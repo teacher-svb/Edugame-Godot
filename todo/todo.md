@@ -1,0 +1,43 @@
+- GODOT_REFACTOR
+    - [1] GODOT_REFACTOR save/load system
+    - [1] GODOT_REFACTOR statemachines
+    - [1] GODOT_REFACTOR flyweightsystem
+    - [1] GODOT_REFACTOR stats & attributes
+    - [1] GODOT_REFACTOR ability system
+    - [1] GODOT_REFACTOR challenges
+    - [1] GODOT_REFACTOR quests
+    - [1] GODOT_REFACTOR inventory
+    - [1] GODOT_REFACTOR UI
+    - [1] GODOT_REFACTOR EventSystem
+- GAME
+    - [ ] GAME Add animations to loading screen
+    - [x] GAME Add character selection screen to statestack
+- INVENTORY
+    - [x] INVENTORY refactor inventory system
+    - [x] INVENTORY open/close inventory
+    - [x] INVENTORY add zoom effect on opening inventory
+    - [ ] INVENTORY allow only equipable items in the gear slots
+- QUESTS
+    - [x] QUESTS add new quest system
+    - [ ] QUESTS refactor to separate quest data from game data
+- SAVE
+    - [x] SAVE add new save/load system
+- MESSAGES
+    - [x] MESSAGES add message Queue
+- INPUT
+    - [x] INPUT use the unity input system instead of the old input system 
+- CHALLENGES
+    - [x] CHALLENGES UI Add challenges to game
+    - [x] CHALLENGES UI Add visualisations for challenges to game
+- HUD
+    - [ ] HUD Refactor (combine player stats view with actions view)
+- COMBAT Combat System
+    - Add combat system to game
+        - [x] COMBAT add stat modifier system
+        - [x] COMBAT add abilities that use stat modifiers
+        - [x] COMBAT add attribute modifier system
+        - [x] COMBAT add abilities that use attribute modifiers
+        - [x] COMBAT rework ability system, to move lifetime (uses) and repeating logic (DoT, ticks) out of Modifier class and into AbilityEffect class.
+        - [ ] COMBAT track ability status in UI
+        - [ ] COMBAT add enemy AI
+        - [ ] COMBAT make equipable items in gear slots trigger stat modifiers on the player
