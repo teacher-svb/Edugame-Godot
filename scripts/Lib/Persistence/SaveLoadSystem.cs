@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Godot;
-using Microsoft.VisualBasic;
 using TnT.Extensions;
 
 namespace TnT.Systems.Persistence
 {
+    [Tool]
     public abstract partial class SaveLoadSystem<[MustBeVariant] T> : Node where T : GameData, new()
     {
         protected IDataService<T> dataService;
@@ -15,6 +15,11 @@ namespace TnT.Systems.Persistence
         [Export] protected string _gameName;
 
         public T GameData;
+
+
+
+        // [ExportToolButton("Save!")] // You can pass an icon as second argument if you want.
+        // public Callable Save => Callable.From(SaveGame);
 
         public override void _Ready()
         {
@@ -72,7 +77,7 @@ namespace TnT.Systems.Persistence
     }
 
     [Serializable]
-    public abstract class GameData
+    public abstract partial class GameData : GodotObject
     {
         public string Name;
     }
@@ -148,7 +153,7 @@ namespace TnT.Systems.Persistence
         IEnumerable<string> ListSaves();
     }
 
-    public class FileDataService<[MustBeVariant]T> : IDataService<T> where T : GameData, new()
+    public class FileDataService<[MustBeVariant] T> : IDataService<T> where T : GameData, new()
     {
         ISerializer serializer;
         string dataPath;
