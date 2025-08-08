@@ -4,33 +4,34 @@ using System.IO;
 using System.Linq;
 using Godot;
 using Microsoft.VisualBasic;
+using TnT.Extensions;
 
 namespace TnT.Systems.Persistence
 {
-    public abstract class SaveLoadSystem<T> : PersistentSingleton<SaveLoadSystem<T>> where T : GameData, new()
+    public abstract partial class SaveLoadSystem<[MustBeVariant] T> : Node where T : GameData, new()
     {
         protected IDataService<T> dataService;
         [Export] protected string _startSceneName;
         [Export] protected string _gameName;
 
-        [Export] public T GameData;
+        public T GameData;
 
-        protected override void Awake()
+        public override void _Ready()
         {
-            base.Awake();
+            // base.Awake();
             dataService = new FileDataService<T>(new JsonSerializer());
         }
 
         void Start() => NewGame();
 
-        void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
-        void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
+        // void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
+        // void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
-        protected abstract void OnSceneLoaded(Scene scene, LoadSceneMode mode);
+        // protected abstract void OnSceneLoaded(Scene scene, LoadSceneMode mode);
 
-        protected void Bind<U, TData>(ref TData data) where U : MonoBehaviour, IBind<TData> where TData : ISaveable, new()
+        protected void Bind<U, TData>(ref TData data) where U : Node, IBind<TData> where TData : ISaveable, new()
         {
-            var entity = FindObjectsByType<U>(FindObjectsSortMode.None).FirstOrDefault();
+            var entity = GetTree().FindObjectsByType<U>().FirstOrDefault();
             if (entity == null)
                 return;
 
@@ -44,7 +45,7 @@ namespace TnT.Systems.Persistence
 
         protected void Bind<U, TData>(ref List<TData> datas) where U : Node, IBind<TData> where TData : ISaveable, new()
         {
-            var entities = FindObjectsByType<U>(FindObjectsSortMode.None);
+            var entities = GetTree().FindObjectsByType<U>();
 
             foreach (var entity in entities)
             {
