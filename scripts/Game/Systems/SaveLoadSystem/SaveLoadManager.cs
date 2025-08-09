@@ -6,22 +6,10 @@ using Godot;
 
 namespace TnT.EduGame
 {
-    [Serializable]
-    public partial class MyGameData : GameData
-    {
-        public string CurrentLevelName;
-        // [SerializeField]
-        // public Character.CharacterSaveData playerData = null;
-        // [SerializeField]
-        // public List<Character.CharacterSaveData> characterData = new();
-        // [SerializeField]
-        // public QuestManager.QuestManagerSaveData questData = null;
-        // public List<Door.DoorSaveData> doorData = new();
-    }
-
     public partial class SaveLoadManager : SaveLoadSystem<MyGameData>
     {
         public static SaveLoadManager Instance { get; private set; }
+        [Export] public override MyGameData GameData { get; set; }
 
         public override void _Ready()
         {
@@ -54,6 +42,7 @@ namespace TnT.EduGame
                 Name = _gameName,
                 CurrentLevelName = _startSceneName
             };
+            GD.Print(GameData.CurrentLevelName);
             LoadScene(GameData.CurrentLevelName);
         }
 

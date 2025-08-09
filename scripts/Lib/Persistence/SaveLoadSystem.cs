@@ -9,13 +9,13 @@ using Newtonsoft.Json;
 namespace TnT.Systems.Persistence
 {
     // [Tool]
-    public abstract partial class SaveLoadSystem<[MustBeVariant] T> : Node where T : GameData, new()
+    public abstract partial class SaveLoadSystem<T> : Node where T : GameData, new()
     {
         protected IDataService<T> dataService;
         [Export] protected string _startSceneName;
         [Export] protected string _gameName;
 
-        public T GameData;
+        public abstract T GameData { get; set; }
 
 
 
@@ -76,13 +76,6 @@ namespace TnT.Systems.Persistence
         public abstract void LoadGame(string gameName);
 
         public void DeleteGame(string gameName) => dataService.Delete(gameName);
-    }
-
-    // [Serializable]
-    [GlobalClass]
-    public abstract partial class GameData : GodotObject
-    {
-        [Export] public string Name;
     }
 
     public interface ISaveable
@@ -156,7 +149,7 @@ namespace TnT.Systems.Persistence
         IEnumerable<string> ListSaves();
     }
 
-    public class FileDataService<[MustBeVariant] T> : IDataService<T> where T : GameData, new()
+    public class FileDataService<T> : IDataService<T> where T : GameData, new()
     {
         ISerializer serializer;
         string dataPath;

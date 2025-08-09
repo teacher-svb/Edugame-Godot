@@ -2,10 +2,10 @@ using Godot;
 using System;
 using TnT.Systems;
 
-public partial class PlayerController : Node
+public partial class Player : Node
 {
 	[Export]
-	Character character;
+	CharacterController2D character;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

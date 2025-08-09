@@ -4,7 +4,7 @@ using TnT.Extensions;
 
 namespace TnT.Systems
 {
-	public partial class Character : CharacterBody2D
+	public partial class CharacterController2D : CharacterBody2D
 	{
 		[Export]
 		public float Speed = 8.0f;
