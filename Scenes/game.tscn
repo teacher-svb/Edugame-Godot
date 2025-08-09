@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ejdrjkfajt4t" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="TileSet" uid="uid://cfonf0rkxvtn" path="res://assets/Tilesets/tilesets.tres" id="1_qxrlw"]
-[ext_resource type="Script" uid="uid://b66cprwwqv431" path="res://scripts/Game/Systems/SaveLoadSystem/SaveLoadManager.cs" id="3_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://h3itbd676lfh" path="res://Scenes/test/UI.tscn" id="3_wrm1d"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h4fw4"]
 
@@ -79,21 +79,23 @@ Speed = 300.0
 zoom = Vector2(4, 4)
 position_smoothing_enabled = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="WorldBoundary" type="StaticBody2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary"]
 position = Vector2(-45, -326)
 shape = SubResource("WorldBoundaryShape2D_h4fw4")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WorldBoundary"]
 position = Vector2(-415, -484)
 shape = SubResource("WorldBoundaryShape2D_ldgsr")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="WorldBoundary"]
 position = Vector2(345, -495)
 shape = SubResource("WorldBoundaryShape2D_o5yvi")
 
-[node name="SaveLoadManager" type="Node" parent="."]
-script = ExtResource("3_wrm1d")
-_startSceneName = "foo"
-_gameName = "bar"
+[node name="UI" parent="." instance=ExtResource("3_wrm1d")]
+z_index = 4096
+offset_left = -187.0
+offset_top = -1072.0
+offset_right = -187.0
+offset_bottom = -1072.0

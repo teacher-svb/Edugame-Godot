@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqtvtjbhmc1uk"]
+
+[ext_resource type="Script" uid="uid://b66cprwwqv431" path="res://scripts/Game/Systems/SaveLoadSystem/SaveLoadManager.cs" id="1_vgwsv"]
+
+[node name="SaveLoadManager" type="Node"]
+script = ExtResource("1_vgwsv")
+_startSceneName = "foo"
+_gameName = "bar"

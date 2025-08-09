@@ -15,6 +15,10 @@ run/main_scene="uid://60p5xq6tioov"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SaveLoadManager="*res://Scenes/autoload/save_load_manager.tscn"
+
 [dotnet]
 
 project/assembly_name="EduGame"

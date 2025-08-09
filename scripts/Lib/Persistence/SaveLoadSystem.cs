@@ -4,10 +4,11 @@ using System.IO;
 using System.Linq;
 using Godot;
 using TnT.Extensions;
+using Newtonsoft.Json;
 
 namespace TnT.Systems.Persistence
 {
-    [Tool]
+    // [Tool]
     public abstract partial class SaveLoadSystem<[MustBeVariant] T> : Node where T : GameData, new()
     {
         protected IDataService<T> dataService;
@@ -24,10 +25,11 @@ namespace TnT.Systems.Persistence
         public override void _Ready()
         {
             // base.Awake();
+            NewGame();
             dataService = new FileDataService<T>(new JsonSerializer());
         }
 
-        void Start() => NewGame();
+        // void Start() => NewGame();
 
         // void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
         // void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -76,10 +78,11 @@ namespace TnT.Systems.Persistence
         public void DeleteGame(string gameName) => dataService.Delete(gameName);
     }
 
-    [Serializable]
+    // [Serializable]
+    [GlobalClass]
     public abstract partial class GameData : GodotObject
     {
-        public string Name;
+        [Export] public string Name;
     }
 
     public interface ISaveable
@@ -181,8 +184,11 @@ namespace TnT.Systems.Persistence
             }
 
             GD.Print($"Saving GameData to '{fileLocation}'");
-            Variant v = Variant.From(data);
-            File.WriteAllText(fileLocation, serializer.Serialize(v));
+            GD.Print(data);
+            // Variant v = Variant.From(data);
+            var json = JsonConvert.SerializeObject(data);
+            // File.WriteAllText(fileLocation, serializer.Serialize(v));
+            File.WriteAllText(fileLocation, json);
         }
 
         public T Load(string name)
@@ -195,7 +201,8 @@ namespace TnT.Systems.Persistence
             }
 
             GD.Print($"Loading GameData from '{fileLocation}'");
-            return serializer.Deserialize(File.ReadAllText(fileLocation)).As<T>();
+            return JsonConvert.DeserializeObject<T>(File.ReadAllText(fileLocation));
+            // return serializer.Deserialize(File.ReadAllText(fileLocation)).As<T>();
         }
 
         public void Delete(string name)
