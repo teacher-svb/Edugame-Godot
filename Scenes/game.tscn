@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://60p5xq6tioov"]
 
-[ext_resource type="PackedScene" uid="uid://ejdrjkfajt4t" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="TileSet" uid="uid://cfonf0rkxvtn" path="res://assets/Tilesets/tilesets.tres" id="1_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://djgv02ndmxkyo" path="res://Scenes/test/Player.tscn" id="1_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://h3itbd676lfh" path="res://Scenes/test/UI.tscn" id="3_wrm1d"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h4fw4"]
@@ -16,6 +16,16 @@ distance = 18.0
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_wrm1d")]
+z_index = 5
+position = Vector2(-212, -1037)
+Speed = 300.0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(34, -11)
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
 
 [node name="TilemapLayers" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -69,15 +79,6 @@ use_parent_material = true
 position = Vector2(8, 8)
 tile_map_data = PackedByteArray("AAAFANf/BAA3AA4AAAAFANj/BAA3AA8AAAADAMz/BAA3AA4AAAADAM3/BAA3AA8AAAD1/8//BAA4AA4AAAD1/9D/BAA4AA8AAAAAAN//BAA4AA4AAAAAAOD/BAA4AA8AAAD3/97/BAA5AA4AAAD3/9//BAA5AA8AAAACANL/BAA8AAkAAAABANT/BAA6AA0AAAA=")
 tile_set = ExtResource("1_qxrlw")
-
-[node name="PlayerCharacter" parent="." instance=ExtResource("1_ebmjs")]
-z_index = 5
-position = Vector2(-178, -1048)
-Speed = 300.0
-
-[node name="Camera2D" type="Camera2D" parent="PlayerCharacter"]
-zoom = Vector2(4, 4)
-position_smoothing_enabled = true
 
 [node name="WorldBoundary" type="StaticBody2D" parent="."]
 

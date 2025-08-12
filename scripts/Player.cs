@@ -2,21 +2,16 @@ using Godot;
 using System;
 using TnT.Systems;
 
-public partial class Player : Node
+public partial class Player : CharacterController2D
 {
-	[Export]
-	CharacterController2D character;
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
-
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		base._Process(delta);
+
 		Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
 		if (direction.Length() > 0)
-			character.Move(direction);
+			this.Move(direction);
 	}
 }

@@ -22,15 +22,8 @@ namespace TnT.Systems
 			rayCast.TargetPosition = new Vector2(tileSize, 0);
 		}
 
-		public override void _Draw()
-		{
-			// DrawLine(new Vector2(0, 0), _currentGoal - Position, new Color(255, 0, 0), 4);
-			// DrawLine(new Vector2(0, 0), _nextGoal - Position, new Color(0, 255, 0), 2);
-		}
-
 		public override void _Process(double delta)
 		{
-			QueueRedraw();
 		}
 
 		public override void _PhysicsProcess(double delta)
