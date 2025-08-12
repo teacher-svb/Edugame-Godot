@@ -15,7 +15,7 @@ namespace TnT.EduGame.GameState
     {
         public static StateManagerGame Instance { get; private set; }
 
-        // Player _player;
+        [Export] Player _player = Player.Instance;
 
         List<IGameState> _states = new()
         {
@@ -36,7 +36,7 @@ namespace TnT.EduGame.GameState
             }
             catch
             {
-                throw new Exception("no dialog state assigned");
+                throw new Exception("no play state assigned");
             }
         }
 

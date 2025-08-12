@@ -42,7 +42,6 @@ namespace TnT.Systems
 				);
 			}
 
-
 			Velocity = Position.DirectionTo(newPos) * Speed * tileSize * (float)delta;
 
 			if (Position.DistanceTo(newPos) > 2)
@@ -62,5 +61,12 @@ namespace TnT.Systems
 			if (rayCast.IsColliding() == false)
 				_nextGoal = nextGoal;
 		}
+
+		public void MoveTo(Vector2 position)
+		{
+			_currentGoal = position.Snap();
+			_nextGoal = position.Snap();
+			this.Position = _nextGoal;
+        }
 	}
 }

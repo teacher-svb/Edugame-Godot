@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=7 format=3 uid="uid://cukimwsr4h11n"]
+
+[ext_resource type="SpriteFrames" uid="uid://coftnq4vpbqrp" path="res://assets/Spritesheets/Characters/Character_022/Character_022_SpriteFrames.tres" id="1_h4r8b"]
+[ext_resource type="Script" uid="uid://bqblbalohjolq" path="res://scripts/Game/Character/CharacterData.cs" id="1_igwf4"]
+[ext_resource type="Texture2D" uid="uid://dt315kny68yau" path="res://assets/Spritesheets/Characters/Character_022/Character_022.png" id="2_3b7g3"]
+[ext_resource type="Texture2D" uid="uid://c0fwbmbtxen2h" path="res://assets/Spritesheets/Characters/Character_022/Character_022_Face.png" id="3_k5oxl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kr3hl"]
+atlas = ExtResource("2_3b7g3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_je0ok"]
+atlas = ExtResource("3_k5oxl")
+region = Rect2(0, 0, 64, 64)
+
+[resource]
+script = ExtResource("1_igwf4")
+_id = "acc25faa-7c96-4370-b0b5-60e212177bf6"
+_name = "Ailin"
+_animatorController = ExtResource("1_h4r8b")
+_face = SubResource("AtlasTexture_je0ok")
+_body = SubResource("AtlasTexture_kr3hl")
+metadata/_custom_type_script = "uid://bqblbalohjolq"

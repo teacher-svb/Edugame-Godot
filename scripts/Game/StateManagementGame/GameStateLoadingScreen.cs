@@ -2,24 +2,25 @@ using System.Threading.Tasks;
 using TnT.Systems.State;
 using System;
 using Godot;
+using TnT.Systems.UI;
+using TnT.Extensions;
 
 namespace TnT.EduGame.GameState
 {
-    [Serializable]
-    public class GameStateLoadingScreen : IStateObject<GameStateLoadingScreen.LoaderOptions>, IGameState
+    public partial class GameStateLoadingScreen : Resource, IStateObject<GameStateLoadingScreen.LoaderOptions>, IGameState
     {
         string _currentScene = "";
 
-        // FadeController _fadeController;
-        // FadeController FadeController
-        // {
-        //     get
-        //     {
-        //         if (_fadeController == null)
-        //             _fadeController = UnityEngine.Object.FindAnyObjectByType<FadeController>();
-        //         return _fadeController;
-        //     }
-        // }
+        FadeController _fadeController;
+        FadeController FadeController
+        {
+            get
+            {
+                if (_fadeController == null)
+                    _fadeController = ManagerUI.Instance.FindAnyObjectByType<FadeController>();
+                return _fadeController;
+            }
+        }
 
         public BaseState GetState(LoaderOptions options)
         {
@@ -36,7 +37,7 @@ namespace TnT.EduGame.GameState
                 return new BaseState(new()
                 {
                     ExitOnNextUpdate = () => true,
-                    // OnEnter = () => LoadScene(sceneLoaderOptions.sceneName, sceneLoaderOptions.player, sceneLoaderOptions.targetLocation, sceneLoaderOptions.forceLoad),
+                    OnEnter = () => LoadScene(sceneLoaderOptions.sceneName, sceneLoaderOptions.player, sceneLoaderOptions.targetLocation, sceneLoaderOptions.forceLoad),
                     OnExit = FadeOut
                 });
             }
@@ -46,7 +47,7 @@ namespace TnT.EduGame.GameState
                 return new BaseState(new()
                 {
                     ExitOnNextUpdate = () => true,
-                    // OnEnter = () => LoadLocation(sceneLoaderOptions.player, sceneLoaderOptions.targetLocation),
+                    OnEnter = () => LoadLocation(sceneLoaderOptions.player, sceneLoaderOptions.targetLocation),
                     OnExit = FadeOut
                 });
             }
@@ -59,38 +60,44 @@ namespace TnT.EduGame.GameState
         async Task FadeIn()
         {
             // ETime[play].timeScale = 0;
-            // await this.FadeController.Show();
+            await this.FadeController.ShowView();
         }
 
-        // async Task LoadLocation(Player player, Vector2 target)
-        // {
-        //     ETime[play].timeScale = 0;
-        //     await this.FadeController.Show();
+        async Task LoadLocation(Player player, Vector2 target)
+        {
+            //     ETime[play].timeScale = 0;
+            await this.FadeController.ShowView();
 
-        //     player.GetComponent<CharacterController2D>().MoveTo(target);
-        // }
+            //     player.GetComponent<CharacterController2D>().MoveTo(target);
+        }
 
-        // async Task LoadScene(string sceneName, Player player, Vector2 target, bool forceLoad)
-        // {
-        //     await FadeIn();
+        async Task LoadScene(string sceneName, Player player, Vector2 target, bool forceLoad)
+        {
+            await FadeIn();
 
-        //     var oldScene = SceneManager.GetSceneByName(_currentScene);
-        //     if (oldScene != null && oldScene.IsValid())
-        //     {
-        //         await SceneManager.UnloadSceneAsync(_currentScene);
-        //     }
-        //     await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+            var gameplayScene = GD.Load<PackedScene>("res://Gameplay/Level1.tscn");
+            // var gameplayInstance = gameplayScene.Instantiate();
+            // gameplayInstance.Name = "GameplaySceneInstance";
+            // ManagerUI.Instance.GetTree().Root.AddChild(gameplayInstance);
+            ManagerUI.Instance.GetTree().ChangeSceneToPacked(gameplayScene);
 
-        //     _currentScene = sceneName;
+            //     var oldScene = SceneManager.GetSceneByName(_currentScene);
+            //     if (oldScene != null && oldScene.IsValid())
+            //     {
+            //         await SceneManager.UnloadSceneAsync(_currentScene);
+            //     }
+            //     await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
-        //     player.GetComponent<CharacterController2D>().MoveTo(target);
-        // }
+            //     _currentScene = sceneName;
+
+            player.MoveTo(target);
+        }
 
         async Task FadeOut()
         {
             await Task.Delay(1000);
 
-            // await this.FadeController.Hide();
+            await this.FadeController.HideView();
 
             // ETime[play].timeScale = 1;
         }
@@ -104,7 +111,7 @@ namespace TnT.EduGame.GameState
 
         public class LocationLoaderOptions : LoaderOptions
         {
-            // public Player player;
+            public Player player;
             public Vector2 targetLocation;
         }
 

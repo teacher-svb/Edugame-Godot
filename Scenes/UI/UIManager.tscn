@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://diuijxjbpmmyo"]
+
+[ext_resource type="PackedScene" uid="uid://cbyjis6mjopgq" path="res://Scenes/UI/FadeController.tscn" id="1_fhfuw"]
+[ext_resource type="Script" uid="uid://bjnewwsvx7s8s" path="res://scripts/Game/Singletons/ManagerUI.cs" id="1_jv8xy"]
+[ext_resource type="Script" uid="uid://7u5mhmxl340a" path="res://scripts/Game/UI/MVC_Fade/FadeView.cs" id="3_sr2kn"]
+[ext_resource type="Script" uid="uid://cvgoslwqcj457" path="res://scripts/Game/UI/MVC_Fade/FadeModel.cs" id="4_a4yig"]
+
+[sub_resource type="Resource" id="Resource_t5yan"]
+script = ExtResource("3_sr2kn")
+metadata/_custom_type_script = "uid://7u5mhmxl340a"
+
+[sub_resource type="Resource" id="Resource_jt2b2"]
+script = ExtResource("4_a4yig")
+metadata/_custom_type_script = "uid://cvgoslwqcj457"
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jv8xy")
+
+[node name="FadeController" parent="." instance=ExtResource("1_fhfuw")]
+layout_mode = 1
+view = SubResource("Resource_t5yan")
+model = SubResource("Resource_jt2b2")

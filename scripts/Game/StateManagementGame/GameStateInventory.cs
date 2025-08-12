@@ -11,7 +11,7 @@ namespace TnT.EduGame.GameState
         // public delegate void OnItemClicked(Item item);
         public delegate void OnCloseInventory();
         // [SerializeField] InputActionReference close;
-        // [SerializeField] CinemachineCamera camera;
+        [Export] Camera2D camera;
         public struct InventoryOptions
         {
         }
@@ -51,12 +51,13 @@ namespace TnT.EduGame.GameState
             // await InventoryController.Show();
 
             // close.action.Enable();
-
-            // while (camera.Lens.OrthographicSize > 1)
-            // {
-            //     camera.Lens.OrthographicSize -= .1f;
-            //     await Task.Yield();
-            // }
+            var zoom = camera.Zoom;
+            while (zoom.X > 1)
+            {
+                zoom.X -= .1f;
+                zoom.Y -= .1f;
+                await Task.Yield();
+            }
         }
 
         async Task CloseInventory()
@@ -64,11 +65,13 @@ namespace TnT.EduGame.GameState
 
             // await InventoryController.Hide();
 
-            // while (camera.Lens.OrthographicSize < 5)
-            // {
-            //     camera.Lens.OrthographicSize += .1f;
-            //     await Task.Yield();
-            // }
+            var zoom = camera.Zoom;
+            while (zoom.X < 5)
+            {
+                zoom.X += .1f;
+                zoom.Y += .1f;
+                await Task.Yield();
+            }
             // // await Inventory.Hide();
             // ETime[play].timeScale = 1;
         }

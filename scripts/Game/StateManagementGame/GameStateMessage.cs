@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using TnT.Systems.State;
 using System;
 using Godot;
+using TnT.EduGame.Characters;
 
 namespace TnT.EduGame.GameState
 {
@@ -11,7 +12,7 @@ namespace TnT.EduGame.GameState
         public struct MessageOptions
         {
             public string text;
-            // public CharacterData character;
+            public CharacterData character;
         }
         // [SerializeField] InputActionReference next;
         // [SerializeField] InputActionReference close;
@@ -79,7 +80,7 @@ namespace TnT.EduGame.GameState
             // {
             //     retrievingNextMsg = true;
             //     await UIController.Hide();
-            //     await Task.Yield();
+                await Task.Yield();
             //     await UIController.Show();
             //     retrievingNextMsg = false;
             // }

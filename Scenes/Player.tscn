@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://djgv02ndmxkyo"]
+
+[ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="1_brc5f"]
+[ext_resource type="SpriteFrames" uid="uid://coftnq4vpbqrp" path="res://assets/Spritesheets/Characters/Character_022/Character_022_SpriteFrames.tres" id="2_brc5f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_15ib8"]
+radius = 7.0
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("rayCast")]
+z_index = 5
+y_sort_enabled = true
+script = ExtResource("1_brc5f")
+Speed = 400.0
+rayCast = NodePath("RayCast2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_brc5f")
+animation = &"blink_down"
+autoplay = "idle_down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_15ib8")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
