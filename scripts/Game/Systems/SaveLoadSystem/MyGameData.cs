@@ -11,10 +11,10 @@ namespace TnT.EduGame
     public partial class MyGameData : GameData
     {
         [Export] public string CurrentLevelName;
+        [Export]
+        public CharacterSaveData playerData = null;
         // [Export]
-        public Character.CharacterSaveData playerData = null;
-        // [Export]
-        public List<Character.CharacterSaveData> characterData = new();
+        public List<CharacterSaveData> characterData = new();
         // [SerializeField]
         // public QuestManager.QuestManagerSaveData questData = null;
         // public List<Door.DoorSaveData> doorData = new();

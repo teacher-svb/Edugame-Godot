@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using TnT.EduGame.Characters;
 using TnT.Extensions;
 
 namespace TnT.Systems
@@ -10,10 +12,12 @@ namespace TnT.Systems
 		public float Speed = 8.0f;
 		[Export]
 		int tileSize = 16;
-		private Vector2 _currentGoal;
-		private Vector2 _nextGoal;
+		protected Vector2 _currentGoal;
+		protected Vector2 _nextGoal;
 		[Export]
 		RayCast2D rayCast;
+		[Export]
+		Character _character;
 
 		public override void _Ready()
 		{
@@ -67,6 +71,6 @@ namespace TnT.Systems
 			_currentGoal = position.Snap();
 			_nextGoal = position.Snap();
 			this.Position = _nextGoal;
-        }
+		}
 	}
 }

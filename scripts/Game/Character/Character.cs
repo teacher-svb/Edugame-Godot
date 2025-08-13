@@ -5,12 +5,14 @@ using TnT.Systems.Persistence;
 using Godot;
 using TnT.Systems;
 using TnT.Extensions;
+using TnT.Input;
 
 namespace TnT.EduGame.Characters
 {
-    public partial class Character : Node, IBind<Character.CharacterSaveData>
+    public partial class Character : Node, IBind<CharacterSaveData>
     {
-        [Export] BaseStats _baseStats;
+        [Export]
+        BaseStats _baseStats;
         public Stats Stats { get; private set; }
         public Attributes Attributes { get; private set; }
         [Export]
@@ -21,22 +23,23 @@ namespace TnT.EduGame.Characters
         public string CharacterId
         {
             get { return _characterData.Id; }
-            // set { _characterData = Resources.FindObjectsOfTypeAll<CharacterData>().FirstOrDefault(c => c.Id == value); }
+            set { _characterData = ResourceFinder.FindObjectsOfTypeAll<CharacterData>().FirstOrDefault(c => c.Id == value); }
         }
         public void LoadCharacter(string characterId)
         {
-            // CharacterId = characterId;
+            CharacterId = characterId;
             if (_characterData == null)
                 return;
 
             _saveData.characterId = CharacterId;
-            // GetComponentInChildren<SpriteRenderer>().sprite = _characterData.CharacterBody;
-            this.FindAncestorOfType<CharacterController2D>().FindAnyObjectByType<AnimatedSprite2D>().SpriteFrames = this._characterData.animatorController;
+            _controller.FindAnyObjectByType<AnimatedSprite2D>().SpriteFrames = this._characterData.animatorController;
         }
 
         // [Export] Dictionary<InputActionReference, Ability> _abilities = new();
+        [Export]
+        public Godot.Collections.Dictionary<InputActionReference, Ability> _abilities = new();
 
-        void Awake()
+        public override void _Ready()
         {
             // this._baseStats = Instantiate(_baseStats);
             this.Stats = new Stats(this._baseStats);
@@ -62,22 +65,12 @@ namespace TnT.EduGame.Characters
         }
 
         #region SAVE/LOAD
-        [Serializable]
-        public class CharacterSaveData : ISaveable
-        {
-            [Export] public string Id { get; set; }
-            [Export] public bool IsNew { get; set; }
-            public Vector2 position;
-            public string characterId;
-        }
 
-        // [Export]
+        [Export]
         CharacterSaveData _saveData = null;
 
-        // [Export] public string UniqueId { get; set; } = Guid.NewGuid().ToString();
         public UniqueId UniqueId { get; set; } = new() { Id = Guid.NewGuid().ToString() };
 
-        // [field: SerializeField, ReadOnly] public string Id { get; set; } = Guid.NewGuid().ToString();
         public void Bind(CharacterSaveData data)
         {
             _saveData = data;

@@ -21,6 +21,7 @@ Player="*res://Scenes/Player.tscn"
 SaveLoadManager="*res://Scenes/autoload/save_load_manager.tscn"
 HudManager="*res://Scenes/UI/HUDManager.tscn"
 UiManager="*res://Scenes/UI/UIManager.tscn"
+InputManager="*res://Scenes/InputManager.tscn"
 
 [dotnet]
 

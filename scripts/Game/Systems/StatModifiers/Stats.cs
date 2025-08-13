@@ -17,7 +17,7 @@ namespace TnT.EduGame
         public int Attack(StatContext c = null) => _mediator.Query(new(StatType.Attack, _baseStats.attack), c ?? new(sender: this));
         public int Defense(StatContext c = null) => _mediator.Query(new(StatType.Defense, _baseStats.defense), c ?? new(sender: this));
         public int MaxHealth(StatContext c = null) => _mediator.Query(new(StatType.MaxHealth, _baseStats.maxHealth), c ?? new(sender: this));
-        public int Resistance(ElementalType type, StatContext c = null) => _mediator.Query(new(StatType.Resistance, _baseStats.resistances[type]), c ?? new(sender: this, elementalType: type));
+        public int Resistance(ElementalType type, StatContext c = null) => _mediator.Query(new(StatType.Resistance, _baseStats.Resistances[type]), c ?? new(sender: this, elementalType: type));
 
         public Stats(BaseStats baseStats)
         {

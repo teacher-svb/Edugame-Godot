@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BaseStats" load_steps=2 format=3 uid="uid://bnc6g46kjd7fa"]
+
+[ext_resource type="Script" uid="uid://c3ak66rkclhhy" path="res://scripts/Game/Systems/StatModifiers/BaseStats.cs" id="1_baadt"]
+
+[resource]
+script = ExtResource("1_baadt")
+attack = 10
+defense = 20
+maxHealth = 5
+Resistances = Dictionary[int, int]({
+0: 0,
+1: -10,
+2: 10
+})
+metadata/_custom_type_script = "uid://c3ak66rkclhhy"
