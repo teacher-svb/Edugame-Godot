@@ -14,7 +14,8 @@ namespace TnT.EduGame
         public int cooldown { get; private set; } = 1;
         [Export]
         public int uses { get; private set; } = 1;
-        public List<IAbilityEffect> Effects = new();
+        [Export(PropertyHint.ResourceType, "BaseAbilityEffect")]
+        public Godot.Collections.Array<BaseAbilityEffect> Effects = new();
         private int _remainingUses;
         private bool _isOnCooldown;
 

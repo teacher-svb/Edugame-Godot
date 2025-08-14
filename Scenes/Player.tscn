@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://djgv02ndmxkyo"]
+[gd_scene load_steps=16 format=3 uid="uid://djgv02ndmxkyo"]
 
 [ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="1_brc5f"]
 [ext_resource type="SpriteFrames" uid="uid://coftnq4vpbqrp" path="res://assets/Spritesheets/Characters/Character_022/Character_022_SpriteFrames.tres" id="2_brc5f"]
@@ -6,9 +6,35 @@
 [ext_resource type="Resource" uid="uid://bnc6g46kjd7fa" path="res://assets/Spritesheets/Characters/Character_022/Character_022_CharacterStats.tres" id="4_nn08x"]
 [ext_resource type="Resource" uid="uid://cukimwsr4h11n" path="res://assets/Spritesheets/Characters/Character_022/Character_022_CharacterData.tres" id="5_52ee3"]
 [ext_resource type="Script" uid="uid://cqfwdw7wlks67" path="res://scripts/Game/Character/CharacterSaveData.cs" id="6_nn08x"]
+[ext_resource type="Script" uid="uid://ch4u84myc17c2" path="res://scripts/Lib/Input/InputAction.cs" id="6_yoq75"]
+[ext_resource type="Script" uid="uid://dca0lksib7tml" path="res://scripts/Game/Systems/Abilities/BaseAbilityEffect.cs" id="7_ksbbd"]
+[ext_resource type="Script" uid="uid://bstjm2fpw6kjo" path="res://scripts/Game/Systems/Abilities/AttributeModifierEffect.cs" id="8_glx4g"]
+[ext_resource type="Script" uid="uid://ds85wh5vywo58" path="res://scripts/Game/Systems/Abilities/Ability.cs" id="9_miouo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_15ib8"]
 radius = 7.0
+
+[sub_resource type="Resource" id="Resource_o3h8g"]
+script = ExtResource("6_yoq75")
+ActionName = "Action1"
+Enabled = false
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
+
+[sub_resource type="Resource" id="Resource_1e7my"]
+script = ExtResource("8_glx4g")
+type = 0
+elementalType = 0
+value = 10.0
+duration = -1
+frequency = 1
+metadata/_custom_type_script = "uid://bstjm2fpw6kjo"
+
+[sub_resource type="Resource" id="Resource_arntx"]
+script = ExtResource("9_miouo")
+cooldown = 1
+uses = 1
+Effects = Array[ExtResource("7_ksbbd")]([SubResource("Resource_1e7my")])
+metadata/_custom_type_script = "uid://ds85wh5vywo58"
 
 [sub_resource type="Resource" id="Resource_52ee3"]
 script = ExtResource("6_nn08x")
@@ -43,4 +69,7 @@ zoom = Vector2(4, 4)
 script = ExtResource("3_5ixxa")
 _baseStats = ExtResource("4_nn08x")
 _characterData = ExtResource("5_52ee3")
+_abilities = {
+SubResource("Resource_o3h8g"): SubResource("Resource_arntx")
+}
 _saveData = SubResource("Resource_52ee3")

@@ -35,9 +35,8 @@ namespace TnT.EduGame.Characters
             _controller.FindAnyObjectByType<AnimatedSprite2D>().SpriteFrames = this._characterData.animatorController;
         }
 
-        // [Export] Dictionary<InputActionReference, Ability> _abilities = new();
         [Export]
-        public Godot.Collections.Dictionary<InputActionReference, Ability> _abilities = new();
+        public Godot.Collections.Dictionary<InputAction, Ability> _abilities = new();
 
         public override void _Ready()
         {
@@ -45,7 +44,7 @@ namespace TnT.EduGame.Characters
             this.Stats = new Stats(this._baseStats);
             this.Attributes = new Attributes(this.Stats);
 
-            // _abilities.ForEach(a => a.Key.action.Enable());
+            _abilities.ForEach(a => a.Key.Enabled = true);
         }
 
         public override void _Process(double delta)
@@ -54,13 +53,13 @@ namespace TnT.EduGame.Characters
             Attributes.Mediator?.Update(delta);
             _saveData.position = _controller.Position;
 
-            // _abilities.ForEach(a =>
-            // {
-            //     if (a.Key.action.triggered)
-            //     {
-            //         a.Value.Activate(this, this);
-            //     }
-            // });
+            _abilities.ForEach(a =>
+            {
+                if (a.Key.Triggered)
+                {
+                    a.Value.Activate(this, this);
+                }
+            });
             GD.Print(Attributes.ToString());
         }
 

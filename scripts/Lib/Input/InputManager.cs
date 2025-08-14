@@ -1,26 +1,23 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace TnT.Input
 {
-    [Tool]
     public partial class InputManager : Node
     {
         public static InputManager Instance { get; private set; }
 
-        private readonly List<InputActionReference> _actions = new();
+        private readonly List<InputAction> _actions = new();
 
         public override void _EnterTree()
         {
             Instance = this;
 
-            // Watch for scene changes so we can auto-scan
+            // Watch for nodes added/removed at runtime
             GetTree().NodeAdded += OnNodeAdded;
             GetTree().NodeRemoved += OnNodeRemoved;
-
-            // Initial scan for already existing nodes
-            ScanNodeAndChildren(GetTree().Root);
         }
 
         public override void _ExitTree()
@@ -30,9 +27,17 @@ namespace TnT.Input
 
             Instance = null;
             _actions.Clear();
+
+            InputManager.Instance = null;
         }
 
-        public override void _Process(double delta)
+        public override void _Ready()
+        {
+            // Scan existing nodes
+            ScanNodeAndChildren(GetTree().Root);
+        }
+
+        public override void _Input(InputEvent ev)
         {
             foreach (var action in _actions)
                 action.Poll();
@@ -45,15 +50,8 @@ namespace TnT.Input
 
         private void OnNodeRemoved(Node node)
         {
-            // Just in case: remove any references from removed nodes
-            var toRemove = new List<InputActionReference>();
-            foreach (var action in _actions)
-            {
-                if (action == null)
-                    toRemove.Add(action);
-            }
-            foreach (var a in toRemove)
-                _actions.Remove(a);
+            // Remove null or destroyed actions from the list
+            _actions.RemoveAll(a => a == null);
         }
 
         private void ScanNodeAndChildren(Node node)
@@ -66,15 +64,13 @@ namespace TnT.Input
 
         private void ScanNode(Node node)
         {
-            // Look for any fields of type InputActionReference
             var fields = node.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
             foreach (var field in fields)
             {
-                if (typeof(InputActionReference).IsAssignableFrom(field.FieldType))
+                if (typeof(InputAction).IsAssignableFrom(field.FieldType))
                 {
-                    var value = field.GetValue(node) as InputActionReference;
-                    if (value != null && !_actions.Contains(value))
+                    if (field.GetValue(node) is InputAction value && !_actions.Contains(value))
                         _actions.Add(value);
                 }
             }
