@@ -20,13 +20,6 @@ namespace TnT.EduGame
         [Export]
         public int maxHealth = 5;
 
-        // public Dictionary<ElementalType, int> resistances = new()
-        // {
-        //    {ElementalType.None, 0},
-        //    {ElementalType.Magical, 10},
-        //    {ElementalType.Physical, -10},
-        // };
-
         [Export]
         public Godot.Collections.Dictionary<ElementalType, int> Resistances { get; set; }
             = new()

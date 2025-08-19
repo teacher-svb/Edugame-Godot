@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=4 uid="uid://jo2kyxpu6eoa"]
+[gd_scene load_steps=3 format=4 uid="uid://jo2kyxpu6eoa"]
 
 [ext_resource type="TileSet" uid="uid://cfonf0rkxvtn" path="res://assets/Tilesets/tilesets.tres" id="1_2llne"]
+[ext_resource type="PackedScene" uid="uid://djgv02ndmxkyo" path="res://Scenes/Player.tscn" id="2_q12u6"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -61,3 +62,7 @@ position = Vector2(8, 8)
 tile_map_data = PackedByteArray("AAABAAsAAgAMAAwAAAABAP7/AgAMAAwAAAA=")
 tile_set = ExtResource("1_2llne")
 collision_enabled = false
+
+[node name="Player" parent="." instance=ExtResource("2_q12u6")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]

@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using TnT.Input;
 
 namespace TnT.EduGame.Characters
 {
@@ -22,5 +23,10 @@ namespace TnT.EduGame.Characters
         public Texture CharacterBody => this._body;
         public string Id => this._id;
         public SpriteFrames animatorController => this._animatorController;
+
+        [Export]
+        public Godot.Collections.Dictionary<InputAction, Ability> CharacterAbilities { get; private set; }
+        [Export]
+        public BaseStats CharacterBaseStats { get; private set; }
     }
 }

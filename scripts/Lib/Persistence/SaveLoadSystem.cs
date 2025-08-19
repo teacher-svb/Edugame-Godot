@@ -5,6 +5,7 @@ using System.Linq;
 using Godot;
 using TnT.Extensions;
 using Newtonsoft.Json;
+using TnT.EduGame.GameState;
 
 namespace TnT.Systems.Persistence
 {
@@ -17,8 +18,6 @@ namespace TnT.Systems.Persistence
 
         public abstract T GameData { get; set; }
 
-
-
         // [ExportToolButton("Save!")] // You can pass an icon as second argument if you want.
         // public Callable Save => Callable.From(SaveGame);
 
@@ -27,6 +26,8 @@ namespace TnT.Systems.Persistence
             // base.Awake();
             NewGame();
             dataService = new FileDataService<T>(new JsonSerializer());
+
+            StateManagerGame.Instance.OnSceneLoaded += OnSceneLoaded;
         }
 
         // void Start() => NewGame();
@@ -34,7 +35,7 @@ namespace TnT.Systems.Persistence
         // void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
         // void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
-        // protected abstract void OnSceneLoaded(Scene scene, LoadSceneMode mode);
+        protected abstract void OnSceneLoaded(NodePath scene);
 
         protected void Bind<U, TData>(ref TData data) where U : Node, IBind<TData> where TData : ISaveable, new()
         {
@@ -177,7 +178,6 @@ namespace TnT.Systems.Persistence
             }
 
             GD.Print($"Saving GameData to '{fileLocation}'");
-            GD.Print(data);
             // Variant v = Variant.From(data);
             var json = JsonConvert.SerializeObject(data);
             // File.WriteAllText(fileLocation, serializer.Serialize(v));

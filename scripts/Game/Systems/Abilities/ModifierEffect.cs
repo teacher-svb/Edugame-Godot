@@ -7,8 +7,7 @@ namespace TnT.EduGame
     public abstract partial class ModifierEffect : BaseAbilityEffect
     {
         [Export] public override ElementalType elementalType { get; protected set; } = ElementalType.None;
-                 public override AbilityOperatorType operatorType { get; protected set; } = AbilityOperatorType.Add;
-        // [Export] public override AbilityOperatorType OperatorType { get; protected set; } = AbilityOperatorType.Add;
+        [Export] public override AbilityOperatorType operatorType { get; protected set; } = AbilityOperatorType.Add;
         [Export] public override float value { get; protected set; } = 10;
         [Export] public override int duration { get; protected set; } = -1;
         [Export] public override int frequency { get; protected set; } = 1;
@@ -18,4 +17,4 @@ namespace TnT.EduGame
         }
         protected abstract void ApplyEffect(Character source, Character target);
     }
-    }
+}

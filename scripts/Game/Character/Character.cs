@@ -12,18 +12,26 @@ namespace TnT.EduGame.Characters
     public partial class Character : Node, IBind<CharacterSaveData>
     {
         [Export]
-        BaseStats _baseStats;
+        CharacterData _characterData;
         public Stats Stats { get; private set; }
         public Attributes Attributes { get; private set; }
-        [Export]
-        CharacterData _characterData;
         CharacterController2D _controller;
 
+        public override void _EnterTree()
+        {
+            this._controller = GetParent<CharacterController2D>();
+        }
 
         public string CharacterId
         {
             get { return _characterData.Id; }
-            set { _characterData = ResourceFinder.FindObjectsOfTypeAll<CharacterData>().FirstOrDefault(c => c.Id == value); }
+            set
+            {
+                _characterData =
+                    ResourceFinder
+                        .FindObjectsOfTypeAll<CharacterData>()
+                        .FirstOrDefault(c => c.Id == value) ?? _characterData;
+            }
         }
         public void LoadCharacter(string characterId)
         {
@@ -35,16 +43,13 @@ namespace TnT.EduGame.Characters
             _controller.FindAnyObjectByType<AnimatedSprite2D>().SpriteFrames = this._characterData.animatorController;
         }
 
-        [Export]
-        public Godot.Collections.Dictionary<InputAction, Ability> _abilities = new();
-
         public override void _Ready()
         {
-            // this._baseStats = Instantiate(_baseStats);
-            this.Stats = new Stats(this._baseStats);
+            this._controller = GetParent<CharacterController2D>();
+            this.Stats = new Stats(this._characterData.CharacterBaseStats);
             this.Attributes = new Attributes(this.Stats);
 
-            _abilities.ForEach(a => a.Key.Enabled = true);
+            this._characterData.CharacterAbilities.ForEach(a => a.Key.Enabled = true);
         }
 
         public override void _Process(double delta)
@@ -53,20 +58,23 @@ namespace TnT.EduGame.Characters
             Attributes.Mediator?.Update(delta);
             _saveData.position = _controller.Position;
 
-            _abilities.ForEach(a =>
+            if (this._characterData != null)
             {
-                if (a.Key.Triggered)
-                {
-                    a.Value.Activate(this, this);
-                }
-            });
+                this._characterData.CharacterAbilities.ForEach(a =>
+                    {
+                        if (a.Key.Triggered)
+                        {
+                            a.Value.Activate(this, this);
+                        }
+                    });
+            }
             GD.Print(Attributes.ToString());
         }
 
         #region SAVE/LOAD
 
         [Export]
-        CharacterSaveData _saveData = null;
+        CharacterSaveData _saveData;
 
         public UniqueId UniqueId { get; set; } = new() { Id = Guid.NewGuid().ToString() };
 

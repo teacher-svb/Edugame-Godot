@@ -11,12 +11,14 @@ namespace TnT.Systems.UI
     {
         Control _root;
         ColorRect _fadeRect;
+        // [Export] NodePath _fadeRectPath;
 
         public async Task InitializeView(Control root)
         {
             _root = root;
             _root.Clear();
 
+            // _fadeRect = root.GetNode(_fadeRectPath) as ColorRect;
             _fadeRect = _root.CreateChild<ColorRect>();
             _fadeRect.Color = Colors.Black;
             _fadeRect.SetAnchorsPreset(Control.LayoutPreset.FullRect);

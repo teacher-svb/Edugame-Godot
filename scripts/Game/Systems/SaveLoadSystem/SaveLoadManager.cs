@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TnT.Extensions;
 using TnT.Systems.Persistence;
 using Godot;
+using TnT.EduGame.Characters;
 
 namespace TnT.EduGame
 {
@@ -17,17 +18,18 @@ namespace TnT.EduGame
             Instance = this;
         }
         
-        // protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        // {
-        //     if (scene.name == "_startScene") return;
+        protected override void OnSceneLoaded(NodePath scene)
+        {
+            // if (scene.name == "_startScene") return;
 
-        //     // Bind<Character, Character.CharacterSaveData>(ref GameData.playerData);
-        //     Bind<Character, Character.CharacterSaveData>(ref GameData.characterData);
-        //     Bind<QuestManager, QuestManager.QuestManagerSaveData>(ref GameData.questData);
-        //     Bind<Door, Door.DoorSaveData>(ref GameData.doorData);
 
-        //     GameData.CurrentLevelName = scene.name;
-        // }
+            // Bind<Character, Character.CharacterSaveData>(ref GameData.playerData);
+            Bind<Character, CharacterSaveData>(ref GameData.characterData);
+            // Bind<QuestManager, QuestManager.QuestManagerSaveData>(ref GameData.questData);
+            // Bind<Door, Door.DoorSaveData>(ref GameData.doorData);
+
+            // GameData.CurrentLevelName = scene.name;
+        }
 
         protected void LoadScene(string sceneName)
         {
