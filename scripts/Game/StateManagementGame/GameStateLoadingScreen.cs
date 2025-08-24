@@ -9,7 +9,7 @@ namespace TnT.EduGame.GameState
 {
     public partial class GameStateLoadingScreen : Resource, IStateObject<GameStateLoadingScreen.LoaderOptions>, IGameState
     {
-        string _currentScene = "";
+        Resource _currentScene;
 
         FadeController _fadeController;
         FadeController FadeController
@@ -32,7 +32,7 @@ namespace TnT.EduGame.GameState
             if (options is SceneLoaderOptions)
             {
                 var sceneLoaderOptions = options as SceneLoaderOptions;
-                if (_currentScene == "")
+                if (_currentScene == null)
                     _currentScene = sceneLoaderOptions.sceneName;
                 return new BaseState(new()
                 {
@@ -65,13 +65,12 @@ namespace TnT.EduGame.GameState
 
         async Task LoadLocation(Player player, Vector2 target)
         {
-            //     ETime[play].timeScale = 0;
-            await this.FadeController.ShowView();
+            await FadeIn();
 
-            //     player.GetComponent<CharacterController2D>().MoveTo(target);
+            player.MoveTo(target);
         }
 
-        async Task LoadScene(string sceneName, Player player, Vector2 target, bool forceLoad)
+        async Task LoadScene(Resource sceneName, Player player, Vector2 target, bool forceLoad)
         {
             await FadeIn();
 
@@ -117,7 +116,7 @@ namespace TnT.EduGame.GameState
 
         public class SceneLoaderOptions : LocationLoaderOptions
         {
-            public string sceneName;
+            public Resource sceneName;
         }
     }
 }

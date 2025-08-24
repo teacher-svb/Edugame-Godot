@@ -3,7 +3,7 @@ using System;
 
 namespace TnT.EduGame
 {
-    public partial class ManagerUI : Control
+    public partial class ManagerUI : Node
     {
         public static ManagerUI Instance { get; private set; }
 

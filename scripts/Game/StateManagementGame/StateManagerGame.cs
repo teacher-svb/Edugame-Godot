@@ -6,6 +6,7 @@ using static TnT.EduGame.GameState.GameStateLoadingScreen;
 using Godot;
 using TnT.EduGame.Characters;
 using System.Threading.Tasks;
+using TnT.Extensions;
 
 namespace TnT.EduGame.GameState
 {
@@ -19,7 +20,7 @@ namespace TnT.EduGame.GameState
 
         public Action<NodePath> OnSceneLoaded;
 
-        [Export] Player _player = Player.Instance;
+        Player _player;
 
         List<IGameState> _states = new()
         {
@@ -35,6 +36,7 @@ namespace TnT.EduGame.GameState
 
         public override void _Ready()
         {
+            _player = GetTree().FindAnyObjectByType<Player>();
 
             GameStatePlay state = _states.OfType<GameStatePlay>().FirstOrDefault();
             try
@@ -67,7 +69,7 @@ namespace TnT.EduGame.GameState
             }
         }
 
-        public void LoadScene(string sceneName, Vector2 targetLocation, bool forceLoad = false)
+        public void LoadScene(Resource sceneName, Vector2 targetLocation, bool forceLoad = false)
         {
             GameStateLoadingScreen state = _states.OfType<GameStateLoadingScreen>().FirstOrDefault();
             try
@@ -82,6 +84,7 @@ namespace TnT.EduGame.GameState
 
         public void LoadLocation(Vector2 targetLocation, bool forceLoad = false)
         {
+            // GetTree().FindAnyObjectByType<Player>();
             GameStateLoadingScreen state = _states.OfType<GameStateLoadingScreen>().FirstOrDefault();
             try
             {

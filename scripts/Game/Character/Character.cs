@@ -68,7 +68,7 @@ namespace TnT.EduGame.Characters
                         }
                     });
             }
-            GD.Print(Attributes.ToString());
+            // GD.Print(Attributes.ToString());
         }
 
         #region SAVE/LOAD

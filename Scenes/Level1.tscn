@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=4 uid="uid://jo2kyxpu6eoa"]
+[gd_scene load_steps=6 format=4 uid="uid://jo2kyxpu6eoa"]
 
 [ext_resource type="TileSet" uid="uid://cfonf0rkxvtn" path="res://assets/Tilesets/tilesets.tres" id="1_2llne"]
 [ext_resource type="PackedScene" uid="uid://djgv02ndmxkyo" path="res://Scenes/Player.tscn" id="2_q12u6"]
+[ext_resource type="Script" uid="uid://bhsdjlrhck4qd" path="res://scripts/test/Transporter.cs" id="3_joc8x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jghel"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_joc8x"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -66,3 +71,28 @@ collision_enabled = false
 [node name="Player" parent="." instance=ExtResource("2_q12u6")]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(4, 4)
+
+[node name="Transporter" type="Area2D" parent="." node_paths=PackedStringArray("_destination")]
+z_index = 10
+position = Vector2(32, -34)
+script = ExtResource("3_joc8x")
+_destination = NodePath("../Transporter2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Transporter"]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_jghel")
+
+[node name="Transporter2" type="Area2D" parent="." node_paths=PackedStringArray("_destination")]
+z_index = 10
+position = Vector2(32, 174)
+script = ExtResource("3_joc8x")
+_destination = NodePath("../Transporter")
+metadata/_custom_type_script = "uid://bhsdjlrhck4qd"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Transporter2"]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_joc8x")
+
+[connection signal="body_entered" from="Transporter" to="Transporter" method="_OnBodyEntered"]
+[connection signal="body_entered" from="Transporter2" to="Transporter2" method="_OnBodyEntered"]

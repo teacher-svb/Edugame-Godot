@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://d02jcva8rvq2j"]
+[gd_scene load_steps=12 format=3 uid="uid://d02jcva8rvq2j"]
 
 [ext_resource type="Script" uid="uid://b66cprwwqv431" path="res://scripts/Game/Systems/SaveLoadSystem/SaveLoadManager.cs" id="1_3yhdi"]
 [ext_resource type="Script" uid="uid://cerfog7uyabpn" path="res://scripts/Game/Systems/SaveLoadSystem/MyGameData.cs" id="2_4v8vv"]
 [ext_resource type="Script" uid="uid://d3ttmxb4thh1c" path="res://scripts/Lib/Input/InputManager.cs" id="3_4v8vv"]
 [ext_resource type="Script" uid="uid://bu2vh3eo113s1" path="res://scripts/Game/UI/MVC_Fade/FadeController.cs" id="4_7g5um"]
+[ext_resource type="Script" uid="uid://bjnewwsvx7s8s" path="res://scripts/Game/Singletons/ManagerUI.cs" id="4_c37v5"]
 [ext_resource type="Script" uid="uid://7u5mhmxl340a" path="res://scripts/Game/UI/MVC_Fade/FadeView.cs" id="5_c37v5"]
 [ext_resource type="Script" uid="uid://cvgoslwqcj457" path="res://scripts/Game/UI/MVC_Fade/FadeModel.cs" id="6_8i7bo"]
 [ext_resource type="Script" uid="uid://c0ssbl3ew4s2d" path="res://scripts/Game/StateManagementGame/StateManagerGame.cs" id="7_0le2r"]
@@ -16,6 +17,7 @@ metadata/_custom_type_script = "uid://cerfog7uyabpn"
 
 [sub_resource type="Resource" id="Resource_n5sdn"]
 script = ExtResource("5_c37v5")
+_fadeRectPath = NodePath("ColorRect")
 metadata/_custom_type_script = "uid://7u5mhmxl340a"
 
 [sub_resource type="Resource" id="Resource_eky4q"]
@@ -33,16 +35,28 @@ _gameName = "FooBar"
 [node name="InputManager" type="Node" parent="."]
 script = ExtResource("3_4v8vv")
 
-[node name="UI" type="Node" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("4_c37v5")
 
 [node name="FadeController" type="Control" parent="UI"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("4_7g5um")
 view = SubResource("Resource_n5sdn")
 model = SubResource("Resource_eky4q")
+
+[node name="ColorRect" type="ColorRect" parent="UI/FadeController"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
 
 [node name="StateManagerGame" type="Node" parent="."]
 script = ExtResource("7_0le2r")
