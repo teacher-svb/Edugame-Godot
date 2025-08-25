@@ -10,8 +10,7 @@ using Godot;
 
 namespace TnT.EduGame.Question
 {
-    [Tool]
-    public class ChallengeValue
+    public partial class ChallengeValue : Resource
     {
         public int Value;
         public string ParamName;
@@ -34,12 +33,12 @@ namespace TnT.EduGame.Question
         public bool CheckAnswer();
         public void SetFormulaParam(int index, string paramName);
         public void ChangeValue(string paramName, int value);
-        public abstract List<ChallengeValue> Values { get; }
+        public abstract Godot.Collections.Array<ChallengeValue> Values { get; }
         public Type SelectedVisualType { get; }
     }
 
-    [Serializable]
-    public class MathChallenge : IMathChallenge
+    [GlobalClass, Tool]
+    public partial class MathChallenge : Resource, IMathChallenge
     {
         [Export]
         public string Name { get; set; } = "";
@@ -84,7 +83,7 @@ namespace TnT.EduGame.Question
         public int Answer { get; private set; }
         // [field: SerializeField, PropertyOrder(4)]
         [Export]
-        public List<ChallengeValue> Values { get; set; } = new List<ChallengeValue>() { };
+        public Godot.Collections.Array<ChallengeValue> Values { get; set; } = new Godot.Collections.Array<ChallengeValue>() { };
         public Type SelectedVisualType => _visualType.Type;
 
         public MathChallenge()
@@ -160,14 +159,14 @@ namespace TnT.EduGame.Question
         public void SetFormulaParam(int index, string paramName)
         {
             // reset any value that currently is mapped to the param name
-            this.Values.FindAll(v => v.ParamName == paramName).ForEach(v => v.ParamName = "");
+            this.Values.ToList().FindAll(v => v.ParamName == paramName).ForEach(v => v.ParamName = "");
             // map the new parameter name to the index-th value in the list of values
             Values.ElementAt(index).ParamName = paramName;
         }
 
         public void ChangeValue(string paramName, int value)
         {
-            this.Values.FindAll(v => v.ParamName == paramName).ForEach(v => v.Value = value);
+            this.Values.ToList().FindAll(v => v.ParamName == paramName).ForEach(v => v.Value = value);
         }
 
         public class ChallengeParametersMissingException : Exception { }

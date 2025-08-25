@@ -37,7 +37,8 @@ namespace TnT.EduGame.GameState
         // private void OnOpenInventory(InputAction.CallbackContext context) => StateManagerGame.Instance.OpenInventory();
         async Task StartGame()
         {
-            // ETime[play].timeScale = 1;
+            var tree = ManagerUI.Instance.GetTree();
+            tree.Paused = false;
 
             // openInventory.action.Enable();
             

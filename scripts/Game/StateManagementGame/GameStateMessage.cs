@@ -90,7 +90,8 @@ namespace TnT.EduGame.GameState
         {
             // UIController.NextBtnPushed += NextMessage;
             // UIController.CloseBtnPushed += ClearMessages;
-            // ETime[play].timeScale = 0;
+            var tree = ManagerUI.Instance.GetTree();
+            tree.Paused = true;
             // await UIController.Show();
             // next.action.Enable();
             // close.action.Enable();
@@ -103,7 +104,8 @@ namespace TnT.EduGame.GameState
             // next.action.Disable();
             // close.action.Disable();
             // await UIController.Hide();
-            // ETime[play].timeScale = 1;
+            var tree = ManagerUI.Instance.GetTree();
+            tree.Paused = false;
         }
     }
 }

@@ -47,7 +47,8 @@ namespace TnT.EduGame.GameState
 
         async Task OpenInventory()
         {
-            // ETime[play].timeScale = 0;
+            var tree = ManagerUI.Instance.GetTree();
+            tree.Paused = true;
             // await InventoryController.Show();
 
             // close.action.Enable();
@@ -73,7 +74,8 @@ namespace TnT.EduGame.GameState
                 await Task.Yield();
             }
             // // await Inventory.Hide();
-            // ETime[play].timeScale = 1;
+            var tree = ManagerUI.Instance.GetTree();
+            tree.Paused = false;
         }
 
         bool ExitInventory()

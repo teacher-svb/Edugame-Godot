@@ -25,6 +25,7 @@ script = ExtResource("6_8i7bo")
 metadata/_custom_type_script = "uid://cvgoslwqcj457"
 
 [node name="Managers" type="Node"]
+process_mode = 3
 
 [node name="SaveLoadManager" type="Node" parent="."]
 script = ExtResource("1_3yhdi")

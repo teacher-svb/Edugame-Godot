@@ -48,7 +48,7 @@ namespace TnT.EduGame.GameState
                 throw new Exception("no play state assigned");
             }
 
-            OnSceneLoaded.Invoke(null);
+            OnSceneLoaded?.Invoke(null);
         }
 
         // public void ShowQuestMessage(QuestObjective o)

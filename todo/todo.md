@@ -1,6 +1,6 @@
 - GODOT_REFACTOR
     - [x] GODOT_REFACTOR save/load system
-    - [1] GODOT_REFACTOR statemachines
+    - [x] GODOT_REFACTOR statemachines
     - [1] GODOT_REFACTOR flyweightsystem
     - [x] GODOT_REFACTOR stats & attributes
     - [x] GODOT_REFACTOR ability system

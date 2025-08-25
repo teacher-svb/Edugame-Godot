@@ -59,7 +59,8 @@ namespace TnT.EduGame.GameState
 
         async Task FadeIn()
         {
-            // ETime[play].timeScale = 0;
+            var tree = ManagerUI.Instance.GetTree();
+            tree.Paused = true;
             await this.FadeController.ShowView();
         }
 
@@ -101,7 +102,8 @@ namespace TnT.EduGame.GameState
 
             await this.FadeController.HideView();
 
-            // ETime[play].timeScale = 1;
+            var tree = ManagerUI.Instance.GetTree();
+            tree.Paused = false;
         }
 
         public interface ISceneLoaderOptions { }

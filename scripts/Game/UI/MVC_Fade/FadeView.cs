@@ -37,8 +37,8 @@ namespace TnT.Systems.UI
 
             for (float i = 0; i < 1; i += 1f/steps)
             {
-                _fadeRect.Color = _fadeRect.Color.Lerp(_from, i);
                 await Task.Delay(1000/steps);
+                _fadeRect.Color = _fadeRect.Color.Lerp(_from, i);
             }
         }
 
@@ -48,8 +48,8 @@ namespace TnT.Systems.UI
 
             for (float i = 0; i < 1; i += 1f/steps)
             {
-                _fadeRect.Color = _fadeRect.Color.Lerp(_to, i);
                 await Task.Delay(1000/steps);
+                _fadeRect.Color = _fadeRect.Color.Lerp(_to, i);
             }
             _root.ZIndex = 0;
         }
