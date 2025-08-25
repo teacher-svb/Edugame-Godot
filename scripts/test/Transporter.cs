@@ -24,7 +24,7 @@ public partial class Transporter : Area2D
             return;
         }
 
-
+        GD.Print(this.Position);
         StateManagerGame.Instance.LoadScene(_sceneToLoad, this.Position);
     }
 }

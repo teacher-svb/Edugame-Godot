@@ -70,26 +70,29 @@ namespace TnT.EduGame.GameState
             player.MoveTo(target);
         }
 
-        async Task LoadScene(Resource sceneName, Player player, Vector2 target, bool forceLoad)
+        async Task LoadScene(Resource scene, Player player, Vector2 target, bool forceLoad)
         {
             await FadeIn();
 
-            var gameplayScene = GD.Load<PackedScene>("res://Gameplay/Level1.tscn");
-            // var gameplayInstance = gameplayScene.Instantiate();
-            // gameplayInstance.Name = "GameplaySceneInstance";
-            // ManagerUI.Instance.GetTree().Root.AddChild(gameplayInstance);
-            ManagerUI.Instance.GetTree().ChangeSceneToPacked(gameplayScene);
+            var gameplayScene = GD.Load<PackedScene>(scene.ResourcePath);
+            var gameplayInstance = gameplayScene.Instantiate();
+            gameplayInstance.Name = "GameplaySceneInstance";
 
-            //     var oldScene = SceneManager.GetSceneByName(_currentScene);
-            //     if (oldScene != null && oldScene.IsValid())
-            //     {
-            //         await SceneManager.UnloadSceneAsync(_currentScene);
-            //     }
-            //     await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+            var tree = ManagerUI.Instance.GetTree();
 
-            //     _currentScene = sceneName;
+            tree.Root.ChildEnteredTree += MovePlayer;
+            tree.ChangeSceneToPacked(gameplayScene);
 
-            player.MoveTo(target);
+            void MovePlayer(Node node)
+            {
+                var tree = ManagerUI.Instance.GetTree();
+                tree.Root.ChildEnteredTree -= MovePlayer;
+
+                var player = ManagerUI.Instance.GetTree().FindAnyObjectByType<Player>();
+
+                player.MoveTo(target);
+                GD.Print(target);
+            }
         }
 
         async Task FadeOut()
