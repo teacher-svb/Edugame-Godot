@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8eidkv5hpkk3"]
+
+[ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://themes/Notifications.tres" id="1_0snb7"]
+[ext_resource type="Script" uid="uid://mpqip1aln67l" path="res://scripts/Game/UI/MVC_Messages/View/Notification.cs" id="2_sqm8t"]
+
+[node name="Notification" type="Control" node_paths=PackedStringArray("_closeBtn", "_nxtBtn", "_characterSprite", "_message", "_characterName")]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 648.0
+grow_horizontal = 2
+theme = ExtResource("1_0snb7")
+script = ExtResource("2_sqm8t")
+_closeBtn = NodePath("Buttons/Close/CloseBtn")
+_nxtBtn = NodePath("Buttons/Next/NextBtn")
+_characterSprite = NodePath("Messager/CharacterSprite")
+_message = NodePath("Message")
+_characterName = NodePath("Messager/CharacterName")
+
+[node name="Message" type="RichTextLabel" parent="."]
+layout_mode = 2
+anchor_right = 1.0
+offset_left = 85.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = 118.0
+text = "Hello, world!"
+
+[node name="Buttons" type="HBoxContainer" parent="."]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = -1
+offset_left = 57.0
+offset_top = 97.0
+offset_right = 999.0
+offset_bottom = 147.0
+
+[node name="Close" type="PanelContainer" parent="Buttons"]
+layout_mode = 2
+
+[node name="CloseBtn" type="Button" parent="Buttons/Close"]
+layout_mode = 2
+
+[node name="CloseBtnLabel" type="RichTextLabel" parent="Buttons/Close"]
+layout_mode = 2
+theme_type_variation = &"RichTextButton"
+bbcode_enabled = true
+text = " [color=#A52A2A]󰢃[/color] [color=#fff8e366][󱊷][/color] "
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Next" type="PanelContainer" parent="Buttons"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="NextBtn" type="Button" parent="Buttons/Next"]
+layout_mode = 2
+
+[node name="NextBtnLabel" type="RichTextLabel" parent="Buttons/Next"]
+layout_mode = 2
+theme_type_variation = &"RichTextButton"
+bbcode_enabled = true
+text = " [color=white]󰙢[/color] [color=#fff8e366][󱁐][/color] "
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Messager" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_right = 157.0
+offset_bottom = 166.0
+
+[node name="CharacterSprite" type="TextureRect" parent="Messager"]
+layout_mode = 2
+stretch_mode = 4
+
+[node name="CharacterName" type="Label" parent="Messager"]
+layout_mode = 2
+size_flags_vertical = 8
+horizontal_alignment = 1
+vertical_alignment = 2

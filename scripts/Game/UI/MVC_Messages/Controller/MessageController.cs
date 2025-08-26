@@ -1,14 +1,14 @@
 
 using System;
 using System.Threading.Tasks;
-using UnityEngine;
+using Godot;
 
 namespace TnT.Systems.UI
 {
-    public class MessageController : MonoBehaviour { 
-        [SerializeField]
+    public partial class MessageController : Control { 
+        [Export]
         public MessageView view = new();
-        [SerializeField]
+        [Export]
         public MessageModel model = new();
         public int Count => model.messages.Count;
 
@@ -23,10 +23,10 @@ namespace TnT.Systems.UI
 
         async void Initialize()
         {
-            await view.InitializeView();
+            await view.InitializeView(this);
         }
 
-        public async Task Show()
+        public async Task ShowView()
         {
             var nextMsg = model.messages.Dequeue();
             view.SetMessage(nextMsg.text, nextMsg.sprite, nextMsg.name);
@@ -34,13 +34,13 @@ namespace TnT.Systems.UI
             await Task.Yield();
         }
 
-        public async Task Hide()
+        public async Task HideView()
         {
             view.Hide();
             await Task.Yield();
         }
 
-        public void AddMessage(string text, Sprite sprite, string name)
+        public void AddMessage(string text, Texture2D sprite, string name)
         {
             model.messages.Enqueue(new() { text = text, sprite = sprite, name = name });
         }

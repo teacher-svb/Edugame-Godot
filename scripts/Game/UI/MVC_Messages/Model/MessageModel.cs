@@ -2,16 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
-using UnityEngine.Events;
+using Godot;
 
 namespace TnT.Systems.UI
 {
-    [Serializable]
-    public class MessageModel
+    [GlobalClass]
+    public partial class MessageModel : Resource
     {
-
-
         public Queue<Message> messages = new();
 
         public void Clear() => messages.Clear();
@@ -27,7 +24,7 @@ namespace TnT.Systems.UI
         }
         public string text;
         public string name;
-        public Sprite sprite;
+        public Texture2D sprite;
         public MessageType Type;
     }
 }

@@ -1,12 +1,11 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=15 format=3 uid="uid://cukimwsr4h11n"]
+[gd_resource type="Resource" load_steps=14 format=3 uid="uid://b4o8xetb12dcq"]
 
-[ext_resource type="SpriteFrames" uid="uid://coftnq4vpbqrp" path="res://assets/Spritesheets/Characters/Character_022/Character_022_SpriteFrames.tres" id="1_h4r8b"]
+[ext_resource type="SpriteFrames" uid="uid://srit1vjsk2no" path="res://assets/Spritesheets/Characters/Character_022/Character_022_SpriteFrames.tres" id="1_h4r8b"]
 [ext_resource type="Script" uid="uid://bqblbalohjolq" path="res://scripts/Game/Character/CharacterData.cs" id="1_igwf4"]
 [ext_resource type="Script" uid="uid://ch4u84myc17c2" path="res://scripts/Lib/Input/InputAction.cs" id="1_je0ok"]
-[ext_resource type="Resource" uid="uid://bxs5xd2hd4bja" path="res://assets/Spritesheets/Characters/Character_022/Character_022_CharacterStats.tres" id="1_k5oxl"]
+[ext_resource type="Resource" path="res://assets/Spritesheets/Characters/Character_022/Character_022_CharacterStats.tres" id="1_k5oxl"]
 [ext_resource type="Script" uid="uid://3357acd2bc78" path="res://scripts/Game/Systems/Abilities/StatModifierEffect.cs" id="2_2u5au"]
 [ext_resource type="Texture2D" uid="uid://dt315kny68yau" path="res://assets/Spritesheets/Characters/Character_022/Character_022.png" id="2_3b7g3"]
-[ext_resource type="Script" uid="uid://dca0lksib7tml" path="res://scripts/Game/Systems/Abilities/BaseAbilityEffect.cs" id="2_d1fg0"]
 [ext_resource type="Script" uid="uid://ds85wh5vywo58" path="res://scripts/Game/Systems/Abilities/Ability.cs" id="2_v2cnc"]
 [ext_resource type="Texture2D" uid="uid://c0fwbmbtxen2h" path="res://assets/Spritesheets/Characters/Character_022/Character_022_Face.png" id="3_k5oxl"]
 
@@ -30,7 +29,7 @@ metadata/_custom_type_script = "uid://3357acd2bc78"
 script = ExtResource("2_v2cnc")
 cooldown = 1
 uses = 1
-Effects = Array[ExtResource("2_d1fg0")]([SubResource("Resource_f7ivq")])
+Effects = [SubResource("Resource_f7ivq")]
 metadata/_custom_type_script = "uid://ds85wh5vywo58"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kr3hl"]
