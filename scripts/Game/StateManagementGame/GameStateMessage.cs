@@ -3,19 +3,21 @@ using TnT.Systems.State;
 using System;
 using Godot;
 using TnT.EduGame.Characters;
+using TnT.Input;
+using TnT.Systems.UI;
 
 namespace TnT.EduGame.GameState
 {
-    [Serializable]
-    public class GameStateMessage : IStateObject<GameStateMessage.MessageOptions>, IGameState
+    [GlobalClass]
+    public partial class GameStateMessage : GameState, IStateObject<GameStateMessage.MessageOptions>
     {
         public struct MessageOptions
         {
             public string text;
             public CharacterData character;
         }
-        // [SerializeField] InputActionReference next;
-        // [SerializeField] InputActionReference close;
+        [Export] public InputAction _next;
+        [Export] public InputAction _close;
 
         // MessageController _uiController;
         private bool retrievingNextMsg;
@@ -34,23 +36,24 @@ namespace TnT.EduGame.GameState
         public BaseState GetState(MessageOptions options)
         {
             allMessagesRead = false;
-            // UIController.AddMessage(options.text, options.character.CharacterFace, options.character.CharacterName);
-            // if (UIController.Count > 1)
-            //     return new BaseState(new() { ExitOnNextUpdate = () => true });
+            // MessageController.Instance.AddMessage(options.text, options.character.CharacterFace, options.character.CharacterName);
+            MessageController.Instance.AddMessage(options.text);
+            if (MessageController.Instance.Count > 1)
+                return new BaseState(new() { ExitOnNextUpdate = () => true });
 
             return new BaseState(new() { OnEnter = Open, OnExit = Close, ExitOnNextUpdate = Exit, OnUpdate = Update });
         }
 
         private void Update()
         {
-            // if (close.action.triggered)
-            // {
-            //     ClearMessages();
-            // }
-            // if (next.action.triggered)
-            // {
-            //     NextMessage();
-            // }
+            if (_close.Triggered)
+            {
+                ClearMessages();
+            }
+            if (_next.Triggered)
+            {
+                NextMessage();
+            }
         }
 
         bool Exit()
@@ -60,50 +63,50 @@ namespace TnT.EduGame.GameState
 
         void ClearMessages()
         {
-            // if (allMessagesRead == false)
-            // {
-            //     UIController.Clear();
-            //     allMessagesRead = true;
-            // }
+            if (allMessagesRead == false)
+            {
+                MessageController.Instance.Clear();
+                allMessagesRead = true;
+            }
         }
 
         async void NextMessage()
         {
-            // if (allMessagesRead == false && UIController.Count == 0)
-            // {
-            //     ClearMessages();
-            //     return;
-            // }
+            if (allMessagesRead == false && MessageController.Instance.Count == 0)
+            {
+                ClearMessages();
+                return;
+            }
 
 
-            // if (UIController.Count > 0 && retrievingNextMsg == false)
-            // {
-            //     retrievingNextMsg = true;
-            //     await UIController.Hide();
+            if (MessageController.Instance.Count > 0 && retrievingNextMsg == false)
+            {
+                retrievingNextMsg = true;
+                await MessageController.Instance.Hide();
                 await Task.Yield();
-            //     await UIController.Show();
-            //     retrievingNextMsg = false;
-            // }
+                await MessageController.Instance.Show();
+                retrievingNextMsg = false;
+            }
         }
 
         async Task Open()
         {
-            // UIController.NextBtnPushed += NextMessage;
-            // UIController.CloseBtnPushed += ClearMessages;
+            MessageController.Instance.NextBtnPushed += NextMessage;
+            MessageController.Instance.CloseBtnPushed += ClearMessages;
             var tree = ManagerUI.Instance.GetTree();
             tree.Paused = true;
-            // await UIController.Show();
-            // next.action.Enable();
-            // close.action.Enable();
+            await MessageController.Instance.Show();
+            _next.Enable();
+            _close.Enable();
         }
 
         async Task Close()
         {
-            // UIController.NextBtnPushed -= NextMessage;
-            // UIController.CloseBtnPushed -= ClearMessages;
-            // next.action.Disable();
-            // close.action.Disable();
-            // await UIController.Hide();
+            MessageController.Instance.NextBtnPushed -= NextMessage;
+            MessageController.Instance.CloseBtnPushed -= ClearMessages;
+            _next.Disable();
+            _close.Disable();
+            await MessageController.Instance.Hide();
             var tree = ManagerUI.Instance.GetTree();
             tree.Paused = false;
         }

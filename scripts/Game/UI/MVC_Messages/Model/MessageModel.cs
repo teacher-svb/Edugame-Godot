@@ -7,7 +7,7 @@ using Godot;
 namespace TnT.Systems.UI
 {
     [GlobalClass]
-    public partial class MessageModel : Resource
+    public partial class MessageModel : Node
     {
         public Queue<Message> messages = new();
 

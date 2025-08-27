@@ -19,7 +19,7 @@ namespace TnT.Systems.UI
         public string CharacterName { get => _characterName.Text; set => _characterName.Text = value; }
         public Texture2D CharacterSprite { set => _characterSprite.Texture = value; }
 
-        public Notification()
+        public override void _Ready()
         {
             _closeBtn.Pressed += () => CloseBtnPushed();
             _nxtBtn.Pressed += () => NextBtnPushed();

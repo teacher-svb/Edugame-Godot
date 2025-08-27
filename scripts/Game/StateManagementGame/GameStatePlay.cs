@@ -5,8 +5,8 @@ using Godot;
 
 namespace TnT.EduGame.GameState
 {
-    [Serializable]
-    public class GameStatePlay : IStateObject<GameStatePlay.PlayOptions>, IGameState
+    [GlobalClass]
+    public partial class GameStatePlay : GameState, IStateObject<GameStatePlay.PlayOptions>
     { 
         public struct PlayOptions
         {

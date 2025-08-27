@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=4 uid="uid://60p5xq6tioov"]
+[gd_scene load_steps=6 format=4 uid="uid://cq3acauhkattk"]
 
 [ext_resource type="TileSet" uid="uid://cfonf0rkxvtn" path="res://assets/Tilesets/tilesets.tres" id="1_llwst"]
-[ext_resource type="PackedScene" uid="uid://djgv02ndmxkyo" path="res://Scenes/Player.tscn" id="2_0plju"]
+[ext_resource type="PackedScene" uid="uid://b18es3ooe0dvt" path="res://Scenes/Player.tscn" id="2_0plju"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h4fw4"]
 
@@ -92,4 +92,3 @@ shape = SubResource("WorldBoundaryShape2D_o5yvi")
 [node name="Player" parent="." instance=ExtResource("2_0plju")]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(4, 4)

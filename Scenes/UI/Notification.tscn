@@ -43,6 +43,7 @@ layout_mode = 2
 
 [node name="CloseBtnLabel" type="RichTextLabel" parent="Buttons/Close"]
 layout_mode = 2
+mouse_filter = 2
 theme_type_variation = &"RichTextButton"
 bbcode_enabled = true
 text = " [color=#A52A2A]󰢃[/color] [color=#fff8e366][󱊷][/color] "
@@ -60,6 +61,7 @@ layout_mode = 2
 
 [node name="NextBtnLabel" type="RichTextLabel" parent="Buttons/Next"]
 layout_mode = 2
+mouse_filter = 2
 theme_type_variation = &"RichTextButton"
 bbcode_enabled = true
 text = " [color=white]󰙢[/color] [color=#fff8e366][󱁐][/color] "

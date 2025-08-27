@@ -20,11 +20,12 @@ public partial class Transporter : Area2D
     {
         if (_sceneToLoad == null)
         {
-            StateManagerGame.Instance.LoadLocation(this.Position);
+            // StateManagerGame.Instance.LoadLocation(this.Position);
+            StateManagerGame.Instance.ShowMessage("This is a test", null);
             return;
         }
 
-        GD.Print(this.Position);
+        // GD.Print(this.Position);
         StateManagerGame.Instance.LoadScene(_sceneToLoad, this.Position);
     }
 }

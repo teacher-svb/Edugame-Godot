@@ -5,13 +5,13 @@ using Godot;
 
 namespace TnT.EduGame.GameState
 {
-    [Serializable]
-    public class GameStateInventory : IStateObject<GameStateInventory.InventoryOptions>, IGameState
+    [GlobalClass]
+    public partial class GameStateInventory : GameState, IStateObject<GameStateInventory.InventoryOptions>
     {
         // public delegate void OnItemClicked(Item item);
         public delegate void OnCloseInventory();
         // [SerializeField] InputActionReference close;
-        [Export] Camera2D camera;
+        Camera2D camera;
         public struct InventoryOptions
         {
         }

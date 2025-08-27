@@ -1,19 +1,50 @@
-[gd_scene load_steps=12 format=3 uid="uid://d02jcva8rvq2j"]
+[gd_scene load_steps=28 format=3 uid="uid://dsdamnlwcc0j1"]
 
 [ext_resource type="Script" uid="uid://b66cprwwqv431" path="res://scripts/Game/Systems/SaveLoadSystem/SaveLoadManager.cs" id="1_3yhdi"]
 [ext_resource type="Script" uid="uid://cerfog7uyabpn" path="res://scripts/Game/Systems/SaveLoadSystem/MyGameData.cs" id="2_4v8vv"]
 [ext_resource type="Script" uid="uid://d3ttmxb4thh1c" path="res://scripts/Lib/Input/InputManager.cs" id="3_4v8vv"]
 [ext_resource type="Script" uid="uid://bu2vh3eo113s1" path="res://scripts/Game/UI/MVC_Fade/FadeController.cs" id="4_7g5um"]
+[ext_resource type="Script" uid="uid://7nvtadqep3kv" path="res://scripts/Game/Systems/QuestSystem/QuestManager.cs" id="4_347u6"]
 [ext_resource type="Script" uid="uid://bjnewwsvx7s8s" path="res://scripts/Game/Singletons/ManagerUI.cs" id="4_c37v5"]
 [ext_resource type="Script" uid="uid://7u5mhmxl340a" path="res://scripts/Game/UI/MVC_Fade/FadeView.cs" id="5_c37v5"]
+[ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="5_iqbe2"]
 [ext_resource type="Script" uid="uid://cvgoslwqcj457" path="res://scripts/Game/UI/MVC_Fade/FadeModel.cs" id="6_8i7bo"]
+[ext_resource type="Resource" uid="uid://bcgox3enbg4ph" path="res://quests/Avocado.tres" id="6_pnf1h"]
 [ext_resource type="Script" uid="uid://c0ssbl3ew4s2d" path="res://scripts/Game/StateManagementGame/StateManagerGame.cs" id="7_0le2r"]
+[ext_resource type="Script" uid="uid://bdql4ehll6w1t" path="res://scripts/Game/Systems/QuestSystem/QuestManagerSaveData.cs" id="7_iqbe2"]
+[ext_resource type="Script" uid="uid://ncf63o7hgool" path="res://scripts/Game/UI/MVC_Messages/Controller/MessageController.cs" id="8_0le2r"]
+[ext_resource type="PackedScene" uid="uid://b8eidkv5hpkk3" path="res://Scenes/UI/Notification.tscn" id="9_n5sdn"]
+[ext_resource type="Script" uid="uid://bgetj7peh8h61" path="res://scripts/Game/UI/MVC_Messages/View/MessageView.cs" id="9_ut70p"]
+[ext_resource type="Script" uid="uid://bs1saqqc0g5yc" path="res://scripts/Game/UI/MVC_Messages/Model/MessageModel.cs" id="10_46vsp"]
+[ext_resource type="Script" uid="uid://djkjkbdwkb3um" path="res://scripts/Game/StateManagementGame/GameStatePlay.cs" id="11_wsyol"]
+[ext_resource type="Script" uid="uid://dm3me216ti1em" path="res://scripts/Game/StateManagementGame/GameStateLoadingScreen.cs" id="12_7ysjy"]
+[ext_resource type="Script" uid="uid://clgnpunn4d55j" path="res://scripts/Game/StateManagementGame/GameStateMessage.cs" id="13_vkax6"]
+[ext_resource type="Script" uid="uid://bvn0ypsbartdv" path="res://scripts/Game/StateManagementGame/GameStateInventory.cs" id="14_ut70p"]
+[ext_resource type="Script" uid="uid://ch4u84myc17c2" path="res://scripts/Lib/Input/InputAction.cs" id="16_ut70p"]
+
+[sub_resource type="Resource" id="Resource_ut70p"]
+script = ExtResource("16_ut70p")
+ActionName = "next"
+Enabled = false
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
+
+[sub_resource type="Resource" id="Resource_46vsp"]
+script = ExtResource("16_ut70p")
+ActionName = "close"
+Enabled = false
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
 
 [sub_resource type="Resource" id="Resource_72h8h"]
 script = ExtResource("2_4v8vv")
 CurrentLevelName = ""
 Name = ""
 metadata/_custom_type_script = "uid://cerfog7uyabpn"
+
+[sub_resource type="Resource" id="Resource_pnf1h"]
+script = ExtResource("7_iqbe2")
+Id = ""
+IsNew = false
+metadata/_custom_type_script = "uid://bdql4ehll6w1t"
 
 [sub_resource type="Resource" id="Resource_n5sdn"]
 script = ExtResource("5_c37v5")
@@ -27,6 +58,23 @@ metadata/_custom_type_script = "uid://cvgoslwqcj457"
 [node name="Managers" type="Node"]
 process_mode = 3
 
+[node name="StateManagerGame" type="Node" parent="."]
+script = ExtResource("7_0le2r")
+
+[node name="InventoryState" type="Node" parent="StateManagerGame"]
+script = ExtResource("14_ut70p")
+
+[node name="LoadingScreenState" type="Node" parent="StateManagerGame"]
+script = ExtResource("12_7ysjy")
+
+[node name="MessageState" type="Node" parent="StateManagerGame"]
+script = ExtResource("13_vkax6")
+_next = SubResource("Resource_ut70p")
+_close = SubResource("Resource_46vsp")
+
+[node name="PlayState" type="Node" parent="StateManagerGame"]
+script = ExtResource("11_wsyol")
+
 [node name="SaveLoadManager" type="Node" parent="."]
 script = ExtResource("1_3yhdi")
 GameData = SubResource("Resource_72h8h")
@@ -35,6 +83,11 @@ _gameName = "FooBar"
 
 [node name="InputManager" type="Node" parent="."]
 script = ExtResource("3_4v8vv")
+
+[node name="QuestManager" type="Node" parent="."]
+script = ExtResource("4_347u6")
+_quests = Array[ExtResource("5_iqbe2")]([ExtResource("6_pnf1h")])
+_saveData = SubResource("Resource_pnf1h")
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("4_c37v5")
@@ -59,5 +112,24 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
-[node name="StateManagerGame" type="Node" parent="."]
-script = ExtResource("7_0le2r")
+[node name="MessageController" type="Node" parent="UI" node_paths=PackedStringArray("view", "model")]
+script = ExtResource("8_0le2r")
+view = NodePath("MessageView")
+model = NodePath("MessageModel")
+
+[node name="MessageModel" type="Node" parent="UI/MessageController"]
+script = ExtResource("10_46vsp")
+
+[node name="MessageView" type="Control" parent="UI/MessageController"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_ut70p")
+
+[node name="Notification" parent="UI/MessageController/MessageView" instance=ExtResource("9_n5sdn")]
+layout_mode = 1
+
+[connection signal="OnQuestUpdated" from="QuestManager" to="StateManagerGame" method="ShowQuestMessage"]

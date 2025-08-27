@@ -5,7 +5,8 @@ using Godot;
 
 namespace TnT.Systems.UI
 {
-    public partial class MessageController : Control { 
+    public partial class MessageController : Node { 
+        public static MessageController Instance { get; private set; }
         [Export]
         public MessageView view = new();
         [Export]
@@ -14,35 +15,39 @@ namespace TnT.Systems.UI
 
         public Action NextBtnPushed;
         public Action CloseBtnPushed;
-        void Start()
+        public override void _Ready()
         {
             Initialize();
             view.NextBtnPushed += () => NextBtnPushed();
             view.CloseBtnPushed += () => CloseBtnPushed();
+            Instance = this;
         }
 
         async void Initialize()
         {
-            await view.InitializeView(this);
+            await view.InitializeView();
         }
 
-        public async Task ShowView()
+        public async Task Show()
         {
             var nextMsg = model.messages.Dequeue();
             view.SetMessage(nextMsg.text, nextMsg.sprite, nextMsg.name);
-            view.Show();
-            await Task.Yield();
+            await view.ShowView();
         }
 
-        public async Task HideView()
+        public async Task Hide()
         {
-            view.Hide();
-            await Task.Yield();
+            await view.HideView();
         }
 
         public void AddMessage(string text, Texture2D sprite, string name)
         {
             model.messages.Enqueue(new() { text = text, sprite = sprite, name = name });
+        }
+
+        public void AddMessage(string text)
+        {
+            model.messages.Enqueue(new() { text = text });
         }
 
         internal void Clear()

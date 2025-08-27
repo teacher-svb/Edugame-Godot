@@ -7,12 +7,20 @@ using Godot;
 using TnT.EduGame.Characters;
 using System.Threading.Tasks;
 using TnT.Extensions;
+using Godot.Collections;
+using TnT.EduGame.QuestSystem;
 
 namespace TnT.EduGame.GameState
 {
-    public interface IGameState
+    public abstract partial class GameState : Node
     {
+        public override void _Ready()
+        {
+            var parent = this.FindAncestorOfType<StateManagerGame>();
+            parent.RegisterState(this);
+        }
     }
+
     [Serializable]
     public partial class StateManagerGame : AbstractStateStack
     {
@@ -22,13 +30,7 @@ namespace TnT.EduGame.GameState
 
         Player _player;
 
-        List<IGameState> _states = new()
-        {
-            new GameStatePlay(),
-            new GameStateMessage(),
-            new GameStateInventory(),
-            new GameStateLoadingScreen()
-        };
+        List<GameState> _states = new();
         public override void _EnterTree()
         {
             Instance = this;
@@ -51,17 +53,24 @@ namespace TnT.EduGame.GameState
             OnSceneLoaded?.Invoke(null);
         }
 
-        // public void ShowQuestMessage(QuestObjective o)
-        // {
-        //     ShowMessage(o.GetText(), o.CharacterData);
-        // }
+        public void ShowQuestMessage(QuestObjective o)
+        {
+            GD.Print(o.GetText());
+            ShowMessage(o.GetText(), o.CharacterData);
+        }
+
+        public void _on_quest_manager_on_quest_updated()
+        {
+            GD.Print("test");
+        }
 
         public void ShowMessage(string text, CharacterData character)
         {
             GameStateMessage state = _states.OfType<GameStateMessage>().FirstOrDefault();
+            GD.Print(state);
             try
             {
-                Push(state.GetState(new() { text = text, character = character }));
+                Push(state.GetState(new() { text = text }));
             }
             catch
             {
@@ -94,6 +103,11 @@ namespace TnT.EduGame.GameState
             {
                 throw new Exception("no scene loader state assigned");
             }
+        }
+
+        internal void RegisterState(GameState gameState)
+        {
+            _states.Add(gameState);
         }
 
         // public void ToggleInventory()

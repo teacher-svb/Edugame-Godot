@@ -105,7 +105,6 @@ namespace TnT.Systems.Persistence
     //     }
     // }
 
-    [Serializable]
     public class UniqueId
     {
         [Export]

@@ -26,6 +26,9 @@ namespace TnT.Input
 
         private bool _wasPressed;
 
+        public void Enable() => Enabled = true;
+        public void Disable() => Enabled = false;
+
         public void Poll()
         {
             // Reset per-frame properties

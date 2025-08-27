@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://djgv02ndmxkyo"]
+[gd_scene load_steps=8 format=3 uid="uid://b18es3ooe0dvt"]
 
 [ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="1_brc5f"]
-[ext_resource type="SpriteFrames" uid="uid://coftnq4vpbqrp" path="res://assets/Spritesheets/Characters/Character_022/Character_022_SpriteFrames.tres" id="2_brc5f"]
+[ext_resource type="SpriteFrames" uid="uid://srit1vjsk2no" path="res://assets/Spritesheets/Characters/Character_022/Character_022_SpriteFrames.tres" id="2_brc5f"]
 [ext_resource type="Script" uid="uid://c861mplcf03p7" path="res://scripts/Game/Character/Character.cs" id="3_5ixxa"]
-[ext_resource type="Resource" uid="uid://cukimwsr4h11n" path="res://assets/Spritesheets/Characters/Character_022/Character_022_CharacterData.tres" id="5_52ee3"]
+[ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://assets/Spritesheets/Characters/Character_022/Character_022_CharacterData.tres" id="5_52ee3"]
 [ext_resource type="Script" uid="uid://cqfwdw7wlks67" path="res://scripts/Game/Character/CharacterSaveData.cs" id="6_nn08x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_15ib8"]

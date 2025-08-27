@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=6 format=3 uid="uid://bcgox3enbg4ph"]
+
+[ext_resource type="Script" uid="uid://bkc5aqh43okjh" path="res://scripts/Game/Systems/QuestSystem/QuestObjective.cs" id="1_ftla8"]
+[ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://assets/Spritesheets/Characters/Character_022/Character_022_CharacterData.tres" id="2_50uyp"]
+[ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="3_7jgrb"]
+
+[sub_resource type="Resource" id="Resource_xx3qb"]
+script = ExtResource("1_ftla8")
+_startText = "Neem Avocado mee! Hij ligt nog in je bed."
+_progressText = "Heb je al eens gekeken in je bed?"
+_completeText = "Hmmmm... Avocado ligt hier niet. "
+_characterData = ExtResource("2_50uyp")
+_objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
+State = 0
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[sub_resource type="Resource" id="Resource_ftla8"]
+script = ExtResource("1_ftla8")
+_startText = "Zullen we eens beneden gaan zoeken?"
+_progressText = "Je kan best eens goed rondkijken of je Avocado vindt!"
+_completeText = "Goed gedaan! Je hebt Avocado gevonden!"
+_characterData = ExtResource("2_50uyp")
+_objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
+State = 0
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[resource]
+script = ExtResource("3_7jgrb")
+_id = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
+_name = "Avocado"
+_objectives = Array[ExtResource("1_ftla8")]([SubResource("Resource_xx3qb"), SubResource("Resource_ftla8")])
+State = 0
+metadata/_custom_type_script = "uid://k32terbd7gqc"

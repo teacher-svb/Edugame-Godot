@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="QuestEventChannel" load_steps=2 format=3 uid="uid://b4ixyrgs7jx1"]
+
+[ext_resource type="Script" uid="uid://dll8d2xuwycuc" path="res://scripts/Game/Systems/QuestSystem/QuestEventChannel.cs" id="1_8rphd"]
+
+[resource]
+script = ExtResource("1_8rphd")
+metadata/_custom_type_script = "uid://dll8d2xuwycuc"
