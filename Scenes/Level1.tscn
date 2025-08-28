@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://3hfdhy3acdbi"]
+[gd_scene load_steps=11 format=4 uid="uid://3hfdhy3acdbi"]
 
 [ext_resource type="TileSet" uid="uid://cfonf0rkxvtn" path="res://assets/Tilesets/tilesets.tres" id="1_2llne"]
 [ext_resource type="PackedScene" uid="uid://b18es3ooe0dvt" path="res://Scenes/Player.tscn" id="2_q12u6"]
@@ -14,6 +14,10 @@
 size = Vector2(41, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t3or0"]
+size = Vector2(14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysn8j"]
+size = Vector2(14, 14)
 
 [node name="Node2D" type="Node2D"]
 
@@ -76,7 +80,6 @@ tile_set = ExtResource("1_2llne")
 collision_enabled = false
 
 [node name="Player" parent="." instance=ExtResource("2_q12u6")]
-position = Vector2(-16, 0)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(4, 4)
@@ -121,7 +124,7 @@ _sceneToLoad = ExtResource("4_jghel")
 [node name="QuestActors" type="Node" parent="."]
 
 [node name="Area2D" type="Area2D" parent="QuestActors"]
-position = Vector2(32, 0)
+position = Vector2(15, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestActors/Area2D"]
 shape = SubResource("RectangleShape2D_t3or0")
@@ -132,7 +135,16 @@ _questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
 _questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
 metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
 
+[node name="Area2D2" type="Area2D" parent="QuestActors"]
+position = Vector2(-15, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestActors/Area2D2"]
+shape = SubResource("RectangleShape2D_ysn8j")
+
+[node name="QuestObjectiveActor" type="Node" parent="QuestActors/Area2D2"]
+script = ExtResource("5_slnnj")
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
 [connection signal="body_entered" from="Transporters/Transporter" to="Transporters/Transporter" method="_OnBodyEntered"]
 [connection signal="body_entered" from="Transporters/Transporter2" to="Transporters/Transporter2" method="_OnBodyEntered"]
 [connection signal="body_entered" from="Transporters/Transporter3" to="Transporters/Transporter3" method="_OnBodyEntered"]
-[connection signal="body_entered" from="QuestActors/Area2D" to="QuestActors/Area2D/QuestObjectiveActor" method="OnTriggerEnter2D"]

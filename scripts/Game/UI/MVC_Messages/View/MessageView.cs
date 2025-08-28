@@ -74,8 +74,8 @@ namespace TnT.Systems.UI
         public void SetMessage(string text, Texture2D sprite, string charName)
         {
             _message.Text = text;
-            // _message.CharacterSprite = sprite;
-            // _message.CharacterName = charName;
+            _message.CharacterSprite = sprite;
+            _message.CharacterName = charName;
         }
     }
 

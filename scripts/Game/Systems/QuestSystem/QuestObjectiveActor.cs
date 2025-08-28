@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using TnT.Extensions;
 
 namespace TnT.EduGame.QuestSystem
 {
@@ -24,6 +25,8 @@ namespace TnT.EduGame.QuestSystem
 
         public override void _Ready()
         {
+            var area = this.FindAncestorOfType<Area2D>();
+            area.BodyEntered += OnTriggerEnter2D;
             _questManager = QuestManager.Instance;
             if (_questManager == null)
                 GD.Print("QuestManager not found");
@@ -33,7 +36,7 @@ namespace TnT.EduGame.QuestSystem
         {
             if (other is Player == false)
                 return;
-                
+
             GD.Print("entered quest starter");
 
             switch (_action)

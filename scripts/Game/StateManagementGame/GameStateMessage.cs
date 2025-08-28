@@ -36,8 +36,8 @@ namespace TnT.EduGame.GameState
         public BaseState GetState(MessageOptions options)
         {
             allMessagesRead = false;
-            // MessageController.Instance.AddMessage(options.text, options.character.CharacterFace, options.character.CharacterName);
-            MessageController.Instance.AddMessage(options.text);
+            MessageController.Instance.AddMessage(options.text, options.character.CharacterFace, options.character.CharacterName);
+            // MessageController.Instance.AddMessage(options.text);
             if (MessageController.Instance.Count > 1)
                 return new BaseState(new() { ExitOnNextUpdate = () => true });
 

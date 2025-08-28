@@ -59,18 +59,13 @@ namespace TnT.EduGame.GameState
             ShowMessage(o.GetText(), o.CharacterData);
         }
 
-        public void _on_quest_manager_on_quest_updated()
-        {
-            GD.Print("test");
-        }
-
         public void ShowMessage(string text, CharacterData character)
         {
             GameStateMessage state = _states.OfType<GameStateMessage>().FirstOrDefault();
             GD.Print(state);
             try
             {
-                Push(state.GetState(new() { text = text }));
+                Push(state.GetState(new() { text = text, character = character }));
             }
             catch
             {

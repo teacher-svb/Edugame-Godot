@@ -65,10 +65,10 @@ namespace TnT.EduGame.QuestSystem
                     icon = "";
                     break;
                 case QuestState.INPROGRESS:
-                    icon = $"<color=#FFD700><size=50>󰲼</size> Start:</color> {StartText}";
+                    icon = $"[color=#FFD700][font_size=50]󰲼[/font_size] Start:[/color] {StartText}";
                     break;
                 case QuestState.COMPLETED:
-                    icon = $"<color=green><size=50>󰦕</size> Klaar!</color> {CompleteText}";
+                    icon = $"[color=green][font_size=50]󰦕[/font_size] Klaar![/color] {CompleteText}";
                     break;
             }
 
