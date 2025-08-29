@@ -6,7 +6,7 @@ using Godot;
 namespace TnT.EduGame.GameState
 {
     [GlobalClass]
-    public partial class GameStateInventory : GameState, IStateObject<GameStateInventory.InventoryOptions>
+    public partial class GameStateInventory : BaseGameState, IStateObject<GameStateInventory.InventoryOptions>
     {
         // public delegate void OnItemClicked(Item item);
         public delegate void OnCloseInventory();

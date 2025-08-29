@@ -46,7 +46,7 @@ namespace TnT.EduGame.QuestSystem
                     return;
 
                 currentObjective.State = value;
-                OnObjectiveStateChanged.Invoke(currentObjective);
+                OnObjectiveStateChanged?.Invoke(currentObjective);
                 // QuestManager.Instance.QuestObjectivesChannel.Invoke(currentObjective.ObjectiveId, currentObjective.State);
 
                 if (value == QuestState.COMPLETED)

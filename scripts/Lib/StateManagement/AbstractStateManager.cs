@@ -4,7 +4,6 @@ using Godot;
 
 namespace TnT.Systems.State
 {
-    [Serializable]
     public abstract partial class AbstractStateManager : Node
     {
         protected abstract BaseState CurrentState { get; set; }

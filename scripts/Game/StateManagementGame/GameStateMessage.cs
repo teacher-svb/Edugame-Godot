@@ -9,7 +9,7 @@ using TnT.Systems.UI;
 namespace TnT.EduGame.GameState
 {
     [GlobalClass]
-    public partial class GameStateMessage : GameState, IStateObject<GameStateMessage.MessageOptions>
+    public partial class GameStateMessage : BaseGameState, IStateObject<GameStateMessage.MessageOptions>
     {
         public struct MessageOptions
         {

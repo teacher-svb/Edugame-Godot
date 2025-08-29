@@ -12,16 +12,6 @@ using TnT.EduGame.QuestSystem;
 
 namespace TnT.EduGame.GameState
 {
-    public abstract partial class GameState : Node
-    {
-        public override void _Ready()
-        {
-            var parent = this.FindAncestorOfType<StateManagerGame>();
-            parent.RegisterState(this);
-        }
-    }
-
-    [Serializable]
     public partial class StateManagerGame : AbstractStateStack
     {
         public static StateManagerGame Instance { get; private set; }
@@ -30,7 +20,7 @@ namespace TnT.EduGame.GameState
 
         Player _player;
 
-        List<GameState> _states = new();
+        List<BaseGameState> _states = new();
         public override void _EnterTree()
         {
             Instance = this;
@@ -98,7 +88,7 @@ namespace TnT.EduGame.GameState
             }
         }
 
-        internal void RegisterState(GameState gameState)
+        internal void RegisterState(BaseGameState gameState)
         {
             _states.Add(gameState);
         }

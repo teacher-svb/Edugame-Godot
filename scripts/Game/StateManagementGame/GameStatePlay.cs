@@ -6,7 +6,7 @@ using Godot;
 namespace TnT.EduGame.GameState
 {
     [GlobalClass]
-    public partial class GameStatePlay : GameState, IStateObject<GameStatePlay.PlayOptions>
+    public partial class GameStatePlay : BaseGameState, IStateObject<GameStatePlay.PlayOptions>
     { 
         public struct PlayOptions
         {

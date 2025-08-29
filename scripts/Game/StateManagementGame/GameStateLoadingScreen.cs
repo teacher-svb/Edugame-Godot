@@ -8,7 +8,7 @@ using TnT.Extensions;
 namespace TnT.EduGame.GameState
 {
     [GlobalClass]
-    public partial class GameStateLoadingScreen : GameState, IStateObject<GameStateLoadingScreen.LoaderOptions>
+    public partial class GameStateLoadingScreen : BaseGameState, IStateObject<GameStateLoadingScreen.LoaderOptions>
     {
         Resource _currentScene;
 

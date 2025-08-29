@@ -20,7 +20,6 @@ public partial class Door : StaticBody2D
 			GD.Print($"Opening door for objective {o.ObjectiveId} when state changed to {o.State}");
 
 			col.SetDeferred("disabled", !col.Disabled);
-			// col.Disabled = !col.Disabled;
 		}
 	}
 }
