@@ -49,5 +49,26 @@ namespace TnT.Extensions
             Random rand = new Random(seed);
             return source.OrderBy(x => rand.Next());
         }
+
+
+        public static IEnumerable<T> Rotate<T>(this IEnumerable<T> source, int k)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            var list = source.ToList();
+            int n = list.Count;
+
+            if (n == 0 || k == 0)
+                return list; // Nothing to rotate
+
+            k %= n; // Reduce unnecessary full rotations
+
+            if (k < 0)
+                k += n; // Convert negative rotations to equivalent positive ones
+
+            // Return rotated sequence without modifying the original
+            return list.Skip(n - k).Concat(list.Take(n - k));
+        }
     }
 }
