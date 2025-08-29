@@ -13,9 +13,9 @@ namespace TnT.Systems.EventSystem
         public delegate void OnListenEventHandler(Variant value);
         [Export] EventChannel eventChannel;
 
-        protected void Awake() => eventChannel.Register(this);
+        public override void _Ready() => eventChannel.Register(this);
 
-        protected void OnDestroy() => eventChannel.Deregister(this);
+        // protected void OnDestroy() => eventChannel.Deregister(this);
 
         public virtual void Raise(params Variant[] values) => EmitSignal(SignalName.OnListen, values);
 

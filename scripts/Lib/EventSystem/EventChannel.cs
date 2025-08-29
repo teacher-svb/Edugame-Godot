@@ -13,6 +13,7 @@ namespace TnT.Systems.EventSystem {
 
         public void Invoke(params Variant[] values)
         {
+            GD.Print($"invoking event channel with {observers.Count} observers");
             foreach (var observer in observers)
             {
                 observer.Raise(values);

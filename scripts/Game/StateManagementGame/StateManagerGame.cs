@@ -55,14 +55,12 @@ namespace TnT.EduGame.GameState
 
         public void ShowQuestMessage(QuestObjective o)
         {
-            GD.Print(o.GetText());
             ShowMessage(o.GetText(), o.CharacterData);
         }
 
         public void ShowMessage(string text, CharacterData character)
         {
             GameStateMessage state = _states.OfType<GameStateMessage>().FirstOrDefault();
-            GD.Print(state);
             try
             {
                 Push(state.GetState(new() { text = text, character = character }));

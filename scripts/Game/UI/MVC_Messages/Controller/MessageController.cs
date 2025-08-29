@@ -28,16 +28,16 @@ namespace TnT.Systems.UI
             await view.InitializeView();
         }
 
-        public async Task Show()
+        public async Task Show(float duration = .2f)
         {
             var nextMsg = model.messages.Dequeue();
             view.SetMessage(nextMsg.text, nextMsg.sprite, nextMsg.name);
-            await view.ShowView();
+            await view.ShowView(duration);
         }
 
-        public async Task Hide()
+        public async Task Hide(float duration = .2f)
         {
-            await view.HideView();
+            await view.HideView(duration);
         }
 
         public void AddMessage(string text, Texture2D sprite, string name)

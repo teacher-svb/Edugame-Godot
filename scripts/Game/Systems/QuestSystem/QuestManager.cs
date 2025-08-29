@@ -20,6 +20,8 @@ namespace TnT.EduGame.QuestSystem
         // UnityEvent<QuestObjective> OnQuestUpdated;
         [Signal]
         public delegate void OnQuestUpdatedEventHandler(QuestObjective objective);
+        [Export] QuestEventChannel eventChannel;
+
 
         public override void _Ready()
         {
@@ -30,13 +32,20 @@ namespace TnT.EduGame.QuestSystem
                 .SetNext(new QuestProcessor<QuestMessageComplete>(QuestState.INPROGRESS, QuestState.COMPLETED))
                 .SetNext(new QuestProcessor<QuestMessageFail>(QuestState.INPROGRESS, QuestState.NOTSTARTED));
 
+            this.OnQuestUpdated += (v) => eventChannel.Invoke(v);
             foreach (var quest in _quests)
             {
                 quest.Reset();
-                quest.OnObjectiveStateChanged += o => EmitSignal(SignalName.OnQuestUpdated, o);
+                quest.OnObjectiveStateChanged += QuestObjectStateChanged;
             }
 
             _saveData.quests = _quests.Select(q => q.GetSaveData()).ToArray();
+        }
+
+        private void QuestObjectStateChanged(QuestObjective o)
+        {
+            GD.Print("emitting signal: onquestupdated");
+            EmitSignal(SignalName.OnQuestUpdated, o);
         }
 
         public void UpdateQuest(QuestMessage msg)

@@ -82,8 +82,7 @@ namespace TnT.EduGame.GameState
             if (MessageController.Instance.Count > 0 && retrievingNextMsg == false)
             {
                 retrievingNextMsg = true;
-                await MessageController.Instance.Hide();
-                await Task.Yield();
+                await MessageController.Instance.Hide(.1f);
                 await MessageController.Instance.Show();
                 retrievingNextMsg = false;
             }

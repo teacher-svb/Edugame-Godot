@@ -1,6 +1,8 @@
 
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace TnT.Easings
 {
@@ -76,6 +78,32 @@ namespace TnT.Easings
         // Delegate type
         //
         public delegate float Function(float start, float end, float value);
+
+        public static async IAsyncEnumerable<float> Animate(
+            float duration,
+            Ease easeType
+        )
+        {
+            double startTime = Time.GetTicksMsec();
+            double endTime = startTime + duration * 1000.0;
+
+            Function easingFunc = GetEasingFunction(easeType);
+
+            SceneTree tree = (SceneTree)Engine.GetMainLoop();
+
+            while (Time.GetTicksMsec() < endTime)
+            {
+                double now = Time.GetTicksMsec();
+                float t = Mathf.Clamp((float)((now - startTime) / (duration * 1000.0)), 0f, 1f);
+
+                float easedT = easingFunc(0f, 1f, t);
+                yield return easedT;
+
+                await tree.ToSignal(tree, SceneTree.SignalName.ProcessFrame);
+            }
+
+            yield return 1f;
+        }
 
         /// <summary>
         /// Returns the function associated to the easingFunction enum. Cache the returned delegate if used frequently.
@@ -548,13 +576,13 @@ namespace TnT.Easings
             value -= 1;
             return delta * 0.5f * (float)Math.Pow(2, -10 * value) * Mathf.Sin((value - s) * TWO_PI / p) + delta * 0.5f + start;
         }        /// <summary>
-        /// Exponential easing in function.
-        /// Starts slowly and accelerates rapidly towards the end.
-        /// </summary>
-        /// <param name="start">Start value.</param>
-        /// <param name="end">End value.</param>
-        /// <param name="value">Normalized time (0 to 1).</param>
-        /// <returns>Eased value.</returns>
+                 /// Exponential easing in function.
+                 /// Starts slowly and accelerates rapidly towards the end.
+                 /// </summary>
+                 /// <param name="start">Start value.</param>
+                 /// <param name="end">End value.</param>
+                 /// <param name="value">Normalized time (0 to 1).</param>
+                 /// <returns>Eased value.</returns>
         public static float EaseInExpo(float start, float end, float value)
         {
             return value == 0f ? start : (end - start) * Mathf.Pow(2f, 10f * (value - 1f)) + start;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Godot;
+using TnT.Easings;
 using TnT.Extensions;
 
 namespace TnT.Systems.UI
@@ -9,24 +10,16 @@ namespace TnT.Systems.UI
     [GlobalClass]
     public partial class MessageView : Control
     {
-        // Control this;
-        // Control container;
-
         Notification _message;
         public Action NextBtnPushed;
         public Action CloseBtnPushed;
 
         public async Task InitializeView()
         {
-            // this.Clear();
-
-            // container = this.CreateChild<Control>("container");
-
             _message = this.FindAnyObjectByType<Notification>();
             this.Modulate = Colors.Transparent;
             this.Scale = new Vector2(0, 0);
 
-            // _message = container.CreateChild<Notification>("dialog");
             _message.Text = "lorem ipsum";
 
             _message.NextBtnPushed += () => NextBtnPushed();
@@ -35,39 +28,31 @@ namespace TnT.Systems.UI
             await Task.Yield();
         }
 
-        public async Task ShowView()
+        public async Task ShowView(float duration = .2f)
         {
-            // container.RemoveFromClassList("warning");
-            // container.RemoveFromClassList("error");
-            // container.AddToClassList("opened");
+            var startColor = this.Modulate;
+            var targetColor = Colors.White;
+            var startScale = this.Scale;
+            var targetScale = new Vector2(1, 1);
 
-
-            var steps = 100;
-
-            var color = Colors.White;
-            var scale = new Vector2(1, 1);
-
-            for (float i = 0; i < 1; i += 1f / steps)
+            await foreach (var t in Easings.Easings.Animate(duration, Ease.EaseOutCubic))
             {
-                await Task.Delay(1000 / steps);
-                this.Modulate = this.Modulate.Lerp(color, i);
-                this.Scale = this.Scale.Lerp(scale, i);
+                this.Modulate = startColor.Lerp(targetColor, t);
+                this.Scale = startScale.Lerp(targetScale, t);
             }
         }
 
-        public async Task HideView()
+        public async Task HideView(float duration = .2f)
         {
-            // container.RemoveFromClassList("opened");
-            var steps = 100;
+            var startColor = this.Modulate;
+            var targetColor = Colors.Transparent;
+            var startScale = this.Scale;
+            var targetScale = new Vector2(0, 0);
 
-            var color = Colors.Transparent;
-            var scale = new Vector2(0.1f,0.1f);
-
-            for (float i = 0; i < 1; i += 1f / steps)
+            await foreach (var t in Easings.Easings.Animate(duration, Ease.EaseOutCubic))
             {
-                await Task.Delay(1000 / steps);
-                this.Modulate = this.Modulate.Lerp(color, i);
-                this.Scale = this.Scale.Lerp(scale, i);
+                this.Modulate = startColor.Lerp(targetColor, t);
+                this.Scale = startScale.Lerp(targetScale, t);
             }
         }
 

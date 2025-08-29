@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=4 uid="uid://3hfdhy3acdbi"]
+[gd_scene load_steps=16 format=4 uid="uid://3hfdhy3acdbi"]
 
 [ext_resource type="TileSet" uid="uid://cfonf0rkxvtn" path="res://assets/Tilesets/tilesets.tres" id="1_2llne"]
 [ext_resource type="PackedScene" uid="uid://b18es3ooe0dvt" path="res://Scenes/Player.tscn" id="2_q12u6"]
 [ext_resource type="Script" uid="uid://bhsdjlrhck4qd" path="res://scripts/test/Transporter.cs" id="3_joc8x"]
 [ext_resource type="PackedScene" uid="uid://cq3acauhkattk" path="res://Scenes/Level2.tscn" id="4_jghel"]
 [ext_resource type="Script" uid="uid://dbtd0oguw4wdj" path="res://scripts/Game/Systems/QuestSystem/QuestObjectiveActor.cs" id="5_slnnj"]
+[ext_resource type="Script" uid="uid://r0pfr1dce2fx" path="res://scripts/Game/Door.cs" id="6_6ll4n"]
+[ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="7_kylad"]
+[ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://quests/QuestEventChannel.tres" id="8_bdlbp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jghel"]
 
@@ -18,6 +21,11 @@ size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysn8j"]
 size = Vector2(14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ll4n"]
+size = Vector2(16, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2h8qs"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -143,7 +151,39 @@ shape = SubResource("RectangleShape2D_ysn8j")
 
 [node name="QuestObjectiveActor" type="Node" parent="QuestActors/Area2D2"]
 script = ExtResource("5_slnnj")
+_questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
+_questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
 metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Area2D3" type="Area2D" parent="QuestActors"]
+position = Vector2(-48, -14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestActors/Area2D3"]
+shape = SubResource("RectangleShape2D_6ll4n")
+
+[node name="QuestObjectiveActor" type="Node" parent="QuestActors/Area2D3"]
+script = ExtResource("5_slnnj")
+_action = 1
+_questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
+_questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+z_index = 10
+position = Vector2(32, -35)
+script = ExtResource("6_6ll4n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_2h8qs")
+
+[node name="QuestEventListener" type="Node" parent="StaticBody2D"]
+script = ExtResource("7_kylad")
+_checkObjectiveId = true
+_objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
+_checkState = true
+_state = 2
+eventChannel = ExtResource("8_bdlbp")
+metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 
 [connection signal="body_entered" from="Transporters/Transporter" to="Transporters/Transporter" method="_OnBodyEntered"]
 [connection signal="body_entered" from="Transporters/Transporter2" to="Transporters/Transporter2" method="_OnBodyEntered"]

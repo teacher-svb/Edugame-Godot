@@ -46,7 +46,6 @@ namespace TnT.EduGame.QuestSystem
                     return;
 
                 currentObjective.State = value;
-                GD.Print("emit quest signal");
                 OnObjectiveStateChanged.Invoke(currentObjective);
                 // QuestManager.Instance.QuestObjectivesChannel.Invoke(currentObjective.ObjectiveId, currentObjective.State);
 

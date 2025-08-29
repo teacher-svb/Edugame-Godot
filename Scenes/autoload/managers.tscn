@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dsdamnlwcc0j1"]
+[gd_scene load_steps=29 format=3 uid="uid://dsdamnlwcc0j1"]
 
 [ext_resource type="Script" uid="uid://b66cprwwqv431" path="res://scripts/Game/Systems/SaveLoadSystem/SaveLoadManager.cs" id="1_3yhdi"]
 [ext_resource type="Script" uid="uid://cerfog7uyabpn" path="res://scripts/Game/Systems/SaveLoadSystem/MyGameData.cs" id="2_4v8vv"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://bs1saqqc0g5yc" path="res://scripts/Game/UI/MVC_Messages/Model/MessageModel.cs" id="10_46vsp"]
 [ext_resource type="Script" uid="uid://djkjkbdwkb3um" path="res://scripts/Game/StateManagementGame/GameStatePlay.cs" id="11_wsyol"]
 [ext_resource type="Script" uid="uid://dm3me216ti1em" path="res://scripts/Game/StateManagementGame/GameStateLoadingScreen.cs" id="12_7ysjy"]
+[ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://quests/QuestEventChannel.tres" id="13_pnf1h"]
 [ext_resource type="Script" uid="uid://clgnpunn4d55j" path="res://scripts/Game/StateManagementGame/GameStateMessage.cs" id="13_vkax6"]
 [ext_resource type="Script" uid="uid://bvn0ypsbartdv" path="res://scripts/Game/StateManagementGame/GameStateInventory.cs" id="14_ut70p"]
 [ext_resource type="Script" uid="uid://ch4u84myc17c2" path="res://scripts/Lib/Input/InputAction.cs" id="16_ut70p"]
@@ -87,6 +88,7 @@ script = ExtResource("3_4v8vv")
 [node name="QuestManager" type="Node" parent="."]
 script = ExtResource("4_347u6")
 _quests = Array[ExtResource("5_iqbe2")]([ExtResource("6_pnf1h")])
+eventChannel = ExtResource("13_pnf1h")
 _saveData = SubResource("Resource_pnf1h")
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -127,6 +129,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(578, 128)
 script = ExtResource("9_ut70p")
 
 [node name="Notification" parent="UI/MessageController/MessageView" instance=ExtResource("9_n5sdn")]
