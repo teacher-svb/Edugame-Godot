@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://7nvtadqep3kv" path="res://scripts/Game/Systems/QuestSystem/QuestManager.cs" id="4_347u6"]
 [ext_resource type="Script" uid="uid://bjnewwsvx7s8s" path="res://scripts/Game/Singletons/ManagerUI.cs" id="4_c37v5"]
 [ext_resource type="Script" uid="uid://7u5mhmxl340a" path="res://scripts/Game/UI/MVC_Fade/FadeView.cs" id="5_c37v5"]
-[ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="5_iqbe2"]
 [ext_resource type="Script" uid="uid://cvgoslwqcj457" path="res://scripts/Game/UI/MVC_Fade/FadeModel.cs" id="6_8i7bo"]
 [ext_resource type="Resource" uid="uid://bcgox3enbg4ph" path="res://quests/Avocado.tres" id="6_pnf1h"]
 [ext_resource type="Script" uid="uid://c0ssbl3ew4s2d" path="res://scripts/Game/StateManagementGame/StateManagerGame.cs" id="7_0le2r"]
@@ -16,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b8eidkv5hpkk3" path="res://Scenes/UI/Notification.tscn" id="9_n5sdn"]
 [ext_resource type="Script" uid="uid://bgetj7peh8h61" path="res://scripts/Game/UI/MVC_Messages/View/MessageView.cs" id="9_ut70p"]
 [ext_resource type="Script" uid="uid://bs1saqqc0g5yc" path="res://scripts/Game/UI/MVC_Messages/Model/MessageModel.cs" id="10_46vsp"]
+[ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="11_aum7h"]
 [ext_resource type="Script" uid="uid://djkjkbdwkb3um" path="res://scripts/Game/StateManagementGame/GameStatePlay.cs" id="11_wsyol"]
 [ext_resource type="Script" uid="uid://dm3me216ti1em" path="res://scripts/Game/StateManagementGame/GameStateLoadingScreen.cs" id="12_7ysjy"]
 [ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://quests/QuestEventChannel.tres" id="13_pnf1h"]
@@ -88,7 +88,7 @@ script = ExtResource("3_4v8vv")
 
 [node name="QuestManager" type="Node" parent="."]
 script = ExtResource("4_347u6")
-_quests = Array[ExtResource("5_iqbe2")]([ExtResource("6_pnf1h")])
+_quests = Array[ExtResource("11_aum7h")]([ExtResource("6_pnf1h")])
 eventChannel = ExtResource("13_pnf1h")
 _saveData = SubResource("Resource_pnf1h")
 
@@ -138,6 +138,3 @@ script = ExtResource("9_ut70p")
 layout_mode = 1
 
 [node name="Carrousel" parent="UI" instance=ExtResource("23_aum7h")]
-script = null
-
-[connection signal="OnQuestUpdated" from="QuestManager" to="StateManagerGame" method="ShowQuestMessage"]

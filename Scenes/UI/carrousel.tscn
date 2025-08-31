@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cptvlnmi8a1fw"]
+[gd_scene load_steps=4 format=3 uid="uid://cptvlnmi8a1fw"]
 
+[ext_resource type="Script" uid="uid://ciun5glrym66e" path="res://scripts/Game/UI/Carrousel/CarrouselValue.cs" id="2_qulgr"]
 [ext_resource type="Script" uid="uid://b8asxjxujh54w" path="res://scripts/Game/UI/Carrousel/Carrousel.cs" id="2_qxsj0"]
 [ext_resource type="Script" uid="uid://bxokmugo3ijd1" path="res://scripts/Game/UI/Carrousel/CarrouselController.cs" id="3_qxsj0"]
 
@@ -32,6 +33,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
+script = ExtResource("2_qulgr")
+_value = "1"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/PanelContainer"]
 layout_mode = 2
@@ -46,6 +49,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.66
+script = ExtResource("2_qulgr")
+_value = "2"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/PanelContainer2"]
 layout_mode = 2
@@ -59,6 +64,8 @@ clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("2_qulgr")
+_value = "3"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/PanelContainer3"]
 layout_mode = 2
@@ -73,6 +80,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.66
+script = ExtResource("2_qulgr")
+_value = "4"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/PanelContainer4"]
 layout_mode = 2
@@ -87,6 +96,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
+script = ExtResource("2_qulgr")
+_value = "5"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/PanelContainer5"]
 layout_mode = 2

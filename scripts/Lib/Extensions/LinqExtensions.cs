@@ -70,5 +70,61 @@ namespace TnT.Extensions
             // Return rotated sequence without modifying the original
             return list.Skip(n - k).Concat(list.Take(n - k));
         }
+
+        public enum PadAlignment
+        {
+            Left,
+            Center,
+            Right
+        }
+        
+        public static IEnumerable<T> Pad<T>(
+            this IEnumerable<T> source,
+            int newSize,
+            PadAlignment alignment = PadAlignment.Center,
+            T paddingValue = default!)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            var sourceList = source.ToList();
+            int originalSize = sourceList.Count;
+
+            if (newSize < originalSize)
+                throw new ArgumentException("New size must be greater than or equal to the original size.");
+
+            int totalPadding = newSize - originalSize;
+            int leftPadding = 0;
+
+            switch (alignment)
+            {
+                case PadAlignment.Left:
+                    leftPadding = 0;
+                    break;
+
+                case PadAlignment.Right:
+                    leftPadding = totalPadding;
+                    break;
+
+                case PadAlignment.Center:
+                    // For even padding, right gets more
+                    leftPadding = totalPadding / 2;
+                    break;
+            }
+
+            int rightPadding = totalPadding - leftPadding;
+
+            // Yield left padding
+            for (int i = 0; i < leftPadding; i++)
+                yield return paddingValue;
+
+            // Yield original elements
+            foreach (var item in sourceList)
+                yield return item;
+
+            // Yield right padding
+            for (int i = 0; i < rightPadding; i++)
+                yield return paddingValue;
+        }
     }
 }
