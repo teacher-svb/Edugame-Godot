@@ -27,86 +27,112 @@ mouse_filter = 2
 alignment = 1
 script = ExtResource("2_qxsj0")
 
-[node name="PanelContainer" type="PanelContainer" parent="Carrousel"]
+[node name="val1" type="PanelContainer" parent="Carrousel"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
 script = ExtResource("2_qulgr")
-_value = "1"
+Value = "1"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/PanelContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/val1"]
 layout_mode = 2
 text = "1"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="Carrousel"]
+[node name="val2" type="PanelContainer" parent="Carrousel"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.66
 script = ExtResource("2_qulgr")
-_value = "2"
+Value = "2"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/PanelContainer2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/val2"]
 layout_mode = 2
 text = "2"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PanelContainer3" type="PanelContainer" parent="Carrousel"]
+[node name="val3" type="PanelContainer" parent="Carrousel"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2_qulgr")
-_value = "3"
+Value = "3"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/PanelContainer3"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/val3"]
 layout_mode = 2
 text = "3"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PanelContainer4" type="PanelContainer" parent="Carrousel"]
+[node name="val4" type="PanelContainer" parent="Carrousel"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.66
 script = ExtResource("2_qulgr")
-_value = "4"
+Value = "4"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/PanelContainer4"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/val4"]
 layout_mode = 2
 text = "4"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PanelContainer5" type="PanelContainer" parent="Carrousel"]
+[node name="val5" type="PanelContainer" parent="Carrousel"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
 script = ExtResource("2_qulgr")
-_value = "5"
+Value = "5"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/PanelContainer5"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/val5"]
 layout_mode = 2
 text = "5"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CarrouselController" type="BoxContainer" parent="." node_paths=PackedStringArray("_carrousel", "_btnPrevious", "_btnNext")]
+[node name="val6" type="PanelContainer" parent="Carrousel"]
+layout_mode = 2
+script = ExtResource("2_qulgr")
+Value = "6"
+metadata/_custom_type_script = "uid://ciun5glrym66e"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/val6"]
+layout_mode = 2
+text = "6"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="val7" type="PanelContainer" parent="Carrousel"]
+layout_mode = 2
+script = ExtResource("2_qulgr")
+Value = "7"
+metadata/_custom_type_script = "uid://ciun5glrym66e"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Carrousel/val7"]
+layout_mode = 2
+text = "7"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CarrouselController" type="BoxContainer" parent="." node_paths=PackedStringArray("_carrousel", "_btnPrevious", "_btnNext", "_label")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -118,6 +144,7 @@ script = ExtResource("3_qxsj0")
 _carrousel = NodePath("../Carrousel")
 _btnPrevious = NodePath("Previous")
 _btnNext = NodePath("Next")
+_label = NodePath("Panel/Label")
 
 [node name="Previous" type="Button" parent="CarrouselController"]
 layout_mode = 2
@@ -125,10 +152,20 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.66
 
-[node name="Button3" type="Button" parent="CarrouselController"]
+[node name="Panel" type="Panel" parent="CarrouselController"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CarrouselController/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "hallo"
 
 [node name="Next" type="Button" parent="CarrouselController"]
 layout_mode = 2

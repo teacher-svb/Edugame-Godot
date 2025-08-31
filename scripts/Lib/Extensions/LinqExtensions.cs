@@ -94,25 +94,25 @@ namespace TnT.Extensions
                 throw new ArgumentException("New size must be greater than or equal to the original size.");
 
             int totalPadding = newSize - originalSize;
-            int leftPadding = 0;
+            int rightPadding = 0;
 
             switch (alignment)
             {
-                case PadAlignment.Left:
-                    leftPadding = 0;
+                case PadAlignment.Right:
+                    rightPadding = 0;
                     break;
 
-                case PadAlignment.Right:
-                    leftPadding = totalPadding;
+                case PadAlignment.Left:
+                    rightPadding = totalPadding;
                     break;
 
                 case PadAlignment.Center:
                     // For even padding, right gets more
-                    leftPadding = totalPadding / 2;
+                    rightPadding = totalPadding / 2;
                     break;
             }
 
-            int rightPadding = totalPadding - leftPadding;
+            int leftPadding = totalPadding - rightPadding;
 
             // Yield left padding
             for (int i = 0; i < leftPadding; i++)

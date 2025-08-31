@@ -7,56 +7,59 @@ using TnT.Extensions;
 
 public partial class Carrousel : BoxContainer
 {
+	[Export] int startIndex = 0;
+
 	bool _isScrolling = false;
 
 	[Signal]
 	// TODO: When Godot 4.5 releases, consider changing "string" to "Variant"
 	public delegate void ValueSelectedEventHandler(string value);
 	float[] ratios = { 0, .66f, 1, .66f, 0 };
+	CarrouselValue[] Children { get => GetChildren().Select(c => c as CarrouselValue).ToArray(); }
+	float[] AllRatios { get => ratios.Pad(Children.Length).ToArray(); }
+
+	CarrouselValue SelectedValue => Children[Children.Length / 2];
 
 	public override void _Ready()
 	{
-		var children = GetChildren().Select(c => c as CarrouselValue).ToArray();
-		for (int i = 0; i < children.Length; i++)
-			children[i].SizeFlagsStretchRatio = ratios[i];
+		var numChildren = GetChildren().Count;
+		var centerIndex = numChildren / 2;
 
-		HideBorders();
+		_ = Slide((startIndex % numChildren) - centerIndex, 0);
 	}
 
-	enum SlideDirection { Previous, Next }
-
-	async Task Slide(SlideDirection direction, float duration = .2f)
+	async Task Slide(int direction, float duration = .2f)
 	{
-		var children = GetChildren().Select(c => c as CarrouselValue).ToArray();
+		var children = Children;
+		var allRatios = AllRatios;
+
 		children.ForEach(c => c.Visible = true);
 
-		var centerIndex = children.Length / 2;
+		if (direction != 0)
+		{
+			for (int i = 0; i < Mathf.Abs(direction); ++i)
+			{
+				var childToMove = direction < 0 ? children[^(1 + i)] : children[i];
+				this.MoveChild(childToMove, direction < 0 ? 0 : -1);
+			}
+		}
 
-		var centerChild = children[centerIndex];
-		var centerChildren = children[(centerIndex - 2)..(centerIndex + 3)]; // range operator is exclusive end
-
-		var childToMove = direction == SlideDirection.Previous ? children[^1] : children[0];
-		this.MoveChild(childToMove, direction == SlideDirection.Previous ? 0 : -1);
-
-		var animateFrom = centerChildren.Select(c => c.SizeFlagsStretchRatio).ToArray();
-		var animateTo = direction == SlideDirection.Previous ? ratios.Rotate(-1).ToArray() : ratios.Rotate(1).ToArray();
+		var animateFrom = children.Select(c => c.SizeFlagsStretchRatio).ToArray();
+		var animateTo = allRatios.Rotate(direction).ToArray();
 
 		// Animate
 		await foreach (var t in Easings.Animate(duration, Ease.EaseInOutCubic))
 		{
-			for (int i = 0; i < centerChildren.Length; i++)
+			for (int i = 0; i < children.Length; i++)
 			{
-				centerChildren[i].SizeFlagsStretchRatio = Mathf.Lerp(animateFrom[i], animateTo[i], t);
-				centerChildren[i].Modulate = centerChildren[i].Modulate.Lerp(new Color(animateTo[i], animateTo[i], animateTo[i]), t);
+				children[i].SizeFlagsStretchRatio = Mathf.Lerp(animateFrom[i], animateTo[i], t);
+				children[i].Modulate = children[i].Modulate.Lerp(new Color(animateTo[i], animateTo[i], animateTo[i]), t);
 			}
 		}
 
-
 		HideBorders();
 
-		await Task.Yield();
-
-		EmitSignal(SignalName.ValueSelected, 2);
+		EmitSignal(SignalName.ValueSelected, SelectedValue.Value);
 	}
 
 	private void HideBorders()
@@ -76,14 +79,14 @@ public partial class Carrousel : BoxContainer
 	{
 		if (_isScrolling) return;
 		_isScrolling = true;
-		await Slide(SlideDirection.Previous);
+		await Slide(-1);
 		_isScrolling = false;
 	}
 	public async void _SelectNext()
 	{
 		if (_isScrolling) return;
 		_isScrolling = true;
-		await Slide(SlideDirection.Next);
+		await Slide(1);
 		_isScrolling = false;
 	}
 }

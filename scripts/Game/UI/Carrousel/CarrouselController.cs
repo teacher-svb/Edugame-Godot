@@ -11,7 +11,6 @@ public partial class CarrouselController : BoxContainer
     Button _btnPrevious;
     [Export]
     Button _btnNext;
-
     public override void _Ready()
     {
         var buttons = this.FindObjectsByType<Button>();
