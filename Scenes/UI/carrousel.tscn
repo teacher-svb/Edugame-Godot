@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b8asxjxujh54w" path="res://scripts/Game/UI/Carrousel/Carrousel.cs" id="2_qxsj0"]
 [ext_resource type="Script" uid="uid://bxokmugo3ijd1" path="res://scripts/Game/UI/Carrousel/CarrouselController.cs" id="3_qxsj0"]
 
-[node name="Wheel" type="Control"]
+[node name="CarrouselWheel" type="Control"]
 process_mode = 3
 clip_contents = true
 layout_mode = 3
@@ -25,6 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 alignment = 1
+vertical = true
 script = ExtResource("2_qxsj0")
 
 [node name="val1" type="PanelContainer" parent="Carrousel"]
@@ -132,31 +133,39 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CarrouselController" type="BoxContainer" parent="." node_paths=PackedStringArray("_carrousel", "_btnPrevious", "_btnNext", "_label")]
+[node name="CarrouselController" type="Control" parent="." node_paths=PackedStringArray("_carrousel", "_btnPrevious", "_btnNext")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
 script = ExtResource("3_qxsj0")
 _carrousel = NodePath("../Carrousel")
-_btnPrevious = NodePath("Previous")
-_btnNext = NodePath("Next")
-_label = NodePath("Panel/Label")
+_btnPrevious = NodePath("BoxContainer/Previous")
+_btnNext = NodePath("BoxContainer/Next")
 
-[node name="Previous" type="Button" parent="CarrouselController"]
+[node name="BoxContainer" type="BoxContainer" parent="CarrouselController"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="Previous" type="Button" parent="CarrouselController/BoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.66
 
-[node name="Panel" type="Panel" parent="CarrouselController"]
+[node name="Panel" type="Panel" parent="CarrouselController/BoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="CarrouselController/Panel"]
+[node name="Label" type="Label" parent="CarrouselController/BoxContainer/Panel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -167,7 +176,7 @@ offset_bottom = 23.0
 grow_horizontal = 2
 text = "hallo"
 
-[node name="Next" type="Button" parent="CarrouselController"]
+[node name="Next" type="Button" parent="CarrouselController/BoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

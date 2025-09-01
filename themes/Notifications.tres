@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://les3xc8lryk4"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://les3xc8lryk4"]
 
 [ext_resource type="Texture2D" uid="uid://nul7wtmt3kpc" path="res://assets/uipack_rpg_sheet.png" id="1_jafkh"]
 [ext_resource type="FontFile" uid="uid://cw1vj1tfcdwao" path="res://assets/Fonts/BigBlueTerminal/BigBlueTerm437NerdFontPropo-Regular.ttf" id="2_jafkh"]
@@ -16,6 +16,13 @@ texture_margin_bottom = 25.0
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jafkh"]
+atlas = ExtResource("1_jafkh")
+region = Rect2(0, 98, 190, 44)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q0lhn"]
+texture = SubResource("AtlasTexture_jafkh")
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_r150k"]
 atlas = ExtResource("1_jafkh")
 region = Rect2(0, 49, 190, 49)
@@ -29,6 +36,31 @@ texture_margin_bottom = 25.0
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_44jsj"]
+atlas = ExtResource("1_jafkh")
+region = Rect2(0, 376, 100, 100)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r150k"]
+texture = SubResource("AtlasTexture_44jsj")
+texture_margin_left = 55.4056
+texture_margin_top = 8.24382
+texture_margin_right = 8.91947
+texture_margin_bottom = 35.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oclf0"]
+atlas = ExtResource("1_jafkh")
+region = Rect2(190, 100, 100, 100)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7fkjd"]
+texture = SubResource("AtlasTexture_oclf0")
+texture_margin_left = 60.0
+texture_margin_top = 25.0
+texture_margin_right = 25.0
+texture_margin_bottom = 35.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7fkjd"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 expand_margin_left = 16.0
@@ -38,22 +70,27 @@ expand_margin_bottom = 16.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jafkh"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jafkh"]
-atlas = ExtResource("1_jafkh")
-region = Rect2(190, 101, 100.04, 99)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q0lhn"]
-texture = SubResource("AtlasTexture_jafkh")
-texture_margin_left = 75.0
-texture_margin_top = 25.0
-texture_margin_right = 25.0
-texture_margin_bottom = 25.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n0102"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
 
 [resource]
 default_font = ExtResource("2_jafkh")
 default_font_size = 24
+BoxContainer/constants/separation = 16
 Button/styles/disabled = SubResource("StyleBoxTexture_44jsj")
+Button/styles/hover = SubResource("StyleBoxTexture_q0lhn")
 Button/styles/normal = SubResource("StyleBoxTexture_oclf0")
+DarkPanel/base_type = &"Panel"
+DarkPanel/styles/panel = SubResource("StyleBoxTexture_r150k")
+LightPanel/base_type = &"Panel"
+LightPanel/styles/panel = SubResource("StyleBoxTexture_7fkjd")
+MarginContainer/constants/margin_bottom = 16
+MarginContainer/constants/margin_left = 16
+MarginContainer/constants/margin_right = 16
+MarginContainer/constants/margin_top = 16
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_7fkjd")
 RichTextButton/base_type = &"RichTextLabel"
 RichTextButton/colors/default_color = Color(0, 0, 0, 1)
@@ -74,4 +111,4 @@ RichTextButton/constants/table_v_separation = 0
 RichTextButton/constants/text_highlight_h_padding = 0
 RichTextButton/constants/text_highlight_v_padding = 0
 RichTextButton/styles/normal = SubResource("StyleBoxEmpty_jafkh")
-RichTextLabel/styles/normal = SubResource("StyleBoxTexture_q0lhn")
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_n0102")

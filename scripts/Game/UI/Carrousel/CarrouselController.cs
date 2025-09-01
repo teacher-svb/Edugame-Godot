@@ -3,7 +3,7 @@ using System;
 using TnT.Extensions;
 
 [GlobalClass]
-public partial class CarrouselController : BoxContainer
+public partial class CarrouselController : Control
 {
     [Export]
     Carrousel _carrousel;

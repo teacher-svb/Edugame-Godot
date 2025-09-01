@@ -15,7 +15,15 @@ namespace TnT.Systems.UI
         public Action NextBtnPushed;
         public Action CloseBtnPushed;
 
-        public string Text { get => _message.Text; set => _message.Text = value; }
+        public string Text
+        {
+            get => _message.Text;
+            set
+            {
+                _message.Text = value;
+                _message.ResetSize();
+            }
+        }
         public string CharacterName { get => _characterName.Text; set => _characterName.Text = value; }
         public Texture2D CharacterSprite { set => _characterSprite.Texture = value; }
 

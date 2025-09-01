@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TnT.Easings;
 using TnT.Extensions;
 
+[GlobalClass]
 public partial class Carrousel : BoxContainer
 {
 	[Export] int startIndex = 0;
