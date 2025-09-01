@@ -9,6 +9,7 @@ namespace TnT.Systems.UI
 {
     public static class ChallengeUIFactory
     {
+        // TODO: remove the whole Types thing, and replace with a simple Enum
         // [InitializeOnLoadMethod]
         static void OnProjectLoadedInEditor()
         {
@@ -23,6 +24,7 @@ namespace TnT.Systems.UI
         }
         private static readonly Dictionary<Type, IChallengeUIStrategy> _strategies = new();
 
+        // TODO: add second Generic type, with restriction to Enum
         public static void Register<T>() where T : IChallengeUIStrategy, new()
         {
             _strategies[typeof(T)] = new T();
@@ -36,6 +38,7 @@ namespace TnT.Systems.UI
             return strategy.Build(challenge);
         }
 
+        // TODO: remove the whole Types thing, and replace with a simple Enum
         public static List<Type> GetRegisteredTypes()
         {
             if (_strategies.Count == 0)
@@ -44,6 +47,7 @@ namespace TnT.Systems.UI
             return _strategies.Keys.ToList();
         }
 
+        // TODO: remove the whole Types thing, and replace with a simple Enum
         private static void AutoRegisterAllStrategies()
         {
             _strategies.Clear();

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dsdamnlwcc0j1"]
+[gd_scene load_steps=30 format=3 uid="uid://dsdamnlwcc0j1"]
 
 [ext_resource type="Script" uid="uid://b66cprwwqv431" path="res://scripts/Game/Systems/SaveLoadSystem/SaveLoadManager.cs" id="1_3yhdi"]
 [ext_resource type="Script" uid="uid://cerfog7uyabpn" path="res://scripts/Game/Systems/SaveLoadSystem/MyGameData.cs" id="2_4v8vv"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://clgnpunn4d55j" path="res://scripts/Game/StateManagementGame/GameStateMessage.cs" id="13_vkax6"]
 [ext_resource type="Script" uid="uid://bvn0ypsbartdv" path="res://scripts/Game/StateManagementGame/GameStateInventory.cs" id="14_ut70p"]
 [ext_resource type="Script" uid="uid://ch4u84myc17c2" path="res://scripts/Lib/Input/InputAction.cs" id="16_ut70p"]
+[ext_resource type="Script" uid="uid://bf6jiou3no26s" path="res://scripts/Game/UI/MVC_Challenges/Controller/ChallengeController.cs" id="23_aum7h"]
 
 [sub_resource type="Resource" id="Resource_ut70p"]
 script = ExtResource("16_ut70p")
@@ -136,6 +137,9 @@ script = ExtResource("9_ut70p")
 [node name="Notification" parent="UI/MessageController/MessageView" instance=ExtResource("9_n5sdn")]
 layout_mode = 1
 
-[connection signal="OnQuestUpdated" from="QuestManager" to="StateManagerGame" method="ShowQuestMessage"]
-
-[editable path="UI/MessageController/MessageView/Notification"]
+[node name="ChallengeController" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("23_aum7h")

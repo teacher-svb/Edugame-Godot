@@ -8,6 +8,7 @@ using TnT.Extensions;
 
 namespace TnT.Systems.UI
 {
+    [GlobalClass]
     public partial class ChallengeView : Resource
     {
         Control _root;

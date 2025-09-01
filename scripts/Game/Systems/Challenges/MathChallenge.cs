@@ -10,18 +10,6 @@ using Godot;
 
 namespace TnT.EduGame.Question
 {
-    public partial class ChallengeValue : Resource
-    {
-        public int Value;
-        public string ParamName;
-        // empty constructor for Unity Editor
-        public ChallengeValue() { }
-        public ChallengeValue(int value, string paramName = "")
-        {
-            Value = value;
-            ParamName = paramName;
-        }
-    }
     public interface IMathChallenge
     {
         public string Name { get; }
@@ -34,6 +22,7 @@ namespace TnT.EduGame.Question
         public void SetFormulaParam(int index, string paramName);
         public void ChangeValue(string paramName, int value);
         public abstract Godot.Collections.Array<ChallengeValue> Values { get; }
+        // TODO: remove the whole Types thing, and replace with a simple Enum
         public Type SelectedVisualType { get; }
     }
 
@@ -58,7 +47,6 @@ namespace TnT.EduGame.Question
         protected string HintText { get; set; } = "";
         public string Question
         {
-            // get => QuestionText;
             // first aggregate the question text's {paramNames} to {numbers}
             // then replace each number (e.g. {0} {1} etc) with their corresponding values
             get => FormulaParams
@@ -78,12 +66,11 @@ namespace TnT.EduGame.Question
         }
         public int ParamCount => FormulaParams.Count();
 
-        // [field: SerializeField, PropertyOrder(3)]
         [Export]
         public int Answer { get; private set; }
-        // [field: SerializeField, PropertyOrder(4)]
         [Export]
         public Godot.Collections.Array<ChallengeValue> Values { get; set; } = new Godot.Collections.Array<ChallengeValue>() { };
+        // TODO: remove the whole Types thing, and replace with a simple Enum
         public Type SelectedVisualType => _visualType.Type;
 
         public MathChallenge()
@@ -132,13 +119,15 @@ namespace TnT.EduGame.Question
             // then select a random one from the list of possible answers
             // and store it as the answer to this challenge
             var dt = new DataTable();
+            // Answer = 3;
+            GD.Print(Values.Count);
             Answer = Values
                 .Select(v => v.Value)
                 .GetPermutations(FormulaParams.Length)
                 .Select(p => p.Cast<object>().ToArray())
                 .Select(p => (int)dt.Compute(string.Format(formattedFormula, p), null))
                 .Distinct()
-                .PickRandom();
+                .PickRandom();    
         }
 
         public bool CheckAnswer() => Evaluate(Formula, FormulaParams) == Answer;

@@ -9,15 +9,6 @@ namespace TnT.Systems.UI
     [GlobalClass]
     public partial class ActionsMenuModel : Resource
     {
-        [Signal]
-        public delegate void OnButtonClickedEventHandler();
-        [GlobalClass]
-        public partial class ButtonData : Resource
-        {
-            [Export] public string buttonLabel = "";
-            public OnButtonClickedEventHandler OnButtonClicked;
-        }
-
         public List<ButtonData> Buttons = new List<ButtonData>();
 
         public void Add(ButtonData item)

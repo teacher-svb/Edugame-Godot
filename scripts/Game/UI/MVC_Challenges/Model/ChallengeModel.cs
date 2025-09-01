@@ -6,6 +6,7 @@ using TnT.EduGame.Question;
 
 namespace TnT.Systems.UI
 {
+    [GlobalClass]
     public partial class ChallengeModel : Resource
     {
         [Export]

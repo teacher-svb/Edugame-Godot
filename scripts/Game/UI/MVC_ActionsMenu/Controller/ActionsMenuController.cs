@@ -19,7 +19,7 @@ namespace TnT.Systems.UI
 
             foreach (var buttonData in model.Buttons)
             {
-                view.AddButton(buttonData.buttonLabel, buttonData.OnButtonClicked.Invoke);
+                // view.AddButton(buttonData.buttonLabel, buttonData.OnButtonClicked);
             }
         }
     }
