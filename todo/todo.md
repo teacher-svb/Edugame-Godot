@@ -5,10 +5,10 @@
     - [x] GODOT_REFACTOR stats & attributes
     - [x] GODOT_REFACTOR ability system
     - [1] GODOT_REFACTOR challenges
-    - [1] GODOT_REFACTOR quests
+    - [x] GODOT_REFACTOR quests
     - [1] GODOT_REFACTOR inventory
     - [1] GODOT_REFACTOR UI systems
-    - [1] GODOT_REFACTOR EventSystem
+    - [x] GODOT_REFACTOR EventSystem
 - GAME
     - [ ] GAME Add animations to loading screen
     - [x] GAME Add character selection screen to statestack
