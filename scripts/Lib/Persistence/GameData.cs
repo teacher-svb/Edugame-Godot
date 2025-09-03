@@ -8,8 +8,7 @@ using Newtonsoft.Json;
 
 namespace TnT.Systems.Persistence
 {
-    // [Serializable]
-    [GlobalClass, Icon("res://assets/rainbow.svg")]
+    [GlobalClass]
     public abstract partial class GameData : Resource
     {
         [Export] public string Name;

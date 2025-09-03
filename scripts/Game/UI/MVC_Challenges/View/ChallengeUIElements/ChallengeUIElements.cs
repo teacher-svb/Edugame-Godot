@@ -4,17 +4,17 @@ using Godot;
 
 namespace TnT.Systems.UI
 {
-    public partial class ChallengeSelect : Control
+    public partial class ChallengeSelect : OptionButton
     {
         public Action<int> OnValueSelected;
     }
 
-    public partial class ChallengeParamInput : Control
+    public partial class ChallengeParamInput : TextEdit
     {
-        public Action<string, int> OnParamChanged;
+        public Action<string, string> OnParamChanged;
     }
     
-    public partial class ChallengeValueView : Control
+    public partial class ChallengeValueView : Label
     {
 
     }

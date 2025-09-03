@@ -4,7 +4,7 @@ using Godot;
 
 namespace TnT.Systems.UI
 {
-    public partial class ChallengeController : Control
+    public partial class ChallengeController : Node
     {
         [Export]
         public ChallengeView view = new();
@@ -17,12 +17,12 @@ namespace TnT.Systems.UI
 
         async void Initialize()
         {
-            await view.InitializeView(this, model.Challenge);
+            await view.InitializeView(model.Challenge);
         }
 
-        private void ValueChanged(string paramName, int value)
+        private void ValueChanged(string paramName, string value)
         {
-            model.SetParameter(paramName, value);
+            model.SetParameter(paramName, int.Parse(value));
             Refresh();
         }
 
@@ -56,12 +56,12 @@ namespace TnT.Systems.UI
         public async Task ShowView()
         {
             await Task.Yield();
-            view.Show();
+            view.ShowView();
         }
 
         public async Task HideView()
         {
-            view.Hide();
+            view.HideView();
             await Task.Yield();
         }
     }

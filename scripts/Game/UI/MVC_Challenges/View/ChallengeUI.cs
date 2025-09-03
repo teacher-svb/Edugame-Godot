@@ -10,138 +10,141 @@ namespace TnT.Systems.UI
 {
     public partial class ChallengeUI : Control
     {
-        public Action OnSubmit;
-        public Action<int> OnValueSelected;
-        public Action<string, int> OnValueChanged;
-        private ChallengeUI() { }
-        public class Builder
-        {
-            private Control _challengeContainer;
-            private Control _submitContainer;
-            private Control _questionContainer;
-            private Control _left = new();
-            private Control _right = new();
-            private readonly IMathChallenge _challenge;
+        [Signal]
+        public delegate void OnSubmitEventHandler();
+        [Signal]
+        public delegate void OnValueSelectedEventHandler(int valueIndex);
+        [Signal]
+        public delegate void OnValueChangedEventHandler(string name, string value);
+        // private ChallengeUI() { }
+        // public class Builder
+        // {
+        //     private Control _challengeContainer;
+        //     private Control _submitContainer;
+        //     private Control _questionContainer;
+        //     private Control _left = new();
+        //     private Control _right = new();
+        //     private readonly IMathChallenge _challenge;
 
-            public Builder(IMathChallenge challenge)
-            {
-                _challenge = challenge;
-            }
-            public ChallengeUI Build()
-            {
-                var ui = new ChallengeUI();
+        //     public Builder(IMathChallenge challenge)
+        //     {
+        //         _challenge = challenge;
+        //     }
+        //     public ChallengeUI Build()
+        //     {
+        //         var ui = new ChallengeUI();
 
-                // _left.AddClass("left");
-                // _right.AddClass("right");
+        //         // _left.AddClass("left");
+        //         // _right.AddClass("right");
 
-                ui.AddChild(_left);
-                ui.AddChild(_right);
+        //         ui.AddChild(_left);
+        //         ui.AddChild(_right);
 
-                _challengeContainer?.AddTo(_left);
-                _questionContainer?.AddTo(_right);
-                _submitContainer?.AddTo(_right);
+        //         _challengeContainer?.AddTo(_left);
+        //         _questionContainer?.AddTo(_right);
+        //         _submitContainer?.AddTo(_right);
 
-                ui
-                    .FindObjectsByType<Button>()
-                    .ToList()
-                    .ForEach(button => button.Pressed += () => ui.OnSubmit?.Invoke());
+        //         ui
+        //             .FindObjectsByType<Button>()
+        //             .ToList()
+        //             .ForEach(button => button.Pressed += () => ui.EmitSignal(SignalName.OnSubmit));
 
-                ui
-                    .FindObjectsByType<ChallengeSelect>()
-                    .ToList()
-                    .ForEach(select => select.OnValueSelected += (index) => ui.OnValueSelected?.Invoke(index));
+        //         ui
+        //             .FindObjectsByType<ChallengeSelect>()
+        //             .ToList()
+        //             .ForEach(select => select.OnValueSelected += (index) => ui.EmitSignal(SignalName.OnValueSelected, index));
 
-                ui
-                    .FindObjectsByType<ChallengeParamInput>()
-                    .ToList()
-                    .ForEach(input => input.OnParamChanged += (param, value) => ui.OnValueChanged?.Invoke(param, value));
-
-
-                return ui;
-            }
-            Builder WithChallengeVisual()
-            {
-                if (_challengeContainer != null)
-                    return this;
-
-                _challengeContainer = new Control();
-                // _challengeContainer.AddClass("challengeContainer");
-
-                return this;
-            }
-            public Builder WithValueSelect(Func<IMathChallenge, ChallengeSelect> createValueSelect)
-            {
-                _challengeContainer = createValueSelect.Invoke(_challenge);
-
-                return this;
-            }
-            public Builder WithValueView(Func<IMathChallenge, ChallengeValueView> createValueView)
-            {
-                _challengeContainer = createValueView.Invoke(_challenge);
-
-                return this;
-            }
-            public Builder WithParamInputs(Func<IMathChallenge, ChallengeParamInput> createParamInput)
-            {
-                _challengeContainer = createParamInput.Invoke(_challenge);
-
-                return this;
-            }
-            public Builder WithQuestionElement()
-            {
-                if (_questionContainer != null)
-                    return this;
-                _questionContainer = new Control();
-                // _questionContainer.AddClass("questionContainer");
-
-                var text = _questionContainer.CreateChild<Label>();
-                text.Text = _challenge.Question;
-
-                return this;
-            }
-            public Builder WithAnswerInput()
-            {
-                if (_submitContainer == null)
-                {
-                    _submitContainer = new Control();
-                    // _submitContainer.AddClass("submitContainer");
-                }
+        //         ui
+        //             .FindObjectsByType<ChallengeParamInput>()
+        //             .ToList()
+        //             .ForEach(input => input.OnParamChanged += (param, value) => ui.EmitSignal(SignalName.OnValueChanged, param, value));
 
 
-                ChallengeParamInput input = new();
+        //         return ui;
+        //     }
+        //     Builder WithChallengeVisual()
+        //     {
+        //         if (_challengeContainer != null)
+        //             return this;
 
-                _challenge.FormulaParams
-                    .Select(p => new ChallengeValueInput(p))
-                    .ToList()
-                    .ForEach(p =>
-                    {
-                        // p.RegisterValueChangedCallback(i => input.OnParamChanged?.Invoke(p.ParamName, int.Parse(i.newValue)));
-                        p.TextChanged += i => input.OnParamChanged?.Invoke(p.ParamName, int.Parse(i));
-                        input.AddChild(p);
-                        p.AddTo(input);
-                    });
+        //         _challengeContainer = new Control();
+        //         // _challengeContainer.AddClass("challengeContainer");
 
-                _submitContainer.AddChild(input);
+        //         return this;
+        //     }
+        //     public Builder WithValueSelect(Func<IMathChallenge, ChallengeSelect> createValueSelect)
+        //     {
+        //         _challengeContainer = createValueSelect.Invoke(_challenge);
 
-                return this;
-            }
-            public Builder WithSubmitButton()
-            {
-                if (_submitContainer == null)
-                {
-                    _submitContainer = new Control();
-                    // _submitContainer.AddClass("submitContainer");
-                }
+        //         return this;
+        //     }
+        //     public Builder WithValueView(Func<IMathChallenge, ChallengeValueView> createValueView)
+        //     {
+        //         _challengeContainer = createValueView.Invoke(_challenge);
 
-                // _submitContainer = new Control();
-                // _submitContainer.AddClass("submitContainer");
+        //         return this;
+        //     }
+        //     public Builder WithParamInputs(Func<IMathChallenge, ChallengeParamInput> createParamInput)
+        //     {
+        //         _challengeContainer = createParamInput.Invoke(_challenge);
 
-                var btn = _submitContainer.CreateChild<Button>();
-                btn.Text = "Klaar!";
-                btn.Disabled = _challenge.Values.Where(v => v.ParamName != "").Count() != _challenge.FormulaParams.Length;
+        //         return this;
+        //     }
+        //     public Builder WithQuestionElement()
+        //     {
+        //         if (_questionContainer != null)
+        //             return this;
+        //         _questionContainer = new Control();
+        //         // _questionContainer.AddClass("questionContainer");
 
-                return this;
-            }
-        }
+        //         var text = _questionContainer.CreateChild<Label>();
+        //         text.Text = _challenge.Question;
+
+        //         return this;
+        //     }
+        //     public Builder WithAnswerInput()
+        //     {
+        //         if (_submitContainer == null)
+        //         {
+        //             _submitContainer = new Control();
+        //             // _submitContainer.AddClass("submitContainer");
+        //         }
+
+
+        //         ChallengeParamInput input = new();
+
+        //         _challenge.FormulaParams
+        //             .Select(p => new ChallengeValueInput(p))
+        //             .ToList()
+        //             .ForEach(p =>
+        //             {
+        //                 // p.RegisterValueChangedCallback(i => input.OnParamChanged?.Invoke(p.ParamName, int.Parse(i.newValue)));
+        //                 p.TextChanged += i => input.OnParamChanged?.Invoke(p.ParamName, i);
+        //                 input.AddChild(p);
+        //                 p.AddTo(input);
+        //             });
+
+        //         _submitContainer.AddChild(input);
+
+        //         return this;
+        //     }
+        //     public Builder WithSubmitButton()
+        //     {
+        //         if (_submitContainer == null)
+        //         {
+        //             _submitContainer = new Control();
+        //             // _submitContainer.AddClass("submitContainer");
+        //         }
+
+        //         // _submitContainer = new Control();
+        //         // _submitContainer.AddClass("submitContainer");
+
+        //         var btn = _submitContainer.CreateChild<Button>();
+        //         btn.Text = "Klaar!";
+        //         btn.Disabled = _challenge.Values.Where(v => v.ParamName != "").Count() != _challenge.FormulaParams.Length;
+
+        //         return this;
+        //     }
+        // }
     }
 }

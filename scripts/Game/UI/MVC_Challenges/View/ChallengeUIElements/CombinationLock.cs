@@ -22,7 +22,7 @@ namespace TnT.Systems.UI
 
     public partial class CombinationLockWheel : Control
     {
-        public Action<string, int> OnValueSelected;
+        public Action<string, string> OnValueSelected;
         string _paramName;
         Control _content;
         Button _btnDown;

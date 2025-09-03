@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dsdamnlwcc0j1"]
+[gd_scene load_steps=34 format=3 uid="uid://dsdamnlwcc0j1"]
 
 [ext_resource type="Script" uid="uid://b66cprwwqv431" path="res://scripts/Game/Systems/SaveLoadSystem/SaveLoadManager.cs" id="1_3yhdi"]
 [ext_resource type="Script" uid="uid://cerfog7uyabpn" path="res://scripts/Game/Systems/SaveLoadSystem/MyGameData.cs" id="2_4v8vv"]
@@ -23,6 +23,10 @@
 [ext_resource type="Script" uid="uid://bvn0ypsbartdv" path="res://scripts/Game/StateManagementGame/GameStateInventory.cs" id="14_ut70p"]
 [ext_resource type="Script" uid="uid://ch4u84myc17c2" path="res://scripts/Lib/Input/InputAction.cs" id="16_ut70p"]
 [ext_resource type="Script" uid="uid://bf6jiou3no26s" path="res://scripts/Game/UI/MVC_Challenges/Controller/ChallengeController.cs" id="23_aum7h"]
+[ext_resource type="Script" uid="uid://dlqolcp4oddju" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeView.cs" id="24_qelhd"]
+[ext_resource type="PackedScene" uid="uid://dx5c0meqksg8l" path="res://Scenes/UI/ChallengeUI.tscn" id="25_blwmm"]
+[ext_resource type="Script" uid="uid://bmfvn3p4u73k5" path="res://scripts/Game/UI/MVC_Challenges/Model/ChallengeModel.cs" id="26_2a8cd"]
+[ext_resource type="Resource" uid="uid://bvtaxgkyu400b" path="res://challenges/SelectThree_easy.tres" id="27_kpb3h"]
 
 [sub_resource type="Resource" id="Resource_ut70p"]
 script = ExtResource("16_ut70p")
@@ -137,9 +141,25 @@ script = ExtResource("9_ut70p")
 [node name="Notification" parent="UI/MessageController/MessageView" instance=ExtResource("9_n5sdn")]
 layout_mode = 1
 
-[node name="ChallengeController" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="ChallengeController" type="Node" parent="UI" node_paths=PackedStringArray("view", "model")]
 script = ExtResource("23_aum7h")
+view = NodePath("ChallengeView")
+model = NodePath("ChallengeModel")
+
+[node name="ChallengeView" type="Control" parent="UI/ChallengeController"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("24_qelhd")
+metadata/_custom_type_script = "uid://dlqolcp4oddju"
+
+[node name="ChallengeUI" parent="UI/ChallengeController/ChallengeView" instance=ExtResource("25_blwmm")]
+layout_mode = 1
+
+[node name="ChallengeModel" type="Node" parent="UI/ChallengeController"]
+script = ExtResource("26_2a8cd")
+_challenge = ExtResource("27_kpb3h")
+metadata/_custom_type_script = "uid://bmfvn3p4u73k5"

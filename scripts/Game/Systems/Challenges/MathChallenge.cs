@@ -22,8 +22,7 @@ namespace TnT.EduGame.Question
         public void SetFormulaParam(int index, string paramName);
         public void ChangeValue(string paramName, int value);
         public abstract Godot.Collections.Array<ChallengeValue> Values { get; }
-        // TODO: remove the whole Types thing, and replace with a simple Enum
-        public Type SelectedVisualType { get; }
+        string ChallengeUIType { get; set; }
     }
 
     [GlobalClass, Tool]
@@ -33,13 +32,13 @@ namespace TnT.EduGame.Question
         public string Name { get; set; } = "";
 
         [Export]
-        TypeReference _visualType = new();
+        public string ChallengeUIType { get; set; } = "";
 
         [Export]
         public string Formula { get; set; } = "";
 
         [Export]
-        public string[] FormulaParams { get; set; } = new string[0];
+        public string[] FormulaParams { get; set; } = [];
 
         [Export]
         protected string QuestionText { get; set; } = "";
@@ -70,8 +69,6 @@ namespace TnT.EduGame.Question
         public int Answer { get; private set; }
         [Export]
         public Godot.Collections.Array<ChallengeValue> Values { get; set; } = new Godot.Collections.Array<ChallengeValue>() { };
-        // TODO: remove the whole Types thing, and replace with a simple Enum
-        public Type SelectedVisualType => _visualType.Type;
 
         public MathChallenge()
         {
@@ -103,6 +100,8 @@ namespace TnT.EduGame.Question
 
         [ExportToolButton("Generate Answer")]
         public Callable ComputeRandomAnswerBtn => Callable.From(ComputeRandomAnswer);
+
+
         public void ComputeRandomAnswer()
         {
             if (FormulaParams.Count() == 0)

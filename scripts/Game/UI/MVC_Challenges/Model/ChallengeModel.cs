@@ -7,13 +7,13 @@ using TnT.EduGame.Question;
 namespace TnT.Systems.UI
 {
     [GlobalClass]
-    public partial class ChallengeModel : Resource
+    public partial class ChallengeModel : Node
     {
         [Export]
         MathChallenge _challenge;
         public IMathChallenge Challenge => _challenge;
 
-        public string Name => Challenge.Name;
+        public string ChallengeName => Challenge.Name;
         public string Question => Challenge.Question;
         public string Hint => Challenge.Hint;
         public int ParamCount => Challenge.ParamCount;

@@ -23,6 +23,10 @@ Managers="*res://Scenes/autoload/managers.tscn"
 
 project/assembly_name="EduGame"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ChallengeUIFactoryPlugin/plugin.cfg")
+
 [input]
 
 move_up={

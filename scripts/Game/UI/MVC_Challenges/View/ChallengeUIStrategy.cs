@@ -102,18 +102,12 @@ namespace TnT.Systems.UI
             ChallengeSelect select = new();
 
             var dropdown = select.CreateChild<OptionButton>();
-            // dropdown.choices.AddRange(challenge.Values.Select(v => v.Value.ToString()));
             challenge.Values.Select(v => v.Value.ToString()).ForEach(t => dropdown.AddItem(t));
             dropdown
             .ItemSelected += c =>
                     select
                         .OnValueSelected?
                         .Invoke(challenge.Values.ToList().FindIndex(v => v.Value == c));
-                // .RegisterValueChangedCallback(c =>
-                //     select
-                //         .OnValueSelected?
-                //         .Invoke(challenge.Values.FindIndex(v => v.Value == int.Parse(c.newValue)))
-                // );
 
             return select;
         }
@@ -140,8 +134,7 @@ namespace TnT.Systems.UI
                 .ToList()
                 .ForEach(p =>
                 {
-                    // p.RegisterValueChangedCallback(i => input.OnParamChanged?.Invoke(p.ParamName, int.Parse(i.newValue)));
-                    p.TextChanged += i => input.OnParamChanged?.Invoke(p.ParamName, int.Parse(i));
+                    p.TextChanged += i => input.OnParamChanged?.Invoke(p.ParamName, i);
                     p.AddTo(input);
                 });
 

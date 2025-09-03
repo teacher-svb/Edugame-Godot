@@ -9,36 +9,33 @@ using TnT.Extensions;
 namespace TnT.Systems.UI
 {
     [GlobalClass]
-    public partial class ChallengeView : Resource
+    public partial class ChallengeView : Control
     {
-        Control _root;
         Node container;
         private ChallengeUI _challengeUi;
 
         public ChallengeUI ChallengeUI => _challengeUi;
 
-        public async Task InitializeView(Control root, IMathChallenge challenge)
+        public async Task InitializeView(IMathChallenge challenge)
         {
-            _root = root;
-            _root.Clear();
 
-            container = _root.CreateChild<Control>("container");
+            container = this.CreateChild<Control>("container");
 
-            await Task.Yield();
+            await Task.Yield(); 
 
             Refresh(challenge);
         }
 
-        public void Show()
+        public void ShowView()
         {
             // container.AddToClassList("opened");
-            _root.Show();
+            this.Show();
         }
 
-        public void Hide()
+        public void HideView()
         {
             // container.RemoveFromClassList("opened");
-            _root.Hide();
+            this.Hide();
         }
 
         public void Refresh(IMathChallenge challenge)
