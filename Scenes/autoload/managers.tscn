@@ -142,6 +142,7 @@ script = ExtResource("9_ut70p")
 layout_mode = 1
 
 [node name="ChallengeController" type="Node" parent="UI" node_paths=PackedStringArray("view", "model")]
+unique_name_in_owner = true
 script = ExtResource("23_aum7h")
 view = NodePath("ChallengeView")
 model = NodePath("ChallengeModel")
