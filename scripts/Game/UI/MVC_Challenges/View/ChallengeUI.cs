@@ -3,11 +3,13 @@
 using System;
 using System.Linq;
 using Godot;
+using Godot.Collections;
 using TnT.EduGame.Question;
 using TnT.Extensions;
 
 namespace TnT.Systems.UI
 {
+    [GlobalClass, Tool]
     public partial class ChallengeUI : Control
     {
         [Signal]
@@ -27,6 +29,13 @@ namespace TnT.Systems.UI
         Control _questionContainer;
         [Export]
         Control _submitContainer;
+
+        [Export]
+        Dictionary<ChallengeUIType, Control> _test;
+
+        [Export]
+        public string _challengeUIType { get; set; } = "";
+
 
 
 

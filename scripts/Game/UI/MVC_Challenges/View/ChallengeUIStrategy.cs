@@ -8,6 +8,15 @@ using TnT.Extensions;
 
 namespace TnT.Systems.UI
 {
+    public enum ChallengeUIType
+    {
+        CogwheelUIStrategy,
+        RadarUIStrategy,
+        SearchGridUIStrategy,
+        DropdownUIStrategy,
+        TextInputUIStrategy,
+        CombinationLockUIStrategy
+    }
 
     public interface IChallengeUIStrategy
     {
@@ -36,7 +45,7 @@ namespace TnT.Systems.UI
         }
     }
 
-    public class GridUIStrategy : IChallengeUIStrategy
+    public class SearchGridUIStrategy : IChallengeUIStrategy
     {
         public ChallengeUI Build(IMathChallenge challenge)
         {

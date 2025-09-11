@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dx5c0meqksg8l"]
+[gd_scene load_steps=3 format=3 uid="uid://dx5c0meqksg8l"]
 
 [ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://themes/Notifications.tres" id="1_ck7ko"]
+[ext_resource type="Script" uid="uid://qjrt84cjuqwm" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeUI.cs" id="2_ubp0e"]
 
-[node name="ChallengeUI" type="Control"]
+[node name="ChallengeUI" type="Control" node_paths=PackedStringArray("_left", "_right", "_challengeContainer", "_questionContainer", "_submitContainer", "_test")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,6 +11,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ck7ko")
+script = ExtResource("2_ubp0e")
+_left = NodePath("Panel/MarginContainer/HBoxContainer/Left")
+_right = NodePath("Panel/MarginContainer/HBoxContainer/Right")
+_challengeContainer = NodePath("Panel/MarginContainer/HBoxContainer/Left/Content")
+_questionContainer = NodePath("Panel/MarginContainer/HBoxContainer/Right/QuestionContainer/Question")
+_submitContainer = NodePath("Panel/MarginContainer/HBoxContainer/Right/SubmitContainer")
+_test = {}
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -31,26 +39,36 @@ grow_vertical = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
 
-[node name="ContentPanel" type="Panel" parent="Panel/MarginContainer/HBoxContainer"]
+[node name="Left" type="Panel" parent="Panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme_type_variation = &"LightPanel"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer"]
+[node name="Content" type="MarginContainer" parent="Panel/MarginContainer/HBoxContainer/Left"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Right" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="QuestionContainer" type="Panel" parent="Panel/MarginContainer/HBoxContainer/Right"]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="Panel" type="Panel" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
 theme_type_variation = &"LightPanel"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
+[node name="Question" type="RichTextLabel" parent="Panel/MarginContainer/HBoxContainer/Right/QuestionContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 text = "Lorem ipsum dolor sit amet, consectet adipiscing elit. 
 
@@ -58,9 +76,9 @@ Integer ac maximus erat, non viverra est. Suspendisse vel erat in erat rhoncus f
 horizontal_alignment = 3
 justification_flags = 35
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="SubmitContainer" type="MarginContainer" parent="Panel/MarginContainer/HBoxContainer/Right"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+[node name="SubmitButton" type="Button" parent="Panel/MarginContainer/HBoxContainer/Right/SubmitContainer"]
 layout_mode = 2
 text = "Klaar!"

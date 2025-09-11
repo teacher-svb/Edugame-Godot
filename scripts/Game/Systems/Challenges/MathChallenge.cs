@@ -22,7 +22,7 @@ namespace TnT.EduGame.Question
         public void SetFormulaParam(int index, string paramName);
         public void ChangeValue(string paramName, int value);
         public abstract Godot.Collections.Array<ChallengeValue> Values { get; }
-        string ChallengeUIType { get; set; }
+        ChallengeUIType ChallengeUIType { get; set; }
     }
 
     [GlobalClass, Tool]
@@ -32,7 +32,7 @@ namespace TnT.EduGame.Question
         public string Name { get; set; } = "";
 
         [Export]
-        public string ChallengeUIType { get; set; } = "";
+        public ChallengeUIType ChallengeUIType { get; set; } = ChallengeUIType.TextInputUIStrategy;
 
         [Export]
         public string Formula { get; set; } = "";
