@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=16 format=3 uid="uid://les3xc8lryk4"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://les3xc8lryk4"]
 
 [ext_resource type="Texture2D" uid="uid://nul7wtmt3kpc" path="res://assets/uipack_rpg_sheet.png" id="1_jafkh"]
 [ext_resource type="FontFile" uid="uid://cw1vj1tfcdwao" path="res://assets/Fonts/BigBlueTerminal/BigBlueTerm437NerdFontPropo-Regular.ttf" id="2_jafkh"]
@@ -15,6 +15,13 @@ texture_margin_right = 25.0
 texture_margin_bottom = 25.0
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fkjd"]
+atlas = ExtResource("1_jafkh")
+region = Rect2(0, 98, 190, 45)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n0102"]
+texture = SubResource("AtlasTexture_7fkjd")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jafkh"]
 atlas = ExtResource("1_jafkh")
@@ -81,8 +88,10 @@ default_font = ExtResource("2_jafkh")
 default_font_size = 24
 BoxContainer/constants/separation = 16
 Button/styles/disabled = SubResource("StyleBoxTexture_44jsj")
+Button/styles/focus = SubResource("StyleBoxTexture_n0102")
 Button/styles/hover = SubResource("StyleBoxTexture_q0lhn")
 Button/styles/normal = SubResource("StyleBoxTexture_oclf0")
+Button/styles/pressed = SubResource("StyleBoxTexture_n0102")
 DarkPanel/base_type = &"Panel"
 DarkPanel/styles/panel = SubResource("StyleBoxTexture_r150k")
 LightPanel/base_type = &"Panel"
