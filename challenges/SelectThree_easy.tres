@@ -27,7 +27,7 @@ metadata/_custom_type_script = "uid://7k86hidqf8h4"
 [resource]
 script = ExtResource("2_h8h2r")
 Name = "Selecteer 3 getallen"
-ChallengeUIType = "CogwheelUIStrategy"
+ChallengeUIType = 0
 Formula = "x+y+z"
 FormulaParams = PackedStringArray("x", "y", "z")
 QuestionText = "Selecteer 3 getallen"

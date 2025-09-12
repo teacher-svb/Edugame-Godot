@@ -80,15 +80,15 @@ namespace TnT.Systems.UI
         {
             ChallengeSelect select = new();
 
-            challenge.Values
-                .Select((v, i) => new ChallengeSelectOption(i, v.ParamName, v.Value))
-                .Shuffle(42) // just a predetermined seed, so shuffling happens to the same order every time
-                .ToList()
-                .ForEach(o =>
-                {
-                    o.Pressed += () => select.OnValueSelected?.Invoke(o.Index);
-                    o.AddTo(select);
-                });
+            // challenge.Values
+            //     .Select((v, i) => new ChallengeSelectOption(i, v.ParamName, v.Value))
+            //     .Shuffle(42) // just a predetermined seed, so shuffling happens to the same order every time
+            //     .ToList()
+            //     .ForEach(o =>
+            //     {
+            //         o.Pressed += () => select.OnValueSelected?.Invoke(o.Index);
+            //         o.AddTo(select);
+            //     });
 
             return select;
         }

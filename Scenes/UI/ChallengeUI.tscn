@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://themes/Notifications.tres" id="1_ck7ko"]
 [ext_resource type="Script" uid="uid://qjrt84cjuqwm" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeUI.cs" id="2_ubp0e"]
 
-[node name="ChallengeUI" type="Control" node_paths=PackedStringArray("_left", "_right", "_challengeContainer", "_questionContainer", "_submitContainer", "_test")]
+[node name="ChallengeUI" type="Control" node_paths=PackedStringArray("_left", "_right", "_challengeContainer", "_questionContainer", "_submitContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,7 +17,7 @@ _right = NodePath("Panel/MarginContainer/HBoxContainer/Right")
 _challengeContainer = NodePath("Panel/MarginContainer/HBoxContainer/Left/Content")
 _questionContainer = NodePath("Panel/MarginContainer/HBoxContainer/Right/QuestionContainer/Question")
 _submitContainer = NodePath("Panel/MarginContainer/HBoxContainer/Right/SubmitContainer")
-_test = {}
+_challengeScenes = Dictionary[int, Resource]({})
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1

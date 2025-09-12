@@ -31,10 +31,7 @@ namespace TnT.Systems.UI
         Control _submitContainer;
 
         [Export]
-        Dictionary<ChallengeUIType, Control> _test;
-
-        [Export]
-        public string _challengeUIType { get; set; } = "";
+        Dictionary<ChallengeUIType, Resource> _challengeScenes;
 
 
 
