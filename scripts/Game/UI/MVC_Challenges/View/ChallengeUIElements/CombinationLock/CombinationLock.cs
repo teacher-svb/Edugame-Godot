@@ -15,7 +15,6 @@ namespace TnT.Systems.UI
 
         public CombinationLock(string paramName, IEnumerable<ChallengeValue> values)
         {
-            this.CreateChild<BoxContainer>();
         }
     }
 }
