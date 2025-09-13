@@ -19,7 +19,7 @@ namespace TnT.Systems.UI
 
         CarrouselValue[] _values;
 
-        public CombinationLockWheel(string paramName, IEnumerable<ChallengeValue> values)
+        public void Init(string paramName, IEnumerable<ChallengeValue> values)
         {
             _carrousel = this.CreateChild<Carrousel>();
             _carrousel.Vertical = true;

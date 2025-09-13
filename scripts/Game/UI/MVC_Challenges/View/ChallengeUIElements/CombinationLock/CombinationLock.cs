@@ -12,9 +12,23 @@ namespace TnT.Systems.UI
     public partial class CombinationLock : Control
     {
         public Action<string, string> OnValueSelected;
+        List<CombinationLockWheel> _wheels;
 
-        public CombinationLock(string paramName, IEnumerable<ChallengeValue> values)
+        public void Init(string[] paramNames, IEnumerable<ChallengeValue> values)
         {
+            var container = this.CreateChild<HBoxContainer>();
+            _wheels = paramNames.Select(p =>
+            {
+                var wheel = container.CreateChild<CombinationLockWheel>();
+                wheel.Init(p, values);
+                return wheel;
+            }).ToList();
+        }
+
+        public void Clear()
+        {
+            _wheels.ForEach(w => w.QueueFree());
+            _wheels.Clear();
         }
     }
 }
