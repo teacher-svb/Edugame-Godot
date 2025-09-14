@@ -80,15 +80,15 @@ namespace TnT.Systems.UI
         {
             ChallengeSelect select = new();
 
-            // challenge.Values
-            //     .Select((v, i) => new ChallengeSelectOption(i, v.ParamName, v.Value))
-            //     .Shuffle(42) // just a predetermined seed, so shuffling happens to the same order every time
-            //     .ToList()
-            //     .ForEach(o =>
-            //     {
-            //         o.Pressed += () => select.OnValueSelected?.Invoke(o.Index);
-            //         o.AddTo(select);
-            //     });
+            challenge.Values
+                .Select((v, i) => new ChallengeSelectOption(i, v.ParamName, v.Value))
+                .Shuffle(42) // just a predetermined seed, so shuffling happens to the same order every time
+                .ToList()
+                .ForEach(o =>
+                {
+                    o.Pressed += () => select.OnValueSelected?.Invoke(o.Index);
+                    o.AddTo(select);
+                });
 
             return select;
         }
@@ -136,15 +136,14 @@ namespace TnT.Systems.UI
 
         ChallengeParamInput CreateTextInputs(IMathChallenge challenge)
         {
-            ChallengeParamInput input = new();
+            var input = new ChallengeParamInput();
 
             challenge.FormulaParams
-                .Select(p => new ChallengeValueInput(p))
-                .ToList()
                 .ForEach(p =>
                 {
-                    p.TextChanged += i => input.OnParamChanged?.Invoke(p.ParamName, i);
-                    p.AddTo(input);
+                    var valueInput = input.CreateChild<ChallengeValueInput>();
+                    valueInput.Init(p);
+                    valueInput.TextChanged += i => input.OnParamChanged?.Invoke(p, i);
                 });
 
             return input;
@@ -165,18 +164,15 @@ namespace TnT.Systems.UI
 
         private ChallengeParamInput CreateCombinationLock(IMathChallenge challenge)
         {
-            ChallengeParamInput input = new();
+            var input = new ChallengeParamInput();
 
-            challenge.FormulaParams
-                .Select(p => new CombinationLockWheel(p, challenge.Values))
-                .ToList()
-                .ForEach(w =>
-                {
-
-                    w.OnValueSelected += (p, v) => input.OnParamChanged?.Invoke(p, v);
-                    input.AddChild(w);
-                    w.AddTo(input);
-                });
+            var container = input.CreateChild<HBoxContainer>();
+            challenge.FormulaParams.ForEach(p =>
+            {
+                var wheel = container.CreateChild<CombinationLockWheel>();
+                wheel.Init(p, challenge.Values);
+                wheel.ValueSelected += (p, v) => input.OnParamChanged?.Invoke(p, v.ToString());
+            });
 
             return input;
         }
