@@ -24,7 +24,7 @@ namespace TnT.Systems.UI
     }
     public interface IValueSelectProvider
     {
-        ChallengeSelect CreateValueSelect(IMathChallenge challenge);
+        ChallengeValueSelect CreateValueSelect(IMathChallenge challenge);
     }
     public class RadarUIStrategy : IChallengeUIStrategy
     {
@@ -33,10 +33,15 @@ namespace TnT.Systems.UI
             return new ChallengeUI
                 .Builder(challenge)
                 .WithQuestionElement()
-                .WithAnswerInput()
+                .WithParamInputs(CreateParamInput, ChallengeUI.Builder.Location.ANSWER)
                 .WithValueView(CreateRadarView)
                 .WithSubmitButton()
                 .Build();
+        }
+
+        private ChallengeParamInput CreateParamInput(IMathChallenge challenge)
+        {
+            throw new NotImplementedException();
         }
 
         private ChallengeValueView CreateRadarView(IMathChallenge challenge)
@@ -52,10 +57,15 @@ namespace TnT.Systems.UI
             return new ChallengeUI
                 .Builder(challenge)
                 .WithQuestionElement()
-                .WithAnswerInput()
+                .WithParamInputs(CreateParamInput, ChallengeUI.Builder.Location.ANSWER)
                 .WithValueView(CreateGridView)
                 .WithSubmitButton()
                 .Build();
+        }
+
+        private ChallengeParamInput CreateParamInput(IMathChallenge challenge)
+        {
+            throw new NotImplementedException();
         }
 
         private ChallengeValueView CreateGridView(IMathChallenge challenge)
@@ -76,9 +86,9 @@ namespace TnT.Systems.UI
                 .Build();
         }
 
-        ChallengeSelect CreateCogwheels(IMathChallenge challenge)
+        ChallengeValueSelect CreateCogwheels(IMathChallenge challenge)
         {
-            ChallengeSelect select = new();
+            ChallengeValueSelect select = new();
 
             challenge.Values
                 .Select((v, i) => new ChallengeSelectOption(i, v.ParamName, v.Value))
@@ -106,9 +116,9 @@ namespace TnT.Systems.UI
                 .Build();
         }
 
-        ChallengeSelect CreateDropdown(IMathChallenge challenge)
+        ChallengeValueSelect CreateDropdown(IMathChallenge challenge)
         {
-            ChallengeSelect select = new();
+            ChallengeValueSelect select = new();
 
             var dropdown = select.CreateChild<OptionButton>();
             challenge.Values.Select(v => v.Value.ToString()).ForEach(t => dropdown.AddItem(t));
@@ -143,7 +153,7 @@ namespace TnT.Systems.UI
                 {
                     var valueInput = input.CreateChild<ChallengeValueInput>();
                     valueInput.Init(p);
-                    valueInput.TextChanged += i => input.OnParamChanged?.Invoke(p, i);
+                    valueInput.ValueChanged += i => input.OnParamChanged?.Invoke(p, i.ToString());
                 });
 
             return input;

@@ -5,7 +5,7 @@ using TnT.Extensions;
 
 namespace TnT.Systems.UI
 {
-    public partial class ChallengeSelect : Control
+    public partial class ChallengeValueSelect : Control
     {
         public Action<int> OnValueSelected;
     }

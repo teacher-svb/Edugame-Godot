@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using TnT.Extensions;
 using Godot.Collections;
 using TnT.EduGame.QuestSystem;
+using TnT.EduGame.Question;
 
 namespace TnT.EduGame.GameState
 {
@@ -58,6 +59,20 @@ namespace TnT.EduGame.GameState
             catch
             {
                 throw new Exception("no dialog state assigned");
+            }
+        }
+
+        public void ShowChallenge(IMathChallenge challenge)
+        {
+            GD.Print($"showing challenge: {challenge.Name}");
+            var state = _states.OfType<GameStateChallenge>().FirstOrDefault();
+            try
+            {
+                Push(state.GetState(new() { challenge = challenge }));
+            }
+            catch
+            {
+                throw new Exception("no challenge state assigned");
             }
         }
 

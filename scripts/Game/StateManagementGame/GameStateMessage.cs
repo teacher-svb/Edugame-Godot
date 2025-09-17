@@ -19,25 +19,13 @@ namespace TnT.EduGame.GameState
         [Export] public InputAction _next;
         [Export] public InputAction _close;
 
-        // MessageController _uiController;
         private bool retrievingNextMsg;
         private bool allMessagesRead = false;
-
-        // MessageController UIController
-        // {
-        //     get
-        //     {
-        //         if (_uiController == null)
-        //             _uiController = UnityEngine.Object.FindAnyObjectByType<MessageController>();
-        //         return _uiController;
-        //     }
-        // }
 
         public BaseState GetState(MessageOptions options)
         {
             allMessagesRead = false;
             MessageController.Instance.AddMessage(options.text, options.character.CharacterFace, options.character.CharacterName);
-            // MessageController.Instance.AddMessage(options.text);
             if (MessageController.Instance.Count > 1)
                 return new BaseState(new() { ExitOnNextUpdate = () => true });
 

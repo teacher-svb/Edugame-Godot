@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://3hfdhy3acdbi"]
+[gd_scene load_steps=19 format=4 uid="uid://3hfdhy3acdbi"]
 
 [ext_resource type="TileSet" uid="uid://cfonf0rkxvtn" path="res://assets/Tilesets/tilesets.tres" id="1_2llne"]
 [ext_resource type="PackedScene" uid="uid://b18es3ooe0dvt" path="res://Scenes/Player.tscn" id="2_q12u6"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://r0pfr1dce2fx" path="res://scripts/Game/Door.cs" id="6_6ll4n"]
 [ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="7_kylad"]
 [ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://quests/QuestEventChannel.tres" id="8_bdlbp"]
+[ext_resource type="Script" uid="uid://cb0mn83cc42v3" path="res://scripts/test/ChallengeActivator.cs" id="9_bdlbp"]
+[ext_resource type="Resource" uid="uid://bvtaxgkyu400b" path="res://challenges/SelectThree_easy.tres" id="10_2h8qs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jghel"]
 
@@ -26,6 +28,8 @@ size = Vector2(14, 14)
 size = Vector2(16, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2h8qs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rpty4"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -185,6 +189,16 @@ _state = 2
 eventChannel = ExtResource("8_bdlbp")
 metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 
+[node name="ChallengeActivator" type="Area2D" parent="."]
+position = Vector2(41, -9)
+script = ExtResource("9_bdlbp")
+_challenge = ExtResource("10_2h8qs")
+metadata/_custom_type_script = "uid://cb0mn83cc42v3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChallengeActivator"]
+shape = SubResource("RectangleShape2D_rpty4")
+
 [connection signal="body_entered" from="Transporters/Transporter" to="Transporters/Transporter" method="_OnBodyEntered"]
 [connection signal="body_entered" from="Transporters/Transporter2" to="Transporters/Transporter2" method="_OnBodyEntered"]
 [connection signal="body_entered" from="Transporters/Transporter3" to="Transporters/Transporter3" method="_OnBodyEntered"]
+[connection signal="body_entered" from="ChallengeActivator" to="ChallengeActivator" method="_OnBodyEntered"]

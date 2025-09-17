@@ -1,18 +1,27 @@
 using System;
 using System.Threading.Tasks;
 using Godot;
+using TnT.EduGame.Question;
 
 namespace TnT.Systems.UI
 {
     public partial class ChallengeController : Node
     {
+        public static ChallengeController Instance { get; private set; }
         [Export]
         public ChallengeView view = new();
         [Export]
         public ChallengeModel model = new();
-        void Start()
+        public override void _Ready()
         {
+            Instance = this;
             Initialize();
+        }
+
+        public void SetChallenge(IMathChallenge challenge)
+        {
+            model.Challenge = challenge as MathChallenge;
+            Refresh();
         }
 
         async void Initialize()
@@ -23,7 +32,7 @@ namespace TnT.Systems.UI
         private void ValueChanged(string paramName, string value)
         {
             model.SetParameter(paramName, int.Parse(value));
-            Refresh();
+            // Refresh();
         }
 
         private void SubmitChallenge()
@@ -42,7 +51,7 @@ namespace TnT.Systems.UI
         private void ValueSelected(int index)
         {
             model.SetParameter(index);
-            Refresh();
+            // Refresh();
         }
 
         void Refresh()
@@ -53,15 +62,15 @@ namespace TnT.Systems.UI
             view.ChallengeUI.OnSubmit += SubmitChallenge;
         }
 
-        public async Task ShowView()
+        public async Task Show()
         {
             await Task.Yield();
-            view.ShowView();
+            await view.ShowView();
         }
 
-        public async Task HideView()
+        public async Task Hide()
         {
-            view.HideView();
+            await view.HideView();
             await Task.Yield();
         }
     }

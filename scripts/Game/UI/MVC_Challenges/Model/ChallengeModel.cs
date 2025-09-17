@@ -11,12 +11,13 @@ namespace TnT.Systems.UI
     {
         [Export]
         MathChallenge _challenge;
-        public IMathChallenge Challenge => _challenge;
+        public MathChallenge Challenge { get => _challenge; set => _challenge = value; }
 
         public string ChallengeName => Challenge.Name;
         public string Question => Challenge.Question;
         public string Hint => Challenge.Hint;
         public int ParamCount => Challenge.ParamCount;
+
 
         Queue<string> _formulaParams;
 
@@ -24,7 +25,7 @@ namespace TnT.Systems.UI
         {
             Challenge.SetFormulaParam(index, name);
         }
-        public void SetParameter( string name, int value)
+        public void SetParameter(string name, int value)
         {
             Challenge.ChangeValue(name, value);
         }
@@ -42,7 +43,7 @@ namespace TnT.Systems.UI
         }
         public void SetChallenge(MathChallenge challenge)
         {
-            _challenge = challenge;
+            Challenge = challenge;
         }
     }
 }

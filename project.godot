@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Managers="*res://Scenes/autoload/managers.tscn"
+ChallengeUiFactoryPlugin="*res://addons/ChallengeUIFactoryPlugin/ChallengeUIFactoryPlugin.cs"
 
 [dotnet]
 

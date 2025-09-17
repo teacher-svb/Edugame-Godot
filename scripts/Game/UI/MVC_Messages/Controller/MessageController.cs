@@ -17,10 +17,10 @@ namespace TnT.Systems.UI
         public Action CloseBtnPushed;
         public override void _Ready()
         {
+            Instance = this;
             Initialize();
             view.NextBtnPushed += () => NextBtnPushed();
             view.CloseBtnPushed += () => CloseBtnPushed();
-            Instance = this;
         }
 
         async void Initialize()
