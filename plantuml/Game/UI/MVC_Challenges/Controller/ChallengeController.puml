@@ -1,0 +1,12 @@
+@startuml
+class ChallengeController <<partial>> {
+    + <<override>> _Ready() : void
+    + SetChallenge(challenge:IMathChallenge) : void
+    + <<async>> Show() : Task
+    + <<async>> Hide() : Task
+}
+Node <|-- ChallengeController
+ChallengeController --> "Instance" ChallengeController
+ChallengeController o-> "view" ChallengeView
+ChallengeController o-> "model" ChallengeModel
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+enum AbilityOperatorType {
+    Add,
+    Multiply,
+    Subtract,
+}
+interface IAbilityEffect {
+    + value : float <<get>>
+    + duration : int <<get>>
+    + frequency : int <<get>>
+}
+IAbilityEffect --> "elementalType" ElementalType
+IAbilityEffect --> "operatorType" AbilityOperatorType
+@enduml

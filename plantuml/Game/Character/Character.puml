@@ -1,0 +1,17 @@
+@startuml
+class Character <<partial>> {
+    + <<override>> _EnterTree() : void
+    + CharacterId : string <<get>> <<set>>
+    + LoadCharacter(characterId:string) : void
+    + <<override>> _Ready() : void
+    + <<override>> _Process(delta:double) : void
+    + Bind(data:CharacterSaveData) : void
+}
+class "IBind`1"<T> {
+}
+Node <|-- Character
+"IBind`1" "<CharacterSaveData>" <|-- Character
+Character --> "Stats" Stats
+Character --> "Attributes" Attributes
+Character o-> "UniqueId" UniqueId
+@enduml

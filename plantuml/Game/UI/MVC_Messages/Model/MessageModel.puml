@@ -1,0 +1,21 @@
+@startuml
+class MessageModel <<partial>> {
+    + Clear() : void
+}
+class Message {
+    + text : string
+    + name : string
+}
+class "Queue`1"<T> {
+}
+enum MessageType {
+    dialog,
+    warning,
+    error,
+}
+Node <|-- MessageModel
+MessageModel o-> "messages<Message>" "Queue`1"
+Message --> "sprite" Texture2D
+Message --> "Type" MessageType
+Message +-- MessageType
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+class GameStateMessage <<partial>> {
+    + GetState(options:MessageOptions) : BaseState
+}
+class "IStateObject`1"<T> {
+}
+struct MessageOptions {
+    + text : string
+}
+BaseGameState <|-- GameStateMessage
+"IStateObject`1" "<GameStateMessage.MessageOptions>" <|-- GameStateMessage
+GameStateMessage --> "_next" InputAction
+GameStateMessage --> "_close" InputAction
+GameStateMessage +-- MessageOptions
+MessageOptions --> "character" CharacterData
+@enduml

@@ -1,0 +1,72 @@
+@startuml
+enum Ease {
+    EaseInQuad= 0,
+    EaseOutQuad,
+    EaseInOutQuad,
+    EaseInCubic,
+    EaseOutCubic,
+    EaseInOutCubic,
+    EaseInQuart,
+    EaseOutQuart,
+    EaseInOutQuart,
+    EaseInQuint,
+    EaseOutQuint,
+    EaseInOutQuint,
+    EaseInSine,
+    EaseOutSine,
+    EaseInOutSine,
+    EaseInExpo,
+    EaseOutExpo,
+    EaseInOutExpo,
+    EaseInCirc,
+    EaseOutCirc,
+    EaseInOutCirc,
+    Linear,
+    Spring,
+    EaseInBounce,
+    EaseOutBounce,
+    EaseInOutBounce,
+    EaseInBack,
+    EaseOutBack,
+    EaseInOutBack,
+    EaseInElastic,
+    EaseOutElastic,
+    EaseInOutElastic,
+}
+class Easings <<static>> {
+    + {static} <<async>> Animate(duration:float, easeType:Ease) : IAsyncEnumerable<float>
+    + {static} GetEasingFunction(easingFunction:Ease) : Function
+    + {static} Linear(start:float, end:float, value:float) : float
+    + {static} Spring(start:float, end:float, value:float) : float
+    + {static} EaseInQuad(start:float, end:float, value:float) : float
+    + {static} EaseOutQuad(start:float, end:float, value:float) : float
+    + {static} EaseInOutQuad(start:float, end:float, value:float) : float
+    + {static} EaseInCubic(start:float, end:float, value:float) : float
+    + {static} EaseOutCubic(start:float, end:float, value:float) : float
+    + {static} EaseInOutCubic(start:float, end:float, value:float) : float
+    + {static} EaseInQuart(start:float, end:float, value:float) : float
+    + {static} EaseOutQuart(start:float, end:float, value:float) : float
+    + {static} EaseInOutQuart(start:float, end:float, value:float) : float
+    + {static} EaseInQuint(start:float, end:float, value:float) : float
+    + {static} EaseOutQuint(start:float, end:float, value:float) : float
+    + {static} EaseInOutQuint(start:float, end:float, value:float) : float
+    + {static} EaseInSine(start:float, end:float, value:float) : float
+    + {static} EaseOutSine(start:float, end:float, value:float) : float
+    + {static} EaseInOutSine(start:float, end:float, value:float) : float
+    + {static} EaseInOutExpo(start:float, end:float, value:float) : float
+    + {static} EaseInCirc(start:float, end:float, value:float) : float
+    + {static} EaseOutCirc(start:float, end:float, value:float) : float
+    + {static} EaseInBack(start:float, end:float, value:float) : float
+    + {static} EaseOutBack(start:float, end:float, value:float) : float
+    + {static} EaseInOutBack(start:float, end:float, value:float) : float
+    + {static} EaseInElastic(start:float, end:float, value:float) : float
+    + {static} EaseOutElastic(start:float, end:float, value:float) : float
+    + {static} EaseInOutElastic(start:float, end:float, value:float) : float
+    + {static} EaseInExpo(start:float, end:float, value:float) : float
+    + {static} EaseOutExpo(start:float, end:float, value:float) : float
+    + {static} EaseInOutCirc(start:float, end:float, value:float) : float
+    + {static} EaseInBounce(start:float, end:float, value:float) : float
+    + {static} EaseOutBounce(start:float, end:float, value:float) : float
+    + {static} EaseInOutBounce(start:float, end:float, value:float) : float
+}
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class FadeView <<partial>> {
+    + <<async>> InitializeView(root:Control) : Task
+    + <<async>> Show() : Task
+    + <<async>> Hide() : Task
+}
+Resource <|-- FadeView
+@enduml

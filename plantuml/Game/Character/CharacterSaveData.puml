@@ -1,0 +1,10 @@
+@startuml
+class CharacterSaveData <<partial>> {
+    + Id : string <<get>> <<set>>
+    + IsNew : bool <<get>> <<set>>
+    + characterId : string
+}
+Resource <|-- CharacterSaveData
+ISaveable <|-- CharacterSaveData
+CharacterSaveData --> "position" Vector2
+@enduml

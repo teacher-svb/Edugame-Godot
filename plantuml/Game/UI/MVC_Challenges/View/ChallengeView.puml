@@ -1,0 +1,11 @@
+@startuml
+class ChallengeView <<partial>> {
+    + <<override>> _Ready() : void
+    + <<async>> InitializeView(challenge:IMathChallenge) : Task
+    + <<async>> ShowView(duration:float) : Task
+    + <<async>> HideView(duration:float) : Task
+    + Refresh(challenge:IMathChallenge) : void
+}
+Control <|-- ChallengeView
+ChallengeView --> "ChallengeUI" ChallengeUI
+@enduml

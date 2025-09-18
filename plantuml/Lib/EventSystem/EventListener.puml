@@ -1,0 +1,7 @@
+@startuml
+abstract class EventListener <<partial>> {
+    + <<override>> _Ready() : void
+    + <<virtual>> Raise(values:Variant[]) : void
+}
+Node <|-- EventListener
+@enduml

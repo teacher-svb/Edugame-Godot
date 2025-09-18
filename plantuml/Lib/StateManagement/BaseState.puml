@@ -1,0 +1,16 @@
+@startuml
+class BaseState {
+    + BaseState(options:StateOptions)
+    + {static} GetEmptyState() : BaseState
+    + <<async>> EnterState() : Task
+    + <<async>> ExitState() : Task
+    + UpdateState() : bool
+}
+class StateOptions {
+}
+BaseState +-- StateOptions
+StateOptions --> "OnEnter" OnEnter
+StateOptions --> "OnExit" OnExit
+StateOptions --> "OnUpdate" OnUpdate
+StateOptions o-> "ExitOnNextUpdate" Exit
+@enduml

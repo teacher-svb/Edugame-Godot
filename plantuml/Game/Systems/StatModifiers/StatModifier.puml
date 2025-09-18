@@ -1,0 +1,16 @@
+@startuml
+abstract class StatModifier {
+    + MarkedForRemoval : bool <<get>>
+    +  <<event>> OnDispose : Action<StatModifier> 
+    + Handle(q:StatQuery, c:StatContext) : int
+    + Update(deltaTime:double) : void
+    + Dispose() : void
+    + {abstract} Modify(q:StatQuery, c:StatContext) : int
+}
+class BasicStatModifier {
+    + BasicStatModifier(statType:StatType, operation:Func<int, int>, duration:float, elementalType:ElementalType)
+    + <<override>> Modify(q:StatQuery, c:StatContext) : int
+}
+IDisposable <|-- StatModifier
+StatModifier <|-- BasicStatModifier
+@enduml

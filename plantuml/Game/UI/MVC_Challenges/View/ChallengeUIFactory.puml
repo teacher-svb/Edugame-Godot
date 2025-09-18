@@ -1,0 +1,5 @@
+@startuml
+class ChallengeUIFactory <<static>> {
+    + {static} Build(challenge:IMathChallenge) : ChallengeUI
+}
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class InputManager <<partial>> {
+    + <<override>> _EnterTree() : void
+    + <<override>> _ExitTree() : void
+    + <<override>> _Ready() : void
+    + <<override>> _Input(ev:InputEvent) : void
+}
+Node <|-- InputManager
+InputManager --> "Instance" InputManager
+@enduml

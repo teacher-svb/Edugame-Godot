@@ -1,0 +1,40 @@
+@startuml
+abstract class "SaveLoadSystem`1"<T> <<partial>> {
+    + {abstract} GameData : T <<get>> <<set>>
+    + <<override>> _Ready() : void
+    + {abstract} NewGame() : void
+    + SaveGame() : void
+    + ReloadGame() : void
+    + {abstract} LoadGame(gameName:string) : void
+    + DeleteGame(gameName:string) : void
+}
+interface ISaveable {
+}
+class UniqueId {
+    + Id : string
+}
+interface IUnique {
+}
+interface "IBind`1"<TData> {
+}
+interface ISerializer {
+}
+class JsonSerializer {
+    + Serialize(obj:Variant) : string
+    + Deserialize(json:string) : Variant
+}
+interface "IDataService`1"<T> {
+}
+class "FileDataService`1"<T> {
+    + FileDataService(serializer:ISerializer)
+    + Save(data:T, overwrite:bool) : void
+    + Load(name:string) : T
+    + Delete(name:string) : void
+    + DeleteAll() : void
+    + ListSaves() : IEnumerable<string>
+}
+Node <|-- "SaveLoadSystem`1"
+IUnique <|-- "IBind`1"
+ISerializer <|-- JsonSerializer
+"IDataService`1" "<T>" <|-- "FileDataService`1"
+@enduml

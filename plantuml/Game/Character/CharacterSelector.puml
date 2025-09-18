@@ -1,0 +1,6 @@
+@startuml
+class CharacterSelector <<partial>> {
+    + SelectCharacter(characterData:CharacterData) : void
+}
+Node <|-- CharacterSelector
+@enduml

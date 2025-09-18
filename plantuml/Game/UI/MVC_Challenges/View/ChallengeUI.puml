@@ -1,0 +1,21 @@
+@startuml
+class ChallengeUI <<partial>> {
+}
+class Builder {
+    + Builder(challenge:IMathChallenge)
+    + Build() : ChallengeUI
+    + WithValueSelect(createValueSelect:Func<IMathChallenge, ChallengeValueSelect>, location:Location) : Builder
+    + WithValueView(createValueView:Func<IMathChallenge, ChallengeValueView>, location:Location) : Builder
+    + WithParamInputs(createParamInput:Func<IMathChallenge, ChallengeParamInput>, location:Location) : Builder
+    + WithQuestionElement() : Builder
+    + WithSubmitButton() : Builder
+}
+enum Location {
+    CHALLENGE,
+    ANSWER,
+    QUESTION,
+}
+Control <|-- ChallengeUI
+ChallengeUI +-- Builder
+Builder +-- Location
+@enduml

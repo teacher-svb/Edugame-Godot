@@ -1,0 +1,6 @@
+@startuml
+class ChallengeActivator <<partial>> {
+    + _OnBodyEntered(other:Node2D) : void
+}
+Area2D <|-- ChallengeActivator
+@enduml

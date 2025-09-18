@@ -1,0 +1,37 @@
+@startuml
+class EasingDerivatives <<static>> {
+    + {static} GetEasingFunctionDerivative(easingFunction:Ease) : Function
+    + {static} LinearD(start:float, end:float, value:float) : float
+    + {static} EaseInQuadD(start:float, end:float, value:float) : float
+    + {static} EaseOutQuadD(start:float, end:float, value:float) : float
+    + {static} EaseInOutQuadD(start:float, end:float, value:float) : float
+    + {static} EaseInCubicD(start:float, end:float, value:float) : float
+    + {static} EaseOutCubicD(start:float, end:float, value:float) : float
+    + {static} EaseInOutCubicD(start:float, end:float, value:float) : float
+    + {static} EaseInQuartD(start:float, end:float, value:float) : float
+    + {static} EaseOutQuartD(start:float, end:float, value:float) : float
+    + {static} EaseInOutQuartD(start:float, end:float, value:float) : float
+    + {static} EaseInQuintD(start:float, end:float, value:float) : float
+    + {static} EaseOutQuintD(start:float, end:float, value:float) : float
+    + {static} EaseInOutQuintD(start:float, end:float, value:float) : float
+    + {static} EaseInSineD(start:float, end:float, value:float) : float
+    + {static} EaseOutSineD(start:float, end:float, value:float) : float
+    + {static} EaseInOutSineD(start:float, end:float, value:float) : float
+    + {static} EaseInExpoD(start:float, end:float, value:float) : float
+    + {static} EaseOutExpoD(start:float, end:float, value:float) : float
+    + {static} EaseInOutExpoD(start:float, end:float, value:float) : float
+    + {static} EaseInCircD(start:float, end:float, value:float) : float
+    + {static} EaseOutCircD(start:float, end:float, value:float) : float
+    + {static} EaseInOutCircD(start:float, end:float, value:float) : float
+    + {static} EaseInBackD(start:float, end:float, value:float) : float
+    + {static} EaseOutBackD(start:float, end:float, value:float) : float
+    + {static} EaseInOutBackD(start:float, end:float, value:float) : float
+    + {static} EaseInElasticD(start:float, end:float, value:float) : float
+    + {static} EaseOutElasticD(start:float, end:float, value:float) : float
+    + {static} EaseInOutElasticD(start:float, end:float, value:float) : float
+    + {static} SpringD(start:float, end:float, value:float) : float
+    + {static} EaseInBounceD(start:float, end:float, value:float) : float
+    + {static} EaseOutBounceD(start:float, end:float, value:float) : float
+    + {static} EaseInOutBounceD(start:float, end:float, value:float) : float
+}
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+class StatModifierEffect <<partial>> {
+}
+ModifierEffect <|-- StatModifierEffect
+@enduml

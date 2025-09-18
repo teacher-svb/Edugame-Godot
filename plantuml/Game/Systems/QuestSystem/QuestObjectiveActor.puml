@@ -1,0 +1,11 @@
+@startuml
+class QuestObjectiveActor <<partial>> {
+    + <<override>> _Ready() : void
+}
+enum QuestObjectiveAction {
+    INITOBJECTIVE,
+    COMPLETEOBJECTIVE,
+}
+Node <|-- QuestObjectiveActor
+QuestObjectiveActor +-- QuestObjectiveAction
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+class QuestManager <<partial>> {
+    + <<override>> _Ready() : void
+    + UpdateQuest(msg:QuestMessage) : void
+    + Bind(data:QuestManagerSaveData) : void
+}
+interface IQuestProcessor {
+}
+abstract class QuestProcessor {
+    + <<virtual>> Process(msg:QuestMessage, quests:List<Quest>) : void
+    + SetNext(processor:IQuestProcessor) : IQuestProcessor
+}
+class "QuestProcessor`1"<T> {
+    + QuestProcessor(currentState:QuestState, resultState:QuestState)
+    + <<override>> Process(msg:QuestMessage, quests:List<Quest>) : void
+}
+abstract class QuestMessage {
+    + QuestId : string <<get>> <<set>>
+    + ObjectiveId : string <<get>> <<set>>
+}
+class QuestMessageStart {
+}
+class QuestMessageFail {
+}
+class QuestMessageComplete {
+}
+class "IBind`1"<T> {
+}
+class "List`1"<T> {
+}
+Node <|-- QuestManager
+"IBind`1" "<QuestManagerSaveData>" <|-- QuestManager
+QuestManager --> "Instance" QuestManager
+QuestManager --> "Quests<Quest>" "List`1"
+QuestManager o-> "UniqueId" UniqueId
+IQuestProcessor <|-- QuestProcessor
+QuestProcessor <|-- "QuestProcessor`1"
+QuestMessage <|-- QuestMessageStart
+QuestMessage <|-- QuestMessageFail
+QuestMessage <|-- QuestMessageComplete
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+class ResourceFinder <<static>> {
+    + {static} FindObjectsOfTypeAll(rootPath:string) : List<T>
+}
+@enduml

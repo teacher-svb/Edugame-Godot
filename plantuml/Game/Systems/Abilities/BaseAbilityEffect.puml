@@ -1,0 +1,12 @@
+@startuml
+abstract class BaseAbilityEffect <<partial>> {
+    + {abstract} value : float <<get>> <<protected set>>
+    + {abstract} duration : int <<get>> <<protected set>>
+    + {abstract} frequency : int <<get>> <<protected set>>
+    + {abstract} Apply(source:Character, target:Character) : void
+}
+Resource <|-- BaseAbilityEffect
+IAbilityEffect <|-- BaseAbilityEffect
+BaseAbilityEffect --> "elementalType" ElementalType
+BaseAbilityEffect --> "operatorType" AbilityOperatorType
+@enduml

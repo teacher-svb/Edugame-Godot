@@ -1,0 +1,16 @@
+@startuml
+class QuestObjective <<partial>> {
+    + StartText : string <<get>>
+    + ProgressText : string <<get>>
+    + CompleteText : string <<get>>
+    + ObjectiveId : string <<get>>
+    + Bind(data:QuestObjectiveSaveData) : void
+    + GetSaveData() : QuestObjectiveSaveData
+    + GetText() : string
+    + GetText(state:QuestState) : string
+}
+Resource <|-- QuestObjective
+QuestObjective --> "CharacterData" CharacterData
+QuestObjective --> "State" QuestState
+QuestObjective --> "SaveData" QuestObjectiveSaveData
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class VectorExtensions <<static>> {
+    + {static} ToVector2(v:Vector3) : Vector2
+    + {static} ToVector3(v:Vector2) : Vector3
+    + {static} Snap(v:Vector3, gridSize:float) : Vector3
+    + {static} Snap(v:Vector2, gridSize:float) : Vector2
+    + {static} SnapOffset(v:Vector3, offset:Vector3, gridSize:float) : Vector3
+    + {static} SnapOffset(v:Vector2, offset:Vector2, gridSize:float) : Vector2
+}
+@enduml

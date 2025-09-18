@@ -1,0 +1,8 @@
+@startuml
+abstract class EventChannel <<partial>> {
+    + Invoke(values:Variant[]) : void
+    + Register(observer:EventListener) : void
+    + Deregister(observer:EventListener) : void
+}
+Resource <|-- EventChannel
+@enduml

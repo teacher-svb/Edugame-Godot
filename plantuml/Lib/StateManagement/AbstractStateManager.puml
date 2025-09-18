@@ -1,0 +1,6 @@
+@startuml
+abstract class AbstractStateManager <<partial>> {
+    + <<async>> <<override>> _Process(delta:double) : void
+}
+Node <|-- AbstractStateManager
+@enduml

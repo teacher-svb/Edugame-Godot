@@ -1,0 +1,9 @@
+@startuml
+class NodeSearchExtensions <<static>> {
+    + {static} FindObjectsByType(tree:SceneTree, recursive:bool) : List<T>
+    + {static} FindObjectsByType(node:Node, recursive:bool) : List<T>
+    + {static} FindAncestorOfType(node:Node, includeSelf:bool) : T
+    + {static} FindAnyObjectByType(tree:SceneTree, recursive:bool) : T
+    + {static} FindAnyObjectByType(node:Node, recursive:bool) : T
+}
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class CarrouselValue <<partial>> {
+    + Value : string
+    + <<override>> _Ready() : void
+}
+PanelContainer <|-- CarrouselValue
+@enduml

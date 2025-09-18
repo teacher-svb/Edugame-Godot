@@ -1,0 +1,5 @@
+@startuml
+class AttributeModifierEffect <<partial>> {
+}
+ModifierEffect <|-- AttributeModifierEffect
+@enduml

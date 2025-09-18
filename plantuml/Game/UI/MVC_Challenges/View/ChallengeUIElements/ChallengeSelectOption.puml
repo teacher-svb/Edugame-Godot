@@ -1,0 +1,10 @@
+@startuml
+class ChallengeSelectOption <<partial>> {
+    + Index : int <<get>> <<set>>
+    + ParamName : string <<get>> <<set>>
+    + Value : int <<get>> <<set>>
+    + IsSelected : bool <<get>> <<set>>
+    + ChallengeSelectOption(index:int, paramName:string, value:int)
+}
+Button <|-- ChallengeSelectOption
+@enduml

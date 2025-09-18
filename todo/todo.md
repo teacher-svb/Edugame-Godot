@@ -7,7 +7,7 @@
     - [1] GODOT_REFACTOR challenges
     - [x] GODOT_REFACTOR quests
     - [1] GODOT_REFACTOR inventory
-    - [1] GODOT_REFACTOR UI systems
+    - [x] GODOT_REFACTOR UI systems
     - [x] GODOT_REFACTOR EventSystem
 - GAME
     - [ ] GAME Add animations to loading screen

@@ -1,0 +1,10 @@
+@startuml
+class ActionsMenuView <<partial>> {
+    + <<async>> InitializeView(root:Control) : Task
+    + AddButton(label:string, btnClick:Action) : void
+    + Clear() : void
+    + Show() : void
+    + Hide() : void
+}
+Resource <|-- ActionsMenuView
+@enduml

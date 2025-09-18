@@ -1,0 +1,29 @@
+@startuml
+class GameStateLoadingScreen <<partial>> {
+    + GetState(options:LoaderOptions) : BaseState
+    + GetState(options:T) : BaseState
+}
+class "IStateObject`1"<T> {
+}
+interface ISceneLoaderOptions {
+}
+class LoaderOptions {
+    + forceLoad : bool
+}
+class LocationLoaderOptions {
+}
+class SceneLoaderOptions {
+}
+BaseGameState <|-- GameStateLoadingScreen
+"IStateObject`1" "<GameStateLoadingScreen.LoaderOptions>" <|-- GameStateLoadingScreen
+GameStateLoadingScreen +-- ISceneLoaderOptions
+GameStateLoadingScreen +-- LoaderOptions
+ISceneLoaderOptions <|-- LoaderOptions
+GameStateLoadingScreen +-- LocationLoaderOptions
+LoaderOptions <|-- LocationLoaderOptions
+LocationLoaderOptions --> "player" Player
+LocationLoaderOptions --> "targetLocation" Vector2
+GameStateLoadingScreen +-- SceneLoaderOptions
+LocationLoaderOptions <|-- SceneLoaderOptions
+SceneLoaderOptions --> "sceneName" Resource
+@enduml

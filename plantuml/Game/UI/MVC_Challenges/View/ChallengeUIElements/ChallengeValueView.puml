@@ -1,0 +1,5 @@
+@startuml
+class ChallengeValueView <<partial>> {
+}
+Control <|-- ChallengeValueView
+@enduml

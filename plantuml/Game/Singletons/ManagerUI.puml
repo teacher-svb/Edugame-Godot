@@ -1,0 +1,7 @@
+@startuml
+class ManagerUI <<partial>> {
+    + <<override>> _Ready() : void
+}
+Node <|-- ManagerUI
+ManagerUI --> "Instance" ManagerUI
+@enduml

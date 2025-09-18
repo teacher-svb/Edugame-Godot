@@ -1,0 +1,38 @@
+@startuml
+enum ChallengeUIType {
+    CogwheelUIStrategy,
+    RadarUIStrategy,
+    SearchGridUIStrategy,
+    DropdownUIStrategy,
+    TextInputUIStrategy,
+    CombinationLockUIStrategy,
+}
+interface IChallengeUIStrategy {
+}
+interface IValueSelectProvider {
+}
+class RadarUIStrategy {
+    + Build(challenge:IMathChallenge) : ChallengeUI
+}
+class SearchGridUIStrategy {
+    + Build(challenge:IMathChallenge) : ChallengeUI
+}
+class CogwheelUIStrategy {
+    + Build(challenge:IMathChallenge) : ChallengeUI
+}
+class DropdownUIStrategy {
+    + Build(challenge:IMathChallenge) : ChallengeUI
+}
+class TextInputUIStrategy {
+    + Build(challenge:IMathChallenge) : ChallengeUI
+}
+class CombinationLockUIStrategy {
+    + Build(challenge:IMathChallenge) : ChallengeUI
+}
+IChallengeUIStrategy <|-- RadarUIStrategy
+IChallengeUIStrategy <|-- SearchGridUIStrategy
+IChallengeUIStrategy <|-- CogwheelUIStrategy
+IChallengeUIStrategy <|-- DropdownUIStrategy
+IChallengeUIStrategy <|-- TextInputUIStrategy
+IChallengeUIStrategy <|-- CombinationLockUIStrategy
+@enduml

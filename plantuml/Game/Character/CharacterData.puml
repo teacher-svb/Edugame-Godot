@@ -1,0 +1,11 @@
+@startuml
+class CharacterData <<partial>> {
+    + CharacterName : string <<get>>
+    + Id : string <<get>>
+}
+Resource <|-- CharacterData
+CharacterData --> "CharacterFace" Texture2D
+CharacterData --> "CharacterBody" Texture2D
+CharacterData --> "animatorController" SpriteFrames
+CharacterData --> "CharacterBaseStats" BaseStats
+@enduml

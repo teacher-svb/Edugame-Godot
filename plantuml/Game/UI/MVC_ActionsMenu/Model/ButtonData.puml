@@ -1,0 +1,6 @@
+@startuml
+class ButtonData <<partial>> {
+    + buttonLabel : string = ""
+}
+Resource <|-- ButtonData
+@enduml

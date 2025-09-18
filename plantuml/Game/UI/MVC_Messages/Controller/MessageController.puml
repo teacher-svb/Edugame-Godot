@@ -1,0 +1,16 @@
+@startuml
+class MessageController <<partial>> {
+    + Count : int <<get>>
+    + <<override>> _Ready() : void
+    + <<async>> Show(duration:float) : Task
+    + <<async>> Hide(duration:float) : Task
+    + AddMessage(text:string, sprite:Texture2D, name:string) : void
+    + AddMessage(text:string) : void
+}
+Node <|-- MessageController
+MessageController --> "Instance" MessageController
+MessageController o-> "view" MessageView
+MessageController o-> "model" MessageModel
+MessageController --> "NextBtnPushed" Action
+MessageController --> "CloseBtnPushed" Action
+@enduml

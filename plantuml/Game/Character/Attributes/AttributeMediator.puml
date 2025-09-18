@@ -1,0 +1,15 @@
+@startuml
+class AttributesMediator {
+    +  <<event>> OnAttributeModified : Action<AttributeType, int, AttributeContext> 
+    + AddModifier(mod:AttributeModifier) : void
+    + Update(deltaTime:double) : void
+}
+class AttributeContext {
+    + Sender : object <<get>>
+    + Target : object <<get>>
+    + Duration : float <<get>>
+    + Frequency : int <<get>>
+    + AttributeContext(sender:object, target:object, elementalType:ElementalType, duration:float, frequency:int)
+}
+AttributeContext --> "ElementalType" ElementalType
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class Player <<partial>> {
+    + {static} Create() : Player
+    + <<override>> _Ready() : void
+    + <<override>> _Process(delta:double) : void
+}
+CharacterController2D <|-- Player
+Player --> "Instance" Player
+@enduml

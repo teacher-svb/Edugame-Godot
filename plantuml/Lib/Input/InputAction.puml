@@ -1,0 +1,16 @@
+@startuml
+class InputAction <<partial>> {
+    + ActionName : string <<get>> <<set>>
+    + Enabled : bool <<get>> <<set>> = false
+    + Triggered : bool <<get>>
+    + WasReleasedThisFrame : bool <<get>>
+    + IsPressed : bool <<get>>
+    +  <<event>> OnPressed : Action 
+    +  <<event>> OnReleased : Action 
+    +  <<event>> OnHeld : Action 
+    + Enable() : void
+    + Disable() : void
+    + Poll() : void
+}
+Resource <|-- InputAction
+@enduml

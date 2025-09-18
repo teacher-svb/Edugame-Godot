@@ -1,0 +1,10 @@
+@startuml
+class FadeController <<partial>> {
+    + <<override>> _Ready() : void
+    + <<async>> ShowView() : Task
+    + <<async>> HideView() : Task
+}
+Control <|-- FadeController
+FadeController o-> "view" FadeView
+FadeController o-> "model" FadeModel
+@enduml

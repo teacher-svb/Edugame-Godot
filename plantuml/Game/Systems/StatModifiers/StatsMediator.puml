@@ -1,0 +1,19 @@
+@startuml
+class StatsMediator {
+    +  <<event>> Queries : Func<StatQuery, StatContext, int> 
+    + Query(query:StatQuery, context:StatContext) : int
+    + AddModifier(mod:StatModifier) : void
+    + Update(deltaTime:double) : void
+}
+class StatQuery {
+    + Result : int <<get>> <<set>>
+    + StatQuery(statType:StatType, value:int)
+}
+class StatContext {
+    + Sender : object <<get>>
+    + Target : object <<get>>
+    + StatContext(sender:object, target:object, elementalType:ElementalType)
+}
+StatQuery --> "statType" StatType
+StatContext --> "ElementalType" ElementalType
+@enduml

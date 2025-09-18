@@ -1,0 +1,6 @@
+@startuml
+class TestBtnLoad <<partial>> {
+    + <<override>> _Pressed() : void
+}
+Button <|-- TestBtnLoad
+@enduml

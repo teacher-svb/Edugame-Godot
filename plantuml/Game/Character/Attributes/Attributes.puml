@@ -1,0 +1,11 @@
+@startuml
+enum AttributeType {
+    Health,
+}
+class Attributes {
+    + Get(type:AttributeType) : int
+    + Attributes(stats:Stats)
+    + <<override>> ToString() : string
+}
+Attributes --> "Mediator" AttributesMediator
+@enduml

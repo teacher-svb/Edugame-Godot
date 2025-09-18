@@ -1,0 +1,14 @@
+@startuml
+class ChallengeModel <<partial>> {
+    + ChallengeName : string <<get>>
+    + Question : string <<get>>
+    + Hint : string <<get>>
+    + ParamCount : int <<get>>
+    + SetParameter(index:int, name:string) : void
+    + SetParameter(name:string, value:int) : void
+    + SetParameter(index:int) : void
+    + SetChallenge(challenge:MathChallenge) : void
+}
+Node <|-- ChallengeModel
+ChallengeModel --> "Challenge" MathChallenge
+@enduml

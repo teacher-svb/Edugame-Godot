@@ -1,0 +1,11 @@
+@startuml
+abstract class ModifierEffect <<partial>> {
+    + <<override>> value : float <<get>> <<protected set>> = 10
+    + <<override>> duration : int <<get>> <<protected set>>
+    + <<override>> frequency : int <<get>> <<protected set>> = 1
+    + <<override>> Apply(source:Character, target:Character) : void
+}
+BaseAbilityEffect <|-- ModifierEffect
+ModifierEffect o-> "elementalType" ElementalType
+ModifierEffect o-> "operatorType" AbilityOperatorType
+@enduml

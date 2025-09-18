@@ -1,0 +1,6 @@
+@startuml
+class Door <<partial>> {
+    + <<override>> _Ready() : void
+}
+StaticBody2D <|-- Door
+@enduml

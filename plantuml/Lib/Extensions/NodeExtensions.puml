@@ -1,0 +1,12 @@
+@startuml
+class NodeExtensions <<static>> {
+    + {static} CreateChild(parent:Node) : T
+    + {static} CreateChild(parent:Node, index:int) : T
+    + {static} CreateChild(parent:Node, name:string) : T
+    + {static} CreateChild(parent:Node, name:string, index:int) : T
+    + {static} AddTo(child:T, parent:Node) : T
+    + {static} AddTo(child:T, parent:Node, index:int) : T
+    + {static} Clear(parent:Node) : void
+    + {static} Clear(parent:Node) : void
+}
+@enduml

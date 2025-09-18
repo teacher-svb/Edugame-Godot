@@ -1,0 +1,9 @@
+@startuml
+class ChallengeParamInput <<partial>> {
+    + Clear() : void
+}
+class "Action`2"<T1,T2> {
+}
+Control <|-- ChallengeParamInput
+ChallengeParamInput --> "OnParamChanged<string,string>" "Action`2"
+@enduml

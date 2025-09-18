@@ -1,0 +1,8 @@
+@startuml
+class ChallengeValueSelect <<partial>> {
+}
+class "Action`1"<T> {
+}
+Control <|-- ChallengeValueSelect
+ChallengeValueSelect --> "OnValueSelected<int>" "Action`1"
+@enduml

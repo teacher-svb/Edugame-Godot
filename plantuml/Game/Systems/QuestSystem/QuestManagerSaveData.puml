@@ -1,0 +1,8 @@
+@startuml
+class QuestManagerSaveData <<partial>> {
+    + Id : string <<get>> <<set>>
+    + IsNew : bool <<get>> <<set>>
+}
+Resource <|-- QuestManagerSaveData
+ISaveable <|-- QuestManagerSaveData
+@enduml

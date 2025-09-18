@@ -1,0 +1,34 @@
+@startuml
+interface IMathChallenge {
+    + Name : string <<get>>
+    + Formula : string <<get>>
+    + Question : string <<get>>
+    + Hint : string <<get>>
+    + CheckAnswer() : bool
+    + SetFormulaParam(index:int, paramName:string) : void
+    + ChangeValue(paramName:string, value:int) : void
+}
+class MathChallenge <<partial>> {
+    + Name : string <<get>> <<set>> = ""
+    + Formula : string <<get>> <<set>> = ""
+    + Question : string <<get>>
+    + Hint : string <<get>>
+    + ParamCount : int <<get>>
+    + Answer : int <<get>>
+    + MathChallenge()
+    + ExtractParamsFromFormula() : void
+    + ComputeRandomAnswer() : void
+    + CheckAnswer() : bool
+    + SetFormulaParam(index:int, paramName:string) : void
+    + ChangeValue(paramName:string, value:int) : void
+}
+class ChallengeParametersMissingException {
+}
+Resource <|-- MathChallenge
+IMathChallenge <|-- MathChallenge
+MathChallenge o-> "ChallengeUIType" ChallengeUIType
+MathChallenge --> "ExtractParamsFromFormulaBtn" Callable
+MathChallenge --> "ComputeRandomAnswerBtn" Callable
+MathChallenge +-- ChallengeParametersMissingException
+Exception <|-- ChallengeParametersMissingException
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class CarrouselController <<partial>> {
+    + <<override>> _Ready() : void
+}
+Control <|-- CarrouselController
+CarrouselController --> "Carrousel" Carrousel
+CarrouselController --> "BtnPrevious" Button
+CarrouselController --> "BtnNext" Button
+@enduml

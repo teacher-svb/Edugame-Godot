@@ -1,0 +1,12 @@
+@startuml
+class GameStatePlay <<partial>> {
+    + GetState(options:PlayOptions) : BaseState
+}
+class "IStateObject`1"<T> {
+}
+struct PlayOptions {
+}
+BaseGameState <|-- GameStatePlay
+"IStateObject`1" "<GameStatePlay.PlayOptions>" <|-- GameStatePlay
+GameStatePlay +-- PlayOptions
+@enduml

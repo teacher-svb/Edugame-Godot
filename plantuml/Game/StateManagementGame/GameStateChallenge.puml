@@ -1,0 +1,13 @@
+@startuml
+class GameStateChallenge <<partial>> {
+    + GetState(options:ChallengeOptions) : BaseState
+}
+class "IStateObject`1"<T> {
+}
+struct ChallengeOptions {
+}
+BaseGameState <|-- GameStateChallenge
+"IStateObject`1" "<GameStateChallenge.ChallengeOptions>" <|-- GameStateChallenge
+GameStateChallenge +-- ChallengeOptions
+ChallengeOptions --> "challenge" IMathChallenge
+@enduml

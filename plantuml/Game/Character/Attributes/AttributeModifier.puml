@@ -1,0 +1,15 @@
+@startuml
+abstract class AttributeModifier {
+    + IsExpired : bool <<get>>
+    +  <<event>> OnDispose : Action<AttributeModifier> 
+    +  <<event>> OnApply : Action<AttributeType, int, AttributeContext> 
+    + Handle() : void
+    + Update(deltaTime:double) : void
+    + Dispose() : void
+}
+class BasicAttributeModifier {
+    + BasicAttributeModifier(attributeType:AttributeType, effect:Func<int, int>, context:AttributeContext, duration:int)
+}
+IDisposable <|-- AttributeModifier
+AttributeModifier <|-- BasicAttributeModifier
+@enduml

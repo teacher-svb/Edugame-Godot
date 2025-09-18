@@ -1,0 +1,11 @@
+@startuml
+class MessageView <<partial>> {
+    + <<async>> InitializeView() : Task
+    + <<async>> ShowView(duration:float) : Task
+    + <<async>> HideView(duration:float) : Task
+    + SetMessage(text:string, sprite:Texture2D, charName:string) : void
+}
+Control <|-- MessageView
+MessageView --> "NextBtnPushed" Action
+MessageView --> "CloseBtnPushed" Action
+@enduml

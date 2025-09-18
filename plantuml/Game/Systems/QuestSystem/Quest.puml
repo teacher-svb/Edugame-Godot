@@ -1,0 +1,32 @@
+@startuml
+enum QuestState {
+    NOTSTARTED,
+    INPROGRESS,
+    COMPLETED,
+    FAILED,
+}
+class Quest <<partial>> {
+    + _id : string <<get>>
+    + Id : string <<get>>
+    + Name : string <<get>>
+    + CurrentObjectiveId : string <<get>>
+    + Initialize() : void
+    + Reset() : void
+    + Bind(data:QuestSaveData) : void
+    + GetSaveData() : QuestSaveData
+}
+class QuestSaveData {
+    + Id : string
+}
+class QuestObjectiveSaveData {
+    + Id : string
+}
+class "List`1"<T> {
+}
+Resource <|-- Quest
+Quest --> "Objectives<QuestObjective>" "List`1"
+Quest --> "OnObjectiveStateChanged" OnQuestObjectiveStateChanged
+Quest --> "State" QuestState
+Quest --> "SaveData" QuestSaveData
+QuestObjectiveSaveData --> "State" QuestState
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+abstract class GameData <<partial>> {
+    + Name : string
+}
+Resource <|-- GameData
+@enduml

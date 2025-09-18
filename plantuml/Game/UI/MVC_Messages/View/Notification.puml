@@ -1,0 +1,11 @@
+@startuml
+class Notification <<partial>> {
+    + Text : string <<get>> <<set>>
+    + CharacterName : string <<get>> <<set>>
+    + <<override>> _Ready() : void
+}
+Control <|-- Notification
+Notification --> "NextBtnPushed" Action
+Notification --> "CloseBtnPushed" Action
+Notification --> "CharacterSprite" Texture2D
+@enduml

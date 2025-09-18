@@ -1,0 +1,7 @@
+@startuml
+class ActionsMenuController <<partial>> {
+}
+Control <|-- ActionsMenuController
+ActionsMenuController o-> "view" ActionsMenuView
+ActionsMenuController o-> "model" ActionsMenuModel
+@enduml

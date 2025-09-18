@@ -1,0 +1,8 @@
+@startuml
+class Ability <<partial>> {
+    + cooldown : int <<get>> = 1
+    + uses : int <<get>> = 1
+    + Activate(source:Character, target:Character) : void
+}
+Resource <|-- Ability
+@enduml

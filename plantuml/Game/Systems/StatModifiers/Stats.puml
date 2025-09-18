@@ -1,0 +1,17 @@
+@startuml
+enum StatType {
+    Attack,
+    Defense,
+    MaxHealth,
+    Resistance,
+}
+class Stats {
+    + Attack(c:StatContext) : int
+    + Defense(c:StatContext) : int
+    + MaxHealth(c:StatContext) : int
+    + Resistance(type:ElementalType, c:StatContext) : int
+    + Stats(baseStats:BaseStats)
+    + <<override>> ToString() : string
+}
+Stats --> "Mediator" StatsMediator
+@enduml

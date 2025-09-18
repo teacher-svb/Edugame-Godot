@@ -1,0 +1,11 @@
+@startuml
+class CharacterController2D <<partial>> {
+    + Speed : float = 8.0f
+    + <<override>> _Ready() : void
+    + <<override>> _Process(delta:double) : void
+    + <<override>> _PhysicsProcess(delta:double) : void
+    + Move(movement:Vector2) : void
+    + MoveTo(position:Vector2) : void
+}
+CharacterBody2D <|-- CharacterController2D
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class MyGameData <<partial>> {
+    + CurrentLevelName : string
+}
+class "List`1"<T> {
+}
+GameData <|-- MyGameData
+MyGameData o-> "playerData" CharacterSaveData
+MyGameData o-> "characterData<CharacterSaveData>" "List`1"
+@enduml

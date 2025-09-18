@@ -1,0 +1,8 @@
+@startuml
+class ChallengeValueInput <<partial>> {
+    + Index : int <<get>> <<set>> = 0
+    + ParamName : string <<get>> <<set>>
+    + Init(paramName:string) : void
+}
+SpinBox <|-- ChallengeValueInput
+@enduml

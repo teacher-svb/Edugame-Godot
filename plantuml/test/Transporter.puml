@@ -1,0 +1,7 @@
+@startuml
+class Transporter <<partial>> {
+    + _OnBodyEntered(other:Node2D) : void
+    + MoveHere() : void
+}
+Area2D <|-- Transporter
+@enduml

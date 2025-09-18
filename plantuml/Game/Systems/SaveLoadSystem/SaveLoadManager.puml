@@ -1,0 +1,12 @@
+@startuml
+class SaveLoadManager <<partial>> {
+    + <<override>> _Ready() : void
+    + <<override>> NewGame() : void
+    + <<override>> LoadGame(gameName:string) : void
+}
+class "SaveLoadSystem`1"<T> {
+}
+"SaveLoadSystem`1" "<MyGameData>" <|-- SaveLoadManager
+SaveLoadManager --> "Instance" SaveLoadManager
+SaveLoadManager --> "GameData" MyGameData
+@enduml

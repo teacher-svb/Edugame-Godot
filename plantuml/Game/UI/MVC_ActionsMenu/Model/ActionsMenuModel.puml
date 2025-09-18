@@ -1,0 +1,11 @@
+@startuml
+class ActionsMenuModel <<partial>> {
+    + Add(item:ButtonData) : void
+    + Get(index:int) : ButtonData
+    + Clear() : void
+}
+class "List`1"<T> {
+}
+Resource <|-- ActionsMenuModel
+ActionsMenuModel o-> "Buttons<ButtonData>" "List`1"
+@enduml

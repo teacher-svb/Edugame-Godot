@@ -1,0 +1,29 @@
+@startuml
+abstract class Timer {
+    + Time : double <<get>> <<set>>
+    + IsRunning : bool <<get>> <<protected set>>
+    + Progress : double <<get>>
+    + Start() : void
+    + Stop() : void
+    + Resume() : void
+    + Pause() : void
+    + {abstract} Tick(deltaTime:double) : void
+}
+class CountdownTimer {
+    + CountdownTimer(value:double)
+    + <<override>> Tick(deltaTime:double) : void
+    + IsFinished : bool <<get>>
+    + Reset() : void
+    + Reset(newTime:double) : void
+}
+class StopwatchTimer {
+    + StopwatchTimer()
+    + <<override>> Tick(deltaTime:double) : void
+    + Reset() : void
+    + GetTime() : double
+}
+Timer o-> "OnTimerStart" Action
+Timer o-> "OnTimerStop" Action
+Timer <|-- CountdownTimer
+Timer <|-- StopwatchTimer
+@enduml

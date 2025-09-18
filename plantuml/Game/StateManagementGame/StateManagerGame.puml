@@ -1,0 +1,16 @@
+@startuml
+class StateManagerGame <<partial>> {
+    + <<override>> _EnterTree() : void
+    + <<override>> _Ready() : void
+    + ShowQuestMessage(o:QuestObjective) : void
+    + ShowMessage(text:string, character:CharacterData) : void
+    + ShowChallenge(challenge:IMathChallenge) : void
+    + LoadScene(sceneName:Resource, targetLocation:Vector2, forceLoad:bool) : void
+    + LoadLocation(targetLocation:Vector2, forceLoad:bool) : void
+}
+class "Action`1"<T> {
+}
+AbstractStateStack <|-- StateManagerGame
+StateManagerGame --> "Instance" StateManagerGame
+StateManagerGame --> "OnSceneLoaded<NodePath>" "Action`1"
+@enduml

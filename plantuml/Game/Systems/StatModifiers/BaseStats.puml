@@ -1,0 +1,13 @@
+@startuml
+enum ElementalType {
+    None,
+    Physical,
+    Magical,
+}
+class BaseStats <<partial>> {
+    + attack : int = 10
+    + defense : int = 20
+    + maxHealth : int = 5
+}
+Resource <|-- BaseStats
+@enduml

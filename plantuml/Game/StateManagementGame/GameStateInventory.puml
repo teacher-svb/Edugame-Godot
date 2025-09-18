@@ -1,0 +1,12 @@
+@startuml
+class GameStateInventory <<partial>> {
+    + GetState(options:InventoryOptions) : BaseState
+}
+class "IStateObject`1"<T> {
+}
+struct InventoryOptions {
+}
+BaseGameState <|-- GameStateInventory
+"IStateObject`1" "<GameStateInventory.InventoryOptions>" <|-- GameStateInventory
+GameStateInventory +-- InventoryOptions
+@enduml

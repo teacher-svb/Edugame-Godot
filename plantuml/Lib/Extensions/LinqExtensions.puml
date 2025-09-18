@@ -1,0 +1,18 @@
+@startuml
+class LinqExtensions <<static>> {
+    + {static} ForEach(source:IEnumerable<T>, action:Action<T>) : IEnumerable<T>
+    + {static} GetPermutations(list:IEnumerable<T>, length:int) : IEnumerable<List<T>>
+    + {static} PickRandom(source:IEnumerable<T>) : T
+    + {static} PickRandom(source:IEnumerable<T>, count:int) : IEnumerable<T>
+    + {static} Shuffle(source:IEnumerable<T>) : IEnumerable<T>
+    + {static} Shuffle(source:IEnumerable<T>, seed:int) : IEnumerable<T>
+    + {static} Rotate(source:IEnumerable<T>, k:int) : IEnumerable<T>
+    + {static} Pad(source:IEnumerable<T>, newSize:int, alignment:PadAlignment, paddingValue:T) : IEnumerable<T>
+}
+enum PadAlignment {
+    Left,
+    Center,
+    Right,
+}
+LinqExtensions +-- PadAlignment
+@enduml

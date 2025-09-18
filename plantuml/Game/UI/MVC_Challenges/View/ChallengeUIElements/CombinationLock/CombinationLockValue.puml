@@ -1,0 +1,7 @@
+@startuml
+class CombinationLockValue <<partial>> {
+    + Value : int <<get>> <<set>>
+    + CombinationLockValue(value:ChallengeValue)
+}
+Label <|-- CombinationLockValue
+@enduml
