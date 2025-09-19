@@ -1,10 +1,10 @@
 - GODOT_REFACTOR
     - [x] GODOT_REFACTOR save/load system
     - [x] GODOT_REFACTOR statemachines
-    - [1] GODOT_REFACTOR flyweightsystem
+    - [ ] GODOT_REFACTOR flyweightsystem
     - [x] GODOT_REFACTOR stats & attributes
     - [x] GODOT_REFACTOR ability system
-    - [1] GODOT_REFACTOR challenges
+    - [x] GODOT_REFACTOR challenges
     - [x] GODOT_REFACTOR quests
     - [1] GODOT_REFACTOR inventory
     - [x] GODOT_REFACTOR UI systems

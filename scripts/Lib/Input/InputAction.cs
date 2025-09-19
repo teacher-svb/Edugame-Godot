@@ -49,14 +49,14 @@ namespace TnT.Input
             if (isPressed && !_wasPressed)
             {
                 Triggered = true;
-                EmitSignal(nameof(ActionPressedEventHandler));
+                EmitSignal(SignalName.ActionPressed);
                 OnPressed?.Invoke();
             }
 
             // Held
             if (isPressed)
             {
-                EmitSignal(nameof(ActionHeldEventHandler));
+                EmitSignal(SignalName.ActionHeld);
                 OnHeld?.Invoke();
             }
 
@@ -64,7 +64,7 @@ namespace TnT.Input
             if (!isPressed && _wasPressed)
             {
                 WasReleasedThisFrame = true;
-                EmitSignal(nameof(ActionReleasedEventHandler));
+                EmitSignal(SignalName.ActionReleased);
                 OnReleased?.Invoke();
             }
 

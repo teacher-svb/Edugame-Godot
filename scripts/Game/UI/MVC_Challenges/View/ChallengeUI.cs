@@ -135,25 +135,9 @@ namespace TnT.Systems.UI
 
                 return this;
             }
-            // public Builder WithAnswerInput()
-            // {
-            //     ChallengeParamInput input = new();
-
-            //     _challenge.FormulaParams
-            //         .ForEach(p =>
-            //         {
-            //             var valueInput = input.CreateChild<ChallengeValueInput>();
-            //             valueInput.ValueChanged += i => input.OnParamChanged?.Invoke(valueInput.ParamName, i.ToString());
-            //             input.AddChild(valueInput);
-            //             valueInput.AddTo(input);
-            //         });
-
-            //     _submitContainer.AddChild(input);
-
-            //     return this;
-            // }
             public Builder WithSubmitButton()
             {
+                _submitContainer.Clear();
                 var btn = _submitContainer.CreateChild<Button>();
                 btn.Text = "Klaar!";
                 btn.Disabled = _challenge.Values.Where(v => v.ParamName != "").Count() != _challenge.FormulaParams.Length;
