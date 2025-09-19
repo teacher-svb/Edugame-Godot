@@ -40,7 +40,7 @@ namespace TnT.EduGame.Question
         [Export]
         public string[] FormulaParams { get; set; } = [];
 
-        [Export]
+        [Export(PropertyHint.MultilineText)]
         protected string QuestionText { get; set; } = "";
         [Export]
         protected string HintText { get; set; } = "";
@@ -75,6 +75,8 @@ namespace TnT.EduGame.Question
             ExtractParamsFromFormula();
             ComputeRandomAnswer();
         }
+
+        Dictionary<string, int> _selectedValues = new();
 
         [ExportToolButton("Extract Params")]
         public Callable ExtractParamsFromFormulaBtn => Callable.From(ExtractParamsFromFormula);
@@ -126,18 +128,21 @@ namespace TnT.EduGame.Question
                 .Select(p => p.Cast<object>().ToArray())
                 .Select(p => (int)dt.Compute(string.Format(formattedFormula, p), null))
                 .Distinct()
-                .PickRandom();    
+                .PickRandom();
         }
 
         public bool CheckAnswer() => Evaluate(Formula, FormulaParams) == Answer;
         int Evaluate(string formula, string[] parameters)
         {
-            if (parameters.Length != Values.Where(v => v.ParamName != "").Count())
+            // if (parameters.Length != Values.Where(v => v.ParamName != "").Count())
+            //     throw new ChallengeParametersMissingException();
+
+            if (_selectedValues.Count < parameters.Count())
                 throw new ChallengeParametersMissingException();
 
             // 1. Replace each variable name with its numeric literal
-            foreach (var param in parameters)
-                formula = formula.Replace(param, Values.FirstOrDefault(v => v.ParamName == param).Value.ToString());
+            foreach (var param in _selectedValues)
+                formula = formula.Replace(param.Key, param.Value.ToString());
 
             // 2. Let DataTable do the math
             var dt = new DataTable();
@@ -146,15 +151,22 @@ namespace TnT.EduGame.Question
 
         public void SetFormulaParam(int index, string paramName)
         {
-            // reset any value that currently is mapped to the param name
-            this.Values.ToList().FindAll(v => v.ParamName == paramName).ForEach(v => v.ParamName = "");
-            // map the new parameter name to the index-th value in the list of values
-            Values.ElementAt(index).ParamName = paramName;
+            // // reset any value that currently is mapped to the param name
+            // this.Values.ToList().FindAll(v => v.ParamName == paramName).ForEach(v => v.ParamName = "");
+            // // map the new parameter name to the index-th value in the list of values
+            // Values.ElementAt(index).ParamName = paramName;
+
+            _selectedValues[paramName] = Values.ElementAt(index).Value;
         }
 
         public void ChangeValue(string paramName, int value)
         {
-            this.Values.ToList().FindAll(v => v.ParamName == paramName).ForEach(v => v.Value = value);
+            // this.Values
+            //     .ToList()
+            //     .FindAll(v => v.ParamName == paramName)
+            //     .ForEach(v => v.Value = value);
+
+            _selectedValues[paramName] = value;
         }
 
         public class ChallengeParametersMissingException : Exception { }

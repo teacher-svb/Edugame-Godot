@@ -177,11 +177,14 @@ namespace TnT.Systems.UI
             var input = new ChallengeParamInput();
 
             var container = input.CreateChild<HBoxContainer>();
+            container.SetAnchorsPreset(Control.LayoutPreset.FullRect);
             challenge.FormulaParams.ForEach(p =>
             {
                 var wheel = container.CreateChild<CombinationLockWheel>();
-                wheel.Init(p, challenge.Values);
+                wheel.ValueSelected += challenge.ChangeValue;
                 wheel.ValueSelected += (p, v) => input.OnParamChanged?.Invoke(p, v.ToString());
+                wheel.Init(p, challenge.Values);
+                wheel.ValueSelected -= challenge.ChangeValue;
             });
 
             return input;

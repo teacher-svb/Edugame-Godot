@@ -45,17 +45,5 @@ namespace TnT.EduGame.QuestSystem
                 case QuestObjectiveAction.COMPLETEOBJECTIVE: _questManager.UpdateQuest(new QuestMessageComplete { QuestId = _questId, ObjectiveId = _questObjectiveId }); break;
             }
         }
-
-        // void OnTriggerEnter2D(Collider2D collision)
-        // {
-        //     if (collision.GetComponent<Player>() == null)
-        //         return;
-
-        //     switch (_action)
-        //     {
-        //         case QuestObjectiveAction.INITOBJECTIVE: _questManager.UpdateQuest(new QuestMessageStart { QuestId = _questId, ObjectiveId = _questObjectiveId }); break;
-        //         case QuestObjectiveAction.COMPLETEOBJECTIVE: _questManager.UpdateQuest(new QuestMessageComplete { QuestId = _questId, ObjectiveId = _questObjectiveId }); break;
-        //     }
-        // }
     }
 }

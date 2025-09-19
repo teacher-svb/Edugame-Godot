@@ -15,7 +15,7 @@ script = ExtResource("2_ubp0e")
 _left = NodePath("Panel/MarginContainer/HBoxContainer/Left")
 _right = NodePath("Panel/MarginContainer/HBoxContainer/Right")
 _challengeContainer = NodePath("Panel/MarginContainer/HBoxContainer/Left/Content")
-_questionContainer = NodePath("Panel/MarginContainer/HBoxContainer/Right/QuestionContainer")
+_questionContainer = NodePath("Panel/MarginContainer/HBoxContainer/Right/QuestionContainer/PanelContainer")
 _answerContainer = NodePath("Panel/MarginContainer/HBoxContainer/Right/SubmitContainer/VBoxContainer/HBoxContainer")
 _submitContainer = NodePath("Panel/MarginContainer/HBoxContainer/Right/SubmitContainer/VBoxContainer")
 _challengeScenes = Dictionary[int, Resource]({})
@@ -63,13 +63,16 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"LightPanel"
 
-[node name="Question" type="RichTextLabel" parent="Panel/MarginContainer/HBoxContainer/Right/QuestionContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Panel/MarginContainer/HBoxContainer/Right/QuestionContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Question" type="RichTextLabel" parent="Panel/MarginContainer/HBoxContainer/Right/QuestionContainer/PanelContainer"]
+layout_mode = 2
 size_flags_vertical = 3
 text = "Lorem ipsum dolor sit amet, consectet adipiscing elit. 
 

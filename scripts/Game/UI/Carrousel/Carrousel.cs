@@ -21,7 +21,7 @@ public partial class Carrousel : BoxContainer
 
 	CarrouselValue SelectedValue => Children[Children.Length / 2];
 
-	public override void _Ready()
+	public void Init()
 	{
 		var numChildren = GetChildren().Count;
 		var centerIndex = numChildren / 2;

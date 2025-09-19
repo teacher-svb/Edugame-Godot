@@ -67,7 +67,7 @@ namespace TnT.Systems.UI
                 SceneTree tree = (SceneTree)Engine.GetMainLoop();
                 var ui = tree.FindAnyObjectByType<ChallengeUI>();
 
-                ui
+                _submitContainer
                     .FindObjectsByType<Button>()
                     .ToList()
                     .ForEach(button => button.Pressed += () => ui.EmitSignal(SignalName.OnSubmit));
@@ -128,6 +128,9 @@ namespace TnT.Systems.UI
                 _questionContainer.Clear();
 
                 var label = _questionContainer.CreateChild<RichTextLabel>();
+                label.SizeFlagsHorizontal = SizeFlags.ExpandFill;
+                label.SizeFlagsVertical = SizeFlags.ExpandFill;
+                label.SetAnchorsPreset(LayoutPreset.FullRect);
                 label.Text = _challenge.Question;
 
                 return this;
