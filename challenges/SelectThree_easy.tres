@@ -6,22 +6,18 @@
 [sub_resource type="Resource" id="Resource_8ldht"]
 script = ExtResource("1_8ldht")
 Value = 1
-ParamName = ""
 
 [sub_resource type="Resource" id="Resource_h8h2r"]
 script = ExtResource("1_8ldht")
 Value = 2
-ParamName = ""
 
 [sub_resource type="Resource" id="Resource_5ysw8"]
 script = ExtResource("1_8ldht")
 Value = 4
-ParamName = ""
 
 [sub_resource type="Resource" id="Resource_mejgv"]
 script = ExtResource("1_8ldht")
 Value = 8
-ParamName = ""
 metadata/_custom_type_script = "uid://7k86hidqf8h4"
 
 [resource]
@@ -31,7 +27,6 @@ ChallengeUIType = 5
 Formula = "x+y+z"
 FormulaParams = PackedStringArray("x", "y", "z")
 QuestionText = "Selecteer 3 getallen die samen {Answer} vormen"
-HintText = ""
 Answer = 13
 Values = Array[ExtResource("1_8ldht")]([SubResource("Resource_8ldht"), SubResource("Resource_h8h2r"), SubResource("Resource_5ysw8"), SubResource("Resource_mejgv")])
 metadata/_custom_type_script = "uid://sup7lp6karaf"
