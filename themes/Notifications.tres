@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=18 format=3 uid="uid://les3xc8lryk4"]
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://les3xc8lryk4"]
 
 [ext_resource type="Texture2D" uid="uid://nul7wtmt3kpc" path="res://assets/uipack_rpg_sheet.png" id="1_jafkh"]
 [ext_resource type="FontFile" uid="uid://cw1vj1tfcdwao" path="res://assets/Fonts/BigBlueTerminal/BigBlueTerm437NerdFontPropo-Regular.ttf" id="2_jafkh"]
@@ -68,6 +68,18 @@ texture_margin_top = 25.0
 texture_margin_right = 25.0
 texture_margin_bottom = 35.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jafkh"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7fkjd"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 expand_margin_left = 16.0
@@ -100,6 +112,7 @@ MarginContainer/constants/margin_bottom = 16
 MarginContainer/constants/margin_left = 16
 MarginContainer/constants/margin_right = 16
 MarginContainer/constants/margin_top = 16
+Panel/styles/panel = SubResource("StyleBoxFlat_jafkh")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_7fkjd")
 RichTextButton/base_type = &"RichTextLabel"
 RichTextButton/colors/default_color = Color(0, 0, 0, 1)

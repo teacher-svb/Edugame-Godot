@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dsdamnlwcc0j1"]
+[gd_scene load_steps=40 format=3 uid="uid://dsdamnlwcc0j1"]
 
 [ext_resource type="Script" uid="uid://b66cprwwqv431" path="res://scripts/Game/Systems/SaveLoadSystem/SaveLoadManager.cs" id="1_3yhdi"]
 [ext_resource type="Script" uid="uid://cerfog7uyabpn" path="res://scripts/Game/Systems/SaveLoadSystem/MyGameData.cs" id="2_4v8vv"]
@@ -28,29 +28,28 @@
 [ext_resource type="PackedScene" uid="uid://dx5c0meqksg8l" path="res://Scenes/UI/ChallengeUI.tscn" id="25_blwmm"]
 [ext_resource type="Script" uid="uid://bmfvn3p4u73k5" path="res://scripts/Game/UI/MVC_Challenges/Model/ChallengeModel.cs" id="26_2a8cd"]
 [ext_resource type="Resource" uid="uid://bvtaxgkyu400b" path="res://challenges/SelectThree_easy.tres" id="27_kpb3h"]
+[ext_resource type="Script" uid="uid://bfyn33tven763" path="res://scripts/Game/UI/MVC_Inventory/InventoryController.cs" id="29_yi7uc"]
+[ext_resource type="Script" uid="uid://bq8nb421y1t1p" path="res://scripts/Game/UI/MVC_Inventory/InventoryModel.cs" id="30_j8mgp"]
+[ext_resource type="Script" uid="uid://bwo0qc8hpbax0" path="res://scripts/Game/UI/MVC_Inventory/InventoryView.cs" id="31_5t4y7"]
+[ext_resource type="Script" uid="uid://dhlebvjmi145c" path="res://scripts/Game/Systems/InventorySystem/Inventory.cs" id="32_i1r4r"]
+[ext_resource type="PackedScene" uid="uid://csd5kk66e1bep" path="res://Scenes/UI/Inventory.tscn" id="32_j8mgp"]
 
 [sub_resource type="Resource" id="Resource_ut70p"]
 script = ExtResource("16_ut70p")
 ActionName = "next"
-Enabled = false
 metadata/_custom_type_script = "uid://ch4u84myc17c2"
 
 [sub_resource type="Resource" id="Resource_46vsp"]
 script = ExtResource("16_ut70p")
 ActionName = "close"
-Enabled = false
 metadata/_custom_type_script = "uid://ch4u84myc17c2"
 
 [sub_resource type="Resource" id="Resource_72h8h"]
 script = ExtResource("2_4v8vv")
-CurrentLevelName = ""
-Name = ""
 metadata/_custom_type_script = "uid://cerfog7uyabpn"
 
 [sub_resource type="Resource" id="Resource_pnf1h"]
 script = ExtResource("7_iqbe2")
-Id = ""
-IsNew = false
 metadata/_custom_type_script = "uid://bdql4ehll6w1t"
 
 [sub_resource type="Resource" id="Resource_n5sdn"]
@@ -168,5 +167,29 @@ layout_mode = 1
 script = ExtResource("26_2a8cd")
 _challenge = ExtResource("27_kpb3h")
 metadata/_custom_type_script = "uid://bmfvn3p4u73k5"
+
+[node name="InventoryController" type="Node" parent="UI" node_paths=PackedStringArray("view", "model")]
+script = ExtResource("29_yi7uc")
+view = NodePath("InventoryView")
+model = NodePath("InventoryModel")
+
+[node name="InventoryModel" type="Node" parent="UI/InventoryController"]
+script = ExtResource("30_j8mgp")
+
+[node name="InventoryView" type="Control" parent="UI/InventoryController"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("31_5t4y7")
+
+[node name="Inventory" parent="UI/InventoryController/InventoryView" instance=ExtResource("32_j8mgp")]
+layout_mode = 0
+anchors_preset = 0
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("32_i1r4r")
 
 [connection signal="OnQuestUpdated" from="QuestManager" to="StateManagerGame" method="ShowQuestMessage"]

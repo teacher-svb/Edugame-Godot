@@ -1,0 +1,73 @@
+[gd_scene load_steps=3 format=3 uid="uid://csd5kk66e1bep"]
+
+[ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://themes/Notifications.tres" id="1_8q74i"]
+[ext_resource type="Script" uid="uid://dawvxm20ec6r5" path="res://scripts/Game/UI/MVC_Inventory/InventoryUI.cs" id="2_oc7th"]
+
+[node name="Inventory" type="PanelContainer" node_paths=PackedStringArray("_itemContainers")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8q74i")
+script = ExtResource("2_oc7th")
+_itemContainers = [NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer2"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer3"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer4"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer5"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer6"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer7"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer8"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer9"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer10")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="PanelContainer4" type="PanelContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="PanelContainer5" type="PanelContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="PanelContainer6" type="PanelContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="PanelContainer7" type="PanelContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="PanelContainer8" type="PanelContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="PanelContainer9" type="PanelContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="PanelContainer10" type="PanelContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
