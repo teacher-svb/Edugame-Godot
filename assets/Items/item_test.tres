@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://dsctdv3pdwt0h"]
+
+[ext_resource type="Script" uid="uid://chksvvfbkadbt" path="res://scripts/Game/Systems/InventorySystem/ItemData.cs" id="1_tykq5"]
+
+[resource]
+script = ExtResource("1_tykq5")
+metadata/_custom_type_script = "uid://chksvvfbkadbt"
