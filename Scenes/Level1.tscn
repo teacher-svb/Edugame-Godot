@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://3hfdhy3acdbi"]
+[gd_scene load_steps=21 format=4 uid="uid://3hfdhy3acdbi"]
 
 [ext_resource type="TileSet" uid="uid://cfonf0rkxvtn" path="res://assets/Tilesets/tilesets.tres" id="1_2llne"]
 [ext_resource type="PackedScene" uid="uid://b18es3ooe0dvt" path="res://Scenes/Player.tscn" id="2_q12u6"]
@@ -8,14 +8,15 @@
 [ext_resource type="Script" uid="uid://r0pfr1dce2fx" path="res://scripts/Game/Door.cs" id="6_6ll4n"]
 [ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="7_kylad"]
 [ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://quests/QuestEventChannel.tres" id="8_bdlbp"]
-[ext_resource type="Script" uid="uid://befhk43htfgw3" path="res://scripts/NpcTest.cs" id="9_bdlbp"]
+[ext_resource type="Script" uid="uid://bxls002a1ygp1" path="res://scripts/Game/CharacterController2D.cs" id="9_2h8qs"]
 [ext_resource type="Texture2D" uid="uid://bfuy78gt6dyyt" path="res://icon.svg" id="10_2h8qs"]
+[ext_resource type="Script" uid="uid://bobbvwscu5csp" path="res://scripts/Game/CharacterAgent2D.cs" id="11_rpty4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_rpty4"]
-vertices = PackedVector2Array(12, -4, 12, -20, 52, -20, 52, 4, 20, 4, 20, 20, -52, 20, -36, 12, -52, 12, -28, -4, -36, -20, -28, -20, 52, 292, -196, 292, -132, 252, -44, 252, -172, 252, 52, 188, -4, 252, -4, 212, -116, 188, -44, 212, -116, 204, -196, 252, -180, 252, -172, 212, -180, 204, -132, 212)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(0, 4, 5, 6, 7), PackedInt32Array(6, 8, 7), PackedInt32Array(9, 0, 7), PackedInt32Array(9, 7, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(16, 14, 13), PackedInt32Array(17, 12, 18, 19), PackedInt32Array(20, 17, 19, 21, 22), PackedInt32Array(13, 23, 24), PackedInt32Array(16, 13, 24), PackedInt32Array(25, 16, 24, 26), PackedInt32Array(25, 26, 22, 27), PackedInt32Array(22, 21, 15, 14, 27), PackedInt32Array(12, 15, 18)])
+vertices = PackedVector2Array(15, -1, 15, -17, 49, -17, 49, 1, 17, 1, 17, 17, -49, 17, -49, 15, -33, 15, -31, -1, -33, -17, -31, -17, 49, 289, -193, 289, -129, 255, -47, 255, -175, 255, 49, 191, -1, 255, -1, 209, -113, 191, -47, 209, -113, 207, -193, 255, -177, 255, -175, 209, -177, 207, -129, 209)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(0, 4, 5, 8, 9), PackedInt32Array(9, 8, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(16, 14, 13), PackedInt32Array(17, 12, 18, 19), PackedInt32Array(20, 17, 19, 21, 22), PackedInt32Array(13, 23, 24), PackedInt32Array(16, 13, 24), PackedInt32Array(25, 16, 24, 26), PackedInt32Array(25, 26, 22, 27), PackedInt32Array(22, 21, 15, 14, 27), PackedInt32Array(12, 15, 18)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-225, 124, -264, 342, 85, 330, 96, 137), PackedVector2Array(-304, -108, 197, -105, 197, 101, -280, 110)])
-agent_radius = 4.0
+agent_radius = 7.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jghel"]
 
@@ -41,6 +42,7 @@ size = Vector2(16, 14)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_rpty4")
+use_edge_connections = false
 
 [node name="Node2D" type="Node2D" parent="NavigationRegion2D"]
 position = Vector2(0, -32)
@@ -101,8 +103,10 @@ tile_set = ExtResource("1_2llne")
 collision_enabled = false
 
 [node name="Player" parent="." instance=ExtResource("2_q12u6")]
+position = Vector2(-70, 233)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(4, 4)
 
 [node name="Transporters" type="Node" parent="."]
 
@@ -197,29 +201,41 @@ _state = 2
 eventChannel = ExtResource("8_bdlbp")
 metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 
-[node name="NPC-test" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_target")]
-position = Vector2(0, 198)
-script = ExtResource("9_bdlbp")
-_target = NodePath("../nav-test-target")
-_speed = 50.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC-test"]
-scale = Vector2(0.37, 0.37)
-shape = SubResource("CircleShape2D_6jj8j")
-disabled = true
+[node name="NPC-test" type="CharacterBody2D" parent="." node_paths=PackedStringArray("rayCast")]
+position = Vector2(25, 192)
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("9_2h8qs")
+Speed = 100.0
+rayCast = NodePath("RayCast2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="NPC-test"]
 scale = Vector2(0.135, 0.135)
 texture = ExtResource("10_2h8qs")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="NPC-test"]
-path_postprocessing = 1
-simplify_path = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC-test"]
+scale = Vector2(0.785, 0.785)
+shape = SubResource("CircleShape2D_6jj8j")
+disabled = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="NPC-test" node_paths=PackedStringArray("_target")]
+path_desired_distance = 4.0
+target_desired_distance = 4.0
+path_max_distance = 16.0
 debug_enabled = true
+script = ExtResource("11_rpty4")
+_target = NodePath("../../nav-test-target")
+
+[node name="Timer" type="Timer" parent="NPC-test"]
+wait_time = 0.2
+autostart = true
+
+[node name="RayCast2D" type="RayCast2D" parent="NPC-test"]
 
 [node name="nav-test-target" type="Node2D" parent="."]
-position = Vector2(-57, 269)
+position = Vector2(-177, 236)
 
 [connection signal="body_entered" from="Transporters/Transporter" to="Transporters/Transporter" method="_OnBodyEntered"]
 [connection signal="body_entered" from="Transporters/Transporter2" to="Transporters/Transporter2" method="_OnBodyEntered"]
 [connection signal="body_entered" from="Transporters/Transporter3" to="Transporters/Transporter3" method="_OnBodyEntered"]
+[connection signal="timeout" from="NPC-test/Timer" to="NPC-test/NavigationAgent2D" method="FindPath"]

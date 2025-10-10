@@ -3,6 +3,8 @@ using System;
 using TnT.Systems;
 using TnT.Systems.Persistence;
 
+
+// TODO: don't make this a CharacterController2D child, but move to separate component (similar to NPC using a NavAgent2D)
 public partial class Player : CharacterController2D//, IBind<Player.PlayerSaveData>
 {
 	public static Player Instance { get; private set; }
