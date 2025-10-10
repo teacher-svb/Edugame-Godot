@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b18es3ooe0dvt"]
+[gd_scene load_steps=9 format=3 uid="uid://b18es3ooe0dvt"]
 
 [ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="1_brc5f"]
+[ext_resource type="Script" uid="uid://bxls002a1ygp1" path="res://scripts/Game/CharacterController2D.cs" id="1_nn08x"]
 [ext_resource type="SpriteFrames" uid="uid://srit1vjsk2no" path="res://assets/Spritesheets/Characters/Character_022/Character_022_SpriteFrames.tres" id="2_brc5f"]
 [ext_resource type="Script" uid="uid://c861mplcf03p7" path="res://scripts/Game/Character/Character.cs" id="3_5ixxa"]
 [ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://assets/Spritesheets/Characters/Character_022/Character_022_CharacterData.tres" id="5_52ee3"]
@@ -12,15 +13,12 @@ radius = 7.0
 [sub_resource type="Resource" id="Resource_52ee3"]
 script = ExtResource("6_nn08x")
 Id = "ba33071a-17fa-41d9-a1c7-293cecf358aa"
-IsNew = false
-position = Vector2(0, 0)
-characterId = ""
 metadata/_custom_type_script = "uid://cqfwdw7wlks67"
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("rayCast", "_character")]
 z_index = 5
 y_sort_enabled = true
-script = ExtResource("1_brc5f")
+script = ExtResource("1_nn08x")
 Speed = 400.0
 rayCast = NodePath("RayCast2D")
 _character = NodePath("Character")
@@ -39,3 +37,6 @@ shape = SubResource("CircleShape2D_15ib8")
 script = ExtResource("3_5ixxa")
 _characterData = ExtResource("5_52ee3")
 _saveData = SubResource("Resource_52ee3")
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("1_brc5f")

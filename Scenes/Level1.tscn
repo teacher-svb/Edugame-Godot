@@ -104,6 +104,8 @@ collision_enabled = false
 
 [node name="Player" parent="." instance=ExtResource("2_q12u6")]
 position = Vector2(-70, 233)
+script = ExtResource("9_2h8qs")
+tileSize = 16
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(4, 4)

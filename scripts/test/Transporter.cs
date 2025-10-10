@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using TnT.EduGame.GameState;
 using TnT.Extensions;
+using TnT.Systems;
 
 // [Tool]
 [GlobalClass]
@@ -12,7 +13,7 @@ public partial class Transporter : Area2D
     [Export] Resource _sceneToLoad;
     public void _OnBodyEntered(Node2D other)
     {
-        if (other is Player)
+        if (other is CharacterController2D && other.FindAnyObjectByType<Player>() != null)
             _destination?.MoveHere();
     }
 

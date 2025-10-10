@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TnT.EduGame.GameState;
 using TnT.EduGame.Question;
 using TnT.Extensions;
+using TnT.Systems;
 
 // [Tool]
 [GlobalClass]
@@ -13,7 +14,7 @@ public partial class ChallengeActivator : Area2D
     MathChallenge _challenge;
     public void _OnBodyEntered(Node2D other)
     {
-        if (other is Player)
+        if (other is CharacterController2D && other.FindAnyObjectByType<Player>() != null)
             StateManagerGame.Instance.ShowChallenge(_challenge);
     }
 }

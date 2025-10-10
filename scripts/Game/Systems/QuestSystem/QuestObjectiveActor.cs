@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using TnT.Extensions;
+using TnT.Systems;
 
 namespace TnT.EduGame.QuestSystem
 {
@@ -34,8 +35,8 @@ namespace TnT.EduGame.QuestSystem
 
         void OnTriggerEnter2D(Node2D other)
         {
-            if (other is Player == false)
-                return;
+            if (other is CharacterController2D && other.FindAnyObjectByType<Player>() != null)
+                    return;
 
             GD.Print("entered quest starter");
 

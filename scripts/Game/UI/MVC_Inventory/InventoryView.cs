@@ -14,6 +14,7 @@ namespace TnT.Systems.UI
     {
         public async Task InitializeView(IEnumerable<Item> inventoryItems, IEnumerable<Item> gearItems)
         {
+            await Task.Yield();
         }
     }
 }

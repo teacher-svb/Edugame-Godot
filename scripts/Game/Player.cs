@@ -1,13 +1,12 @@
 using Godot;
-using System;
+using TnT.Extensions;
 using TnT.Systems;
-using TnT.Systems.Persistence;
 
-
-// TODO: don't make this a CharacterController2D child, but move to separate component (similar to NPC using a NavAgent2D)
-public partial class Player : CharacterController2D//, IBind<Player.PlayerSaveData>
+public partial class Player : Node//, IBind<Player.PlayerSaveData>
 {
 	public static Player Instance { get; private set; }
+
+	CharacterController2D _cc;
 
 	public static Player Create()
 	{
@@ -19,6 +18,7 @@ public partial class Player : CharacterController2D//, IBind<Player.PlayerSaveDa
 	public override void _Ready()
 	{
 		Instance = this;
+		_cc = this.FindAncestorOfType<CharacterController2D>();
 		base._Ready();
 	}
 
@@ -27,8 +27,12 @@ public partial class Player : CharacterController2D//, IBind<Player.PlayerSaveDa
 		base._Process(delta);
 
 		Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-
 		if (direction.Length() > 0)
-			this.Move(direction);
+			_cc.Move(direction);
 	}
+
+	public void MoveTo(Vector2 target)
+    {
+		_cc.MoveTo(target);
+    }
 }
