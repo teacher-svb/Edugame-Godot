@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b18es3ooe0dvt"]
+[gd_scene load_steps=10 format=3 uid="uid://b18es3ooe0dvt"]
 
 [ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="1_brc5f"]
 [ext_resource type="Script" uid="uid://bxls002a1ygp1" path="res://scripts/Game/CharacterController2D.cs" id="1_nn08x"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c861mplcf03p7" path="res://scripts/Game/Character/Character.cs" id="3_5ixxa"]
 [ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://assets/Spritesheets/Characters/Character_022/Character_022_CharacterData.tres" id="5_52ee3"]
 [ext_resource type="Script" uid="uid://cqfwdw7wlks67" path="res://scripts/Game/Character/CharacterSaveData.cs" id="6_nn08x"]
+[ext_resource type="Script" uid="uid://bobbvwscu5csp" path="res://scripts/Game/CharacterAgent2D.cs" id="7_52ee3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_15ib8"]
 radius = 7.0
@@ -40,3 +41,7 @@ _saveData = SubResource("Resource_52ee3")
 
 [node name="Player" type="Node" parent="."]
 script = ExtResource("1_brc5f")
+
+[node name="CharacterAgent2D" type="NavigationAgent2D" parent="."]
+script = ExtResource("7_52ee3")
+metadata/_custom_type_script = "uid://bobbvwscu5csp"

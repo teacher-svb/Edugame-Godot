@@ -104,8 +104,6 @@ collision_enabled = false
 
 [node name="Player" parent="." instance=ExtResource("2_q12u6")]
 position = Vector2(-70, 233)
-script = ExtResource("9_2h8qs")
-tileSize = 16
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(4, 4)
@@ -143,7 +141,7 @@ position = Vector2(-10.5, 26)
 shape = SubResource("RectangleShape2D_slnnj")
 
 [node name="Transporter4" type="Area2D" parent="Transporters"]
-position = Vector2(48, -433)
+position = Vector2(-23, 350)
 script = ExtResource("3_joc8x")
 _sceneToLoad = ExtResource("4_jghel")
 
