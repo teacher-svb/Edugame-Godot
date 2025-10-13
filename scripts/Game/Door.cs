@@ -8,8 +8,8 @@ public partial class Door : StaticBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		var listener = this.FindAnyObjectByType<QuestEventListener>();
-		listener.OnListen += ToggleDoor;
+		// var listener = this.FindAnyObjectByType<QuestEventListener>();
+		// listener.OnListen += ToggleDoor;
 	}
 
 	private void ToggleDoor(Variant value)

@@ -16,18 +16,12 @@ namespace TnT.Systems
 		protected Vector2 _nextGoal;
 		[Export]
 		RayCast2D rayCast;
-		[Export]
-		Character _character;
 
 		public override void _Ready()
 		{
 			_currentGoal = Position.Snap();
 			_nextGoal = _currentGoal;
 			rayCast.TargetPosition = new Vector2(tileSize, 0);
-		}
-
-		public override void _Process(double delta)
-		{
 		}
 
 		public override void _PhysicsProcess(double delta)

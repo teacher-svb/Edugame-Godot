@@ -7,7 +7,10 @@ using TnT.Systems;
 public partial class CharacterAgent2D : NavigationAgent2D
 {
 	[Export]
-	Node2D _target;
+	Node2D[] _targets = Array.Empty<Node2D>();
+	int _currentIndex = 0;
+	[Export]
+	bool _loop = false;
 
 	CharacterController2D _cc;
 
@@ -15,26 +18,33 @@ public partial class CharacterAgent2D : NavigationAgent2D
 	public override void _Ready()
 	{
 		_cc = this.FindAncestorOfType<CharacterController2D>();
-		TargetPosition = _target.GlobalPosition;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (_target == null)
-			return;
-		
-		if (DistanceToTarget() < 8)
+
+		if (_currentIndex >= _targets.Length)
 			return;
 
 		var direction = GetNextPathPosition() - _cc.GlobalPosition;
+		// direction = direction.Snapped(1);
+		// direction = new Vector2(Mathf.Sign(direction.X), Mathf.Sign(direction.Y));
+
 		_cc.Move(direction.Normalized());
 	}
 
 	public void FindPath()
 	{
-		if (_target == null)
+		if (DistanceToTarget() < 8)
+			_currentIndex++;
+
+		if (_currentIndex >= _targets.Length && _loop == true)
+			_currentIndex = 0;
+		
+		if (_currentIndex >= _targets.Length)
 			return;
-		TargetPosition = _target.GlobalPosition.Snap();
+
+		TargetPosition = _targets[_currentIndex].GlobalPosition.Snap();
 	}
 }

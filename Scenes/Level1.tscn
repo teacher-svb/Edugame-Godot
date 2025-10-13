@@ -103,7 +103,7 @@ tile_set = ExtResource("1_2llne")
 collision_enabled = false
 
 [node name="Player" parent="." instance=ExtResource("2_q12u6")]
-position = Vector2(-70, 233)
+position = Vector2(-63, 234)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(4, 4)
@@ -184,15 +184,27 @@ _questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
 _questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
 metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Area2D4" type="Area2D" parent="QuestActors"]
+position = Vector2(32, 193)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestActors/Area2D4"]
+shape = SubResource("RectangleShape2D_6ll4n")
+
+[node name="QuestObjectiveActor" type="Node" parent="QuestActors/Area2D4"]
+script = ExtResource("5_slnnj")
+_questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
+_questObjectiveId = "3fa2357c-d52d-4e0c-9c60-e122a4d8d261"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="BedroomDoor" type="StaticBody2D" parent="."]
 z_index = 10
 position = Vector2(32, -35)
 script = ExtResource("6_6ll4n")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BedroomDoor"]
 shape = SubResource("RectangleShape2D_2h8qs")
 
-[node name="QuestEventListener" type="Node" parent="StaticBody2D"]
+[node name="QuestEventListener" type="Node" parent="BedroomDoor"]
 script = ExtResource("7_kylad")
 _checkObjectiveId = true
 _objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
@@ -202,7 +214,7 @@ eventChannel = ExtResource("8_bdlbp")
 metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 
 [node name="NPC-test" type="CharacterBody2D" parent="." node_paths=PackedStringArray("rayCast")]
-position = Vector2(25, 192)
+position = Vector2(14, 192)
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("9_2h8qs")
@@ -218,13 +230,14 @@ scale = Vector2(0.785, 0.785)
 shape = SubResource("CircleShape2D_6jj8j")
 disabled = true
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="NPC-test" node_paths=PackedStringArray("_target")]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="NPC-test" node_paths=PackedStringArray("_targets")]
 path_desired_distance = 4.0
 target_desired_distance = 4.0
 path_max_distance = 16.0
 debug_enabled = true
 script = ExtResource("11_rpty4")
-_target = NodePath("../../nav-test-target")
+_targets = [NodePath("../../nav-test-target3"), NodePath("../../nav-test-target"), NodePath("../../nav-test-target2")]
+_loop = true
 
 [node name="Timer" type="Timer" parent="NPC-test"]
 wait_time = 0.2
@@ -232,10 +245,26 @@ autostart = true
 
 [node name="RayCast2D" type="RayCast2D" parent="NPC-test"]
 
+[node name="QuestEventListener" type="Node" parent="NPC-test"]
+script = ExtResource("7_kylad")
+_checkObjectiveId = true
+_objectiveId = "3fa2357c-d52d-4e0c-9c60-e122a4d8d261"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("8_bdlbp")
+metadata/_custom_type_script = "uid://dd1g4qvshevqa"
+
 [node name="nav-test-target" type="Node2D" parent="."]
+position = Vector2(-24, 283)
+
+[node name="nav-test-target2" type="Node2D" parent="."]
 position = Vector2(-177, 236)
+
+[node name="nav-test-target3" type="Node2D" parent="."]
+position = Vector2(14, 194)
 
 [connection signal="body_entered" from="Transporters/Transporter" to="Transporters/Transporter" method="_OnBodyEntered"]
 [connection signal="body_entered" from="Transporters/Transporter2" to="Transporters/Transporter2" method="_OnBodyEntered"]
 [connection signal="body_entered" from="Transporters/Transporter3" to="Transporters/Transporter3" method="_OnBodyEntered"]
+[connection signal="OnListen" from="BedroomDoor/QuestEventListener" to="BedroomDoor" method="ToggleDoor"]
 [connection signal="timeout" from="NPC-test/Timer" to="NPC-test/NavigationAgent2D" method="FindPath"]

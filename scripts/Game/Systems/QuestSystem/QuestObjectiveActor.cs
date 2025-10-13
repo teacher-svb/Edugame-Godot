@@ -35,7 +35,7 @@ namespace TnT.EduGame.QuestSystem
 
         void OnTriggerEnter2D(Node2D other)
         {
-            if (other is CharacterController2D && other.FindAnyObjectByType<Player>() != null)
+            if (other is CharacterController2D && other.FindAnyObjectByType<Player>() == null)
                     return;
 
             GD.Print("entered quest starter");
