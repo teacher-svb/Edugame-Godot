@@ -28,6 +28,10 @@ public partial class CharacterAgent2D : NavigationAgent2D
 			return;
 
 		var direction = GetNextPathPosition() - _cc.GlobalPosition;
+		var angle = direction.Angle();
+		angle = Mathf.Snapped(angle, Mathf.Pi / 4);
+
+		direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 		// direction = direction.Snapped(1);
 		// direction = new Vector2(Mathf.Sign(direction.X), Mathf.Sign(direction.Y));
 
