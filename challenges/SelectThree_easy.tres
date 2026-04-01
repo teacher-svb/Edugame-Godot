@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MathChallenge" load_steps=7 format=3 uid="uid://bvtaxgkyu400b"]
+[gd_resource type="Resource" script_class="MathChallenge" format=3 uid="uid://bvtaxgkyu400b"]
 
 [ext_resource type="Script" uid="uid://7k86hidqf8h4" path="res://scripts/Game/Systems/Challenges/ChallengeValue.cs" id="1_8ldht"]
 [ext_resource type="Script" uid="uid://sup7lp6karaf" path="res://scripts/Game/Systems/Challenges/MathChallenge.cs" id="2_h8h2r"]

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=19 format=3 uid="uid://les3xc8lryk4"]
+[gd_resource type="Theme" format=3 uid="uid://les3xc8lryk4"]
 
 [ext_resource type="Texture2D" uid="uid://nul7wtmt3kpc" path="res://assets/uipack_rpg_sheet.png" id="1_jafkh"]
 [ext_resource type="FontFile" uid="uid://cw1vj1tfcdwao" path="res://assets/Fonts/BigBlueTerminal/BigBlueTerm437NerdFontPropo-Regular.ttf" id="2_jafkh"]
