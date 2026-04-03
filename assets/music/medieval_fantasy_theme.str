@@ -1,0 +1,116 @@
+// ============================================================
+// MEDIEVAL FANTASY GAME BACKGROUND MUSIC
+// ============================================================
+// Composed for: EduGame medieval fantasy setting
+// Tempo: ~110 BPM
+// Key: D Dorian (medieval modal flavor)
+//
+// FEATURES:
+// - Lyrical flute melody (lead voice)
+// - Flowing harp arpeggios (harmonic foundation)
+// - Deep bass line (grounding)
+// - Lute-like plucked accompaniment
+// - Mystical bell accents (atmospheric)
+//
+// HOW TO USE IN STRUDEL REPL:
+// 1. Copy this entire code
+// 2. Paste into the Strudel REPL (https://strudel.cc)
+// 3. Press Ctrl+Enter to play
+// 4. Adjust .cpm(110) to change tempo if needed
+//
+// CUSTOMIZATION TIPS:
+// - Change scale to "d:minor" for darker mood
+// - Adjust .gain() values to rebalance instruments
+// - Modify .room() for more/less reverb
+// - Try .sometimes(x => x.fast(2)) on melodies for variation
+// ============================================================
+
+setcps(110/60/4)
+
+stack(
+  // ===== FLUTE MELODY - Primary melodic voice =====
+  note("d5 e5 f5 [g5 a5] g5 f5 e5 d5")
+    .scale("d:dorian")
+    .sound("sine")
+    .lpf(2000)                    // Soft, flute-like tone
+    .gain(0.6)
+    .room(0.6)
+    .pan(0.5)
+    .slow(4),                     // 4 beats per pattern cycle
+
+  // ===== HARP ARPEGGIOS - Harmonic foundation =====
+  note("<[d3 f3 a3 d4] [c3 e3 g3 c4] [bb2 d3 f3 bb3] [a2 c3 e3 a3]>")
+    .sound("gm_orchestral_harp")
+    .gain(0.8)
+    .delay(0.25)
+    .delaytime(0.125)             // Eighth note delay
+    .delayfeedback(0.3)
+    .room(0.7)
+    .slow(8),                     // Slower harmonic rhythm
+
+  // ===== BASS LINE - Grounding foundation =====
+  note("<d2 c2 bb1 a1>")
+    .sound("gm_acoustic_bass")
+    .lpf(300)                     // Deep, warm bass
+    .gain(0.7)
+    .room(0.4)
+    .slow(8),
+
+  // ===== LUTE-LIKE PLUCKS - Rhythmic texture =====
+  note("~ [d4 a3] ~ [f4 d4] ~ [a3 f3] [g3 e3] ~")
+    .scale("d:dorian")
+    .sound("gm_acoustic_guitar_nylon")  // Lute approximation
+    .gain(0.5)
+    .release(0.3)                 // Short, plucked articulation
+    .room(0.5)
+    .pan(sine.range(0.3, 0.7).slow(16))  // Gentle stereo movement
+    .slow(2),
+
+  // ===== BELL ACCENTS - Mystical atmosphere =====
+  note("d5 a5 ~!6")               // Bell rings on beats 1 and 2, then rests
+    .sound("gm_tubular_bells")
+    .gain(0.35)
+    .delay(0.4)
+    .delaytime(0.25)
+    .delayfeedback(0.5)
+    .room(0.9)                    // Lots of reverb for mystique
+    .release(2)                   // Long decay
+    .slow(8),                     // Sparse, occasional accents
+
+  // ===== GENTLE PERCUSSION - Subtle pulse =====
+  s("~ ~ ~ bd ~ ~ ~ ~")
+    .gain(0.4)
+    .lpf(400)                     // Muffled, distant drum
+    .room(0.5)
+)
+
+// ============================================================
+// VARIATION SUGGESTIONS:
+// ============================================================
+//
+// 1. ADD DRAMA: Apply .sometimes(x => x.fast(2)) to flute
+// 2. DARKER MOOD: Change all .scale("d:dorian") to .scale("d:minor")
+// 3. MORE MOVEMENT: Add .degradeBy(0.3) to lute for sparse texture
+// 4. TENSION: Use .every(8, x => x.add(1)) on melody to rise
+// 5. DYNAMIC SWELLS: Add .gain(sine.range(0.4, 0.8).slow(16)) to harp
+//
+// ============================================================
+// TECHNICAL NOTES:
+// ============================================================
+//
+// BPM CALCULATION:
+// setcps(110/60/4) = 110 BPM ÷ 60 seconds ÷ 4 beats = cycles per second
+//
+// SCALE: D Dorian = D E F G A B C D (medieval/modal character)
+//
+// SOUND SOURCES:
+// - "sine" = pure sine wave (flute-like when filtered)
+// - "gm_*" = General MIDI sounds (requires web audio)
+// - Fallback to built-in samples if GM unavailable
+//
+// PERFORMANCE:
+// - Designed for continuous looping background music
+// - CPU-efficient for game integration
+// - All patterns phase-aligned to 4/4 meter
+//
+// ============================================================

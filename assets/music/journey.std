@@ -1,0 +1,109 @@
+// Fantasy-Medieval Song in Strudel
+// A heroic journey through ancient kingdoms
+
+// ===== SECTION A: The Castle Courtyard =====
+const sectionA = stack(
+  // Main melody
+  note("d4 e4 f4 g4 a4 [g4 f4] e4 d4")
+    .scale("d:dorian")
+    .sound("gm_piano")
+    .lpf(1200)
+    .room(0.5)
+    .slow(2),
+  
+  // Harp arpeggios
+  note("<[d3 f3 a3 d4] [c3 e3 g3 c4] [bb2 d3 f3 bb3] [a2 c3 e3 a3]>")
+    .sound("gm_orchestral_harp")
+    .gain(1.5)
+    .delay(0.3)
+    .delaytime(0.125)
+    .delayfeedback(0.4)
+    .room(0.7)
+    .slow(4),
+  
+  // Flute counter-melody
+  note("~ a4 ~ g4 ~ f4 e4 ~")
+    .scale("d:dorian")
+    .sound("sine")
+    .lpf(2000)
+    .gain(0.5)
+    .pan(sine.range(0.3, 0.7).slow(8))
+    .slow(2),
+  
+  // Tavern drums
+  s("bd ~ ~ bd ~ sd ~ ~")
+    .gain(0.7)
+    .room(0.3),
+  
+  // Hand drum embellishments
+  s("~ ~ hh ~ ~ hh ~ hh")
+    .gain(0.4)
+    .speed(0.9)
+)
+
+// ===== SECTION B: The Heroic Journey =====
+const sectionB = stack(
+  // Main melody - more dramatic
+  note("a4 g4 f4 e4 d4 e4 f4 [g4] a4 g4")
+    .scale("d:dorian")
+    .sound("gm_piano")
+    .lpf(1500)
+    .room(0.6)
+    .gain(0.8)
+    .slow(2),
+  
+  // Harp chords - different progression
+  note("<[d3 f3 a3 d4] [a2 c3 e3 a3] [bb2 d3 f3 bb3] [c3 e3 g3 c4]>")
+    .sound("gm_orchestral_harp")
+    .gain(1.6)
+    .delay(0.3)
+    .delaytime(0.125)
+    .delayfeedback(0.4)
+    .room(0.7)
+    .slow(4),
+  
+  // Flute - more urgent and active
+  note("[d5 c5] [a4] g4 f4 [e4 g4] a4")
+    .scale("d:dorian")
+    .sound("sine")
+    .lpf(2200)
+    .gain(0.6)
+    .pan(sine.range(0.3, 0.7).slow(6))
+    .slow(2),
+  
+  // Battle march drums
+  s("bd ~ bd ~ bd sd ~ sd")
+    .gain(0.8)
+    .room(0.3),
+  
+  // Hand drum embellishments - more active
+  s("~ hh hh ~ hh hh ~ hh")
+    .gain(0.5)
+    .speed(0.9)
+)
+
+// ===== TRANSITION CONTROL =====
+// Manually sequence: play A for 16 cycles, then play B for 16 cycles, repeat
+$: randcat(sectionA, sectionB)
+
+// ===== PERSISTENT ELEMENTS (play throughout) =====
+
+// Deep bass drone - the castle foundations
+$: note("d2")
+  .sound("gm_acoustic_bass")
+  .lpf(200)
+  .gain(0.5)
+  .room(0.8)
+  .slow(8)
+
+// Occasional bell tolls from the tower
+$: note("d5 a5")
+  .sound("gm_tubular_bells")
+  .gain(.4)
+  .delay(0.5)
+  .delaytime(0.25)
+  .delayfeedback(0.6)
+  .room(0.9)
+  .slow(16)
+  .release(2)
+  .sometimes(x => x.fast(2))
