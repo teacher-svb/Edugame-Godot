@@ -85,15 +85,13 @@ namespace TnT.EduGame.GameState
             tree.Root.ChildEnteredTree += MovePlayer;
             tree.ChangeSceneToPacked(gameplayScene);
 
-            void MovePlayer(Node node)
+            async void MovePlayer(Node node)
             {
-                var tree = ManagerUI.Instance.GetTree();
                 tree.Root.ChildEnteredTree -= MovePlayer;
 
-                var player = ManagerUI.Instance.GetTree().FindAnyObjectByType<Player>();
+                await node.ToSignal(node, Node.SignalName.Ready);
 
-                player.MoveTo(target);
-                GD.Print(target);
+                tree.FindAnyObjectByType<Player>().MoveTo(target);
             }
         }
 

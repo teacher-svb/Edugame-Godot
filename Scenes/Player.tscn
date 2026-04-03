@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b18es3ooe0dvt"]
+[gd_scene format=3 uid="uid://b18es3ooe0dvt"]
 
 [ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="1_brc5f"]
 [ext_resource type="Script" uid="uid://bxls002a1ygp1" path="res://scripts/Game/CharacterController2D.cs" id="1_nn08x"]
@@ -16,32 +16,31 @@ script = ExtResource("6_nn08x")
 Id = "ba33071a-17fa-41d9-a1c7-293cecf358aa"
 metadata/_custom_type_script = "uid://cqfwdw7wlks67"
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("rayCast", "_character")]
+[node name="CharacterController" type="CharacterBody2D" unique_id=152422234 node_paths=PackedStringArray("rayCast")]
 z_index = 5
 y_sort_enabled = true
 script = ExtResource("1_nn08x")
 Speed = 400.0
 rayCast = NodePath("RayCast2D")
-_character = NodePath("Character")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=581219306]
 sprite_frames = ExtResource("2_brc5f")
 animation = &"blink_down"
 autoplay = "idle_down"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=983746629]
 shape = SubResource("CircleShape2D_15ib8")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=565773710]
 
-[node name="Character" type="Node" parent="."]
+[node name="Character" type="Node" parent="." unique_id=2066739926]
 script = ExtResource("3_5ixxa")
 _characterData = ExtResource("5_52ee3")
 _saveData = SubResource("Resource_52ee3")
 
-[node name="Player" type="Node" parent="."]
+[node name="Player" type="Node" parent="." unique_id=1559025809]
 script = ExtResource("1_brc5f")
 
-[node name="CharacterAgent2D" type="NavigationAgent2D" parent="."]
+[node name="CharacterAgent2D" type="NavigationAgent2D" parent="." unique_id=1371547403]
 script = ExtResource("7_52ee3")
 metadata/_custom_type_script = "uid://bobbvwscu5csp"
