@@ -71,7 +71,7 @@ environment = SubResource("Environment_lkauf")
 
 [node name="sky" type="DirectionalLight3D" parent="Environment" unique_id=1426619675]
 transform = Transform3D(-0.965926, 0.197685, 0.167057, 0, -0.645458, 0.763796, 0.258819, 0.73777, 0.623464, 0, 2, 0)
-light_energy = 12.308
+light_energy = 2.289
 sky_mode = 2
 
 [node name="Sun" type="DirectionalLight3D" parent="Environment" unique_id=2141871353]
@@ -81,10 +81,9 @@ light_energy = 0.5
 shadow_enabled = true
 shadow_normal_bias = 1.0
 shadow_opacity = 0.79
-shadow_blur = 1.5
-directional_shadow_mode = 0
+shadow_blur = 3.0
 directional_shadow_blend_splits = true
-directional_shadow_max_distance = 25.0
+directional_shadow_max_distance = 30.0
 sky_mode = 1
 
 [node name="indoor_gridmap" type="GridMap" parent="." unique_id=316860359]
@@ -149,18 +148,6 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.96
 
 [node name="kitchenMicrowave" parent="Kitchen" unique_id=1319709699 instance=ExtResource("15_d3gh3")]
 transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, 1.9967117, 0.43290854, -0.9465704)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Kitchen" unique_id=1996195359]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.5649219, 1.3195003, -0.8341575)
-light_energy = 0.1
-
-[node name="SpotLight3D3" type="SpotLight3D" parent="Kitchen" unique_id=974636888]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 2.0686002, 0.9257815, -1.9795823)
-light_energy = 0.1
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="Kitchen" unique_id=746469869]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.5369161, 0.903525, -0.7422109)
-light_energy = 0.1
 
 [node name="Livingroom" type="Node3D" parent="." unique_id=578465874]
 

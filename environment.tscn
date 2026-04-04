@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://cicoifqqhu3tg"]
+
+[sub_resource type="Gradient" id="Gradient_upsym"]
+offsets = PackedFloat32Array(0.117647, 1)
+colors = PackedColorArray(0.0277098, 0.0773411, 0.103768, 1, 1, 0.939093, 0.819838, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mdpnd"]
+gradient = SubResource("Gradient_upsym")
+width = 512
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_ifw4m"]
+rayleigh_coefficient = 1.0
+rayleigh_color = Color(0.77368456, 0.85677356, 1, 1)
+mie_color = Color(0.8403034, 0.94551045, 0.99741834, 1)
+
+[sub_resource type="Sky" id="Sky_mdpnd"]
+sky_material = SubResource("PhysicalSkyMaterial_ifw4m")
+process_mode = 3
+
+[sub_resource type="Environment" id="Environment_lkauf"]
+background_mode = 2
+background_energy_multiplier = 0.5
+sky = SubResource("Sky_mdpnd")
+tonemap_mode = 3
+ssao_enabled = true
+ssao_radius = 0.6
+ssao_intensity = 1.87
+adjustment_enabled = true
+adjustment_saturation = 1.2
+adjustment_color_correction = SubResource("GradientTexture1D_mdpnd")
+
+[node name="Environment" type="Node3D" unique_id=1626489397]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=120090058]
+environment = SubResource("Environment_lkauf")
+
+[node name="sky" type="DirectionalLight3D" parent="." unique_id=1426619675]
+transform = Transform3D(-0.965926, 0.197685, 0.167057, 0, -0.645458, 0.763796, 0.258819, 0.73777, 0.623464, 0, 2, 0)
+light_energy = 20.0
+sky_mode = 2
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=2141871353]
+transform = Transform3D(-0.976296, -0.186106, -0.110502, 0, -0.510543, 0.859852, -0.21644, 0.83947, 0.498441, 0, 2, 0)
+light_color = Color(1, 0.94902, 0.827451, 1)
+shadow_enabled = true
+shadow_normal_bias = 0.0
+shadow_opacity = 0.79
+shadow_blur = 1.5
+sky_mode = 1
