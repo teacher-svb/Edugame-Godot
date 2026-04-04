@@ -36,17 +36,20 @@ colors = PackedColorArray(0.0277098, 0.0773411, 0.103768, 1, 1, 0.939093, 0.8198
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_mdpnd"]
 gradient = SubResource("Gradient_upsym")
+width = 512
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_ifw4m"]
-rayleigh_coefficient = 0.5
-rayleigh_color = Color(0.89943725, 0.937389, 0.9999992, 1)
-mie_color = Color(0.410533, 0.806022, 0.980377, 1)
+rayleigh_coefficient = 1.0
+rayleigh_color = Color(0.77368456, 0.85677356, 1, 1)
+mie_color = Color(0.8403034, 0.94551045, 0.99741834, 1)
 
 [sub_resource type="Sky" id="Sky_mdpnd"]
 sky_material = SubResource("PhysicalSkyMaterial_ifw4m")
+process_mode = 3
 
 [sub_resource type="Environment" id="Environment_lkauf"]
 background_mode = 2
+background_energy_multiplier = 0.2
 sky = SubResource("Sky_mdpnd")
 tonemap_mode = 3
 ssao_enabled = true
@@ -68,17 +71,20 @@ environment = SubResource("Environment_lkauf")
 
 [node name="sky" type="DirectionalLight3D" parent="Environment" unique_id=1426619675]
 transform = Transform3D(-0.965926, 0.197685, 0.167057, 0, -0.645458, 0.763796, 0.258819, 0.73777, 0.623464, 0, 2, 0)
-light_energy = 20.0
+light_energy = 12.308
 sky_mode = 2
 
 [node name="Sun" type="DirectionalLight3D" parent="Environment" unique_id=2141871353]
-transform = Transform3D(-0.976296, -0.186106, -0.110502, 0, -0.510543, 0.859852, -0.21644, 0.83947, 0.498441, 0, 2, 0)
+transform = Transform3D(0.9800221, -0.17101489, -0.10154128, 5.887901e-09, -0.5105431, 0.85985214, -0.1988887, -0.84267396, -0.5003437, 0, 2, 0)
 light_color = Color(1, 0.94902, 0.827451, 1)
-light_energy = 0.3
+light_energy = 0.5
 shadow_enabled = true
-shadow_normal_bias = 0.0
+shadow_normal_bias = 1.0
 shadow_opacity = 0.79
 shadow_blur = 1.5
+directional_shadow_mode = 0
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 25.0
 sky_mode = 1
 
 [node name="indoor_gridmap" type="GridMap" parent="." unique_id=316860359]
@@ -193,7 +199,7 @@ mesh = ExtResource("3_182vs")
 skeleton = NodePath("../../indoor_gridmap")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1107007381]
-transform = Transform3D(-0.99991435, 0.009683431, -0.008809905, 0, 0.6729566, 0.7396821, 0.0130913425, 0.73961866, -0.6728989, -1.7394495, 11.662254, -12.288824)
+transform = Transform3D(-0.99991435, 0.009683431, -0.008809905, 0, 0.6729566, 0.7396821, 0.0130913425, 0.73961866, -0.6728989, -1.7668601, 13.470341, -14.382447)
 fov = 15.4
 near = 0.016
 
