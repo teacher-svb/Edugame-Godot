@@ -2,6 +2,8 @@
 
 [ext_resource type="MeshLibrary" uid="uid://c03ahsqxmcvk0" path="res://assets/3D/Furniture Kit/furniture-kit.meshlib" id="1_prsx4"]
 [ext_resource type="PackedScene" uid="uid://hnsprachgabr" path="res://assets/3D/Furniture Kit/Models/GLTF format/stairs.glb" id="2_f2o16"]
+[ext_resource type="Material" uid="uid://ch1a8r7ydb2oe" path="res://materials/black_mask.tres" id="2_shbgg"]
+[ext_resource type="ArrayMesh" uid="uid://dj6kds8mharjp" path="res://assets/3D/openbox.obj" id="3_182vs"]
 [ext_resource type="PackedScene" uid="uid://cvdwjeiyjqey" path="res://assets/3D/Furniture Kit/Models/GLTF format/kitchenCabinet.glb" id="3_mmqba"]
 [ext_resource type="PackedScene" uid="uid://c4feul3ei7qgv" path="res://assets/3D/Furniture Kit/Models/GLTF format/kitchenCabinetCornerInner.glb" id="4_bysjn"]
 [ext_resource type="PackedScene" uid="uid://b1u2nuwvu7yn2" path="res://assets/3D/Furniture Kit/Models/GLTF format/kitchenCabinetCornerRound.glb" id="5_fk4mx"]
@@ -18,64 +20,78 @@
 [ext_resource type="PackedScene" uid="uid://dvco42ojy8qml" path="res://assets/3D/Furniture Kit/Models/GLTF format/tableCloth.glb" id="16_oywso"]
 [ext_resource type="PackedScene" uid="uid://dktqavrdc8ur4" path="res://assets/3D/Furniture Kit/Models/GLTF format/chairCushion.glb" id="17_oc118"]
 [ext_resource type="PackedScene" uid="uid://bx6cp663wgyvp" path="res://assets/3D/Furniture Kit/Models/GLTF format/rugSquare.glb" id="18_oc118"]
+[ext_resource type="PackedScene" uid="uid://dub2t6hbmceud" path="res://assets/3D/Furniture Kit/Models/GLTF format/doorwayFront.glb" id="19_0yx1s"]
+[ext_resource type="PackedScene" uid="uid://ci0qlbk7yu2cr" path="res://assets/3D/Furniture Kit/Models/GLTF format/bedSingle.glb" id="22_0tae3"]
+[ext_resource type="PackedScene" uid="uid://ct1kqwdhujc8n" path="res://assets/3D/Furniture Kit/Models/GLTF format/benchCushionLow.glb" id="23_7n07m"]
+[ext_resource type="PackedScene" uid="uid://40rbyr5gq5lu" path="res://assets/3D/Furniture Kit/Models/GLTF format/cabinetBedDrawer.glb" id="24_kdqke"]
+[ext_resource type="PackedScene" uid="uid://bmcouihuq457y" path="res://assets/3D/Furniture Kit/Models/GLTF format/desk.glb" id="25_kb3qt"]
+[ext_resource type="PackedScene" uid="uid://db03lq6cgxid2" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedDoors.glb" id="26_7vwr8"]
+[ext_resource type="PackedScene" uid="uid://dcaqo4uenuwgu" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedWide.glb" id="27_qovxq"]
+[ext_resource type="PackedScene" uid="uid://5ac2eh7lcw6p" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosed.glb" id="28_7n07m"]
+[ext_resource type="PackedScene" uid="uid://cd2furrsxugw6" path="res://assets/3D/Furniture Kit/Models/GLTF format/books.glb" id="29_kdqke"]
 
-[sub_resource type="Sky" id="Sky_f2o16"]
+[sub_resource type="Gradient" id="Gradient_upsym"]
+offsets = PackedFloat32Array(0.117647, 1)
+colors = PackedColorArray(0.0277098, 0.0773411, 0.103768, 1, 1, 0.939093, 0.819838, 1)
 
-[sub_resource type="Environment" id="Environment_extoh"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mdpnd"]
+gradient = SubResource("Gradient_upsym")
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_ifw4m"]
+rayleigh_coefficient = 0.5
+rayleigh_color = Color(0.89943725, 0.937389, 0.9999992, 1)
+mie_color = Color(0.410533, 0.806022, 0.980377, 1)
+
+[sub_resource type="Sky" id="Sky_mdpnd"]
+sky_material = SubResource("PhysicalSkyMaterial_ifw4m")
+
+[sub_resource type="Environment" id="Environment_lkauf"]
 background_mode = 2
-sky = SubResource("Sky_f2o16")
-tonemap_mode = 2
+sky = SubResource("Sky_mdpnd")
+tonemap_mode = 3
+ssao_enabled = true
+ssao_radius = 0.6
+ssao_intensity = 1.87
+adjustment_enabled = true
+adjustment_saturation = 1.2
+adjustment_color_correction = SubResource("GradientTexture1D_mdpnd")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1bi7"]
-cull_mode = 1
-albedo_color = Color(0, 0, 0, 1)
-metallic_specular = 0.0
-
-[sub_resource type="BoxMesh" id="BoxMesh_14bvk"]
-material = SubResource("StandardMaterial3D_c1bi7")
+[sub_resource type="SphereMesh" id="SphereMesh_kdqke"]
+material = ExtResource("2_shbgg")
 
 [node name="Node3D" type="Node3D" unique_id=565024144]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2007341892]
-environment = SubResource("Environment_extoh")
+[node name="Environment" type="Node3D" parent="." unique_id=1626489397]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=882783164]
-transform = Transform3D(0.6156615, 0.6824373, -0.39400533, 0, 0.4999999, 0.86602545, 0.7880107, -0.53317845, 0.30783072, 0, 0, 0)
-light_energy = 0.5
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=120090058]
+environment = SubResource("Environment_lkauf")
+
+[node name="sky" type="DirectionalLight3D" parent="Environment" unique_id=1426619675]
+transform = Transform3D(-0.965926, 0.197685, 0.167057, 0, -0.645458, 0.763796, 0.258819, 0.73777, 0.623464, 0, 2, 0)
+light_energy = 20.0
+sky_mode = 2
+
+[node name="Sun" type="DirectionalLight3D" parent="Environment" unique_id=2141871353]
+transform = Transform3D(-0.976296, -0.186106, -0.110502, 0, -0.510543, 0.859852, -0.21644, 0.83947, 0.498441, 0, 2, 0)
+light_color = Color(1, 0.94902, 0.827451, 1)
+light_energy = 0.3
 shadow_enabled = true
+shadow_normal_bias = 0.0
+shadow_opacity = 0.79
+shadow_blur = 1.5
+sky_mode = 1
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=182168604]
-transform = Transform3D(-0.6243567, -0.6764864, 0.3905698, 1.1649723e-07, 0.50000006, 0.86602545, -0.78113955, 0.54070914, -0.3121782, 0, 0, 0)
-light_energy = 0.1
-shadow_enabled = true
-
-[node name="walls" type="GridMap" parent="." unique_id=316860359]
+[node name="indoor_gridmap" type="GridMap" parent="." unique_id=316860359]
 mesh_library = ExtResource("1_prsx4")
-cell_size = Vector3(1, 1, 1)
+cell_size = Vector3(1, 0.05, 1)
 cell_center_y = false
 data = {
-"cells": PackedInt32Array(65533, 1, 130, 0, 65535, 0, 65535, 65535, 0, 65534, 65535, 0, 65533, 65535, 3, 65532, 65535, 0, 65531, 65535, 1441793, 65531, 65534, 1441792, 65531, 65533, 1441799, 65531, 65532, 1441792, 1, 65534, 1048582, 1, 65533, 1048582, 1, 65532, 1048576, 1, 65535, 1, 65532, 65531, 655360, 65533, 65531, 655367, 65534, 65531, 655364, 65535, 65531, 655367, 0, 65531, 655360, 1, 65531, 1048577, 65531, 65531, 655361)
+"cells": PackedInt32Array(65533, 1, 130, 0, 65535, 0, 65535, 65535, 0, 65534, 65535, 0, 65533, 65535, 3, 65532, 65535, 0, 65531, 65535, 1441793, 65531, 65534, 1441792, 65531, 65533, 1441799, 65531, 65532, 1441792, 1, 65534, 1048582, 1, 65533, 1048582, 1, 65532, 1048576, 1, 65535, 1, 65532, 65531, 655360, 65533, 65531, 655367, 65534, 65531, 655363, 65535, 65531, 655367, 0, 65531, 655360, 1, 65531, 1048577, 65531, 65531, 655361, -3, 65535, 655371, -2, 65531, 655371, -1, 65531, 1441804, -65536, 65531, 1441804, -65535, 65532, 655372, -65535, 65533, 655372, -65535, 65534, 655372, -65536, 65535, 1048588, -1, 65535, 1048588, -2, 65535, 1048588, -4, 65535, 1048588, -5, 65534, 12, -5, 65533, 12, -5, 65532, 12, -4, 65531, 1441804, -3, 65531, 1441804, -5, 65531, 655369, -65535, 65531, 1048585, -65535, 65535, 9, -5, 65535, 1441801, -4, 65534, 1441803, -3, 65534, 1441803, -2, 65534, 1441803, -1, 65534, 1441803, -65536, 65534, 1441803, -65536, 65533, 1441803, -65536, 65532, 1441803, -1, 65532, 1441803, -1, 65533, 1441803, -2, 65533, 1441803, -2, 65532, 1441803, -3, 65532, 1441803, -3, 65533, 1441803, -4, 65533, 1441803, -4, 65532, 1441803, -65525, 65535, 11, -65524, 65535, 11, -65523, 65535, 11, -65522, 65535, 655372, -65526, 65535, 12, -65525, 0, 1048588, -65524, 0, 1048588, -65523, 0, 1048588, -65522, 0, 9, -65526, 0, 1441801, 14, 65534, 1048577, 14, 65535, 1048576, 13, 0, 6, 12, 0, 0, 11, 0, 3, 10, 65535, 1441792, 10, 65534, 655361, 14, 0, 1, 10, 0, 1441793, 11, 65534, 655360, 12, 65534, 655360, 13, 65534, 655360, -65524, 65534, 1441804, -65523, 65534, 1441804, -65525, 65534, 1441804, -65522, 65534, 1048585, -65526, 65534, 655369)
 }
-
-[node name="stairs" parent="." unique_id=1939150842 instance=ExtResource("2_f2o16")]
-transform = Transform3D(-4.152582e-08, 0, -0.95, 0, 0.95, 0, 0.95, 0, -4.152582e-08, -2.9157922, -0.77252865, -1.0971615)
-
-[node name="floor" type="GridMap" parent="." unique_id=2057753325]
-mesh_library = ExtResource("1_prsx4")
-cell_size = Vector3(1, 1, 1)
-cell_center_y = false
-data = {
-"cells": PackedInt32Array(65534, 65535, 1048588, 65535, 65535, 1048588, 0, 65535, 1048588, 65531, 65532, 12, 65531, 65533, 12, 65531, 65534, 12, 65531, 65535, 1441801, 65533, 65535, 655371, 0, 65534, 655371, 65535, 65534, 655371, 65534, 65534, 655371, 65533, 65534, 655371, 65532, 65534, 655371, 65532, 65533, 655371, 65533, 65533, 655371, 65534, 65533, 655371, 65535, 65533, 655371, 0, 65533, 655371, 0, 65532, 655371, 65535, 65532, 655371, 65534, 65532, 655371, 65533, 65532, 655371, 65532, 65532, 655371, 65532, 65535, 1048588, 65534, 65531, 1441803, 65535, 65531, 1441804, 0, 65531, 1441804, 65533, 65531, 1441804, 65532, 65531, 1441804, 65531, 65531, 655369, 1, 65531, 1048585, 1, 65532, 655372, 1, 65533, 655372, 1, 65534, 655372)
-}
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1590769772]
-transform = Transform3D(1, 0, -7.1054274e-15, 0, 2.5562356, 0, 0, 0, 2.3053486, -2.5362773, 0, 0.6800761)
-cast_shadow = 0
-mesh = SubResource("BoxMesh_14bvk")
-skeleton = NodePath("../walls")
+metadata/_editor_floor_ = Vector3(0, -1, 0)
 
 [node name="Kitchen" type="Node3D" parent="." unique_id=326821015]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6930403, 0.044218063, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.693, 0, 0)
 
 [node name="kitchenCabinet" parent="Kitchen" unique_id=585347416 instance=ExtResource("3_mmqba")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.29, 0, -0.975)
@@ -128,25 +144,98 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.96
 [node name="kitchenMicrowave" parent="Kitchen" unique_id=1319709699 instance=ExtResource("15_d3gh3")]
 transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, 1.9967117, 0.43290854, -0.9465704)
 
+[node name="SpotLight3D" type="SpotLight3D" parent="Kitchen" unique_id=1996195359]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.5649219, 1.3195003, -0.8341575)
+light_energy = 0.1
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Kitchen" unique_id=974636888]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 2.0686002, 0.9257815, -1.9795823)
+light_energy = 0.1
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Kitchen" unique_id=746469869]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.5369161, 0.903525, -0.7422109)
+light_energy = 0.1
+
 [node name="Livingroom" type="Node3D" parent="." unique_id=578465874]
 
 [node name="tableCloth" parent="Livingroom" unique_id=1234716365 instance=ExtResource("16_oywso")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.9152344, 0.052731276, -2.0805285)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.9152344, 0, -2.0805285)
 
 [node name="tableCloth2" parent="Livingroom" unique_id=839416735 instance=ExtResource("16_oywso")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3125439, 0.052731276, -2.0805285)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3125439, 0, -2.0805285)
 
 [node name="chairCushion" parent="Livingroom" unique_id=1838283608 instance=ExtResource("17_oc118")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.0146303, 0.046773434, -2.8287356)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.0146303, 0, -2.8287356)
 
 [node name="chairCushion2" parent="Livingroom" unique_id=885769154 instance=ExtResource("17_oc118")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.0146303, 0.046773434, -2.4769497)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.0146303, 0, -2.4769497)
 
 [node name="chairCushion3" parent="Livingroom" unique_id=850914252 instance=ExtResource("17_oc118")]
-transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -2.630958, 0.046773434, -2.2982376)
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -2.630958, 0, -2.2982376)
 
 [node name="chairCushion4" parent="Livingroom" unique_id=203546859 instance=ExtResource("17_oc118")]
-transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -2.630958, 0.046773434, -2.6500235)
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -2.630958, 0, -2.6500235)
 
 [node name="rugSquare" parent="Livingroom" unique_id=812307430 instance=ExtResource("18_oc118")]
-transform = Transform3D(2.2097661, 0, 0, 0, 1, 0, 0, 0, 2.2097661, -3.298517, 0.054727554, -1.4733434)
+transform = Transform3D(2.2097661, 0, 0, 0, 1, 0, 0, 0, 2.2097661, -3.299, 0, -1.473)
+
+[node name="stairs" parent="Livingroom" unique_id=1939150842 instance=ExtResource("2_f2o16")]
+transform = Transform3D(-4.152582e-08, 0, -0.95, 0, 0.95, 0, 0.95, 0, -4.152582e-08, -2.9157922, -0.77252865, -1.0971615)
+
+[node name="doorwayFront" parent="Livingroom" unique_id=1330932814 instance=ExtResource("19_0yx1s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7450155, 0, -4.4579797)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Livingroom" unique_id=1590769772]
+transform = Transform3D(-4.371139e-08, 0, 0.4077264, 0, 0.8308974, 0, -1, 0, -1.7822288e-08, -2.5362773, 0.23912078, 0.51757336)
+material_override = ExtResource("2_shbgg")
+cast_shadow = 0
+mesh = ExtResource("3_182vs")
+skeleton = NodePath("../../indoor_gridmap")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1107007381]
+transform = Transform3D(-0.99991435, 0.009683431, -0.008809905, 0, 0.6729566, 0.7396821, 0.0130913425, 0.73961866, -0.6728989, -1.7394495, 11.662254, -12.288824)
+fov = 15.4
+near = 0.016
+
+[node name="Bedroom" type="Node3D" parent="." unique_id=201428126]
+
+[node name="stairs2" parent="Bedroom" unique_id=15608921 instance=ExtResource("2_f2o16")]
+transform = Transform3D(-4.152582e-08, 0, 0.95, 0, 0.95, 0, -0.95, 0, -4.152582e-08, 11.846959, -1.2703094, 2.1912327)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Bedroom" unique_id=1223312376]
+transform = Transform3D(-4.371139e-08, 0, 0.4077264, 0, 0.8308974, 0, -1, 0, -1.7822288e-08, 11.491761, 0.23912078, 1.5000426)
+material_override = ExtResource("2_shbgg")
+cast_shadow = 0
+mesh = ExtResource("3_182vs")
+skeleton = NodePath("../../indoor_gridmap")
+
+[node name="bedSingle" parent="Bedroom" unique_id=1094179095 instance=ExtResource("22_0tae3")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 14.178923, 0, -0.6990976)
+
+[node name="benchCushionLow" parent="Bedroom" unique_id=1755434884 instance=ExtResource("23_7n07m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.691968, 0, 0.46061492)
+
+[node name="cabinetBedDrawer" parent="Bedroom" unique_id=1138683894 instance=ExtResource("24_kdqke")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 14.076734, 0, 0.25556684)
+
+[node name="desk" parent="Bedroom" unique_id=1198519338 instance=ExtResource("25_kb3qt")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 10.908302, 0, -0.1342783)
+
+[node name="bookcaseClosedDoors" parent="Bedroom" unique_id=374552429 instance=ExtResource("26_7vwr8")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 12.917295, 4.7683716e-07, 0.2264834)
+
+[node name="bookcaseClosedWide" parent="Bedroom" unique_id=1796271444 instance=ExtResource("27_qovxq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 14.222402, 2.3841858e-07, -0.8225241)
+
+[node name="bookcaseClosed" parent="Bedroom" unique_id=191902409 instance=ExtResource("28_7n07m")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 12.518359, 0, 0.22696567)
+
+[node name="books" parent="Bedroom" unique_id=1307336697 instance=ExtResource("29_kdqke")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 12.31149, 0.61005694, 0.25851455)
+
+[node name="books2" parent="Bedroom" unique_id=1471422341 instance=ExtResource("29_kdqke")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 12.473042, 0.61005694, 0.25851455)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=150091654]
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
+mesh = SubResource("SphereMesh_kdqke")
