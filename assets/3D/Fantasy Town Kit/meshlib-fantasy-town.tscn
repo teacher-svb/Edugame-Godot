@@ -1,0 +1,379 @@
+[gd_scene format=3 uid="uid://cgglw5x25hghe"]
+
+[ext_resource type="PackedScene" uid="uid://cdf82vopixfpf" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/balcony-wall-fence.glb" id="1_cpo7j"]
+[ext_resource type="PackedScene" uid="uid://cie42regs6dme" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/balcony-wall.glb" id="2_vndg0"]
+[ext_resource type="PackedScene" uid="uid://deacntejafmh7" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/fence-broken.glb" id="11_k1rps"]
+[ext_resource type="PackedScene" uid="uid://blwcgs2dgjc48" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/fence-curved.glb" id="12_rsyy6"]
+[ext_resource type="PackedScene" uid="uid://6i7kwthcgbmv" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/fence-gate.glb" id="13_ujrjc"]
+[ext_resource type="PackedScene" uid="uid://dcgx52s8mj354" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/fence.glb" id="14_b87tm"]
+[ext_resource type="PackedScene" uid="uid://dmkmhiagx8g6h" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/fountain-center.glb" id="15_it4q4"]
+[ext_resource type="PackedScene" uid="uid://b5e67vn1c6g2m" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/fountain-corner-inner-square.glb" id="16_3d64j"]
+[ext_resource type="PackedScene" uid="uid://bo6sjf43ne4og" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/fountain-corner-inner.glb" id="17_o4eo1"]
+[ext_resource type="PackedScene" uid="uid://dwundcepqdux1" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/fountain-corner.glb" id="18_cpwgq"]
+[ext_resource type="PackedScene" uid="uid://b0f3aluw1x01v" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/fountain-curved.glb" id="19_o78qt"]
+[ext_resource type="PackedScene" uid="uid://ddnakiiglkbyq" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/fountain-edge.glb" id="20_mm5em"]
+[ext_resource type="PackedScene" uid="uid://bvvm6ivh5cb2h" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/fountain-round-detail.glb" id="21_0t7fb"]
+[ext_resource type="PackedScene" uid="uid://chx8aqd2c7el0" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/fountain-round.glb" id="22_4bx06"]
+[ext_resource type="PackedScene" uid="uid://dqaihkiu0dc00" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/fountain-square-detail.glb" id="23_dgdcy"]
+[ext_resource type="PackedScene" uid="uid://qda4lem1oqi8" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/fountain-square.glb" id="24_rfdkc"]
+[ext_resource type="PackedScene" uid="uid://bl338t7cmd8vi" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/hedge-curved.glb" id="25_5vif6"]
+[ext_resource type="PackedScene" uid="uid://c35csasuoyx8o" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/hedge-gate.glb" id="26_2dsti"]
+[ext_resource type="PackedScene" uid="uid://5edrpfmnmt6k" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/hedge-large-curved.glb" id="27_40g8j"]
+[ext_resource type="PackedScene" uid="uid://w0ir1tt81pc4" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/hedge-large-gate.glb" id="28_epx78"]
+[ext_resource type="PackedScene" uid="uid://cjgxv35w0qa26" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/hedge-large.glb" id="29_v0trg"]
+[ext_resource type="PackedScene" uid="uid://breid1qv468kn" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/hedge.glb" id="30_hq8nf"]
+[ext_resource type="PackedScene" uid="uid://51xlyd7dwyim" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/planks-half.glb" id="35_4ojo3"]
+[ext_resource type="PackedScene" uid="uid://bgr4dnk5nrb4k" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/planks-opening.glb" id="36_1vh17"]
+[ext_resource type="PackedScene" uid="uid://0nw2qp6pa5gm" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/planks.glb" id="37_g2lro"]
+[ext_resource type="PackedScene" uid="uid://dwvte8a456llv" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/poles-horizontal.glb" id="38_42lnk"]
+[ext_resource type="PackedScene" uid="uid://cec4v5uryvs5u" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/poles.glb" id="39_eec88"]
+[ext_resource type="PackedScene" uid="uid://d3543khjarxv8" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/road-bend.glb" id="40_gkjn4"]
+[ext_resource type="PackedScene" uid="uid://bjnl1vjomrim6" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/road-corner-inner.glb" id="41_aq08l"]
+[ext_resource type="PackedScene" uid="uid://cw7ufcdkcpl3f" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/road-corner.glb" id="42_rdws5"]
+[ext_resource type="PackedScene" uid="uid://e0jw3ttpcgyy" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/road-curb-end.glb" id="43_sjmds"]
+[ext_resource type="PackedScene" uid="uid://b4gokvdfni7r2" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/road-curb.glb" id="44_tcwku"]
+[ext_resource type="PackedScene" uid="uid://b1t5i326tcdus" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/road-edge-slope.glb" id="45_t6b60"]
+[ext_resource type="PackedScene" uid="uid://dwtv568l6uauf" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/road-edge.glb" id="46_b4gqr"]
+[ext_resource type="PackedScene" uid="uid://dhd3qsy4av1fc" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/road-slope.glb" id="47_5oxxr"]
+[ext_resource type="PackedScene" uid="uid://ddndu3080feo6" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/road.glb" id="48_ep8n4"]
+[ext_resource type="PackedScene" uid="uid://c7kswpd5jytdx" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-corner-inner.glb" id="52_a33vr"]
+[ext_resource type="PackedScene" uid="uid://byue4j6ptkej6" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-corner-round.glb" id="53_kp4ss"]
+[ext_resource type="PackedScene" uid="uid://mrejvfajr478" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-corner.glb" id="54_txqvg"]
+[ext_resource type="PackedScene" uid="uid://b2j8wsyuclwhi" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-flat.glb" id="55_jyj51"]
+[ext_resource type="PackedScene" uid="uid://b3lwox0jgwfve" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-gable-detail.glb" id="56_g7ivt"]
+[ext_resource type="PackedScene" uid="uid://bogwhn1y011ab" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-gable-end.glb" id="57_7a31r"]
+[ext_resource type="PackedScene" uid="uid://bgxtq82x6ltmw" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-gable-top.glb" id="58_q4v6g"]
+[ext_resource type="PackedScene" uid="uid://lwtpslsh3twh" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-gable.glb" id="59_mw2en"]
+[ext_resource type="PackedScene" uid="uid://khq10w40x6uy" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-high-corner-round.glb" id="60_khgci"]
+[ext_resource type="PackedScene" uid="uid://t5gnjb4qjigu" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-high-corner.glb" id="61_xn5xw"]
+[ext_resource type="PackedScene" uid="uid://dphr7n0fcjqw3" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-high-cornerinner.glb" id="62_luyrd"]
+[ext_resource type="PackedScene" uid="uid://yegs31n2kyep" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-high-flat.glb" id="63_c6n6o"]
+[ext_resource type="PackedScene" uid="uid://demgck5uenr2w" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-high-gable-detail.glb" id="64_8sxk4"]
+[ext_resource type="PackedScene" uid="uid://2vj75dtr0alw" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-high-gable-end.glb" id="65_epq35"]
+[ext_resource type="PackedScene" uid="uid://cdtywkr84uibv" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-high-gable-top.glb" id="66_kcjyr"]
+[ext_resource type="PackedScene" uid="uid://s67tp8gj6emy" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-high-gable.glb" id="67_jqgi4"]
+[ext_resource type="PackedScene" uid="uid://bsskcqttney40" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-high-left.glb" id="68_ry12w"]
+[ext_resource type="PackedScene" uid="uid://cqnl5laxdjrjk" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-high-point.glb" id="69_tt4rb"]
+[ext_resource type="PackedScene" uid="uid://hg6wclm78cpp" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-high-right.glb" id="70_1agqx"]
+[ext_resource type="PackedScene" uid="uid://dbb15coktkihc" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-high-window.glb" id="71_ar6h5"]
+[ext_resource type="PackedScene" uid="uid://dxx1uog2sxgsy" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-high.glb" id="72_k0ojj"]
+[ext_resource type="PackedScene" uid="uid://bgnt4cwmcre30" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-left.glb" id="73_3whw7"]
+[ext_resource type="PackedScene" uid="uid://bcss142v5ka7v" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-point.glb" id="74_hm8fj"]
+[ext_resource type="PackedScene" uid="uid://c0la46mhwi7il" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-right.glb" id="75_mboj8"]
+[ext_resource type="PackedScene" uid="uid://cxmh4grb6rfq7" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof-window.glb" id="76_028gq"]
+[ext_resource type="PackedScene" uid="uid://c8qm70iv1ec4a" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/roof.glb" id="77_stek6"]
+[ext_resource type="PackedScene" uid="uid://b6uwjmwpf00x" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-arch-top-detail.glb" id="101_lgbkw"]
+[ext_resource type="PackedScene" uid="uid://cf202o20k7t5r" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-arch-top.glb" id="102_oqcij"]
+[ext_resource type="PackedScene" uid="uid://7trwwhwsgule" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-arch.glb" id="103_crdb7"]
+[ext_resource type="PackedScene" uid="uid://dgwmruhwgxhn8" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-block-half.glb" id="104_vjsnn"]
+[ext_resource type="PackedScene" uid="uid://ku6d6dttcfp" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-block.glb" id="105_dig3x"]
+[ext_resource type="PackedScene" uid="uid://di82u24i7klb8" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-broken.glb" id="106_tldjh"]
+[ext_resource type="PackedScene" uid="uid://duqmblnlc3kmt" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-corner-detail.glb" id="107_1thrg"]
+[ext_resource type="PackedScene" uid="uid://5mq6xmbnc8j0" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-corner-diagonal-half.glb" id="108_mmdy3"]
+[ext_resource type="PackedScene" uid="uid://b0rbvpufnjtft" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-corner-diagonal.glb" id="109_fiyau"]
+[ext_resource type="PackedScene" uid="uid://dlkxhcgnotni1" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-corner-edge.glb" id="110_alnwd"]
+[ext_resource type="PackedScene" uid="uid://dnuku2g81obkm" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-corner.glb" id="111_6iein"]
+[ext_resource type="PackedScene" uid="uid://d2ep0t3safbm" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-curved.glb" id="112_fvddh"]
+[ext_resource type="PackedScene" uid="uid://i7gskx8g1qvj" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-detail-cross.glb" id="113_vtbd6"]
+[ext_resource type="PackedScene" uid="uid://cehsi14w3osy5" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-detail-diagonal.glb" id="114_yvtqd"]
+[ext_resource type="PackedScene" uid="uid://cnxahijj2ft5k" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-detail-horizontal.glb" id="115_yevlx"]
+[ext_resource type="PackedScene" uid="uid://choql4hfissjg" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-diagonal.glb" id="116_v5pbp"]
+[ext_resource type="PackedScene" uid="uid://b77o54akfgtb4" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-door.glb" id="117_g6oj8"]
+[ext_resource type="PackedScene" uid="uid://60l8th5282t4" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-doorway-base.glb" id="118_v7qn8"]
+[ext_resource type="PackedScene" uid="uid://btm8jc8l3rynt" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-doorway-round.glb" id="119_2ix53"]
+[ext_resource type="PackedScene" uid="uid://b0y01l48y6gl2" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-doorway-square-wide-curved.glb" id="120_r2g87"]
+[ext_resource type="PackedScene" uid="uid://bribix0rcv7ej" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-doorway-square-wide.glb" id="121_uqhgt"]
+[ext_resource type="PackedScene" uid="uid://bp4c6gppolemx" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-doorway-square.glb" id="122_rgftg"]
+[ext_resource type="PackedScene" uid="uid://882rcy5avyja" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-half.glb" id="123_ti3k7"]
+[ext_resource type="PackedScene" uid="uid://caamhdbmxu6gb" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-rounded.glb" id="124_7ttwn"]
+[ext_resource type="PackedScene" uid="uid://d1obmxg1ifgcb" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-side.glb" id="125_fey6k"]
+[ext_resource type="PackedScene" uid="uid://dxoal43lhtn05" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-slope.glb" id="126_fjun4"]
+[ext_resource type="PackedScene" uid="uid://uwpn5jyk803d" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-window-glass.glb" id="127_i1jyw"]
+[ext_resource type="PackedScene" uid="uid://r1i55ect3e0b" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-window-round.glb" id="128_2s1xj"]
+[ext_resource type="PackedScene" uid="uid://dpjogvalvr7bm" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-window-shutters.glb" id="129_qnjsd"]
+[ext_resource type="PackedScene" uid="uid://d0kds8dtnsdbv" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-window-small.glb" id="130_v6xfq"]
+[ext_resource type="PackedScene" uid="uid://chq2xxngpsvp1" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-window-stone.glb" id="131_ov2in"]
+[ext_resource type="PackedScene" uid="uid://dausa2dmq5t4s" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-arch-top-detail.glb" id="132_i8c7r"]
+[ext_resource type="PackedScene" uid="uid://cyxvhg6mpfr55" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-arch-top.glb" id="133_03mur"]
+[ext_resource type="PackedScene" uid="uid://5qxxll61qyjy" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-arch.glb" id="134_bqslk"]
+[ext_resource type="PackedScene" uid="uid://cxblmdtm23w06" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-block-half.glb" id="135_qqe6p"]
+[ext_resource type="PackedScene" uid="uid://dcspvmf558uwb" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-block.glb" id="136_4xmfk"]
+[ext_resource type="PackedScene" uid="uid://3hslefmkfys" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-broken.glb" id="137_4jydr"]
+[ext_resource type="PackedScene" uid="uid://buwcfykbqdj23" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-corner-diagonal-half.glb" id="138_wahy2"]
+[ext_resource type="PackedScene" uid="uid://cgsvheaa7pmpm" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-corner-diagonal.glb" id="139_67xa0"]
+[ext_resource type="PackedScene" uid="uid://dr0l2pwba75po" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-corner-edge.glb" id="140_3jil0"]
+[ext_resource type="PackedScene" uid="uid://bujym52be5cyw" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-corner.glb" id="141_vpksk"]
+[ext_resource type="PackedScene" uid="uid://p58j8n7qtvqb" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-curved.glb" id="142_g3ds8"]
+[ext_resource type="PackedScene" uid="uid://ciocf15gct8ke" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-detail-cross.glb" id="143_3spac"]
+[ext_resource type="PackedScene" uid="uid://whh6a71oc643" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-detail-diagonal.glb" id="144_rm5pa"]
+[ext_resource type="PackedScene" uid="uid://bc8sr00s4jsyk" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-detail-horizontal.glb" id="145_yccba"]
+[ext_resource type="PackedScene" uid="uid://dwv51t77l5tjl" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-diagonal.glb" id="146_u4vin"]
+[ext_resource type="PackedScene" uid="uid://dh7nij6l263q4" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-door.glb" id="147_uxjbm"]
+[ext_resource type="PackedScene" uid="uid://dsqaimctlkbi0" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-doorway-base.glb" id="148_5y585"]
+[ext_resource type="PackedScene" uid="uid://bbnl063ch3qrt" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-doorway-round.glb" id="149_vosaj"]
+[ext_resource type="PackedScene" uid="uid://itglsmbajx7e" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-doorway-square-wide-curved.glb" id="150_j8bw3"]
+[ext_resource type="PackedScene" uid="uid://cl2m5mcx8nku5" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-doorway-square-wide.glb" id="151_1o1y1"]
+[ext_resource type="PackedScene" uid="uid://nhmbbamwhs5l" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-doorway-square.glb" id="152_qgvx6"]
+[ext_resource type="PackedScene" uid="uid://cab35d1c7eas" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-half.glb" id="153_y3g58"]
+[ext_resource type="PackedScene" uid="uid://2ifkndae1k6t" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-rounded.glb" id="154_gyk5a"]
+[ext_resource type="PackedScene" uid="uid://b36bvpeylxjrr" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-side.glb" id="155_h41jp"]
+[ext_resource type="PackedScene" uid="uid://dn3xmnaqg0dt" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-slope.glb" id="156_5ga7s"]
+[ext_resource type="PackedScene" uid="uid://i51kqim80cvg" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-window-glass.glb" id="157_oh1qv"]
+[ext_resource type="PackedScene" uid="uid://bxivtxkn832ji" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-window-round.glb" id="158_fwb27"]
+[ext_resource type="PackedScene" uid="uid://bvcoy3kxtgmyq" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-window-shutters.glb" id="159_thnhq"]
+[ext_resource type="PackedScene" uid="uid://bhjuyh4wy5pin" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-window-small.glb" id="160_0tiyv"]
+[ext_resource type="PackedScene" uid="uid://cgac77ka0huti" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood-window-stone.glb" id="161_nihv7"]
+[ext_resource type="PackedScene" uid="uid://ccfefla8vue2v" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall-wood.glb" id="162_mymfx"]
+[ext_resource type="PackedScene" uid="uid://cv0fm1wjpp61s" path="res://assets/3D/Fantasy Town Kit/Models/GLB format/wall.glb" id="163_ret6j"]
+
+[node name="Node3D" type="Node3D" unique_id=1369105513]
+
+[node name="roof-corner-inner2" parent="." unique_id=1747996649 instance=ExtResource("52_a33vr")]
+
+[node name="roof-corner-round2" parent="." unique_id=1067474985 instance=ExtResource("53_kp4ss")]
+
+[node name="roof-corner2" parent="." unique_id=1107223204 instance=ExtResource("54_txqvg")]
+
+[node name="roof-flat2" parent="." unique_id=1793806037 instance=ExtResource("55_jyj51")]
+
+[node name="roof-gable-detail2" parent="." unique_id=1287947510 instance=ExtResource("56_g7ivt")]
+
+[node name="roof-gable-end2" parent="." unique_id=1624063628 instance=ExtResource("57_7a31r")]
+
+[node name="roof-gable-top2" parent="." unique_id=1766555175 instance=ExtResource("58_q4v6g")]
+
+[node name="roof-gable2" parent="." unique_id=1135397968 instance=ExtResource("59_mw2en")]
+
+[node name="roof-high-corner-round2" parent="." unique_id=882448025 instance=ExtResource("60_khgci")]
+
+[node name="roof-high-corner2" parent="." unique_id=850704320 instance=ExtResource("61_xn5xw")]
+
+[node name="roof-high-cornerinner2" parent="." unique_id=730003359 instance=ExtResource("62_luyrd")]
+
+[node name="roof-high-flat2" parent="." unique_id=747319467 instance=ExtResource("63_c6n6o")]
+
+[node name="roof-high-gable-detail2" parent="." unique_id=2107656405 instance=ExtResource("64_8sxk4")]
+
+[node name="roof-high-gable-end2" parent="." unique_id=99014238 instance=ExtResource("65_epq35")]
+
+[node name="roof-high-gable-top2" parent="." unique_id=1676311840 instance=ExtResource("66_kcjyr")]
+
+[node name="roof-high-gable2" parent="." unique_id=552819565 instance=ExtResource("67_jqgi4")]
+
+[node name="roof-high-left2" parent="." unique_id=1962279294 instance=ExtResource("68_ry12w")]
+
+[node name="roof-high-point2" parent="." unique_id=1934498430 instance=ExtResource("69_tt4rb")]
+
+[node name="roof-high-right2" parent="." unique_id=1884240593 instance=ExtResource("70_1agqx")]
+
+[node name="roof-high-window2" parent="." unique_id=2103096623 instance=ExtResource("71_ar6h5")]
+
+[node name="roof-high2" parent="." unique_id=1312495071 instance=ExtResource("72_k0ojj")]
+
+[node name="roof-left2" parent="." unique_id=36616372 instance=ExtResource("73_3whw7")]
+
+[node name="roof-point2" parent="." unique_id=1482033184 instance=ExtResource("74_hm8fj")]
+
+[node name="roof-right2" parent="." unique_id=587844351 instance=ExtResource("75_mboj8")]
+
+[node name="roof-window2" parent="." unique_id=526175975 instance=ExtResource("76_028gq")]
+
+[node name="roof2" parent="." unique_id=513740354 instance=ExtResource("77_stek6")]
+
+[node name="wall-arch-top-detail2" parent="." unique_id=1503332748 instance=ExtResource("101_lgbkw")]
+
+[node name="wall-arch-top2" parent="." unique_id=110042709 instance=ExtResource("102_oqcij")]
+
+[node name="wall-arch2" parent="." unique_id=402158658 instance=ExtResource("103_crdb7")]
+
+[node name="wall-block-half2" parent="." unique_id=1750186940 instance=ExtResource("104_vjsnn")]
+
+[node name="wall-block2" parent="." unique_id=1583420073 instance=ExtResource("105_dig3x")]
+
+[node name="wall-broken2" parent="." unique_id=1870627771 instance=ExtResource("106_tldjh")]
+
+[node name="wall-corner-detail2" parent="." unique_id=2014446955 instance=ExtResource("107_1thrg")]
+
+[node name="wall-corner-diagonal-half2" parent="." unique_id=107874159 instance=ExtResource("108_mmdy3")]
+
+[node name="wall-corner-diagonal2" parent="." unique_id=1343182887 instance=ExtResource("109_fiyau")]
+
+[node name="wall-corner-edge2" parent="." unique_id=1667990064 instance=ExtResource("110_alnwd")]
+
+[node name="wall-corner2" parent="." unique_id=569411762 instance=ExtResource("111_6iein")]
+
+[node name="wall-curved2" parent="." unique_id=1538318695 instance=ExtResource("112_fvddh")]
+
+[node name="wall-detail-cross2" parent="." unique_id=1636056680 instance=ExtResource("113_vtbd6")]
+
+[node name="wall-detail-diagonal2" parent="." unique_id=666491983 instance=ExtResource("114_yvtqd")]
+
+[node name="wall-detail-horizontal2" parent="." unique_id=1640885925 instance=ExtResource("115_yevlx")]
+
+[node name="wall-diagonal2" parent="." unique_id=1375003480 instance=ExtResource("116_v5pbp")]
+
+[node name="wall-door2" parent="." unique_id=837441542 instance=ExtResource("117_g6oj8")]
+
+[node name="wall-doorway-base2" parent="." unique_id=474058066 instance=ExtResource("118_v7qn8")]
+
+[node name="wall-doorway-round2" parent="." unique_id=1151889604 instance=ExtResource("119_2ix53")]
+
+[node name="wall-doorway-square-wide-curved2" parent="." unique_id=2020852122 instance=ExtResource("120_r2g87")]
+
+[node name="wall-doorway-square-wide2" parent="." unique_id=1208462250 instance=ExtResource("121_uqhgt")]
+
+[node name="wall-doorway-square2" parent="." unique_id=838473618 instance=ExtResource("122_rgftg")]
+
+[node name="wall-half2" parent="." unique_id=1061208516 instance=ExtResource("123_ti3k7")]
+
+[node name="wall-rounded2" parent="." unique_id=1417971596 instance=ExtResource("124_7ttwn")]
+
+[node name="wall-side2" parent="." unique_id=823958314 instance=ExtResource("125_fey6k")]
+
+[node name="wall-slope2" parent="." unique_id=763836622 instance=ExtResource("126_fjun4")]
+
+[node name="wall-window-glass2" parent="." unique_id=200247598 instance=ExtResource("127_i1jyw")]
+
+[node name="wall-window-round2" parent="." unique_id=437913791 instance=ExtResource("128_2s1xj")]
+
+[node name="wall-window-shutters2" parent="." unique_id=1663590579 instance=ExtResource("129_qnjsd")]
+
+[node name="wall-window-small2" parent="." unique_id=1153250350 instance=ExtResource("130_v6xfq")]
+
+[node name="wall-window-stone2" parent="." unique_id=725041820 instance=ExtResource("131_ov2in")]
+
+[node name="wall-wood-arch-top-detail2" parent="." unique_id=843262549 instance=ExtResource("132_i8c7r")]
+
+[node name="wall-wood-arch-top2" parent="." unique_id=1890073403 instance=ExtResource("133_03mur")]
+
+[node name="wall-wood-arch2" parent="." unique_id=1660763351 instance=ExtResource("134_bqslk")]
+
+[node name="wall-wood-block-half2" parent="." unique_id=151001455 instance=ExtResource("135_qqe6p")]
+
+[node name="wall-wood-block2" parent="." unique_id=1973067603 instance=ExtResource("136_4xmfk")]
+
+[node name="wall-wood-broken2" parent="." unique_id=1652012380 instance=ExtResource("137_4jydr")]
+
+[node name="wall-wood-corner-diagonal-half2" parent="." unique_id=885303449 instance=ExtResource("138_wahy2")]
+
+[node name="wall-wood-corner-diagonal2" parent="." unique_id=1684084369 instance=ExtResource("139_67xa0")]
+
+[node name="wall-wood-corner-edge2" parent="." unique_id=1811119722 instance=ExtResource("140_3jil0")]
+
+[node name="wall-wood-corner2" parent="." unique_id=92464952 instance=ExtResource("141_vpksk")]
+
+[node name="wall-wood-curved2" parent="." unique_id=2122602440 instance=ExtResource("142_g3ds8")]
+
+[node name="wall-wood-detail-cross2" parent="." unique_id=510015398 instance=ExtResource("143_3spac")]
+
+[node name="wall-wood-detail-diagonal2" parent="." unique_id=837606149 instance=ExtResource("144_rm5pa")]
+
+[node name="wall-wood-detail-horizontal2" parent="." unique_id=1759260501 instance=ExtResource("145_yccba")]
+
+[node name="wall-wood-diagonal2" parent="." unique_id=2075335443 instance=ExtResource("146_u4vin")]
+
+[node name="wall-wood-door2" parent="." unique_id=796899800 instance=ExtResource("147_uxjbm")]
+
+[node name="wall-wood-doorway-base2" parent="." unique_id=1221315539 instance=ExtResource("148_5y585")]
+
+[node name="wall-wood-doorway-round2" parent="." unique_id=545530380 instance=ExtResource("149_vosaj")]
+
+[node name="wall-wood-doorway-square-wide-curved2" parent="." unique_id=2044877282 instance=ExtResource("150_j8bw3")]
+
+[node name="wall-wood-doorway-square-wide2" parent="." unique_id=1113458810 instance=ExtResource("151_1o1y1")]
+
+[node name="wall-wood-doorway-square2" parent="." unique_id=2065609931 instance=ExtResource("152_qgvx6")]
+
+[node name="wall-wood-half2" parent="." unique_id=1132276068 instance=ExtResource("153_y3g58")]
+
+[node name="wall-wood-rounded2" parent="." unique_id=1992551456 instance=ExtResource("154_gyk5a")]
+
+[node name="wall-wood-side2" parent="." unique_id=515845590 instance=ExtResource("155_h41jp")]
+
+[node name="wall-wood-slope2" parent="." unique_id=1710328112 instance=ExtResource("156_5ga7s")]
+
+[node name="wall-wood-window-glass2" parent="." unique_id=1232788812 instance=ExtResource("157_oh1qv")]
+
+[node name="wall-wood-window-round2" parent="." unique_id=655034106 instance=ExtResource("158_fwb27")]
+
+[node name="wall-wood-window-shutters2" parent="." unique_id=1752820379 instance=ExtResource("159_thnhq")]
+
+[node name="wall-wood-window-small2" parent="." unique_id=1078731810 instance=ExtResource("160_0tiyv")]
+
+[node name="wall-wood-window-stone2" parent="." unique_id=1181002836 instance=ExtResource("161_nihv7")]
+
+[node name="wall-wood2" parent="." unique_id=760067886 instance=ExtResource("162_mymfx")]
+
+[node name="wall2" parent="." unique_id=1630222363 instance=ExtResource("163_ret6j")]
+
+[node name="balcony-wall-fence2" parent="." unique_id=1904298877 instance=ExtResource("1_cpo7j")]
+
+[node name="balcony-wall2" parent="." unique_id=2107509688 instance=ExtResource("2_vndg0")]
+
+[node name="fence-broken2" parent="." unique_id=2106673623 instance=ExtResource("11_k1rps")]
+
+[node name="fence-curved2" parent="." unique_id=653855923 instance=ExtResource("12_rsyy6")]
+
+[node name="fence-gate2" parent="." unique_id=2130045350 instance=ExtResource("13_ujrjc")]
+
+[node name="fence2" parent="." unique_id=561594320 instance=ExtResource("14_b87tm")]
+
+[node name="fountain-center2" parent="." unique_id=1092538764 instance=ExtResource("15_it4q4")]
+
+[node name="fountain-corner-inner-square2" parent="." unique_id=1988892050 instance=ExtResource("16_3d64j")]
+
+[node name="fountain-corner-inner2" parent="." unique_id=1947294129 instance=ExtResource("17_o4eo1")]
+
+[node name="fountain-corner2" parent="." unique_id=1982657134 instance=ExtResource("18_cpwgq")]
+
+[node name="fountain-curved2" parent="." unique_id=1388881854 instance=ExtResource("19_o78qt")]
+
+[node name="fountain-edge2" parent="." unique_id=924902578 instance=ExtResource("20_mm5em")]
+
+[node name="fountain-round-detail2" parent="." unique_id=2122795297 instance=ExtResource("21_0t7fb")]
+
+[node name="fountain-round2" parent="." unique_id=77412529 instance=ExtResource("22_4bx06")]
+
+[node name="fountain-square-detail2" parent="." unique_id=1346654556 instance=ExtResource("23_dgdcy")]
+
+[node name="fountain-square2" parent="." unique_id=381355829 instance=ExtResource("24_rfdkc")]
+
+[node name="hedge-curved2" parent="." unique_id=1644009197 instance=ExtResource("25_5vif6")]
+
+[node name="hedge-gate2" parent="." unique_id=998888763 instance=ExtResource("26_2dsti")]
+
+[node name="hedge-large-curved2" parent="." unique_id=694040250 instance=ExtResource("27_40g8j")]
+
+[node name="hedge-large-gate2" parent="." unique_id=1043129765 instance=ExtResource("28_epx78")]
+
+[node name="hedge-large2" parent="." unique_id=1625679723 instance=ExtResource("29_v0trg")]
+
+[node name="hedge2" parent="." unique_id=363343698 instance=ExtResource("30_hq8nf")]
+
+[node name="planks-half2" parent="." unique_id=112107083 instance=ExtResource("35_4ojo3")]
+
+[node name="planks-opening2" parent="." unique_id=672561909 instance=ExtResource("36_1vh17")]
+
+[node name="planks2" parent="." unique_id=1583725378 instance=ExtResource("37_g2lro")]
+
+[node name="poles-horizontal2" parent="." unique_id=1974614603 instance=ExtResource("38_42lnk")]
+
+[node name="poles2" parent="." unique_id=1827444410 instance=ExtResource("39_eec88")]
+
+[node name="road-bend2" parent="." unique_id=353151024 instance=ExtResource("40_gkjn4")]
+
+[node name="road-corner-inner2" parent="." unique_id=149263164 instance=ExtResource("41_aq08l")]
+
+[node name="road-corner2" parent="." unique_id=1731092709 instance=ExtResource("42_rdws5")]
+
+[node name="road-curb-end2" parent="." unique_id=903041796 instance=ExtResource("43_sjmds")]
+
+[node name="road-curb2" parent="." unique_id=2133718264 instance=ExtResource("44_tcwku")]
+
+[node name="road-edge-slope2" parent="." unique_id=1750836470 instance=ExtResource("45_t6b60")]
+
+[node name="road-edge2" parent="." unique_id=1480251238 instance=ExtResource("46_b4gqr")]
+
+[node name="road-slope2" parent="." unique_id=828908045 instance=ExtResource("47_5oxxr")]
+
+[node name="road2" parent="." unique_id=2010506564 instance=ExtResource("48_ep8n4")]
