@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://m0glnkjnbd03"]
+
+[ext_resource type="PackedScene" uid="uid://c5c7itgdjt5j5" path="res://assets/3D/Furniture Kit/furniture-kit-tileables.blend" id="1_vna8h"]
+
+[node name="furniture-kit-tileables" unique_id=1789117157 instance=ExtResource("1_vna8h")]
