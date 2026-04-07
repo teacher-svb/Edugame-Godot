@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cyxg8f1y6y3ew"]
+
+[ext_resource type="PackedScene" uid="uid://bb550y1ipn4ae" path="res://assets/3D/Fantasy Town Kit/fantasy-town-kit-tileables.blend" id="1_jc2ao"]
+
+[node name="fantasy-town-kit-tileables" unique_id=1952156930 instance=ExtResource("1_jc2ao")]

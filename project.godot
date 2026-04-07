@@ -28,6 +28,10 @@ ChallengeUiFactoryPlugin="*res://addons/ChallengeUIFactoryPlugin/ChallengeUIFact
 
 project/assembly_name="EduGame"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ChallengeUIFactoryPlugin/plugin.cfg", "res://addons/UpFaceMultiMesh/plugin.cfg")
+
 [input]
 
 move_up={

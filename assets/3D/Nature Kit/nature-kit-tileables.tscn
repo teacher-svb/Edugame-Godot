@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dg1321ryk7sqt"]
+
+[ext_resource type="PackedScene" uid="uid://xp1wjr7gvrvr" path="res://assets/3D/Nature Kit/nature-kit-tileables.blend" id="1_xrdgp"]
+
+[node name="nature-kit-tileables" unique_id=402118586 instance=ExtResource("1_xrdgp")]
