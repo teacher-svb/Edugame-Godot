@@ -48,6 +48,11 @@ _subresources={
 "save_to_file/fallback_path": "res://assets/3D/Nature Kit/Models/tree_detailed.res",
 "save_to_file/path": "uid://c85qyc0sfae5i"
 }
+},
+"nodes": {
+"PATH:tree_detailed": {
+"generate/physics": true
+}
 }
 }
 gltf/naming_version=2

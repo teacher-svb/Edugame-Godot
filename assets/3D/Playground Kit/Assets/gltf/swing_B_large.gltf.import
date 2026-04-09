@@ -37,6 +37,18 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:swing_B_large": {
+"generate/physics": true
+},
+"PATH:swing_B_large/swing_B_large_seat_A": {
+"generate/physics": true
+},
+"PATH:swing_B_large/swing_B_large_seat_B": {
+"generate/physics": true
+}
+}
+}
 gltf/naming_version=2
 gltf/embedded_image_handling=1

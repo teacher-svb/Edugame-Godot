@@ -40,51 +40,67 @@ materials/extract_path=""
 _subresources={
 "nodes": {
 "PATH:bridge_center_stone": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:bridge_center_stoneRound": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:bridge_center_wood": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:bridge_center_woodRound": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:bridge_side_stone": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:bridge_side_stoneRound": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:bridge_side_wood": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:bridge_side_woodRound": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:bridge_stone": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:bridge_stoneNarrow": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:bridge_stoneRound": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:bridge_stoneRoundNarrow": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:bridge_wood": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:bridge_woodNarrow": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:bridge_woodRound": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:bridge_woodRoundNarrow": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:fence": {
@@ -139,45 +155,59 @@ _subresources={
 "generate/physics": true
 },
 "PATH:ground_grass": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:ground_pathBend": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:ground_pathBendBank": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:ground_pathCorner": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:ground_pathCornerSmall": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:ground_pathCross": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:ground_pathEnd": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:ground_pathEndClosed": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:ground_pathOpen": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:ground_pathRocks": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:ground_pathSide": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:ground_pathSideOpen": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:ground_pathSplit": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:ground_pathStraight": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:ground_pathTile": {
@@ -244,30 +274,39 @@ _subresources={
 "generate/physics": true
 },
 "PATH:road": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:road-bend": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:road-corner": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:road-corner-inner": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:road-curb": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:road-curb-end": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:road-edge": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:road-edge-slope": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:road-slope": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:roof": {
@@ -283,6 +322,7 @@ _subresources={
 "generate/physics": true
 },
 "PATH:roof-flat": {
+"generate/navmesh": 1,
 "generate/physics": true
 },
 "PATH:roof-gable": {
