@@ -5,26 +5,36 @@ using TnT.EduGame.GameState;
 using TnT.Extensions;
 using TnT.Systems;
 
-// [Tool]
 [GlobalClass]
-public partial class Transporter : Area2D
+public partial class Transporter : Node
 {
-    [Export] Transporter _destination;
-    [Export] Resource _sceneToLoad;
-    public void _OnBodyEntered(Node2D other)
+    [Export] protected Transporter _destination;
+    [Export] protected Resource _sceneToLoad;
+
+    protected Vector3 Destination
     {
-        if (other is CharacterController2D && other.FindAnyObjectByType<Player>() != null)
+        get
+        {
+            var pos = this.Get("position");
+            return pos.VariantType switch
+            {
+                Variant.Type.Vector2 => pos.AsVector2().ToVector3(),
+                Variant.Type.Vector3 => pos.AsVector3(),
+                _ => throw new InvalidOperationException($"{GetType().Name} must inherit from Node2D or Node3D")
+            };
+        }
+    }
+    public void _OnBodyEntered(Node other)
+    {
+        if (other.FindAnyObjectByType<Player>() != null)
             _destination?.MoveHere();
     }
 
     public void MoveHere()
     {
         if (_sceneToLoad == null)
-        {
-            StateManagerGame.Instance.LoadLocation(this.Position);
-            return;
-        }
-
-        StateManagerGame.Instance.LoadScene(_sceneToLoad, this.Position);
+            StateManagerGame.Instance.LoadLocation(Destination);
+        else
+            StateManagerGame.Instance.LoadScene(_sceneToLoad, Destination);
     }
 }

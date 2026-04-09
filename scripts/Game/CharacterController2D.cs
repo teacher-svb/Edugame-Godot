@@ -60,10 +60,10 @@ namespace TnT.Systems
 				_nextGoal = nextGoal;
 		}
 
-		public void MoveTo(Vector2 position)
+		public void MoveTo(Vector3 position)
 		{
-			_currentGoal = position.Snap();
-			_nextGoal = position.Snap();
+			_currentGoal = position.ToVector2().Snap();
+			_nextGoal = position.ToVector2().Snap();
 			this.Position = _nextGoal;
 		}
 	}

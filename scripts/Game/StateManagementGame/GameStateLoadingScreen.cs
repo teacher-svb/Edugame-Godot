@@ -65,14 +65,14 @@ namespace TnT.EduGame.GameState
             await this.FadeController.ShowView();
         }
 
-        async Task LoadLocation(Player player, Vector2 target)
+        async Task LoadLocation(Player player, Vector3 target)
         {
             await FadeIn();
 
             player.MoveTo(target);
         }
 
-        async Task LoadScene(Resource scene, Player player, Vector2 target, bool forceLoad)
+        async Task LoadScene(Resource scene, Player player, Vector3 target, bool forceLoad)
         {
             await FadeIn();
 
@@ -115,7 +115,7 @@ namespace TnT.EduGame.GameState
         public class LocationLoaderOptions : LoaderOptions
         {
             public Player player;
-            public Vector2 targetLocation;
+            public Vector3 targetLocation;
         }
 
         public class SceneLoaderOptions : LocationLoaderOptions

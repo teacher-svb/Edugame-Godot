@@ -76,7 +76,7 @@ namespace TnT.EduGame.GameState
             }
         }
 
-        public void LoadScene(Resource sceneName, Vector2 targetLocation, bool forceLoad = false)
+        public void LoadScene(Resource sceneName, Vector3 targetLocation, bool forceLoad = false)
         {
             GameStateLoadingScreen state = _states.OfType<GameStateLoadingScreen>().FirstOrDefault();
             try
@@ -89,7 +89,7 @@ namespace TnT.EduGame.GameState
             }
         }
 
-        public void LoadLocation(Vector2 targetLocation, bool forceLoad = false)
+        public void LoadLocation(Vector3 targetLocation, bool forceLoad = false)
         {
             // GetTree().FindAnyObjectByType<Player>();
             GameStateLoadingScreen state = _states.OfType<GameStateLoadingScreen>().FirstOrDefault();

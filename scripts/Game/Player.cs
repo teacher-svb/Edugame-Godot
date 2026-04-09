@@ -31,7 +31,7 @@ public partial class Player : Node//, IBind<Player.PlayerSaveData>
 			_cc.Move(direction);
 	}
 
-	public void MoveTo(Vector2 target)
+	public void MoveTo(Vector3 target)
     {
 		_cc.MoveTo(target);
     }
