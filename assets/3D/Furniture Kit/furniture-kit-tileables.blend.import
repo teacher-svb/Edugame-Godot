@@ -39,8 +39,159 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "nodes": {
-"PATH:Cube": {
-"import/skip_import": true
+"PATH:bookcaseClosed(Clone)": {
+"generate/physics": true
+},
+"PATH:bookcaseClosedDoors(Clone)": {
+"generate/physics": true
+},
+"PATH:bookcaseClosedWide(Clone)": {
+"generate/physics": true
+},
+"PATH:bookcaseOpen(Clone)": {
+"generate/physics": true
+},
+"PATH:bookcaseOpenLow(Clone)": {
+"generate/physics": true
+},
+"PATH:desk(Clone)": {
+"generate/physics": true
+},
+"PATH:deskCorner(Clone)": {
+"generate/physics": true
+},
+"PATH:doorway(Clone)": {
+"generate/physics": true
+},
+"PATH:doorwayFront(Clone)": {
+"generate/physics": true
+},
+"PATH:doorwayOpen(Clone)": {
+"generate/physics": true
+},
+"PATH:floorCorner(Clone)": {
+"generate/navmesh": 1,
+"generate/physics": true
+},
+"PATH:floorCornerRound(Clone)": {
+"generate/navmesh": 1,
+"generate/physics": true
+},
+"PATH:floorFull(Clone)": {
+"generate/navmesh": 1,
+"generate/physics": true
+},
+"PATH:floorHalf(Clone)": {
+"generate/navmesh": 1,
+"generate/physics": true
+},
+"PATH:kitchenBar(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenBarEnd(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenCabinet(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenCabinetCornerInner(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenCabinetCornerRound(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenCabinetDrawer(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenCabinetOpen(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenCabinetUpper(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenCabinetUpperCornerLeft(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenCabinetUpperCornerRight(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenCabinetUpperDouble(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenCabinetUpperLow(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenFridge(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenFridgeBuiltIn(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenFridgeLarge(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenFridgeSmall(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenSink(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenStove(Clone)": {
+"generate/physics": true
+},
+"PATH:kitchenStoveElectric(Clone)": {
+"generate/physics": true
+},
+"PATH:rugDoormat(Clone)": {
+"generate/physics": true
+},
+"PATH:rugRectangle(Clone)": {
+"generate/physics": true
+},
+"PATH:rugRound(Clone)": {
+"generate/physics": true
+},
+"PATH:rugRounded(Clone)": {
+"generate/physics": true
+},
+"PATH:rugSquare(Clone)": {
+"generate/physics": true
+},
+"PATH:stairs(Clone)": {
+"generate/physics": true
+},
+"PATH:stairsCorner(Clone)": {
+"generate/physics": true
+},
+"PATH:stairsOpen(Clone)": {
+"generate/physics": true
+},
+"PATH:stairsOpenSingle(Clone)": {
+"generate/physics": true
+},
+"PATH:wall(Clone)": {
+"generate/physics": true
+},
+"PATH:wallCorner(Clone)": {
+"generate/physics": true
+},
+"PATH:wallCornerRond(Clone)": {
+"generate/physics": true
+},
+"PATH:wallDoorway(Clone)": {
+"generate/physics": true
+},
+"PATH:wallDoorwayWide(Clone)": {
+"generate/physics": true
+},
+"PATH:wallHalf(Clone)": {
+"generate/physics": true
+},
+"PATH:wallWindow(Clone)": {
+"generate/physics": true
+},
+"PATH:wallWindowSlide(Clone)": {
+"generate/physics": true
 }
 }
 }
