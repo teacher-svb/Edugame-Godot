@@ -199,7 +199,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34683228, 0)
 shape = SubResource("CapsuleShape3D_iotrw")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=2018844510]
-transform = Transform3D(1, 0, 0, 0, 0.74453294, 0.6675857, 0, -0.6675857, 0.74453294, 0, 6.935853, 7.2997875)
+transform = Transform3D(1, 0, 0, 0, 0.74453294, 0.6675857, 0, -0.6675857, 0.74453294, 0, 11.285046, 12.150276)
 projection = 1
 fov = 10.9
 size = 5.0
