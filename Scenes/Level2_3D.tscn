@@ -12,6 +12,8 @@
 [ext_resource type="ArrayMesh" uid="uid://jjy6atmp2inn" path="res://assets/3D/Nature Kit/Models/tree_oak.res" id="9_nl50q"]
 [ext_resource type="PackedScene" uid="uid://cdou2t4bule12" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-b.glb" id="11_55vhe"]
 [ext_resource type="Script" uid="uid://dc4u7vqilp6dd" path="res://scripts/CharacterController3D.cs" id="11_qyvsi"]
+[ext_resource type="AudioStream" uid="uid://p6yptdrwk41y" path="res://assets/music/Dawn_at_the_Eastern_Gate.mp3" id="13_iotrw"]
+[ext_resource type="Script" uid="uid://dt1pmf2iuc4nb" path="res://scripts/CharacterAnimator.cs" id="13_sikog"]
 
 [sub_resource type="Gradient" id="Gradient_ykqph"]
 offsets = PackedFloat32Array(0.117647, 1)
@@ -72,6 +74,55 @@ plane = Plane(1, 0, 0, 0)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iotrw"]
 radius = 0.12402344
 height = 0.6754761
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sikog"]
+animation = &"fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nq4sg"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xbk2r"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_im6n0"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_60cj0"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aebyh"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0qrrf"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iikk8"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0ft5a"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w8kji"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yj0bu"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sikog"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_nq4sg"]
+states/End/position = Vector2(864, 160)
+states/Start/position = Vector2(193, 173)
+states/fall/node = SubResource("AnimationNodeAnimation_sikog")
+states/fall/position = Vector2(591, 309)
+states/idle/node = SubResource("AnimationNodeAnimation_nq4sg")
+states/idle/position = Vector2(344, 181)
+states/jump/node = SubResource("AnimationNodeAnimation_xbk2r")
+states/jump/position = Vector2(591, 101)
+states/walk/node = SubResource("AnimationNodeAnimation_im6n0")
+states/walk/position = Vector2(515, 189)
+transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_60cj0"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_aebyh"), "fall", "walk", SubResource("AnimationNodeStateMachineTransition_0qrrf"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_iikk8"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_0ft5a"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_w8kji"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_yj0bu"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_sikog")]
 
 [node name="Node3D" type="Node3D" unique_id=33420625]
 
@@ -188,11 +239,18 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.633665, 1.9073486e-06, 4.169815)
 shape = SubResource("WorldBoundaryShape3D_oaewr")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1353268474]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1353268474 node_paths=PackedStringArray("VisualRoot")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5442896, 0, 37.191315)
 script = ExtResource("11_qyvsi")
+VisualRoot = NodePath("character-female-b2/character-female-b")
 
-[node name="character-female-b2" parent="CharacterBody3D" unique_id=1547534136 instance=ExtResource("11_55vhe")]
+[node name="character-female-b2" parent="CharacterBody3D" unique_id=1913118570 instance=ExtResource("11_55vhe")]
+
+[node name="Skeleton3D" parent="CharacterBody3D/character-female-b2/character-female-b" parent_id_path=PackedInt32Array(1913118570, 1244519516) index="0" unique_id=606344397]
+bones/3/rotation = Quaternion(0.025528878, 0, 0, 0.9996741)
+bones/4/rotation = Quaternion(0, 0, -0.31086612, 0.95045376)
+bones/5/rotation = Quaternion(0, 0, 0.31086612, 0.95045376)
+bones/6/rotation = Quaternion(0, -0.025528878, 0, 0.9996741)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=146199459]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34683228, 0)
@@ -204,3 +262,22 @@ projection = 1
 fov = 10.9
 size = 5.0
 far = 200.0
+
+[node name="CharacterAnimator" type="Node" parent="CharacterBody3D" unique_id=1716070428 node_paths=PackedStringArray("AnimationTree")]
+script = ExtResource("13_sikog")
+AnimationTree = NodePath("../AnimationTree")
+
+[node name="AnimationTree" type="AnimationTree" parent="CharacterBody3D" unique_id=909264513]
+root_node = NodePath("../character-female-b2")
+tree_root = SubResource("AnimationNodeStateMachine_nq4sg")
+anim_player = NodePath("../character-female-b2/AnimationPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=397472222]
+stream = ExtResource("13_iotrw")
+volume_db = -20.613
+autoplay = true
+parameters/looping = true
+
+[connection signal="MovementStateChanged" from="CharacterBody3D" to="CharacterBody3D/CharacterAnimator" method="OnMovementStateChanged"]
+
+[editable path="CharacterBody3D/character-female-b2"]
