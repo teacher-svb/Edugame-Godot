@@ -70,7 +70,7 @@ buffer = PackedFloat32Array(-1.4488113, -0.15143396, 1.4620292, -8.730619, 0.065
 plane = Plane(1, 0, 0, 0)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iotrw"]
-radius = 0.21191406
+radius = 0.12402344
 height = 0.6754761
 
 [node name="Node3D" type="Node3D" unique_id=33420625]
@@ -189,7 +189,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.633665, 1.9073486e-06, 4.
 shape = SubResource("WorldBoundaryShape3D_oaewr")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1353268474]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 36.884872)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5442896, 0, 37.191315)
 script = ExtResource("11_qyvsi")
 
 [node name="character-female-b2" parent="CharacterBody3D" unique_id=1547534136 instance=ExtResource("11_55vhe")]
@@ -199,5 +199,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34683228, 0)
 shape = SubResource("CapsuleShape3D_iotrw")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=2018844510]
-transform = Transform3D(1, 0, 0, 0, 0.74453294, 0.6675857, 0, -0.6675857, 0.74453294, 0, 8.556789, 9.107555)
+transform = Transform3D(1, 0, 0, 0, 0.74453294, 0.6675857, 0, -0.6675857, 0.74453294, 0, 17.957369, 19.591663)
 fov = 10.9

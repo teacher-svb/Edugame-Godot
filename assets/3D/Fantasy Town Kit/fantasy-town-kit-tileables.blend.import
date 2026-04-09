@@ -37,7 +37,568 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:bridge_center_stone": {
+"generate/physics": true
+},
+"PATH:bridge_center_stoneRound": {
+"generate/physics": true
+},
+"PATH:bridge_center_wood": {
+"generate/physics": true
+},
+"PATH:bridge_center_woodRound": {
+"generate/physics": true
+},
+"PATH:bridge_side_stone": {
+"generate/physics": true
+},
+"PATH:bridge_side_stoneRound": {
+"generate/physics": true
+},
+"PATH:bridge_side_wood": {
+"generate/physics": true
+},
+"PATH:bridge_side_woodRound": {
+"generate/physics": true
+},
+"PATH:bridge_stone": {
+"generate/physics": true
+},
+"PATH:bridge_stoneNarrow": {
+"generate/physics": true
+},
+"PATH:bridge_stoneRound": {
+"generate/physics": true
+},
+"PATH:bridge_stoneRoundNarrow": {
+"generate/physics": true
+},
+"PATH:bridge_wood": {
+"generate/physics": true
+},
+"PATH:bridge_woodNarrow": {
+"generate/physics": true
+},
+"PATH:bridge_woodRound": {
+"generate/physics": true
+},
+"PATH:bridge_woodRoundNarrow": {
+"generate/physics": true
+},
+"PATH:fence": {
+"generate/physics": true
+},
+"PATH:fence-broken": {
+"generate/physics": true
+},
+"PATH:fence-curved": {
+"generate/physics": true
+},
+"PATH:fence-gate": {
+"generate/physics": true
+},
+"PATH:fence-gate/gate": {
+"generate/physics": true
+},
+"PATH:fence_bend": {
+"generate/physics": true
+},
+"PATH:fence_bendCenter": {
+"generate/physics": true
+},
+"PATH:fence_corner": {
+"generate/physics": true
+},
+"PATH:fence_gate": {
+"generate/physics": true
+},
+"PATH:fence_planks": {
+"generate/physics": true
+},
+"PATH:fence_planksDouble": {
+"generate/physics": true
+},
+"PATH:fence_simple": {
+"generate/physics": true
+},
+"PATH:fence_simpleCenter": {
+"generate/physics": true
+},
+"PATH:fence_simpleDiagonal": {
+"generate/physics": true
+},
+"PATH:fence_simpleDiagonalCenter": {
+"generate/physics": true
+},
+"PATH:fence_simpleHigh": {
+"generate/physics": true
+},
+"PATH:fence_simpleLow": {
+"generate/physics": true
+},
+"PATH:ground_grass": {
+"generate/physics": true
+},
+"PATH:ground_pathBend": {
+"generate/physics": true
+},
+"PATH:ground_pathBendBank": {
+"generate/physics": true
+},
+"PATH:ground_pathCorner": {
+"generate/physics": true
+},
+"PATH:ground_pathCornerSmall": {
+"generate/physics": true
+},
+"PATH:ground_pathCross": {
+"generate/physics": true
+},
+"PATH:ground_pathEnd": {
+"generate/physics": true
+},
+"PATH:ground_pathEndClosed": {
+"generate/physics": true
+},
+"PATH:ground_pathOpen": {
+"generate/physics": true
+},
+"PATH:ground_pathRocks": {
+"generate/physics": true
+},
+"PATH:ground_pathSide": {
+"generate/physics": true
+},
+"PATH:ground_pathSideOpen": {
+"generate/physics": true
+},
+"PATH:ground_pathSplit": {
+"generate/physics": true
+},
+"PATH:ground_pathStraight": {
+"generate/physics": true
+},
+"PATH:ground_pathTile": {
+"generate/physics": true
+},
+"PATH:ground_riverBend": {
+"generate/physics": true
+},
+"PATH:ground_riverBendBank": {
+"generate/physics": true
+},
+"PATH:ground_riverCorner": {
+"generate/physics": true
+},
+"PATH:ground_riverCornerSmall": {
+"generate/physics": true
+},
+"PATH:ground_riverCross": {
+"generate/physics": true
+},
+"PATH:ground_riverEnd": {
+"generate/physics": true
+},
+"PATH:ground_riverEndClosed": {
+"generate/physics": true
+},
+"PATH:ground_riverOpen": {
+"generate/physics": true
+},
+"PATH:ground_riverRocks": {
+"generate/physics": true
+},
+"PATH:ground_riverSide": {
+"generate/physics": true
+},
+"PATH:ground_riverSideOpen": {
+"generate/physics": true
+},
+"PATH:ground_riverSplit": {
+"generate/physics": true
+},
+"PATH:ground_riverStraight": {
+"generate/physics": true
+},
+"PATH:ground_riverTile": {
+"generate/physics": true
+},
+"PATH:hedge": {
+"generate/physics": true
+},
+"PATH:hedge-curved": {
+"generate/physics": true
+},
+"PATH:hedge-gate": {
+"generate/physics": true
+},
+"PATH:hedge-large": {
+"generate/physics": true
+},
+"PATH:hedge-large-curved": {
+"generate/physics": true
+},
+"PATH:hedge-large-gate": {
+"generate/physics": true
+},
+"PATH:road": {
+"generate/physics": true
+},
+"PATH:road-bend": {
+"generate/physics": true
+},
+"PATH:road-corner": {
+"generate/physics": true
+},
+"PATH:road-corner-inner": {
+"generate/physics": true
+},
+"PATH:road-curb": {
+"generate/physics": true
+},
+"PATH:road-curb-end": {
+"generate/physics": true
+},
+"PATH:road-edge": {
+"generate/physics": true
+},
+"PATH:road-edge-slope": {
+"generate/physics": true
+},
+"PATH:road-slope": {
+"generate/physics": true
+},
+"PATH:roof": {
+"generate/physics": true
+},
+"PATH:roof-corner": {
+"generate/physics": true
+},
+"PATH:roof-corner-inner": {
+"generate/physics": true
+},
+"PATH:roof-corner-round": {
+"generate/physics": true
+},
+"PATH:roof-flat": {
+"generate/physics": true
+},
+"PATH:roof-gable": {
+"generate/physics": true
+},
+"PATH:roof-gable-detail": {
+"generate/physics": true
+},
+"PATH:roof-gable-end": {
+"generate/physics": true
+},
+"PATH:roof-gable-top": {
+"generate/physics": true
+},
+"PATH:roof-high": {
+"generate/physics": true
+},
+"PATH:roof-high-corner": {
+"generate/physics": true
+},
+"PATH:roof-high-corner-round": {
+"generate/physics": true
+},
+"PATH:roof-high-cornerinner": {
+"generate/physics": true
+},
+"PATH:roof-high-flat": {
+"generate/physics": true
+},
+"PATH:roof-high-gable": {
+"generate/physics": true
+},
+"PATH:roof-high-gable-detail": {
+"generate/physics": true
+},
+"PATH:roof-high-gable-end": {
+"generate/physics": true
+},
+"PATH:roof-high-gable-top": {
+"generate/physics": true
+},
+"PATH:roof-high-left": {
+"generate/physics": true
+},
+"PATH:roof-high-point": {
+"generate/physics": true
+},
+"PATH:roof-high-right": {
+"generate/physics": true
+},
+"PATH:roof-high-window": {
+"generate/physics": true
+},
+"PATH:roof-left": {
+"generate/physics": true
+},
+"PATH:roof-point": {
+"generate/physics": true
+},
+"PATH:roof-right": {
+"generate/physics": true
+},
+"PATH:roof-window": {
+"generate/physics": true
+},
+"PATH:stairs-full": {
+"generate/physics": true
+},
+"PATH:stairs-full-corner-inner": {
+"generate/physics": true
+},
+"PATH:stairs-full-corner-outer": {
+"generate/physics": true
+},
+"PATH:stairs-stone": {
+"generate/physics": true
+},
+"PATH:stairs-stone-corner": {
+"generate/physics": true
+},
+"PATH:stairs-stone-handrail": {
+"generate/physics": true
+},
+"PATH:stairs-stone-round": {
+"generate/physics": true
+},
+"PATH:stairs-wide-stone": {
+"generate/physics": true
+},
+"PATH:stairs-wide-stone-handrail": {
+"generate/physics": true
+},
+"PATH:stairs-wide-wood": {
+"generate/physics": true
+},
+"PATH:stairs-wide-wood-handrail": {
+"generate/physics": true
+},
+"PATH:stairs-wood": {
+"generate/physics": true
+},
+"PATH:stairs-wood-handrail": {
+"generate/physics": true
+},
+"PATH:stall": {
+"generate/physics": true
+},
+"PATH:stall-bench": {
+"generate/physics": true
+},
+"PATH:stall-green": {
+"generate/physics": true
+},
+"PATH:stall-red": {
+"generate/physics": true
+},
+"PATH:stall-stool": {
+"generate/physics": true
+},
+"PATH:wall": {
+"generate/physics": true
+},
+"PATH:wall-arch": {
+"generate/physics": true
+},
+"PATH:wall-arch-top": {
+"generate/physics": true
+},
+"PATH:wall-arch-top-detail": {
+"generate/physics": true
+},
+"PATH:wall-block": {
+"generate/physics": true
+},
+"PATH:wall-block-half": {
+"generate/physics": true
+},
+"PATH:wall-broken": {
+"generate/physics": true
+},
+"PATH:wall-corner": {
+"generate/physics": true
+},
+"PATH:wall-corner-detail": {
+"generate/physics": true
+},
+"PATH:wall-corner-diagonal": {
+"generate/physics": true
+},
+"PATH:wall-corner-diagonal-half": {
+"generate/physics": true
+},
+"PATH:wall-corner-edge": {
+"generate/physics": true
+},
+"PATH:wall-curved": {
+"generate/physics": true
+},
+"PATH:wall-detail-cross": {
+"generate/physics": true
+},
+"PATH:wall-detail-diagonal": {
+"generate/physics": true
+},
+"PATH:wall-detail-horizontal": {
+"generate/physics": true
+},
+"PATH:wall-diagonal": {
+"generate/physics": true
+},
+"PATH:wall-door": {
+"generate/physics": true
+},
+"PATH:wall-door/door": {
+"generate/physics": true
+},
+"PATH:wall-doorway-base": {
+"generate/physics": true
+},
+"PATH:wall-doorway-round": {
+"generate/physics": true
+},
+"PATH:wall-doorway-square": {
+"generate/physics": true
+},
+"PATH:wall-doorway-square-wide": {
+"generate/physics": true
+},
+"PATH:wall-doorway-square-wide-curved": {
+"generate/physics": true
+},
+"PATH:wall-half": {
+"generate/physics": true
+},
+"PATH:wall-rounded": {
+"generate/physics": true
+},
+"PATH:wall-side": {
+"generate/physics": true
+},
+"PATH:wall-slope": {
+"generate/physics": true
+},
+"PATH:wall-window-glass": {
+"generate/physics": true
+},
+"PATH:wall-window-round": {
+"generate/physics": true
+},
+"PATH:wall-window-shutters": {
+"generate/physics": true
+},
+"PATH:wall-window-small": {
+"generate/physics": true
+},
+"PATH:wall-window-stone": {
+"generate/physics": true
+},
+"PATH:wall-wood": {
+"generate/physics": true
+},
+"PATH:wall-wood-arch": {
+"generate/physics": true
+},
+"PATH:wall-wood-arch-top": {
+"generate/physics": true
+},
+"PATH:wall-wood-arch-top-detail": {
+"generate/physics": true
+},
+"PATH:wall-wood-block": {
+"generate/physics": true
+},
+"PATH:wall-wood-block-half": {
+"generate/physics": true
+},
+"PATH:wall-wood-broken": {
+"generate/physics": true
+},
+"PATH:wall-wood-corner": {
+"generate/physics": true
+},
+"PATH:wall-wood-corner-diagonal": {
+"generate/physics": true
+},
+"PATH:wall-wood-corner-diagonal-half": {
+"generate/physics": true
+},
+"PATH:wall-wood-corner-edge": {
+"generate/physics": true
+},
+"PATH:wall-wood-curved": {
+"generate/physics": true
+},
+"PATH:wall-wood-detail-cross": {
+"generate/physics": true
+},
+"PATH:wall-wood-detail-diagonal": {
+"generate/physics": true
+},
+"PATH:wall-wood-detail-horizontal": {
+"generate/physics": true
+},
+"PATH:wall-wood-diagonal": {
+"generate/physics": true
+},
+"PATH:wall-wood-door": {
+"generate/physics": true
+},
+"PATH:wall-wood-door/door_001": {
+"generate/physics": true
+},
+"PATH:wall-wood-doorway-base": {
+"generate/physics": true
+},
+"PATH:wall-wood-doorway-round": {
+"generate/physics": true
+},
+"PATH:wall-wood-doorway-square": {
+"generate/physics": true
+},
+"PATH:wall-wood-doorway-square-wide": {
+"generate/physics": true
+},
+"PATH:wall-wood-doorway-square-wide-curved": {
+"generate/physics": true
+},
+"PATH:wall-wood-half": {
+"generate/physics": true
+},
+"PATH:wall-wood-rounded": {
+"generate/physics": true
+},
+"PATH:wall-wood-side": {
+"generate/physics": true
+},
+"PATH:wall-wood-slope": {
+"generate/physics": true
+},
+"PATH:wall-wood-window-glass": {
+"generate/physics": true
+},
+"PATH:wall-wood-window-round": {
+"generate/physics": true
+},
+"PATH:wall-wood-window-shutters": {
+"generate/physics": true
+},
+"PATH:wall-wood-window-small": {
+"generate/physics": true
+},
+"PATH:wall-wood-window-stone": {
+"generate/physics": true
+}
+}
+}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true
