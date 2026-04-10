@@ -37,7 +37,175 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:bridge-draw": {
+"generate/physics": true
+},
+"PATH:bridge-straight": {
+"generate/physics": true
+},
+"PATH:bridge-straight-pillar": {
+"generate/physics": true
+},
+"PATH:ground": {
+"generate/physics": true
+},
+"PATH:ground-hills": {
+"generate/physics": true
+},
+"PATH:stairs-stone": {
+"generate/physics": true
+},
+"PATH:stairs-stone-square": {
+"generate/physics": true
+},
+"PATH:tower-base": {
+"generate/physics": true
+},
+"PATH:tower-hexagon-base": {
+"generate/physics": true
+},
+"PATH:tower-hexagon-mid": {
+"generate/physics": true
+},
+"PATH:tower-hexagon-roof": {
+"generate/physics": true
+},
+"PATH:tower-hexagon-roof-secondary": {
+"generate/physics": true
+},
+"PATH:tower-hexagon-top": {
+"generate/physics": true
+},
+"PATH:tower-hexagon-top-wood": {
+"generate/physics": true
+},
+"PATH:tower-slant-roof": {
+"generate/physics": true
+},
+"PATH:tower-square": {
+"generate/physics": true
+},
+"PATH:tower-square-arch": {
+"generate/physics": true
+},
+"PATH:tower-square-base": {
+"generate/physics": true
+},
+"PATH:tower-square-base-border": {
+"generate/physics": true
+},
+"PATH:tower-square-base-color": {
+"generate/physics": true
+},
+"PATH:tower-square-mid": {
+"generate/physics": true
+},
+"PATH:tower-square-mid-color": {
+"generate/physics": true
+},
+"PATH:tower-square-mid-door": {
+"generate/physics": true
+},
+"PATH:tower-square-mid-open": {
+"generate/physics": true
+},
+"PATH:tower-square-mid-open-simple": {
+"generate/physics": true
+},
+"PATH:tower-square-mid-windows": {
+"generate/physics": true
+},
+"PATH:tower-square-roof": {
+"generate/physics": true
+},
+"PATH:tower-square-top": {
+"generate/physics": true
+},
+"PATH:tower-square-top-color": {
+"generate/physics": true
+},
+"PATH:tower-square-top-roof": {
+"generate/physics": true
+},
+"PATH:tower-square-top-roof-high": {
+"generate/physics": true
+},
+"PATH:tower-square-top-roof-high-windows": {
+"generate/physics": true
+},
+"PATH:tower-square-top-roof-rounded": {
+"generate/physics": true
+},
+"PATH:tower-top": {
+"generate/physics": true
+},
+"PATH:wall": {
+"generate/physics": true
+},
+"PATH:wall-corner": {
+"generate/physics": true
+},
+"PATH:wall-corner-half": {
+"generate/physics": true
+},
+"PATH:wall-corner-half-tower": {
+"generate/physics": true
+},
+"PATH:wall-corner-slant": {
+"generate/physics": true
+},
+"PATH:wall-doorway": {
+"generate/physics": true
+},
+"PATH:wall-gate-center-left": {
+"generate/physics": true
+},
+"PATH:wall-gate-center-right": {
+"generate/physics": true
+},
+"PATH:wall-half": {
+"generate/physics": true
+},
+"PATH:wall-half-modular": {
+"generate/physics": true
+},
+"PATH:wall-narrow": {
+"generate/physics": true
+},
+"PATH:wall-narrow-corner": {
+"generate/physics": true
+},
+"PATH:wall-narrow-gate": {
+"generate/physics": true
+},
+"PATH:wall-narrow-stairs": {
+"generate/physics": true
+},
+"PATH:wall-narrow-stairs-rail": {
+"generate/physics": true
+},
+"PATH:wall-narrow-wood": {
+"generate/physics": true
+},
+"PATH:wall-narrow-wood-fence": {
+"generate/physics": true
+},
+"PATH:wall-pillar": {
+"generate/physics": true
+},
+"PATH:wall-stud": {
+"generate/physics": true
+},
+"PATH:wall-to-narrow-left": {
+"generate/physics": true
+},
+"PATH:wall-to-narrow-right": {
+"generate/physics": true
+}
+}
+}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true
