@@ -16,7 +16,6 @@
 [ext_resource type="Script" uid="uid://bhsdjlrhck4qd" path="res://scripts/test/Transporter.cs" id="22_182vs"]
 [ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="22_ycjjd"]
 [ext_resource type="PackedScene" uid="uid://ct1kqwdhujc8n" path="res://assets/3D/Furniture Kit/Models/GLTF format/benchCushionLow.glb" id="23_7n07m"]
-[ext_resource type="PackedScene" uid="uid://bkg5k0ed5xbko" path="res://Scenes/Level2_3D.scn" id="24_c1bi7"]
 [ext_resource type="PackedScene" uid="uid://40rbyr5gq5lu" path="res://assets/3D/Furniture Kit/Models/GLTF format/cabinetBedDrawer.glb" id="24_kdqke"]
 [ext_resource type="PackedScene" uid="uid://bmcouihuq457y" path="res://assets/3D/Furniture Kit/Models/GLTF format/desk.glb" id="25_kb3qt"]
 [ext_resource type="PackedScene" uid="uid://db03lq6cgxid2" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedDoors.glb" id="26_7vwr8"]
@@ -2923,10 +2922,10 @@ VisualRoot = NodePath("character-female-b2/character-female-b")
 [node name="character-female-b2" parent="CharacterBody3D" unique_id=1913118570 instance=ExtResource("20_182vs")]
 
 [node name="Skeleton3D" parent="CharacterBody3D/character-female-b2/character-female-b" parent_id_path=PackedInt32Array(1913118570, 1357584895) index="0" unique_id=421653466]
-bones/3/rotation = Quaternion(-0.0022790139, 0, 0, 0.99999744)
-bones/4/rotation = Quaternion(0, 0, -0.3792947, 0.9252759)
-bones/5/rotation = Quaternion(0, 0, 0.3792947, 0.9252759)
-bones/6/rotation = Quaternion(0, 0.0022790139, 0, 0.99999744)
+bones/3/rotation = Quaternion(-0.041091662, 0, 0, 0.9991554)
+bones/4/rotation = Quaternion(0, 0, -0.26614287, 0.9639336)
+bones/5/rotation = Quaternion(0, 0, 0.26614287, 0.9639336)
+bones/6/rotation = Quaternion(0, 0.041091662, 0, 0.9991554)
 
 [node name="body-mesh" parent="CharacterBody3D/character-female-b2/character-female-b/Skeleton3D" index="0" unique_id=264502214]
 layers = 3
@@ -3004,7 +3003,6 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 [node name="transporter_livingroom_level2" type="Area3D" parent="." unique_id=1664634794]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.055, 36.5)
 script = ExtResource("22_182vs")
-_sceneToLoad = ExtResource("24_c1bi7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="transporter_livingroom_level2" unique_id=2109793199]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9697871, 0.29126757, -31.581316)
