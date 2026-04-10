@@ -11,7 +11,7 @@ public partial class Transporter : Node
     [Export] protected Transporter _destination;
     [Export] protected Resource _sceneToLoad;
 
-    protected Vector3 Destination
+    protected Vector3 TransporterLocation
     {
         get
         {
@@ -26,15 +26,13 @@ public partial class Transporter : Node
     }
     public void _OnBodyEntered(Node other)
     {
-        if (other.FindAnyObjectByType<Player>() != null)
-            _destination?.MoveHere();
-    }
+        if (other.FindAnyObjectByType<Player>() == null)
+            return;
 
-    public void MoveHere()
-    {
-        if (_sceneToLoad == null)
-            StateManagerGame.Instance.LoadLocation(Destination);
-        else
-            StateManagerGame.Instance.LoadScene(_sceneToLoad, Destination);
+        
+        if (_destination != null)
+            StateManagerGame.Instance.LoadLocation(_destination.TransporterLocation);
+        else if (_sceneToLoad != null)
+            StateManagerGame.Instance.LoadScene(_sceneToLoad, TransporterLocation);
     }
 }

@@ -6,7 +6,12 @@ using TnT.Extensions;
 
 namespace TnT.Systems
 {
-	public partial class CharacterController2D : CharacterBody2D
+	public interface ICharacterController
+	{
+		void Move(Vector2 movement);
+		void MoveTo(Vector3 position);
+	}
+	public partial class CharacterController2D : CharacterBody2D, ICharacterController
 	{
 		[Export]
 		public float Speed = 8.0f;

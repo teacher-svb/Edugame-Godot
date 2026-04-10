@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ds3n2sccbaxi5"
-path="res://.godot/imported/bridge_side_wood.glb-9aef5425ed082ccfa137ffda3e4e4ec6.scn"
+uid="uid://cf0a74ofv68ug"
+path="res://.godot/imported/stump_oldTall_hollow.glb-b34e6b827c3b578f99589867256a0337.scn"
 
 [deps]
 
-source_file="res://assets/3D/Nature Kit/Models/GLTF format/bridge_side_wood.glb"
-dest_files=["res://.godot/imported/bridge_side_wood.glb-9aef5425ed082ccfa137ffda3e4e4ec6.scn"]
+source_file="res://assets/3D/Nature Kit/Models/GLTF format/stump_oldTall_hollow.glb"
+dest_files=["res://.godot/imported/stump_oldTall_hollow.glb-b34e6b827c3b578f99589867256a0337.scn"]
 
 [params]
 
@@ -39,9 +39,8 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "nodes": {
-"PATH:bridge_side_wood": {
-"generate/physics": true,
-"physics/shape_type": 1
+"PATH:stump_oldTall": {
+"generate/physics": true
 }
 }
 }

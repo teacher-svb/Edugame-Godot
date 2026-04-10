@@ -130,14 +130,14 @@ _destination = NodePath("../Transporter")
 position = Vector2(0, -18)
 shape = SubResource("RectangleShape2D_joc8x")
 
-[node name="Transporter3" type="Area2D" parent="Transporters" unique_id=1179419814 node_paths=PackedStringArray("_destination")]
+[node name="Transporter3" type="Area2D" parent="Transporters" unique_id=1179419814]
 z_index = 10
-position = Vector2(-14, 287)
+position = Vector2(47, -431)
 script = ExtResource("3_joc8x")
-_destination = NodePath("../Transporter4")
+_sceneToLoad = ExtResource("4_jghel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Transporters/Transporter3" unique_id=1788055342]
-position = Vector2(-10.5, 26)
+position = Vector2(-71, 734)
 shape = SubResource("RectangleShape2D_slnnj")
 
 [node name="Transporter4" type="Area2D" parent="Transporters" unique_id=2005701088]
@@ -268,3 +268,5 @@ position = Vector2(14, 194)
 [connection signal="body_entered" from="Transporters/Transporter3" to="Transporters/Transporter3" method="_OnBodyEntered"]
 [connection signal="OnListen" from="BedroomDoor/QuestEventListener" to="BedroomDoor" method="ToggleDoor"]
 [connection signal="timeout" from="NPC-test/Timer" to="NPC-test/NavigationAgent2D" method="FindPath"]
+
+[editable path="BAR"]

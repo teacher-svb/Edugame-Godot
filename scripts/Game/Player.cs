@@ -6,7 +6,7 @@ public partial class Player : Node//, IBind<Player.PlayerSaveData>
 {
 	public static Player Instance { get; private set; }
 
-	CharacterController2D _cc;
+	ICharacterController _cc;
 
 	public static Player Create()
 	{
@@ -19,6 +19,8 @@ public partial class Player : Node//, IBind<Player.PlayerSaveData>
 	{
 		Instance = this;
 		_cc = this.FindAncestorOfType<CharacterController2D>();
+		if (_cc == null)
+			_cc = this.FindAncestorOfType<CharacterController3D>();
 		base._Ready();
 	}
 

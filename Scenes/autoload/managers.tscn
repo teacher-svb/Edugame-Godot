@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dsdamnlwcc0j1"]
+[gd_scene format=3 uid="uid://dsdamnlwcc0j1"]
 
 [ext_resource type="Script" uid="uid://b66cprwwqv431" path="res://scripts/Game/Systems/SaveLoadSystem/SaveLoadManager.cs" id="1_3yhdi"]
 [ext_resource type="Script" uid="uid://cerfog7uyabpn" path="res://scripts/Game/Systems/SaveLoadSystem/MyGameData.cs" id="2_4v8vv"]
@@ -33,6 +33,7 @@
 [ext_resource type="Script" uid="uid://bwo0qc8hpbax0" path="res://scripts/Game/UI/MVC_Inventory/InventoryView.cs" id="31_5t4y7"]
 [ext_resource type="Script" uid="uid://dhlebvjmi145c" path="res://scripts/Game/Systems/InventorySystem/Inventory.cs" id="32_i1r4r"]
 [ext_resource type="PackedScene" uid="uid://csd5kk66e1bep" path="res://Scenes/UI/Inventory.tscn" id="32_j8mgp"]
+[ext_resource type="AudioStream" uid="uid://p6yptdrwk41y" path="res://assets/music/Dawn_at_the_Eastern_Gate.mp3" id="34_5t4y7"]
 
 [sub_resource type="Resource" id="Resource_ut70p"]
 script = ExtResource("16_ut70p")
@@ -61,48 +62,48 @@ metadata/_custom_type_script = "uid://7u5mhmxl340a"
 script = ExtResource("6_8i7bo")
 metadata/_custom_type_script = "uid://cvgoslwqcj457"
 
-[node name="Managers" type="Node"]
+[node name="Managers" type="Node" unique_id=583445644]
 process_mode = 3
 
-[node name="StateManagerGame" type="Node" parent="."]
+[node name="StateManagerGame" type="Node" parent="." unique_id=1531059217]
 script = ExtResource("7_0le2r")
 
-[node name="InventoryState" type="Node" parent="StateManagerGame"]
+[node name="InventoryState" type="Node" parent="StateManagerGame" unique_id=1597684738]
 script = ExtResource("14_ut70p")
 
-[node name="LoadingScreenState" type="Node" parent="StateManagerGame"]
+[node name="LoadingScreenState" type="Node" parent="StateManagerGame" unique_id=1545499888]
 script = ExtResource("12_7ysjy")
 
-[node name="MessageState" type="Node" parent="StateManagerGame"]
+[node name="MessageState" type="Node" parent="StateManagerGame" unique_id=1908576831]
 script = ExtResource("13_vkax6")
 _next = SubResource("Resource_ut70p")
 _close = SubResource("Resource_46vsp")
 
-[node name="PlayState" type="Node" parent="StateManagerGame"]
+[node name="PlayState" type="Node" parent="StateManagerGame" unique_id=1708318737]
 script = ExtResource("11_wsyol")
 
-[node name="ChallengeState" type="Node" parent="StateManagerGame"]
+[node name="ChallengeState" type="Node" parent="StateManagerGame" unique_id=1334514005]
 script = ExtResource("7_blwmm")
 
-[node name="SaveLoadManager" type="Node" parent="."]
+[node name="SaveLoadManager" type="Node" parent="." unique_id=977596409]
 script = ExtResource("1_3yhdi")
 GameData = SubResource("Resource_72h8h")
 _startSceneName = "Level1"
 _gameName = "FooBar"
 
-[node name="InputManager" type="Node" parent="."]
+[node name="InputManager" type="Node" parent="." unique_id=1531480527]
 script = ExtResource("3_4v8vv")
 
-[node name="QuestManager" type="Node" parent="."]
+[node name="QuestManager" type="Node" parent="." unique_id=600992704]
 script = ExtResource("4_347u6")
 _quests = Array[ExtResource("11_aum7h")]([ExtResource("6_pnf1h")])
 eventChannel = ExtResource("13_pnf1h")
 _saveData = SubResource("Resource_pnf1h")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=379512689]
 script = ExtResource("4_c37v5")
 
-[node name="FadeController" type="Control" parent="UI"]
+[node name="FadeController" type="Control" parent="UI" unique_id=1274864108]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -113,7 +114,7 @@ script = ExtResource("4_7g5um")
 view = SubResource("Resource_n5sdn")
 model = SubResource("Resource_eky4q")
 
-[node name="ColorRect" type="ColorRect" parent="UI/FadeController"]
+[node name="ColorRect" type="ColorRect" parent="UI/FadeController" unique_id=1091947856]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -123,15 +124,15 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="MessageController" type="Node" parent="UI" node_paths=PackedStringArray("view", "model")]
+[node name="MessageController" type="Node" parent="UI" unique_id=189203661 node_paths=PackedStringArray("view", "model")]
 script = ExtResource("8_0le2r")
 view = NodePath("MessageView")
 model = NodePath("MessageModel")
 
-[node name="MessageModel" type="Node" parent="UI/MessageController"]
+[node name="MessageModel" type="Node" parent="UI/MessageController" unique_id=503624646]
 script = ExtResource("10_46vsp")
 
-[node name="MessageView" type="Control" parent="UI/MessageController"]
+[node name="MessageView" type="Control" parent="UI/MessageController" unique_id=132175026]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -141,16 +142,16 @@ grow_vertical = 2
 pivot_offset = Vector2(578, 128)
 script = ExtResource("9_ut70p")
 
-[node name="Notification" parent="UI/MessageController/MessageView" instance=ExtResource("9_n5sdn")]
+[node name="Notification" parent="UI/MessageController/MessageView" unique_id=756365186 instance=ExtResource("9_n5sdn")]
 layout_mode = 1
 
-[node name="ChallengeController" type="Node" parent="UI" node_paths=PackedStringArray("view", "model")]
+[node name="ChallengeController" type="Node" parent="UI" unique_id=162030598 node_paths=PackedStringArray("view", "model")]
 unique_name_in_owner = true
 script = ExtResource("23_aum7h")
 view = NodePath("ChallengeView")
 model = NodePath("ChallengeModel")
 
-[node name="ChallengeView" type="Control" parent="UI/ChallengeController"]
+[node name="ChallengeView" type="Control" parent="UI/ChallengeController" unique_id=366009643]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -160,23 +161,23 @@ grow_vertical = 2
 script = ExtResource("24_qelhd")
 metadata/_custom_type_script = "uid://dlqolcp4oddju"
 
-[node name="ChallengeUI" parent="UI/ChallengeController/ChallengeView" instance=ExtResource("25_blwmm")]
+[node name="ChallengeUI" parent="UI/ChallengeController/ChallengeView" unique_id=12389747 instance=ExtResource("25_blwmm")]
 layout_mode = 1
 
-[node name="ChallengeModel" type="Node" parent="UI/ChallengeController"]
+[node name="ChallengeModel" type="Node" parent="UI/ChallengeController" unique_id=1213671079]
 script = ExtResource("26_2a8cd")
 _challenge = ExtResource("27_kpb3h")
 metadata/_custom_type_script = "uid://bmfvn3p4u73k5"
 
-[node name="InventoryController" type="Node" parent="UI" node_paths=PackedStringArray("view", "model")]
+[node name="InventoryController" type="Node" parent="UI" unique_id=898957681 node_paths=PackedStringArray("view", "model")]
 script = ExtResource("29_yi7uc")
 view = NodePath("InventoryView")
 model = NodePath("InventoryModel")
 
-[node name="InventoryModel" type="Node" parent="UI/InventoryController"]
+[node name="InventoryModel" type="Node" parent="UI/InventoryController" unique_id=391958656]
 script = ExtResource("30_j8mgp")
 
-[node name="InventoryView" type="Control" parent="UI/InventoryController"]
+[node name="InventoryView" type="Control" parent="UI/InventoryController" unique_id=1870665979]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -185,11 +186,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("31_5t4y7")
 
-[node name="Inventory" parent="UI/InventoryController/InventoryView" instance=ExtResource("32_j8mgp")]
+[node name="Inventory" parent="UI/InventoryController/InventoryView" unique_id=1662155608 instance=ExtResource("32_j8mgp")]
 layout_mode = 0
 anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
-[node name="Inventory" type="Node" parent="."]
+[node name="Inventory" type="Node" parent="." unique_id=463827073]
 script = ExtResource("32_i1r4r")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=358640137]
+stream = ExtResource("34_5t4y7")
+volume_db = -20.678
+autoplay = true
 
 [connection signal="OnQuestUpdated" from="QuestManager" to="StateManagerGame" method="ShowQuestMessage"]

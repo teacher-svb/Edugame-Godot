@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ds3n2sccbaxi5"
-path="res://.godot/imported/bridge_side_wood.glb-9aef5425ed082ccfa137ffda3e4e4ec6.scn"
+uid="uid://dkog55j0euvur"
+path="res://.godot/imported/tree_entrance.glb-d519d5a385259c8735958b9ace92713a.scn"
 
 [deps]
 
-source_file="res://assets/3D/Nature Kit/Models/GLTF format/bridge_side_wood.glb"
-dest_files=["res://.godot/imported/bridge_side_wood.glb-9aef5425ed082ccfa137ffda3e4e4ec6.scn"]
+source_file="res://assets/3D/Nature Kit/Models/GLTF format/tree_entrance.glb"
+dest_files=["res://.godot/imported/tree_entrance.glb-d519d5a385259c8735958b9ace92713a.scn"]
 
 [params]
 
@@ -39,9 +39,8 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "nodes": {
-"PATH:bridge_side_wood": {
-"generate/physics": true,
-"physics/shape_type": 1
+"PATH:tree_oak": {
+"generate/physics": true
 }
 }
 }
