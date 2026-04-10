@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://d0bcfa56mr3qm"]
+
+[ext_resource type="PackedScene" uid="uid://di8rbvh4nh66p" path="res://assets/3D/Castle Kit/castle-kit-tileables.blend" id="1_5b3xu"]
+
+[node name="castle-kit-tileables" unique_id=1009885300 instance=ExtResource("1_5b3xu")]
