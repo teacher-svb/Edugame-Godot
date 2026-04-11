@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b2ibmt13khumi"]
+
+[ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://shaders/occlusionFader.gdshader" id="1_wke77"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_wke77")
+shader_parameter/camera_position = Vector3(0, 0, 0)
+shader_parameter/player_position = Vector3(0, 0, 0)
+shader_parameter/fade_alpha = 0.15
+shader_parameter/fade_radius = 1.0

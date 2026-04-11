@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dq3byceg1xhwi"]
+
+[ext_resource type="MeshLibrary" uid="uid://cwpbh6uer7t1g" path="res://assets/3D/Fantasy Town Kit/fantasy_town_kit_tileables.meshlib" id="1_7r7hd"]
+
+[node name="Node3D" type="Node3D" unique_id=911986635]
+
+[node name="GridMap" type="GridMap" parent="." unique_id=2126192421]
+mesh_library = ExtResource("1_7r7hd")
+cell_size = Vector3(1, 0.5, 1)
+cell_center_y = false
+data = {
+"cells": PackedInt32Array(0, 0, 169, 1, 1, 655529, 0, 65535, 162, 0, 65534, 162, 0, 65533, 162, 0, 65532, 162, 65535, 0, 1441954, 65534, 0, 1441954, 65533, 0, 1441954, 65532, 0, 1441961, 65532, 65535, 655522, 65532, 65534, 655522, 65532, 65533, 655522, 65532, 65532, 655522)
+}

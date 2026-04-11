@@ -1,0 +1,166 @@
+[gd_scene format=3 uid="uid://dbd5x8kw0exag"]
+
+[ext_resource type="MeshLibrary" uid="uid://bhyhxgksl15j5" path="res://assets/3D/Modular Dungeon Kit/dungeon_kit_tileables.meshlib" id="1_srmrl"]
+[ext_resource type="Script" uid="uid://dqewu7p7xjtgh" path="res://scripts/GridMapOcclusionFader.cs" id="2_3m3qi"]
+[ext_resource type="Script" uid="uid://dc4u7vqilp6dd" path="res://scripts/CharacterController3D.cs" id="2_jri2c"]
+[ext_resource type="PackedScene" uid="uid://cdou2t4bule12" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-b.glb" id="3_3m3qi"]
+[ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://shaders/occlusionFader.gdshader" id="3_ic28c"]
+[ext_resource type="Script" uid="uid://dt1pmf2iuc4nb" path="res://scripts/CharacterAnimator.cs" id="4_ic28c"]
+[ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="5_hq6iv"]
+
+[sub_resource type="Gradient" id="Gradient_jri2c"]
+offsets = PackedFloat32Array(0.117647, 1)
+colors = PackedColorArray(0.0277098, 0.0773411, 0.103768, 1, 1, 0.939093, 0.819838, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kdqke"]
+gradient = SubResource("Gradient_jri2c")
+width = 512
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_3m3qi"]
+rayleigh_coefficient = 1.0
+rayleigh_color = Color(0.77368456, 0.85677356, 1, 1)
+mie_color = Color(0.8403034, 0.94551045, 0.99741834, 1)
+
+[sub_resource type="Sky" id="Sky_kb3qt"]
+sky_material = SubResource("PhysicalSkyMaterial_3m3qi")
+process_mode = 3
+
+[sub_resource type="Environment" id="Environment_ic28c"]
+background_mode = 2
+background_energy_multiplier = 0.2
+sky = SubResource("Sky_kb3qt")
+tonemap_mode = 3
+ssao_enabled = true
+ssao_radius = 0.6
+ssao_intensity = 1.87
+adjustment_enabled = true
+adjustment_saturation = 1.2
+adjustment_color_correction = SubResource("GradientTexture1D_kdqke")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ic28c"]
+radius = 0.12402344
+height = 0.6754761
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sikog"]
+animation = &"fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nq4sg"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xbk2r"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_im6n0"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_60cj0"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aebyh"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0qrrf"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iikk8"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0ft5a"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w8kji"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yj0bu"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sikog"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hq6iv"]
+states/End/position = Vector2(864, 160)
+states/Start/position = Vector2(193, 173)
+states/fall/node = SubResource("AnimationNodeAnimation_sikog")
+states/fall/position = Vector2(591, 309)
+states/idle/node = SubResource("AnimationNodeAnimation_nq4sg")
+states/idle/position = Vector2(344, 181)
+states/jump/node = SubResource("AnimationNodeAnimation_xbk2r")
+states/jump/position = Vector2(591, 101)
+states/walk/node = SubResource("AnimationNodeAnimation_im6n0")
+states/walk/position = Vector2(515, 189)
+transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_60cj0"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_aebyh"), "fall", "walk", SubResource("AnimationNodeStateMachineTransition_0qrrf"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_iikk8"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_0ft5a"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_w8kji"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_yj0bu"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_sikog")]
+
+[node name="Node3D" type="Node3D" unique_id=589359545]
+
+[node name="GridMap" type="GridMap" parent="." unique_id=1092195489 node_paths=PackedStringArray("Player", "Camera")]
+mesh_library = ExtResource("1_srmrl")
+cell_size = Vector3(4, 2, 4)
+cell_center_y = false
+data = {
+"cells": PackedInt32Array(65535, 1, 655360, 0, 1, 655360, 65534, 1, 2, 1, 1, 1048580, 1, 3, 22, 1, 0, 1048577, 0, 0, 0, 65535, 0, 0, 65534, 0, 0, 65533, 0, 1441793, 65533, 65534, 655380, -131072, 65534, 1441814, -131070, 65534, 655360, -131069, 65534, 655360, -131068, 65534, 1048577, -131068, 0, 1441792, -131068, 65535, 1441792, -131068, 2, 1441797, -131068, 3, 1441798, -131068, 5, 1441798, -131068, 7, 1048584, 65533, 65532, 1048576, 65533, 65531, 1048576, 65533, 65530, 1048576, 65533, 65527, 1048592, 65530, 65527, 2, 65533, 65524, 1441794, 0, 65527, 655362, 65530, 65534, 2)
+}
+script = ExtResource("2_3m3qi")
+OcclusionShader = ExtResource("3_ic28c")
+Player = NodePath("../CharacterBody3D")
+Camera = NodePath("../CharacterBody3D/Camera3D")
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Environment" type="Node3D" parent="." unique_id=1261937569]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.012903452, 0, 0.0022169743)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=295633625]
+environment = SubResource("Environment_ic28c")
+
+[node name="Sun" type="DirectionalLight3D" parent="Environment" unique_id=348734138]
+transform = Transform3D(0.9800221, -0.17101485, -0.10154131, 0.10437453, 0.0076344907, 0.9945089, -0.16930057, -0.9852391, 0.025331547, 0, 2, 0)
+light_color = Color(1, 0.94902, 0.827451, 1)
+light_energy = 0.8
+light_angular_distance = 36.67
+shadow_enabled = true
+shadow_normal_bias = 1.0
+shadow_opacity = 0.35
+shadow_blur = 6.657
+shadow_caster_mask = 4294967294
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 30.0
+sky_mode = 1
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1683869378 node_paths=PackedStringArray("VisualRoot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.248171, 7.1360216, 15.400652)
+script = ExtResource("2_jri2c")
+VisualRoot = NodePath("character-female-b2/character-female-b")
+
+[node name="character-female-b2" parent="CharacterBody3D" unique_id=371834684 instance=ExtResource("3_3m3qi")]
+
+[node name="Skeleton3D" parent="CharacterBody3D/character-female-b2/character-female-b" parent_id_path=PackedInt32Array(371834684, 1357584895) index="0" unique_id=421653466]
+bones/3/rotation = Quaternion(0.034198835, 0, 0, 0.99941504)
+bones/4/rotation = Quaternion(0, 0, -0.29645076, 0.9550482)
+bones/5/rotation = Quaternion(0, 0, 0.29645076, 0.9550482)
+bones/6/rotation = Quaternion(0, -0.034198835, 0, 0.99941504)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=51372571]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34683228, 0)
+shape = SubResource("CapsuleShape3D_ic28c")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=221130020]
+transform = Transform3D(1, 0, 0, 0, 0.74453294, 0.6675857, 0, -0.6675857, 0.74453294, 0, 11.285046, 12.150276)
+projection = 1
+fov = 10.9
+size = 5.0
+far = 200.0
+
+[node name="CharacterAnimator" type="Node" parent="CharacterBody3D" unique_id=327779802 node_paths=PackedStringArray("AnimationTree")]
+script = ExtResource("4_ic28c")
+AnimationTree = NodePath("../AnimationTree")
+
+[node name="AnimationTree" type="AnimationTree" parent="CharacterBody3D" unique_id=1870831523]
+root_node = NodePath("../character-female-b2")
+tree_root = SubResource("AnimationNodeStateMachine_hq6iv")
+anim_player = NodePath("../character-female-b2/AnimationPlayer")
+
+[node name="Player" type="Node" parent="CharacterBody3D" unique_id=1438387384]
+script = ExtResource("5_hq6iv")
+
+[connection signal="MovementStateChanged" from="CharacterBody3D" to="CharacterBody3D/CharacterAnimator" method="OnMovementStateChanged"]
+
+[editable path="CharacterBody3D/character-female-b2"]

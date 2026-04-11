@@ -1,0 +1,174 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://cxj2bvhpfwsd4"
+path="res://.godot/imported/dungeon-kit-tileables.blend-d9a176361745f6ae7f819551de215fda.scn"
+
+[deps]
+
+source_file="res://assets/3D/Modular Dungeon Kit/dungeon-kit-tileables.blend"
+dest_files=["res://.godot/imported/dungeon-kit-tileables.blend-d9a176361745f6ae7f819551de215fda.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"nodes": {
+"PATH:corridor": {
+"generate/physics": true
+},
+"PATH:corridor-corner": {
+"generate/physics": true
+},
+"PATH:corridor-end": {
+"generate/physics": true
+},
+"PATH:corridor-intersection": {
+"generate/physics": true
+},
+"PATH:corridor-junction": {
+"generate/physics": true
+},
+"PATH:corridor-transition": {
+"generate/physics": true
+},
+"PATH:corridor-wide": {
+"generate/physics": true
+},
+"PATH:corridor-wide-corner": {
+"generate/physics": true
+},
+"PATH:corridor-wide-end": {
+"generate/physics": true
+},
+"PATH:corridor-wide-intersection": {
+"generate/physics": true
+},
+"PATH:corridor-wide-junction": {
+"generate/physics": true
+},
+"PATH:gate": {
+"generate/physics": true
+},
+"PATH:gate-door": {
+"generate/physics": true
+},
+"PATH:gate-door-window": {
+"generate/physics": true
+},
+"PATH:gate-metal-bars": {
+"generate/physics": true
+},
+"PATH:room-corner": {
+"generate/physics": true
+},
+"PATH:room-large": {
+"generate/physics": true
+},
+"PATH:room-large-variation": {
+"generate/physics": true
+},
+"PATH:room-small": {
+"generate/physics": true
+},
+"PATH:room-small-variation": {
+"generate/physics": true
+},
+"PATH:room-wide": {
+"generate/physics": true
+},
+"PATH:room-wide-variation": {
+"generate/physics": true
+},
+"PATH:template-corner": {
+"generate/physics": true
+},
+"PATH:template-detail": {
+"generate/physics": true
+},
+"PATH:template-floor": {
+"generate/physics": true
+},
+"PATH:template-floor-big": {
+"generate/physics": true
+},
+"PATH:template-floor-detail": {
+"generate/physics": true
+},
+"PATH:template-floor-detail-a": {
+"generate/physics": true
+},
+"PATH:template-floor-layer": {
+"generate/physics": true
+},
+"PATH:template-floor-layer-hole": {
+"generate/physics": true
+},
+"PATH:template-floor-layer-raised": {
+"generate/physics": true
+},
+"PATH:template-wall": {
+"generate/physics": true
+},
+"PATH:template-wall-corner": {
+"generate/physics": true
+},
+"PATH:template-wall-detail-a": {
+"generate/physics": true
+},
+"PATH:template-wall-half": {
+"generate/physics": true
+},
+"PATH:template-wall-stairs": {
+"generate/physics": true
+},
+"PATH:template-wall-top": {
+"generate/physics": true
+}
+}
+}
+blender/nodes/visible=0
+blender/nodes/active_collection_only=false
+blender/nodes/punctual_lights=true
+blender/nodes/cameras=true
+blender/nodes/custom_properties=true
+blender/nodes/modifiers=1
+blender/meshes/colors=false
+blender/meshes/uvs=true
+blender/meshes/normals=true
+blender/meshes/export_geometry_nodes_instances=false
+blender/meshes/gpu_instances=false
+blender/meshes/tangents=true
+blender/meshes/skins=2
+blender/meshes/export_bones_deforming_mesh_only=false
+blender/materials/unpack_enabled=true
+blender/materials/export_materials=1
+blender/animation/limit_playback=true
+blender/animation/always_sample=true
+blender/animation/group_tracks=true
+gltf/naming_version=2
