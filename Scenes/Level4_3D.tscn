@@ -92,10 +92,11 @@ transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_
 
 [node name="Node3D" type="Node3D" unique_id=589359545]
 
-[node name="GridMap" type="GridMap" parent="." unique_id=1092195489 node_paths=PackedStringArray("Player", "Camera")]
+[node name="GridMap" type="GridMap" parent="." unique_id=1092195489 node_paths=PackedStringArray("Player", "Camera", "PlayerRayCast")]
 mesh_library = ExtResource("1_srmrl")
 cell_size = Vector3(4, 2, 4)
 cell_center_y = false
+collision_layer = 3
 data = {
 "cells": PackedInt32Array(65535, 1, 655360, 0, 1, 655360, 65534, 1, 2, 1, 1, 1048580, 1, 3, 22, 1, 0, 1048577, 0, 0, 0, 65535, 0, 0, 65534, 0, 0, 65533, 0, 1441793, 65533, 65534, 655380, -131072, 65534, 1441814, -131070, 65534, 655360, -131069, 65534, 655360, -131068, 65534, 1048577, -131068, 0, 1441792, -131068, 65535, 1441792, -131068, 2, 1441797, -131068, 3, 1441798, -131068, 5, 1441798, -131068, 7, 1048584, 65533, 65532, 1048576, 65533, 65531, 1048576, 65533, 65530, 1048576, 65533, 65527, 1048592, 65530, 65527, 2, 65533, 65524, 1441794, 0, 65527, 655362, 65530, 65534, 2)
 }
@@ -103,6 +104,7 @@ script = ExtResource("2_3m3qi")
 OcclusionShader = ExtResource("3_ic28c")
 Player = NodePath("../CharacterBody3D")
 Camera = NodePath("../CharacterBody3D/Camera3D")
+PlayerRayCast = NodePath("../CharacterBody3D/RayCast3D")
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Environment" type="Node3D" parent="." unique_id=1261937569]
@@ -133,10 +135,10 @@ VisualRoot = NodePath("character-female-b2/character-female-b")
 [node name="character-female-b2" parent="CharacterBody3D" unique_id=371834684 instance=ExtResource("3_3m3qi")]
 
 [node name="Skeleton3D" parent="CharacterBody3D/character-female-b2/character-female-b" parent_id_path=PackedInt32Array(371834684, 1357584895) index="0" unique_id=421653466]
-bones/3/rotation = Quaternion(0.034198835, 0, 0, 0.99941504)
-bones/4/rotation = Quaternion(0, 0, -0.29645076, 0.9550482)
-bones/5/rotation = Quaternion(0, 0, 0.29645076, 0.9550482)
-bones/6/rotation = Quaternion(0, -0.034198835, 0, 0.99941504)
+bones/3/rotation = Quaternion(0.037508067, 0, 0, 0.9992964)
+bones/4/rotation = Quaternion(0, 0, -0.27649838, 0.9610144)
+bones/5/rotation = Quaternion(0, 0, 0.27649838, 0.9610144)
+bones/6/rotation = Quaternion(0, -0.037508067, 0, 0.9992964)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=51372571]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34683228, 0)
@@ -160,6 +162,13 @@ anim_player = NodePath("../character-female-b2/AnimationPlayer")
 
 [node name="Player" type="Node" parent="CharacterBody3D" unique_id=1438387384]
 script = ExtResource("5_hq6iv")
+
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D" unique_id=896819450]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 11.285, 12.15)
+hit_from_inside = true
+debug_shape_custom_color = Color(1, 0, 1, 1)
+debug_shape_thickness = 5
 
 [connection signal="MovementStateChanged" from="CharacterBody3D" to="CharacterBody3D/CharacterAnimator" method="OnMovementStateChanged"]
 

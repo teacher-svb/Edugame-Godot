@@ -8,6 +8,8 @@ uniform float feather : hint_range(0.0, 5.0) = 0.2;
 
 global uniform vec3 player_pos;
 uniform vec3 camera_pos;
+uniform float is_occluded = 0.0;
+
 
 void fragment() {
     vec3 world_pos = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
@@ -24,7 +26,7 @@ void fragment() {
 
     // Only fade fragments between player and camera (proj > 0)
     float cam_dist = length(camera_pos - player_pos);
-	float in_range = step(0.0, proj) * step(proj, cam_dist);
+	float in_range = step(0.5, proj) * step(proj, cam_dist);
 
     float mask = smoothstep(hole_radius - feather, hole_radius, dist);
 
