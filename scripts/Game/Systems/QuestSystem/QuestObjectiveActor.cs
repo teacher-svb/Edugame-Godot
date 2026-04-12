@@ -26,17 +26,15 @@ namespace TnT.EduGame.QuestSystem
 
         public override void _Ready()
         {
-            var area = this.FindAncestorOfType<Area2D>();
-            area.BodyEntered += OnTriggerEnter2D;
             _questManager = QuestManager.Instance;
             if (_questManager == null)
                 GD.Print("QuestManager not found");
         }
 
-        void OnTriggerEnter2D(Node2D other)
+        void _OnBodyEntered(Node other)
         {
-            if (other is CharacterController2D && other.FindAnyObjectByType<Player>() == null)
-                    return;
+            if (other.FindAnyObjectByType<Player>() == null)
+                return;
 
             GD.Print("entered quest starter");
 

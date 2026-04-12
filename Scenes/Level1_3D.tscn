@@ -14,7 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/Player_3D.tscn" id="21_ycjjd"]
 [ext_resource type="PackedScene" uid="uid://ci0qlbk7yu2cr" path="res://assets/3D/Furniture Kit/Models/GLTF format/bedSingle.glb" id="22_0tae3"]
 [ext_resource type="Script" uid="uid://bhsdjlrhck4qd" path="res://scripts/test/Transporter.cs" id="22_182vs"]
+[ext_resource type="Script" uid="uid://dbtd0oguw4wdj" path="res://scripts/Game/Systems/QuestSystem/QuestObjectiveActor.cs" id="22_ycjjd"]
 [ext_resource type="PackedScene" uid="uid://ct1kqwdhujc8n" path="res://assets/3D/Furniture Kit/Models/GLTF format/benchCushionLow.glb" id="23_7n07m"]
+[ext_resource type="PackedScene" uid="uid://ri147ckev4hj" path="res://assets/3D/Mini Characters 1/Models/GLB format/avocado.glb" id="24_c1bi7"]
 [ext_resource type="PackedScene" uid="uid://40rbyr5gq5lu" path="res://assets/3D/Furniture Kit/Models/GLTF format/cabinetBedDrawer.glb" id="24_kdqke"]
 [ext_resource type="PackedScene" uid="uid://bmcouihuq457y" path="res://assets/3D/Furniture Kit/Models/GLTF format/desk.glb" id="25_kb3qt"]
 [ext_resource type="PackedScene" uid="uid://db03lq6cgxid2" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedDoors.glb" id="26_7vwr8"]
@@ -55,9 +57,16 @@ adjustment_color_correction = SubResource("GradientTexture1D_kdqke")
 [sub_resource type="BoxShape3D" id="BoxShape3D_shbgg"]
 size = Vector3(0.4958725, 1, 0.774292)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ycjjd"]
+size = Vector3(1.5620174, 1, 0.36618042)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c1bi7"]
+size = Vector3(0.4958725, 1.0795898, 1.127533)
+
 [node name="Node3D2" type="Node3D" unique_id=565024144]
 script = ExtResource("1_14bvk")
 OcclusionShader = ExtResource("2_mglpj")
+MaxRadius = 1.0
 
 [node name="Environment" type="Node3D" parent="." unique_id=1626489397]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.012903452, 0, 0.0022169743)
@@ -229,10 +238,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.064562, 0, 0.29980087)
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1136978952]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.714869, 0.13522768, 0.20574808)
+script = ExtResource("22_ycjjd")
+_questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
+_questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1875313900]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.042747498, 0, 0)
 shape = SubResource("BoxShape3D_shbgg")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D" unique_id=2042212710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6717138, 0, 0.5679015)
+shape = SubResource("BoxShape3D_ycjjd")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D" unique_id=4008341]
@@ -240,12 +257,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3400679, 0, 0)
 shape = SubResource("BoxShape3D_shbgg")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
-[node name="Area3D2" type="Area3D" parent="." unique_id=1322930721]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.469843, 0.13522768, 0.20574808)
+[node name="Area3D2" type="Area3D" parent="." unique_id=994627467]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.428207, 0.13522768, 0.20574808)
+script = ExtResource("22_ycjjd")
+_action = 1
+_questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
+_questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=1437564251]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.039886475, 0, 0.0009765625)
-shape = SubResource("BoxShape3D_shbgg")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=344954541]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.042747498, 0.039794922, -0.030471802)
+shape = SubResource("BoxShape3D_c1bi7")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
 [node name="transporter_bedroom-livingroom" type="Area3D" parent="." unique_id=1189788667 node_paths=PackedStringArray("_destination")]
@@ -278,6 +299,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9697871, 0.43125337, -31.5
 shape = SubResource("BoxShape3D_shbgg")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
+[node name="avocado2" parent="." unique_id=1869030793 instance=ExtResource("24_c1bi7")]
+transform = Transform3D(-0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, -0.70710677, -1.2217548, 0.0036462545, 3.8689103)
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_OnBodyEntered"]
+[connection signal="body_entered" from="Area3D2" to="Area3D2" method="_OnBodyEntered"]
 [connection signal="body_entered" from="transporter_bedroom-livingroom" to="transporter_bedroom-livingroom" method="_OnBodyEntered"]
 [connection signal="body_entered" from="transporter_livingroom-bedroom" to="transporter_livingroom-bedroom" method="_OnBodyEntered"]
 [connection signal="body_entered" from="transporter_livingroom_level2" to="transporter_livingroom_level2" method="_OnBodyEntered"]

@@ -83,8 +83,7 @@ namespace TnT.EduGame
 
 
             float targetRadius = _playerRayCast.IsColliding() ? MaxRadius : 0.0f;
-            if (_playerRayCast.IsColliding())
-                GD.Print(_playerRayCast.GetCollider());
+
             _currentRadius = Mathf.MoveToward(_currentRadius, targetRadius, (float)delta * FadeSpeed * MaxRadius);
 
             foreach (var mat in _allMaterials)
@@ -111,8 +110,8 @@ namespace TnT.EduGame
         }
 
         // MultiMeshInstance3D: no surface override API, so duplicate the MultiMesh and its Mesh
-        private void ApplyToMultiMeshInstance(MultiMeshInstance3D mmi)
-        {
+        // private void ApplyToMultiMeshInstance(MultiMeshInstance3D mmi)
+        // {
             // if (mmi.Multimesh?.Mesh == null) return;
 
             // var multimesh = (MultiMesh)mmi.Multimesh.Duplicate();
@@ -127,7 +126,7 @@ namespace TnT.EduGame
 
             // multimesh.Mesh = mesh;
             // mmi.Multimesh = multimesh;
-        }
+        // }
 
         // GridMap: must duplicate the MeshLibrary and replace materials inside it
         private void ApplyToGridMap(GridMap gridMap)

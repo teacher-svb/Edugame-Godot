@@ -2699,10 +2699,10 @@ VisualRoot = NodePath("character-female-b2/character-female-b")
 [node name="character-female-b2" parent="." unique_id=484953847 instance=ExtResource("2_sb0or")]
 
 [node name="Skeleton3D" parent="character-female-b2/character-female-b" parent_id_path=PackedInt32Array(484953847, 1520587921) index="0" unique_id=1550514916]
-bones/3/rotation = Quaternion(-0.0074113873, 0, 0, 0.9999726)
-bones/4/rotation = Quaternion(0, 0, -0.36204866, 0.9321593)
-bones/5/rotation = Quaternion(0, 0, 0.36204866, 0.9321593)
-bones/6/rotation = Quaternion(0, 0.0074113873, 0, 0.9999726)
+bones/3/rotation = Quaternion(0.031860933, 0, 0, 0.9994924)
+bones/4/rotation = Quaternion(0, 0, -0.3051565, 0.9523022)
+bones/5/rotation = Quaternion(0, 0, 0.3051565, 0.9523022)
+bones/6/rotation = Quaternion(0, -0.031860933, 0, 0.9994924)
 
 [node name="body-mesh" parent="character-female-b2/character-female-b/Skeleton3D" index="0" unique_id=1736541477]
 layers = 3
@@ -2719,8 +2719,7 @@ shape = SubResource("CapsuleShape3D_14bvk")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1556376148]
 transform = Transform3D(1, 0, 0, 0, 0.74453294, 0.6675857, 0, -0.6675857, 0.74453294, 0, 11.285046, 12.150276)
-projection = 1
-fov = 10.9
+fov = 12.84131
 size = 5.0
 far = 200.0
 
@@ -2737,7 +2736,7 @@ anim_player = NodePath("../character-female-b2/AnimationPlayer")
 script = ExtResource("4_cvtri")
 
 [node name="RayCast3D" type="RayCast3D" parent="." unique_id=1632914296]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7137857, 0.29650137)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5801216, -0.033002913)
 target_position = Vector3(0, 11.285, 12.15)
 hit_from_inside = true
 debug_shape_custom_color = Color(1, 0, 1, 1)
