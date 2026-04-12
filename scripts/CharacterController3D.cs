@@ -8,6 +8,9 @@ public partial class CharacterController3D : CharacterBody3D, ICharacterControll
     public const float JumpVelocity = 4.5f;
     public const float RotationSpeed = 10.0f;
 
+    [Export] public RayCast3D OcclusionRaycast { get; set; }
+    [Export] public Camera3D Camera { get; set; }
+
     [Export] public Node3D VisualRoot { get; set; }
 
     [Signal] public delegate void MovementStateChangedEventHandler(string state);

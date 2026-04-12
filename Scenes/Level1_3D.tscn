@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://lsbk05nndu58"]
 
+[ext_resource type="Script" uid="uid://coeco3nsaywj6" path="res://scripts/OcclusionFader.cs" id="1_14bvk"]
 [ext_resource type="PackedScene" uid="uid://hnsprachgabr" path="res://assets/3D/Furniture Kit/Models/GLTF format/stairs.glb" id="2_f2o16"]
+[ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://shaders/occlusionFader.gdshader" id="2_mglpj"]
 [ext_resource type="Material" uid="uid://ch1a8r7ydb2oe" path="res://materials/black_mask.tres" id="2_shbgg"]
 [ext_resource type="ArrayMesh" uid="uid://dj6kds8mharjp" path="res://assets/3D/openbox.obj" id="3_182vs"]
 [ext_resource type="PackedScene" uid="uid://cuv5joqecv4bn" path="res://assets/3D/Furniture Kit/Models/GLTF format/hoodModern.glb" id="13_ycjjd"]
@@ -16,6 +18,7 @@
 [ext_resource type="Script" uid="uid://bhsdjlrhck4qd" path="res://scripts/test/Transporter.cs" id="22_182vs"]
 [ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="22_ycjjd"]
 [ext_resource type="PackedScene" uid="uid://ct1kqwdhujc8n" path="res://assets/3D/Furniture Kit/Models/GLTF format/benchCushionLow.glb" id="23_7n07m"]
+[ext_resource type="PackedScene" uid="uid://bkg5k0ed5xbko" path="res://Scenes/Level2_3D.scn" id="24_c1bi7"]
 [ext_resource type="PackedScene" uid="uid://40rbyr5gq5lu" path="res://assets/3D/Furniture Kit/Models/GLTF format/cabinetBedDrawer.glb" id="24_kdqke"]
 [ext_resource type="PackedScene" uid="uid://bmcouihuq457y" path="res://assets/3D/Furniture Kit/Models/GLTF format/desk.glb" id="25_kb3qt"]
 [ext_resource type="PackedScene" uid="uid://db03lq6cgxid2" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedDoors.glb" id="26_7vwr8"]
@@ -2743,7 +2746,12 @@ transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_
 [sub_resource type="BoxShape3D" id="BoxShape3D_shbgg"]
 size = Vector3(0.4958725, 1, 0.774292)
 
-[node name="Node3D2" type="Node3D" unique_id=565024144]
+[node name="Node3D2" type="Node3D" unique_id=565024144 node_paths=PackedStringArray("Player", "Camera", "PlayerRayCast")]
+script = ExtResource("1_14bvk")
+OcclusionShader = ExtResource("2_mglpj")
+Player = NodePath("CharacterBody3D")
+Camera = NodePath("CharacterBody3D/Camera3D")
+PlayerRayCast = NodePath("CharacterBody3D/RayCast3D")
 
 [node name="Environment" type="Node3D" parent="." unique_id=1626489397]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.012903452, 0, 0.0022169743)
@@ -2771,37 +2779,37 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.01
 [node name="tableCloth" parent="Livingroom" unique_id=1234716365 instance=ExtResource("16_oywso")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.9152344, 0, -2.0805285)
 
-[node name="tableCloth(Clone)" parent="Livingroom/tableCloth" index="0" unique_id=1630464400]
+[node name="tableCloth(Clone)" parent="Livingroom/tableCloth" index="0" unique_id=910953393]
 layers = 3
 
 [node name="tableCloth2" parent="Livingroom" unique_id=839416735 instance=ExtResource("16_oywso")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3125439, 0, -2.0805285)
 
-[node name="tableCloth(Clone)" parent="Livingroom/tableCloth2" index="0" unique_id=1630464400]
+[node name="tableCloth(Clone)" parent="Livingroom/tableCloth2" index="0" unique_id=910953393]
 layers = 3
 
 [node name="chairCushion" parent="Livingroom" unique_id=1838283608 instance=ExtResource("17_oc118")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.0146303, 0, -2.8287356)
 
-[node name="chairCushion(Clone)" parent="Livingroom/chairCushion" index="0" unique_id=1068836636]
+[node name="chairCushion(Clone)" parent="Livingroom/chairCushion" index="0" unique_id=831273190]
 layers = 3
 
 [node name="chairCushion2" parent="Livingroom" unique_id=885769154 instance=ExtResource("17_oc118")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.0146303, 0, -2.4769497)
 
-[node name="chairCushion(Clone)" parent="Livingroom/chairCushion2" index="0" unique_id=1068836636]
+[node name="chairCushion(Clone)" parent="Livingroom/chairCushion2" index="0" unique_id=831273190]
 layers = 3
 
 [node name="chairCushion3" parent="Livingroom" unique_id=850914252 instance=ExtResource("17_oc118")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -2.630958, 0, -2.2982376)
 
-[node name="chairCushion(Clone)" parent="Livingroom/chairCushion3" index="0" unique_id=1068836636]
+[node name="chairCushion(Clone)" parent="Livingroom/chairCushion3" index="0" unique_id=831273190]
 layers = 3
 
 [node name="chairCushion4" parent="Livingroom" unique_id=203546859 instance=ExtResource("17_oc118")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -2.630958, 0, -2.6500235)
 
-[node name="chairCushion(Clone)" parent="Livingroom/chairCushion4" index="0" unique_id=1068836636]
+[node name="chairCushion(Clone)" parent="Livingroom/chairCushion4" index="0" unique_id=831273190]
 layers = 3
 
 [node name="rugSquare" parent="Livingroom" unique_id=812307430 instance=ExtResource("18_oc118")]
@@ -2836,25 +2844,25 @@ skeleton = NodePath("")
 [node name="bedSingle" parent="Bedroom" unique_id=1094179095 instance=ExtResource("22_0tae3")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 14.178923, 0, -0.6990976)
 
-[node name="bedSingle(Clone)" parent="Bedroom/bedSingle" index="0" unique_id=1446537369]
+[node name="bedSingle(Clone)" parent="Bedroom/bedSingle" index="0" unique_id=464591998]
 layers = 3
 
 [node name="benchCushionLow" parent="Bedroom" unique_id=1755434884 instance=ExtResource("23_7n07m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.691968, 0, 0.46061492)
 
-[node name="benchCushionLow(Clone)" parent="Bedroom/benchCushionLow" index="0" unique_id=692353389]
+[node name="benchCushionLow(Clone)" parent="Bedroom/benchCushionLow" index="0" unique_id=1789996934]
 layers = 3
 
 [node name="cabinetBedDrawer" parent="Bedroom" unique_id=1138683894 instance=ExtResource("24_kdqke")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 14.076734, 0, 0.25556684)
 
-[node name="cabinetBedDrawer(Clone)" parent="Bedroom/cabinetBedDrawer" index="0" unique_id=1797508318]
+[node name="cabinetBedDrawer(Clone)" parent="Bedroom/cabinetBedDrawer" index="0" unique_id=118210122]
 layers = 3
 
 [node name="desk" parent="Bedroom" unique_id=1198519338 instance=ExtResource("25_kb3qt")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 10.908302, 0, -0.1342783)
 
-[node name="desk(Clone)" parent="Bedroom/desk" index="0" unique_id=602885063]
+[node name="desk(Clone)" parent="Bedroom/desk" index="0" unique_id=424381713]
 layers = 3
 
 [node name="bookcaseClosedDoors" parent="Bedroom" unique_id=374552429 instance=ExtResource("26_7vwr8")]
@@ -2863,13 +2871,13 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 12.9
 [node name="bookcaseClosedWide" parent="Bedroom" unique_id=1796271444 instance=ExtResource("27_qovxq")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 14.222402, 2.3841858e-07, -0.8225241)
 
-[node name="bookcaseClosedWide(Clone)" parent="Bedroom/bookcaseClosedWide" index="0" unique_id=2079687073]
+[node name="bookcaseClosedWide(Clone)" parent="Bedroom/bookcaseClosedWide" index="0" unique_id=1746289387]
 layers = 3
 
 [node name="bookcaseClosed" parent="Bedroom" unique_id=191902409 instance=ExtResource("28_7n07m")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 12.518359, 0, 0.22696567)
 
-[node name="bookcaseClosed(Clone)" parent="Bedroom/bookcaseClosed" index="0" unique_id=976850065]
+[node name="bookcaseClosed(Clone)" parent="Bedroom/bookcaseClosed" index="0" unique_id=804329142]
 layers = 3
 
 [node name="books" parent="Bedroom" unique_id=1307336697 instance=ExtResource("29_kdqke")]
@@ -2905,13 +2913,13 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 [node name="hoodModern" parent="Kitchen" unique_id=1669411966 instance=ExtResource("13_ycjjd")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.027, 0.854, -0.813)
 
-[node name="hoodModern(Clone)" parent="Kitchen/hoodModern" index="0" unique_id=892372070]
+[node name="hoodModern(Clone)" parent="Kitchen/hoodModern" index="0" unique_id=1551769058]
 layers = 3
 
 [node name="kitchenMicrowave" parent="Kitchen" unique_id=1319709699 instance=ExtResource("15_d3gh3")]
 transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, 1.3037117, 0.43290854, -0.9465704)
 
-[node name="kitchenMicrowave(Clone)" parent="Kitchen/kitchenMicrowave" index="0" unique_id=1017961811]
+[node name="kitchenMicrowave(Clone)" parent="Kitchen/kitchenMicrowave" index="0" unique_id=335824636]
 layers = 3
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=242210098 node_paths=PackedStringArray("VisualRoot")]
@@ -2921,19 +2929,19 @@ VisualRoot = NodePath("character-female-b2/character-female-b")
 
 [node name="character-female-b2" parent="CharacterBody3D" unique_id=1913118570 instance=ExtResource("20_182vs")]
 
-[node name="Skeleton3D" parent="CharacterBody3D/character-female-b2/character-female-b" parent_id_path=PackedInt32Array(1913118570, 1357584895) index="0" unique_id=421653466]
-bones/3/rotation = Quaternion(-0.041091662, 0, 0, 0.9991554)
-bones/4/rotation = Quaternion(0, 0, -0.26614287, 0.9639336)
-bones/5/rotation = Quaternion(0, 0, 0.26614287, 0.9639336)
-bones/6/rotation = Quaternion(0, 0.041091662, 0, 0.9991554)
+[node name="Skeleton3D" parent="CharacterBody3D/character-female-b2/character-female-b" parent_id_path=PackedInt32Array(1913118570, 1520587921) index="0" unique_id=1550514916]
+bones/3/rotation = Quaternion(-0.023067556, 0, 0, 0.9997339)
+bones/4/rotation = Quaternion(0, 0, -0.31787777, 0.94813174)
+bones/5/rotation = Quaternion(0, 0, 0.31787777, 0.94813174)
+bones/6/rotation = Quaternion(0, 0.023067556, 0, 0.9997339)
 
-[node name="body-mesh" parent="CharacterBody3D/character-female-b2/character-female-b/Skeleton3D" index="0" unique_id=264502214]
+[node name="body-mesh" parent="CharacterBody3D/character-female-b2/character-female-b/Skeleton3D" index="0" unique_id=1736541477]
 layers = 3
 
-[node name="head-mesh" parent="CharacterBody3D/character-female-b2/character-female-b/Skeleton3D" index="1" unique_id=1251889532]
+[node name="head-mesh" parent="CharacterBody3D/character-female-b2/character-female-b/Skeleton3D" index="1" unique_id=1117568524]
 layers = 3
 
-[node name="AnimationPlayer" parent="CharacterBody3D/character-female-b2" index="1" unique_id=1880124255]
+[node name="AnimationPlayer" parent="CharacterBody3D/character-female-b2" index="1" unique_id=1396780351]
 libraries/ = SubResource("AnimationLibrary_c1bi7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1856797131]
@@ -2958,6 +2966,13 @@ anim_player = NodePath("../character-female-b2/AnimationPlayer")
 
 [node name="Player" type="Node" parent="CharacterBody3D" unique_id=390318870]
 script = ExtResource("22_ycjjd")
+
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D" unique_id=1813556037]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, 11.285, 12.15)
+hit_from_inside = true
+debug_shape_custom_color = Color(1, 0, 1, 1)
+debug_shape_thickness = 5
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1136978952]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.714869, 0.13522768, 0.20574808)
@@ -3003,6 +3018,7 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 [node name="transporter_livingroom_level2" type="Area3D" parent="." unique_id=1664634794]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.055, 36.5)
 script = ExtResource("22_182vs")
+_sceneToLoad = ExtResource("24_c1bi7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="transporter_livingroom_level2" unique_id=2109793199]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9697871, 0.29126757, -31.581316)

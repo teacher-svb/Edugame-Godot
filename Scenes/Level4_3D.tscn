@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://drbp1lf6v2s2j"]
 
+[ext_resource type="Script" uid="uid://coeco3nsaywj6" path="res://scripts/OcclusionFader.cs" id="1_hq6iv"]
 [ext_resource type="MeshLibrary" uid="uid://bhyhxgksl15j5" path="res://assets/3D/Modular Dungeon Kit/dungeon_kit_tileables.meshlib" id="1_srmrl"]
-[ext_resource type="Script" uid="uid://dqewu7p7xjtgh" path="res://scripts/GridMapOcclusionFader.cs" id="2_3m3qi"]
 [ext_resource type="Script" uid="uid://dc4u7vqilp6dd" path="res://scripts/CharacterController3D.cs" id="2_jri2c"]
 [ext_resource type="PackedScene" uid="uid://cdou2t4bule12" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-b.glb" id="3_3m3qi"]
-[ext_resource type="Shader" path="res://shaders/occlusionFader.gdshader" id="3_ic28c"]
+[ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://shaders/occlusionFader.gdshader" id="3_ic28c"]
 [ext_resource type="Script" uid="uid://dt1pmf2iuc4nb" path="res://scripts/CharacterAnimator.cs" id="4_ic28c"]
 [ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="5_hq6iv"]
 
@@ -91,8 +91,11 @@ states/walk/position = Vector2(515, 189)
 transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_60cj0"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_aebyh"), "fall", "walk", SubResource("AnimationNodeStateMachineTransition_0qrrf"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_iikk8"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_0ft5a"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_w8kji"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_yj0bu"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_sikog")]
 
 [node name="Node3D" type="Node3D" unique_id=589359545]
+script = ExtResource("1_hq6iv")
+OcclusionShader = ExtResource("3_ic28c")
+MaxRadius = 1.0
 
-[node name="GridMap" type="GridMap" parent="." unique_id=1092195489 node_paths=PackedStringArray("Player", "Camera", "PlayerRayCast")]
+[node name="GridMap" type="GridMap" parent="." unique_id=1092195489]
 mesh_library = ExtResource("1_srmrl")
 cell_size = Vector3(4, 2, 4)
 cell_center_y = false
@@ -100,11 +103,6 @@ collision_layer = 3
 data = {
 "cells": PackedInt32Array(65535, 1, 655360, 0, 1, 655360, 65534, 1, 2, 1, 1, 1048580, 1, 3, 22, 1, 0, 1048577, 0, 0, 0, 65535, 0, 0, 65534, 0, 0, 65533, 0, 1441793, 65533, 65534, 655380, -131072, 65534, 1441814, -131070, 65534, 655360, -131069, 65534, 655360, -131068, 65534, 1048577, -131068, 0, 1441792, -131068, 65535, 1441792, -131068, 2, 1441797, -131068, 3, 1441798, -131068, 5, 1441798, -131068, 7, 1048584, 65533, 65532, 1048576, 65533, 65531, 1048576, 65533, 65530, 1048576, 65533, 65527, 1048592, 65530, 65527, 2, 65533, 65524, 1441794, 0, 65527, 655362, 65530, 65534, 2, -65535, 3, 32, -65535, 2, 32, -65535, 1, 32, -65536, 1, 32, -1, 1, 32, -2, 1, 32, -65535, 0, 32, -65536, 0, 32, -1, 0, 32, -2, 0, 32, -3, 0, 32, -1, 65535, 32, -2, 65535, 32, -3, 65535, 32, -4, 65535, 32, -5, 65535, 32, -5, 65534, 32, -5, 65533, 32, -4, 65533, 32, -3, 65533, 32, -2, 65533, 32, -1, 65533, 32, -1, 65534, 32, -2, 65534, 32, -3, 65534, 32, -4, 65534, 32, -6, 65534, 32, -3, 65532, 32, -3, 65531, 32, -3, 65530, 32, -3, 65529, 32, -3, 65528, 32, -3, 65527, 32, -3, 65526, 32, -3, 65525, 32, -3, 65524, 32, -4, 65527, 32, -4, 65526, 32, -4, 65525, 32, -5, 65525, 32, -5, 65526, 32, -5, 65527, 32, -5, 65528, 32, -5, 65529, 32, -4, 65529, 32, -4, 65528, 32, -6, 65527, 32, -2, 65527, 32, -1, 65527, 32, -65536, 65527, 32, -1, 65526, 32, -1, 65525, 32, -2, 65525, 32, -2, 65526, 32, -2, 65528, 32, -2, 65529, 32, -1, 65529, 32, -1, 65528, 32, -196607, 65534, 32, -196606, 65534, 32, -196605, 65534, 32, -196604, 65534, 32, -196604, 65535, 32, -196604, 0, 32, -196604, 1, 32, -196604, 2, 33, -196604, 4, 33, -196604, 6, 33, -196604, 8, 33)
 }
-script = ExtResource("2_3m3qi")
-OcclusionShader = ExtResource("3_ic28c")
-Player = NodePath("../CharacterBody3D")
-Camera = NodePath("../CharacterBody3D/Camera3D")
-PlayerRayCast = NodePath("../CharacterBody3D/RayCast3D")
 metadata/_editor_floor_ = Vector3(0, -3, 0)
 
 [node name="Environment" type="Node3D" parent="." unique_id=1261937569]
@@ -127,18 +125,20 @@ directional_shadow_blend_splits = true
 directional_shadow_max_distance = 30.0
 sky_mode = 1
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1683869378 node_paths=PackedStringArray("VisualRoot")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.248171, 7.1360216, 15.400652)
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1683869378 node_paths=PackedStringArray("OcclusionRaycast", "Camera", "VisualRoot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.248171, 4.0409055, 15.827967)
 script = ExtResource("2_jri2c")
+OcclusionRaycast = NodePath("RayCast3D")
+Camera = NodePath("Camera3D")
 VisualRoot = NodePath("character-female-b2/character-female-b")
 
 [node name="character-female-b2" parent="CharacterBody3D" unique_id=371834684 instance=ExtResource("3_3m3qi")]
 
 [node name="Skeleton3D" parent="CharacterBody3D/character-female-b2/character-female-b" parent_id_path=PackedInt32Array(371834684, 1520587921) index="0" unique_id=1550514916]
-bones/3/rotation = Quaternion(0.0055485726, 0, 0, 0.9999846)
-bones/4/rotation = Quaternion(0, 0, -0.37793493, 0.9258323)
-bones/5/rotation = Quaternion(0, 0, 0.37793493, 0.9258323)
-bones/6/rotation = Quaternion(0, -0.0055485726, 0, 0.9999846)
+bones/3/rotation = Quaternion(0.032908086, 0, 0, 0.99945843)
+bones/4/rotation = Quaternion(0, 0, -0.28974178, 0.9571049)
+bones/5/rotation = Quaternion(0, 0, 0.28974178, 0.9571049)
+bones/6/rotation = Quaternion(0, -0.032908086, 0, 0.99945843)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=51372571]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34683228, 0)

@@ -5,6 +5,7 @@ uniform sampler2D albedo_texture : source_color, hint_default_white;
 uniform vec4 albedo_color : source_color = vec4(1.0);
 uniform float hole_radius : hint_range(0.0, 10.0) = 1.0;
 uniform float feather : hint_range(0.0, 5.0) = 0.2;
+uniform float vertical_offset : hint_range(0.0, 3.0) = 2.0;
 
 global uniform vec3 player_pos;
 uniform vec3 camera_pos;
@@ -14,19 +15,22 @@ uniform float is_occluded = 0.0;
 void fragment() {
     vec3 world_pos = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
 
-    // Cylinder axis from player toward camera
-    vec3 axis = normalize(camera_pos - player_pos);
+    // Shift the cylinder origin upward so the player sits at the bottom of the hole
+    vec3 cylinder_origin = player_pos + vec3(0.0, vertical_offset, 0.0);
+
+    // Cylinder axis from cylinder origin toward camera
+    vec3 axis = normalize(camera_pos - cylinder_origin);
 
     // Project fragment onto the axis
-    vec3 to_frag = world_pos - player_pos;
+    vec3 to_frag = world_pos - cylinder_origin;
     float proj = dot(to_frag, axis);
 
     // Perpendicular distance from the cylinder axis
     float dist = length(to_frag - proj * axis);
 
     // Only fade fragments between player and camera (proj > 0)
-    float cam_dist = length(camera_pos - player_pos);
-	float in_range = step(0.5, proj) * step(proj, cam_dist);
+    float cam_dist = length(camera_pos - cylinder_origin);
+	float in_range = step(-.2, proj) * step(proj, cam_dist);
 
     float mask = smoothstep(hole_radius - feather, hole_radius, dist);
 
