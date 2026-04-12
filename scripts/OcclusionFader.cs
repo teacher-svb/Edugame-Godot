@@ -5,17 +5,20 @@ using TnT.Extensions;
 namespace TnT.EduGame
 {
     /// <summary>
-    /// Applies the occlusion-fader shader to all MeshInstance3D and GridMap nodes
-    /// in the scene (or only those in the "occludable" group when UseGroup is true).
+    /// Applies the occlusion-fader shader to all MeshInstance3D, MultiMeshInstance3D,
+    /// and GridMap nodes in the scene (or only those in the "occludable" group when UseGroup is true).
     /// Place this node anywhere in the scene tree.
     /// </summary>
     public partial class OcclusionFader : Node3D
     {
+        /// <summary>The occlusion fader shader (occlusionFader.gdshader).</summary>
         [Export] public Shader OcclusionShader { get; set; }
         CharacterController3D _playerController;
         Camera3D _camera;
         RayCast3D _playerRayCast;
+        /// <summary>How fast the hole opens and closes, in units per second.</summary>
         [Export] public float FadeSpeed { get; set; } = 2.0f;
+        /// <summary>Maximum radius of the occlusion hole when fully open. Should match hole_radius in the shader.</summary>
         [Export] public float MaxRadius { get; set; } = 2.0f;
         /// <summary>
         /// How far above the player's origin the hole is centered.
@@ -26,7 +29,7 @@ namespace TnT.EduGame
         /// When true, only nodes in the "occludable" group receive the shader.
         /// When false, every MeshInstance3D and GridMap in the scene is affected.
         /// </summary>
-        [Export] public bool UseGroup { get; set; } = false;
+        // [Export] public bool UseGroup { get; set; } = false;
 
         private readonly List<ShaderMaterial> _allMaterials = new();
         private float _currentRadius = 0.0f;
@@ -36,25 +39,32 @@ namespace TnT.EduGame
             _playerController = GetTree().FindAnyObjectByType<Player>().GetParent() as CharacterController3D;
             _camera = _playerController.Camera;
             _playerRayCast = _playerController.OcclusionRaycast;
-            if (UseGroup)
-            {
-                foreach (var node in GetTree().GetNodesInGroup("occludable"))
-                {
-                    if (node is MeshInstance3D mi) ApplyToMeshInstance(mi);
-                    else if (node is GridMap gm) ApplyToGridMap(gm);
-                }
-            }
-            else
-            {
+            // if (UseGroup)
+            // {
+            //     foreach (var node in GetTree().GetNodesInGroup("occludable"))
+            //     {
+            //         if (node is MeshInstance3D mi)           ApplyToMeshInstance(mi);
+            //         else if (node is MultiMeshInstance3D mmi) ApplyToMultiMeshInstance(mmi);
+            //         else if (node is GridMap gm)               ApplyToGridMap(gm);
+            //     }
+            // }
+            // else
+            // {
                 foreach (var mi in GetTree().FindObjectsByType<MeshInstance3D>())
                 {
                     if (_playerController.IsAncestorOf(mi)) continue;
                     ApplyToMeshInstance(mi);
                 }
 
+                // foreach (var mmi in GetTree().FindObjectsByType<MultiMeshInstance3D>())
+                // {
+                //     if (_playerController.IsAncestorOf(mmi)) continue;
+                //     ApplyToMultiMeshInstance(mmi);
+                // }
+
                 foreach (var gm in GetTree().FindObjectsByType<GridMap>())
                     ApplyToGridMap(gm);
-            }
+            // }
 
         }
 
@@ -73,6 +83,8 @@ namespace TnT.EduGame
 
 
             float targetRadius = _playerRayCast.IsColliding() ? MaxRadius : 0.0f;
+            if (_playerRayCast.IsColliding())
+                GD.Print(_playerRayCast.GetCollider());
             _currentRadius = Mathf.MoveToward(_currentRadius, targetRadius, (float)delta * FadeSpeed * MaxRadius);
 
             foreach (var mat in _allMaterials)
@@ -96,6 +108,25 @@ namespace TnT.EduGame
                 meshInstance.SetSurfaceOverrideMaterial(s, mat);
                 _allMaterials.Add(mat);
             }
+        }
+
+        // MultiMeshInstance3D: no surface override API, so duplicate the MultiMesh and its Mesh
+        private void ApplyToMultiMeshInstance(MultiMeshInstance3D mmi)
+        {
+            // if (mmi.Multimesh?.Mesh == null) return;
+
+            // var multimesh = (MultiMesh)mmi.Multimesh.Duplicate();
+            // var mesh = (Mesh)multimesh.Mesh.Duplicate();
+
+            // for (int s = 0; s < mesh.GetSurfaceCount(); s++)
+            // {
+            //     var mat = BuildMaterial(mesh.SurfaceGetMaterial(s) as BaseMaterial3D);
+            //     mesh.SurfaceSetMaterial(s, mat);
+            //     _allMaterials.Add(mat);
+            // }
+
+            // multimesh.Mesh = mesh;
+            // mmi.Multimesh = multimesh;
         }
 
         // GridMap: must duplicate the MeshLibrary and replace materials inside it

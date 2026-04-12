@@ -10,7 +10,7 @@ namespace TnT.EduGame.GameState
     [GlobalClass]
     public partial class GameStateLoadingScreen : BaseGameState, IStateObject<GameStateLoadingScreen.LoaderOptions>
     {
-        Resource _currentScene;
+        string _currentScenePath;
 
         FadeController _fadeController;
         FadeController FadeController
@@ -33,12 +33,12 @@ namespace TnT.EduGame.GameState
             if (options is SceneLoaderOptions)
             {
                 var sceneLoaderOptions = options as SceneLoaderOptions;
-                if (_currentScene == null)
-                    _currentScene = sceneLoaderOptions.sceneName;
+                if (_currentScenePath == null)
+                    _currentScenePath = sceneLoaderOptions.scenePath;
                 return new BaseState(new()
                 {
                     ExitOnNextUpdate = () => true,
-                    OnEnter = () => LoadScene(sceneLoaderOptions.sceneName, sceneLoaderOptions.player, sceneLoaderOptions.targetLocation, sceneLoaderOptions.forceLoad),
+                    OnEnter = () => LoadScene(sceneLoaderOptions.scenePath, sceneLoaderOptions.player, sceneLoaderOptions.targetLocation, sceneLoaderOptions.forceLoad),
                     OnExit = FadeOut
                 });
             }
@@ -72,11 +72,11 @@ namespace TnT.EduGame.GameState
             player.MoveTo(target);
         }
 
-        async Task LoadScene(Resource scene, Player player, Vector3 target, bool forceLoad)
+        async Task LoadScene(string scenePath, Player player, Vector3 target, bool forceLoad)
         {
             await FadeIn();
 
-            var gameplayScene = GD.Load<PackedScene>(scene.ResourcePath);
+            var gameplayScene = GD.Load<PackedScene>(scenePath);
             var gameplayInstance = gameplayScene.Instantiate();
             gameplayInstance.Name = "GameplaySceneInstance";
 
@@ -120,7 +120,7 @@ namespace TnT.EduGame.GameState
 
         public class SceneLoaderOptions : LocationLoaderOptions
         {
-            public Resource sceneName;
+            public string scenePath;
         }
     }
 }

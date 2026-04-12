@@ -76,12 +76,12 @@ namespace TnT.EduGame.GameState
             }
         }
 
-        public void LoadScene(Resource sceneName, Vector3 targetLocation, bool forceLoad = false)
+        public void LoadScene(string scenePath, Vector3 targetLocation, bool forceLoad = false)
         {
             GameStateLoadingScreen state = _states.OfType<GameStateLoadingScreen>().FirstOrDefault();
             try
             {
-                Push(state.GetState<SceneLoaderOptions>(new() { sceneName = sceneName, player = _player, targetLocation = targetLocation, forceLoad = forceLoad }));
+                Push(state.GetState<SceneLoaderOptions>(new() { scenePath = scenePath, player = _player, targetLocation = targetLocation, forceLoad = forceLoad }));
             }
             catch
             {

@@ -2,11 +2,9 @@
 
 [ext_resource type="Script" uid="uid://coeco3nsaywj6" path="res://scripts/OcclusionFader.cs" id="1_hq6iv"]
 [ext_resource type="MeshLibrary" uid="uid://bhyhxgksl15j5" path="res://assets/3D/Modular Dungeon Kit/dungeon_kit_tileables.meshlib" id="1_srmrl"]
-[ext_resource type="Script" uid="uid://dc4u7vqilp6dd" path="res://scripts/CharacterController3D.cs" id="2_jri2c"]
-[ext_resource type="PackedScene" uid="uid://cdou2t4bule12" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-b.glb" id="3_3m3qi"]
 [ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://shaders/occlusionFader.gdshader" id="3_ic28c"]
-[ext_resource type="Script" uid="uid://dt1pmf2iuc4nb" path="res://scripts/CharacterAnimator.cs" id="4_ic28c"]
-[ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="5_hq6iv"]
+[ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/Player_3D.tscn" id="6_3m3qi"]
+[ext_resource type="Script" uid="uid://bhsdjlrhck4qd" path="res://scripts/test/Transporter.cs" id="8_hq6iv"]
 
 [sub_resource type="Gradient" id="Gradient_jri2c"]
 offsets = PackedFloat32Array(0.117647, 1)
@@ -37,58 +35,11 @@ adjustment_enabled = true
 adjustment_saturation = 1.2
 adjustment_color_correction = SubResource("GradientTexture1D_kdqke")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ic28c"]
-radius = 0.12402344
-height = 0.6754761
+[sub_resource type="BoxShape3D" id="BoxShape3D_ic28c"]
+size = Vector3(3.994873, 9.118042, 1)
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sikog"]
-animation = &"fall"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nq4sg"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xbk2r"]
-animation = &"jump"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_im6n0"]
-animation = &"walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_60cj0"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aebyh"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0qrrf"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iikk8"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0ft5a"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w8kji"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yj0bu"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sikog"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hq6iv"]
-states/End/position = Vector2(864, 160)
-states/Start/position = Vector2(193, 173)
-states/fall/node = SubResource("AnimationNodeAnimation_sikog")
-states/fall/position = Vector2(591, 309)
-states/idle/node = SubResource("AnimationNodeAnimation_nq4sg")
-states/idle/position = Vector2(344, 181)
-states/jump/node = SubResource("AnimationNodeAnimation_xbk2r")
-states/jump/position = Vector2(591, 101)
-states/walk/node = SubResource("AnimationNodeAnimation_im6n0")
-states/walk/position = Vector2(515, 189)
-transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_60cj0"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_aebyh"), "fall", "walk", SubResource("AnimationNodeStateMachineTransition_0qrrf"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_iikk8"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_0ft5a"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_w8kji"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_yj0bu"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_sikog")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ihpsd"]
+size = Vector3(3.2751493, 1.4509277, 0.7153015)
 
 [node name="Node3D" type="Node3D" unique_id=589359545]
 script = ExtResource("1_hq6iv")
@@ -125,51 +76,25 @@ directional_shadow_blend_splits = true
 directional_shadow_max_distance = 30.0
 sky_mode = 1
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1683869378 node_paths=PackedStringArray("OcclusionRaycast", "Camera", "VisualRoot")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.248171, 4.0409055, 15.827967)
-script = ExtResource("2_jri2c")
-OcclusionRaycast = NodePath("RayCast3D")
-Camera = NodePath("Camera3D")
-VisualRoot = NodePath("character-female-b2/character-female-b")
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2139486354]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.220087, 0, 16.50248)
+collision_layer = 2147483648
 
-[node name="character-female-b2" parent="CharacterBody3D" unique_id=371834684 instance=ExtResource("3_3m3qi")]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=69056306]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2166748, 4.059021, 0)
+shape = SubResource("BoxShape3D_ic28c")
 
-[node name="Skeleton3D" parent="CharacterBody3D/character-female-b2/character-female-b" parent_id_path=PackedInt32Array(371834684, 1520587921) index="0" unique_id=1550514916]
-bones/3/rotation = Quaternion(0.032908086, 0, 0, 0.99945843)
-bones/4/rotation = Quaternion(0, 0, -0.28974178, 0.9571049)
-bones/5/rotation = Quaternion(0, 0, 0.28974178, 0.9571049)
-bones/6/rotation = Quaternion(0, -0.032908086, 0, 0.99945843)
+[node name="transporter_entrance-level2" type="Area3D" parent="." unique_id=724020990]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.886121, -9.536743e-07, 9.132318)
+script = ExtResource("8_hq6iv")
+_sceneToLoadPath = "uid://bkg5k0ed5xbko"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=51372571]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34683228, 0)
-shape = SubResource("CapsuleShape3D_ic28c")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="transporter_entrance-level2" unique_id=464292282]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.904705, 4.6376214, 6.786029)
+shape = SubResource("BoxShape3D_ihpsd")
+debug_color = Color(0, 0.6, 0.69803923, 1)
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=221130020]
-transform = Transform3D(1, 0, 0, 0, 0.74453294, 0.6675857, 0, -0.6675857, 0.74453294, 0, 11.285046, 12.150276)
-projection = 1
-fov = 10.9
-size = 5.0
-far = 200.0
+[node name="Player" parent="." unique_id=820993804 instance=ExtResource("6_3m3qi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.16138, 2.647956, 13.059824)
 
-[node name="CharacterAnimator" type="Node" parent="CharacterBody3D" unique_id=327779802 node_paths=PackedStringArray("AnimationTree")]
-script = ExtResource("4_ic28c")
-AnimationTree = NodePath("../AnimationTree")
-
-[node name="AnimationTree" type="AnimationTree" parent="CharacterBody3D" unique_id=1870831523]
-root_node = NodePath("../character-female-b2")
-tree_root = SubResource("AnimationNodeStateMachine_hq6iv")
-anim_player = NodePath("../character-female-b2/AnimationPlayer")
-
-[node name="Player" type="Node" parent="CharacterBody3D" unique_id=1438387384]
-script = ExtResource("5_hq6iv")
-
-[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D" unique_id=896819450]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-target_position = Vector3(0, 11.285, 12.15)
-hit_from_inside = true
-debug_shape_custom_color = Color(1, 0, 1, 1)
-debug_shape_thickness = 5
-
-[connection signal="MovementStateChanged" from="CharacterBody3D" to="CharacterBody3D/CharacterAnimator" method="OnMovementStateChanged"]
-
-[editable path="CharacterBody3D/character-female-b2"]
+[connection signal="body_entered" from="transporter_entrance-level2" to="transporter_entrance-level2" method="_OnBodyEntered"]

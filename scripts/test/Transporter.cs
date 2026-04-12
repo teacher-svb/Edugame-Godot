@@ -9,7 +9,9 @@ using TnT.Systems;
 public partial class Transporter : Node
 {
     [Export] protected Transporter _destination;
-    [Export] protected Resource _sceneToLoad;
+    [Export(PropertyHint.File, "*.tscn,*.scn")]
+    protected string _sceneToLoadPath;
+    // [Export] protected Resource _sceneToLoad;
 
     protected Vector3 TransporterLocation
     {
@@ -29,10 +31,10 @@ public partial class Transporter : Node
         if (other.FindAnyObjectByType<Player>() == null)
             return;
 
-        
+
         if (_destination != null)
             StateManagerGame.Instance.LoadLocation(_destination.TransporterLocation);
-        else if (_sceneToLoad != null)
-            StateManagerGame.Instance.LoadScene(_sceneToLoad, TransporterLocation);
+        else if (_sceneToLoadPath != "")
+            StateManagerGame.Instance.LoadScene(_sceneToLoadPath, TransporterLocation);
     }
 }
