@@ -135,10 +135,10 @@ VisualRoot = NodePath("character-female-b2/character-female-b")
 [node name="character-female-b2" parent="CharacterBody3D" unique_id=371834684 instance=ExtResource("3_3m3qi")]
 
 [node name="Skeleton3D" parent="CharacterBody3D/character-female-b2/character-female-b" parent_id_path=PackedInt32Array(371834684, 1357584895) index="0" unique_id=421653466]
-bones/3/rotation = Quaternion(0.037508067, 0, 0, 0.9992964)
-bones/4/rotation = Quaternion(0, 0, -0.27649838, 0.9610144)
-bones/5/rotation = Quaternion(0, 0, 0.27649838, 0.9610144)
-bones/6/rotation = Quaternion(0, -0.037508067, 0, 0.9992964)
+bones/3/rotation = Quaternion(0.017604455, 0, 0, 0.999845)
+bones/4/rotation = Quaternion(0, 0, -0.3513435, 0.93624663)
+bones/5/rotation = Quaternion(0, 0, 0.3513435, 0.93624663)
+bones/6/rotation = Quaternion(0, -0.017604455, 0, 0.999845)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=51372571]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34683228, 0)

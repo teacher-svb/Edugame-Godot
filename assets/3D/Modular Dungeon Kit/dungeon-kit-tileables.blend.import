@@ -39,37 +39,10 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "nodes": {
-"PATH:corridor": {
-"generate/physics": true
-},
-"PATH:corridor-corner": {
-"generate/physics": true
-},
-"PATH:corridor-end": {
-"generate/physics": true
-},
 "PATH:corridor-intersection": {
 "generate/physics": true
 },
-"PATH:corridor-junction": {
-"generate/physics": true
-},
-"PATH:corridor-transition": {
-"generate/physics": true
-},
-"PATH:corridor-wide": {
-"generate/physics": true
-},
-"PATH:corridor-wide-corner": {
-"generate/physics": true
-},
-"PATH:corridor-wide-end": {
-"generate/physics": true
-},
 "PATH:corridor-wide-intersection": {
-"generate/physics": true
-},
-"PATH:corridor-wide-junction": {
 "generate/physics": true
 },
 "PATH:gate": {
@@ -82,27 +55,6 @@ _subresources={
 "generate/physics": true
 },
 "PATH:gate-metal-bars": {
-"generate/physics": true
-},
-"PATH:room-corner": {
-"generate/physics": true
-},
-"PATH:room-large": {
-"generate/physics": true
-},
-"PATH:room-large-variation": {
-"generate/physics": true
-},
-"PATH:room-small": {
-"generate/physics": true
-},
-"PATH:room-small-variation": {
-"generate/physics": true
-},
-"PATH:room-wide": {
-"generate/physics": true
-},
-"PATH:room-wide-variation": {
 "generate/physics": true
 },
 "PATH:template-corner": {
