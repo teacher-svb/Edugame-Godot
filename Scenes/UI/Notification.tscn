@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8eidkv5hpkk3"]
+[gd_scene format=3 uid="uid://b8eidkv5hpkk3"]
 
 [ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://themes/Notifications.tres" id="1_0snb7"]
 [ext_resource type="Script" uid="uid://mpqip1aln67l" path="res://scripts/Game/UI/MVC_Messages/View/Notification.cs" id="2_sqm8t"]
@@ -8,7 +8,7 @@
 atlas = ExtResource("3_sqm8t")
 region = Rect2(0, 0, 64, 64)
 
-[node name="Notification" type="Control" node_paths=PackedStringArray("_closeBtn", "_nxtBtn", "_characterSprite", "_message", "_characterName")]
+[node name="Notification" type="Control" unique_id=685767845 node_paths=PackedStringArray("_closeBtn", "_nxtBtn", "_characterSprite", "_message", "_characterName")]
 layout_mode = 3
 anchors_preset = 10
 anchor_right = 1.0
@@ -23,7 +23,7 @@ _characterSprite = NodePath("Messager/CharacterSprite")
 _message = NodePath("Panel/Message")
 _characterName = NodePath("Messager/CharacterName")
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="." unique_id=602076499]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -34,33 +34,35 @@ offset_bottom = 172.0
 grow_horizontal = 2
 theme_type_variation = &"LightPanel"
 
-[node name="Message" type="RichTextLabel" parent="Panel"]
+[node name="Message" type="RichTextLabel" parent="Panel" unique_id=636996138]
 clip_contents = false
 layout_mode = 2
 bbcode_enabled = true
 text = "[color=#FFD700][font_size=50]󰲼[/font_size] Start:[/color] Suspendisse nisl tortor, rhoncus.
 "
 fit_content = true
+scroll_active = false
 
-[node name="Buttons" type="HBoxContainer" parent="Panel/Message"]
+[node name="Buttons" type="HBoxContainer" parent="Panel/Message" unique_id=345256235]
 layout_direction = 3
 layout_mode = 1
-anchors_preset = 12
+anchors_preset = -1
 anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.99000007
+anchor_bottom = 1.7110001
 offset_top = 9.0
-offset_bottom = 59.0
+offset_right = -608.23004
+offset_bottom = -0.013000488
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Close" type="PanelContainer" parent="Panel/Message/Buttons"]
+[node name="Close" type="PanelContainer" parent="Panel/Message/Buttons" unique_id=811073020]
 layout_mode = 2
 
-[node name="CloseBtn" type="Button" parent="Panel/Message/Buttons/Close"]
+[node name="CloseBtn" type="Button" parent="Panel/Message/Buttons/Close" unique_id=1933717760]
 layout_mode = 2
 
-[node name="CloseBtnLabel" type="RichTextLabel" parent="Panel/Message/Buttons/Close"]
+[node name="CloseBtnLabel" type="RichTextLabel" parent="Panel/Message/Buttons/Close" unique_id=1275694043]
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"RichTextButton"
@@ -71,14 +73,14 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Next" type="PanelContainer" parent="Panel/Message/Buttons"]
+[node name="Next" type="PanelContainer" parent="Panel/Message/Buttons" unique_id=294014583]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="NextBtn" type="Button" parent="Panel/Message/Buttons/Next"]
+[node name="NextBtn" type="Button" parent="Panel/Message/Buttons/Next" unique_id=1012605488]
 layout_mode = 2
 
-[node name="NextBtnLabel" type="RichTextLabel" parent="Panel/Message/Buttons/Next"]
+[node name="NextBtnLabel" type="RichTextLabel" parent="Panel/Message/Buttons/Next" unique_id=2097912026]
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"RichTextButton"
@@ -89,21 +91,21 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Messager" type="VBoxContainer" parent="."]
+[node name="Messager" type="VBoxContainer" parent="." unique_id=524706536]
 layout_mode = 0
 offset_left = 24.0
 offset_right = 185.0
 offset_bottom = 202.0
 theme_override_constants/separation = 4
 
-[node name="CharacterSprite" type="TextureRect" parent="Messager"]
+[node name="CharacterSprite" type="TextureRect" parent="Messager" unique_id=1332631301]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 10.0
 texture = SubResource("AtlasTexture_j83ny")
 stretch_mode = 6
 
-[node name="CharacterName" type="Label" parent="Messager"]
+[node name="CharacterName" type="Label" parent="Messager" unique_id=455399557]
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
