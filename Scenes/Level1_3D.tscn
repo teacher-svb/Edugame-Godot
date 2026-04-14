@@ -61,7 +61,7 @@ size = Vector3(0.4958725, 1, 0.774292)
 size = Vector3(1.5620174, 1, 0.36618042)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c1bi7"]
-size = Vector3(0.4958725, 1.0795898, 1.127533)
+size = Vector3(0.4958725, 1.0795898, 0.2446518)
 
 [node name="Node3D2" type="Node3D" unique_id=565024144]
 script = ExtResource("1_14bvk")
@@ -269,6 +269,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.042747498, 0.039794922, -0
 shape = SubResource("BoxShape3D_c1bi7")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
+[node name="Area3D3" type="Area3D" parent="." unique_id=2051305232]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.587408, 0.13522768, 0.7266444)
+script = ExtResource("22_ycjjd")
+_action = 1
+_questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
+_questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8924"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D3" unique_id=597132956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.042747498, 0.039794922, 0.61976135)
+shape = SubResource("BoxShape3D_c1bi7")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
 [node name="transporter_bedroom-livingroom" type="Area3D" parent="." unique_id=1189788667 node_paths=PackedStringArray("_destination")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.417043, 0.055497095, -0.385913)
 script = ExtResource("22_182vs")
@@ -309,6 +321,7 @@ bones/4/rotation = Quaternion(0.0032652554, -0.0431301, -0.08427945, 0.99550295)
 
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_OnBodyEntered"]
 [connection signal="body_entered" from="Area3D2" to="Area3D2" method="_OnBodyEntered"]
+[connection signal="body_entered" from="Area3D3" to="Area3D3" method="_OnBodyEntered"]
 [connection signal="body_entered" from="transporter_bedroom-livingroom" to="transporter_bedroom-livingroom" method="_OnBodyEntered"]
 [connection signal="body_entered" from="transporter_livingroom-bedroom" to="transporter_livingroom-bedroom" method="_OnBodyEntered"]
 [connection signal="body_entered" from="transporter_livingroom_level2" to="transporter_livingroom_level2" method="_OnBodyEntered"]

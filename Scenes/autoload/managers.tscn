@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://bjnewwsvx7s8s" path="res://scripts/Game/Singletons/ManagerUI.cs" id="4_c37v5"]
 [ext_resource type="Script" uid="uid://7u5mhmxl340a" path="res://scripts/Game/UI/MVC_Fade/FadeView.cs" id="5_c37v5"]
 [ext_resource type="Script" uid="uid://cvgoslwqcj457" path="res://scripts/Game/UI/MVC_Fade/FadeModel.cs" id="6_8i7bo"]
-[ext_resource type="Resource" uid="uid://bcgox3enbg4ph" path="res://quests/Avocado.tres" id="6_pnf1h"]
+[ext_resource type="Resource" uid="uid://bcgox3enbg4ph" path="res://quests/LookingForAvocado.tres" id="6_pnf1h"]
 [ext_resource type="Script" uid="uid://c0ssbl3ew4s2d" path="res://scripts/Game/StateManagementGame/StateManagerGame.cs" id="7_0le2r"]
 [ext_resource type="Script" uid="uid://crvao34oeaf4m" path="res://scripts/Game/StateManagementGame/GameStateChallenge.cs" id="7_blwmm"]
 [ext_resource type="Script" uid="uid://bdql4ehll6w1t" path="res://scripts/Game/Systems/QuestSystem/QuestManagerSaveData.cs" id="7_iqbe2"]

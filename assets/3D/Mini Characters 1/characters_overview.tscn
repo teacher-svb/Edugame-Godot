@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://cpp5lij1bvdr5"]
+
+[ext_resource type="PackedScene" uid="uid://dxkpcq7iwnmxo" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-a.glb" id="1_a0403"]
+[ext_resource type="PackedScene" uid="uid://cdou2t4bule12" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-b.glb" id="2_ipwq4"]
+[ext_resource type="PackedScene" uid="uid://cpwcng6oti6wh" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-c.glb" id="3_bo4p8"]
+[ext_resource type="PackedScene" uid="uid://c7wdumm6p64ys" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-d.glb" id="4_30ofl"]
+[ext_resource type="PackedScene" uid="uid://1dcxdjq4yhc6" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-e.glb" id="5_t0qi2"]
+[ext_resource type="PackedScene" uid="uid://ddaffim88r3ri" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-f.glb" id="6_f30ns"]
+[ext_resource type="PackedScene" uid="uid://byugryd2bknk1" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-male-a.glb" id="7_uvvxr"]
+[ext_resource type="PackedScene" uid="uid://dayfflcwisv17" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-male-b.glb" id="8_20kv0"]
+[ext_resource type="PackedScene" uid="uid://drwvpbhjq4fqi" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-male-c.glb" id="9_sk402"]
+[ext_resource type="PackedScene" uid="uid://bwjplwur1q0eq" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-male-d.glb" id="10_hx8oi"]
+[ext_resource type="PackedScene" uid="uid://bb3q4mngyn8pm" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-male-e.glb" id="11_7hibc"]
+[ext_resource type="PackedScene" uid="uid://qhull6alulsf" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-male-f.glb" id="12_m4jh8"]
+
+[node name="Node3D" type="Node3D" unique_id=748304475]
+
+[node name="character-female-a2" parent="." unique_id=1865028695 instance=ExtResource("1_a0403")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="character-female-b2" parent="." unique_id=484953847 instance=ExtResource("2_ipwq4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="character-female-c2" parent="." unique_id=847242639 instance=ExtResource("3_bo4p8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+
+[node name="character-female-d2" parent="." unique_id=436328959 instance=ExtResource("4_30ofl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="character-female-e2" parent="." unique_id=1793933687 instance=ExtResource("5_t0qi2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="character-female-f2" parent="." unique_id=2015996154 instance=ExtResource("6_f30ns")]
+
+[node name="character-male-a2" parent="." unique_id=475273681 instance=ExtResource("7_uvvxr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1)
+
+[node name="character-male-b2" parent="." unique_id=1690580080 instance=ExtResource("8_20kv0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1)
+
+[node name="character-male-c2" parent="." unique_id=1842826630 instance=ExtResource("9_sk402")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1)
+
+[node name="character-male-d2" parent="." unique_id=1122977597 instance=ExtResource("10_hx8oi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)
+
+[node name="character-male-e2" parent="." unique_id=58853703 instance=ExtResource("11_7hibc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+
+[node name="character-male-f2" parent="." unique_id=279331367 instance=ExtResource("12_m4jh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
