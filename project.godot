@@ -95,3 +95,7 @@ occlusion_radius={
 "type": "float",
 "value": 1.0
 }
+occlusion_voffset={
+"type": "float",
+"value": 1.0
+}

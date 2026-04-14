@@ -1,5 +1,5 @@
+using System.Linq;
 using Godot;
-using System.Collections.Generic;
 using TnT.Extensions;
 
 namespace TnT.Systems.OcclusionFade
@@ -12,21 +12,20 @@ namespace TnT.Systems.OcclusionFade
     public partial class OcclusionFader : Node3D
     {
         /// <summary>The occlusion fader shader (occlusionFader.gdshader).</summary>
-        [Export] public Shader OcclusionShader { get; set; }
+        [Export] private Shader OcclusionShader { get; set; }
         CharacterController3D _playerController;
         Camera3D _camera;
         RayCast3D _playerRayCast;
         /// <summary>How fast the hole opens and closes, in units per second.</summary>
-        [Export] public float FadeSpeed { get; set; } = 2.0f;
+        [Export] private float FadeSpeed { get; set; } = 2.0f;
         /// <summary>Maximum radius of the occlusion hole when fully open. Should match hole_radius in the shader.</summary>
-        [Export] public float MaxRadius { get; set; } = 2.0f;
+        [Export] private float MaxRadius { get; set; } = 2.0f;
         /// <summary>
         /// How far above the player's origin the hole is centered.
         /// 0 = player at center of hole, ~1 = player at bottom of hole.
         /// </summary>
-        [Export] public float VerticalOffset { get; set; } = 1.0f;
+        [Export] private float VerticalOffset { get; set; } = 1.0f;
 
-        private readonly List<ShaderMaterial> _allMaterials = new();
         private float _currentRadius = 0.0f;
 
         public override void _Ready()
@@ -34,18 +33,18 @@ namespace TnT.Systems.OcclusionFade
             _playerController = GetTree().FindAnyObjectByType<Player>().GetParent() as CharacterController3D;
             _camera = _playerController.Camera;
             _playerRayCast = _playerController.OcclusionRaycast;
-            foreach (var mi in GetTree().FindObjectsByType<MeshInstance3D>())
-            {
-                if (_playerController.IsAncestorOf(mi)) continue;
-                ApplyToMeshInstance(mi);
-            }
+            GetTree()
+                .FindObjectsByType<MeshInstance3D>()
+                .Where(n => _playerController.IsAncestorOf(n) == false)
+                .ForEach(ApplyToMeshInstance);
+
+            // foreach (var mi in GetTree().FindObjectsByType<MeshInstance3D>().Where(n => _playerController.IsAncestorOf(n) == false))
+            //     ApplyToMeshInstance(mi);
 
             foreach (var gm in GetTree().FindObjectsByType<GridMap>())
                 ApplyToGridMap(gm);
 
-            foreach (var mat in _allMaterials)
-                mat.SetShaderParameter("vertical_offset", VerticalOffset);
-
+            RenderingServer.GlobalShaderParameterSet("occlusion_voffset", VerticalOffset);
         }
 
         public override void _Process(double delta)
@@ -72,7 +71,6 @@ namespace TnT.Systems.OcclusionFade
 
                 var mat = BuildMaterial(existing as BaseMaterial3D);
                 meshInstance.SetSurfaceOverrideMaterial(s, mat);
-                _allMaterials.Add(mat);
             }
         }
 
@@ -90,7 +88,6 @@ namespace TnT.Systems.OcclusionFade
                 {
                     var mat = BuildMaterial(mesh.SurfaceGetMaterial(s) as BaseMaterial3D);
                     mesh.SurfaceSetMaterial(s, mat);
-                    _allMaterials.Add(mat);
                 }
                 gridMap.MeshLibrary.SetItemMesh(id, mesh);
             }

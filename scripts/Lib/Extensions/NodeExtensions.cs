@@ -82,7 +82,8 @@ namespace TnT.Extensions
         }
 
         /// <summary>
-        /// Removes all children of a specific type T.
+        /// Removes all nodes of type T in the subtree.
+        /// Unlike Clear(), siblings of matched nodes are preserved.
         /// </summary>
         public static void Clear<T>(this Node parent) where T : Node
         {

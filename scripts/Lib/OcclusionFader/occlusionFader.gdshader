@@ -4,8 +4,8 @@ render_mode depth_draw_opaque, cull_back;
 uniform sampler2D albedo_texture : source_color, hint_default_white;
 uniform vec4 albedo_color : source_color = vec4(1.0);
 uniform float feather : hint_range(0.0, 5.0) = 0.2;
-uniform float vertical_offset : hint_range(0.0, 3.0) = 2.0;
 
+global uniform float occlusion_voffset : hint_range(0.0, 3.0) = 1.0;
 global uniform float occlusion_radius : hint_range(0.0, 10.0) = 1.0;
 
 global uniform vec3 player_pos;
@@ -16,7 +16,7 @@ void fragment() {
     vec3 world_pos = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
 
     // Shift the cylinder origin upward so the player sits at the bottom of the hole
-    vec3 cylinder_origin = player_pos + vec3(0.0, vertical_offset, 0.0);
+    vec3 cylinder_origin = player_pos + vec3(0.0, occlusion_voffset, 0.0);
 
     // Cylinder axis from cylinder origin toward camera
     vec3 axis = normalize(camera_pos - cylinder_origin);
