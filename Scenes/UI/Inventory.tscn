@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://csd5kk66e1bep"]
+[gd_scene format=3 uid="uid://csd5kk66e1bep"]
 
-[ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://themes/Notifications.tres" id="1_8q74i"]
+[ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="1_8q74i"]
 [ext_resource type="Script" uid="uid://dawvxm20ec6r5" path="res://scripts/Game/UI/MVC_Inventory/InventoryUI.cs" id="2_oc7th"]
 
 [node name="Inventory" type="PanelContainer" node_paths=PackedStringArray("_itemContainers")]

@@ -1,6 +1,0 @@
-@startuml
-abstract class BaseGameState <<partial>> {
-    + <<override>> _Ready() : void
-}
-Node <|-- BaseGameState
-@enduml

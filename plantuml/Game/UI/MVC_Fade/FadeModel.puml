@@ -1,5 +1,0 @@
-@startuml
-class FadeModel <<partial>> {
-}
-Resource <|-- FadeModel
-@enduml

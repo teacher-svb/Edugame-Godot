@@ -1,5 +1,0 @@
-@startuml
-interface "IStateObject`1"<T> {
-    + GetState(options:T) : BaseState
-}
-@enduml

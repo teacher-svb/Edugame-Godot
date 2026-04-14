@@ -1,8 +1,0 @@
-@startuml
-class Carrousel <<partial>> {
-    + <<override>> _Ready() : void
-    + <<async>> _SelectPrevious() : void
-    + <<async>> _SelectNext() : void
-}
-BoxContainer <|-- Carrousel
-@enduml

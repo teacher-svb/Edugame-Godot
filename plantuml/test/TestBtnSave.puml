@@ -1,6 +1,0 @@
-@startuml
-class TestBtnSave <<partial>> {
-    + <<override>> _Pressed() : void
-}
-Button <|-- TestBtnSave
-@enduml

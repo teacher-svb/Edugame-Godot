@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dbtd0oguw4wdj" path="res://scripts/Game/Systems/QuestSystem/QuestObjectiveActor.cs" id="5_slnnj"]
 [ext_resource type="Script" uid="uid://r0pfr1dce2fx" path="res://scripts/Game/Door.cs" id="6_6ll4n"]
 [ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="7_kylad"]
-[ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://quests/QuestEventChannel.tres" id="8_bdlbp"]
+[ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/quests/QuestEventChannel.tres" id="8_bdlbp"]
 [ext_resource type="Script" uid="uid://bxls002a1ygp1" path="res://scripts/Game/CharacterController2D.cs" id="9_2h8qs"]
 [ext_resource type="Texture2D" uid="uid://bfuy78gt6dyyt" path="res://icon.svg" id="10_2h8qs"]
 [ext_resource type="Script" uid="uid://bobbvwscu5csp" path="res://scripts/Game/CharacterAgent2D.cs" id="11_rpty4"]

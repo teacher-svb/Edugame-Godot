@@ -1,6 +1,0 @@
-@startuml
-class CombinationLockWheel <<partial>> {
-    + Init(paramName:string, values:IEnumerable<ChallengeValue>) : void
-}
-Control <|-- CombinationLockWheel
-@enduml

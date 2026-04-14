@@ -2,7 +2,7 @@ using Godot;
 using System.Collections.Generic;
 using TnT.Extensions;
 
-namespace TnT.EduGame
+namespace TnT.Systems.OcclusionFade
 {
     /// <summary>
     /// Applies the occlusion-fader shader to all MeshInstance3D and GridMap nodes in 

@@ -1,7 +1,0 @@
-@startuml
-abstract class AbstractStateStack <<partial>> {
-    + Push(state:BaseState) : void
-    + <<async>> Pop() : void
-}
-AbstractStateManager <|-- AbstractStateStack
-@enduml

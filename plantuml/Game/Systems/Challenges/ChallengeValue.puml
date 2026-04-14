@@ -1,9 +1,0 @@
-@startuml
-class ChallengeValue <<partial>> {
-    + Value : int
-    + ParamName : string
-    + ChallengeValue()
-    + ChallengeValue(value:int, paramName:string)
-}
-Resource <|-- ChallengeValue
-@enduml

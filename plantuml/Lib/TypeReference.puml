@@ -1,6 +1,0 @@
-@startuml
-class TypeReference <<partial>> {
-}
-Resource <|-- TypeReference
-TypeReference --> "Type" Type
-@enduml

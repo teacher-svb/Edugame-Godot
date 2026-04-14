@@ -51,15 +51,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
 [node name="character-male-f2" parent="." unique_id=279331367 instance=ExtResource("12_m4jh8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="character-male-g" parent="." unique_id=440717015 instance=ExtResource("13_ipwq4")]
+[node name="character-male-g" parent="." unique_id=1058184607 instance=ExtResource("13_ipwq4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -1)
-
-[node name="Skeleton3D" parent="character-male-g/character-male-b" parent_id_path=PackedInt32Array(440717015, 1648725145) index="0" unique_id=563459901]
-bones/1/rotation = Quaternion(-3.9443045e-31, -1.4687558e-09, 5.916457e-31, 1)
-bones/2/rotation = Quaternion(-3.9443045e-31, -1.4687558e-09, 5.916457e-31, 1)
-bones/3/rotation = Quaternion(5.89298e-40, 1.4940476e-09, 7.888609e-31, 1)
-bones/4/rotation = Quaternion(-2.865308e-09, -1.1868491e-09, -0.38268346, 0.92387956)
-bones/5/rotation = Quaternion(-2.8653075e-09, 1.1868491e-09, 0.38268346, 0.92387956)
-bones/6/rotation = Quaternion(-3.9443045e-31, -1.5506938e-09, 6.902533e-31, 1)
 
 [editable path="character-male-g"]

@@ -13,7 +13,7 @@
     - [ ] GAME Add animations to loading screen
     - [x] GAME Add character selection screen to statestack
 - GAMEPLAY
-    - [ ] GAMEPLAY Add sequence: quest-start/NPC-approach/Conversation/NC-follow/Conversation/quest-end
+    - [ ] GAMEPLAY Add sequence: quest-start/NPC-approach/Conversation/PC-follow/Conversation/quest-end
 - INVENTORY
     - [x] INVENTORY refactor inventory system
     - [x] INVENTORY open/close inventory

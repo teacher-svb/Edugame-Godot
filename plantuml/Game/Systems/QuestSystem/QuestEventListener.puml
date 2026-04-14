@@ -1,6 +1,0 @@
-@startuml
-class QuestEventListener <<partial>> {
-    + <<override>> Raise(values:Variant[]) : void
-}
-EventListener <|-- QuestEventListener
-@enduml

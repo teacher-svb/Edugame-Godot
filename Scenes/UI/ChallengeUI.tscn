@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dx5c0meqksg8l"]
+[gd_scene format=3 uid="uid://dx5c0meqksg8l"]
 
-[ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://themes/Notifications.tres" id="1_ck7ko"]
+[ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="1_ck7ko"]
 [ext_resource type="Script" uid="uid://qjrt84cjuqwm" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeUI.cs" id="2_ubp0e"]
 
 [node name="ChallengeUI" type="Control" node_paths=PackedStringArray("_left", "_right", "_challengeContainer", "_questionContainer", "_answerContainer", "_submitContainer")]
