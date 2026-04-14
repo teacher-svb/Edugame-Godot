@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://lsbk05nndu58"]
 
-[ext_resource type="Script" uid="uid://coeco3nsaywj6" path="res://scripts/OcclusionFader.cs" id="1_14bvk"]
+[ext_resource type="Script" uid="uid://coeco3nsaywj6" path="res://scripts/Lib/OcclusionFader/OcclusionFader.cs" id="1_14bvk"]
 [ext_resource type="PackedScene" uid="uid://hnsprachgabr" path="res://assets/3D/Furniture Kit/Models/GLTF format/stairs.glb" id="2_f2o16"]
-[ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://shaders/occlusionFader.gdshader" id="2_mglpj"]
+[ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://scripts/Lib/OcclusionFader/occlusionFader.gdshader" id="2_mglpj"]
 [ext_resource type="Material" uid="uid://ch1a8r7ydb2oe" path="res://materials/black_mask.tres" id="2_shbgg"]
 [ext_resource type="ArrayMesh" uid="uid://dj6kds8mharjp" path="res://assets/3D/openbox.obj" id="3_182vs"]
 [ext_resource type="PackedScene" uid="uid://cuv5joqecv4bn" path="res://assets/3D/Furniture Kit/Models/GLTF format/hoodModern.glb" id="13_ycjjd"]
@@ -317,7 +317,7 @@ transform = Transform3D(-0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, -0.
 [node name="Skeleton3D" parent="avocado2/Armature" parent_id_path=PackedInt32Array(1869030793, 1923085597) index="0" unique_id=559322183]
 bones/1/rotation = Quaternion(-0.122428946, 0.027743451, 0.07656861, 0.9891304)
 bones/3/rotation = Quaternion(-0.072635084, -0.026248384, 0.12224877, 0.98949003)
-bones/4/rotation = Quaternion(0.0032652554, -0.0431301, -0.08427945, 0.99550295)
+bones/4/rotation = Quaternion(-0.007638178, -0.032984573, -0.08431003, 0.9958642)
 
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_OnBodyEntered"]
 [connection signal="body_entered" from="Area3D2" to="Area3D2" method="_OnBodyEntered"]

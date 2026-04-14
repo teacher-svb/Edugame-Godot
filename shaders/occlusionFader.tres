@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://b2ibmt13khumi"]
 
-[ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://shaders/occlusionFader.gdshader" id="1_wke77"]
+[ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://scripts/Lib/OcclusionFader/occlusionFader.gdshader" id="1_wke77"]
 
 [resource]
 render_priority = 0

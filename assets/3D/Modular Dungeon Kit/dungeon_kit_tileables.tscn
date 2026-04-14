@@ -2,4 +2,4 @@
 
 [ext_resource type="PackedScene" uid="uid://cxj2bvhpfwsd4" path="res://assets/3D/Modular Dungeon Kit/dungeon-kit-tileables.blend" id="1_a1asw"]
 
-[node name="dungeon-kit-tileables" unique_id=251946588 instance=ExtResource("1_a1asw")]
+[node name="dungeon-kit-tileables" unique_id=762259289 instance=ExtResource("1_a1asw")]

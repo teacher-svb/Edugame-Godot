@@ -3,13 +3,13 @@ render_mode depth_draw_opaque, cull_back;
 
 uniform sampler2D albedo_texture : source_color, hint_default_white;
 uniform vec4 albedo_color : source_color = vec4(1.0);
-uniform float hole_radius : hint_range(0.0, 10.0) = 1.0;
 uniform float feather : hint_range(0.0, 5.0) = 0.2;
 uniform float vertical_offset : hint_range(0.0, 3.0) = 2.0;
 
+global uniform float occlusion_radius : hint_range(0.0, 10.0) = 1.0;
+
 global uniform vec3 player_pos;
-uniform vec3 camera_pos;
-uniform float is_occluded = 0.0;
+global uniform vec3 camera_pos;
 
 
 void fragment() {
@@ -32,7 +32,7 @@ void fragment() {
     float cam_dist = length(camera_pos - cylinder_origin);
 	float in_range = step(-.2, proj) * step(proj, cam_dist);
 
-    float mask = smoothstep(hole_radius - feather, hole_radius, dist);
+    float mask = smoothstep(occlusion_radius - feather, occlusion_radius, dist);
 
     const mat4 dither_m = mat4(
         vec4(0.0625, 0.5625, 0.1875, 0.6875),

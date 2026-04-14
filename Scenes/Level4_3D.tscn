@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://drbp1lf6v2s2j"]
 
-[ext_resource type="Script" uid="uid://coeco3nsaywj6" path="res://scripts/OcclusionFader.cs" id="1_hq6iv"]
+[ext_resource type="Script" uid="uid://coeco3nsaywj6" path="res://scripts/Lib/OcclusionFader/OcclusionFader.cs" id="1_hq6iv"]
 [ext_resource type="MeshLibrary" uid="uid://bhyhxgksl15j5" path="res://assets/3D/Modular Dungeon Kit/dungeon_kit_tileables.meshlib" id="1_srmrl"]
-[ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://shaders/occlusionFader.gdshader" id="3_ic28c"]
+[ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://scripts/Lib/OcclusionFader/occlusionFader.gdshader" id="3_ic28c"]
 [ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/Player_3D.tscn" id="6_3m3qi"]
 [ext_resource type="Script" uid="uid://bhsdjlrhck4qd" path="res://scripts/test/Transporter.cs" id="8_hq6iv"]
 
@@ -39,7 +39,7 @@ adjustment_color_correction = SubResource("GradientTexture1D_kdqke")
 size = Vector3(3.994873, 9.118042, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ihpsd"]
-size = Vector3(3.2751493, 1.4509277, 0.7153015)
+size = Vector3(3.2751493, 1.4509277, 0.8249359)
 
 [node name="Node3D" type="Node3D" unique_id=589359545]
 script = ExtResource("1_hq6iv")
@@ -48,7 +48,7 @@ MaxRadius = 1.0
 
 [node name="GridMap" type="GridMap" parent="." unique_id=1092195489]
 mesh_library = ExtResource("1_srmrl")
-cell_size = Vector3(4, 2, 4)
+cell_size = Vector3(2, 1, 2)
 cell_center_y = false
 collision_layer = 3
 data = {
@@ -77,11 +77,11 @@ directional_shadow_max_distance = 30.0
 sky_mode = 1
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2139486354]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.220087, 0, 16.50248)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0752306, 0, 8.433324)
 collision_layer = 2147483648
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=69056306]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2166748, 4.059021, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.059, 0)
 shape = SubResource("BoxShape3D_ic28c")
 
 [node name="transporter_entrance-level2" type="Area3D" parent="." unique_id=724020990]
@@ -90,11 +90,11 @@ script = ExtResource("8_hq6iv")
 _sceneToLoadPath = "uid://bkg5k0ed5xbko"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="transporter_entrance-level2" unique_id=464292282]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.904705, 4.6376214, 6.786029)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.993947, 2.6177406, -1.061902)
 shape = SubResource("BoxShape3D_ihpsd")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
 [node name="Player" parent="." unique_id=820993804 instance=ExtResource("6_3m3qi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.16138, 2.647956, 13.059824)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0320635, 1.7421509, 6.6781507)
 
 [connection signal="body_entered" from="transporter_entrance-level2" to="transporter_entrance-level2" method="_OnBodyEntered"]

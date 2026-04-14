@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bwjplwur1q0eq" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-male-d.glb" id="10_hx8oi"]
 [ext_resource type="PackedScene" uid="uid://bb3q4mngyn8pm" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-male-e.glb" id="11_7hibc"]
 [ext_resource type="PackedScene" uid="uid://qhull6alulsf" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-male-f.glb" id="12_m4jh8"]
+[ext_resource type="PackedScene" uid="uid://n2jqt6oke3v2" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-male-g.glb" id="13_ipwq4"]
 
 [node name="Node3D" type="Node3D" unique_id=748304475]
 
@@ -49,3 +50,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
 
 [node name="character-male-f2" parent="." unique_id=279331367 instance=ExtResource("12_m4jh8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="character-male-g" parent="." unique_id=440717015 instance=ExtResource("13_ipwq4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -1)
+
+[node name="Skeleton3D" parent="character-male-g/character-male-b" parent_id_path=PackedInt32Array(440717015, 1648725145) index="0" unique_id=563459901]
+bones/1/rotation = Quaternion(-3.9443045e-31, -1.4687558e-09, 5.916457e-31, 1)
+bones/2/rotation = Quaternion(-3.9443045e-31, -1.4687558e-09, 5.916457e-31, 1)
+bones/3/rotation = Quaternion(5.89298e-40, 1.4940476e-09, 7.888609e-31, 1)
+bones/4/rotation = Quaternion(-2.865308e-09, -1.1868491e-09, -0.38268346, 0.92387956)
+bones/5/rotation = Quaternion(-2.8653075e-09, 1.1868491e-09, 0.38268346, 0.92387956)
+bones/6/rotation = Quaternion(-3.9443045e-31, -1.5506938e-09, 6.902533e-31, 1)
+
+[editable path="character-male-g"]
