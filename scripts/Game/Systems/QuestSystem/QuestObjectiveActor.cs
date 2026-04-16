@@ -31,7 +31,7 @@ namespace TnT.EduGame.QuestSystem
                 GD.Print("QuestManager not found");
         }
 
-        void _OnBodyEntered(Node other)
+        void _OnQuestObjectiveActivated(Node other)
         {
             if (other.FindAnyObjectByType<Player>() == null)
                 return;
