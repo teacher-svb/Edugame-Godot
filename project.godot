@@ -73,6 +73,10 @@ close={
 3d_physics/layer_31="dont occlude"
 3d_physics/layer_32="world boundaries"
 
+[navigation]
+
+3d/default_cell_size=0.1
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

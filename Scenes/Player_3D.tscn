@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cdou2t4bule12" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-b.glb" id="2_sb0or"]
 [ext_resource type="Script" uid="uid://dt1pmf2iuc4nb" path="res://scripts/CharacterAnimator.cs" id="3_mawk5"]
 [ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="4_cvtri"]
+[ext_resource type="Script" uid="uid://di4vc0qfrn4vu" path="res://scripts/Game/CharacterAgent3D.cs" id="5_sb0or"]
 
 [sub_resource type="Animation" id="Animation_7hpe5"]
 resource_name = "attack-kick-left"
@@ -2699,10 +2700,10 @@ VisualRoot = NodePath("character-female-b2/character-female-b")
 [node name="character-female-b2" parent="." unique_id=484953847 instance=ExtResource("2_sb0or")]
 
 [node name="Skeleton3D" parent="character-female-b2/character-female-b" parent_id_path=PackedInt32Array(484953847, 1520587921) index="0" unique_id=1550514916]
-bones/3/rotation = Quaternion(0.0049374634, 0, 0, 0.9999879)
-bones/4/rotation = Quaternion(0, 0, -0.37898344, 0.9254035)
-bones/5/rotation = Quaternion(0, 0, 0.37898344, 0.9254035)
-bones/6/rotation = Quaternion(0, -0.0049374634, 0, 0.9999879)
+bones/3/rotation = Quaternion(-0.0055950545, 0, 0, 0.9999844)
+bones/4/rotation = Quaternion(0, 0, -0.36712268, 0.9301725)
+bones/5/rotation = Quaternion(0, 0, 0.36712268, 0.9301725)
+bones/6/rotation = Quaternion(0, 0.0055950545, 0, 0.9999844)
 
 [node name="body-mesh" parent="character-female-b2/character-female-b/Skeleton3D" index="0" unique_id=1736541477]
 layers = 3
@@ -2743,6 +2744,13 @@ debug_shape_custom_color = Color(1, 0, 1, 1)
 debug_shape_thickness = 5
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1447331713]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
+path_height_offset = 0.75
+avoidance_enabled = true
+max_speed = 5.0
+debug_enabled = true
+script = ExtResource("5_sb0or")
 
 [connection signal="MovementStateChanged" from="." to="CharacterAnimator" method="OnMovementStateChanged"]
 
