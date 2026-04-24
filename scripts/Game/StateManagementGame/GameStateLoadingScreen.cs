@@ -52,8 +52,8 @@ namespace TnT.EduGame.GameState
                     OnExit = FadeOut
                 });
             }
-            else if (options is SceneLoaderOptions)
-                return new BaseState(new() { ExitOnNextUpdate = () => true, OnEnter = FadeIn, OnExit = FadeOut });
+            // else if (options is SceneLoaderOptions)
+            //     return new BaseState(new() { ExitOnNextUpdate = () => true, OnEnter = FadeIn, OnExit = FadeOut });
 
             return BaseState.GetEmptyState();
         }

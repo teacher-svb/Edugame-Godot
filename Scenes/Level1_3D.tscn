@@ -5,7 +5,6 @@
 [ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://scripts/Lib/OcclusionFader/occlusionFader.gdshader" id="2_mglpj"]
 [ext_resource type="Material" uid="uid://ch1a8r7ydb2oe" path="res://materials/black_mask.tres" id="2_shbgg"]
 [ext_resource type="ArrayMesh" uid="uid://dj6kds8mharjp" path="res://assets/3D/openbox.obj" id="3_182vs"]
-[ext_resource type="Script" uid="uid://dt1pmf2iuc4nb" path="res://scripts/CharacterAnimator.cs" id="7_kdqke"]
 [ext_resource type="PackedScene" uid="uid://cuv5joqecv4bn" path="res://assets/3D/Furniture Kit/Models/GLTF format/hoodModern.glb" id="13_ycjjd"]
 [ext_resource type="PackedScene" uid="uid://wrnpr82rhsc0" path="res://assets/3D/Furniture Kit/Models/GLTF format/kitchenMicrowave.glb" id="15_d3gh3"]
 [ext_resource type="PackedScene" uid="uid://dvco42ojy8qml" path="res://assets/3D/Furniture Kit/Models/GLTF format/tableCloth.glb" id="16_oywso"]
@@ -19,14 +18,11 @@
 [ext_resource type="PackedScene" uid="uid://ct1kqwdhujc8n" path="res://assets/3D/Furniture Kit/Models/GLTF format/benchCushionLow.glb" id="23_7n07m"]
 [ext_resource type="PackedScene" uid="uid://ri147ckev4hj" path="res://assets/3D/Mini Characters 1/Models/GLB format/avocado.glb" id="24_c1bi7"]
 [ext_resource type="PackedScene" uid="uid://40rbyr5gq5lu" path="res://assets/3D/Furniture Kit/Models/GLTF format/cabinetBedDrawer.glb" id="24_kdqke"]
-[ext_resource type="PackedScene" uid="uid://n2jqt6oke3v2" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-male-g.glb" id="25_14bvk"]
+[ext_resource type="PackedScene" uid="uid://bc07cf20006c8" path="res://Scenes/characters/dad.tscn" id="25_14bvk"]
 [ext_resource type="PackedScene" uid="uid://bmcouihuq457y" path="res://assets/3D/Furniture Kit/Models/GLTF format/desk.glb" id="25_kb3qt"]
-[ext_resource type="Script" uid="uid://dc4u7vqilp6dd" path="res://scripts/CharacterController3D.cs" id="25_mglpj"]
 [ext_resource type="PackedScene" uid="uid://db03lq6cgxid2" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedDoors.glb" id="26_7vwr8"]
-[ext_resource type="Script" uid="uid://di4vc0qfrn4vu" path="res://scripts/Game/CharacterAgent3D.cs" id="27_0tae3"]
 [ext_resource type="PackedScene" uid="uid://dcaqo4uenuwgu" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedWide.glb" id="27_qovxq"]
 [ext_resource type="PackedScene" uid="uid://5ac2eh7lcw6p" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosed.glb" id="28_7n07m"]
-[ext_resource type="Script" uid="uid://caawogpo8xjof" path="res://scripts/NavigationPathDebugger.cs" id="28_kdqke"]
 [ext_resource type="PackedScene" uid="uid://cd2furrsxugw6" path="res://assets/3D/Furniture Kit/Models/GLTF format/books.glb" id="29_kdqke"]
 [ext_resource type="MeshLibrary" uid="uid://dn1i16n6um3sg" path="res://assets/3D/Furniture Kit/furniture-kit-tileables.meshlib" id="30_kb3qt"]
 
@@ -75,60 +71,6 @@ cell_size = 0.1
 cell_height = 0.5
 agent_radius = 0.1
 region_min_size = 15.0
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mglpj"]
-radius = 0.083984375
-height = 0.6586914
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sikog"]
-animation = &"fall"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nq4sg"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xbk2r"]
-animation = &"jump"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_im6n0"]
-animation = &"walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_60cj0"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aebyh"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0qrrf"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iikk8"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0ft5a"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w8kji"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yj0bu"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sikog"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_kb3qt"]
-states/End/position = Vector2(864, 160)
-states/Start/position = Vector2(193, 173)
-states/fall/node = SubResource("AnimationNodeAnimation_sikog")
-states/fall/position = Vector2(591, 309)
-states/idle/node = SubResource("AnimationNodeAnimation_nq4sg")
-states/idle/position = Vector2(344, 181)
-states/jump/node = SubResource("AnimationNodeAnimation_xbk2r")
-states/jump/position = Vector2(591, 101)
-states/walk/node = SubResource("AnimationNodeAnimation_im6n0")
-states/walk/position = Vector2(515, 189)
-transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_60cj0"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_aebyh"), "fall", "walk", SubResource("AnimationNodeStateMachineTransition_0qrrf"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_iikk8"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_0ft5a"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_w8kji"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_yj0bu"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_sikog")]
-graph_offset = Vector2(-250, -94)
 
 [node name="Node3D2" type="Node3D" unique_id=565024144]
 script = ExtResource("1_14bvk")
@@ -394,65 +336,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0019197, 0, 3.7967463)
 [node name="Node3D3" type="Node3D" parent="." unique_id=847245381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.64642096, 0, 1.5572877)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1641806985 node_paths=PackedStringArray("_agent")]
-visible = false
-script = ExtResource("28_kdqke")
-_agent = NodePath("../dad/NavigationAgent3D")
-
 [node name="Player" parent="." unique_id=820993804 instance=ExtResource("21_ycjjd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.78799653, 0, 2.266995)
 
-[node name="Skeleton3D" parent="Player/character-female-b2/character-female-b" parent_id_path=PackedInt32Array(820993804, 484953847, 1520587921) index="0" unique_id=1550514916]
-bones/3/rotation = Quaternion(0.014690356, 0, 0, 0.9998921)
-bones/4/rotation = Quaternion(0, 0, -0.34160718, 0.9398429)
-bones/5/rotation = Quaternion(0, 0, 0.34160718, 0.9398429)
-bones/6/rotation = Quaternion(0, -0.014690356, 0, 0.9998921)
-
-[node name="dad" type="CharacterBody3D" parent="." unique_id=184151125 node_paths=PackedStringArray("VisualRoot")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46547437, 0, 1.3699307)
-script = ExtResource("25_mglpj")
-_speed = 1.0
-VisualRoot = NodePath("character-male-g")
-
-[node name="character-male-g" parent="dad" unique_id=2064435565 instance=ExtResource("25_14bvk")]
-
-[node name="Skeleton3D" parent="dad/character-male-g/character-male-b" parent_id_path=PackedInt32Array(2064435565, 1847187186) index="0" unique_id=812148881]
-bones/0/rotation = Quaternion(-8.557136e-09, 2.4203237e-08, -4.142208e-16, 1)
-bones/1/rotation = Quaternion(1.1832914e-30, -2.5970621e-09, 1.774937e-30, 1)
-bones/2/rotation = Quaternion(1.1832914e-30, -2.5970621e-09, 1.774937e-30, 1)
-bones/3/rotation = Quaternion(0.0148186395, 2.1126714e-09, -3.1310687e-11, 0.9998902)
-bones/4/rotation = Quaternion(-2.6997726e-09, -1.2033489e-09, -0.34124547, 0.93997425)
-bones/5/rotation = Quaternion(-2.7477574e-09, 1.4875734e-09, 0.34124547, 0.93997425)
-bones/6/rotation = Quaternion(1.2266769e-11, -0.014818649, -1.1528945e-11, 0.9998902)
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="dad" unique_id=2021466129 node_paths=PackedStringArray("_targets")]
-path_desired_distance = 0.1
-target_desired_distance = 0.1
-path_height_offset = 0.75
-simplify_path = true
-avoidance_enabled = true
-max_speed = 5.0
-avoidance_priority = 0.5
-debug_enabled = true
-debug_use_custom = true
-debug_path_custom_color = Color(1, 0, 1, 1)
-debug_path_custom_point_size = 12.48
-script = ExtResource("27_0tae3")
-_targets = [NodePath("../../Node3D"), NodePath("../../Node3D2"), NodePath("../../Node3D3")]
-_loop = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="dad" unique_id=1016075718]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34106445, 0)
-shape = SubResource("CapsuleShape3D_mglpj")
-
-[node name="CharacterAnimator" type="Node" parent="dad" unique_id=1598988815 node_paths=PackedStringArray("AnimationTree")]
-script = ExtResource("7_kdqke")
-AnimationTree = NodePath("../AnimationTree")
-
-[node name="AnimationTree" type="AnimationTree" parent="dad" unique_id=594323650]
-root_node = NodePath("../character-male-g")
-tree_root = SubResource("AnimationNodeStateMachine_kb3qt")
-anim_player = NodePath("../character-male-g/AnimationPlayer")
+[node name="dad" parent="." unique_id=1058915040 instance=ExtResource("25_14bvk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24534157, 0, 1.3776648)
 
 [connection signal="body_entered" from="transporters/transporter_bedroom-livingroom" to="transporters/transporter_bedroom-livingroom" method="_OnBodyEntered"]
 [connection signal="body_entered" from="transporters/transporter_livingroom-bedroom" to="transporters/transporter_livingroom-bedroom" method="_OnBodyEntered"]
@@ -460,8 +348,6 @@ anim_player = NodePath("../character-male-g/AnimationPlayer")
 [connection signal="body_entered" from="QuestActivators/Area3D" to="QuestActivators/Area3D" method="_OnQuestObjectiveActivated"]
 [connection signal="body_entered" from="QuestActivators/Area3D2" to="QuestActivators/Area3D2" method="_OnBodyEntered"]
 [connection signal="body_entered" from="QuestActivators/Area3D3" to="QuestActivators/Area3D3" method="_OnBodyEntered"]
-[connection signal="MovementStateChanged" from="dad" to="dad/CharacterAnimator" method="OnMovementStateChanged"]
-[connection signal="target_reached" from="dad/NavigationAgent3D" to="dad/NavigationAgent3D" method="FindPath"]
 
 [editable path="avocado2"]
 [editable path="NavigationRegion3D/Livingroom/tableCloth"]
@@ -480,6 +366,3 @@ anim_player = NodePath("../character-male-g/AnimationPlayer")
 [editable path="NavigationRegion3D/Bedroom/bookcaseClosed"]
 [editable path="NavigationRegion3D/Kitchen/hoodModern"]
 [editable path="NavigationRegion3D/Kitchen/kitchenMicrowave"]
-[editable path="Player"]
-[editable path="Player/character-female-b2"]
-[editable path="dad/character-male-g"]
