@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using TnT.Extensions;
+using TnT.Input;
 using TnT.Systems;
 using TnT.Systems.State;
 
@@ -10,26 +11,14 @@ namespace TnT.EduGame.CharacterState
 {
     public partial class CharacterStateManager : AbstractStateStack
     {
-        public ICharacterController Controller { get; private set; }
-        public AgentPatrolController PatrolAgent { get; private set; }
-        public AgentFollowController FollowAgent { get; private set; }
-
         private readonly List<BaseCharacterState> _registeredStates = new();
+
+        [Export] NavigationAgent3D _agent;
+        [Export] CharacterController3D _controller;
 
         public override void _Ready()
         {
-            Controller = this.FindAncestorOfType<CharacterController3D>();
-            if (Controller == null)
-                Controller = this.FindAncestorOfType<CharacterController2D>();
-
-            var parent = GetParent();
-            PatrolAgent = parent.FindAnyObjectByType<AgentPatrolController>();
-            FollowAgent = parent.FindAnyObjectByType<AgentFollowController>();
-
-            var idle = _registeredStates.OfType<CharacterStateIdle>().FirstOrDefault()
-                ?? throw new Exception("CharacterStateManager requires a CharacterStateIdle child node");
-
-            Push(idle.GetState(new()));
+            Idling();
         }
 
         internal void RegisterState(BaseCharacterState state)
@@ -41,25 +30,33 @@ namespace TnT.EduGame.CharacterState
         // Call this before switching to a different behavior.
         public new void Pop() => base.Pop();
 
+        public void Idling()
+        {
+            var idle = _registeredStates.OfType<CharacterStateIdle>().FirstOrDefault()
+                ?? throw new Exception("CharacterStateManager requires a CharacterStateIdle child node");
+
+            Push(idle.GetState(new()));
+        }
+
         public void Follow(Node3D target)
         {
             var state = _registeredStates.OfType<CharacterStateFollowing>().FirstOrDefault()
                 ?? throw new Exception("CharacterStateManager requires a CharacterStateFollowing child node");
-            Push(state.GetState(new() { Target = target }));
+            Push(state.GetState(new() { agent = _agent, cc = _controller, Target = target }));
         }
 
-        public void StartMoving()
+        public void StartInput(params InputActionBase[] actions)
         {
-            var state = _registeredStates.OfType<CharacterStateMoving>().FirstOrDefault()
+            var state = _registeredStates.OfType<CharacterStateMoveInput>().FirstOrDefault()
                 ?? throw new Exception("CharacterStateManager requires a CharacterStateMoving child node");
-            Push(state.GetState(new()));
+            Push(state.GetState(new() {agent = _agent, cc = _controller, actions = actions}));
         }
 
-        public void StartPatrol()
+        public void StartPatrol(Node3D[] patrolTargets)
         {
             var state = _registeredStates.OfType<CharacterStatePatrolling>().FirstOrDefault()
                 ?? throw new Exception("CharacterStateManager requires a CharacterStatePatrolling child node");
-            Push(state.GetState(new()));
+            Push(state.GetState(new() { agent = _agent, cc = _controller, targets = patrolTargets }));
         }
     }
 }

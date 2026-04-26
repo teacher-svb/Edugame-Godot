@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -9,7 +8,7 @@ namespace TnT.Input
     {
         public static InputManager Instance { get; private set; }
 
-        private readonly List<InputAction> _actions = new();
+        private readonly List<InputActionBase> _actions = [];
 
         public override void _EnterTree()
         {
@@ -45,7 +44,7 @@ namespace TnT.Input
 
         private void OnNodeAdded(Node node)
         {
-            ScanNodeAndChildren(node);
+            ScanNode(node);
         }
 
         private void OnNodeRemoved(Node node)
@@ -68,9 +67,9 @@ namespace TnT.Input
 
             foreach (var field in fields)
             {
-                if (typeof(InputAction).IsAssignableFrom(field.FieldType))
+                if (typeof(InputActionBase).IsAssignableFrom(field.FieldType))
                 {
-                    if (field.GetValue(node) is InputAction value && !_actions.Contains(value))
+                    if (field.GetValue(node) is InputActionBase value && !_actions.Contains(value))
                         _actions.Add(value);
                 }
             }

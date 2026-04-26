@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Godot;
 using TnT.Extensions;
@@ -10,24 +11,14 @@ namespace TnT.EduGame.CharacterState
     {
         public struct IdleOptions { }
 
-        CharacterStateManager _manager;
-
-        public override void _Ready()
-        {
-            base._Ready();
-            _manager = this.FindAncestorOfType<CharacterStateManager>();
-        }
-
         public BaseState GetState(IdleOptions options = default)
         {
-            return new BaseState(new() { OnEnter = OnEnter });
+            return new BaseState(new() { ExitOnNextUpdate = Exit });
         }
 
-        Task OnEnter()
+        private bool Exit()
         {
-            _manager.PatrolAgent?.SetProcess(false);
-            _manager.FollowAgent?.SetProcess(false);
-            return Task.CompletedTask;
+            return false;
         }
     }
 }

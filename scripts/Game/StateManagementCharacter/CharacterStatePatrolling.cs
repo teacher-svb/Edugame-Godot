@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Godot;
 using TnT.Extensions;
@@ -8,31 +9,64 @@ namespace TnT.EduGame.CharacterState
     [GlobalClass]
     public partial class CharacterStatePatrolling : BaseCharacterState, IStateObject<CharacterStatePatrolling.PatrolOptions>
     {
-        public struct PatrolOptions { }
-
-        CharacterStateManager _manager;
-
-        public override void _Ready()
+        public struct PatrolOptions
         {
-            base._Ready();
-            _manager = this.FindAncestorOfType<CharacterStateManager>();
+            public Node3D[] targets;
+            public CharacterController3D cc;
+            public NavigationAgent3D agent;
         }
+        [Export]
+        bool _loop = true;
+        int _currentIndex = 0;
+
+        PatrolOptions _options;
 
         public BaseState GetState(PatrolOptions options = default)
         {
-            return new BaseState(new() { OnEnter = OnEnter, OnExit = OnExit });
+            _options = options;
+            return new BaseState(new() { OnEnter = OnEnter, OnExit = OnExit, OnUpdate = OnUpdate });
+        }
+
+        private void OnUpdate()
+        {
+            if (_currentIndex >= _options.targets.Length)
+                return;
+
+            var nextPos = _options.agent.GetNextPathPosition();
+            Vector3 direction = nextPos - _options.cc.GlobalPosition;
+
+            _options.cc.Move(direction.ToVector2XZ());
         }
 
         Task OnEnter()
         {
-            _manager.PatrolAgent.SetProcess(true);
+            _options.agent.TargetReached += FindPath;
+
+            if (_currentIndex < _options.targets.Length)
+                _options.agent.TargetPosition = _options.targets[_currentIndex].GlobalPosition;
+            
             return Task.CompletedTask;
         }
 
         Task OnExit()
         {
-            _manager.PatrolAgent.SetProcess(false);
+            _options.agent.TargetReached -= FindPath;
             return Task.CompletedTask;
+        }
+
+        async void FindPath()
+        {
+            await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
+
+            _currentIndex++;
+
+            if (_currentIndex >= _options.targets.Length && _loop)
+                _currentIndex = 0;
+
+            if (_currentIndex >= _options.targets.Length)
+                return;
+
+            _options.agent.TargetPosition = _options.targets[_currentIndex].GlobalPosition;
         }
     }
 }

@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dt1pmf2iuc4nb" path="res://scripts/CharacterAnimator.cs" id="1_1wrgq"]
 [ext_resource type="Script" uid="uid://dc4u7vqilp6dd" path="res://scripts/CharacterController3D.cs" id="1_707x3"]
-[ext_resource type="Script" uid="uid://b1x0n5hcilrbv" path="res://scripts/Game/AgentPatrolController.cs" id="2_1wrgq"]
-[ext_resource type="Script" uid="uid://dkfld3mbsih7h" path="res://scripts/Game/AgentFollowController.cs" id="3_qxotf"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sikog"]
 animation = &"fall"
@@ -61,14 +59,6 @@ script = ExtResource("1_707x3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=293151575]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1876010761]
-
-[node name="AgentPatrolController" type="Node" parent="NavigationAgent3D" unique_id=1071088437 node_paths=PackedStringArray("_agent")]
-script = ExtResource("2_1wrgq")
-_agent = NodePath("..")
-
-[node name="AgentFollowController" type="Node" parent="NavigationAgent3D" unique_id=1408036440 node_paths=PackedStringArray("_agent")]
-script = ExtResource("3_qxotf")
-_agent = NodePath("..")
 
 [node name="Animation" type="Node" parent="." unique_id=2085856052]
 

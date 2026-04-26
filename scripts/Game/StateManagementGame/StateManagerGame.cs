@@ -5,9 +5,7 @@ using System.Linq;
 using static TnT.EduGame.GameState.GameStateLoadingScreen;
 using Godot;
 using TnT.EduGame.Characters;
-using System.Threading.Tasks;
 using TnT.Extensions;
-using Godot.Collections;
 using TnT.EduGame.QuestSystem;
 using TnT.EduGame.Question;
 
@@ -21,7 +19,7 @@ namespace TnT.EduGame.GameState
 
         Player _player;
 
-        List<BaseGameState> _states = new();
+        List<BaseGameState> _registeredStates = new();
         public override void _EnterTree()
         {
             Instance = this;
@@ -31,15 +29,10 @@ namespace TnT.EduGame.GameState
         {
             _player = GetTree().FindAnyObjectByType<Player>();
 
-            GameStatePlay state = _states.OfType<GameStatePlay>().FirstOrDefault();
-            try
-            {
-                Push(state.GetState(new()));
-            }
-            catch
-            {
-                throw new Exception("no play state assigned");
-            }
+            var state = _registeredStates.OfType<GameStatePlay>().FirstOrDefault()
+                ?? throw new Exception("no play state assigned");
+                
+            Push(state.GetState(new()));
 
             OnSceneLoaded?.Invoke(null);
         }
@@ -51,61 +44,39 @@ namespace TnT.EduGame.GameState
 
         public void ShowMessage(string text, CharacterData character)
         {
-            GameStateMessage state = _states.OfType<GameStateMessage>().FirstOrDefault();
-            try
-            {
-                Push(state.GetState(new() { text = text, character = character }));
-            }
-            catch
-            {
-                throw new Exception("no dialog state assigned");
-            }
+            var state = _registeredStates.OfType<GameStateMessage>().FirstOrDefault()
+                ?? throw new Exception("no dialog state assigned");
+            
+            Push(state.GetState(new() { text = text, character = character }));
         }
 
         public void ShowChallenge(IMathChallenge challenge)
         {
-            GD.Print($"showing challenge: {challenge.Name}");
-            var state = _states.OfType<GameStateChallenge>().FirstOrDefault();
-            try
-            {
-                Push(state.GetState(new() { challenge = challenge }));
-            }
-            catch
-            {
-                throw new Exception("no challenge state assigned");
-            }
+            var state = _registeredStates.OfType<GameStateChallenge>().FirstOrDefault()
+                ?? throw new Exception("no challenge state assigned");
+            
+            Push(state.GetState(new() { challenge = challenge }));
         }
 
         public void LoadScene(string scenePath, Vector3 targetLocation, bool forceLoad = false)
         {
-            GameStateLoadingScreen state = _states.OfType<GameStateLoadingScreen>().FirstOrDefault();
-            try
-            {
-                Push(state.GetState<SceneLoaderOptions>(new() { scenePath = scenePath, player = _player, targetLocation = targetLocation, forceLoad = forceLoad }));
-            }
-            catch
-            {
-                throw new Exception("no scene loader state assigned");
-            }
+            var state = _registeredStates.OfType<GameStateLoadingScreen>().FirstOrDefault()
+                ?? throw new Exception("no scene loader state assigned");
+                
+            Push(state.GetState<SceneLoaderOptions>(new() { scenePath = scenePath, player = _player, targetLocation = targetLocation, forceLoad = forceLoad }));
         }
 
         public void LoadLocation(Vector3 targetLocation, bool forceLoad = false)
         {
-            // GetTree().FindAnyObjectByType<Player>();
-            GameStateLoadingScreen state = _states.OfType<GameStateLoadingScreen>().FirstOrDefault();
-            try
-            {
-                Push(state.GetState<LocationLoaderOptions>(new() { player = _player, targetLocation = targetLocation, forceLoad = forceLoad }));
-            }
-            catch
-            {
-                throw new Exception("no scene loader state assigned");
-            }
+            var state = _registeredStates.OfType<GameStateLoadingScreen>().FirstOrDefault()
+                ?? throw new Exception("no scene loader state assigned");
+                
+            Push(state.GetState<LocationLoaderOptions>(new() { player = _player, targetLocation = targetLocation, forceLoad = forceLoad }));
         }
 
         internal void RegisterState(BaseGameState gameState)
         {
-            _states.Add(gameState);
+            _registeredStates.Add(gameState);
         }
 
         // public void ToggleInventory()

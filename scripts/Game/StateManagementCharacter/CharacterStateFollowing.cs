@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Godot;
 using TnT.Extensions;
@@ -11,33 +12,34 @@ namespace TnT.EduGame.CharacterState
         public struct FollowOptions
         {
             public Node3D Target;
+            public CharacterController3D cc;
+            public NavigationAgent3D agent;
         }
 
-        CharacterStateManager _manager;
-
-        public override void _Ready()
-        {
-            base._Ready();
-            _manager = this.FindAncestorOfType<CharacterStateManager>();
-        }
+        FollowOptions _options;
 
         public BaseState GetState(FollowOptions options = default)
         {
-            _manager.FollowAgent.Target = options.Target;
-            return new BaseState(new() { OnEnter = OnEnter, OnExit = OnExit });
+            _options = options;
+            return new BaseState(new() { OnUpdate = OnUpdate });
         }
 
-        Task OnEnter()
+        private async void OnUpdate()
         {
-            _manager.FollowAgent.SetProcess(true);
-            return Task.CompletedTask;
+            if (_options.Target == null)
+                return;
+
+            Vector3 _direction = _options.agent.GetNextPathPosition() - _options.cc.GlobalPosition;
+            _options.cc.Move(_direction.ToVector2XZ());
+
+            await FindPath();
         }
 
-        Task OnExit()
+        async Task FindPath()
         {
-            _manager.FollowAgent.Target = null;
-            _manager.FollowAgent.SetProcess(false);
-            return Task.CompletedTask;
+            await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
+
+            _options.agent.TargetPosition = _options.Target.GlobalPosition;
         }
     }
 }

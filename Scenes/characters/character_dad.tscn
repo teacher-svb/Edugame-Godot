@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://d11od8uonxhra"]
+
+[ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_3D.tscn" id="1_a2d18"]
+[ext_resource type="PackedScene" uid="uid://n2jqt6oke3v2" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-male-g.glb" id="2_6vton"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a2d18"]
+radius = 0.1274414
+height = 0.6963501
+
+[node name="CharacterController3D" unique_id=926984674 node_paths=PackedStringArray("VisualRoot") instance=ExtResource("1_a2d18")]
+VisualRoot = NodePath("character-male-g")
+
+[node name="CollisionShape3D" parent="." index="0" unique_id=293151575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34902954, 0)
+shape = SubResource("CapsuleShape3D_a2d18")
+
+[node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
+root_node = NodePath("../../character-male-g")
+anim_player = NodePath("../../character-male-g/AnimationPlayer")
+
+[node name="character-male-g" parent="." index="3" unique_id=2127119757 instance=ExtResource("2_6vton")]
+
+[node name="Skeleton3D" parent="character-male-g/character-male-b" parent_id_path=PackedInt32Array(2127119757, 618410602) index="0" unique_id=801209756]
+bones/0/rotation = Quaternion(-8.557136e-09, 2.4203237e-08, -4.142208e-16, 1)
+bones/1/rotation = Quaternion(1.1832914e-30, -2.5970621e-09, 1.774937e-30, 1)
+bones/2/rotation = Quaternion(1.1832914e-30, -2.5970621e-09, 1.774937e-30, 1)
+bones/3/rotation = Quaternion(0.023140315, 2.112338e-09, -4.8893632e-11, 0.9997323)
+bones/4/rotation = Quaternion(-2.9190008e-09, -8.715548e-10, -0.33456352, 0.9423732)
+bones/5/rotation = Quaternion(-2.9263254e-09, 1.2036665e-09, 0.33456352, 0.9423732)
+bones/6/rotation = Quaternion(4.1718554e-10, -0.023140317, -5.5433817e-12, 0.9997323)
+
+[editable path="character-male-g"]
