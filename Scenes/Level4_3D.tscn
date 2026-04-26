@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://coeco3nsaywj6" path="res://scripts/Lib/OcclusionFader/OcclusionFader.cs" id="1_hq6iv"]
 [ext_resource type="MeshLibrary" uid="uid://bhyhxgksl15j5" path="res://assets/3D/Modular Dungeon Kit/dungeon_kit_tileables.meshlib" id="1_srmrl"]
 [ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://scripts/Lib/OcclusionFader/occlusionFader.gdshader" id="3_ic28c"]
-[ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/Player_3D.tscn" id="6_3m3qi"]
+[ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="6_3m3qi"]
 [ext_resource type="Script" uid="uid://bhsdjlrhck4qd" path="res://scripts/test/Transporter.cs" id="8_hq6iv"]
 
 [sub_resource type="Gradient" id="Gradient_jri2c"]

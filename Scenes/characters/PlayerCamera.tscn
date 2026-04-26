@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dwmsot5m0pw1o"]
+
+[node name="PlayerCamera" type="Node3D" unique_id=741163845]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1676918431]
+transform = Transform3D(1, 0, 0, 0, 0.744533, 0.66758573, 0, -0.66758573, 0.744533, 0, 11.285046, 12.150276)
+current = true
+fov = 12.84131
+size = 5.0
+far = 200.0
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=185355257]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5801216, -0.033002913)
+target_position = Vector3(0, 11.285, 12.15)
+hit_from_inside = true
+debug_shape_custom_color = Color(1, 0, 1, 1)
+debug_shape_thickness = 5

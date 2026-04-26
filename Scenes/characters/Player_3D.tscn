@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://crkyo8y8iqgx1"]
+
+[ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_3D.tscn" id="1_v5scr"]
+[ext_resource type="PackedScene" uid="uid://cdou2t4bule12" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-b.glb" id="2_sb0or"]
+[ext_resource type="PackedScene" uid="uid://dwmsot5m0pw1o" path="res://Scenes/characters/PlayerCamera.tscn" id="3_eym15"]
+[ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="4_cvtri"]
+[ext_resource type="Script" uid="uid://ch4u84myc17c2" path="res://scripts/Lib/Input/InputAction.cs" id="4_eym15"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7dxc7"]
+radius = 0.12109375
+height = 0.6599045
+
+[sub_resource type="Resource" id="Resource_7dxc7"]
+script = ExtResource("4_eym15")
+ActionName = "move_left"
+Enabled = true
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
+
+[sub_resource type="Resource" id="Resource_yx5mg"]
+script = ExtResource("4_eym15")
+ActionName = "move_right"
+Enabled = true
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
+
+[sub_resource type="Resource" id="Resource_hnwjb"]
+script = ExtResource("4_eym15")
+ActionName = "move_up"
+Enabled = true
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
+
+[sub_resource type="Resource" id="Resource_wgpbl"]
+script = ExtResource("4_eym15")
+ActionName = "move_down"
+Enabled = true
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
+
+[sub_resource type="Resource" id="Resource_lgshl"]
+script = ExtResource("4_eym15")
+ActionName = "jump"
+Enabled = true
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
+
+[node name="CharacterController3D" unique_id=926984674 node_paths=PackedStringArray("OcclusionRaycast", "Camera", "VisualRoot") instance=ExtResource("1_v5scr")]
+OcclusionRaycast = NodePath("PlayerCamera/RayCast3D")
+Camera = NodePath("PlayerCamera/Camera3D")
+VisualRoot = NodePath("character-female-b2")
+
+[node name="CollisionShape3D" parent="." index="0" unique_id=293151575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3380165, 0)
+shape = SubResource("CapsuleShape3D_7dxc7")
+
+[node name="character-female-b2" parent="." index="2" unique_id=371834684 instance=ExtResource("2_sb0or")]
+
+[node name="Skeleton3D" parent="character-female-b2/character-female-b" parent_id_path=PackedInt32Array(371834684, 1357584895) index="0" unique_id=421653466]
+bones/3/rotation = Quaternion(0.031140888, 0, 0, 0.99951506)
+bones/4/rotation = Quaternion(0, 0, -0.3077151, 0.9514786)
+bones/5/rotation = Quaternion(0, 0, 0.3077151, 0.9514786)
+bones/6/rotation = Quaternion(0, -0.031140888, 0, 0.99951506)
+
+[node name="PlayerController" type="Node" parent="." index="3" unique_id=1092226004]
+script = ExtResource("4_cvtri")
+_left = SubResource("Resource_7dxc7")
+_right = SubResource("Resource_yx5mg")
+_forward = SubResource("Resource_hnwjb")
+_back = SubResource("Resource_wgpbl")
+_jump = SubResource("Resource_lgshl")
+
+[node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
+root_node = NodePath("../../character-female-b2")
+anim_player = NodePath("../../character-female-b2/AnimationPlayer")
+
+[node name="PlayerCamera" parent="." index="5" unique_id=741163845 instance=ExtResource("3_eym15")]
+
+[connection signal="MovementStateChanged" from="." to="Animation/CharacterAnimator" method="OnMovementStateChanged"]
+
+[editable path="character-female-b2"]
+[editable path="PlayerCamera"]

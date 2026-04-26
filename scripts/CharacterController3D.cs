@@ -35,6 +35,13 @@ public partial class CharacterController3D : CharacterBody3D, ICharacterControll
 
     Vector2 inputDir;
 
+    public override void _Ready()
+    {
+
+        if (OcclusionRaycast != null)
+            OcclusionRaycast.AddException(this);
+    }
+
     /// <summary>
     /// Processes physics each frame: applies gravity, handles jumping,
     /// moves the character, rotates the visual root toward the direction of travel,

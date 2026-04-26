@@ -4,7 +4,7 @@ using TnT.Extensions;
 using TnT.Systems;
 
 [GlobalClass]
-public partial class CharacterAgent3D : NavigationAgent3D
+public partial class AgentPatrolController : Node
 {
 	[Export]
 	Node3D[] _targets = Array.Empty<Node3D>();
@@ -14,12 +14,13 @@ public partial class CharacterAgent3D : NavigationAgent3D
 	Vector3 direction;
 
 	CharacterController3D _cc;
+	[Export] NavigationAgent3D _agent;
 
 	public override void _Ready()
 	{
 		_cc = this.FindAncestorOfType<CharacterController3D>();
 		if (_currentIndex < _targets.Length)
-		TargetPosition = _targets[_currentIndex].GlobalPosition;
+		_agent.TargetPosition = _targets[_currentIndex].GlobalPosition;
 	}
 
 	public override void _Process(double delta)
@@ -27,7 +28,7 @@ public partial class CharacterAgent3D : NavigationAgent3D
 		if (_currentIndex >= _targets.Length)
 			return;
 
-		var nextPos = GetNextPathPosition();
+		var nextPos = _agent.GetNextPathPosition();
 		direction = nextPos - _cc.GlobalPosition;
 		_cc.Move(direction.ToVector2XZ());
 	}
@@ -44,7 +45,6 @@ public partial class CharacterAgent3D : NavigationAgent3D
 		if (_currentIndex >= _targets.Length)
 			return;
 
-		TargetPosition = _targets[_currentIndex].GlobalPosition;
-		GD.Print($"new target: {TargetPosition}, reachable: {IsTargetReachable()}");
+		_agent.TargetPosition = _targets[_currentIndex].GlobalPosition;
 	}
 }

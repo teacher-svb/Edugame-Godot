@@ -11,8 +11,8 @@ namespace TnT.EduGame.CharacterState
     public partial class CharacterStateManager : AbstractStateStack
     {
         public ICharacterController Controller { get; private set; }
-        public CharacterAgent3DPatrol PatrolAgent { get; private set; }
-        public CharacterAgent3DFollow FollowAgent { get; private set; }
+        public AgentPatrolController PatrolAgent { get; private set; }
+        public AgentFollowController FollowAgent { get; private set; }
 
         private readonly List<BaseCharacterState> _registeredStates = new();
 
@@ -23,8 +23,8 @@ namespace TnT.EduGame.CharacterState
                 Controller = this.FindAncestorOfType<CharacterController2D>();
 
             var parent = GetParent();
-            PatrolAgent = parent.FindAnyObjectByType<CharacterAgent3DPatrol>();
-            FollowAgent = parent.FindAnyObjectByType<CharacterAgent3DFollow>();
+            PatrolAgent = parent.FindAnyObjectByType<AgentPatrolController>();
+            FollowAgent = parent.FindAnyObjectByType<AgentFollowController>();
 
             var idle = _registeredStates.OfType<CharacterStateIdle>().FirstOrDefault()
                 ?? throw new Exception("CharacterStateManager requires a CharacterStateIdle child node");

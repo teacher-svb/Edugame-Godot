@@ -1,10 +1,17 @@
 using Godot;
 using TnT.Extensions;
+using TnT.Input;
 using TnT.Systems;
 
 public partial class Player : Node//, IBind<Player.PlayerSaveData>
 {
 	public static Player Instance { get; private set; }
+
+	[Export] InputAction _left;
+	[Export] InputAction _right;
+	[Export] InputAction _forward;
+	[Export] InputAction _back;
+	[Export] InputAction _jump;
 
 	ICharacterController _cc;
 
