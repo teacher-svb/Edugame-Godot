@@ -27,11 +27,14 @@ public partial class CharacterController3D : CharacterBody3D, ICharacterControll
     /// <summary>
     /// Emitted whenever the character's movement state changes.
     /// Possible state values are <c>"idle"</c>, <c>"moving"</c>,
-    /// <c>"airborne_rising"</c>, and <c>"airborne_falling"</c>.
+    /// <c>"jumped"</c>, <c>"landed"</c>, <c>"airborne_rising"</c>, and <c>"airborne_falling"</c>.
+    /// <c>"jumped"</c> and <c>"landed"</c> fire for exactly one physics frame.
     /// </summary>
     [Signal] public delegate void MovementStateChangedEventHandler(string state);
 
     private string _currentState = "";
+    private bool _wasOnFloor = true;
+    private bool _justJumped = false;
 
     Vector2 inputDir;
 
@@ -60,6 +63,7 @@ public partial class CharacterController3D : CharacterBody3D, ICharacterControll
         {
             velocity.Y = _jumpVelocity;
             _jump = false;
+            _justJumped = true;
         }
 
         Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
@@ -96,12 +100,21 @@ public partial class CharacterController3D : CharacterBody3D, ICharacterControll
     {
         string state;
 
-        if (!IsOnFloor())
-            state = Velocity.Y > 0 ? "airborne_rising" : "airborne_falling";
+        if (_justJumped)
+        {
+            state = "jumped";
+            _justJumped = false;
+        }
+        else if (!_wasOnFloor && IsOnFloor())
+            state = "landed";
+        else if (!IsOnFloor())
+            state = Velocity.Y > 0 ? "jump" : "fall";
         else if (direction != Vector3.Zero)
-            state = "moving";
+            state = "walk";
         else
             state = "idle";
+
+        _wasOnFloor = IsOnFloor();
 
         if (state == _currentState) return;
         _currentState = state;

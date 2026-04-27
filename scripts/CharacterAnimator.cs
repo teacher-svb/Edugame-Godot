@@ -9,18 +9,12 @@ public interface IMovementAnimator
 public partial class CharacterAnimator : Node, IMovementAnimator
 {
     [Export] public AnimationTree AnimationTree { get; set; }
-
-    // Maps movement states to animation names — easily editable,
-    // or replace with a Resource-based mapping for designer-friendly editing
-    private readonly System.Collections.Generic.Dictionary<string, string> _stateMap = new()
-    {
-        { "idle",            "idle"  },
-        { "moving",          "walk"  },
-        { "airborne_rising", "jump"  },
-        { "airborne_falling","fall"  },
-    };
+    /// <summary>The visual root whose scale is tweened for squash and stretch effects.</summary>
+    [Export] Node3D VisualRoot { get; set; }
+    [Export] GpuParticles3D LandingParticles { get; set; }
 
     private AnimationNodeStateMachinePlayback _stateMachine;
+    private Tween _squashStretchTween;
 
     public override void _Ready()
     {
@@ -32,8 +26,46 @@ public partial class CharacterAnimator : Node, IMovementAnimator
 
     public void OnMovementStateChanged(string movementState)
     {
-        if (_stateMachine == null) return;
-        if (_stateMap.TryGetValue(movementState, out var animName))
-            _stateMachine.Travel(animName);
+        switch (movementState)
+        {
+            case "idle":
+            case "walk":
+            case "jump":
+            case "fall": _stateMachine.Travel(movementState); break;
+            case "jumped": DoStretch(); break;
+            case "landed": DoSquash(); break;
+        }
+    }
+
+    // Elongate on Y, compress on X/Z, then spring back.
+    private void DoStretch()
+    {
+        if (VisualRoot == null) return;
+        _squashStretchTween?.Kill();
+        _squashStretchTween = CreateTween();
+
+        _squashStretchTween
+            .TweenProperty(VisualRoot, "scale", new Vector3(0.8f, 1.3f, 0.8f), 0.1f)
+            .SetTrans(Tween.TransitionType.Sine)
+            .SetEase(Tween.EaseType.In);
+        _squashStretchTween
+            .TweenProperty(VisualRoot, "scale", Vector3.One, 0.22f)
+            .SetTrans(Tween.TransitionType.Sine)
+            .SetEase(Tween.EaseType.Out);
+    }
+
+    // Flatten on Y, spread on X/Z, then spring back.
+    private void DoSquash()
+    {
+        LandingParticles.Emitting = true;
+        if (VisualRoot == null) return;
+        VisualRoot.Scale = new Vector3(1.3f, .5f, 1.3f);
+        _squashStretchTween?.Kill();
+        _squashStretchTween = CreateTween();
+
+        _squashStretchTween
+            .TweenProperty(VisualRoot, "scale", Vector3.One, 0.22f)
+            .SetTrans(Tween.TransitionType.Sine)
+            .SetEase(Tween.EaseType.Out);
     }
 }
