@@ -56,7 +56,7 @@ public partial class Player : Node, IInputActionable//, IBind<Player.PlayerSaveD
 
 	private void StopMoving(InputActionBase action)
 	{
-		if (!_inputActive) return;
+		if (!_inputActive || MoveAction.IsPressed) return;
 		_inputActive = false;
 		_stateManager.Pop();
 	}

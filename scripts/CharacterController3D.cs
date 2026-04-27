@@ -35,6 +35,8 @@ public partial class CharacterController3D : CharacterBody3D, ICharacterControll
 
     Vector2 inputDir;
 
+    bool _jump = false;
+
     public override void _Ready()
     {
 
@@ -54,8 +56,11 @@ public partial class CharacterController3D : CharacterBody3D, ICharacterControll
         if (!IsOnFloor())
             velocity += GetGravity() * (float)delta;
 
-        if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+        if (IsOnFloor() && _jump)
+        {
             velocity.Y = _jumpVelocity;
+            _jump = false;
+        }
 
         Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 
@@ -101,6 +106,11 @@ public partial class CharacterController3D : CharacterBody3D, ICharacterControll
         if (state == _currentState) return;
         _currentState = state;
         EmitSignal(SignalName.MovementStateChanged, state);
+    }
+
+    public void Jump()
+    {
+        _jump = true;
     }
 
     /// <summary>
