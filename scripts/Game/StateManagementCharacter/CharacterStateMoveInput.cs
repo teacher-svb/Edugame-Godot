@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using TnT.Extensions;
@@ -7,7 +10,9 @@ using TnT.Systems.State;
 namespace TnT.EduGame.CharacterState
 {
     [GlobalClass]
-    public partial class CharacterStateMoveInput : BaseCharacterState, IStateObject<CharacterStateMoveInput.MovingOptions>
+    public partial class CharacterStateMoveInput :
+        BaseCharacterState,
+        IStateObject<CharacterStateMoveInput.MovingOptions>
     {
         public struct MovingOptions
         {
@@ -22,14 +27,26 @@ namespace TnT.EduGame.CharacterState
         public BaseState GetState(MovingOptions options = default)
         {
             _options = options;
-            return new BaseState(new() { OnUpdate = OnUpdate });
+            return new BaseState(new() { OnEnter = OnEnter, OnExit = OnExit });
         }
 
-        void OnUpdate()
+        private async Task OnEnter()
         {
-            var direction = Godot.Input.GetVector("move_left", "move_right", "move_up", "move_down");
-            if (direction != Vector2.Zero)
-                _options.cc.Move(direction);
+            GD.Print("entering input state");
+            _options.moveAction.OnHeld += OnHeld;
+        }
+
+        private async Task OnExit()
+        {
+            GD.Print("leaving input state");
+            _options.moveAction.OnHeld -= OnHeld;
+        }
+
+        private void OnHeld(InputActionBase action)
+        {
+            var dir = (action as InputAction2D).Value;
+            if (dir != Vector2.Zero)
+                _options.cc.Move(dir);
         }
     }
 }

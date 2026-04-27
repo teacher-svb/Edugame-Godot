@@ -13,11 +13,13 @@ namespace TnT.EduGame.CharacterState
     {
         private readonly List<BaseCharacterState> _registeredStates = new();
 
-        [Export] NavigationAgent3D _agent;
-        [Export] CharacterController3D _controller;
+        NavigationAgent3D _agent;
+        CharacterController3D _controller;
 
         public override void _Ready()
         {
+            _controller = this.FindAncestorOfType<CharacterController3D>();
+            _agent = _controller.FindAnyObjectByType<NavigationAgent3D>();
             Idling();
         }
 

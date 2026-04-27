@@ -1,6 +1,5 @@
 using Godot;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace TnT.Input
 {
@@ -8,13 +7,12 @@ namespace TnT.Input
     {
         public static InputManager Instance { get; private set; }
 
-        private readonly List<InputActionBase> _actions = [];
+        private readonly List<IInputActionable> _actionables = [];
 
         public override void _EnterTree()
         {
             Instance = this;
 
-            // Watch for nodes added/removed at runtime
             GetTree().NodeAdded += OnNodeAdded;
             GetTree().NodeRemoved += OnNodeRemoved;
         }
@@ -25,54 +23,53 @@ namespace TnT.Input
             GetTree().NodeRemoved -= OnNodeRemoved;
 
             Instance = null;
-            _actions.Clear();
-
-            InputManager.Instance = null;
+            _actionables.Clear();
         }
 
         public override void _Ready()
         {
-            // Scan existing nodes
             ScanNodeAndChildren(GetTree().Root);
         }
 
-        public override void _Input(InputEvent ev)
+        /// <inheritdoc/>
+        public override void _Process(double delta)
         {
-            foreach (var action in _actions)
-                action.Poll();
+            foreach (var actionable in _actionables)
+                actionable.Poll();
+        }
+
+        /// <summary>Adds <paramref name="actionable"/> to the poll list if not already registered.</summary>
+        public void Register(IInputActionable actionable)
+        {
+            if (!_actionables.Contains(actionable))
+                _actionables.Add(actionable);
+        }
+
+        /// <summary>Removes <paramref name="actionable"/> from the poll list.</summary>
+        public void Unregister(IInputActionable actionable)
+        {
+            _actionables.Remove(actionable);
         }
 
         private void OnNodeAdded(Node node)
         {
-            ScanNode(node);
+            if (node is IInputActionable actionable)
+                actionable.Register();
         }
 
         private void OnNodeRemoved(Node node)
         {
-            // Remove null or destroyed actions from the list
-            _actions.RemoveAll(a => a == null);
+            if (node is IInputActionable actionable)
+                actionable.Unregister();
         }
 
         private void ScanNodeAndChildren(Node node)
         {
-            ScanNode(node);
+            if (node is IInputActionable actionable)
+                actionable.Register();
 
             foreach (Node child in node.GetChildren())
                 ScanNodeAndChildren(child);
-        }
-
-        private void ScanNode(Node node)
-        {
-            var fields = node.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-
-            foreach (var field in fields)
-            {
-                if (typeof(InputActionBase).IsAssignableFrom(field.FieldType))
-                {
-                    if (field.GetValue(node) is InputActionBase value && !_actions.Contains(value))
-                        _actions.Add(value);
-                }
-            }
         }
     }
 }

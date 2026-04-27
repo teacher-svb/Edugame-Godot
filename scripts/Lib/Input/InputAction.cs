@@ -1,11 +1,12 @@
 using Godot;
+using System;
 
 namespace TnT.Input
 {
     [GlobalClass]
     public partial class InputAction : InputActionBase
     {
-        [Export] public string ActionName { get; set; }
+        [Export] public string InputReference { get; set; }
 
         private bool _wasPressed;
 
@@ -22,7 +23,10 @@ namespace TnT.Input
                 return;
             }
 
-            bool isPressed = Godot.Input.IsActionPressed(ActionName);
+            if (string.IsNullOrEmpty(InputReference) || !InputMap.HasAction(InputReference))
+                throw new InvalidOperationException($"InputAction: no InputMap action named \"{InputReference}\". Add it in Project > Project Settings > Input Map.");
+
+            bool isPressed = Godot.Input.IsActionPressed(InputReference);
             IsPressed = isPressed;
 
             // Pressed (first frame)

@@ -4,41 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://cdou2t4bule12" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-b.glb" id="2_sb0or"]
 [ext_resource type="PackedScene" uid="uid://dwmsot5m0pw1o" path="res://Scenes/characters/PlayerCamera.tscn" id="3_eym15"]
 [ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="4_cvtri"]
-[ext_resource type="Script" uid="uid://ch4u84myc17c2" path="res://scripts/Lib/Input/InputAction.cs" id="4_eym15"]
+[ext_resource type="Script" uid="uid://dikx3tegvslhi" path="res://scripts/Game/StateManagementCharacter/CharacterStateManager.cs" id="6_hnwjb"]
+[ext_resource type="Script" uid="uid://55xneh1xtvnj" path="res://scripts/Game/StateManagementCharacter/CharacterStateIdle.cs" id="6_wgpbl"]
+[ext_resource type="Script" uid="uid://fumvv65m5aig" path="res://scripts/Game/StateManagementCharacter/CharacterStateFollowing.cs" id="7_lgshl"]
+[ext_resource type="Script" uid="uid://dw3ggojroh7rn" path="res://scripts/Game/StateManagementCharacter/CharacterStateMoveInput.cs" id="7_wgpbl"]
+[ext_resource type="Script" uid="uid://ds2u0dlloavie" path="res://scripts/Game/StateManagementCharacter/CharacterStatePatrolling.cs" id="8_2u77j"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7dxc7"]
 radius = 0.12109375
 height = 0.6599045
-
-[sub_resource type="Resource" id="Resource_7dxc7"]
-script = ExtResource("4_eym15")
-ActionName = "move_left"
-Enabled = true
-metadata/_custom_type_script = "uid://ch4u84myc17c2"
-
-[sub_resource type="Resource" id="Resource_yx5mg"]
-script = ExtResource("4_eym15")
-ActionName = "move_right"
-Enabled = true
-metadata/_custom_type_script = "uid://ch4u84myc17c2"
-
-[sub_resource type="Resource" id="Resource_hnwjb"]
-script = ExtResource("4_eym15")
-ActionName = "move_up"
-Enabled = true
-metadata/_custom_type_script = "uid://ch4u84myc17c2"
-
-[sub_resource type="Resource" id="Resource_wgpbl"]
-script = ExtResource("4_eym15")
-ActionName = "move_down"
-Enabled = true
-metadata/_custom_type_script = "uid://ch4u84myc17c2"
-
-[sub_resource type="Resource" id="Resource_lgshl"]
-script = ExtResource("4_eym15")
-ActionName = "jump"
-Enabled = true
-metadata/_custom_type_script = "uid://ch4u84myc17c2"
 
 [node name="CharacterController3D" unique_id=926984674 node_paths=PackedStringArray("OcclusionRaycast", "Camera", "VisualRoot") instance=ExtResource("1_v5scr")]
 OcclusionRaycast = NodePath("PlayerCamera/RayCast3D")
@@ -52,24 +26,41 @@ shape = SubResource("CapsuleShape3D_7dxc7")
 [node name="character-female-b2" parent="." index="2" unique_id=371834684 instance=ExtResource("2_sb0or")]
 
 [node name="Skeleton3D" parent="character-female-b2/character-female-b" parent_id_path=PackedInt32Array(371834684, 1357584895) index="0" unique_id=421653466]
-bones/3/rotation = Quaternion(0.035283994, 0, 0, 0.99937737)
-bones/4/rotation = Quaternion(0, 0, -0.29234028, 0.9563144)
-bones/5/rotation = Quaternion(0, 0, 0.29234028, 0.9563144)
-bones/6/rotation = Quaternion(0, -0.035283994, 0, 0.99937737)
+bones/3/rotation = Quaternion(0.04079324, 0, 0, 0.9991677)
+bones/4/rotation = Quaternion(0, 0, -0.26700646, 0.96369475)
+bones/5/rotation = Quaternion(0, 0, 0.26700646, 0.96369475)
+bones/6/rotation = Quaternion(0, -0.04079324, 0, 0.9991677)
 
-[node name="PlayerController" type="Node" parent="." index="3" unique_id=1092226004]
+[node name="PlayerController" type="Node" parent="." index="3" unique_id=1092226004 node_paths=PackedStringArray("_stateManager")]
 script = ExtResource("4_cvtri")
-_left = SubResource("Resource_7dxc7")
-_right = SubResource("Resource_yx5mg")
-_forward = SubResource("Resource_hnwjb")
-_back = SubResource("Resource_wgpbl")
-_jump = SubResource("Resource_lgshl")
+_stateManager = NodePath("../stateManager")
 
 [node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
 root_node = NodePath("../../character-female-b2")
 anim_player = NodePath("../../character-female-b2/AnimationPlayer")
 
 [node name="PlayerCamera" parent="." index="5" unique_id=741163845 instance=ExtResource("3_eym15")]
+
+[node name="stateManager" type="Node" parent="." index="6" unique_id=28947232 node_paths=PackedStringArray("_agent", "_controller")]
+script = ExtResource("6_hnwjb")
+_agent = NodePath("../NavigationAgent3D")
+_controller = NodePath("..")
+
+[node name="CharacterStateIdle" type="Node" parent="stateManager" index="0" unique_id=1005793179]
+script = ExtResource("6_wgpbl")
+metadata/_custom_type_script = "uid://55xneh1xtvnj"
+
+[node name="CharacterStateFollowing" type="Node" parent="stateManager" index="1" unique_id=104961001]
+script = ExtResource("7_lgshl")
+metadata/_custom_type_script = "uid://fumvv65m5aig"
+
+[node name="CharacterStatePatrolling" type="Node" parent="stateManager" index="2" unique_id=927451102]
+script = ExtResource("8_2u77j")
+metadata/_custom_type_script = "uid://ds2u0dlloavie"
+
+[node name="CharacterStateMoveInput" type="Node" parent="stateManager" index="3" unique_id=850319564]
+script = ExtResource("7_wgpbl")
+metadata/_custom_type_script = "uid://dw3ggojroh7rn"
 
 [connection signal="MovementStateChanged" from="." to="Animation/CharacterAnimator" method="OnMovementStateChanged"]
 

@@ -1,19 +1,36 @@
 using System;
+using System.Linq;
 using Godot;
 using TnT.EduGame.CharacterState;
 using TnT.Extensions;
 using TnT.Input;
 using TnT.Systems;
 
-public partial class Player : Node//, IBind<Player.PlayerSaveData>
+public partial class Player : Node, IInputActionable//, IBind<Player.PlayerSaveData>
 {
 	public static Player Instance { get; private set; }
 
-	[Export] InputAction2D _move;
-	[Export] InputAction _jump;
+	[Export]
+	public InputActionBase[] InputActions { get; set; } =
+	[
+		new InputAction2D {
+			ActionName = "move",
+			Enabled = true,
+			NegativeX = new InputAction { InputReference = "move_left",  Enabled = true },
+			PositiveX = new InputAction { InputReference = "move_right", Enabled = true },
+			NegativeY = new InputAction { InputReference = "move_up",  Enabled = true },
+			PositiveY = new InputAction { InputReference = "move_down",    Enabled = true }
+		},
+		new InputAction   { ActionName = "jump", InputReference = "jump", Enabled = true }
+	];
+
+	InputAction2D MoveAction => InputActions.FirstOrDefault(a => a.ActionName == "move") as InputAction2D;
+	InputAction JumpAction => InputActions.FirstOrDefault(a => a.ActionName == "jump") as InputAction;
+
 
 	ICharacterController _cc;
 	[Export] CharacterStateManager _stateManager;
+	bool _inputActive;
 
 	public static Player Create()
 	{
@@ -30,31 +47,29 @@ public partial class Player : Node//, IBind<Player.PlayerSaveData>
 			_cc = this.FindAncestorOfType<CharacterController3D>();
 		base._Ready();
 
-		_move.ActionPressed += StartMoving;
-		_move.ActionReleased += StopMoving;
+		MoveAction.OnPressed += StartMoving;
+		MoveAction.OnReleased += StopMoving;
+
+		JumpAction.OnPressed += StartMoving;
+		JumpAction.OnReleased += StopMoving;
 	}
 
-    private void StopMoving()
-    {
-		_stateManager.Idling();
-    }
-
-    private void StartMoving()
+	private void StopMoving(InputActionBase action)
 	{
-		_stateManager.StartInput(_move, _jump);
-    }
+		if (!_inputActive) return;
+		_inputActive = false;
+		_stateManager.Pop();
+	}
 
-    // public override void _Process(double delta)
-	// {
-	// 	base._Process(delta);
-
-	// 	Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-	// 	if (direction.Length() > 0)
-	// 		_cc.Move(direction);
-	// }
+	private void StartMoving(InputActionBase action)
+	{
+		if (_inputActive) return;
+		_inputActive = true;
+		_stateManager.StartInput(MoveAction, JumpAction);
+	}
 
 	public void MoveTo(Vector3 target)
-    {
+	{
 		_cc.MoveTo(target);
-    }
+	}
 }
