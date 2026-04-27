@@ -13,7 +13,8 @@ namespace TnT.EduGame.CharacterState
         {
             public CharacterController3D cc;
             public NavigationAgent3D agent;
-            public InputActionBase[] actions;
+            public InputAction2D moveAction;
+            public InputAction jumpAction;
         }
 
         MovingOptions _options;

@@ -45,11 +45,11 @@ namespace TnT.EduGame.CharacterState
             Push(state.GetState(new() { agent = _agent, cc = _controller, Target = target }));
         }
 
-        public void StartInput(params InputActionBase[] actions)
+        public void StartInput(InputAction2D moveAction, InputAction jumpAction)
         {
             var state = _registeredStates.OfType<CharacterStateMoveInput>().FirstOrDefault()
                 ?? throw new Exception("CharacterStateManager requires a CharacterStateMoving child node");
-            Push(state.GetState(new() {agent = _agent, cc = _controller, actions = actions}));
+            Push(state.GetState(new() {agent = _agent, cc = _controller, moveAction = moveAction, jumpAction = jumpAction}));
         }
 
         public void StartPatrol(Node3D[] patrolTargets)
