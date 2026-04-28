@@ -18,6 +18,7 @@ namespace TnT.EduGame.CharacterState
 
         public override void _Ready()
         {
+            ProcessMode = ProcessModeEnum.Pausable;
             _controller = this.FindAncestorOfType<CharacterController3D>();
             _agent = _controller.FindAnyObjectByType<NavigationAgent3D>();
             Idling();
