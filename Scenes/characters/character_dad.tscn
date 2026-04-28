@@ -8,6 +8,8 @@ radius = 0.1274414
 height = 0.6963501
 
 [node name="CharacterController3D" unique_id=926984674 node_paths=PackedStringArray("VisualRoot") instance=ExtResource("1_a2d18")]
+_speed = 3.0
+_jumpVelocity = 3.0
 VisualRoot = NodePath("character-male-g")
 
 [node name="CollisionShape3D" parent="." index="0" unique_id=293151575]
@@ -27,9 +29,11 @@ anim_player = NodePath("../../character-male-g/AnimationPlayer")
 bones/0/rotation = Quaternion(-8.557136e-09, 2.4203237e-08, -4.142208e-16, 1)
 bones/1/rotation = Quaternion(1.1832914e-30, -2.5970621e-09, 1.774937e-30, 1)
 bones/2/rotation = Quaternion(1.1832914e-30, -2.5970621e-09, 1.774937e-30, 1)
-bones/3/rotation = Quaternion(0.010119754, 2.1127957e-09, -2.1382417e-11, 0.9999488)
-bones/4/rotation = Quaternion(-2.9024254e-09, -1.4160857e-09, -0.3689464, 0.9294507)
-bones/5/rotation = Quaternion(-3.0679033e-09, 1.1662558e-09, 0.3689464, 0.9294507)
-bones/6/rotation = Quaternion(6.0119414e-12, -0.010119762, -4.4252887e-12, 0.9999488)
+bones/3/rotation = Quaternion(1.8979145e-23, 2.1129036e-09, -3.697142e-16, 1)
+bones/4/rotation = Quaternion(-2.8702145e-09, -1.1750018e-09, -0.38268352, 0.92387956)
+bones/5/rotation = Quaternion(-2.8603997e-09, 1.1986966e-09, 0.3826835, 0.9238795)
+bones/6/rotation = Quaternion(8.1078685e-25, -2.193012e-09, 3.697141e-16, 1)
+
+[connection signal="MovementStateChanged" from="." to="Animation/CharacterAnimator" method="OnMovementStateChanged"]
 
 [editable path="character-male-g"]

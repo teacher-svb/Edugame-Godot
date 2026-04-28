@@ -352,26 +352,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.091408, 0, 0.43780148)
 [node name="Dad" parent="." unique_id=926984674 instance=ExtResource("25_14bvk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.731884, 0, 1.6418324)
 _speed = 0.5
-_jumpVelocity = 3.0
-
-[node name="NavigationAgent3D" parent="Dad" index="1" unique_id=1876010761]
-path_desired_distance = 1.0
-target_desired_distance = 1.0
-path_height_offset = 0.0
-debug_enabled = false
-debug_path_custom_color = Color(1, 1, 1, 1)
-
-[node name="character-male-g" parent="Dad" index="3" unique_id=2127119757]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
-
-[node name="Skeleton3D" parent="Dad/character-male-g/character-male-b" parent_id_path=PackedInt32Array(926984674, 2127119757, 618410602) index="0" unique_id=801209756]
-bones/3/rotation = Quaternion(0.042630807, 2.110983e-09, -9.0075315e-11, 0.9990909)
-bones/4/rotation = Quaternion(-5.2560987e-09, -1.6070818e-09, -0.26356998, 0.96464026)
-bones/5/rotation = Quaternion(-3.6308874e-09, 1.3860625e-09, 0.26356998, 0.96464026)
-bones/6/rotation = Quaternion(1.4065635e-09, -0.0426308, -4.7414496e-11, 0.9990909)
-
-[node name="CharacterStatePatrolling" parent="Dad/stateManager" parent_id_path=PackedInt32Array(926984674, 2020265289) index="2" unique_id=1994538582]
-_loop = true
 
 [node name="Avocado" parent="." unique_id=626473423 instance=ExtResource("25_mglpj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.185062, 0, 4.059492)
@@ -433,5 +413,3 @@ metadata/_custom_type_script = "uid://ddl5nxhirmbnr"
 [editable path="NavigationRegion3D/Bedroom/bookcaseClosed"]
 [editable path="NavigationRegion3D/Kitchen/hoodModern"]
 [editable path="NavigationRegion3D/Kitchen/kitchenMicrowave"]
-[editable path="Dad"]
-[editable path="Dad/character-male-g"]
