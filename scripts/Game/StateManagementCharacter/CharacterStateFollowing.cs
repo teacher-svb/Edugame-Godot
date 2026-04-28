@@ -18,17 +18,24 @@ namespace TnT.EduGame.CharacterState
 
         FollowOptions _options;
         float _previousTargetDesiredDistance;
+        float _previousSpeed;
 
         public BaseState GetState(FollowOptions options = default)
         {
             _options = options;
+            _previousSpeed = options.cc.Speed;
             _previousTargetDesiredDistance = _options.agent.TargetDesiredDistance;
             _options.agent.TargetDesiredDistance = 1f;
+
+            if (options.Target is CharacterController3D)
+                options.cc.Speed = (options.Target as CharacterController3D).Speed;
+
             return new BaseState(new() { OnUpdate = OnUpdate, OnExit = OnExit });
         }
 
         private Task OnExit()
         {
+            _options.cc.Speed = _previousSpeed;
             _options.agent.TargetDesiredDistance = _previousTargetDesiredDistance;
             return Task.CompletedTask;
         }

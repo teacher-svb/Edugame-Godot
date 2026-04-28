@@ -12,6 +12,7 @@ public partial class CharacterController3D : CharacterBody3D, ICharacterControll
     [Export] private float _jumpVelocity = 4.5f;
     [Export] private float _rotationSpeed = 10.0f;
 
+
     /// <summary>
     /// Raycast used to detect occlusion between the camera and the character.
     /// </summary>
@@ -23,6 +24,7 @@ public partial class CharacterController3D : CharacterBody3D, ICharacterControll
     [Export] public Camera3D Camera { get; private set; }
 
     [Export] private Node3D VisualRoot { get; set; }
+    public float Speed { get => _speed; set => _speed = value; }
 
     /// <summary>
     /// Emitted whenever the character's movement state changes.

@@ -57,7 +57,9 @@ public partial class CharacterAnimator : Node, IMovementAnimator
     // Flatten on Y, spread on X/Z, then spring back.
     private void DoSquash()
     {
-        LandingParticles.Emitting = true;
+        if (LandingParticles != null)
+            LandingParticles.Emitting = true;
+            
         if (VisualRoot == null) return;
         VisualRoot.Scale = new Vector3(1.3f, .5f, 1.3f);
         _squashStretchTween?.Kill();
