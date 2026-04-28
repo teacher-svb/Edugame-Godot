@@ -93,7 +93,7 @@ public partial class CharacterController3D : CharacterBody3D, ICharacterControll
     {
         if (VisualRoot == null) return;
         var target = Basis.LookingAt(-direction, Vector3.Up);
-        VisualRoot.Basis = VisualRoot.Basis.Slerp(target, _rotationSpeed * (float)delta);
+        VisualRoot.Basis = VisualRoot.Basis.Orthonormalized().Slerp(target, _rotationSpeed * (float)delta);
     }
 
     private void EmitMovementState(Vector3 direction)
