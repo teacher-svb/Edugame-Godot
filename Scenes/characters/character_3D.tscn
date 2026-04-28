@@ -2,6 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dt1pmf2iuc4nb" path="res://scripts/CharacterAnimator.cs" id="1_1wrgq"]
 [ext_resource type="Script" uid="uid://dc4u7vqilp6dd" path="res://scripts/CharacterController3D.cs" id="1_707x3"]
+[ext_resource type="Script" uid="uid://dikx3tegvslhi" path="res://scripts/Game/StateManagementCharacter/CharacterStateManager.cs" id="3_d75bo"]
+[ext_resource type="Script" uid="uid://55xneh1xtvnj" path="res://scripts/Game/StateManagementCharacter/CharacterStateIdle.cs" id="4_u1x07"]
+[ext_resource type="Script" uid="uid://fumvv65m5aig" path="res://scripts/Game/StateManagementCharacter/CharacterStateFollowing.cs" id="5_mu1lf"]
+[ext_resource type="Script" uid="uid://ds2u0dlloavie" path="res://scripts/Game/StateManagementCharacter/CharacterStatePatrolling.cs" id="6_v1v05"]
+[ext_resource type="Script" uid="uid://dw3ggojroh7rn" path="res://scripts/Game/StateManagementCharacter/CharacterStateMoveInput.cs" id="7_w8mnd"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sikog"]
 animation = &"fall"
@@ -69,3 +74,22 @@ AnimationTree = NodePath("../AnimationTree")
 [node name="AnimationTree" type="AnimationTree" parent="Animation" unique_id=58694043]
 root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeStateMachine_hr8he")
+
+[node name="stateManager" type="Node" parent="." unique_id=2020265289]
+script = ExtResource("3_d75bo")
+
+[node name="CharacterStateIdle" type="Node" parent="stateManager" unique_id=1664841762]
+script = ExtResource("4_u1x07")
+metadata/_custom_type_script = "uid://55xneh1xtvnj"
+
+[node name="CharacterStateFollowing" type="Node" parent="stateManager" unique_id=305423949]
+script = ExtResource("5_mu1lf")
+metadata/_custom_type_script = "uid://fumvv65m5aig"
+
+[node name="CharacterStatePatrolling" type="Node" parent="stateManager" unique_id=1994538582]
+script = ExtResource("6_v1v05")
+metadata/_custom_type_script = "uid://ds2u0dlloavie"
+
+[node name="CharacterStateMoveInput" type="Node" parent="stateManager" unique_id=1767845139]
+script = ExtResource("7_w8mnd")
+metadata/_custom_type_script = "uid://dw3ggojroh7rn"

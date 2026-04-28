@@ -4,11 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://cdou2t4bule12" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-b.glb" id="2_sb0or"]
 [ext_resource type="PackedScene" uid="uid://dwmsot5m0pw1o" path="res://Scenes/characters/PlayerCamera.tscn" id="3_eym15"]
 [ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="4_cvtri"]
-[ext_resource type="Script" uid="uid://dikx3tegvslhi" path="res://scripts/Game/StateManagementCharacter/CharacterStateManager.cs" id="6_hnwjb"]
-[ext_resource type="Script" uid="uid://55xneh1xtvnj" path="res://scripts/Game/StateManagementCharacter/CharacterStateIdle.cs" id="6_wgpbl"]
-[ext_resource type="Script" uid="uid://fumvv65m5aig" path="res://scripts/Game/StateManagementCharacter/CharacterStateFollowing.cs" id="7_lgshl"]
-[ext_resource type="Script" uid="uid://dw3ggojroh7rn" path="res://scripts/Game/StateManagementCharacter/CharacterStateMoveInput.cs" id="7_wgpbl"]
-[ext_resource type="Script" uid="uid://ds2u0dlloavie" path="res://scripts/Game/StateManagementCharacter/CharacterStatePatrolling.cs" id="8_2u77j"]
 [ext_resource type="Texture2D" uid="uid://22l4wvbueyg3" path="res://assets/ring.png" id="10_lgshl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7dxc7"]
@@ -59,10 +54,10 @@ shape = SubResource("CapsuleShape3D_7dxc7")
 [node name="character-female-b2" parent="." index="2" unique_id=371834684 instance=ExtResource("2_sb0or")]
 
 [node name="Skeleton3D" parent="character-female-b2/character-female-b" parent_id_path=PackedInt32Array(371834684, 1357584895) index="0" unique_id=421653466]
-bones/3/rotation = Quaternion(0.021528492, 0, 0, 0.9997683)
-bones/4/rotation = Quaternion(0, 0, -0.340046, 0.9404089)
-bones/5/rotation = Quaternion(0, 0, 0.340046, 0.9404089)
-bones/6/rotation = Quaternion(0, -0.021528492, 0, 0.9997683)
+bones/3/rotation = Quaternion(0.034739178, 0, 0, 0.99939644)
+bones/4/rotation = Quaternion(0, 0, -0.29440472, 0.9556809)
+bones/5/rotation = Quaternion(0, 0, 0.29440472, 0.9556809)
+bones/6/rotation = Quaternion(0, -0.034739178, 0, 0.99939644)
 
 [node name="PlayerController" type="Node" parent="." index="3" unique_id=1092226004 node_paths=PackedStringArray("_stateManager")]
 script = ExtResource("4_cvtri")
@@ -76,29 +71,10 @@ LandingParticles = NodePath("../../GPUParticles3D")
 root_node = NodePath("../../character-female-b2")
 anim_player = NodePath("../../character-female-b2/AnimationPlayer")
 
-[node name="stateManager" type="Node" parent="." index="5" unique_id=28947232]
-script = ExtResource("6_hnwjb")
-
-[node name="CharacterStateIdle" type="Node" parent="stateManager" index="0" unique_id=1005793179]
-script = ExtResource("6_wgpbl")
-metadata/_custom_type_script = "uid://55xneh1xtvnj"
-
-[node name="CharacterStateFollowing" type="Node" parent="stateManager" index="1" unique_id=104961001]
-script = ExtResource("7_lgshl")
-metadata/_custom_type_script = "uid://fumvv65m5aig"
-
-[node name="CharacterStatePatrolling" type="Node" parent="stateManager" index="2" unique_id=927451102]
-script = ExtResource("8_2u77j")
-metadata/_custom_type_script = "uid://ds2u0dlloavie"
-
-[node name="CharacterStateMoveInput" type="Node" parent="stateManager" index="3" unique_id=850319564]
-script = ExtResource("7_wgpbl")
-metadata/_custom_type_script = "uid://dw3ggojroh7rn"
-
-[node name="PlayerCamera" parent="." index="6" unique_id=741163845 node_paths=PackedStringArray("Target") instance=ExtResource("3_eym15")]
+[node name="PlayerCamera" parent="." index="5" unique_id=741163845 node_paths=PackedStringArray("Target") instance=ExtResource("3_eym15")]
 Target = NodePath("../character-female-b2")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="7" unique_id=1538626892]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="6" unique_id=1538626892]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07240015, 0)
 emitting = false
 amount = 2
