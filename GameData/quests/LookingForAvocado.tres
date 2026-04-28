@@ -34,7 +34,7 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 [sub_resource type="Resource" id="Resource_hakfr"]
 script = ExtResource("1_4h7u6")
 _startText = "Zullen we verder gaan?"
-_completeText = "Hier is de keuken. Kijk daar! Avocado ligt op je te wachten."
+_completeText = "Hier is de keuken. Ik ben er zeker van dat Avocado hier ergens ligt..."
 _characterData = ExtResource("3_r6kp3")
 _objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8926"
 metadata/_custom_type_script = "uid://bkc5aqh43okjh"
