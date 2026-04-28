@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://cmyotajgoscmu"]
+
+[ext_resource type="Texture2D" uid="uid://4uvh8xsk58su" path="res://assets/Spritesheets/Characters/Character_007/Character_007_Face.png" id="1_2uxeb"]
+[ext_resource type="Script" uid="uid://bqblbalohjolq" path="res://scripts/Game/Character/CharacterData.cs" id="2_3x61f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rd6oc"]
+atlas = ExtResource("1_2uxeb")
+region = Rect2(0, 0, 64, 64.5)
+
+[resource]
+script = ExtResource("2_3x61f")
+_name = "papa"
+_face = SubResource("AtlasTexture_rd6oc")
+CharacterAbilities = null
+metadata/_custom_type_script = "uid://bqblbalohjolq"

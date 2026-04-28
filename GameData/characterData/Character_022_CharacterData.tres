@@ -2,7 +2,7 @@
 
 [ext_resource type="SpriteFrames" uid="uid://srit1vjsk2no" path="res://assets/Spritesheets/Characters/Character_022/Character_022_SpriteFrames.tres" id="1_h4r8b"]
 [ext_resource type="Script" uid="uid://bqblbalohjolq" path="res://scripts/Game/Character/CharacterData.cs" id="1_igwf4"]
-[ext_resource type="Resource" uid="uid://bxs5xd2hd4bja" path="res://assets/Spritesheets/Characters/Character_022/Character_022_CharacterStats.tres" id="1_k5oxl"]
+[ext_resource type="Resource" uid="uid://bxs5xd2hd4bja" path="res://GameData/characterData/Character_022_CharacterStats.tres" id="1_k5oxl"]
 [ext_resource type="Texture2D" uid="uid://dt315kny68yau" path="res://assets/Spritesheets/Characters/Character_022/Character_022.png" id="2_3b7g3"]
 [ext_resource type="Texture2D" uid="uid://c0fwbmbtxen2h" path="res://assets/Spritesheets/Characters/Character_022/Character_022_Face.png" id="3_k5oxl"]
 

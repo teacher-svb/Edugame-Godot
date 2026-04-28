@@ -17,6 +17,8 @@ namespace TnT.Systems.State
                 return result;
             }
         }
+        protected int StateCount => _states.Count;
+
         public void Push(BaseState state)
         {
             _states.Push(state);
@@ -24,6 +26,7 @@ namespace TnT.Systems.State
 
         public async void Pop()
         {
+            if (StateCount <= 1) return;
             await TransitionOut();
         }
 

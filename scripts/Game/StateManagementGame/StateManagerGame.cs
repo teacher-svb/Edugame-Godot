@@ -31,7 +31,7 @@ namespace TnT.EduGame.GameState
 
             var state = _registeredStates.OfType<GameStatePlay>().FirstOrDefault()
                 ?? throw new Exception("no play state assigned");
-                
+
             Push(state.GetState(new()));
 
             OnSceneLoaded?.Invoke(null);
@@ -46,7 +46,7 @@ namespace TnT.EduGame.GameState
         {
             var state = _registeredStates.OfType<GameStateMessage>().FirstOrDefault()
                 ?? throw new Exception("no dialog state assigned");
-            
+
             Push(state.GetState(new() { text = text, character = character, next = ManagerUI.Instance.Next, close = ManagerUI.Instance.Close }));
         }
 
@@ -54,7 +54,7 @@ namespace TnT.EduGame.GameState
         {
             var state = _registeredStates.OfType<GameStateChallenge>().FirstOrDefault()
                 ?? throw new Exception("no challenge state assigned");
-            
+
             Push(state.GetState(new() { challenge = challenge }));
         }
 
@@ -62,7 +62,7 @@ namespace TnT.EduGame.GameState
         {
             var state = _registeredStates.OfType<GameStateLoadingScreen>().FirstOrDefault()
                 ?? throw new Exception("no scene loader state assigned");
-                
+
             Push(state.GetState<SceneLoaderOptions>(new() { scenePath = scenePath, player = _player, targetLocation = targetLocation, forceLoad = forceLoad }));
         }
 
@@ -70,13 +70,21 @@ namespace TnT.EduGame.GameState
         {
             var state = _registeredStates.OfType<GameStateLoadingScreen>().FirstOrDefault()
                 ?? throw new Exception("no scene loader state assigned");
-                
+
             Push(state.GetState<LocationLoaderOptions>(new() { player = _player, targetLocation = targetLocation, forceLoad = forceLoad }));
         }
 
         internal void RegisterState(BaseGameState gameState)
         {
             _registeredStates.Add(gameState);
+        }
+
+        public void OpenInventory()
+        {
+            var state = _registeredStates.OfType<GameStateInventory>().FirstOrDefault()
+                ?? throw new Exception("no inventory state assigned");
+
+            Push(state.GetState(new() { close = ManagerUI.Instance.Close }));
         }
 
         // public void ToggleInventory()

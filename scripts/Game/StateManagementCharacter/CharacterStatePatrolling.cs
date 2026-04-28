@@ -40,6 +40,7 @@ namespace TnT.EduGame.CharacterState
 
         Task OnEnter()
         {
+            GD.Print("entering patrol state");
             _options.agent.TargetReached += FindPath;
 
             if (_currentIndex < _options.targets.Length)
@@ -50,6 +51,7 @@ namespace TnT.EduGame.CharacterState
 
         Task OnExit()
         {
+            GD.Print("exiting patrol state");
             _options.agent.TargetReached -= FindPath;
             return Task.CompletedTask;
         }

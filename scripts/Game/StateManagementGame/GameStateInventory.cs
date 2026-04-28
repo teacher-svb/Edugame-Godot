@@ -18,6 +18,7 @@ namespace TnT.EduGame.GameState
 
         public struct InventoryOptions
         {
+            public InputAction close;
         }
 
         // InventoryController _inventoryController;

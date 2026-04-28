@@ -9,10 +9,15 @@ namespace TnT.EduGame.GameState
     [GlobalClass]
     public partial class GameStatePlay : BaseGameState, IStateObject<GameStatePlay.PlayOptions>, IInputActionable
     {
+        private PlayOptions _options;
+
         public InputActionBase[] InputActions => [];
 
         public struct PlayOptions
         {
+            public InputAction jump;
+            public InputAction2D move;
+            public InputAction openInventory;
         }
         // [SerializeField] InputActionReference openInventory;
 
@@ -27,11 +32,15 @@ namespace TnT.EduGame.GameState
         //     }
         // }
 
-        public BaseState GetState(PlayOptions options) => new BaseState(new() { OnEnter = StartGame, OnUpdate = Update });
+        public BaseState GetState(PlayOptions options)
+        {
+            _options = options;
+            return new BaseState(new() { OnEnter = StartGame, OnUpdate = Update });
+        }
 
         private void Update()
         {
-            // if (openInventory.action.triggered)
+            // if (_options.openInventory.Triggered)
             // {
             //     StateManagerGame.Instance.OpenInventory();
             // }

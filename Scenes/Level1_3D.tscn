@@ -16,15 +16,20 @@
 [ext_resource type="Script" uid="uid://bhsdjlrhck4qd" path="res://scripts/test/Transporter.cs" id="22_182vs"]
 [ext_resource type="Script" uid="uid://dbtd0oguw4wdj" path="res://scripts/Game/Systems/QuestSystem/QuestObjectiveActor.cs" id="22_ycjjd"]
 [ext_resource type="PackedScene" uid="uid://ct1kqwdhujc8n" path="res://assets/3D/Furniture Kit/Models/GLTF format/benchCushionLow.glb" id="23_7n07m"]
-[ext_resource type="PackedScene" uid="uid://ri147ckev4hj" path="res://assets/3D/Mini Characters 1/Models/GLB format/avocado.glb" id="24_c1bi7"]
 [ext_resource type="PackedScene" uid="uid://40rbyr5gq5lu" path="res://assets/3D/Furniture Kit/Models/GLTF format/cabinetBedDrawer.glb" id="24_kdqke"]
 [ext_resource type="PackedScene" uid="uid://d11od8uonxhra" path="res://Scenes/characters/character_dad.tscn" id="25_14bvk"]
 [ext_resource type="PackedScene" uid="uid://bmcouihuq457y" path="res://assets/3D/Furniture Kit/Models/GLTF format/desk.glb" id="25_kb3qt"]
+[ext_resource type="PackedScene" uid="uid://dv3mlsoycb230" path="res://Scenes/characters/character_avocado.tscn" id="25_mglpj"]
+[ext_resource type="Script" uid="uid://dwsdoxdyyhw24" path="res://scripts/Game/Systems/QuestSystem/QuestObjectiveReactor.cs" id="26_0tae3"]
 [ext_resource type="PackedScene" uid="uid://db03lq6cgxid2" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedDoors.glb" id="26_7vwr8"]
+[ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/quests/QuestEventChannel.tres" id="27_0tae3"]
 [ext_resource type="PackedScene" uid="uid://dcaqo4uenuwgu" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedWide.glb" id="27_qovxq"]
 [ext_resource type="PackedScene" uid="uid://5ac2eh7lcw6p" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosed.glb" id="28_7n07m"]
+[ext_resource type="Script" uid="uid://dwgnr104drqro" path="res://scripts/Game/Systems/QuestSystem/QuestObjectiveBinding.cs" id="28_kb3qt"]
+[ext_resource type="Script" uid="uid://ddl5nxhirmbnr" path="res://scripts/Game/Systems/QuestSystem/Reactions/StartPatrolReaction.cs" id="29_7vwr8"]
 [ext_resource type="PackedScene" uid="uid://cd2furrsxugw6" path="res://assets/3D/Furniture Kit/Models/GLTF format/books.glb" id="29_kdqke"]
 [ext_resource type="MeshLibrary" uid="uid://dn1i16n6um3sg" path="res://assets/3D/Furniture Kit/furniture-kit-tileables.meshlib" id="30_kb3qt"]
+[ext_resource type="Script" uid="uid://dj8ksb0k1axep" path="res://scripts/Game/Systems/QuestSystem/Reactions/FollowReaction.cs" id="30_qovxq"]
 
 [sub_resource type="Gradient" id="Gradient_upsym"]
 offsets = PackedFloat32Array(0.117647, 1)
@@ -52,7 +57,7 @@ size = Vector3(0.4958725, 1, 0.774292)
 size = Vector3(1.5620174, 1, 0.36618042)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c1bi7"]
-size = Vector3(0.4958725, 1.0795898, 0.6716423)
+size = Vector3(1.1812191, 1.4217529, 1.090303)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_7n07m"]
 vertices = PackedVector3Array(-14.01304, 0.72969055, 0.9021754, -14.31304, 0.72969055, 1.0021753, -14.31304, 0.72969055, 1.3021753, -10.613039, 0.72969055, 1.3021753, -10.613039, 0.72969055, 1.0021753, -11.01304, 0.72969055, 0.9021754, -13.213039, 0.72969055, 0.8021753, -11.01304, 0.72969055, 0.102175474, -10.613039, 0.72969055, 0.002175331, -10.613039, 0.72969055, -0.29782462, -11.913039, 0.72969055, -0.29782462, -12.01304, 0.72969055, -0.09782457, -13.913039, 0.72969055, 0.7021754, -13.913039, 0.72969055, -0.09782457, -14.11304, 0.72969055, -0.09782457, -13.01304, 0.72969055, -0.19782472, 1.6869612, 0.72969055, 0.7021754, 1.6869612, 0.72969055, 1.0021753, 1.9869604, 0.72969055, 1.9021754, 2.7869616, 0.72969055, 1.9021754, 4.38696, 0.72969055, 0.7021754, 2.7869616, 0.72969055, 3.1021752, 2.2869616, 0.72969055, 3.1021752, 2.2869616, 0.72969055, 4.3021755, 2.9869604, 0.72969055, 2.9021754, 4.38696, 0.72969055, 4.3021755, 2.9869604, 0.72969055, 2.2021756, -0.31303978, 0.72969055, 3.3021755, -0.8130398, 0.72969055, 3.3021755, -1.0130396, 0.72969055, 3.6021752, -1.3130398, 0.72969055, 3.6021752, -1.3130398, 0.72969055, 4.3021755, 1.4869604, 0.72969055, 1.2021754, 1.6869612, 0.72969055, 2.2021756, 1.6869612, 0.72969055, 2.9021754, -0.013039589, 0.72969055, 1.8021755, -0.013039589, 0.72969055, 3.2021756, -0.013039589, 0.72969055, 1.2021754, -0.5130396, 0.72969055, 3.1021752, -0.31303978, 0.72969055, 1.7021756, -0.8130398, 0.72969055, 1.2021754, -0.5130396, 0.72969055, 1.9021754)
@@ -89,9 +94,6 @@ directional_shadow_fade_start = 0.46
 directional_shadow_max_distance = 25.0
 directional_shadow_pancake_size = 2.0
 sky_mode = 1
-
-[node name="avocado2" parent="." unique_id=1869030793 instance=ExtResource("24_c1bi7")]
-transform = Transform3D(-0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, -0.70710677, -1.2217548, 0.0036462545, 3.8689103)
 
 [node name="transporters" type="Node" parent="." unique_id=838434594]
 
@@ -168,7 +170,31 @@ _questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
 _questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8924"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="QuestActivators/Area3D3" unique_id=597132956]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.042747498, 0.039794922, 0.61976135)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.042747498, 0.21087646, 0.55158794)
+shape = SubResource("BoxShape3D_c1bi7")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="Area3D4" type="Area3D" parent="QuestActivators" unique_id=466476982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8146913, 0.13522744, 3.5032008)
+script = ExtResource("22_ycjjd")
+_action = 1
+_questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
+_questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8925"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="QuestActivators/Area3D4" unique_id=1988574561]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7404449, 0, -0.116850376)
+shape = SubResource("BoxShape3D_c1bi7")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="Area3D5" type="Area3D" parent="QuestActivators" unique_id=1826500242]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6225774, 0.13522744, 2.0201664)
+script = ExtResource("22_ycjjd")
+_action = 1
+_questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
+_questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8926"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="QuestActivators/Area3D5" unique_id=17129685]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.88351655)
 shape = SubResource("BoxShape3D_c1bi7")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
@@ -324,27 +350,73 @@ layers = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.091408, 0, 0.43780148)
 
 [node name="Dad" parent="." unique_id=926984674 instance=ExtResource("25_14bvk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.441972)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.731884, 0, 1.6418324)
+_speed = 0.5
+_jumpVelocity = 3.0
 
-[node name="dadPatrolPoints" type="Node" parent="." unique_id=778300208]
+[node name="NavigationAgent3D" parent="Dad" index="1" unique_id=1876010761]
+path_desired_distance = 1.0
+target_desired_distance = 1.0
+path_height_offset = 0.0
+debug_enabled = false
+debug_path_custom_color = Color(1, 1, 1, 1)
 
-[node name="dadPatrolPoint" type="Node3D" parent="dadPatrolPoints" unique_id=1705158803]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7617927, 0, 2.7226472)
+[node name="character-male-g" parent="Dad" index="3" unique_id=2127119757]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="dadPatrolPoint2" type="Node3D" parent="dadPatrolPoints" unique_id=1203074680]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0019197, 0, 3.7967463)
+[node name="Skeleton3D" parent="Dad/character-male-g/character-male-b" parent_id_path=PackedInt32Array(926984674, 2127119757, 618410602) index="0" unique_id=801209756]
+bones/3/rotation = Quaternion(0.042630807, 2.110983e-09, -9.0075315e-11, 0.9990909)
+bones/4/rotation = Quaternion(-5.2560987e-09, -1.6070818e-09, -0.26356998, 0.96464026)
+bones/5/rotation = Quaternion(-3.6308874e-09, 1.3860625e-09, 0.26356998, 0.96464026)
+bones/6/rotation = Quaternion(1.4065635e-09, -0.0426308, -4.7414496e-11, 0.9990909)
 
-[node name="dadPatrolPoint3" type="Node3D" parent="dadPatrolPoints" unique_id=847245381]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.64642096, 0, 1.5572877)
+[node name="CharacterStatePatrolling" parent="Dad/stateManager" parent_id_path=PackedInt32Array(926984674, 2020265289) index="2" unique_id=1994538582]
+_loop = true
+
+[node name="Avocado" parent="." unique_id=626473423 instance=ExtResource("25_mglpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.185062, 0, 4.059492)
+
+[node name="QuestObjectiveReactor" type="Node" parent="." unique_id=2056696063]
+script = ExtResource("26_0tae3")
+eventChannel = ExtResource("27_0tae3")
+
+[node name="QuestObjectiveBinding" type="Node" parent="QuestObjectiveReactor" unique_id=1170270416]
+script = ExtResource("28_kb3qt")
+ObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8924"
+State = 2
+
+[node name="StartPatrolReaction" type="Node" parent="QuestObjectiveReactor/QuestObjectiveBinding" unique_id=909161437 node_paths=PackedStringArray("PatrolTargets", "Character")]
+script = ExtResource("29_7vwr8")
+PatrolTargets = [NodePath("../../../QuestActivators/Area3D4")]
+Character = NodePath("../../../Dad")
+metadata/_custom_type_script = "uid://ddl5nxhirmbnr"
+
+[node name="FollowReaction" type="Node" parent="QuestObjectiveReactor/QuestObjectiveBinding" unique_id=1364216830 node_paths=PackedStringArray("Target", "Character")]
+script = ExtResource("30_qovxq")
+Target = NodePath("../../../Dad")
+Character = NodePath("../../../Player")
+metadata/_custom_type_script = "uid://dj8ksb0k1axep"
+
+[node name="QuestObjectiveBinding2" type="Node" parent="QuestObjectiveReactor" unique_id=423351628]
+script = ExtResource("28_kb3qt")
+ObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8925"
+State = 2
+
+[node name="StartPatrolReaction" type="Node" parent="QuestObjectiveReactor/QuestObjectiveBinding2" unique_id=23977294 node_paths=PackedStringArray("PatrolTargets", "Character")]
+script = ExtResource("29_7vwr8")
+PatrolTargets = [NodePath("../../../QuestActivators/Area3D5")]
+Character = NodePath("../../../Dad")
+metadata/_custom_type_script = "uid://ddl5nxhirmbnr"
 
 [connection signal="body_entered" from="transporters/transporter_bedroom-livingroom" to="transporters/transporter_bedroom-livingroom" method="_OnBodyEntered"]
 [connection signal="body_entered" from="transporters/transporter_livingroom-bedroom" to="transporters/transporter_livingroom-bedroom" method="_OnBodyEntered"]
 [connection signal="body_entered" from="transporters/transporter_livingroom_level2" to="transporters/transporter_livingroom_level2" method="_OnBodyEntered"]
 [connection signal="body_entered" from="QuestActivators/Area3D" to="QuestActivators/Area3D" method="_OnQuestObjectiveActivated"]
 [connection signal="body_entered" from="QuestActivators/Area3D2" to="QuestActivators/Area3D2" method="_OnQuestObjectiveActivated"]
-[connection signal="body_entered" from="QuestActivators/Area3D3" to="QuestActivators/Area3D3" method="_OnBodyEntered"]
+[connection signal="body_entered" from="QuestActivators/Area3D3" to="QuestActivators/Area3D3" method="_OnQuestObjectiveActivated"]
+[connection signal="body_entered" from="QuestActivators/Area3D4" to="QuestActivators/Area3D4" method="_OnQuestObjectiveActivated"]
+[connection signal="body_entered" from="QuestActivators/Area3D5" to="QuestActivators/Area3D5" method="_OnQuestObjectiveActivated"]
 
-[editable path="avocado2"]
 [editable path="NavigationRegion3D/Livingroom/tableCloth"]
 [editable path="NavigationRegion3D/Livingroom/tableCloth2"]
 [editable path="NavigationRegion3D/Livingroom/chairCushion"]
@@ -361,3 +433,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.64642096, 0, 1.5572877)
 [editable path="NavigationRegion3D/Bedroom/bookcaseClosed"]
 [editable path="NavigationRegion3D/Kitchen/hoodModern"]
 [editable path="NavigationRegion3D/Kitchen/kitchenMicrowave"]
+[editable path="Dad"]
+[editable path="Dad/character-male-g"]

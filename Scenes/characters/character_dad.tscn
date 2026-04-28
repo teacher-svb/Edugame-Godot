@@ -14,6 +14,9 @@ VisualRoot = NodePath("character-male-g")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34902954, 0)
 shape = SubResource("CapsuleShape3D_a2d18")
 
+[node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
+VisualRoot = NodePath("../../character-male-g")
+
 [node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
 root_node = NodePath("../../character-male-g")
 anim_player = NodePath("../../character-male-g/AnimationPlayer")
@@ -24,9 +27,9 @@ anim_player = NodePath("../../character-male-g/AnimationPlayer")
 bones/0/rotation = Quaternion(-8.557136e-09, 2.4203237e-08, -4.142208e-16, 1)
 bones/1/rotation = Quaternion(1.1832914e-30, -2.5970621e-09, 1.774937e-30, 1)
 bones/2/rotation = Quaternion(1.1832914e-30, -2.5970621e-09, 1.774937e-30, 1)
-bones/3/rotation = Quaternion(0.023140315, 2.112338e-09, -4.8893632e-11, 0.9997323)
-bones/4/rotation = Quaternion(-2.9190008e-09, -8.715548e-10, -0.33456352, 0.9423732)
-bones/5/rotation = Quaternion(-2.9263254e-09, 1.2036665e-09, 0.33456352, 0.9423732)
-bones/6/rotation = Quaternion(4.1718554e-10, -0.023140317, -5.5433817e-12, 0.9997323)
+bones/3/rotation = Quaternion(0.010119754, 2.1127957e-09, -2.1382417e-11, 0.9999488)
+bones/4/rotation = Quaternion(-2.9024254e-09, -1.4160857e-09, -0.3689464, 0.9294507)
+bones/5/rotation = Quaternion(-3.0679033e-09, 1.1662558e-09, 0.3689464, 0.9294507)
+bones/6/rotation = Quaternion(6.0119414e-12, -0.010119762, -4.4252887e-12, 0.9999488)
 
 [editable path="character-male-g"]

@@ -6,7 +6,7 @@ using TnT.Systems;
 namespace TnT.EduGame.QuestSystem
 {
     [GlobalClass]
-    public partial class QuestObjectiveActor : Node
+    public partial class QuestObjectiveActor : Node3D
     {
         public enum QuestObjectiveAction
         {

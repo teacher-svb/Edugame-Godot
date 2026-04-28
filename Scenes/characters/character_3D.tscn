@@ -64,6 +64,11 @@ script = ExtResource("1_707x3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=293151575]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1876010761]
+path_desired_distance = 0.4
+target_desired_distance = 0.4
+path_height_offset = 0.75
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 1, 1)
 
 [node name="Animation" type="Node" parent="." unique_id=2085856052]
 
@@ -88,6 +93,7 @@ metadata/_custom_type_script = "uid://fumvv65m5aig"
 
 [node name="CharacterStatePatrolling" type="Node" parent="stateManager" unique_id=1994538582]
 script = ExtResource("6_v1v05")
+_loop = false
 metadata/_custom_type_script = "uid://ds2u0dlloavie"
 
 [node name="CharacterStateMoveInput" type="Node" parent="stateManager" unique_id=1767845139]

@@ -129,6 +129,9 @@ namespace TnT.Extensions
         /// <returns>The first matching node, or <c>null</c> if none is found.</returns>
         public static T FindAnyObjectByType<T>(this Node node, bool recursive = true) where T : Node
         {
+            if (node is T)
+                return node as T;
+                
             if (recursive)
                 return ScanTreeForFirst<T>(node);
 

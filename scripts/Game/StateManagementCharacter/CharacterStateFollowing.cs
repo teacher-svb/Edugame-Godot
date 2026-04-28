@@ -17,11 +17,20 @@ namespace TnT.EduGame.CharacterState
         }
 
         FollowOptions _options;
+        float _previousTargetDesiredDistance;
 
         public BaseState GetState(FollowOptions options = default)
         {
             _options = options;
-            return new BaseState(new() { OnUpdate = OnUpdate });
+            _previousTargetDesiredDistance = _options.agent.TargetDesiredDistance;
+            _options.agent.TargetDesiredDistance = 1f;
+            return new BaseState(new() { OnUpdate = OnUpdate, OnExit = OnExit });
+        }
+
+        private Task OnExit()
+        {
+            _options.agent.TargetDesiredDistance = _previousTargetDesiredDistance;
+            return Task.CompletedTask;
         }
 
         private async void OnUpdate()
@@ -29,8 +38,11 @@ namespace TnT.EduGame.CharacterState
             if (_options.Target == null)
                 return;
 
-            Vector3 _direction = _options.agent.GetNextPathPosition() - _options.cc.GlobalPosition;
-            _options.cc.Move(_direction.ToVector2XZ());
+            if (!_options.agent.IsNavigationFinished())
+            {
+                Vector3 _direction = _options.agent.GetNextPathPosition() - _options.cc.GlobalPosition;
+                _options.cc.Move(_direction.ToVector2XZ());
+            }
 
             await FindPath();
         }
