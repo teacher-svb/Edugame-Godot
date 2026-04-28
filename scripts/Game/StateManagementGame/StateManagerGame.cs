@@ -47,7 +47,7 @@ namespace TnT.EduGame.GameState
             var state = _registeredStates.OfType<GameStateMessage>().FirstOrDefault()
                 ?? throw new Exception("no dialog state assigned");
             
-            Push(state.GetState(new() { text = text, character = character }));
+            Push(state.GetState(new() { text = text, character = character, next = ManagerUI.Instance.Next, close = ManagerUI.Instance.Close }));
         }
 
         public void ShowChallenge(IMathChallenge challenge)

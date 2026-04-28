@@ -31,6 +31,7 @@ namespace TnT.Input
             ScanNodeAndChildren(GetTree().Root);
         }
 
+        
         /// <inheritdoc/>
         public override void _Process(double delta)
         {

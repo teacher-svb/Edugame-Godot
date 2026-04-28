@@ -2,16 +2,20 @@ using System.Threading.Tasks;
 using TnT.Systems.State;
 using System;
 using Godot;
+using TnT.Input;
 
 namespace TnT.EduGame.GameState
 {
     [GlobalClass]
-    public partial class GameStateInventory : BaseGameState, IStateObject<GameStateInventory.InventoryOptions>
+    public partial class GameStateInventory : BaseGameState, IStateObject<GameStateInventory.InventoryOptions>, IInputActionable
     {
         // public delegate void OnItemClicked(Item item);
         public delegate void OnCloseInventory();
         // [SerializeField] InputActionReference close;
         Camera2D camera;
+
+        public InputActionBase[] InputActions => [];
+
         public struct InventoryOptions
         {
         }

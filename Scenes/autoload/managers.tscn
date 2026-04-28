@@ -37,11 +37,15 @@
 
 [sub_resource type="Resource" id="Resource_ut70p"]
 script = ExtResource("16_ut70p")
+InputReference = "next"
+Enabled = true
 ActionName = "next"
 metadata/_custom_type_script = "uid://ch4u84myc17c2"
 
 [sub_resource type="Resource" id="Resource_46vsp"]
 script = ExtResource("16_ut70p")
+InputReference = "close"
+Enabled = true
 ActionName = "close"
 metadata/_custom_type_script = "uid://ch4u84myc17c2"
 
@@ -52,6 +56,18 @@ metadata/_custom_type_script = "uid://cerfog7uyabpn"
 [sub_resource type="Resource" id="Resource_pnf1h"]
 script = ExtResource("7_iqbe2")
 metadata/_custom_type_script = "uid://bdql4ehll6w1t"
+
+[sub_resource type="Resource" id="Resource_5t4y7"]
+script = ExtResource("16_ut70p")
+InputReference = "next"
+ActionName = "next"
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
+
+[sub_resource type="Resource" id="Resource_i1r4r"]
+script = ExtResource("16_ut70p")
+InputReference = "close"
+ActionName = "close"
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
 
 [sub_resource type="Resource" id="Resource_n5sdn"]
 script = ExtResource("5_c37v5")
@@ -102,6 +118,8 @@ _saveData = SubResource("Resource_pnf1h")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=379512689]
 script = ExtResource("4_c37v5")
+Next = SubResource("Resource_5t4y7")
+Close = SubResource("Resource_i1r4r")
 
 [node name="FadeController" type="Control" parent="UI" unique_id=1274864108]
 layout_mode = 3

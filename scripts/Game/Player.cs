@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using Godot;
 using TnT.EduGame.CharacterState;
@@ -41,6 +42,7 @@ public partial class Player : Node, IInputActionable//, IBind<Player.PlayerSaveD
 
 	public override void _Ready()
 	{
+		ProcessMode = ProcessModeEnum.Pausable;
 		Instance = this;
 		_cc = this.FindAncestorOfType<CharacterController2D>();
 		if (_cc == null)
@@ -56,6 +58,7 @@ public partial class Player : Node, IInputActionable//, IBind<Player.PlayerSaveD
 
 	private void StopMoving(InputActionBase action)
 	{
+		if (GetTree().Paused) return;
 		if (!_inputActive || MoveAction.IsPressed) return;
 		_inputActive = false;
 		_stateManager.Pop();
@@ -63,6 +66,7 @@ public partial class Player : Node, IInputActionable//, IBind<Player.PlayerSaveD
 
 	private void StartMoving(InputActionBase action)
 	{
+		if (GetTree().Paused) return;
 		if (_inputActive) return;
 		_inputActive = true;
 		_stateManager.StartInput(MoveAction, JumpAction);

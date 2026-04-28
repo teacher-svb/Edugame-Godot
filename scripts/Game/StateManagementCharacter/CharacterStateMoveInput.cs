@@ -27,29 +27,29 @@ namespace TnT.EduGame.CharacterState
         public BaseState GetState(MovingOptions options = default)
         {
             _options = options;
-            return new BaseState(new() { OnEnter = OnEnter, OnExit = OnExit });
+            return new BaseState(new() { OnEnter = OnEnter, OnExit = OnExit, OnUpdate = OnUpdate });
+        }
+
+        private void OnUpdate()
+        {
+            if (_options.jumpAction.Triggered)
+            {
+                _options.cc.Jump();
+            }
         }
 
         private async Task OnEnter()
         {
             GD.Print("entering input state");
             _options.moveAction.OnHeld += OnHeld;
-            _options.jumpAction.OnPressed += OnJump;
             if (_options.jumpAction.IsPressed)
-                OnJump(null);
-        }
-
-        private void OnJump(InputActionBase action)
-        {
-            GD.Print("jump");
-            _options.cc.Jump();
+                _options.cc.Jump();
         }
 
         private async Task OnExit()
         {
             GD.Print("leaving input state");
             _options.moveAction.OnHeld -= OnHeld;
-            _options.jumpAction.OnPressed -= OnJump;
         }
 
         private void OnHeld(InputActionBase action)

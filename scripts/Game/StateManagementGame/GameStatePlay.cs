@@ -2,12 +2,15 @@ using System.Threading.Tasks;
 using TnT.Systems.State;
 using System;
 using Godot;
+using TnT.Input;
 
 namespace TnT.EduGame.GameState
 {
     [GlobalClass]
-    public partial class GameStatePlay : BaseGameState, IStateObject<GameStatePlay.PlayOptions>
-    { 
+    public partial class GameStatePlay : BaseGameState, IStateObject<GameStatePlay.PlayOptions>, IInputActionable
+    {
+        public InputActionBase[] InputActions => [];
+
         public struct PlayOptions
         {
         }

@@ -15,15 +15,17 @@ namespace TnT.EduGame.GameState
         {
             public string text;
             public CharacterData character;
+            public InputAction next;
+            public InputAction close;
         }
-        [Export] public InputAction _next;
-        [Export] public InputAction _close;
 
         private bool retrievingNextMsg;
         private bool allMessagesRead = false;
+        MessageOptions _options;
 
         public BaseState GetState(MessageOptions options)
         {
+            _options = options;
             allMessagesRead = false;
             MessageController.Instance.AddMessage(options.text, options.character.CharacterFace, options.character.CharacterName);
             if (MessageController.Instance.Count > 1)
@@ -34,11 +36,11 @@ namespace TnT.EduGame.GameState
 
         private void Update()
         {
-            if (_close.Triggered)
+            if (_options.close.Triggered)
             {
                 ClearMessages();
             }
-            if (_next.Triggered)
+            if (_options.next.Triggered)
             {
                 NextMessage();
             }
@@ -60,6 +62,7 @@ namespace TnT.EduGame.GameState
 
         async void NextMessage()
         {
+            GD.Print("next message");
             if (allMessagesRead == false && MessageController.Instance.Count == 0)
             {
                 ClearMessages();
@@ -78,21 +81,23 @@ namespace TnT.EduGame.GameState
 
         async Task Open()
         {
+            GD.Print("entering message state");
             MessageController.Instance.NextBtnPushed += NextMessage;
             MessageController.Instance.CloseBtnPushed += ClearMessages;
             var tree = ManagerUI.Instance.GetTree();
             tree.Paused = true;
             await MessageController.Instance.Show();
-            _next.Enable();
-            _close.Enable();
+            _options.next.Enable();
+            _options.close.Enable();
         }
 
         async Task Close()
         {
+            GD.Print("leaving message state");
             MessageController.Instance.NextBtnPushed -= NextMessage;
             MessageController.Instance.CloseBtnPushed -= ClearMessages;
-            _next.Disable();
-            _close.Disable();
+            _options.next.Disable();
+            _options.close.Disable();
             await MessageController.Instance.Hide();
             var tree = ManagerUI.Instance.GetTree();
             tree.Paused = false;
