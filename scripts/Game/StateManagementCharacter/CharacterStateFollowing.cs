@@ -30,11 +30,17 @@ namespace TnT.EduGame.CharacterState
             if (options.Target is CharacterController3D)
                 options.cc.Speed = (options.Target as CharacterController3D).Speed;
 
-            return new BaseState(new() { OnUpdate = OnUpdate, OnExit = OnExit });
+            return new BaseState(new() { OnUpdate = OnUpdate, OnExit = OnExit, OnEnter = OnEnter });
+        }
+
+        private async Task OnEnter()
+        {
+            GD.Print("entering follow state");
         }
 
         private Task OnExit()
         {
+            GD.Print("leaving follow state");
             _options.cc.Speed = _previousSpeed;
             _options.agent.TargetDesiredDistance = _previousTargetDesiredDistance;
             return Task.CompletedTask;

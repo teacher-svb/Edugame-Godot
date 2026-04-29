@@ -49,28 +49,39 @@ public partial class Player : Node, IInputActionable//, IBind<Player.PlayerSaveD
 			_cc = this.FindAncestorOfType<CharacterController3D>();
 		base._Ready();
 
-		MoveAction.OnPressed += StartMoving;
-		MoveAction.OnReleased += StopMoving;
+		// MoveAction.OnPressed += StartMoving;
+		// MoveAction.OnReleased += StopMoving;
 
-		JumpAction.OnPressed += StartMoving;
-		JumpAction.OnReleased += StopMoving;
+		// JumpAction.OnPressed += StartMoving;
+		// JumpAction.OnReleased += StopMoving;
 	}
 
-	private void StopMoving(InputActionBase action)
+	public override void _Process(double delta)
 	{
-		if (GetTree().Paused) return;
-		if (!_inputActive || MoveAction.IsPressed) return;
-		_inputActive = false;
-		_stateManager.Pop();
+		if (_stateManager.IsAutonomousBehaviorActive)
+			return;
+
+		if (MoveAction.Triggered || JumpAction.Triggered)
+			_stateManager.StartInput(MoveAction, JumpAction);
+		else if (MoveAction.IsPressed == false && JumpAction.Triggered == false)
+			_stateManager.Pop();
 	}
 
-	private void StartMoving(InputActionBase action)
-	{
-		if (GetTree().Paused) return;
-		if (_inputActive) return;
-		_inputActive = true;
-		_stateManager.StartInput(MoveAction, JumpAction);
-	}
+	// private void StopMoving(InputActionBase action)
+	// {
+	// 	if (GetTree().Paused) return;
+	// 	if (!_inputActive || MoveAction.IsPressed || _stateManager.IsAutonomousBehaviorActive) return;
+	// 	_inputActive = false;
+	// 	_stateManager.Pop();
+	// }
+
+	// private void StartMoving(InputActionBase action)
+	// {
+	// 	if (GetTree().Paused) return;
+	// 	if (_inputActive || _stateManager.IsAutonomousBehaviorActive) return;
+	// 	_inputActive = true;
+	// 	_stateManager.StartInput(MoveAction, JumpAction);
+	// }
 
 	public void MoveTo(Vector3 target)
 	{

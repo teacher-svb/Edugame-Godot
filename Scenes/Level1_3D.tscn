@@ -30,6 +30,8 @@
 [ext_resource type="PackedScene" uid="uid://cd2furrsxugw6" path="res://assets/3D/Furniture Kit/Models/GLTF format/books.glb" id="29_kdqke"]
 [ext_resource type="MeshLibrary" uid="uid://dn1i16n6um3sg" path="res://assets/3D/Furniture Kit/furniture-kit-tileables.meshlib" id="30_kb3qt"]
 [ext_resource type="Script" uid="uid://dj8ksb0k1axep" path="res://scripts/Game/Systems/QuestSystem/Reactions/FollowReaction.cs" id="30_qovxq"]
+[ext_resource type="Script" uid="uid://7y84wsxpxkii" path="res://scripts/Game/Systems/QuestSystem/Reactions/PopStateReaction.cs" id="31_7vwr8"]
+[ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="32_qovxq"]
 
 [sub_resource type="Gradient" id="Gradient_upsym"]
 offsets = PackedFloat32Array(0.117647, 1)
@@ -367,7 +369,7 @@ State = 2
 
 [node name="StartPatrolReaction" type="Node" parent="QuestObjectiveReactor/QuestObjectiveBinding" unique_id=909161437 node_paths=PackedStringArray("PatrolTargets", "Character")]
 script = ExtResource("29_7vwr8")
-PatrolTargets = [NodePath("../../../QuestActivators/Area3D4")]
+PatrolTargets = [NodePath("../../../Marker3D"), NodePath("../../../QuestActivators/Area3D4")]
 Character = NodePath("../../../Dad")
 metadata/_custom_type_script = "uid://ddl5nxhirmbnr"
 
@@ -384,9 +386,33 @@ State = 2
 
 [node name="StartPatrolReaction" type="Node" parent="QuestObjectiveReactor/QuestObjectiveBinding2" unique_id=23977294 node_paths=PackedStringArray("PatrolTargets", "Character")]
 script = ExtResource("29_7vwr8")
-PatrolTargets = [NodePath("../../../QuestActivators/Area3D5")]
+PatrolTargets = [NodePath("../../../Marker3D2"), NodePath("../../../Marker3D3"), NodePath("../../../QuestActivators/Area3D5")]
 Character = NodePath("../../../Dad")
 metadata/_custom_type_script = "uid://ddl5nxhirmbnr"
+
+[node name="QuestObjectiveBinding3" type="Node" parent="QuestObjectiveReactor" unique_id=1884084502]
+script = ExtResource("28_kb3qt")
+ObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8926"
+State = 2
+
+[node name="PopStateReaction" type="Node" parent="QuestObjectiveReactor/QuestObjectiveBinding3" unique_id=1067911410 node_paths=PackedStringArray("Character")]
+script = ExtResource("31_7vwr8")
+Character = NodePath("../../../Player")
+metadata/_custom_type_script = "uid://7y84wsxpxkii"
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=1982524714]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3657837, 0, 3.4071345)
+
+[node name="Marker3D2" type="Marker3D" parent="." unique_id=2145844556]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6589265, 0, 4.190114)
+
+[node name="Marker3D3" type="Marker3D" parent="." unique_id=59002883]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4630524, 0, 4.190114)
+
+[node name="QuestEventListener" type="Node" parent="." unique_id=2017863461]
+script = ExtResource("32_qovxq")
+eventChannel = ExtResource("27_0tae3")
+metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 
 [connection signal="body_entered" from="transporters/transporter_bedroom-livingroom" to="transporters/transporter_bedroom-livingroom" method="_OnBodyEntered"]
 [connection signal="body_entered" from="transporters/transporter_livingroom-bedroom" to="transporters/transporter_livingroom-bedroom" method="_OnBodyEntered"]

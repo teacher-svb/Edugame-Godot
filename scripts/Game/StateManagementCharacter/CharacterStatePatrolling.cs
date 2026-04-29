@@ -24,7 +24,12 @@ namespace TnT.EduGame.CharacterState
         public BaseState GetState(PatrolOptions options = default)
         {
             _options = options;
-            return new BaseState(new() { OnEnter = OnEnter, OnExit = OnExit, OnUpdate = OnUpdate });
+            return new BaseState(new() { OnEnter = OnEnter, OnExit = OnExit, OnUpdate = OnUpdate, ExitOnNextUpdate = IsDone });
+        }
+
+        private bool IsDone()
+        {
+            return _loop == false && _options.agent.IsTargetReached();
         }
 
         private void OnUpdate()

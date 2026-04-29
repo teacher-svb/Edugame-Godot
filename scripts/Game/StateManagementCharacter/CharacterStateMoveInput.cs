@@ -36,12 +36,17 @@ namespace TnT.EduGame.CharacterState
             {
                 _options.cc.Jump();
             }
+            if (_options.moveAction.IsPressed)
+            {
+                var dir = _options.moveAction.Value;
+                if (dir != Vector2.Zero)
+                    _options.cc.Move(dir);
+            }
         }
 
         private async Task OnEnter()
         {
             GD.Print("entering input state");
-            _options.moveAction.OnHeld += OnHeld;
             if (_options.jumpAction.IsPressed)
                 _options.cc.Jump();
         }
@@ -49,7 +54,6 @@ namespace TnT.EduGame.CharacterState
         private async Task OnExit()
         {
             GD.Print("leaving input state");
-            _options.moveAction.OnHeld -= OnHeld;
         }
 
         private void OnHeld(InputActionBase action)
