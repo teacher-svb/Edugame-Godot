@@ -8,7 +8,7 @@ public interface IMovementAnimator
 
 public partial class CharacterAnimator : Node, IMovementAnimator
 {
-    [Export] public AnimationTree AnimationTree { get; set; }
+    [Export] AnimationTree AnimationTree { get; set; }
     /// <summary>The visual root whose scale is tweened for squash and stretch effects.</summary>
     [Export] Node3D VisualRoot { get; set; }
     [Export] GpuParticles3D LandingParticles { get; set; }

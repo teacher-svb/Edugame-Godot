@@ -35,11 +35,8 @@ namespace TnT.Systems.OcclusionFade
             _playerRayCast = _playerController.OcclusionRaycast;
             GetTree()
                 .FindObjectsByType<MeshInstance3D>()
-                .Where(n => _playerController.IsAncestorOf(n) == false)
+                .Where(n => n.FindAncestorOfType<CharacterController3D>() == null)
                 .ForEach(ApplyToMeshInstance);
-
-            // foreach (var mi in GetTree().FindObjectsByType<MeshInstance3D>().Where(n => _playerController.IsAncestorOf(n) == false))
-            //     ApplyToMeshInstance(mi);
 
             foreach (var gm in GetTree().FindObjectsByType<GridMap>())
                 ApplyToGridMap(gm);

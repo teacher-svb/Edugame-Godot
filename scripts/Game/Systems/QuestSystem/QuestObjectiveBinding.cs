@@ -6,8 +6,8 @@ namespace TnT.EduGame.QuestSystem
     [GlobalClass]
     public partial class QuestObjectiveBinding : Node
     {
-        [Export] public string ObjectiveId { get; set; }
-        [Export] public QuestState State { get; set; }
+        [Export] string ObjectiveId { get; set; }
+        [Export] QuestState State { get; set; }
 
         private QuestReaction[] _reactions = [];
 

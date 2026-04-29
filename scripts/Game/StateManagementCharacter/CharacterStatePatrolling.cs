@@ -29,7 +29,7 @@ namespace TnT.EduGame.CharacterState
 
         private bool IsDone()
         {
-            return _loop == false && _options.agent.IsTargetReached();
+            return _loop == false && _options.agent.IsTargetReached() && _currentIndex == _options.targets.Length - 1;
         }
 
         private void OnUpdate()

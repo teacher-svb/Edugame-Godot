@@ -9,22 +9,35 @@ namespace TnT.EduGame.CharacterState
     [GlobalClass]
     public partial class CharacterStateIdle : BaseCharacterState, IStateObject<CharacterStateIdle.IdleOptions>
     {
-        public struct IdleOptions { }
+        private IdleOptions _options;
+
+        public struct IdleOptions
+        {
+            public int durationMs;
+        }
 
         public BaseState GetState(IdleOptions options = default)
         {
-            return new BaseState(new() { ExitOnNextUpdate = Exit, OnEnter = OnEnter, OnExit = OnExit });
+            _options = options;
+            return new BaseState(new() { ExitOnNextUpdate = Stop, OnEnter = OnEnter, OnExit = OnExit });
         }
 
-        private bool Exit()
+        private bool Stop()
         {
-            return false;
+            return _options.durationMs == 0;
         }
 
         private async Task OnEnter()
         {
             GD.Print("entering idle state");
+            if (_options.durationMs >= 0)
+            {
+                await Task.Delay(_options.durationMs);
+                _options.durationMs = 0;
+            }
         }
+
+
 
         private async Task OnExit()
         {

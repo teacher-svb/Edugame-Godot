@@ -31,13 +31,16 @@ namespace TnT.EduGame.QuestSystem
                 GD.Print("QuestManager not found");
         }
 
-        void _OnQuestObjectiveActivated(Node other)
+        void _OnPlayerTrigger(Node other)
         {
             if (other.FindAnyObjectByType<Player>() == null)
                 return;
 
-            GD.Print("entered quest starter");
+            _OnTrigger();
+        }
 
+        void _OnTrigger()
+        {
             switch (_action)
             {
                 case QuestObjectiveAction.INITOBJECTIVE: _questManager.UpdateQuest(new QuestMessageStart { QuestId = _questId, ObjectiveId = _questObjectiveId }); break;

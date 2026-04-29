@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Godot;
 using TnT.Extensions;
 using TnT.Input;
@@ -18,6 +19,17 @@ namespace TnT.EduGame.CharacterState
         NavigationAgent3D _agent;
         CharacterController3D _controller;
 
+        public enum stateTypes
+        {
+            idle,
+            patrol,
+            follow,
+            input
+        }
+
+        [Signal] public delegate void SequenceCompletedEventHandler();
+
+
         public override void _Ready()
         {
             ProcessMode = ProcessModeEnum.Pausable;
@@ -31,17 +43,20 @@ namespace TnT.EduGame.CharacterState
             _registeredStates.Add(state);
         }
 
-        // Pop the current behavior state to return to idle.
-        // Call this before switching to a different behavior.
-        public new void Pop() => base.Pop();
+        public override async Task Pop()
+        {
+            _autonomousBehaviorActive = false;
+            await base.Pop();
+            if (StateCount == 1)
+                EmitSignal(SignalName.SequenceCompleted);
+        }
 
-        public void Idling()
+        public void Idling(int durationMs = -1)
         {
             if (_autonomousBehaviorActive) return;
             var idle = _registeredStates.OfType<CharacterStateIdle>().FirstOrDefault()
                 ?? throw new Exception("CharacterStateManager requires a CharacterStateIdle child node");
-
-            Push(idle.GetState(new()));
+            Push(idle.GetState(new() { durationMs = durationMs }));
         }
 
         public void Follow(Node3D target)
@@ -57,7 +72,7 @@ namespace TnT.EduGame.CharacterState
             if (_autonomousBehaviorActive) return;
             var state = _registeredStates.OfType<CharacterStateMoveInput>().FirstOrDefault()
                 ?? throw new Exception("CharacterStateManager requires a CharacterStateMoving child node");
-            Push(state.GetState(new() {agent = _agent, cc = _controller, moveAction = moveAction, jumpAction = jumpAction}));
+            Push(state.GetState(new() { agent = _agent, cc = _controller, moveAction = moveAction, jumpAction = jumpAction }));
         }
 
         public void StartPatrol(Node3D[] patrolTargets)
@@ -68,11 +83,6 @@ namespace TnT.EduGame.CharacterState
             Push(state.GetState(new() { agent = _agent, cc = _controller, targets = patrolTargets }));
         }
 
-        protected async override System.Threading.Tasks.Task TransitionOut()
-        {
-            GD.Print("transition out");
-            _autonomousBehaviorActive = false;
-            await base.TransitionOut();
-        }
+
     }
 }

@@ -54,10 +54,10 @@ shape = SubResource("CapsuleShape3D_7dxc7")
 [node name="character-female-b2" parent="." index="2" unique_id=371834684 instance=ExtResource("2_sb0or")]
 
 [node name="Skeleton3D" parent="character-female-b2/character-female-b" parent_id_path=PackedInt32Array(371834684, 1357584895) index="0" unique_id=421653466]
-bones/3/rotation = Quaternion(-0.034518454, 0, 0, 0.9994041)
-bones/4/rotation = Quaternion(0, 0, -0.28511193, 0.9584943)
-bones/5/rotation = Quaternion(0, 0, 0.28511193, 0.9584943)
-bones/6/rotation = Quaternion(0, 0.034518454, 0, 0.9994041)
+bones/3/rotation = Quaternion(0.004916977, 0, 0, 0.9999879)
+bones/4/rotation = Quaternion(0, 0, -0.3690142, 0.9294238)
+bones/5/rotation = Quaternion(0, 0, 0.3690142, 0.9294238)
+bones/6/rotation = Quaternion(0, -0.004916977, 0, 0.9999879)
 
 [node name="PlayerController" type="Node" parent="." index="3" unique_id=1092226004 node_paths=PackedStringArray("_stateManager")]
 script = ExtResource("4_cvtri")

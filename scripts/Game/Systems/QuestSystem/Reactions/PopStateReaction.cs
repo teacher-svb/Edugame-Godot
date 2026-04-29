@@ -6,6 +6,6 @@ namespace TnT.EduGame.QuestSystem
     [GlobalClass]
     public partial class PopStateReaction : CharacterReaction
     {
-        protected override void Act(CharacterStateManager sm) {}
+        protected override void Act(CharacterStateManager sm) => _ = sm.Pop();
     }
 }

@@ -25,7 +25,7 @@ namespace TnT.EduGame.CharacterState
             _options = options;
             _previousSpeed = options.cc.Speed;
             _previousTargetDesiredDistance = _options.agent.TargetDesiredDistance;
-            _options.agent.TargetDesiredDistance = 1f;
+            _options.agent.TargetDesiredDistance = .5f;
 
             if (options.Target is CharacterController3D)
                 options.cc.Speed = (options.Target as CharacterController3D).Speed;

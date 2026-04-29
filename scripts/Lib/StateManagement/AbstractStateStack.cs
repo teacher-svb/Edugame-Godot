@@ -1,49 +1,66 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Godot;
+
 namespace TnT.Systems.State
 {
-
-    public abstract partial class AbstractStateStack : AbstractStateManager
+    public abstract partial class AbstractStateStack : Node
     {
-        Stack<BaseState> _states = new Stack<BaseState>();
-        private BaseState currentState = null;
-        protected sealed override BaseState CurrentState { get => currentState; set => currentState = value; }
-        protected sealed override BaseState NextState
+        private readonly Stack<BaseState> _states = new();
+        private BaseState _currentState = null;
+        private bool _transitioning = false;
+
+        protected bool Transitioning { get => _transitioning; set => _transitioning = value; }
+        protected int StateCount => _states.Count;
+
+        private BaseState NextState
         {
             get
             {
-                BaseState result;
-                _states.TryPeek(out result);
+                _states.TryPeek(out var result);
                 return result;
             }
         }
-        protected int StateCount => _states.Count;
+
+        public async override void _Process(double delta)
+        {
+            if (_transitioning || NextState == null)
+                return;
+
+            if (NextState.Equals(_currentState))
+            {
+                if (_currentState.UpdateState())
+                    await Pop();
+            }
+            else
+                await TransitionIn();
+        }
 
         public void Push(BaseState state)
         {
             _states.Push(state);
         }
 
-        public async void Pop()
+        public virtual async Task Pop()
         {
             if (StateCount <= 1) return;
             await TransitionOut();
         }
 
-        protected async override Task TransitionIn()
+        protected async Task TransitionIn()
         {
-            Transitioning = true;
-            CurrentState = NextState;
-            await CurrentState.EnterState();
-            Transitioning = false;
+            _transitioning = true;
+            _currentState = NextState;
+            await _currentState.EnterState();
+            _transitioning = false;
         }
 
-        protected async override Task TransitionOut()
+        protected async Task TransitionOut()
         {
-            Transitioning = true;
+            _transitioning = true;
             var state = _states.Pop();
             await state.ExitState();
-            Transitioning = false;
+            _transitioning = false;
         }
     }
 }
