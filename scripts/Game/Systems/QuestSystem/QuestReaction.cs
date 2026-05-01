@@ -7,29 +7,51 @@ namespace TnT.EduGame.QuestSystem
 {
     [Tool]
     [GlobalClass]
-    public partial class QuestReaction : Node
+    public partial class QuestReaction : Resource
     {
-        [Export] Node _target;
+        [Export] NodePath _targetPath;
         [Export] string _methodName;
         [Export] Godot.Collections.Array<Variant> _params = [];
 
         [ExportToolButton("Pick Method")]
         public Callable PickMethodButton => Callable.From(OpenMethodPicker);
 
-        [Signal] public delegate void ReactionStartEventHandler();
-        [Signal] public delegate void ReactionEndEventHandler();
+        public override void _ValidateProperty(Godot.Collections.Dictionary property)
+        {
+            if (property["name"].AsStringName() == PropertyName._methodName)
+                property["usage"] = (int)(property["usage"].As<PropertyUsageFlags>() | PropertyUsageFlags.ReadOnly);
+        }
+
+        private Node ResolveEditorTarget()
+        {
+            var sceneRoot = EditorInterface.Singleton.GetEditedSceneRoot();
+            if (sceneRoot == null) return null;
+
+            foreach (var node in sceneRoot.FindChildren("*", "", true, false))
+            {
+                var prop = node.Get("_reactions");
+                if (prop.VariantType != Variant.Type.Array) continue;
+
+                var reactions = prop.As<Godot.Collections.Array<QuestReaction>>();
+                if (reactions?.Contains(this) == true)
+                    return node.GetNodeOrNull(_targetPath);
+            }
+            return null;
+        }
 
         private void OpenMethodPicker()
         {
-            if (_target == null)
+            var target = ResolveEditorTarget();
+
+            if (target == null)
             {
-                GD.PrintErr("QuestReaction: assign a target node before picking a method.");
+                GD.PrintErr("QuestReaction: assign a target path before picking a method.");
                 return;
             }
 
             var picker = new Window
             {
-                Title = $"Select method on {_target.Name}",
+                Title = $"Select method on {target.Name}",
                 Size = new Vector2I(350, 500)
             };
 
@@ -46,7 +68,7 @@ namespace TnT.EduGame.QuestSystem
 
             var root = tree.CreateItem();
             var gameAssembly = typeof(QuestReaction).Assembly;
-            var scriptPath = _target.GetScript().As<Resource>()?.ResourcePath;
+            var scriptPath = target.GetScript().As<Resource>()?.ResourcePath;
             var className = scriptPath?.GetFile().GetBaseName();
             var targetType = className != null
                 ? gameAssembly.GetTypes().FirstOrDefault(t => t.Name == className)
@@ -86,11 +108,11 @@ namespace TnT.EduGame.QuestSystem
 
         public async Task Execute()
         {
-            EmitSignal(SignalName.ReactionStart);
+            var target = ((SceneTree)Engine.GetMainLoop()).Root.GetNode(_targetPath);
 
-            new Callable(_target, _methodName).Call([.._params]);
+            new Callable(target, _methodName).Call([.._params]);
 
-            if (_target is IQuestReactionObject completionObject)
+            if (target is IQuestReactionObject completionObject)
             {
                 var tcs = new TaskCompletionSource();
                 completionObject.ReactionCompleted += Complete;
@@ -102,8 +124,6 @@ namespace TnT.EduGame.QuestSystem
                     tcs.SetResult();
                 }
             }
-
-            EmitSignal(SignalName.ReactionEnd);
         }
     }
 }

@@ -1,4 +1,3 @@
-using System.Linq;
 using Godot;
 using TnT.Systems.EventSystem;
 
@@ -11,14 +10,10 @@ namespace TnT.EduGame.QuestSystem
         [Export] string _objectiveId;
         [Export] bool _checkState;
         [Export] QuestState _state;
+        [Export] internal Godot.Collections.Array<QuestReaction> _reactions = [];
 
-        private QuestReaction[] _reactions = [];
-
-        public override void _Ready()
-        {
-            base._Ready();
-            _reactions = GetChildren().OfType<QuestReaction>().ToArray();
-        }
+        [Signal] public delegate void ReactionStartEventHandler();
+        [Signal] public delegate void ReactionEndEventHandler();
 
         public override void Raise(params Variant[] values)
         {
@@ -37,7 +32,11 @@ namespace TnT.EduGame.QuestSystem
         private async void ExecuteReactions()
         {
             foreach (var reaction in _reactions)
+            {
+                EmitSignal(SignalName.ReactionStart);
                 await reaction.Execute();
+                EmitSignal(SignalName.ReactionEnd); 
+            }
         }
     }
 }
