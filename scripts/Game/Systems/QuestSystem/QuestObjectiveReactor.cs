@@ -1,29 +1,24 @@
 using System.Linq;
 using Godot;
-using TnT.Systems.EventSystem;
 
 namespace TnT.EduGame.QuestSystem
 {
     [GlobalClass]
-    public partial class QuestObjectiveReactor : EventListener
+    public partial class QuestObjectiveReactor : QuestEventListener
     {
-        private QuestObjectiveBinding[] _bindings = [];
+        private QuestReaction[] _reactions = [];
 
         public override void _Ready()
         {
-            _bindings = GetChildren().OfType<QuestObjectiveBinding>().ToArray();
+            _reactions = GetChildren().OfType<QuestReaction>().ToArray();
             base._Ready();
+            OnListen += _ => ExecuteReactions();
         }
 
-        public override void Raise(params Variant[] values)
+        private async void ExecuteReactions()
         {
-            foreach (var value in values)
-            {
-                if (value.Obj is not QuestObjective objective) continue;
-                foreach (var binding in _bindings)
-                    if (binding.Matches(objective))
-                        binding.Execute();
-            }
+            foreach (var reaction in _reactions)
+                await reaction.Execute();
         }
     }
 }

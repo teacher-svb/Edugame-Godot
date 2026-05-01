@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using TnT.EduGame.QuestSystem;
 using TnT.Extensions;
 using TnT.Input;
 using TnT.Systems;
@@ -10,7 +11,7 @@ using TnT.Systems.State;
 
 namespace TnT.EduGame.CharacterState
 {
-    public partial class CharacterStateManager : AbstractStateStack
+    public partial class CharacterStateManager : AbstractStateStack, IQuestReactionObject
     {
         private readonly List<BaseCharacterState> _registeredStates = new();
         private bool _autonomousBehaviorActive = false;
@@ -18,6 +19,12 @@ namespace TnT.EduGame.CharacterState
 
         NavigationAgent3D _agent;
         CharacterController3D _controller;
+
+        public event Action ReactionCompleted
+    {
+        add    => Connect(SignalName.SequenceCompleted, Callable.From(value));
+        remove => Disconnect(SignalName.SequenceCompleted, Callable.From(value));
+    }
 
         public enum stateTypes
         {
