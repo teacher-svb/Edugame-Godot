@@ -31,7 +31,7 @@
 [ext_resource type="Script" uid="uid://4o3ttvbs7cow" path="res://scripts/Game/Systems/QuestSystem/Reactions/IdlingReaction.cs" id="29_qovxq"]
 [ext_resource type="MeshLibrary" uid="uid://dn1i16n6um3sg" path="res://assets/3D/Furniture Kit/furniture-kit-tileables.meshlib" id="30_kb3qt"]
 [ext_resource type="Script" uid="uid://dj8ksb0k1axep" path="res://scripts/Game/Systems/QuestSystem/Reactions/FollowReaction.cs" id="30_qovxq"]
-[ext_resource type="Script" uid="uid://7y84wsxpxkii" path="res://scripts/Game/Systems/QuestSystem/Reactions/PopStateReaction.cs" id="31_7vwr8"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Reactions/PopStateReaction.cs" id="31_7vwr8"]
 
 [sub_resource type="Gradient" id="Gradient_upsym"]
 offsets = PackedFloat32Array(0.117647, 1)
@@ -185,6 +185,7 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 
 [node name="Area3D4" type="Area3D" parent="QuestActivators" unique_id=466476982]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8146913, 0.13522744, 3.5032008)
+visible = false
 script = ExtResource("22_ycjjd")
 _action = 1
 _questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
@@ -192,6 +193,7 @@ _questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8925"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="QuestActivators/Area3D4" unique_id=1988574561]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97574663, 0, -0.22500849)
+visible = false
 shape = SubResource("BoxShape3D_lhsq1")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
@@ -370,10 +372,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.731884, 0, 1.6418324)
 _speed = 0.5
 
 [node name="Skeleton3D" parent="Dad/character-male-g/character-male-b" parent_id_path=PackedInt32Array(926984674, 2127119757, 618410602) index="0" unique_id=801209756]
-bones/3/rotation = Quaternion(0.014403295, 2.1126845e-09, -3.0433107e-11, 0.99989635)
-bones/4/rotation = Quaternion(-2.6968157e-09, -1.1987594e-09, -0.34241658, 0.9395483)
-bones/5/rotation = Quaternion(-2.7548575e-09, 1.484918e-09, 0.34241658, 0.9395483)
-bones/6/rotation = Quaternion(1.1720985e-11, -0.014403302, -1.0935931e-11, 0.99989635)
+bones/3/rotation = Quaternion(0.043394525, 2.1109134e-09, -9.168898e-11, 0.99905807)
+bones/4/rotation = Quaternion(-4.7312407e-09, -1.0827712e-09, -0.26357, 0.96464026)
+bones/5/rotation = Quaternion(-3.1064373e-09, 8.6106516e-10, 0.26357, 0.96464026)
+bones/6/rotation = Quaternion(3.972438e-10, -0.043394525, -2.7576736e-11, 0.99905807)
 
 [node name="Avocado" parent="." unique_id=626473423 instance=ExtResource("25_mglpj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.185062, 0, 4.059492)
@@ -386,11 +388,6 @@ eventChannel = ExtResource("27_0tae3")
 script = ExtResource("28_kb3qt")
 ObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8924"
 State = 2
-
-[node name="PopStateReaction" type="Node" parent="QuestObjectiveReactor/DadTourBinding1" unique_id=1586975852 node_paths=PackedStringArray("Character")]
-script = ExtResource("31_7vwr8")
-Character = NodePath("../../../Dad")
-metadata/_custom_type_script = "uid://7y84wsxpxkii"
 
 [node name="IdlingReaction" type="Node" parent="QuestObjectiveReactor/DadTourBinding1" unique_id=419667266 node_paths=PackedStringArray("Character")]
 script = ExtResource("29_qovxq")
@@ -468,7 +465,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4630524, 0, 4.190114)
 [connection signal="body_entered" from="QuestActivators/Area3D3" to="QuestActivators/Area3D3" method="_OnPlayerTrigger"]
 [connection signal="body_entered" from="QuestActivators/Area3D4" to="QuestActivators/Area3D4" method="_OnPlayerTrigger"]
 [connection signal="body_entered" from="QuestActivators/Area3D5" to="QuestActivators/Area3D5" method="_OnPlayerTrigger"]
-[connection signal="StatePopped" from="Dad/stateManager" to="QuestActivators/QuestObjectiveActor" method="_OnTrigger"]
 
 [editable path="NavigationRegion3D/Livingroom/tableCloth"]
 [editable path="NavigationRegion3D/Livingroom/tableCloth2"]

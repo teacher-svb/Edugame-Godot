@@ -11,6 +11,7 @@ namespace TnT.EduGame.QuestSystem
         protected CharacterStateManager StateManager
             => Character.FindAnyObjectByType<CharacterStateManager>();
 
+        public override void Prepare() => StateManager.Pop();
         public sealed override void Execute() => Act(StateManager);
 
         protected abstract void Act(CharacterStateManager sm);

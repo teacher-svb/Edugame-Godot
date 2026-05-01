@@ -22,6 +22,8 @@ namespace TnT.EduGame.QuestSystem
         public void Execute()
         {
             foreach (var reaction in _reactions)
+                reaction.Prepare();
+            foreach (var reaction in _reactions)
                 reaction.Execute();
         }
     }
