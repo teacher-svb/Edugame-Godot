@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -106,12 +107,47 @@ namespace TnT.EduGame.QuestSystem
             picker.CloseRequested += picker.QueueFree;
         }
 
-        public async Task Execute()
+        public async Task Execute(Node context)
         {
-            var target = ((SceneTree)Engine.GetMainLoop()).Root.GetNode(_targetPath);
+            // Resolve _targetPath relative to the owning QuestEventListener
+            var target = context.GetNode(_targetPath);
 
-            new Callable(target, _methodName).Call([.._params]);
+            // Use reflection to find the method — Callable.Call() doesn't dispatch params[] methods
+            var method = target.GetType().GetMethod(_methodName, BindingFlags.Public | BindingFlags.Instance);
+            if (method == null) { GD.PrintErr($"QuestReaction: method '{_methodName}' not found on '{target.Name}'."); return; }
 
+            // NodePath variants are converted to actual Node references before passing
+            var resolvedParams = _params.Select(p =>
+                p.VariantType == Variant.Type.NodePath
+                    ? Variant.From(context.GetNode(p.As<NodePath>()))
+                    : p).ToArray();
+
+            var parameters = method.GetParameters();
+            var lastParam = parameters.LastOrDefault();
+            object[] args;
+
+            if (lastParam?.IsDefined(typeof(ParamArrayAttribute), false) == true)
+            {
+                // params method: convert leading regular args, pack the rest into a typed array
+                var regularArgs = parameters.Take(parameters.Length - 1)
+                    .Select((p, i) => ConvertVariant(resolvedParams[i], p.ParameterType)).ToArray();
+                var elementType = lastParam.ParameterType.GetElementType();
+                var remainder = resolvedParams.Skip(parameters.Length - 1).ToArray();
+                var arr = Array.CreateInstance(elementType, remainder.Length);
+                for (int i = 0; i < remainder.Length; i++)
+                    arr.SetValue(ConvertVariant(remainder[i], elementType), i);
+                args = [..regularArgs, arr];
+            }
+            else
+            {
+                // Regular method: convert each Variant to the expected C# parameter type
+                args = [..resolvedParams.Select((p, i) => ConvertVariant(p, parameters[i].ParameterType))];
+            }
+
+            method.Invoke(target, args);
+
+            // If the target implements IQuestReactionObject, wait for it to signal completion
+            // before returning, so reactions execute sequentially in QuestEventListener
             if (target is IQuestReactionObject completionObject)
             {
                 var tcs = new TaskCompletionSource();
@@ -124,6 +160,19 @@ namespace TnT.EduGame.QuestSystem
                     tcs.SetResult();
                 }
             }
+        }
+
+        private static object ConvertVariant(Variant v, Type t)
+        {
+            if (typeof(GodotObject).IsAssignableFrom(t)) return v.As<GodotObject>();
+            return v.VariantType switch
+            {
+                Variant.Type.Bool   => v.As<bool>(),
+                Variant.Type.Int    => Convert.ChangeType(v.As<long>(), t),
+                Variant.Type.Float  => Convert.ChangeType(v.As<double>(), t),
+                Variant.Type.String => v.As<string>(),
+                _                   => v.Obj
+            };
         }
     }
 }

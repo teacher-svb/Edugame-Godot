@@ -21,8 +21,11 @@ namespace TnT.EduGame.QuestSystem
             {
                 if (value.Obj is QuestObjective o)
                 {
+                    GD.Print(o.ObjectiveId);
                     if (_checkObjectiveId && o.ObjectiveId != _objectiveId) return;
+                    GD.Print($"objective Id ok, state is {o.State}");
                     if (_checkState && o.State != _state) return;
+                    GD.Print("objective state ok");
                     base.Raise(o);
                     ExecuteReactions();
                 }
@@ -31,12 +34,12 @@ namespace TnT.EduGame.QuestSystem
 
         private async void ExecuteReactions()
         {
+            EmitSignal(SignalName.ReactionStart);
             foreach (var reaction in _reactions)
             {
-                EmitSignal(SignalName.ReactionStart);
-                await reaction.Execute();
-                EmitSignal(SignalName.ReactionEnd); 
+                await reaction.Execute(this);
             }
+            EmitSignal(SignalName.ReactionEnd);
         }
     }
 }

@@ -60,6 +60,7 @@ namespace TnT.EduGame.CharacterState
 
         public void Idling(int durationMs = -1)
         {
+            GD.Print(durationMs);
             if (_autonomousBehaviorActive) return;
             var idle = _registeredStates.OfType<CharacterStateIdle>().FirstOrDefault()
                 ?? throw new Exception("CharacterStateManager requires a CharacterStateIdle child node");
@@ -82,12 +83,12 @@ namespace TnT.EduGame.CharacterState
             Push(state.GetState(new() { agent = _agent, cc = _controller, moveAction = moveAction, jumpAction = jumpAction }));
         }
 
-        public void StartPatrol(Node3D[] patrolTargets)
+        public void StartPatrol(params Node[] patrolTargets)
         {
             var state = _registeredStates.OfType<CharacterStatePatrolling>().FirstOrDefault()
                 ?? throw new Exception("CharacterStateManager requires a CharacterStatePatrolling child node");
             _autonomousBehaviorActive = true;
-            Push(state.GetState(new() { agent = _agent, cc = _controller, targets = patrolTargets }));
+            Push(state.GetState(new() { agent = _agent, cc = _controller, targets = patrolTargets.Where(t => t is Node3D).Select(t => t as Node3D).ToArray() }));
         }
 
 

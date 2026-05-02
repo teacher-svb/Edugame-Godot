@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://ckobusjip2hti" path="res://scripts/Game/Systems/QuestSystem/QuestReaction.cs" id="27_0tae3"]
 [ext_resource type="PackedScene" uid="uid://dcaqo4uenuwgu" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedWide.glb" id="27_qovxq"]
 [ext_resource type="PackedScene" uid="uid://5ac2eh7lcw6p" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosed.glb" id="28_7n07m"]
+[ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/quests/QuestEventChannel.tres" id="28_kdqke"]
 [ext_resource type="PackedScene" uid="uid://cd2furrsxugw6" path="res://assets/3D/Furniture Kit/Models/GLTF format/books.glb" id="29_kdqke"]
 [ext_resource type="MeshLibrary" uid="uid://dn1i16n6um3sg" path="res://assets/3D/Furniture Kit/furniture-kit-tileables.meshlib" id="30_kb3qt"]
 
@@ -76,9 +77,25 @@ cell_height = 0.5
 agent_radius = 0.1
 region_min_size = 15.0
 
-[sub_resource type="Resource" id="Resource_7n07m"]
+[sub_resource type="Resource" id="Resource_0tae3"]
 script = ExtResource("27_0tae3")
-_targetPath = NodePath("../Dad")
+_targetPath = NodePath("../Dad/stateManager")
+_methodName = "Idling"
+_params = [2000]
+metadata/_custom_type_script = "uid://ckobusjip2hti"
+
+[sub_resource type="Resource" id="Resource_kb3qt"]
+script = ExtResource("27_0tae3")
+_targetPath = NodePath("../Dad/stateManager")
+_methodName = "StartPatrol"
+_params = [NodePath("../Marker3D"), NodePath("../QuestActivators/Area3D4")]
+metadata/_custom_type_script = "uid://ckobusjip2hti"
+
+[sub_resource type="Resource" id="Resource_7vwr8"]
+script = ExtResource("27_0tae3")
+_targetPath = NodePath("../Dad/stateManager")
+_methodName = "Idling"
+_params = [2000]
 metadata/_custom_type_script = "uid://ckobusjip2hti"
 
 [node name="Node3D2" type="Node3D" unique_id=565024144]
@@ -185,7 +202,6 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 
 [node name="Area3D4" type="Area3D" parent="QuestActivators" unique_id=466476982]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8146913, 0.13522744, 3.5032008)
-visible = false
 script = ExtResource("22_ycjjd")
 _action = 1
 _questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
@@ -193,7 +209,6 @@ _questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8925"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="QuestActivators/Area3D4" unique_id=1988574561]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97574663, 0, -0.22500849)
-visible = false
 shape = SubResource("BoxShape3D_lhsq1")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
@@ -372,17 +387,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.731884, 0, 1.6418324)
 _speed = 0.5
 
 [node name="Skeleton3D" parent="Dad/character-male-g/character-male-b" parent_id_path=PackedInt32Array(926984674, 2127119757, 618410602) index="0" unique_id=801209756]
-bones/3/rotation = Quaternion(0.023653392, 2.1123123e-09, -4.997766e-11, 0.9997202)
-bones/4/rotation = Quaternion(-2.769815e-09, -7.8527485e-10, -0.31621054, 0.9486891)
-bones/5/rotation = Quaternion(-2.7211795e-09, 1.2613111e-09, 0.31621054, 0.9486891)
-bones/6/rotation = Quaternion(-4.4867565e-10, -0.0236534, -2.290194e-11, 0.9997202)
+bones/3/rotation = Quaternion(0.03501394, 2.1116084e-09, -7.398156e-11, 0.9993869)
+bones/4/rotation = Quaternion(-3.1382512e-09, -1.0130807e-09, -0.29315966, 0.9560635)
+bones/5/rotation = Quaternion(-2.7919935e-09, 1.5277688e-09, 0.29315966, 0.9560635)
+bones/6/rotation = Quaternion(1.3572471e-10, -0.03501393, 6.914302e-11, 0.9993869)
 
 [node name="Avocado" parent="." unique_id=626473423 instance=ExtResource("25_mglpj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.185062, 0, 4.059492)
 
 [node name="QuestObjectiveReactor" type="Node" parent="." unique_id=2056696063]
 script = ExtResource("26_0tae3")
-_reactions = Array[ExtResource("27_0tae3")]([SubResource("Resource_7n07m")])
+_checkObjectiveId = true
+_objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8925"
+_checkState = true
+_state = 1
+_reactions = Array[ExtResource("27_0tae3")]([SubResource("Resource_0tae3"), SubResource("Resource_kb3qt"), SubResource("Resource_7vwr8")])
+eventChannel = ExtResource("28_kdqke")
 
 [node name="Marker3D" type="Marker3D" parent="." unique_id=1982524714]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3657837, 0, 3.4071345)
@@ -399,8 +419,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4630524, 0, 4.190114)
 [connection signal="body_entered" from="QuestActivators/Area3D" to="QuestActivators/Area3D" method="_OnPlayerTrigger"]
 [connection signal="body_entered" from="QuestActivators/Area3D2" to="QuestActivators/Area3D2" method="_OnPlayerTrigger"]
 [connection signal="body_entered" from="QuestActivators/Area3D3" to="QuestActivators/Area3D3" method="_OnPlayerTrigger"]
-[connection signal="body_entered" from="QuestActivators/Area3D4" to="QuestActivators/Area3D4" method="_OnPlayerTrigger"]
 [connection signal="body_entered" from="QuestActivators/Area3D5" to="QuestActivators/Area3D5" method="_OnPlayerTrigger"]
+[connection signal="ReactionEnd" from="QuestObjectiveReactor" to="QuestActivators/Area3D4" method="_OnTrigger"]
 
 [editable path="NavigationRegion3D/Livingroom/tableCloth"]
 [editable path="NavigationRegion3D/Livingroom/tableCloth2"]
