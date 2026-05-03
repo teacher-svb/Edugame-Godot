@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="21_ycjjd"]
 [ext_resource type="PackedScene" uid="uid://ci0qlbk7yu2cr" path="res://assets/3D/Furniture Kit/Models/GLTF format/bedSingle.glb" id="22_0tae3"]
 [ext_resource type="Script" uid="uid://bhsdjlrhck4qd" path="res://scripts/test/Transporter.cs" id="22_182vs"]
-[ext_resource type="Script" uid="uid://dbtd0oguw4wdj" path="res://scripts/Game/Systems/QuestSystem/QuestObjectiveActor.cs" id="22_ycjjd"]
+[ext_resource type="Script" uid="uid://dbtd0oguw4wdj" path="res://scripts/Game/Systems/QuestSystem/QuestTrigger.cs" id="22_ycjjd"]
 [ext_resource type="PackedScene" uid="uid://ct1kqwdhujc8n" path="res://assets/3D/Furniture Kit/Models/GLTF format/benchCushionLow.glb" id="23_7n07m"]
 [ext_resource type="PackedScene" uid="uid://40rbyr5gq5lu" path="res://assets/3D/Furniture Kit/Models/GLTF format/cabinetBedDrawer.glb" id="24_kdqke"]
 [ext_resource type="PackedScene" uid="uid://d11od8uonxhra" path="res://Scenes/characters/character_dad.tscn" id="25_14bvk"]

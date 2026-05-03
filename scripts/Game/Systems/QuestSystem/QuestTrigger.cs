@@ -6,9 +6,9 @@ using TnT.Systems;
 namespace TnT.EduGame.QuestSystem
 {
     [GlobalClass]
-    public partial class QuestObjectiveActor : Node3D
+    public partial class QuestTrigger : Node3D
     {
-        public enum QuestObjectiveAction
+        public enum TriggerType
         {
             INITOBJECTIVE,
             COMPLETEOBJECTIVE
@@ -16,7 +16,7 @@ namespace TnT.EduGame.QuestSystem
         QuestManager _questManager;
 
         [Export]
-        QuestObjectiveAction _action;
+        TriggerType _action;
 
         [Export]
         string _questId = Guid.Empty.ToString();
@@ -43,8 +43,8 @@ namespace TnT.EduGame.QuestSystem
         {
             switch (_action)
             {
-                case QuestObjectiveAction.INITOBJECTIVE: _questManager.UpdateQuest(new QuestMessageStart { QuestId = _questId, ObjectiveId = _questObjectiveId }); break;
-                case QuestObjectiveAction.COMPLETEOBJECTIVE: _questManager.UpdateQuest(new QuestMessageComplete { QuestId = _questId, ObjectiveId = _questObjectiveId }); break;
+                case TriggerType.INITOBJECTIVE: _questManager.UpdateQuest(new QuestMessageStart { QuestId = _questId, ObjectiveId = _questObjectiveId }); break;
+                case TriggerType.COMPLETEOBJECTIVE: _questManager.UpdateQuest(new QuestMessageComplete { QuestId = _questId, ObjectiveId = _questObjectiveId }); break;
             }
         }
     }
