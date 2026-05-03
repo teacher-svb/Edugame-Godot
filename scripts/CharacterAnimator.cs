@@ -1,5 +1,7 @@
 // CharacterAnimator.cs — owns all animation knowledge
 using Godot;
+using TnT.EduGame.Characters;
+using TnT.Extensions;
 
 public interface IMovementAnimator
 {
@@ -18,6 +20,8 @@ public partial class CharacterAnimator : Node, IMovementAnimator
 
     public override void _Ready()
     {
+        CharacterController3D cc = this.FindAncestorOfType<Character3D>().FindAnyObjectByType<CharacterController3D>();
+        cc.MovementStateChanged += OnMovementStateChanged;
         if (AnimationTree == null) return;
         AnimationTree.Active = true;
         _stateMachine = (AnimationNodeStateMachinePlayback)

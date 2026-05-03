@@ -1,4 +1,6 @@
 using Godot;
+using TnT.EduGame.Characters;
+using TnT.Extensions;
 using TnT.Systems;
 
 /// <summary>
@@ -6,11 +8,14 @@ using TnT.Systems;
 /// for a <see cref="CharacterBody3D"/>. Implements <see cref="ICharacterController"/>
 /// so it can be driven by the game's character and input systems.
 /// </summary>
-public partial class CharacterController3D : CharacterBody3D, ICharacterController
+[GlobalClass]
+public partial class CharacterController3D : Node, ICharacterController
 {
     [Export] private float _speed = 5.0f;
     [Export] private float _jumpVelocity = 4.5f;
     [Export] private float _rotationSpeed = 10.0f;
+    Character3D _character;
+    public Vector3 GlobalPosition => _character.GlobalPosition;
 
 
     /// <summary>
@@ -44,9 +49,8 @@ public partial class CharacterController3D : CharacterBody3D, ICharacterControll
 
     public override void _Ready()
     {
-
-        if (OcclusionRaycast != null)
-            OcclusionRaycast.AddException(this);
+        _character = this.FindAncestorOfType<Character3D>();
+        OcclusionRaycast?.AddException(_character);
     }
 
     /// <summary>
@@ -56,19 +60,19 @@ public partial class CharacterController3D : CharacterBody3D, ICharacterControll
     /// </summary>
     public override void _PhysicsProcess(double delta)
     {
-        Vector3 velocity = Velocity;
+        Vector3 velocity = _character.Velocity;
 
-        if (!IsOnFloor())
-            velocity += GetGravity() * (float)delta;
+        if (_character.IsOnFloor() == false)
+            velocity += _character.GetGravity() * (float)delta;
 
-        if (IsOnFloor() && _jump)
+        if (_character.IsOnFloor() && _jump)
         {
             velocity.Y = _jumpVelocity;
             _jump = false;
             _justJumped = true;
         }
 
-        Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+        Vector3 direction = (_character.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 
         if (direction != Vector3.Zero)
         {
@@ -77,12 +81,12 @@ public partial class CharacterController3D : CharacterBody3D, ICharacterControll
         }
         else
         {
-            velocity.X = Mathf.MoveToward(Velocity.X, 0, _speed);
-            velocity.Z = Mathf.MoveToward(Velocity.Z, 0, _speed);
+            velocity.X = Mathf.MoveToward(_character.Velocity.X, 0, _speed);
+            velocity.Z = Mathf.MoveToward(_character.Velocity.Z, 0, _speed);
         }
 
-        Velocity = velocity;
-        MoveAndSlide();
+        _character.Velocity = velocity;
+        _character.MoveAndSlide();
 
         if (direction != Vector3.Zero)
             OrientToDirection(direction, delta);
@@ -107,16 +111,16 @@ public partial class CharacterController3D : CharacterBody3D, ICharacterControll
             state = "jumped";
             _justJumped = false;
         }
-        else if (!_wasOnFloor && IsOnFloor())
+        else if (!_wasOnFloor && _character.IsOnFloor())
             state = "landed";
-        else if (!IsOnFloor())
-            state = Velocity.Y > 0 ? "jump" : "fall";
+        else if (_character.IsOnFloor() == false)
+            state = _character.Velocity.Y > 0 ? "jump" : "fall";
         else if (direction != Vector3.Zero)
             state = "walk";
         else
             state = "idle";
 
-        _wasOnFloor = IsOnFloor();
+        _wasOnFloor = _character.IsOnFloor();
 
         if (state == _currentState) return;
         _currentState = state;
@@ -146,6 +150,6 @@ public partial class CharacterController3D : CharacterBody3D, ICharacterControll
     /// <param name="position">The target position in world space.</param>
     public void MoveTo(Vector3 position)
     {
-        this.Position = position;
+        _character.Position = position;
     }
 }

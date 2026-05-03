@@ -13,7 +13,7 @@ namespace TnT.EduGame
         public float value { get; }
         public int duration { get; }
         public int frequency { get; }
-        void Apply(Character source, Character target);
+        void Apply(Character3D source, Character3D target);
     }
 
 }

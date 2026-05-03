@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Godot;
+using TnT.EduGame.Characters;
 using TnT.Extensions;
 using TnT.Systems.State;
 
@@ -27,8 +28,8 @@ namespace TnT.EduGame.CharacterState
             _previousTargetDesiredDistance = _options.agent.TargetDesiredDistance;
             _options.agent.TargetDesiredDistance = .5f;
 
-            if (options.Target is CharacterController3D)
-                options.cc.Speed = (options.Target as CharacterController3D).Speed;
+            if (options.Target is Character3D)
+                options.cc.Speed = (options.Target as Character3D).FindAnyObjectByType<CharacterController3D>().Speed;
 
             return new BaseState(new() { OnUpdate = OnUpdate, OnExit = OnExit, OnEnter = OnEnter });
         }

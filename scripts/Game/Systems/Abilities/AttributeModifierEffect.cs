@@ -8,7 +8,7 @@ namespace TnT.EduGame
     public partial class AttributeModifierEffect : ModifierEffect
     {
         [Export] AttributeType type = AttributeType.Health;
-        protected override void ApplyEffect(Character source, Character target)
+        protected override void ApplyEffect(Character3D source, Character3D target)
         {
             AttributeContext c = new(source, target, elementalType, duration, frequency);
             AttributeModifier mod = operatorType switch

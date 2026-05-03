@@ -11,7 +11,7 @@ namespace TnT.EduGame
         [Export] StatType type = StatType.MaxHealth;
 
 
-        protected override void ApplyEffect(Character source, Character target)
+        protected override void ApplyEffect(Character3D source, Character3D target)
         {
             StatModifier mod = operatorType switch
             {

@@ -24,7 +24,7 @@ namespace TnT.EduGame
 
 
             // Bind<Character, Character.CharacterSaveData>(ref GameData.playerData);
-            Bind<Character, CharacterSaveData>(ref GameData.characterData);
+            Bind<Character3D, CharacterSaveData>(ref GameData.characterData);
             // Bind<QuestManager, QuestManager.QuestManagerSaveData>(ref GameData.questData);
             // Bind<Door, Door.DoorSaveData>(ref GameData.doorData);
 

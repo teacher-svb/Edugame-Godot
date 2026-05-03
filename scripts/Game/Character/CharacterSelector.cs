@@ -5,11 +5,11 @@ using TnT.Extensions;
 
 public partial class CharacterSelector : Node
 {
-    Character _playerCharacter;
+    Character3D _playerCharacter;
     void Start()
     {
         var player = GetTree().FindAnyObjectByType<Player>();
-        _playerCharacter = player.GetTree().FindAnyObjectByType<Character>();
+        _playerCharacter = player.GetTree().FindAnyObjectByType<Character3D>();
     }
     public void SelectCharacter(CharacterData characterData)
     {

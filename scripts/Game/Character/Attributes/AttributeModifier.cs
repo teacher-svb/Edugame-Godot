@@ -69,9 +69,9 @@ namespace TnT.EduGame
 
         protected override int Apply(AttributeContext c)
         {
-            if (c.Target is Character)
+            if (c.Target is Character3D)
             {
-                var target = c.Target as Character;
+                var target = c.Target as Character3D;
                 var attr = target.Attributes.Get(attributeType);
                 return _effect.Invoke(attr);
             }

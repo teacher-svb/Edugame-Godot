@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using Godot;
+using TnT.EduGame.Characters;
 using TnT.EduGame.CharacterState;
 using TnT.Extensions;
 using TnT.Input;
@@ -29,7 +30,7 @@ public partial class Player : Node, IInputActionable//, IBind<Player.PlayerSaveD
 	InputAction JumpAction => InputActions.FirstOrDefault(a => a.ActionName == "jump") as InputAction;
 
 
-	ICharacterController _cc;
+	CharacterController3D _cc;
 	[Export] CharacterStateManager _stateManager;
 	bool _inputActive;
 
@@ -44,16 +45,8 @@ public partial class Player : Node, IInputActionable//, IBind<Player.PlayerSaveD
 	{
 		ProcessMode = ProcessModeEnum.Pausable;
 		Instance = this;
-		_cc = this.FindAncestorOfType<CharacterController2D>();
-		if (_cc == null)
-			_cc = this.FindAncestorOfType<CharacterController3D>();
+		_cc = this.FindAncestorOfType<Character3D>().FindAnyObjectByType<CharacterController3D>();
 		base._Ready();
-
-		// MoveAction.OnPressed += StartMoving;
-		// MoveAction.OnReleased += StopMoving;
-
-		// JumpAction.OnPressed += StartMoving;
-		// JumpAction.OnReleased += StopMoving;
 	}
 
 	public override void _Process(double delta)
@@ -64,7 +57,7 @@ public partial class Player : Node, IInputActionable//, IBind<Player.PlayerSaveD
 		if (MoveAction.Triggered || JumpAction.Triggered)
 			_stateManager.StartInput(MoveAction, JumpAction);
 		else if (MoveAction.IsPressed == false && JumpAction.Triggered == false)
-			_stateManager.Pop();
+			_ = _stateManager.Pop();
 	}
 
 	// private void StopMoving(InputActionBase action)

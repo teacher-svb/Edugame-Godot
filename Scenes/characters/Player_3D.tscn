@@ -1,14 +1,16 @@
 [gd_scene format=3 uid="uid://crkyo8y8iqgx1"]
 
 [ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_3D.tscn" id="1_v5scr"]
+[ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_022_CharacterData.tres" id="2_7dxc7"]
 [ext_resource type="PackedScene" uid="uid://cdou2t4bule12" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-b.glb" id="2_sb0or"]
 [ext_resource type="PackedScene" uid="uid://dwmsot5m0pw1o" path="res://Scenes/characters/PlayerCamera.tscn" id="3_eym15"]
+[ext_resource type="Script" uid="uid://cqfwdw7wlks67" path="res://scripts/Game/Character/CharacterSaveData.cs" id="3_yx5mg"]
 [ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="4_cvtri"]
 [ext_resource type="Texture2D" uid="uid://22l4wvbueyg3" path="res://assets/ring.png" id="10_lgshl"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7dxc7"]
-radius = 0.12109375
-height = 0.6599045
+[sub_resource type="Resource" id="Resource_hnwjb"]
+script = ExtResource("3_yx5mg")
+metadata/_custom_type_script = "uid://cqfwdw7wlks67"
 
 [sub_resource type="Curve" id="Curve_2u77j"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.2936442, 0.0, 0, 0]
@@ -40,41 +42,37 @@ albedo_texture = ExtResource("10_lgshl")
 material = SubResource("StandardMaterial3D_q5fig")
 orientation = 1
 
-[node name="CharacterController3D" unique_id=926984674 node_paths=PackedStringArray("OcclusionRaycast", "Camera", "VisualRoot") instance=ExtResource("1_v5scr")]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7dxc7"]
+radius = 0.12109375
+height = 0.6599045
+
+[node name="Player" unique_id=926984674 instance=ExtResource("1_v5scr")]
+_characterData = ExtResource("2_7dxc7")
+_saveData = SubResource("Resource_hnwjb")
+
+[node name="CharacterController3D" parent="." index="0" unique_id=631752590 node_paths=PackedStringArray("OcclusionRaycast", "Camera", "VisualRoot")]
 _speed = 3.0
 _jumpVelocity = 3.0
-OcclusionRaycast = NodePath("PlayerCamera/RayCast3D")
-Camera = NodePath("PlayerCamera/Camera3D")
-VisualRoot = NodePath("character-female-b2")
+OcclusionRaycast = NodePath("../PlayerCamera/RayCast3D")
+Camera = NodePath("../PlayerCamera/Camera3D")
+VisualRoot = NodePath("../character-female-b2")
 
-[node name="CollisionShape3D" parent="." index="0" unique_id=293151575]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3380165, 0)
-shape = SubResource("CapsuleShape3D_7dxc7")
-
-[node name="character-female-b2" parent="." index="2" unique_id=371834684 instance=ExtResource("2_sb0or")]
+[node name="character-female-b2" parent="." index="1" unique_id=371834684 instance=ExtResource("2_sb0or")]
 
 [node name="Skeleton3D" parent="character-female-b2/character-female-b" parent_id_path=PackedInt32Array(371834684, 1357584895) index="0" unique_id=421653466]
-bones/3/rotation = Quaternion(0.004916977, 0, 0, 0.9999879)
-bones/4/rotation = Quaternion(0, 0, -0.3690142, 0.9294238)
-bones/5/rotation = Quaternion(0, 0, 0.3690142, 0.9294238)
-bones/6/rotation = Quaternion(0, -0.004916977, 0, 0.9999879)
+bones/3/rotation = Quaternion(-0.00018305588, 0, 0, 1)
+bones/4/rotation = Quaternion(0, 0, -0.38217607, 0.92408955)
+bones/5/rotation = Quaternion(0, 0, 0.38217607, 0.92408955)
+bones/6/rotation = Quaternion(0, 0.00018305588, 0, 1)
 
-[node name="PlayerController" type="Node" parent="." index="3" unique_id=1092226004 node_paths=PackedStringArray("_stateManager")]
+[node name="PlayerController" type="Node" parent="." index="2" unique_id=1092226004 node_paths=PackedStringArray("_stateManager")]
 script = ExtResource("4_cvtri")
 _stateManager = NodePath("../stateManager")
 
-[node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot", "LandingParticles")]
-VisualRoot = NodePath("../../character-female-b2")
-LandingParticles = NodePath("../../GPUParticles3D")
-
-[node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
-root_node = NodePath("../../character-female-b2")
-anim_player = NodePath("../../character-female-b2/AnimationPlayer")
-
-[node name="PlayerCamera" parent="." index="5" unique_id=741163845 node_paths=PackedStringArray("Target") instance=ExtResource("3_eym15")]
+[node name="PlayerCamera" parent="." index="3" unique_id=741163845 node_paths=PackedStringArray("Target") instance=ExtResource("3_eym15")]
 Target = NodePath("../character-female-b2")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="6" unique_id=1538626892]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="4" unique_id=1538626892]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07240015, 0)
 emitting = false
 amount = 2
@@ -84,7 +82,17 @@ explosiveness = 0.54
 process_material = SubResource("ParticleProcessMaterial_hcta7")
 draw_pass_1 = SubResource("QuadMesh_rvcpu")
 
-[connection signal="MovementStateChanged" from="." to="Animation/CharacterAnimator" method="OnMovementStateChanged"]
+[node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot", "LandingParticles")]
+VisualRoot = NodePath("../../character-female-b2")
+LandingParticles = NodePath("../../GPUParticles3D")
+
+[node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
+root_node = NodePath("../../character-female-b2")
+anim_player = NodePath("../../character-female-b2/AnimationPlayer")
+
+[node name="CollisionShape3D" parent="." index="7" unique_id=293151575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3380165, 0)
+shape = SubResource("CapsuleShape3D_7dxc7")
 
 [editable path="character-female-b2"]
 [editable path="PlayerCamera"]

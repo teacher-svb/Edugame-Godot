@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using TnT.EduGame.Characters;
 using TnT.EduGame.QuestSystem;
 using TnT.Extensions;
 using TnT.Input;
@@ -11,7 +12,7 @@ using TnT.Systems.State;
 
 namespace TnT.EduGame.CharacterState
 {
-    public partial class CharacterStateManager : AbstractStateStack, IQuestReactionObject
+    public partial class CharacterStateManager : AbstractStateStack
     {
         private readonly List<BaseCharacterState> _registeredStates = new();
         private bool _autonomousBehaviorActive = false;
@@ -20,28 +21,14 @@ namespace TnT.EduGame.CharacterState
         NavigationAgent3D _agent;
         CharacterController3D _controller;
 
-        public event Action ReactionCompleted
-    {
-        add    => Connect(SignalName.SequenceCompleted, Callable.From(value));
-        remove => Disconnect(SignalName.SequenceCompleted, Callable.From(value));
-    }
-
-        public enum stateTypes
-        {
-            idle,
-            patrol,
-            follow,
-            input
-        }
-
         [Signal] public delegate void SequenceCompletedEventHandler();
 
 
         public override void _Ready()
         {
             ProcessMode = ProcessModeEnum.Pausable;
-            _controller = this.FindAncestorOfType<CharacterController3D>();
-            _agent = _controller.FindAnyObjectByType<NavigationAgent3D>();
+            _controller = this.FindAncestorOfType<Character3D>().FindAnyObjectByType<CharacterController3D>();
+            _agent = this.FindAncestorOfType<Character3D>().FindAnyObjectByType<NavigationAgent3D>();
             Idling();
         }
 

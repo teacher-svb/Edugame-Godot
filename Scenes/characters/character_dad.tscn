@@ -7,33 +7,30 @@
 radius = 0.1274414
 height = 0.6963501
 
-[node name="CharacterController3D" unique_id=926984674 node_paths=PackedStringArray("VisualRoot") instance=ExtResource("1_a2d18")]
-_speed = 3.0
+[node name="dad" unique_id=926984674 instance=ExtResource("1_a2d18")]
+
+[node name="CharacterController3D" parent="." index="0" unique_id=631752590 node_paths=PackedStringArray("VisualRoot")]
+_speed = 1.0
 _jumpVelocity = 3.0
-VisualRoot = NodePath("character-male-g")
+VisualRoot = NodePath("../character-male-g")
 
-[node name="CollisionShape3D" parent="." index="0" unique_id=293151575]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34902954, 0)
-shape = SubResource("CapsuleShape3D_a2d18")
-
-[node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
-VisualRoot = NodePath("../../character-male-g")
-
-[node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
-root_node = NodePath("../../character-male-g")
-anim_player = NodePath("../../character-male-g/AnimationPlayer")
-
-[node name="character-male-g" parent="." index="3" unique_id=2127119757 instance=ExtResource("2_6vton")]
+[node name="character-male-g" parent="." index="1" unique_id=2127119757 instance=ExtResource("2_6vton")]
 
 [node name="Skeleton3D" parent="character-male-g/character-male-b" parent_id_path=PackedInt32Array(2127119757, 618410602) index="0" unique_id=801209756]
 bones/0/rotation = Quaternion(-8.557136e-09, 2.4203237e-08, -4.142208e-16, 1)
 bones/1/rotation = Quaternion(1.1832914e-30, -2.5970621e-09, 1.774937e-30, 1)
 bones/2/rotation = Quaternion(1.1832914e-30, -2.5970621e-09, 1.774937e-30, 1)
-bones/3/rotation = Quaternion(1.8979145e-23, 2.1129036e-09, -3.697142e-16, 1)
-bones/4/rotation = Quaternion(-2.8702145e-09, -1.1750018e-09, -0.38268352, 0.92387956)
-bones/5/rotation = Quaternion(-2.8603997e-09, 1.1986966e-09, 0.3826835, 0.9238795)
-bones/6/rotation = Quaternion(8.1078685e-25, -2.193012e-09, 3.697141e-16, 1)
+bones/3/rotation = Quaternion(-0.040772066, 2.1111466e-09, 8.6147034e-11, 0.9991685)
+bones/4/rotation = Quaternion(-3.7157075e-09, -1.7333277e-09, -0.26706788, 0.9636778)
+bones/5/rotation = Quaternion(-2.2617666e-09, 9.750053e-10, 0.26706788, 0.9636778)
+bones/6/rotation = Quaternion(8.768945e-11, 0.04077204, -7.09331e-11, 0.9991685)
 
-[connection signal="MovementStateChanged" from="." to="Animation/CharacterAnimator" method="OnMovementStateChanged"]
+[node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
+root_node = NodePath("../../character-male-g")
+anim_player = NodePath("../../character-male-g/AnimationPlayer")
+
+[node name="CollisionShape3D" parent="." index="4" unique_id=293151575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34902954, 0)
+shape = SubResource("CapsuleShape3D_a2d18")
 
 [editable path="character-male-g"]

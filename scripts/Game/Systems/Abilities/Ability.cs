@@ -19,7 +19,7 @@ namespace TnT.EduGame
         private int _remainingUses;
         private bool _isOnCooldown;
 
-        public void Activate(Character source, Character target)
+        public void Activate(Character3D source, Character3D target)
         {
             if (_isOnCooldown)
                 return;

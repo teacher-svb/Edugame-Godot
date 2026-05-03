@@ -8,6 +8,13 @@ This is an educational game built with **Godot 4.5** and **C# (.NET 8.0)**. The 
 
 ## Build and Development Commands
 
+## GitHub Operations
+Use the gh CLI for all GitHub tasks, not MCP:
+- `gh issue list / create / view`
+- `gh pr create / list / merge`
+- `gh repo view`
+- `gh api` for anything else
+
 ### Building the Project
 ```bash
 dotnet build

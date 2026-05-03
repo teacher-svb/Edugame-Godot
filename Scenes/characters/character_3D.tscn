@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dt1pmf2iuc4nb" path="res://scripts/CharacterAnimator.cs" id="1_1wrgq"]
 [ext_resource type="Script" uid="uid://dc4u7vqilp6dd" path="res://scripts/CharacterController3D.cs" id="1_707x3"]
+[ext_resource type="Script" uid="uid://c861mplcf03p7" path="res://scripts/Game/Character/Character3D.cs" id="1_u1x07"]
 [ext_resource type="Script" uid="uid://dikx3tegvslhi" path="res://scripts/Game/StateManagementCharacter/CharacterStateManager.cs" id="3_d75bo"]
 [ext_resource type="Script" uid="uid://55xneh1xtvnj" path="res://scripts/Game/StateManagementCharacter/CharacterStateIdle.cs" id="4_u1x07"]
 [ext_resource type="Script" uid="uid://fumvv65m5aig" path="res://scripts/Game/StateManagementCharacter/CharacterStateFollowing.cs" id="5_mu1lf"]
@@ -58,27 +59,13 @@ states/walk/position = Vector2(515, 189)
 transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_60cj0"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_aebyh"), "fall", "walk", SubResource("AnimationNodeStateMachineTransition_0qrrf"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_iikk8"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_0ft5a"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_w8kji"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_yj0bu"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_sikog")]
 graph_offset = Vector2(-8, 8)
 
-[node name="CharacterController3D" type="CharacterBody3D" unique_id=926984674]
+[node name="Character" type="CharacterBody3D" unique_id=497783338]
+script = ExtResource("1_u1x07")
+metadata/_custom_type_script = "uid://c861mplcf03p7"
+
+[node name="CharacterController3D" type="Node" parent="." unique_id=631752590]
 script = ExtResource("1_707x3")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=293151575]
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1876010761]
-path_desired_distance = 0.2
-target_desired_distance = 0.2
-path_height_offset = 0.75
-debug_enabled = true
-debug_path_custom_color = Color(1, 0, 1, 1)
-
-[node name="Animation" type="Node" parent="." unique_id=2085856052]
-
-[node name="CharacterAnimator" type="Node" parent="Animation" unique_id=1328867310 node_paths=PackedStringArray("AnimationTree")]
-script = ExtResource("1_1wrgq")
-AnimationTree = NodePath("../AnimationTree")
-
-[node name="AnimationTree" type="AnimationTree" parent="Animation" unique_id=58694043]
-root_node = NodePath("../..")
-tree_root = SubResource("AnimationNodeStateMachine_hr8he")
+metadata/_custom_type_script = "uid://dc4u7vqilp6dd"
 
 [node name="stateManager" type="Node" parent="." unique_id=2020265289]
 script = ExtResource("3_d75bo")
@@ -99,3 +86,22 @@ metadata/_custom_type_script = "uid://ds2u0dlloavie"
 [node name="CharacterStateMoveInput" type="Node" parent="stateManager" unique_id=1767845139]
 script = ExtResource("7_w8mnd")
 metadata/_custom_type_script = "uid://dw3ggojroh7rn"
+
+[node name="Animation" type="Node" parent="." unique_id=2085856052]
+
+[node name="CharacterAnimator" type="Node" parent="Animation" unique_id=1328867310 node_paths=PackedStringArray("AnimationTree")]
+script = ExtResource("1_1wrgq")
+AnimationTree = NodePath("../AnimationTree")
+
+[node name="AnimationTree" type="AnimationTree" parent="Animation" unique_id=58694043]
+root_node = NodePath("../../CharacterController3D")
+tree_root = SubResource("AnimationNodeStateMachine_hr8he")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=293151575]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1876010761]
+path_desired_distance = 0.2
+target_desired_distance = 0.2
+path_height_offset = 0.75
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 1, 1)

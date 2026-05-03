@@ -1,5 +1,6 @@
 using System.Linq;
 using Godot;
+using TnT.EduGame.Characters;
 using TnT.Extensions;
 
 namespace TnT.Systems.OcclusionFade
@@ -13,7 +14,7 @@ namespace TnT.Systems.OcclusionFade
     {
         /// <summary>The occlusion fader shader (occlusionFader.gdshader).</summary>
         [Export] private Shader OcclusionShader { get; set; }
-        CharacterController3D _playerController;
+        Character3D _playerCharacter;
         Camera3D _camera;
         RayCast3D _playerRayCast;
         /// <summary>How fast the hole opens and closes, in units per second.</summary>
@@ -30,12 +31,15 @@ namespace TnT.Systems.OcclusionFade
 
         public override void _Ready()
         {
-            _playerController = GetTree().FindAnyObjectByType<Player>().GetParent() as CharacterController3D;
-            _camera = _playerController.Camera;
-            _playerRayCast = _playerController.OcclusionRaycast;
+            _playerCharacter = GetTree()
+                .FindAnyObjectByType<Player>()
+                .FindAncestorOfType<Character3D>();
+                
+            _camera = _playerCharacter.FindAnyObjectByType<CharacterController3D>().Camera;
+            _playerRayCast = _playerCharacter.FindAnyObjectByType<CharacterController3D>().OcclusionRaycast;
             GetTree()
                 .FindObjectsByType<MeshInstance3D>()
-                .Where(n => n.FindAncestorOfType<CharacterController3D>() == null)
+                .Where(n => n.FindAncestorOfType<Character3D>() == null)
                 .ForEach(ApplyToMeshInstance);
 
             foreach (var gm in GetTree().FindObjectsByType<GridMap>())
@@ -51,7 +55,7 @@ namespace TnT.Systems.OcclusionFade
             float targetRadius = _playerRayCast.IsColliding() ? MaxRadius : 0.0f;
             _currentRadius = Mathf.MoveToward(_currentRadius, targetRadius, (float)delta * FadeSpeed * MaxRadius);
 
-            RenderingServer.GlobalShaderParameterSet("player_pos", _playerController.GlobalPosition);
+            RenderingServer.GlobalShaderParameterSet("player_pos", _playerCharacter.GlobalPosition);
             RenderingServer.GlobalShaderParameterSet("occlusion_radius", _currentRadius);
             RenderingServer.GlobalShaderParameterSet("camera_pos", _camera.GlobalPosition);
         }

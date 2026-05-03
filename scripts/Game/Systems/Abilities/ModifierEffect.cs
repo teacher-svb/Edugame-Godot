@@ -11,10 +11,10 @@ namespace TnT.EduGame
         [Export] public override float value { get; protected set; } = 10;
         [Export] public override int duration { get; protected set; } = -1;
         [Export] public override int frequency { get; protected set; } = 1;
-        public override void Apply(Character source, Character target)
+        public override void Apply(Character3D source, Character3D target)
         {
             ApplyEffect(source, target);
         }
-        protected abstract void ApplyEffect(Character source, Character target);
+        protected abstract void ApplyEffect(Character3D source, Character3D target);
     }
 }

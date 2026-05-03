@@ -112,6 +112,12 @@ namespace TnT.EduGame.QuestSystem
             // Resolve _targetPath relative to the owning QuestEventListener
             var target = context.GetNode(_targetPath);
 
+            if (target is not IQuestReactionObject completionObject)
+            {
+                GD.PrintErr($"QuestReaction: '{target.Name}' must implement IQuestReactionObject.");
+                return;
+            }
+
             // Use reflection to find the method — Callable.Call() doesn't dispatch params[] methods
             var method = target.GetType().GetMethod(_methodName, BindingFlags.Public | BindingFlags.Instance);
             if (method == null) { GD.PrintErr($"QuestReaction: method '{_methodName}' not found on '{target.Name}'."); return; }
@@ -144,21 +150,17 @@ namespace TnT.EduGame.QuestSystem
                 args = [..resolvedParams.Select((p, i) => ConvertVariant(p, parameters[i].ParameterType))];
             }
 
+            // Subscribe before invoking — method may complete synchronously and fire
+            // ReactionCompleted on the same frame before a post-invoke subscribe would run.
+            var tcs = new TaskCompletionSource();
+            completionObject.ReactionCompleted += Complete;
             method.Invoke(target, args);
+            await tcs.Task;
 
-            // If the target implements IQuestReactionObject, wait for it to signal completion
-            // before returning, so reactions execute sequentially in QuestEventListener
-            if (target is IQuestReactionObject completionObject)
+            void Complete()
             {
-                var tcs = new TaskCompletionSource();
-                completionObject.ReactionCompleted += Complete;
-                await tcs.Task;
-
-                void Complete()
-                {
-                    completionObject.ReactionCompleted -= Complete;
-                    tcs.SetResult();
-                }
+                completionObject.ReactionCompleted -= Complete;
+                tcs.SetResult();
             }
         }
 

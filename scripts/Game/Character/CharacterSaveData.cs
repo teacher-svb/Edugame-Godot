@@ -9,7 +9,7 @@ namespace TnT.EduGame.Characters
     {
         [Export] public string Id { get; set; } = Guid.NewGuid().ToString();
         [Export] public bool IsNew { get; set; }
-        [Export] public Vector2 position;
+        [Export] public Vector3 position;
         [Export] public string characterId;
     }
 }

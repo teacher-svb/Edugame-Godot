@@ -12,7 +12,7 @@ namespace TnT.EduGame
         public abstract float value { get; protected set; }
         public abstract int duration { get; protected set; }
         public abstract int frequency { get; protected set; }
-        public abstract void Apply(Character source, Character target);
+        public abstract void Apply(Character3D source, Character3D target);
     }
 
 }
