@@ -47,7 +47,6 @@ namespace TnT.EduGame.CharacterState
 
         public void Idling(int durationMs = -1)
         {
-            GD.Print(durationMs);
             if (_autonomousBehaviorActive) return;
             var idle = _registeredStates.OfType<CharacterStateIdle>().FirstOrDefault()
                 ?? throw new Exception("CharacterStateManager requires a CharacterStateIdle child node");

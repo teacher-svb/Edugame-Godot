@@ -19,7 +19,7 @@ namespace TnT.EduGame.CharacterState
         public BaseState GetState(IdleOptions options = default)
         {
             _options = options;
-            return new BaseState(new() { ExitOnNextUpdate = Stop, OnEnter = OnEnter, OnExit = OnExit });
+            return new BaseState(new() { ExitOnNextUpdate = Stop, OnEnter = OnEnter });
         }
 
         private bool Stop()
@@ -29,19 +29,11 @@ namespace TnT.EduGame.CharacterState
 
         private async Task OnEnter()
         {
-            GD.Print("entering idle state");
             if (_options.durationMs >= 0)
             {
                 await Task.Delay(_options.durationMs);
                 _options.durationMs = 0;
             }
-        }
-
-
-
-        private async Task OnExit()
-        {
-            GD.Print("leaving idle state");
         }
     }
 }

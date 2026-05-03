@@ -6,7 +6,7 @@ using TnT.Systems;
 namespace TnT.EduGame.QuestSystem
 {
     [GlobalClass]
-    public partial class QuestTrigger : Node3D
+    public partial class QuestTrigger : Node
     {
         public enum TriggerType
         {

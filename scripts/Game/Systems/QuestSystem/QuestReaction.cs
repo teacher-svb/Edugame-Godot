@@ -10,8 +10,8 @@ namespace TnT.EduGame.QuestSystem
     [GlobalClass]
     public partial class QuestReaction : Resource
     {
-        [Export] NodePath _targetPath;
-        [Export] string _methodName;
+        [Export] public NodePath _targetPath;
+        [Export] public string _methodName;
         [Export] Godot.Collections.Array<Variant> _params = [];
 
         [ExportToolButton("Pick Method")]
@@ -142,12 +142,12 @@ namespace TnT.EduGame.QuestSystem
                 var arr = Array.CreateInstance(elementType, remainder.Length);
                 for (int i = 0; i < remainder.Length; i++)
                     arr.SetValue(ConvertVariant(remainder[i], elementType), i);
-                args = [..regularArgs, arr];
+                args = [.. regularArgs, arr];
             }
             else
             {
                 // Regular method: convert each Variant to the expected C# parameter type
-                args = [..resolvedParams.Select((p, i) => ConvertVariant(p, parameters[i].ParameterType))];
+                args = [.. resolvedParams.Select((p, i) => ConvertVariant(p, parameters[i].ParameterType))];
             }
 
             // Subscribe before invoking — method may complete synchronously and fire
@@ -169,11 +169,11 @@ namespace TnT.EduGame.QuestSystem
             if (typeof(GodotObject).IsAssignableFrom(t)) return v.As<GodotObject>();
             return v.VariantType switch
             {
-                Variant.Type.Bool   => v.As<bool>(),
-                Variant.Type.Int    => Convert.ChangeType(v.As<long>(), t),
-                Variant.Type.Float  => Convert.ChangeType(v.As<double>(), t),
+                Variant.Type.Bool => v.As<bool>(),
+                Variant.Type.Int => Convert.ChangeType(v.As<long>(), t),
+                Variant.Type.Float => Convert.ChangeType(v.As<double>(), t),
                 Variant.Type.String => v.As<string>(),
-                _                   => v.Obj
+                _ => v.Obj
             };
         }
     }

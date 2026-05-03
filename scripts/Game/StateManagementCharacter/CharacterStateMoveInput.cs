@@ -46,14 +46,12 @@ namespace TnT.EduGame.CharacterState
 
         private async Task OnEnter()
         {
-            GD.Print("entering input state");
             if (_options.jumpAction.IsPressed)
                 _options.cc.Jump();
         }
 
         private async Task OnExit()
         {
-            GD.Print("leaving input state");
         }
 
         private void OnHeld(InputActionBase action)

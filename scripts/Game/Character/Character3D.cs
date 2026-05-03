@@ -107,6 +107,11 @@ namespace TnT.EduGame.Characters
             _stateManager.Follow(target);
         }
 
+        public void PopCurrentState()
+        {
+            _ = _stateManager.Pop();
+        }
+
         #region SAVE/LOAD
 
         [Export]

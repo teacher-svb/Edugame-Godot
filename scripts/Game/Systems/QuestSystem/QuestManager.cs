@@ -44,7 +44,7 @@ namespace TnT.EduGame.QuestSystem
 
         private void QuestObjectStateChanged(QuestObjective o)
         {
-            GD.Print("emitting signal: onquestupdated");
+            // GD.Print("emitting signal: onquestupdated");
             EmitSignal(SignalName.OnQuestUpdated, o);
         }
 
@@ -52,7 +52,7 @@ namespace TnT.EduGame.QuestSystem
         {
             if (_questChain == null)
             {
-                GD.Print("QuestChain not initialized");
+                // GD.Print("QuestChain not initialized");
                 return;
             }
             _questChain.Process(msg, Quests);

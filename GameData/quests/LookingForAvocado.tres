@@ -11,7 +11,7 @@ _startText = "Ik wil Avocado meenemen! Ik denk dat hij nog in m'n bed ligt..."
 _progressText = "Heb je al eens gekeken in je bed?"
 _completeText = "Hmmmm... Avocado ligt hier niet. "
 _characterData = ExtResource("2_xpsoe")
-_objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
+_objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8921"
 metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 
 [sub_resource type="Resource" id="Resource_ftla8"]
@@ -20,7 +20,7 @@ _startText = "Ik zal beneden eens gaan zoeken."
 _progressText = "Je kan best eens goed rondkijken of je Avocado vindt!"
 _completeText = "Goed! Ik zal hier eens rondkijken!"
 _characterData = ExtResource("2_xpsoe")
-_objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8924"
+_objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8922"
 metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 
 [sub_resource type="Resource" id="Resource_mx3ai"]
@@ -28,7 +28,7 @@ script = ExtResource("1_4h7u6")
 _startText = "Hallo! Zal ik je even rondleiden?"
 _completeText = "Langs deze deur kan je naar buiten!"
 _characterData = ExtResource("3_r6kp3")
-_objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8925"
+_objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
 metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 
 [sub_resource type="Resource" id="Resource_hakfr"]
@@ -36,7 +36,7 @@ script = ExtResource("1_4h7u6")
 _startText = "Zullen we verder gaan?"
 _completeText = "Hier is de keuken. Ik ben er zeker van dat Avocado hier ergens ligt..."
 _characterData = ExtResource("3_r6kp3")
-_objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8926"
+_objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8924"
 metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 
 [resource]

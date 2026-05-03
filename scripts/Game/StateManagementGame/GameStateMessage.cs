@@ -81,7 +81,6 @@ namespace TnT.EduGame.GameState
 
         async Task Open()
         {
-            GD.Print("entering message state");
             MessageController.Instance.NextBtnPushed += NextMessage;
             MessageController.Instance.CloseBtnPushed += ClearMessages;
             var tree = ManagerUI.Instance.GetTree();
@@ -93,7 +92,6 @@ namespace TnT.EduGame.GameState
 
         async Task Close()
         {
-            GD.Print("leaving message state");
             MessageController.Instance.NextBtnPushed -= NextMessage;
             MessageController.Instance.CloseBtnPushed -= ClearMessages;
             _options.next.Disable();
