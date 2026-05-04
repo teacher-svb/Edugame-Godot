@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dhofhkoi6x3f5"]
+
+[ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_3D.tscn" id="1_qsc7l"]
+[ext_resource type="PackedScene" uid="uid://ddaffim88r3ri" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-f.glb" id="2_p8yhg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qsc7l"]
+radius = 0.11279297
+height = 0.6777344
+
+[node name="Character" unique_id=497783338 instance=ExtResource("1_qsc7l")]
+
+[node name="CharacterController3D" parent="." index="0" unique_id=631752590 node_paths=PackedStringArray("VisualRoot")]
+VisualRoot = NodePath("../character-female-f2")
+
+[node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
+VisualRoot = NodePath("../../character-female-f2")
+
+[node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
+root_node = NodePath("../../character-female-f2")
+anim_player = NodePath("../../character-female-f2/AnimationPlayer")
+
+[node name="CollisionShape3D" parent="." index="3" unique_id=293151575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.328125, 0)
+shape = SubResource("CapsuleShape3D_qsc7l")
+
+[node name="character-female-f2" parent="." index="5" unique_id=611794134 instance=ExtResource("2_p8yhg")]
+
+[node name="Skeleton3D" parent="character-female-f2/character-female-f" parent_id_path=PackedInt32Array(611794134, 1629004892) index="0" unique_id=2132135827]
+bones/3/rotation = Quaternion(-0.038270723, 0, 0, 0.99926746)
+bones/4/rotation = Quaternion(0, 0, -0.280761, 0.9597778)
+bones/5/rotation = Quaternion(0, 0, 0.280761, 0.9597778)
+bones/6/rotation = Quaternion(0, 0.038270723, 0, 0.99926746)
+
+[editable path="character-female-f2"]

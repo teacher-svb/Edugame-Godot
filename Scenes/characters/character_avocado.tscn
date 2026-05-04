@@ -9,19 +9,15 @@ height = 0.3795166
 
 [node name="avocado" unique_id=926984674 instance=ExtResource("1_7k8ld")]
 
-[node name="CharacterController3D" parent="." index="0" unique_id=926984674 node_paths=PackedStringArray("VisualRoot")]
+[node name="CharacterController3D" parent="." index="0" unique_id=631752590 node_paths=PackedStringArray("VisualRoot")]
 VisualRoot = NodePath("../avocado2")
-
-[node name="CollisionShape3D" parent="CharacterController3D" index="0" unique_id=293151575]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18597412, 0)
-shape = SubResource("CapsuleShape3D_rqd8d")
 
 [node name="avocado2" parent="." index="1" unique_id=1975359764 instance=ExtResource("2_xpawx")]
 
 [node name="Skeleton3D" parent="avocado2/Armature" parent_id_path=PackedInt32Array(1975359764, 1923085597) index="0" unique_id=559322183]
 bones/1/rotation = Quaternion(-0.122428946, 0.027743451, 0.07656861, 0.9891304)
 bones/3/rotation = Quaternion(-0.072635084, -0.026248384, 0.12224877, 0.98949003)
-bones/4/rotation = Quaternion(-0.018482717, 0.024529295, -0.08431858, 0.9959654)
+bones/4/rotation = Quaternion(0.0057660243, -0.04069899, -0.08428711, 0.99559337)
 
 [node name="avocado" parent="avocado2/Armature/Skeleton3D" index="0" unique_id=1533239025]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 0, 0)
@@ -29,5 +25,9 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 0
 [node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
 root_node = NodePath("../../avocado2")
 anim_player = NodePath("../../avocado2/AnimationPlayer")
+
+[node name="CollisionShape3D" parent="." index="4" unique_id=293151575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18597412, 0)
+shape = SubResource("CapsuleShape3D_rqd8d")
 
 [editable path="avocado2"]

@@ -10,7 +10,7 @@ public interface IMovementAnimator
 
 public partial class CharacterAnimator : Node, IMovementAnimator
 {
-    [Export] AnimationTree AnimationTree { get; set; }
+    AnimationTree AnimationTree { get; set; }
     /// <summary>The visual root whose scale is tweened for squash and stretch effects.</summary>
     [Export] Node3D VisualRoot { get; set; }
     [Export] GpuParticles3D LandingParticles { get; set; }
@@ -22,6 +22,8 @@ public partial class CharacterAnimator : Node, IMovementAnimator
     {
         CharacterController3D cc = this.FindAncestorOfType<Character3D>().FindAnyObjectByType<CharacterController3D>();
         cc.MovementStateChanged += OnMovementStateChanged;
+
+        AnimationTree = this.FindAncestorOfType<Character3D>().FindAnyObjectByType<AnimationTree>();
         if (AnimationTree == null) return;
         AnimationTree.Active = true;
         _stateMachine = (AnimationNodeStateMachinePlayback)

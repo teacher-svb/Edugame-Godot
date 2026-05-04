@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Godot;
+using TnT.Systems;
 
 namespace TnT.EduGame.QuestSystem
 {
@@ -43,138 +45,116 @@ namespace TnT.EduGame.QuestSystem
         private void OpenMethodPicker()
         {
             var target = ResolveEditorTarget();
-
             if (target == null)
             {
-                GD.PrintErr("QuestReaction: assign a target path before picking a method.");
+                GD.PrintErr("QuestReaction: Assign a target path before picking a method.");
                 return;
             }
 
-            var picker = new Window
-            {
-                Title = $"Select method on {target.Name}",
-                Size = new Vector2I(350, 500)
-            };
-
-            var vbox = new VBoxContainer();
-            vbox.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.FullRect, Control.LayoutPresetMode.KeepSize, 4);
-            picker.AddChild(vbox);
-
-            var tree = new Tree
-            {
-                SizeFlagsVertical = Control.SizeFlags.ExpandFill,
-                HideRoot = true
-            };
-            vbox.AddChild(tree);
-
-            var root = tree.CreateItem();
-            var gameAssembly = typeof(QuestReaction).Assembly;
-            var scriptPath = target.GetScript().As<Resource>()?.ResourcePath;
-            var className = scriptPath?.GetFile().GetBaseName();
-            var targetType = className != null
-                ? gameAssembly.GetTypes().FirstOrDefault(t => t.Name == className)
-                : null;
-
+            var targetType = GodotReflectionUtils.GetCsharpType(target);
             if (targetType == null)
             {
-                GD.PrintErr($"QuestReaction: could not resolve C# type from script '{scriptPath}'.");
-                picker.QueueFree();
+                GD.PrintErr($"QuestReaction: Could not resolve C# type for '{target.Name}'.");
                 return;
             }
 
-            var methods = targetType
-                .GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                .Where(m => m.DeclaringType?.Assembly == gameAssembly)
-                .OrderBy(m => m.Name);
-
-            foreach (var method in methods)
+            var methods = GodotReflectionUtils.GetUserMethods(targetType).ToList();
+            CreatePickerWindow($"Select method on {target.Name}", methods, selectedName =>
             {
-                var item = tree.CreateItem(root);
-                item.SetText(0, method.Name);
-            }
+                _methodName = selectedName;
+                NotifyPropertyListChanged();
+            });
+        }
+
+        // Builds and shows a modal tree picker. Calls onSelected with the chosen method name.
+        private static void CreatePickerWindow(string title, List<MethodInfo> methods, Action<string> onSelected)
+        {
+            var picker = new Window { Title = title, Size = new Vector2I(350, 500) };
+            var vbox = new VBoxContainer();
+            vbox.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.FullRect, Control.LayoutPresetMode.KeepSize, 4);
+
+            var tree = new Tree { SizeFlagsVertical = Control.SizeFlags.ExpandFill, HideRoot = true };
+            var root = tree.CreateItem();
+            foreach (var method in methods)
+                tree.CreateItem(root).SetText(0, method.Name);
 
             tree.ItemSelected += () =>
             {
-                var selected = tree.GetSelected();
-                if (selected == null) return;
-                _methodName = selected.GetText(0);
-                NotifyPropertyListChanged();
+                onSelected?.Invoke(tree.GetSelected()?.GetText(0));
                 picker.QueueFree();
             };
 
+            picker.CloseRequested += picker.QueueFree;
+            picker.AddChild(vbox);
+            vbox.AddChild(tree);
+
             EditorInterface.Singleton.GetBaseControl().AddChild(picker);
             picker.PopupCentered();
-            picker.CloseRequested += picker.QueueFree;
         }
 
+        // Entry point. Validates target and method, then maps params and invokes.
         public async Task Execute(Node context)
         {
-            // Resolve _targetPath relative to the owning QuestEventListener
-            var target = context.GetNode(_targetPath);
-
-            if (target is not IQuestReactionObject completionObject)
+            var target = context.GetNodeOrNull(_targetPath);
+            if (!IsInstanceValid(target) || target is not IQuestReactionObject completionObject)
             {
-                GD.PrintErr($"QuestReaction: '{target.Name}' must implement IQuestReactionObject.");
+                GD.PrintErr($"QuestReaction: Target at '{_targetPath}' is invalid or missing IQuestReactionObject.");
                 return;
             }
 
-            // Use reflection to find the method — Callable.Call() doesn't dispatch params[] methods
+            // Callable.Call() doesn't dispatch params[] methods — reflection used instead
             var method = target.GetType().GetMethod(_methodName, BindingFlags.Public | BindingFlags.Instance);
-            if (method == null) { GD.PrintErr($"QuestReaction: method '{_methodName}' not found on '{target.Name}'."); return; }
-
-            // NodePath variants are converted to actual Node references before passing
-            var resolvedParams = _params.Select(p =>
-                p.VariantType == Variant.Type.NodePath
-                    ? Variant.From(context.GetNode(p.As<NodePath>()))
-                    : p).ToArray();
+            if (method == null)
+            {
+                GD.PrintErr($"QuestReaction: Method '{_methodName}' not found on '{target.Name}'.");
+                return;
+            }
 
             var parameters = method.GetParameters();
-            var lastParam = parameters.LastOrDefault();
-            object[] args;
-
-            if (lastParam?.IsDefined(typeof(ParamArrayAttribute), false) == true)
+            bool hasParamsArray = parameters.LastOrDefault()?.IsDefined(typeof(ParamArrayAttribute), false) ?? false;
+            if (!hasParamsArray && _params.Count != parameters.Length)
             {
-                // params method: convert leading regular args, pack the rest into a typed array
-                var regularArgs = parameters.Take(parameters.Length - 1)
-                    .Select((p, i) => ConvertVariant(resolvedParams[i], p.ParameterType)).ToArray();
-                var elementType = lastParam.ParameterType.GetElementType();
-                var remainder = resolvedParams.Skip(parameters.Length - 1).ToArray();
-                var arr = Array.CreateInstance(elementType, remainder.Length);
-                for (int i = 0; i < remainder.Length; i++)
-                    arr.SetValue(ConvertVariant(remainder[i], elementType), i);
-                args = [.. regularArgs, arr];
-            }
-            else
-            {
-                // Regular method: convert each Variant to the expected C# parameter type
-                args = [.. resolvedParams.Select((p, i) => ConvertVariant(p, parameters[i].ParameterType))];
+                GD.PrintErr($"QuestReaction: Config error — '{_methodName}' expects {parameters.Length} args, got {_params.Count}.");
+                return;
             }
 
-            // Subscribe before invoking — method may complete synchronously and fire
-            // ReactionCompleted on the same frame before a post-invoke subscribe would run.
-            var tcs = new TaskCompletionSource();
-            completionObject.ReactionCompleted += Complete;
-            method.Invoke(target, args);
-            await tcs.Task;
-
-            void Complete()
+            try
             {
-                completionObject.ReactionCompleted -= Complete;
-                tcs.SetResult();
+                var args = GodotReflectionUtils.MapVariantsToParameters(context, _params, parameters);
+                await InvokeAndAwait(method, target, args, completionObject);
+            }
+            catch (Exception e)
+            {
+                var msg = e is TargetInvocationException ? e.InnerException?.Message : e.Message;
+                GD.PrintErr($"QuestReaction: Runtime error in '{_methodName}': {msg}");
             }
         }
 
-        private static object ConvertVariant(Variant v, Type t)
+        // Invokes the method and waits for the observer to signal ReactionCompleted.
+        // Subscribes before invoking — the method may fire the event synchronously on
+        // the same frame, before a post-invoke subscribe would ever run.
+        // On failure, cleans up the subscription and re-throws for Execute to log.
+        private static async Task InvokeAndAwait(MethodInfo method, Node target, object[] args, IQuestReactionObject observer)
         {
-            if (typeof(GodotObject).IsAssignableFrom(t)) return v.As<GodotObject>();
-            return v.VariantType switch
+            var tcs = new TaskCompletionSource();
+            observer.ReactionCompleted += OnCompleted;
+
+            void OnCompleted()
             {
-                Variant.Type.Bool => v.As<bool>(),
-                Variant.Type.Int => Convert.ChangeType(v.As<long>(), t),
-                Variant.Type.Float => Convert.ChangeType(v.As<double>(), t),
-                Variant.Type.String => v.As<string>(),
-                _ => v.Obj
-            };
+                observer.ReactionCompleted -= OnCompleted;
+                tcs.TrySetResult();
+            }
+
+            try
+            {
+                method.Invoke(target, args);
+                await tcs.Task;
+            }
+            catch
+            {
+                OnCompleted();
+                throw;
+            }
         }
     }
 }

@@ -26,7 +26,7 @@
 [ext_resource type="Script" uid="uid://cqfwdw7wlks67" path="res://scripts/Game/Character/CharacterSaveData.cs" id="27_kdqke"]
 [ext_resource type="PackedScene" uid="uid://dcaqo4uenuwgu" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedWide.glb" id="27_qovxq"]
 [ext_resource type="PackedScene" uid="uid://5ac2eh7lcw6p" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosed.glb" id="28_7n07m"]
-[ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/quests/QuestEventChannel.tres" id="28_kdqke"]
+[ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="28_kdqke"]
 [ext_resource type="PackedScene" uid="uid://cd2furrsxugw6" path="res://assets/3D/Furniture Kit/Models/GLTF format/books.glb" id="29_kdqke"]
 [ext_resource type="MeshLibrary" uid="uid://dn1i16n6um3sg" path="res://assets/3D/Furniture Kit/furniture-kit-tileables.meshlib" id="30_kb3qt"]
 

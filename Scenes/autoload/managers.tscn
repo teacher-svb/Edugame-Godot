@@ -19,7 +19,7 @@
 [ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="11_aum7h"]
 [ext_resource type="Script" uid="uid://djkjkbdwkb3um" path="res://scripts/Game/StateManagementGame/GameStatePlay.cs" id="11_wsyol"]
 [ext_resource type="Script" uid="uid://dm3me216ti1em" path="res://scripts/Game/StateManagementGame/GameStateLoadingScreen.cs" id="12_7ysjy"]
-[ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/quests/QuestEventChannel.tres" id="13_pnf1h"]
+[ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="13_pnf1h"]
 [ext_resource type="Script" uid="uid://clgnpunn4d55j" path="res://scripts/Game/StateManagementGame/GameStateMessage.cs" id="13_vkax6"]
 [ext_resource type="Script" uid="uid://bvn0ypsbartdv" path="res://scripts/Game/StateManagementGame/GameStateInventory.cs" id="14_ut70p"]
 [ext_resource type="Script" uid="uid://ch4u84myc17c2" path="res://scripts/Lib/Input/InputAction.cs" id="16_ut70p"]
