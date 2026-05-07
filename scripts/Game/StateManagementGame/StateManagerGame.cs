@@ -25,14 +25,14 @@ namespace TnT.EduGame.GameState
             Instance = this;
         }
 
-        public override void _Ready()
+        public override async void _Ready()
         {
             _player = GetTree().FindAnyObjectByType<Player>();
 
             var state = _registeredStates.OfType<GameStatePlay>().FirstOrDefault()
                 ?? throw new Exception("no play state assigned");
 
-            Push(state.GetState(new()));
+            Push(state.GetState(new() { openInventory = ManagerUI.Instance.Open }));
 
             OnSceneLoaded?.Invoke(null);
         }

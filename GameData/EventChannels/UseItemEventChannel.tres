@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="ItemEventChannel" format=3 uid="uid://cmj45lqtdr2l6"]
+
+[ext_resource type="Script" uid="uid://j07kgej6f002" path="res://scripts/Game/Systems/InventorySystem/ItemEventChannel.cs" id="1_psvd6"]
+
+[resource]
+script = ExtResource("1_psvd6")

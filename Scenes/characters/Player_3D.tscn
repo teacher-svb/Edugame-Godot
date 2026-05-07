@@ -60,10 +60,10 @@ VisualRoot = NodePath("../character-female-b2")
 [node name="character-female-b2" parent="." index="1" unique_id=371834684 instance=ExtResource("2_sb0or")]
 
 [node name="Skeleton3D" parent="character-female-b2/character-female-b" parent_id_path=PackedInt32Array(371834684, 1357584895) index="0" unique_id=421653466]
-bones/3/rotation = Quaternion(-0.00018305588, 0, 0, 1)
-bones/4/rotation = Quaternion(0, 0, -0.38217607, 0.92408955)
-bones/5/rotation = Quaternion(0, 0, 0.38217607, 0.92408955)
-bones/6/rotation = Quaternion(0, 0.00018305588, 0, 1)
+bones/3/rotation = Quaternion(0.019323101, 0, 0, 0.9998134)
+bones/4/rotation = Quaternion(0, 0, -0.34640172, 0.93808633)
+bones/5/rotation = Quaternion(0, 0, 0.34640172, 0.93808633)
+bones/6/rotation = Quaternion(0, -0.019323101, 0, 0.9998134)
 
 [node name="PlayerController" type="Node" parent="." index="2" unique_id=1092226004 node_paths=PackedStringArray("_stateManager")]
 script = ExtResource("4_cvtri")

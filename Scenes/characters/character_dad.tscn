@@ -20,10 +20,10 @@ VisualRoot = NodePath("../character-male-g")
 bones/0/rotation = Quaternion(-8.557136e-09, 2.4203237e-08, -4.142208e-16, 1)
 bones/1/rotation = Quaternion(1.1832914e-30, -2.5970621e-09, 1.774937e-30, 1)
 bones/2/rotation = Quaternion(1.1832914e-30, -2.5970621e-09, 1.774937e-30, 1)
-bones/3/rotation = Quaternion(-0.040772066, 2.1111466e-09, 8.6147034e-11, 0.9991685)
-bones/4/rotation = Quaternion(-3.7157075e-09, -1.7333277e-09, -0.26706788, 0.9636778)
-bones/5/rotation = Quaternion(-2.2617666e-09, 9.750053e-10, 0.26706788, 0.9636778)
-bones/6/rotation = Quaternion(8.768945e-11, 0.04077204, -7.09331e-11, 0.9991685)
+bones/3/rotation = Quaternion(-0.04273025, 2.1109738e-09, 9.028447e-11, 0.99908674)
+bones/4/rotation = Quaternion(-3.4504075e-09, -1.3477988e-09, -0.26357, 0.9646403)
+bones/5/rotation = Quaternion(-1.8260512e-09, 5.294576e-10, 0.26357, 0.9646403)
+bones/6/rotation = Quaternion(9.606597e-11, 0.04273022, -7.168434e-11, 0.99908674)
 
 [node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
 root_node = NodePath("../../character-male-g")
@@ -32,5 +32,8 @@ anim_player = NodePath("../../character-male-g/AnimationPlayer")
 [node name="CollisionShape3D" parent="." index="4" unique_id=293151575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34902954, 0)
 shape = SubResource("CapsuleShape3D_a2d18")
+
+[node name="NavigationAgent3D" parent="." index="5" unique_id=1876010761]
+debug_enabled = false
 
 [editable path="character-male-g"]

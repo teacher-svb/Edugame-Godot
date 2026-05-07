@@ -22,6 +22,7 @@ public partial class Door : Node3D
 			var animName = _col.Disabled ? "door_close" : "door_open";
 			_animPlayer.Play(animName);
 			int durationMs = (int)(_animPlayer.CurrentAnimationLength * 1000);
+			
 			await Task.Delay(durationMs);
 		}
 		_col.SetDeferred("disabled", !_col.Disabled);

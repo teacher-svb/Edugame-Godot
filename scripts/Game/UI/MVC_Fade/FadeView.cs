@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Godot;
+using TnT.Easings;
 using TnT.Extensions;
 
 namespace TnT.Systems.UI
@@ -19,38 +20,34 @@ namespace TnT.Systems.UI
         public async Task InitializeView(Control root)
         {
             _root = root;
-            // _root.Clear();
 
             _fadeRect = root.GetNode(_fadeRectPath) as ColorRect;
-            // _fadeRect = _root.CreateChild<ColorRect>();
             _fadeRect.Color = _to;
             _fadeRect.SetAnchorsPreset(Control.LayoutPreset.FullRect);
 
             await Task.Yield();
         }
 
-        public async Task Show()
+        public async Task Show(float durationSeconds = 1f)
         {
             _root.ZIndex = 10;
+            var startColor = _fadeRect.Color;
 
-            var steps = 100;
-
-            for (float i = 0; i < 1; i += 1f/steps)
+            await foreach (var t in Easings.Easings.Animate(durationSeconds, Ease.Linear))
             {
-                await Task.Delay(1000/steps);
-                _fadeRect.Color = _fadeRect.Color.Lerp(_from, i);
+                _fadeRect.Color = startColor.Lerp(_from, t);
             }
         }
 
-        public async Task Hide()
+        public async Task Hide(float durationSeconds = 1f)
         {
-            var steps = 100;
+            var startColor = _fadeRect.Color;
 
-            for (float i = 0; i < 1; i += 1f/steps)
+            await foreach (var t in Easings.Easings.Animate(durationSeconds, Ease.Linear))
             {
-                await Task.Delay(1000/steps);
-                _fadeRect.Color = _fadeRect.Color.Lerp(_to, i);
+                _fadeRect.Color = startColor.Lerp(_to, t);
             }
+
             _root.ZIndex = 0;
         }
     }

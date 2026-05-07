@@ -1,7 +1,14 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://dsctdv3pdwt0h"]
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dsctdv3pdwt0h"]
 
+[ext_resource type="Texture2D" uid="uid://b4w45xrv1mal" path="res://assets/Spritesheets/Characters/Character_Avocado/avocado.png" id="1_alwbg"]
 [ext_resource type="Script" uid="uid://chksvvfbkadbt" path="res://scripts/Game/Systems/InventorySystem/ItemData.cs" id="1_tykq5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knjau"]
+atlas = ExtResource("1_alwbg")
+region = Rect2(5, 5.5, 21, 23)
 
 [resource]
 script = ExtResource("1_tykq5")
+Name = "Avocado"
+Icon = SubResource("AtlasTexture_knjau")
 metadata/_custom_type_script = "uid://chksvvfbkadbt"

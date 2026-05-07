@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using TnT.Easings;
 using TnT.EduGame.Inventory;
 
 namespace TnT.Systems.UI
@@ -12,29 +13,49 @@ namespace TnT.Systems.UI
         [Export]
         Control[] _itemContainers = new Control[10];
 
-        public async Task InitializeView(IEnumerable<Item> inventoryItems)
+        public void InitializeView(IEnumerable<ItemData> inventoryItems)
         {
+            this.Modulate = Colors.Transparent;
             var items = inventoryItems.ToArray();
             for (int i = 0; i < _itemContainers.Length; i++)
             {
                 var slot = _itemContainers[i];
+                if (slot == null)
+                    continue;
                 foreach (var child in slot.GetChildren())
-                    child.QueueFree();
+                        child.QueueFree();
 
                 if (i < items.Length && items[i] != null)
                     slot.AddChild(MakeIcon(items[i].Icon));
             }
-            await Task.CompletedTask;
         }
 
         public async Task ShowView(float duration = .2f)
         {
+            GD.Print("showview");
+
+            var startColor = this.Modulate;
+            var endColor = Colors.White;
+
+            await foreach (var t in Easings.Easings.Animate(duration, Ease.Linear))
+            {
+                this.Modulate = startColor.Lerp(endColor, t);
+            }
             Visible = true;
             await Task.CompletedTask;
         }
 
         public async Task HideView(float duration = .2f)
         {
+            GD.Print("hideview");
+
+            var startColor = this.Modulate;
+            var endColor = Colors.Transparent;
+
+            await foreach (var t in Easings.Easings.Animate(duration, Ease.Linear))
+            {
+                this.Modulate = startColor.Lerp(endColor, t);
+            }
             Visible = false;
             await Task.CompletedTask;
         }

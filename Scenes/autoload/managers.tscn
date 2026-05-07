@@ -29,9 +29,12 @@
 [ext_resource type="Script" uid="uid://bmfvn3p4u73k5" path="res://scripts/Game/UI/MVC_Challenges/Model/ChallengeModel.cs" id="26_2a8cd"]
 [ext_resource type="Resource" uid="uid://bvtaxgkyu400b" path="res://GameData/challenges/SelectThree_easy.tres" id="27_kpb3h"]
 [ext_resource type="Script" uid="uid://bfyn33tven763" path="res://scripts/Game/UI/MVC_Inventory/InventoryController.cs" id="29_yi7uc"]
+[ext_resource type="Resource" uid="uid://clf3iqsa6rjxf" path="res://GameData/EventChannels/PickupItemEventChannel.tres" id="30_5t4y7"]
+[ext_resource type="Resource" uid="uid://cmj45lqtdr2l6" path="res://GameData/EventChannels/UseItemEventChannel.tres" id="30_fkgmb"]
+[ext_resource type="Script" uid="uid://cewycpjka78f3" path="res://scripts/Game/Systems/InventorySystem/ItemEventListener.cs" id="30_i1r4r"]
 [ext_resource type="Script" uid="uid://bq8nb421y1t1p" path="res://scripts/Game/UI/MVC_Inventory/InventoryModel.cs" id="30_j8mgp"]
 [ext_resource type="Script" uid="uid://bwo0qc8hpbax0" path="res://scripts/Game/UI/MVC_Inventory/InventoryView.cs" id="31_5t4y7"]
-[ext_resource type="Script" uid="uid://dhlebvjmi145c" path="res://scripts/Game/Systems/InventorySystem/Inventory.cs" id="32_i1r4r"]
+[ext_resource type="Resource" uid="uid://bytjn381x70ha" path="res://GameData/EventChannels/RemoveItemEventChannel.tres" id="31_hwrcp"]
 [ext_resource type="PackedScene" uid="uid://csd5kk66e1bep" path="res://Scenes/UI/Inventory.tscn" id="32_j8mgp"]
 [ext_resource type="AudioStream" uid="uid://p6yptdrwk41y" path="res://assets/music/Dawn_at_the_Eastern_Gate.mp3" id="34_5t4y7"]
 
@@ -53,6 +56,12 @@ metadata/_custom_type_script = "uid://ch4u84myc17c2"
 script = ExtResource("16_ut70p")
 InputReference = "close"
 ActionName = "close"
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
+
+[sub_resource type="Resource" id="Resource_awodd"]
+script = ExtResource("16_ut70p")
+InputReference = "open"
+ActionName = "open"
 metadata/_custom_type_script = "uid://ch4u84myc17c2"
 
 [sub_resource type="Resource" id="Resource_n5sdn"]
@@ -104,6 +113,7 @@ _saveData = SubResource("Resource_pnf1h")
 script = ExtResource("4_c37v5")
 Next = SubResource("Resource_5t4y7")
 Close = SubResource("Resource_i1r4r")
+Open = SubResource("Resource_awodd")
 
 [node name="FadeController" type="Control" parent="UI" unique_id=1274864108]
 layout_mode = 3
@@ -172,10 +182,17 @@ script = ExtResource("26_2a8cd")
 _challenge = ExtResource("27_kpb3h")
 metadata/_custom_type_script = "uid://bmfvn3p4u73k5"
 
-[node name="InventoryController" type="Node" parent="UI" unique_id=898957681 node_paths=PackedStringArray("view", "model")]
+[node name="InventoryController" type="Node" parent="UI" unique_id=898957681 node_paths=PackedStringArray("view", "model", "_pickupItemListener")]
 script = ExtResource("29_yi7uc")
 view = NodePath("InventoryView")
 model = NodePath("InventoryModel")
+_pickupItemListener = NodePath("PickupItemEventListener")
+_useItemChannel = ExtResource("30_fkgmb")
+_removeItemChannel = ExtResource("31_hwrcp")
+
+[node name="PickupItemEventListener" type="Node" parent="UI/InventoryController" unique_id=1242244140]
+script = ExtResource("30_i1r4r")
+eventChannel = ExtResource("30_5t4y7")
 
 [node name="InventoryModel" type="Node" parent="UI/InventoryController" unique_id=391958656]
 script = ExtResource("30_j8mgp")
@@ -190,17 +207,9 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("31_5t4y7")
 
-[node name="Inventory" parent="UI/InventoryController/InventoryView" unique_id=1662155608 instance=ExtResource("32_j8mgp")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-mouse_filter = 2
-
-[node name="Inventory" type="Node" parent="." unique_id=463827073]
-script = ExtResource("32_i1r4r")
+[node name="Inventory" parent="UI/InventoryController/InventoryView" unique_id=1662155608 node_paths=PackedStringArray("_itemContainers") instance=ExtResource("32_j8mgp")]
+layout_mode = 1
+_itemContainers = [null, NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer2"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer3"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer4"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer5"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer6"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer7"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer8"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer9"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer10")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=358640137]
 stream = ExtResource("34_5t4y7")

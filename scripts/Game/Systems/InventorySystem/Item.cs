@@ -1,26 +1,23 @@
-using System;
 using Godot;
+using TnT.Extensions;
 
 namespace TnT.EduGame.Inventory
 {
-    /// <summary>
-    /// Represents an in-game Item, based on an ItemData Resource.
-    /// </summary>
     [GlobalClass]
-    public partial class Item : Node2D
+    public partial class Item : Node3D
     {
-        public Action<Item> OnItemUsed;
-
-        [Export]
-        ItemData _staticData;
-        [Export]
-        string _id = Guid.NewGuid().ToString();
-        public string Id => _id;
-
-        public bool IsPersistent => _staticData.IsPersistent;
-        public string ItemId => _staticData.Id;
-        public Texture2D Icon => _staticData.Icon;
+        [Export] ItemData _staticData;
+        [Export] ItemEventChannel _pickupChannel;
 
         public ItemData Data => _staticData;
+
+        public void _OnBodyEntered(Node body)
+        {
+            if (body.FindAnyObjectByType<Player>() == null)
+                return;
+
+            _pickupChannel.Invoke(_staticData);
+            GetParent().QueueFree();
+        }
     }
 }

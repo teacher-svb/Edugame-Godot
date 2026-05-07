@@ -2,10 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_3D.tscn" id="1_7k8ld"]
 [ext_resource type="PackedScene" uid="uid://ri147ckev4hj" path="res://assets/3D/Mini Characters 1/Models/GLB format/avocado.glb" id="2_xpawx"]
+[ext_resource type="Script" uid="uid://dm0yib0bvn1ee" path="res://scripts/Game/Systems/InventorySystem/Item.cs" id="3_ch0qv"]
+[ext_resource type="Resource" uid="uid://dsctdv3pdwt0h" path="res://GameData/Items/item_test.tres" id="4_da6yh"]
+[ext_resource type="Resource" uid="uid://clf3iqsa6rjxf" path="res://GameData/EventChannels/PickupItemEventChannel.tres" id="5_da6yh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rqd8d"]
 radius = 0.118652344
 height = 0.3795166
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_da6yh"]
+height = 0.47583008
+radius = 0.25927734
 
 [node name="avocado" unique_id=926984674 instance=ExtResource("1_7k8ld")]
 
@@ -17,7 +24,7 @@ VisualRoot = NodePath("../avocado2")
 [node name="Skeleton3D" parent="avocado2/Armature" parent_id_path=PackedInt32Array(1975359764, 1923085597) index="0" unique_id=559322183]
 bones/1/rotation = Quaternion(-0.122428946, 0.027743451, 0.07656861, 0.9891304)
 bones/3/rotation = Quaternion(-0.072635084, -0.026248384, 0.12224877, 0.98949003)
-bones/4/rotation = Quaternion(0.0057660243, -0.04069899, -0.08428711, 0.99559337)
+bones/4/rotation = Quaternion(-0.008404614, 0.042020533, -0.08428091, 0.99552023)
 
 [node name="avocado" parent="avocado2/Armature/Skeleton3D" index="0" unique_id=1533239025]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 0, 0)
@@ -29,5 +36,18 @@ anim_player = NodePath("../../avocado2/AnimationPlayer")
 [node name="CollisionShape3D" parent="." index="4" unique_id=293151575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18597412, 0)
 shape = SubResource("CapsuleShape3D_rqd8d")
+
+[node name="ItemRef" type="Node3D" parent="." index="6" unique_id=563072524]
+script = ExtResource("3_ch0qv")
+_staticData = ExtResource("4_da6yh")
+_pickupChannel = ExtResource("5_da6yh")
+
+[node name="Area3D" type="Area3D" parent="." index="7" unique_id=1554866459]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=1623215847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22790527, 0)
+shape = SubResource("CylinderShape3D_da6yh")
+
+[connection signal="body_entered" from="Area3D" to="ItemRef" method="_OnBodyEntered"]
 
 [editable path="avocado2"]

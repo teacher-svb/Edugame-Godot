@@ -7,11 +7,9 @@ using TnT.Input;
 namespace TnT.EduGame.GameState
 {
     [GlobalClass]
-    public partial class GameStatePlay : BaseGameState, IStateObject<GameStatePlay.PlayOptions>, IInputActionable
+    public partial class GameStatePlay : BaseGameState, IStateObject<GameStatePlay.PlayOptions>
     {
         private PlayOptions _options;
-
-        public InputActionBase[] InputActions => [];
 
         public struct PlayOptions
         {
@@ -19,18 +17,6 @@ namespace TnT.EduGame.GameState
             public InputAction2D move;
             public InputAction openInventory;
         }
-        // [SerializeField] InputActionReference openInventory;
-
-        // ActionsMenuController _actionsMenuController;
-
-        // ActionsMenuController ActionsMenuController
-        // {
-        //     get {
-        //         if (_actionsMenuController == null)
-        //             _actionsMenuController = UnityEngine.Object.FindAnyObjectByType<ActionsMenuController>();
-        //         return _actionsMenuController;
-        //     }
-        // }
 
         public BaseState GetState(PlayOptions options)
         {
@@ -40,21 +26,19 @@ namespace TnT.EduGame.GameState
 
         private void Update()
         {
-            // if (_options.openInventory.Triggered)
-            // {
-            //     StateManagerGame.Instance.OpenInventory();
-            // }
+            if (_options.openInventory.Triggered)
+            {
+                StateManagerGame.Instance.OpenInventory();
+            }
         }
 
-        // private void OnOpenInventory(InputAction.CallbackContext context) => StateManagerGame.Instance.OpenInventory();
         async Task StartGame()
         {
             var tree = ManagerUI.Instance.GetTree();
             tree.Paused = false;
 
-            // openInventory.action.Enable();
+            _options.openInventory.Enable();
             
-            // openInventory.action.performed += OnOpenInventory;
             await Task.Yield();
         }
     }
