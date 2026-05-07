@@ -15,6 +15,7 @@ anchor_right = 1.0
 offset_bottom = 648.0
 grow_horizontal = 2
 pivot_offset = Vector2(572, 129)
+mouse_filter = 1
 theme = ExtResource("1_0snb7")
 script = ExtResource("2_sqm8t")
 _closeBtn = NodePath("Panel/Message/Buttons/Close/CloseBtn")
@@ -32,6 +33,7 @@ offset_top = 29.0
 offset_right = -86.0
 offset_bottom = 172.0
 grow_horizontal = 2
+mouse_filter = 1
 theme_type_variation = &"LightPanel"
 
 [node name="Message" type="RichTextLabel" parent="Panel" unique_id=636996138]
@@ -58,6 +60,7 @@ grow_vertical = 0
 
 [node name="Close" type="PanelContainer" parent="Panel/Message/Buttons" unique_id=811073020]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="CloseBtn" type="Button" parent="Panel/Message/Buttons/Close" unique_id=1933717760]
 layout_mode = 2
@@ -76,6 +79,7 @@ vertical_alignment = 1
 [node name="Next" type="PanelContainer" parent="Panel/Message/Buttons" unique_id=294014583]
 layout_mode = 2
 size_flags_horizontal = 8
+mouse_filter = 1
 
 [node name="NextBtn" type="Button" parent="Panel/Message/Buttons/Next" unique_id=1012605488]
 layout_mode = 2

@@ -1,92 +1,49 @@
 using System.Threading.Tasks;
 using TnT.Systems.State;
-using System;
 using Godot;
 using TnT.Input;
+using TnT.Systems.UI;
 
 namespace TnT.EduGame.GameState
 {
     [GlobalClass]
-    public partial class GameStateInventory : BaseGameState, IStateObject<GameStateInventory.InventoryOptions>, IInputActionable
+    public partial class GameStateInventory : BaseGameState, IStateObject<GameStateInventory.InventoryOptions>
     {
-        // public delegate void OnItemClicked(Item item);
-        public delegate void OnCloseInventory();
-        // [SerializeField] InputActionReference close;
-        Camera2D camera;
-
-        public InputActionBase[] InputActions => [];
-
         public struct InventoryOptions
         {
             public InputAction close;
         }
 
-        // InventoryController _inventoryController;
-
-        // InventoryController InventoryController
-        // {
-        //     get
-        //     {
-        //         if (_inventoryController == null)
-        //             _inventoryController = UnityEngine.Object.FindAnyObjectByType<InventoryController>();
-        //         return _inventoryController;
-        //     }
-        // }
-
-        // Inventory.Inventory _inventory;
-
-        // Inventory.Inventory Inventory
-        // {
-        //     get
-        //     {
-        //         if (_inventory == null)
-        //             _inventory = UnityEngine.Object.FindAnyObjectByType<Inventory.Inventory>();
-        //         return _inventory;
-        //     }
-        // }
+        private bool _closed;
+        private InventoryOptions _options;
 
         public BaseState GetState(InventoryOptions options)
         {
-            return new BaseState(new() { OnEnter = OpenInventory, ExitOnNextUpdate = ExitInventory, OnExit = CloseInventory });
+            _options = options;
+            _closed = false;
+            return new BaseState(new() { OnEnter = Open, OnExit = Close, ExitOnNextUpdate = Exit, OnUpdate = Update });
         }
 
-        async Task OpenInventory()
+        private void Update()
         {
-            var tree = ManagerUI.Instance.GetTree();
-            tree.Paused = true;
-            // await InventoryController.Show();
-
-            // close.action.Enable();
-            var zoom = camera.Zoom;
-            while (zoom.X > 1)
-            {
-                zoom.X -= .1f;
-                zoom.Y -= .1f;
-                await Task.Yield();
-            }
+            if (_options.close.Triggered)
+                _closed = true;
         }
 
-        async Task CloseInventory()
+        private bool Exit() => _closed;
+
+        private async Task Open()
         {
-
-            // await InventoryController.Hide();
-
-            var zoom = camera.Zoom;
-            while (zoom.X < 5)
-            {
-                zoom.X += .1f;
-                zoom.Y += .1f;
-                await Task.Yield();
-            }
-            // // await Inventory.Hide();
-            var tree = ManagerUI.Instance.GetTree();
-            tree.Paused = false;
+            ManagerUI.Instance.GetTree().Paused = true;
+            await InventoryController.Instance.Show();
+            _options.close.Enable();
         }
 
-        bool ExitInventory()
+        private async Task Close()
         {
-            // return close.action.triggered;
-            return false;
+            _options.close.Disable();
+            await InventoryController.Instance.Hide();
+            ManagerUI.Instance.GetTree().Paused = false;
         }
     }
 }

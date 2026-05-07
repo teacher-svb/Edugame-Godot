@@ -15,12 +15,12 @@ namespace TnT.Systems.UI
 
         public Action NextBtnPushed;
         public Action CloseBtnPushed;
-        public override void _Ready()
+        public override async void _Ready()
         {
             Instance = this;
             Initialize();
-            view.NextBtnPushed += () => NextBtnPushed();
-            view.CloseBtnPushed += () => CloseBtnPushed();
+            view.NextBtnPushed += () => NextBtnPushed?.Invoke();
+            view.CloseBtnPushed += () => CloseBtnPushed?.Invoke();
         }
 
         async void Initialize()

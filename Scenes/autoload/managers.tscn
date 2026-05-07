@@ -35,20 +35,6 @@
 [ext_resource type="PackedScene" uid="uid://csd5kk66e1bep" path="res://Scenes/UI/Inventory.tscn" id="32_j8mgp"]
 [ext_resource type="AudioStream" uid="uid://p6yptdrwk41y" path="res://assets/music/Dawn_at_the_Eastern_Gate.mp3" id="34_5t4y7"]
 
-[sub_resource type="Resource" id="Resource_ut70p"]
-script = ExtResource("16_ut70p")
-InputReference = "next"
-Enabled = true
-ActionName = "next"
-metadata/_custom_type_script = "uid://ch4u84myc17c2"
-
-[sub_resource type="Resource" id="Resource_46vsp"]
-script = ExtResource("16_ut70p")
-InputReference = "close"
-Enabled = true
-ActionName = "close"
-metadata/_custom_type_script = "uid://ch4u84myc17c2"
-
 [sub_resource type="Resource" id="Resource_72h8h"]
 script = ExtResource("2_4v8vv")
 metadata/_custom_type_script = "uid://cerfog7uyabpn"
@@ -92,8 +78,6 @@ script = ExtResource("12_7ysjy")
 
 [node name="MessageState" type="Node" parent="StateManagerGame" unique_id=1908576831]
 script = ExtResource("13_vkax6")
-_next = SubResource("Resource_ut70p")
-_close = SubResource("Resource_46vsp")
 
 [node name="PlayState" type="Node" parent="StateManagerGame" unique_id=1708318737]
 script = ExtResource("11_wsyol")
@@ -158,6 +142,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(578, 128)
+mouse_filter = 1
 script = ExtResource("9_ut70p")
 
 [node name="Notification" parent="UI/MessageController/MessageView" unique_id=756365186 instance=ExtResource("9_n5sdn")]
@@ -202,6 +187,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("31_5t4y7")
 
 [node name="Inventory" parent="UI/InventoryController/InventoryView" unique_id=1662155608 instance=ExtResource("32_j8mgp")]
@@ -211,6 +197,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
+mouse_filter = 2
 
 [node name="Inventory" type="Node" parent="." unique_id=463827073]
 script = ExtResource("32_i1r4r")

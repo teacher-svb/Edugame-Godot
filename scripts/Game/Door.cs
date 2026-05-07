@@ -1,25 +1,29 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 using TnT.EduGame.QuestSystem;
 using TnT.Extensions;
 
-public partial class Door : StaticBody2D
+public partial class Door : Node3D
 {
+	CollisionShape3D _col;
+	AnimationPlayer _animPlayer;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		// var listener = this.FindAnyObjectByType<QuestEventListener>();
-		// listener.OnListen += ToggleDoor;
+		_col = this.FindAnyObjectByType<CollisionShape3D>();
+		_animPlayer = this.FindAnyObjectByType<AnimationPlayer>();
 	}
 
-	private void ToggleDoor(Variant value)
+	private async void ToggleDoor()
 	{
-		if (value.Obj is QuestObjective o)
+		if (_animPlayer != null)
 		{
-			var col = this.FindAnyObjectByType<CollisionShape2D>();
-			GD.Print($"Opening door for objective {o.ObjectiveId} when state changed to {o.State}");
-
-			col.SetDeferred("disabled", !col.Disabled);
+			var animName = _col.Disabled ? "door_close" : "door_open";
+			_animPlayer.Play(animName);
+			int durationMs = (int)(_animPlayer.CurrentAnimationLength * 1000);
+			await Task.Delay(durationMs);
 		}
+		_col.SetDeferred("disabled", !_col.Disabled);
 	}
 }

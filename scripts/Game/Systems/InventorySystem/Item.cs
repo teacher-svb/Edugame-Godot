@@ -17,9 +17,9 @@ namespace TnT.EduGame.Inventory
         string _id = Guid.NewGuid().ToString();
         public string Id => _id;
 
-        public bool IsPersistent { get => _staticData.IsPersistent; private set => _staticData.IsPersistent = value; }
-        public string ItemId { get => _staticData.Id; private set => _staticData.Id = value; }
-        public Texture2D Icon { get => _staticData.Icon; private set => _staticData.Icon = value; }
+        public bool IsPersistent => _staticData.IsPersistent;
+        public string ItemId => _staticData.Id;
+        public Texture2D Icon => _staticData.Icon;
 
         public ItemData Data => _staticData;
     }

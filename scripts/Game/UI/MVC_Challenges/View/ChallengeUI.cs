@@ -9,7 +9,7 @@ using TnT.Extensions;
 
 namespace TnT.Systems.UI
 {
-    [GlobalClass, Tool]
+    [GlobalClass]
     public partial class ChallengeUI : Control
     {
         [Signal]

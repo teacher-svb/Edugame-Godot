@@ -27,10 +27,11 @@ namespace TnT.Systems.UI
         public string CharacterName { get => _characterName.Text; set => _characterName.Text = value; }
         public Texture2D CharacterSprite { set => _characterSprite.Texture = value; }
 
-        public override void _Ready()
+        public override async void _Ready()
         {
-            _closeBtn.Pressed += () => CloseBtnPushed();
-            _nxtBtn.Pressed += () => NextBtnPushed();
+            _closeBtn.Pressed += () => GD.Print("btn pressed");
+            _closeBtn.Pressed += () => CloseBtnPushed?.Invoke();
+            _nxtBtn.Pressed += () => NextBtnPushed?.Invoke();
         }
     }
 }

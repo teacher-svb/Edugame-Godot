@@ -22,8 +22,8 @@ namespace TnT.Systems.UI
 
             _message.Text = "lorem ipsum";
 
-            _message.NextBtnPushed += () => NextBtnPushed();
-            _message.CloseBtnPushed += () => CloseBtnPushed();
+            _message.NextBtnPushed += () => NextBtnPushed?.Invoke();
+            _message.CloseBtnPushed += () => CloseBtnPushed?.Invoke();
 
             await Task.Yield();
         }

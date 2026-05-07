@@ -12,7 +12,6 @@ namespace TnT.Systems.UI
     {
         Inventory _inventory;
         public IEnumerable<Item> Items => _inventory.Items;
-        public IEnumerable<Item> Gear => _inventory.Gear;
         public void Initialize()
         {
             _inventory = GetTree().FindAnyObjectByType<Inventory>();
