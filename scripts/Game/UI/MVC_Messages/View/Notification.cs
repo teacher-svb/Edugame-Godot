@@ -29,7 +29,6 @@ namespace TnT.Systems.UI
 
         public override async void _Ready()
         {
-            _closeBtn.Pressed += () => GD.Print("btn pressed");
             _closeBtn.Pressed += () => CloseBtnPushed?.Invoke();
             _nxtBtn.Pressed += () => NextBtnPushed?.Invoke();
         }

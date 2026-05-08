@@ -27,8 +27,6 @@ namespace TnT.EduGame.QuestSystem
         public override void _Ready()
         {
             _questManager = QuestManager.Instance;
-            if (_questManager == null)
-                GD.Print("QuestManager not found");
         }
 
         void _OnPlayerTrigger(Node other)

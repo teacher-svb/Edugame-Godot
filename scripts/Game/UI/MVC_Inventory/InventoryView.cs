@@ -44,8 +44,6 @@ namespace TnT.Systems.UI
 
         public async Task ShowView(float duration = .2f)
         {
-            GD.Print("showview");
-
             var startColor = this.Modulate;
             var endColor = Colors.White;
 
@@ -59,8 +57,6 @@ namespace TnT.Systems.UI
 
         public async Task HideView(float duration = .2f)
         {
-            GD.Print("hideview");
-
             var startColor = this.Modulate;
             var endColor = Colors.Transparent;
 

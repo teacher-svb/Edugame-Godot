@@ -62,7 +62,6 @@ namespace TnT.EduGame.GameState
 
         async void NextMessage()
         {
-            GD.Print("next message");
             if (allMessagesRead == false && MessageController.Instance.Count == 0)
             {
                 ClearMessages();

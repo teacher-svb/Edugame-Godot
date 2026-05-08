@@ -42,7 +42,7 @@ void fragment() {
     );
 
     ivec2 uv = ivec2(FRAGCOORD.xy) % 4;
-	if (in_range > 0.5 && mask < dither_m[uv.x][uv.y] && world_pos.y > player_pos.y + .5) discard;
+	if (in_range > 0.5 && mask < dither_m[uv.x][uv.y] && world_pos.y > player_pos.y + .1) discard;
 
     vec4 tex = texture(albedo_texture, UV) * albedo_color;
     ALBEDO = tex.rgb;

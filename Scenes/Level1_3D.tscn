@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://dv3mlsoycb230" path="res://Scenes/characters/character_avocado.tscn" id="25_mglpj"]
 [ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="26_0tae3"]
 [ext_resource type="PackedScene" uid="uid://db03lq6cgxid2" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedDoors.glb" id="26_7vwr8"]
+[ext_resource type="Texture2D" uid="uid://bnliw6xgnacr1" path="res://assets/tutorial-arrows.png" id="26_qovxq"]
 [ext_resource type="Script" uid="uid://ckobusjip2hti" path="res://scripts/Game/Systems/QuestSystem/QuestReaction.cs" id="27_0tae3"]
 [ext_resource type="Script" uid="uid://cqfwdw7wlks67" path="res://scripts/Game/Character/CharacterSaveData.cs" id="27_kdqke"]
 [ext_resource type="PackedScene" uid="uid://dcaqo4uenuwgu" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedWide.glb" id="27_qovxq"]
@@ -72,7 +73,7 @@ size = Vector3(0.72718954, 1.4217529, 0.5893482)
 size = Vector3(1.131227, 1.2264404, 0.84568787)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_csk8p"]
-size = Vector3(0.9929533, 1.4217529, 1.9507984)
+size = Vector3(0.2543987, 1.4217529, 1.9507984)
 
 [sub_resource type="Animation" id="Animation_7vwr8"]
 length = 0.001
@@ -118,6 +119,18 @@ size = Vector3(0.6619873, 1.5184326, 0.12817383)
 script = ExtResource("27_kdqke")
 metadata/_custom_type_script = "uid://cqfwdw7wlks67"
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_csk8p"]
+transparency = 1
+cull_mode = 2
+no_depth_test = true
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.5686275)
+albedo_texture = ExtResource("26_qovxq")
+disable_receive_shadows = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sppe2"]
+material = SubResource("StandardMaterial3D_csk8p")
+
 [sub_resource type="Resource" id="Resource_0tae3"]
 script = ExtResource("27_0tae3")
 _targetPath = NodePath("../../../../dad")
@@ -129,7 +142,7 @@ metadata/_custom_type_script = "uid://ckobusjip2hti"
 script = ExtResource("27_0tae3")
 _targetPath = NodePath("../../../../dad")
 _methodName = "SetStateToPatrolling"
-_params = [NodePath("../../../../Marker3D"), NodePath("../../../../Marker3D2")]
+_params = [NodePath("../../../../Waypoints/Marker3D"), NodePath("../../../../Waypoints/Marker3D2")]
 metadata/_custom_type_script = "uid://ckobusjip2hti"
 
 [sub_resource type="Resource" id="Resource_7vwr8"]
@@ -150,7 +163,7 @@ metadata/_custom_type_script = "uid://ckobusjip2hti"
 script = ExtResource("27_0tae3")
 _targetPath = NodePath("../../../../dad")
 _methodName = "SetStateToPatrolling"
-_params = [NodePath("../../../../Marker3D3"), NodePath("../../../../Marker3D4")]
+_params = [NodePath("../../../../Waypoints/Marker3D3"), NodePath("../../../../Waypoints/Marker3D4")]
 metadata/_custom_type_script = "uid://ckobusjip2hti"
 
 [sub_resource type="Resource" id="Resource_lhsq1"]
@@ -369,7 +382,7 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 13.441111, 0.13522768, -0.20352992)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Bedroom/Area3D2" unique_id=344954541]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13688087, 0.039794922, 0.2691477)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08598423, 0.039794922, 0.2691477)
 shape = SubResource("BoxShape3D_csk8p")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
@@ -422,27 +435,71 @@ transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.707
 [node name="kitchenMicrowave(Clone)" parent="NavigationRegion3D/Kitchen/kitchenMicrowave" index="0" unique_id=1017961811]
 layers = 3
 
-[node name="Marker3D" type="Marker3D" parent="." unique_id=1982524714]
+[node name="Waypoints" type="Node" parent="." unique_id=331121236]
+
+[node name="Marker3D" type="Marker3D" parent="Waypoints" unique_id=1982524714]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3162112, 4.7683716e-07, 4.085461)
 
-[node name="Marker3D2" type="Marker3D" parent="." unique_id=2145844556]
+[node name="Marker3D2" type="Marker3D" parent="Waypoints" unique_id=2145844556]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5207508, 0, 4.0724177)
 
-[node name="Marker3D3" type="Marker3D" parent="." unique_id=59002883]
+[node name="Marker3D3" type="Marker3D" parent="Waypoints" unique_id=59002883]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55671304, 0, 4.080787)
 
-[node name="Marker3D4" type="Marker3D" parent="." unique_id=1257562889]
+[node name="Marker3D4" type="Marker3D" parent="Waypoints" unique_id=1257562889]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6931679, 0, 1.8831236)
 
 [node name="Player" parent="." unique_id=926984674 instance=ExtResource("21_ycjjd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9195175, 0, 0.20126241)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.970758, 0, -0.07768965)
 _saveData = SubResource("Resource_qovxq")
+
+[node name="tutorial" type="Node3D" parent="Player" unique_id=1617046406]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2539379, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/tutorial" unique_id=1822487694]
+transform = Transform3D(0.7387687, 0, 0, 0, 1, 0, 0, 0, 0.7387687, 0, 0.04558456, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_sppe2")
+
+[node name="Right" type="Label3D" parent="Player/tutorial" unique_id=320560823]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7231178, 0.1523425, 0.07759935)
+billboard = 1
+no_depth_test = true
+text = "D"
+
+[node name="Left" type="Label3D" parent="Player/tutorial" unique_id=1209077766]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75131035, 0.1523425, 0.07759935)
+billboard = 1
+no_depth_test = true
+text = "Q"
+
+[node name="Up" type="Label3D" parent="Player/tutorial" unique_id=1673694638]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013881683, 0.1523425, -0.73908746)
+billboard = 1
+no_depth_test = true
+text = "Z"
+
+[node name="Down" type="Label3D" parent="Player/tutorial" unique_id=1211620603]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006181717, 0.1523425, 0.8005708)
+billboard = 1
+no_depth_test = true
+text = "S"
+
+[node name="Jump" type="Label3D" parent="Player/tutorial" unique_id=596378753]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006181717, -0.24529779, 0.11606294)
+visible = false
+billboard = 1
+no_depth_test = true
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(1, 1, 1, 1)
+text = "space"
+font_size = 24
 
 [node name="dad" parent="." unique_id=1460930038 instance=ExtResource("25_14bvk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5396967, 0, 1.8358989)
 
 [node name="avocado" parent="." unique_id=15025039 instance=ExtResource("25_mglpj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2369477, 2.3841858e-07, 4.020653)
+transform = Transform3D(0.6180243, 0, 0.78615904, 0, 1, 0, -0.78615904, 0, 0.6180243, -1.2369477, 2.3841858e-07, 3.860877)
 
 [node name="Quests" type="Node" parent="." unique_id=371530256]
 
@@ -486,10 +543,18 @@ metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
 
 [node name="Reactions" type="Node" parent="Quests/LookingForAvocado" unique_id=1622472242]
 
-[node name="obj1-init-OpenDoor" type="Node" parent="Quests/LookingForAvocado/Reactions" unique_id=2056696063]
+[node name="obj1-completed-OpenDoor" type="Node" parent="Quests/LookingForAvocado/Reactions" unique_id=2056696063]
 script = ExtResource("26_0tae3")
 _checkObjectiveId = true
 _objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8921"
+_checkState = true
+_state = 2
+eventChannel = ExtResource("28_kdqke")
+
+[node name="obj2-completed-removeTutorial" type="Node" parent="Quests/LookingForAvocado/Reactions" unique_id=548396824]
+script = ExtResource("26_0tae3")
+_checkObjectiveId = true
+_objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8922"
 _checkState = true
 _state = 2
 eventChannel = ExtResource("28_kdqke")
@@ -536,7 +601,8 @@ eventChannel = ExtResource("28_kdqke")
 [connection signal="body_entered" from="NavigationRegion3D/Livingroom/Area3D6" to="Quests/LookingForAvocado/Triggers/obj2-complete" method="_OnPlayerTrigger"]
 [connection signal="body_entered" from="NavigationRegion3D/Bedroom/Area3D" to="Quests/LookingForAvocado/Triggers/obj1-init" method="_OnPlayerTrigger"]
 [connection signal="body_entered" from="NavigationRegion3D/Bedroom/Area3D2" to="Quests/LookingForAvocado/Triggers/obj1-complete" method="_OnPlayerTrigger"]
-[connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj1-init-OpenDoor" to="NavigationRegion3D/Bedroom/StaticBody3D" method="ToggleDoor"]
+[connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj1-completed-OpenDoor" to="NavigationRegion3D/Bedroom/StaticBody3D" method="ToggleDoor"]
+[connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj2-completed-removeTutorial" to="Player/tutorial" method="queue_free"]
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj3-init-DadReaction" to="Quests/LookingForAvocado/Triggers/obj3-complete" method="_OnTrigger"]
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj4-init-DadReaction" to="Quests/LookingForAvocado/Triggers/obj4-complete" method="_OnTrigger"]
 
