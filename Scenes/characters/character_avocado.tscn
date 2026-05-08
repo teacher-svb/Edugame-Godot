@@ -10,9 +10,36 @@
 radius = 0.118652344
 height = 0.3795166
 
+[sub_resource type="Animation" id="Animation_da6yh"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_u4rbu"]
+resource_name = "updown"
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.5, 1, 0, 0.02, 0, 1, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_foxhp"]
+_data = {
+&"RESET": SubResource("Animation_da6yh"),
+&"updown": SubResource("Animation_u4rbu")
+}
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_da6yh"]
 height = 0.47583008
-radius = 0.25927734
+radius = 0.5307617
 
 [node name="avocado" unique_id=926984674 instance=ExtResource("1_7k8ld")]
 
@@ -24,7 +51,7 @@ VisualRoot = NodePath("../avocado2")
 [node name="Skeleton3D" parent="avocado2/Armature" parent_id_path=PackedInt32Array(1975359764, 1923085597) index="0" unique_id=559322183]
 bones/1/rotation = Quaternion(-0.122428946, 0.027743451, 0.07656861, 0.9891304)
 bones/3/rotation = Quaternion(-0.072635084, -0.026248384, 0.12224877, 0.98949003)
-bones/4/rotation = Quaternion(-0.008404614, 0.042020533, -0.08428091, 0.99552023)
+bones/4/rotation = Quaternion(0.006515396, -0.039644435, -0.0842903, 0.99563104)
 
 [node name="avocado" parent="avocado2/Armature/Skeleton3D" index="0" unique_id=1533239025]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 0, 0)
@@ -41,6 +68,23 @@ shape = SubResource("CapsuleShape3D_rqd8d")
 script = ExtResource("3_ch0qv")
 _staticData = ExtResource("4_da6yh")
 _pickupChannel = ExtResource("5_da6yh")
+
+[node name="Node3D" type="Node3D" parent="ItemRef" index="0" unique_id=627201557]
+
+[node name="Label3D" type="Label3D" parent="ItemRef/Node3D" index="0" unique_id=843782552]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64464813, 0)
+billboard = 2
+text = "E"
+
+[node name="Label3D2" type="Label3D" parent="ItemRef/Node3D" index="1" unique_id=1262405723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7856241, 0)
+billboard = 2
+text = "druk op"
+font_size = 16
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ItemRef/Node3D" index="2" unique_id=436589357]
+libraries/ = SubResource("AnimationLibrary_foxhp")
+autoplay = &"updown"
 
 [node name="Area3D" type="Area3D" parent="." index="7" unique_id=1554866459]
 

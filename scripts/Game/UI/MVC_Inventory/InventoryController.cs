@@ -18,7 +18,7 @@ namespace TnT.Systems.UI
         public override void _Ready()
         {
             Instance = this;
-            model.OnInventoryChanged += () => view.InitializeView(model.Items);
+            model.OnInventoryChanged += () => view.RefreshView(model.Items);
             model.OnItemAction += (item, type) =>
             {
                 switch (type)
@@ -32,6 +32,7 @@ namespace TnT.Systems.UI
                     default:
                         break;
                 }
+                view.RefreshView(model.Items);
 
             };
             _pickupItemListener.OnItemEvent += model.AddItem;

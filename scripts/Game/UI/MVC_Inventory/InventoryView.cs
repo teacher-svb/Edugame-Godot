@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Godot;
 using TnT.Easings;
 using TnT.EduGame.Inventory;
+using TnT.Extensions;
 
 namespace TnT.Systems.UI
 {
@@ -15,15 +16,26 @@ namespace TnT.Systems.UI
 
         public void InitializeView(IEnumerable<ItemData> inventoryItems)
         {
-            this.Modulate = Colors.Transparent;
+            Modulate = Colors.Transparent;
+            FillSlots(inventoryItems);
+        }
+
+        public void RefreshView(IEnumerable<ItemData> inventoryItems)
+        {
+            FillSlots(inventoryItems);
+        }
+
+        private void FillSlots(IEnumerable<ItemData> inventoryItems)
+        {
             var items = inventoryItems.ToArray();
+
             for (int i = 0; i < _itemContainers.Length; i++)
             {
                 var slot = _itemContainers[i];
                 if (slot == null)
                     continue;
                 foreach (var child in slot.GetChildren())
-                        child.QueueFree();
+                    child.QueueFree();
 
                 if (i < items.Length && items[i] != null)
                     slot.AddChild(MakeIcon(items[i].Icon));

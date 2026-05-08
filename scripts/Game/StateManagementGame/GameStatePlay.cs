@@ -16,6 +16,7 @@ namespace TnT.EduGame.GameState
             public InputAction jump;
             public InputAction2D move;
             public InputAction openInventory;
+            public InputAction pickupItem;
         }
 
         public BaseState GetState(PlayOptions options)

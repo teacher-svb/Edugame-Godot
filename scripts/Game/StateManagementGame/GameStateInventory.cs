@@ -34,7 +34,7 @@ namespace TnT.EduGame.GameState
 
         private async Task Open()
         {
-            ManagerUI.Instance.GetTree().Paused = true;
+            // ManagerUI.Instance.GetTree().Paused = true;
             await InventoryController.Instance.Show();
             _options.close.Enable();
         }
@@ -43,7 +43,7 @@ namespace TnT.EduGame.GameState
         {
             _options.close.Disable();
             await InventoryController.Instance.Hide();
-            ManagerUI.Instance.GetTree().Paused = false;
+            // ManagerUI.Instance.GetTree().Paused = false;
         }
     }
 }

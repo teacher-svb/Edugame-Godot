@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b66cprwwqv431" path="res://scripts/Game/Systems/SaveLoadSystem/SaveLoadManager.cs" id="1_3yhdi"]
 [ext_resource type="Script" uid="uid://cerfog7uyabpn" path="res://scripts/Game/Systems/SaveLoadSystem/MyGameData.cs" id="2_4v8vv"]
 [ext_resource type="Script" uid="uid://d3ttmxb4thh1c" path="res://scripts/Lib/Input/InputManager.cs" id="3_4v8vv"]
+[ext_resource type="Script" uid="uid://x737eafgbb37" path="res://scripts/Lib/Input/InputAction2D.cs" id="3_fkgmb"]
 [ext_resource type="Script" uid="uid://bu2vh3eo113s1" path="res://scripts/Game/UI/MVC_Fade/FadeController.cs" id="4_7g5um"]
 [ext_resource type="Script" uid="uid://7nvtadqep3kv" path="res://scripts/Game/Systems/QuestSystem/QuestManager.cs" id="4_347u6"]
 [ext_resource type="Script" uid="uid://bjnewwsvx7s8s" path="res://scripts/Game/Singletons/ManagerUI.cs" id="4_c37v5"]
@@ -33,10 +34,66 @@
 [ext_resource type="Resource" uid="uid://cmj45lqtdr2l6" path="res://GameData/EventChannels/UseItemEventChannel.tres" id="30_fkgmb"]
 [ext_resource type="Script" uid="uid://cewycpjka78f3" path="res://scripts/Game/Systems/InventorySystem/ItemEventListener.cs" id="30_i1r4r"]
 [ext_resource type="Script" uid="uid://bq8nb421y1t1p" path="res://scripts/Game/UI/MVC_Inventory/InventoryModel.cs" id="30_j8mgp"]
-[ext_resource type="Script" uid="uid://bwo0qc8hpbax0" path="res://scripts/Game/UI/MVC_Inventory/InventoryView.cs" id="31_5t4y7"]
 [ext_resource type="Resource" uid="uid://bytjn381x70ha" path="res://GameData/EventChannels/RemoveItemEventChannel.tres" id="31_hwrcp"]
 [ext_resource type="PackedScene" uid="uid://csd5kk66e1bep" path="res://Scenes/UI/Inventory.tscn" id="32_j8mgp"]
 [ext_resource type="AudioStream" uid="uid://p6yptdrwk41y" path="res://assets/music/Dawn_at_the_Eastern_Gate.mp3" id="34_5t4y7"]
+
+[sub_resource type="Resource" id="Resource_hwrcp"]
+script = ExtResource("16_ut70p")
+InputReference = "open"
+Enabled = true
+ActionName = "open"
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
+
+[sub_resource type="Resource" id="Resource_wdqj0"]
+script = ExtResource("16_ut70p")
+InputReference = "pickup"
+Enabled = true
+ActionName = "pickup"
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
+
+[sub_resource type="Resource" id="Resource_8mpub"]
+script = ExtResource("16_ut70p")
+InputReference = "move_left"
+Enabled = true
+ActionName = "move_left"
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
+
+[sub_resource type="Resource" id="Resource_7p1b1"]
+script = ExtResource("16_ut70p")
+InputReference = "move_up"
+Enabled = true
+ActionName = "move_up"
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
+
+[sub_resource type="Resource" id="Resource_v88nt"]
+script = ExtResource("16_ut70p")
+InputReference = "move_right"
+Enabled = true
+ActionName = "move_right"
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
+
+[sub_resource type="Resource" id="Resource_n2kwl"]
+script = ExtResource("16_ut70p")
+InputReference = "move_down"
+Enabled = true
+ActionName = "move_down"
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
+
+[sub_resource type="Resource" id="Resource_d2cak"]
+script = ExtResource("3_fkgmb")
+NegativeX = SubResource("Resource_8mpub")
+PositiveX = SubResource("Resource_v88nt")
+NegativeY = SubResource("Resource_7p1b1")
+PositiveY = SubResource("Resource_n2kwl")
+metadata/_custom_type_script = "uid://x737eafgbb37"
+
+[sub_resource type="Resource" id="Resource_56cnb"]
+script = ExtResource("16_ut70p")
+InputReference = "jump"
+Enabled = true
+ActionName = "jump"
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
 
 [sub_resource type="Resource" id="Resource_72h8h"]
 script = ExtResource("2_4v8vv")
@@ -78,6 +135,10 @@ process_mode = 3
 
 [node name="StateManagerGame" type="Node" parent="." unique_id=1531059217]
 script = ExtResource("7_0le2r")
+OpenInventoryAction = SubResource("Resource_hwrcp")
+PickupItemAction = SubResource("Resource_wdqj0")
+MovePlayerAction = SubResource("Resource_d2cak")
+JumpPlayerAction = SubResource("Resource_56cnb")
 
 [node name="InventoryState" type="Node" parent="StateManagerGame" unique_id=1597684738]
 script = ExtResource("14_ut70p")
@@ -109,13 +170,13 @@ _quests = Array[ExtResource("11_aum7h")]([ExtResource("6_pnf1h")])
 eventChannel = ExtResource("13_pnf1h")
 _saveData = SubResource("Resource_pnf1h")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=379512689]
+[node name="UIManager" type="CanvasLayer" parent="." unique_id=379512689]
 script = ExtResource("4_c37v5")
 Next = SubResource("Resource_5t4y7")
 Close = SubResource("Resource_i1r4r")
 Open = SubResource("Resource_awodd")
 
-[node name="FadeController" type="Control" parent="UI" unique_id=1274864108]
+[node name="FadeController" type="Control" parent="UIManager" unique_id=1274864108]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -126,7 +187,7 @@ script = ExtResource("4_7g5um")
 view = SubResource("Resource_n5sdn")
 model = SubResource("Resource_eky4q")
 
-[node name="ColorRect" type="ColorRect" parent="UI/FadeController" unique_id=1091947856]
+[node name="ColorRect" type="ColorRect" parent="UIManager/FadeController" unique_id=1091947856]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -136,15 +197,15 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="MessageController" type="Node" parent="UI" unique_id=189203661 node_paths=PackedStringArray("view", "model")]
+[node name="MessageController" type="Node" parent="UIManager" unique_id=189203661 node_paths=PackedStringArray("view", "model")]
 script = ExtResource("8_0le2r")
 view = NodePath("MessageView")
 model = NodePath("MessageModel")
 
-[node name="MessageModel" type="Node" parent="UI/MessageController" unique_id=503624646]
+[node name="MessageModel" type="Node" parent="UIManager/MessageController" unique_id=503624646]
 script = ExtResource("10_46vsp")
 
-[node name="MessageView" type="Control" parent="UI/MessageController" unique_id=132175026]
+[node name="MessageView" type="Control" parent="UIManager/MessageController" unique_id=132175026]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -155,16 +216,16 @@ pivot_offset = Vector2(578, 128)
 mouse_filter = 1
 script = ExtResource("9_ut70p")
 
-[node name="Notification" parent="UI/MessageController/MessageView" unique_id=756365186 instance=ExtResource("9_n5sdn")]
+[node name="Notification" parent="UIManager/MessageController/MessageView" unique_id=756365186 instance=ExtResource("9_n5sdn")]
 layout_mode = 1
 
-[node name="ChallengeController" type="Node" parent="UI" unique_id=162030598 node_paths=PackedStringArray("view", "model")]
+[node name="ChallengeController" type="Node" parent="UIManager" unique_id=162030598 node_paths=PackedStringArray("view", "model")]
 unique_name_in_owner = true
 script = ExtResource("23_aum7h")
 view = NodePath("ChallengeView")
 model = NodePath("ChallengeModel")
 
-[node name="ChallengeView" type="Control" parent="UI/ChallengeController" unique_id=366009643]
+[node name="ChallengeView" type="Control" parent="UIManager/ChallengeController" unique_id=366009643]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -174,15 +235,15 @@ grow_vertical = 2
 script = ExtResource("24_qelhd")
 metadata/_custom_type_script = "uid://dlqolcp4oddju"
 
-[node name="ChallengeUI" parent="UI/ChallengeController/ChallengeView" unique_id=12389747 instance=ExtResource("25_blwmm")]
+[node name="ChallengeUI" parent="UIManager/ChallengeController/ChallengeView" unique_id=12389747 instance=ExtResource("25_blwmm")]
 layout_mode = 1
 
-[node name="ChallengeModel" type="Node" parent="UI/ChallengeController" unique_id=1213671079]
+[node name="ChallengeModel" type="Node" parent="UIManager/ChallengeController" unique_id=1213671079]
 script = ExtResource("26_2a8cd")
 _challenge = ExtResource("27_kpb3h")
 metadata/_custom_type_script = "uid://bmfvn3p4u73k5"
 
-[node name="InventoryController" type="Node" parent="UI" unique_id=898957681 node_paths=PackedStringArray("view", "model", "_pickupItemListener")]
+[node name="InventoryController" type="Node" parent="UIManager" unique_id=898957681 node_paths=PackedStringArray("view", "model", "_pickupItemListener")]
 script = ExtResource("29_yi7uc")
 view = NodePath("InventoryView")
 model = NodePath("InventoryModel")
@@ -190,26 +251,14 @@ _pickupItemListener = NodePath("PickupItemEventListener")
 _useItemChannel = ExtResource("30_fkgmb")
 _removeItemChannel = ExtResource("31_hwrcp")
 
-[node name="PickupItemEventListener" type="Node" parent="UI/InventoryController" unique_id=1242244140]
+[node name="PickupItemEventListener" type="Node" parent="UIManager/InventoryController" unique_id=1242244140]
 script = ExtResource("30_i1r4r")
 eventChannel = ExtResource("30_5t4y7")
 
-[node name="InventoryModel" type="Node" parent="UI/InventoryController" unique_id=391958656]
+[node name="InventoryModel" type="Node" parent="UIManager/InventoryController" unique_id=391958656]
 script = ExtResource("30_j8mgp")
 
-[node name="InventoryView" type="Control" parent="UI/InventoryController" unique_id=1870665979]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("31_5t4y7")
-
-[node name="Inventory" parent="UI/InventoryController/InventoryView" unique_id=1662155608 node_paths=PackedStringArray("_itemContainers") instance=ExtResource("32_j8mgp")]
-layout_mode = 1
-_itemContainers = [null, NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer2"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer3"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer4"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer5"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer6"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer7"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer8"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer9"), NodePath("VBoxContainer/MarginContainer/HBoxContainer/PanelContainer10")]
+[node name="InventoryView" parent="UIManager/InventoryController" unique_id=1662155608 instance=ExtResource("32_j8mgp")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=358640137]
 stream = ExtResource("34_5t4y7")

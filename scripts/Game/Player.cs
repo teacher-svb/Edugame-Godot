@@ -4,30 +4,31 @@ using System.Linq;
 using Godot;
 using TnT.EduGame.Characters;
 using TnT.EduGame.CharacterState;
+using TnT.EduGame.GameState;
 using TnT.Extensions;
 using TnT.Input;
 using TnT.Systems;
 
-public partial class Player : Node, IInputActionable//, IBind<Player.PlayerSaveData>
+public partial class Player : Node//, IInputActionable//, IBind<Player.PlayerSaveData>
 {
 	public static Player Instance { get; private set; }
 
-	[Export]
-	public InputActionBase[] InputActions { get; set; } =
-	[
-		new InputAction2D {
-			ActionName = "move",
-			Enabled = true,
-			NegativeX = new InputAction { InputReference = "move_left",  Enabled = true },
-			PositiveX = new InputAction { InputReference = "move_right", Enabled = true },
-			NegativeY = new InputAction { InputReference = "move_up",  Enabled = true },
-			PositiveY = new InputAction { InputReference = "move_down",    Enabled = true }
-		},
-		new InputAction   { ActionName = "jump", InputReference = "jump", Enabled = true }
-	];
+	// [Export]
+	// public InputActionBase[] InputActions { get; set; } =
+	// [
+	// 	new InputAction2D {
+	// 		ActionName = "move",
+	// 		Enabled = true,
+	// 		NegativeX = new InputAction { InputReference = "move_left",  Enabled = true },
+	// 		PositiveX = new InputAction { InputReference = "move_right", Enabled = true },
+	// 		NegativeY = new InputAction { InputReference = "move_up",  Enabled = true },
+	// 		PositiveY = new InputAction { InputReference = "move_down",    Enabled = true }
+	// 	},
+	// 	new InputAction   { ActionName = "jump", InputReference = "jump", Enabled = true }
+	// ];
 
-	InputAction2D MoveAction => InputActions.FirstOrDefault(a => a.ActionName == "move") as InputAction2D;
-	InputAction JumpAction => InputActions.FirstOrDefault(a => a.ActionName == "jump") as InputAction;
+	InputAction2D MoveAction => StateManagerGame.Instance.MovePlayerAction;
+	InputAction JumpAction =>StateManagerGame.Instance.JumpPlayerAction;
 
 
 	CharacterController3D _cc;

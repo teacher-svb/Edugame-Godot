@@ -8,12 +8,20 @@ using TnT.EduGame.Characters;
 using TnT.Extensions;
 using TnT.EduGame.QuestSystem;
 using TnT.EduGame.Question;
+using TnT.Input;
 
 namespace TnT.EduGame.GameState
 {
-    public partial class StateManagerGame : AbstractStateStack
+    public partial class StateManagerGame : AbstractStateStack, IInputActionable
     {
         public static StateManagerGame Instance { get; private set; }
+
+        [Export] public InputAction OpenInventoryAction { get; private set; }
+        [Export] public InputAction PickupItemAction { get; private set; }
+        [Export] public InputAction2D MovePlayerAction { get; private set; }
+        [Export] public InputAction JumpPlayerAction { get; private set; }
+
+        public InputActionBase[] InputActions => [OpenInventoryAction, PickupItemAction, MovePlayerAction, JumpPlayerAction];
 
         public Action<NodePath> OnSceneLoaded;
 
@@ -32,7 +40,7 @@ namespace TnT.EduGame.GameState
             var state = _registeredStates.OfType<GameStatePlay>().FirstOrDefault()
                 ?? throw new Exception("no play state assigned");
 
-            Push(state.GetState(new() { openInventory = ManagerUI.Instance.Open }));
+            Push(state.GetState(new() { openInventory = OpenInventoryAction, pickupItem = PickupItemAction }));
 
             OnSceneLoaded?.Invoke(null);
         }
