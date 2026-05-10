@@ -11,6 +11,7 @@ namespace TnT.EduGame.GameState
     public partial class GameStateLoadingScreen : BaseGameState, IStateObject<GameStateLoadingScreen.LoaderOptions>
     {
         string _currentScenePath;
+        bool _loadingFinished = false;
 
         FadeController _fadeController;
         FadeController FadeController
@@ -30,6 +31,7 @@ namespace TnT.EduGame.GameState
 
         public BaseState GetState<T>(T options) where T : ISceneLoaderOptions, new()
         {
+            _loadingFinished = false;
             if (options is SceneLoaderOptions)
             {
                 var sceneLoaderOptions = options as SceneLoaderOptions;
@@ -37,8 +39,8 @@ namespace TnT.EduGame.GameState
                     _currentScenePath = sceneLoaderOptions.scenePath;
                 return new BaseState(new()
                 {
-                    ExitOnNextUpdate = () => true,
-                    OnEnter = () => LoadScene(sceneLoaderOptions.scenePath, sceneLoaderOptions.player, sceneLoaderOptions.targetLocation, sceneLoaderOptions.forceLoad),
+                    ExitOnNextUpdate = () => _loadingFinished,
+                    OnEnter = () => LoadScene(sceneLoaderOptions.scenePath, sceneLoaderOptions.targetLocation, sceneLoaderOptions.onSceneReady),
                     OnExit = FadeOut
                 });
             }
@@ -47,8 +49,8 @@ namespace TnT.EduGame.GameState
                 var sceneLoaderOptions = options as LocationLoaderOptions;
                 return new BaseState(new()
                 {
-                    ExitOnNextUpdate = () => true,
-                    OnEnter = () => LoadLocation(sceneLoaderOptions.player, sceneLoaderOptions.targetLocation),
+                    ExitOnNextUpdate = () => _loadingFinished,
+                    OnEnter = () => LoadLocation(sceneLoaderOptions.targetLocation),
                     OnExit = FadeOut
                 });
             }
@@ -65,14 +67,17 @@ namespace TnT.EduGame.GameState
             await this.FadeController.ShowView();
         }
 
-        async Task LoadLocation(Player player, Vector3 target)
+        async Task LoadLocation(Vector3 target)
         {
             await FadeIn();
 
-            player.MoveTo(target);
+            var tree = ManagerUI.Instance.GetTree();
+            tree.FindAnyObjectByType<Player>().MoveTo(target);
+
+            _loadingFinished = true;
         }
 
-        async Task LoadScene(string scenePath, Player player, Vector3 target, bool forceLoad)
+        async Task LoadScene(string scenePath, Vector3 target, Action<string> onSceneReady)
         {
             await FadeIn();
 
@@ -91,7 +96,10 @@ namespace TnT.EduGame.GameState
 
                 await node.ToSignal(node, Node.SignalName.Ready);
 
+                onSceneReady?.Invoke(scenePath);
+
                 tree.FindAnyObjectByType<Player>().MoveTo(target);
+                _loadingFinished = true;
             }
         }
 
@@ -109,18 +117,19 @@ namespace TnT.EduGame.GameState
 
         public class LoaderOptions : ISceneLoaderOptions
         {
-            public bool forceLoad;
+            // public bool forceLoad;
         }
 
         public class LocationLoaderOptions : LoaderOptions
         {
-            public Player player;
+            // public Player player;
             public Vector3 targetLocation;
         }
 
         public class SceneLoaderOptions : LocationLoaderOptions
         {
             public string scenePath;
+            public Action<string> onSceneReady;
         }
     }
 }

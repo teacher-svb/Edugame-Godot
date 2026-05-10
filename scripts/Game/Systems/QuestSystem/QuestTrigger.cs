@@ -37,6 +37,11 @@ namespace TnT.EduGame.QuestSystem
             _OnTrigger();
         }
 
+        void _OnTrigger(Variant v)
+        {
+            _OnTrigger();
+        }
+
         void _OnTrigger()
         {
             switch (_action)

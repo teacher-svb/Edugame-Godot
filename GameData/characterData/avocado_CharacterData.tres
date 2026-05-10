@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://dks7i46ib37or"]
+
+[ext_resource type="Script" uid="uid://bqblbalohjolq" path="res://scripts/Game/Character/CharacterData.cs" id="1_lcybp"]
+[ext_resource type="Texture2D" uid="uid://b4w45xrv1mal" path="res://assets/Spritesheets/Characters/Character_Avocado/avocado.png" id="1_yqos7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1edip"]
+atlas = ExtResource("1_yqos7")
+region = Rect2(10, 7.964868, 12, 17.310106)
+
+[resource]
+script = ExtResource("1_lcybp")
+_name = "Avocado"
+_face = SubResource("AtlasTexture_1edip")
+_body = ExtResource("1_yqos7")
+CharacterAbilities = null
+metadata/_custom_type_script = "uid://bqblbalohjolq"

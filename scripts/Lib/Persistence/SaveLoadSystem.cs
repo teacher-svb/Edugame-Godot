@@ -21,13 +21,15 @@ namespace TnT.Systems.Persistence
         // [ExportToolButton("Save!")] // You can pass an icon as second argument if you want.
         // public Callable Save => Callable.From(SaveGame);
 
-        public override void _Ready()
+        public override async void _Ready()
         {
             // base.Awake();
             NewGame();
             dataService = new FileDataService<T>(new JsonSerializer());
 
-            StateManagerGame.Instance.OnSceneLoaded += OnSceneLoaded;
+            StateManagerGame.Instance.SceneLoaded += OnSceneLoaded;
+            
+            OnSceneLoaded("");
         }
 
         // void Start() => NewGame();
@@ -35,7 +37,7 @@ namespace TnT.Systems.Persistence
         // void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
         // void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
-        protected abstract void OnSceneLoaded(NodePath scene);
+        protected abstract void OnSceneLoaded(string scenePath);
 
         protected void Bind<U, TData>(ref TData data) where U : Node, IBind<TData> where TData : ISaveable, new()
         {

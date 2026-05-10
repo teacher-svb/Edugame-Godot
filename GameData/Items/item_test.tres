@@ -9,6 +9,7 @@ region = Rect2(5, 5.5, 21, 23)
 
 [resource]
 script = ExtResource("1_tykq5")
+Id = "56de1c29-e358-4c5c-b698-e8b4892fbacb"
 Name = "Avocado"
 Icon = SubResource("AtlasTexture_knjau")
 metadata/_custom_type_script = "uid://chksvvfbkadbt"

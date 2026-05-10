@@ -123,7 +123,8 @@ namespace TnT.EduGame.Characters
         {
             _saveData = data;
             _saveData.Id = UniqueId.Id;
-            this.Position = _saveData.position;
+            if (!data.IsNew)
+                this.Position = _saveData.position;
             LoadCharacter(_saveData.characterId);
         }
         #endregion

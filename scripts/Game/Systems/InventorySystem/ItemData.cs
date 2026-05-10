@@ -7,7 +7,7 @@ namespace TnT.EduGame.Inventory
     public partial class ItemData : Resource
     {
         [Export]
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Id;
         [Export]
         public string Name;
         [Export]

@@ -32,6 +32,8 @@
 [ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="28_kdqke"]
 [ext_resource type="PackedScene" uid="uid://cd2furrsxugw6" path="res://assets/3D/Furniture Kit/Models/GLTF format/books.glb" id="29_kdqke"]
 [ext_resource type="MeshLibrary" uid="uid://dn1i16n6um3sg" path="res://assets/3D/Furniture Kit/furniture-kit-tileables.meshlib" id="30_kb3qt"]
+[ext_resource type="Script" uid="uid://cewycpjka78f3" path="res://scripts/Game/Systems/InventorySystem/ItemEventListener.cs" id="33_sppe2"]
+[ext_resource type="Resource" uid="uid://clf3iqsa6rjxf" path="res://GameData/EventChannels/PickupItemEventChannel.tres" id="34_lhsq1"]
 
 [sub_resource type="Gradient" id="Gradient_upsym"]
 offsets = PackedFloat32Array(0.117647, 1)
@@ -52,12 +54,6 @@ adjustment_enabled = true
 adjustment_saturation = 1.2
 adjustment_color_correction = SubResource("GradientTexture1D_kdqke")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qovxq"]
-size = Vector3(0.4958725, 1.8308105, 1.285881)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_shbgg"]
-size = Vector3(0.4958725, 1.3237305, 0.93255615)
-
 [sub_resource type="NavigationMesh" id="NavigationMesh_7n07m"]
 vertices = PackedVector3Array(-14.01304, 0.72969055, 0.9021754, -14.31304, 0.72969055, 1.0021753, -14.31304, 0.72969055, 1.3021753, -10.613039, 0.72969055, 1.3021753, -10.613039, 0.72969055, 1.0021753, -11.01304, 0.72969055, 0.9021754, -13.213039, 0.72969055, 0.8021753, -11.01304, 0.72969055, 0.102175474, -10.613039, 0.72969055, 0.002175331, -10.613039, 0.72969055, -0.29782462, -11.913039, 0.72969055, -0.29782462, -12.01304, 0.72969055, -0.09782457, -13.913039, 0.72969055, 0.7021754, -13.913039, 0.72969055, -0.09782457, -14.11304, 0.72969055, -0.09782457, -13.01304, 0.72969055, -0.19782472, 1.6869612, 0.72969055, 0.7021754, 1.6869612, 0.72969055, 1.0021753, 1.9869604, 0.72969055, 1.9021754, 2.7869616, 0.72969055, 1.9021754, 4.38696, 0.72969055, 0.7021754, 2.7869616, 0.72969055, 3.1021752, 2.2869616, 0.72969055, 3.1021752, 2.2869616, 0.72969055, 4.3021755, 2.9869604, 0.72969055, 2.9021754, 4.38696, 0.72969055, 4.3021755, 2.9869604, 0.72969055, 2.2021756, -0.31303978, 0.72969055, 3.3021755, -0.8130398, 0.72969055, 3.3021755, -1.0130396, 0.72969055, 3.6021752, -1.3130398, 0.72969055, 3.6021752, -1.3130398, 0.72969055, 4.3021755, 1.4869604, 0.72969055, 1.2021754, 1.6869612, 0.72969055, 2.2021756, 1.6869612, 0.72969055, 2.9021754, -0.013039589, 0.72969055, 1.8021755, -0.013039589, 0.72969055, 3.2021756, -0.013039589, 0.72969055, 1.2021754, -0.5130396, 0.72969055, 3.1021752, -0.31303978, 0.72969055, 1.7021756, -0.8130398, 0.72969055, 1.2021754, -0.5130396, 0.72969055, 1.9021754)
 polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 6), PackedInt32Array(6, 3, 0), PackedInt32Array(0, 3, 2), PackedInt32Array(8, 7, 9), PackedInt32Array(9, 7, 10), PackedInt32Array(10, 7, 11), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 0), PackedInt32Array(7, 5, 11), PackedInt32Array(11, 5, 15), PackedInt32Array(15, 5, 6), PackedInt32Array(0, 12, 6), PackedInt32Array(17, 16, 18), PackedInt32Array(18, 16, 19), PackedInt32Array(19, 16, 20), PackedInt32Array(23, 22, 21), PackedInt32Array(21, 24, 23), PackedInt32Array(23, 24, 25), PackedInt32Array(24, 26, 25), PackedInt32Array(25, 26, 20), PackedInt32Array(26, 19, 20), PackedInt32Array(29, 28, 27), PackedInt32Array(31, 30, 29), PackedInt32Array(17, 18, 32), PackedInt32Array(32, 18, 33), PackedInt32Array(33, 34, 32), PackedInt32Array(32, 34, 35), PackedInt32Array(35, 34, 36), PackedInt32Array(29, 27, 36), PackedInt32Array(22, 23, 34), PackedInt32Array(34, 23, 36), PackedInt32Array(36, 23, 29), PackedInt32Array(29, 23, 31), PackedInt32Array(35, 37, 32), PackedInt32Array(28, 38, 27), PackedInt32Array(37, 35, 39), PackedInt32Array(39, 41, 37), PackedInt32Array(37, 41, 40), PackedInt32Array(38, 28, 41), PackedInt32Array(41, 28, 40)]
@@ -66,11 +62,43 @@ cell_height = 0.5
 agent_radius = 0.1
 region_min_size = 15.0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_wwfkw"]
+size = Vector3(0.65283203, 1.3062286, 0.23248291)
+
+[sub_resource type="Animation" id="Animation_sppe2"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("doorwayFront(Clone)/door")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_lhsq1"]
+resource_name = "door_open"
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("doorwayFront(Clone)/door")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 1, 0, -0.82729137, 0, 0.561773)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q6n1l"]
+_data = {
+&"RESET": SubResource("Animation_sppe2"),
+&"door_open": SubResource("Animation_lhsq1")
+}
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_c1bi7"]
 size = Vector3(0.72718954, 1.4217529, 0.5893482)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ycjjd"]
 size = Vector3(1.131227, 1.2264404, 0.84568787)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_shbgg"]
+size = Vector3(0.4958725, 1.3237305, 0.93255615)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_csk8p"]
 size = Vector3(0.2543987, 1.4217529, 1.9507984)
@@ -113,7 +141,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sppe2"]
-size = Vector3(0.6619873, 1.5184326, 0.12817383)
+size = Vector3(0.6619873, 1.5184326, 0.19494629)
 
 [sub_resource type="Resource" id="Resource_qovxq"]
 script = ExtResource("27_kdqke")
@@ -130,6 +158,9 @@ disable_receive_shadows = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_sppe2"]
 material = SubResource("StandardMaterial3D_csk8p")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qovxq"]
+size = Vector3(0.4958725, 1.8308105, 1.285881)
 
 [sub_resource type="Resource" id="Resource_0tae3"]
 script = ExtResource("27_0tae3")
@@ -207,40 +238,6 @@ directional_shadow_max_distance = 25.0
 directional_shadow_pancake_size = 2.0
 sky_mode = 1
 
-[node name="transporters" type="Node" parent="." unique_id=838434594]
-
-[node name="transporter_bedroom-livingroom" type="Area3D" parent="transporters" unique_id=1189788667 node_paths=PackedStringArray("_destination")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.417043, 0.055497095, -0.385913)
-script = ExtResource("22_182vs")
-_destination = NodePath("../transporter_livingroom-bedroom")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="transporters/transporter_bedroom-livingroom" unique_id=7071199]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.039886475, 0.25354004, -0.8764658)
-shape = SubResource("BoxShape3D_qovxq")
-debug_color = Color(0, 0.6, 0.69803923, 1)
-
-[node name="transporter_livingroom-bedroom" type="Area3D" parent="transporters" unique_id=415332278 node_paths=PackedStringArray("_destination")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5591128, 0.055497095, 0.62592345)
-script = ExtResource("22_182vs")
-_destination = NodePath("../transporter_bedroom-livingroom")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="transporters/transporter_livingroom-bedroom" unique_id=820383267]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.039886475, 0.29126757, -1.0552176)
-shape = SubResource("BoxShape3D_shbgg")
-debug_color = Color(0, 0.6, 0.69803923, 1)
-
-[node name="transporter_livingroom_level2" type="Area3D" parent="transporters" unique_id=1664634794]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.055, 36.5)
-script = ExtResource("22_182vs")
-_sceneToLoadPath = "uid://bkg5k0ed5xbko"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="transporters/transporter_livingroom_level2" unique_id=2109793199]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9697871, 0.43125337, -31.581316)
-shape = SubResource("BoxShape3D_shbgg")
-debug_color = Color(0, 0.6, 0.69803923, 1)
-
-[node name="QuestActivators" type="Node" parent="." unique_id=1980788771]
-
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=576877010]
 navigation_mesh = SubResource("NavigationMesh_7n07m")
 
@@ -289,8 +286,22 @@ transform = Transform3D(2.2097661, 0, 0, 0, 1, 0, 0, 0, 2.2097661, -3.299, 0, -1
 [node name="stairs" parent="NavigationRegion3D/Livingroom" unique_id=472851437 instance=ExtResource("2_f2o16")]
 transform = Transform3D(-4.152582e-08, 0, -0.95, 0, 0.95, 0, 0.95, 0, -4.152582e-08, -2.9157922, -0.77252865, -1.0971615)
 
-[node name="doorwayFront" parent="NavigationRegion3D/Livingroom" unique_id=1330932814 instance=ExtResource("19_0yx1s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7450155, 0, -4.4579797)
+[node name="frontDoor" type="StaticBody3D" parent="NavigationRegion3D/Livingroom" unique_id=1390593349]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74222, 0, -4.4569173)
+script = ExtResource("20_7vwr8")
+
+[node name="doorwayFront" parent="NavigationRegion3D/Livingroom/frontDoor" unique_id=1330932814 instance=ExtResource("19_0yx1s")]
+
+[node name="door" parent="NavigationRegion3D/Livingroom/frontDoor/doorwayFront/doorwayFront(Clone)" parent_id_path=PackedInt32Array(1330932814, 773667155) index="0" unique_id=1826631734]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0.028349997, 0, -0.044549998)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Livingroom/frontDoor" unique_id=1068424579]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26635742, 0.6274643, -0.037017822)
+shape = SubResource("BoxShape3D_wwfkw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NavigationRegion3D/Livingroom/frontDoor" unique_id=1703295383]
+root_node = NodePath("../doorwayFront")
+libraries/ = SubResource("AnimationLibrary_q6n1l")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Livingroom" unique_id=1590769772]
 transform = Transform3D(-4.371139e-08, 0, 0.4077264, 0, 0.8308974, 0, -1, 0, -1.7822288e-08, -2.5362773, 0.23912078, 0.51757336)
@@ -387,10 +398,10 @@ shape = SubResource("BoxShape3D_csk8p")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Bedroom" unique_id=618653428]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.251612, 0, 0.54648226)
 script = ExtResource("20_7vwr8")
 
 [node name="doorway" parent="NavigationRegion3D/Bedroom/StaticBody3D" unique_id=110300816 instance=ExtResource("19_kb3qt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.258279, 0, 0.56044614)
 
 [node name="door" parent="NavigationRegion3D/Bedroom/StaticBody3D/doorway/doorway(Clone)" parent_id_path=PackedInt32Array(110300816, 1404491973) index="0" unique_id=1455786519]
 transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 0.028349997, 0, -0.044549998)
@@ -400,7 +411,7 @@ root_node = NodePath("../../../../..")
 libraries/ = SubResource("AnimationLibrary_sppe2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Bedroom/StaticBody3D" unique_id=197649861]
-transform = Transform3D(0.99999994, 0, -7.1054274e-15, 0, 1, 0, 7.1054274e-15, 0, 0.99999994, 11.531167, 0.2592163, 0.51271737)
+transform = Transform3D(0.99999994, 0, -7.1054274e-15, 0, 1, 0, 7.1054274e-15, 0, 0.99999994, 0.28406334, 0.259, -0.03338605)
 shape = SubResource("BoxShape3D_sppe2")
 
 [node name="GridMap" type="GridMap" parent="NavigationRegion3D" unique_id=226462118]
@@ -501,6 +512,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5396967, 0, 1.8358989)
 [node name="avocado" parent="." unique_id=15025039 instance=ExtResource("25_mglpj")]
 transform = Transform3D(0.6180243, 0, 0.78615904, 0, 1, 0, -0.78615904, 0, 0.6180243, -1.2369477, 2.3841858e-07, 3.860877)
 
+[node name="transporters" type="Node" parent="." unique_id=838434594]
+
+[node name="transporter_bedroom-livingroom" type="Area3D" parent="transporters" unique_id=1189788667 node_paths=PackedStringArray("_destination")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.417043, 0.055497095, -0.385913)
+script = ExtResource("22_182vs")
+_destination = NodePath("../transporter_livingroom-bedroom")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="transporters/transporter_bedroom-livingroom" unique_id=7071199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.039886475, 0.25354004, -0.8764658)
+shape = SubResource("BoxShape3D_qovxq")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="transporter_livingroom-bedroom" type="Area3D" parent="transporters" unique_id=415332278 node_paths=PackedStringArray("_destination")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5591128, 0.055497095, 0.62592345)
+script = ExtResource("22_182vs")
+_destination = NodePath("../transporter_bedroom-livingroom")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="transporters/transporter_livingroom-bedroom" unique_id=820383267]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.039886475, 0.29126757, -1.0552176)
+shape = SubResource("BoxShape3D_shbgg")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="transporter_livingroom_level2" type="Area3D" parent="transporters" unique_id=1664634794]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.055, 36.5)
+script = ExtResource("22_182vs")
+_sceneToLoadPath = "uid://bkg5k0ed5xbko"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="transporters/transporter_livingroom_level2" unique_id=2109793199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9697871, 0.43125337, -31.581316)
+shape = SubResource("BoxShape3D_shbgg")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
 [node name="Quests" type="Node" parent="." unique_id=371530256]
 
 [node name="LookingForAvocado" type="Node" parent="Quests" unique_id=819544074]
@@ -539,6 +582,13 @@ script = ExtResource("22_ycjjd")
 _action = 1
 _questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
 _questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8924"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="obj5-complete" type="Node" parent="Quests/LookingForAvocado/Triggers" unique_id=1272349876]
+script = ExtResource("22_ycjjd")
+_action = 1
+_questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
+_questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8925"
 metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
 
 [node name="Reactions" type="Node" parent="Quests/LookingForAvocado" unique_id=1622472242]
@@ -595,16 +645,34 @@ _state = 2
 _reactions = Array[ExtResource("27_0tae3")]([SubResource("Resource_csk8p")])
 eventChannel = ExtResource("28_kdqke")
 
-[connection signal="body_entered" from="transporters/transporter_bedroom-livingroom" to="transporters/transporter_bedroom-livingroom" method="_OnBodyEntered"]
-[connection signal="body_entered" from="transporters/transporter_livingroom-bedroom" to="transporters/transporter_livingroom-bedroom" method="_OnBodyEntered"]
-[connection signal="body_entered" from="transporters/transporter_livingroom_level2" to="transporters/transporter_livingroom_level2" method="_OnBodyEntered"]
+[node name="obj5-completed-OpenDoor" type="Node" parent="Quests/LookingForAvocado/Reactions" unique_id=810609432]
+script = ExtResource("26_0tae3")
+_checkObjectiveId = true
+_objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8925"
+_checkState = true
+_state = 2
+_reactions = Array[ExtResource("27_0tae3")]([SubResource("Resource_csk8p")])
+eventChannel = ExtResource("28_kdqke")
+
+[node name="ItemEventListener" type="Node" parent="." unique_id=893104707]
+script = ExtResource("33_sppe2")
+_checkItemId = true
+_itemId = "56de1c29-e358-4c5c-b698-e8b4892fbacb"
+eventChannel = ExtResource("34_lhsq1")
+metadata/_custom_type_script = "uid://cewycpjka78f3"
+
 [connection signal="body_entered" from="NavigationRegion3D/Livingroom/Area3D6" to="Quests/LookingForAvocado/Triggers/obj2-complete" method="_OnPlayerTrigger"]
 [connection signal="body_entered" from="NavigationRegion3D/Bedroom/Area3D" to="Quests/LookingForAvocado/Triggers/obj1-init" method="_OnPlayerTrigger"]
 [connection signal="body_entered" from="NavigationRegion3D/Bedroom/Area3D2" to="Quests/LookingForAvocado/Triggers/obj1-complete" method="_OnPlayerTrigger"]
+[connection signal="body_entered" from="transporters/transporter_bedroom-livingroom" to="transporters/transporter_bedroom-livingroom" method="_OnBodyEntered"]
+[connection signal="body_entered" from="transporters/transporter_livingroom-bedroom" to="transporters/transporter_livingroom-bedroom" method="_OnBodyEntered"]
+[connection signal="body_entered" from="transporters/transporter_livingroom_level2" to="transporters/transporter_livingroom_level2" method="_OnBodyEntered"]
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj1-completed-OpenDoor" to="NavigationRegion3D/Bedroom/StaticBody3D" method="ToggleDoor"]
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj2-completed-removeTutorial" to="Player/tutorial" method="queue_free"]
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj3-init-DadReaction" to="Quests/LookingForAvocado/Triggers/obj3-complete" method="_OnTrigger"]
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj4-init-DadReaction" to="Quests/LookingForAvocado/Triggers/obj4-complete" method="_OnTrigger"]
+[connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj5-completed-OpenDoor" to="NavigationRegion3D/Livingroom/frontDoor" method="ToggleDoor"]
+[connection signal="OnListen" from="ItemEventListener" to="Quests/LookingForAvocado/Triggers/obj5-complete" method="_OnTrigger"]
 
 [editable path="NavigationRegion3D/Livingroom/tableCloth"]
 [editable path="NavigationRegion3D/Livingroom/tableCloth2"]
@@ -612,7 +680,7 @@ eventChannel = ExtResource("28_kdqke")
 [editable path="NavigationRegion3D/Livingroom/chairCushion2"]
 [editable path="NavigationRegion3D/Livingroom/chairCushion3"]
 [editable path="NavigationRegion3D/Livingroom/chairCushion4"]
-[editable path="NavigationRegion3D/Livingroom/doorwayFront"]
+[editable path="NavigationRegion3D/Livingroom/frontDoor/doorwayFront"]
 [editable path="NavigationRegion3D/Bedroom/bedSingle"]
 [editable path="NavigationRegion3D/Bedroom/benchCushionLow"]
 [editable path="NavigationRegion3D/Bedroom/cabinetBedDrawer"]

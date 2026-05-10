@@ -21,7 +21,7 @@ namespace TnT.Systems.UI
 
         public void AddItem(ItemData item)
         {
-            GD.Print($"picked up item {item.Name}");
+            GD.Print($"picked up item {item.Id}");
             var index = Array.IndexOf(_items, null);
             if (index < 0) return;
             _items[index] = item;

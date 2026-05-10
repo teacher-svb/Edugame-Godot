@@ -9,23 +9,10 @@ using TnT.Extensions;
 using TnT.Input;
 using TnT.Systems;
 
-public partial class Player : Node//, IInputActionable//, IBind<Player.PlayerSaveData>
+public partial class Player : Node
 {
 	public static Player Instance { get; private set; }
 
-	// [Export]
-	// public InputActionBase[] InputActions { get; set; } =
-	// [
-	// 	new InputAction2D {
-	// 		ActionName = "move",
-	// 		Enabled = true,
-	// 		NegativeX = new InputAction { InputReference = "move_left",  Enabled = true },
-	// 		PositiveX = new InputAction { InputReference = "move_right", Enabled = true },
-	// 		NegativeY = new InputAction { InputReference = "move_up",  Enabled = true },
-	// 		PositiveY = new InputAction { InputReference = "move_down",    Enabled = true }
-	// 	},
-	// 	new InputAction   { ActionName = "jump", InputReference = "jump", Enabled = true }
-	// ];
 
 	InputAction2D MoveAction => StateManagerGame.Instance.MovePlayerAction;
 	InputAction JumpAction =>StateManagerGame.Instance.JumpPlayerAction;
@@ -60,22 +47,6 @@ public partial class Player : Node//, IInputActionable//, IBind<Player.PlayerSav
 		else if (MoveAction.IsPressed == false && JumpAction.Triggered == false)
 			_ = _stateManager.Pop();
 	}
-
-	// private void StopMoving(InputActionBase action)
-	// {
-	// 	if (GetTree().Paused) return;
-	// 	if (!_inputActive || MoveAction.IsPressed || _stateManager.IsAutonomousBehaviorActive) return;
-	// 	_inputActive = false;
-	// 	_stateManager.Pop();
-	// }
-
-	// private void StartMoving(InputActionBase action)
-	// {
-	// 	if (GetTree().Paused) return;
-	// 	if (_inputActive || _stateManager.IsAutonomousBehaviorActive) return;
-	// 	_inputActive = true;
-	// 	_stateManager.StartInput(MoveAction, JumpAction);
-	// }
 
 	public void MoveTo(Vector3 target)
 	{

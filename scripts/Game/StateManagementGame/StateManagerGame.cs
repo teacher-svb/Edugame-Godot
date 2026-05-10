@@ -23,7 +23,7 @@ namespace TnT.EduGame.GameState
 
         public InputActionBase[] InputActions => [OpenInventoryAction, PickupItemAction, MovePlayerAction, JumpPlayerAction];
 
-        public Action<NodePath> OnSceneLoaded;
+        [Signal] public delegate void SceneLoadedEventHandler(string scenePath);
 
         Player _player;
 
@@ -42,7 +42,7 @@ namespace TnT.EduGame.GameState
 
             Push(state.GetState(new() { openInventory = OpenInventoryAction, pickupItem = PickupItemAction }));
 
-            OnSceneLoaded?.Invoke(null);
+            // EmitSignal(SignalName.SceneLoaded, "");
         }
 
         public void ShowQuestMessage(QuestObjective o)
@@ -66,20 +66,20 @@ namespace TnT.EduGame.GameState
             Push(state.GetState(new() { challenge = challenge }));
         }
 
-        public void LoadScene(string scenePath, Vector3 targetLocation, bool forceLoad = false)
+        public void LoadScene(string scenePath, Vector3 targetLocation)
         {
             var state = _registeredStates.OfType<GameStateLoadingScreen>().FirstOrDefault()
                 ?? throw new Exception("no scene loader state assigned");
 
-            Push(state.GetState<SceneLoaderOptions>(new() { scenePath = scenePath, player = _player, targetLocation = targetLocation, forceLoad = forceLoad }));
+            Push(state.GetState<SceneLoaderOptions>(new() { scenePath = scenePath, targetLocation = targetLocation, onSceneReady = p => EmitSignal(SignalName.SceneLoaded, p) }));
         }
 
-        public void LoadLocation(Vector3 targetLocation, bool forceLoad = false)
+        public void LoadLocation(Vector3 targetLocation)
         {
             var state = _registeredStates.OfType<GameStateLoadingScreen>().FirstOrDefault()
                 ?? throw new Exception("no scene loader state assigned");
 
-            Push(state.GetState<LocationLoaderOptions>(new() { player = _player, targetLocation = targetLocation, forceLoad = forceLoad }));
+            Push(state.GetState<LocationLoaderOptions>(new() { targetLocation = targetLocation }));
         }
 
         internal void RegisterState(BaseGameState gameState)
@@ -94,26 +94,5 @@ namespace TnT.EduGame.GameState
 
             Push(state.GetState(new() { close = ManagerUI.Instance.Close }));
         }
-
-        // public void ToggleInventory()
-        // {
-        //     OpenInventory();
-        // }
-
-        // public GameStateInventory OpenInventory(GameStateInventory.OnItemClicked onItemClicked = null)
-        // {
-        //     GameStateInventory state = _states.OfType<GameStateInventory>().FirstOrDefault();
-        //     try
-        //     {
-        //         ETime[play].timeScale = 0;
-        //         Push(state.GetState(new() { }));
-
-        //         return state;
-        //     }
-        //     catch
-        //     {
-        //         throw new Exception("no inventory state assigned");
-        //     }
-        // }
     }
 }

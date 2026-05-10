@@ -17,6 +17,6 @@ namespace TnT.EduGame
         public List<CharacterSaveData> characterData = new();
         // [SerializeField]
         // public QuestManager.QuestManagerSaveData questData = null;
-        // public List<Door.DoorSaveData> doorData = new();
+        public List<DoorSaveData> doorData = new();
     }
 }

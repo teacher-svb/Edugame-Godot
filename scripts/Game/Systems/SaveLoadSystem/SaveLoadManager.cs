@@ -18,15 +18,16 @@ namespace TnT.EduGame
             Instance = this;
         }
         
-        protected override void OnSceneLoaded(NodePath scene)
+        protected override void OnSceneLoaded(string scenePath)
         {
             // if (scene.name == "_startScene") return;
 
+            GD.Print("SaveLoadManager OnSceneLoaded");
 
             // Bind<Character, Character.CharacterSaveData>(ref GameData.playerData);
             Bind<Character3D, CharacterSaveData>(ref GameData.characterData);
             // Bind<QuestManager, QuestManager.QuestManagerSaveData>(ref GameData.questData);
-            // Bind<Door, Door.DoorSaveData>(ref GameData.doorData);
+            Bind<Door, DoorSaveData>(ref GameData.doorData);
 
             // GameData.CurrentLevelName = scene.name;
         }
@@ -39,6 +40,7 @@ namespace TnT.EduGame
 
         public override void NewGame()
         {
+            GD.Print("SaveLoadManager newgame");
             GameData = new MyGameData
             {
                 Name = _gameName,
@@ -50,6 +52,7 @@ namespace TnT.EduGame
 
         public override void LoadGame(string gameName)
         {
+            GD.Print("SaveLoadManager LoadGame");
             GameData = dataService.Load(gameName);
 
             GD.Print(GameData.CurrentLevelName);
