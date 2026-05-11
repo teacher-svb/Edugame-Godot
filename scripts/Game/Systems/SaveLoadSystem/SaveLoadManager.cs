@@ -28,6 +28,7 @@ namespace TnT.EduGame
             Bind<Character3D, CharacterSaveData>(ref GameData.characterData);
             // Bind<QuestManager, QuestManager.QuestManagerSaveData>(ref GameData.questData);
             Bind<Door, DoorSaveData>(ref GameData.doorData);
+            Bind<PlayerTutorial, TutorialSaveData>(ref GameData.tutorialData);
 
             // GameData.CurrentLevelName = scene.name;
         }
@@ -44,7 +45,7 @@ namespace TnT.EduGame
             GameData = new MyGameData
             {
                 Name = _gameName,
-                CurrentLevelName = _startSceneName
+                CurrentLevelName = _startSceneName,
             };
             GD.Print(GameData.CurrentLevelName);
             LoadScene(GameData.CurrentLevelName);

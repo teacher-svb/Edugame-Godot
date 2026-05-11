@@ -14,9 +14,11 @@
 [ext_resource type="Script" uid="uid://crvao34oeaf4m" path="res://scripts/Game/StateManagementGame/GameStateChallenge.cs" id="7_blwmm"]
 [ext_resource type="Script" uid="uid://bdql4ehll6w1t" path="res://scripts/Game/Systems/QuestSystem/QuestManagerSaveData.cs" id="7_iqbe2"]
 [ext_resource type="Script" uid="uid://ncf63o7hgool" path="res://scripts/Game/UI/MVC_Messages/Controller/MessageController.cs" id="8_0le2r"]
+[ext_resource type="Script" uid="uid://c673wplbelsyw" path="res://scripts/Game/StateManagementGame/GameStatePauseMenu.cs" id="9_56cnb"]
 [ext_resource type="PackedScene" uid="uid://b8eidkv5hpkk3" path="res://Scenes/UI/Notification.tscn" id="9_n5sdn"]
 [ext_resource type="Script" uid="uid://bgetj7peh8h61" path="res://scripts/Game/UI/MVC_Messages/View/MessageView.cs" id="9_ut70p"]
 [ext_resource type="Script" uid="uid://bs1saqqc0g5yc" path="res://scripts/Game/UI/MVC_Messages/Model/MessageModel.cs" id="10_46vsp"]
+[ext_resource type="Script" uid="uid://cypyw7658ri5r" path="res://scripts/Game/StateManagementGame/GameStateSettings.cs" id="10_wgk6c"]
 [ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="11_aum7h"]
 [ext_resource type="Script" uid="uid://djkjkbdwkb3um" path="res://scripts/Game/StateManagementGame/GameStatePlay.cs" id="11_wsyol"]
 [ext_resource type="Script" uid="uid://dm3me216ti1em" path="res://scripts/Game/StateManagementGame/GameStateLoadingScreen.cs" id="12_7ysjy"]
@@ -37,12 +39,24 @@
 [ext_resource type="Resource" uid="uid://bytjn381x70ha" path="res://GameData/EventChannels/RemoveItemEventChannel.tres" id="31_hwrcp"]
 [ext_resource type="PackedScene" uid="uid://csd5kk66e1bep" path="res://Scenes/UI/Inventory.tscn" id="32_j8mgp"]
 [ext_resource type="AudioStream" uid="uid://p6yptdrwk41y" path="res://assets/music/Dawn_at_the_Eastern_Gate.mp3" id="34_5t4y7"]
+[ext_resource type="Script" uid="uid://cp5bj565jyei0" path="res://scripts/Game/UI/MVC_PauseMenu/PauseMenuController.cs" id="37_wdqj0"]
+[ext_resource type="Script" uid="uid://bj01trh2jwtl1" path="res://scripts/Game/UI/MVC_PauseMenu/PauseMenuModel.cs" id="38_8mpub"]
+[ext_resource type="PackedScene" uid="uid://c3qhgndpkvx23" path="res://Scenes/UI/PauseMenuUI.tscn" id="39_8mpub"]
+[ext_resource type="Script" uid="uid://vxn3gfrl3h1l" path="res://scripts/Game/UI/MVC_Settings/SettingsController.cs" id="40_v88nt"]
+[ext_resource type="Script" uid="uid://c20c4ihxalgfu" path="res://scripts/Game/UI/MVC_Settings/SettingsModel.cs" id="41_n2kwl"]
+[ext_resource type="PackedScene" uid="uid://ddarmu38cbcs" path="res://Scenes/UI/SettingsUI.tscn" id="42_n2kwl"]
 
 [sub_resource type="Resource" id="Resource_hwrcp"]
 script = ExtResource("16_ut70p")
 InputReference = "open"
 Enabled = true
 ActionName = "open"
+metadata/_custom_type_script = "uid://ch4u84myc17c2"
+
+[sub_resource type="Resource" id="Resource_wgk6c"]
+script = ExtResource("16_ut70p")
+InputReference = "Pause"
+ActionName = "Pause"
 metadata/_custom_type_script = "uid://ch4u84myc17c2"
 
 [sub_resource type="Resource" id="Resource_wdqj0"]
@@ -136,6 +150,7 @@ process_mode = 3
 [node name="StateManagerGame" type="Node" parent="." unique_id=1531059217]
 script = ExtResource("7_0le2r")
 OpenInventoryAction = SubResource("Resource_hwrcp")
+PauseGameAction = SubResource("Resource_wgk6c")
 PickupItemAction = SubResource("Resource_wdqj0")
 MovePlayerAction = SubResource("Resource_d2cak")
 JumpPlayerAction = SubResource("Resource_56cnb")
@@ -154,6 +169,14 @@ script = ExtResource("11_wsyol")
 
 [node name="ChallengeState" type="Node" parent="StateManagerGame" unique_id=1334514005]
 script = ExtResource("7_blwmm")
+
+[node name="GameStatePauseMenu" type="Node" parent="StateManagerGame" unique_id=286615040]
+script = ExtResource("9_56cnb")
+metadata/_custom_type_script = "uid://c673wplbelsyw"
+
+[node name="GameStateSettings" type="Node" parent="StateManagerGame" unique_id=2037842696]
+script = ExtResource("10_wgk6c")
+metadata/_custom_type_script = "uid://cypyw7658ri5r"
 
 [node name="SaveLoadManager" type="Node" parent="." unique_id=977596409]
 script = ExtResource("1_3yhdi")
@@ -259,6 +282,30 @@ eventChannel = ExtResource("30_5t4y7")
 script = ExtResource("30_j8mgp")
 
 [node name="InventoryView" parent="UIManager/InventoryController" unique_id=1662155608 instance=ExtResource("32_j8mgp")]
+
+[node name="PauseMenuController" type="Node" parent="UIManager" unique_id=924298833 node_paths=PackedStringArray("view", "model")]
+script = ExtResource("37_wdqj0")
+view = NodePath("PauseMenuView")
+model = NodePath("PauseMenuModel")
+metadata/_custom_type_script = "uid://cp5bj565jyei0"
+
+[node name="PauseMenuModel" type="Node" parent="UIManager/PauseMenuController" unique_id=588791433]
+script = ExtResource("38_8mpub")
+metadata/_custom_type_script = "uid://bj01trh2jwtl1"
+
+[node name="PauseMenuView" parent="UIManager/PauseMenuController" unique_id=35513525 instance=ExtResource("39_8mpub")]
+
+[node name="SettingsController" type="Node" parent="UIManager" unique_id=1391147643 node_paths=PackedStringArray("view", "model")]
+script = ExtResource("40_v88nt")
+view = NodePath("Control")
+model = NodePath("SettingsModel")
+metadata/_custom_type_script = "uid://vxn3gfrl3h1l"
+
+[node name="SettingsModel" type="Node" parent="UIManager/SettingsController" unique_id=14836353]
+script = ExtResource("41_n2kwl")
+metadata/_custom_type_script = "uid://c20c4ihxalgfu"
+
+[node name="Control" parent="UIManager/SettingsController" unique_id=29440267 instance=ExtResource("42_n2kwl")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=358640137]
 stream = ExtResource("34_5t4y7")

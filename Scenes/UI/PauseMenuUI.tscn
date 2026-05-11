@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://c3qhgndpkvx23"]
+
+[ext_resource type="Script" uid="uid://ejrfvfbpy3gr" path="res://scripts/Game/UI/MVC_PauseMenu/PauseMenuView.cs" id="1_28jtb"]
+[ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="1_padb0"]
+
+[node name="PauseMenuView" type="Control" unique_id=35513525 node_paths=PackedStringArray("_resumeButton", "_settingsButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_28jtb")
+_resumeButton = NodePath("CenterContainer/VBoxContainer/Resume")
+_settingsButton = NodePath("CenterContainer/VBoxContainer/Settings")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1417072373]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1747080522]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Resume" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1254672643]
+layout_mode = 2
+theme = ExtResource("1_padb0")
+text = "Verder spelen"
+
+[node name="Settings" type="Button" parent="CenterContainer/VBoxContainer" unique_id=788719596]
+layout_mode = 2
+theme = ExtResource("1_padb0")
+text = "Instellingen"
+
+[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer" unique_id=89786240]
+layout_mode = 2
+theme = ExtResource("1_padb0")
+text = "Afsluiten"

@@ -21,10 +21,11 @@
 [ext_resource type="PackedScene" uid="uid://40rbyr5gq5lu" path="res://assets/3D/Furniture Kit/Models/GLTF format/cabinetBedDrawer.glb" id="24_kdqke"]
 [ext_resource type="PackedScene" uid="uid://d11od8uonxhra" path="res://Scenes/characters/character_dad.tscn" id="25_14bvk"]
 [ext_resource type="PackedScene" uid="uid://bmcouihuq457y" path="res://assets/3D/Furniture Kit/Models/GLTF format/desk.glb" id="25_kb3qt"]
+[ext_resource type="Script" uid="uid://dwo8a5sv4sh5o" path="res://scripts/Game/PlayerTutorial.cs" id="25_lhsq1"]
 [ext_resource type="PackedScene" uid="uid://dv3mlsoycb230" path="res://Scenes/characters/character_avocado.tscn" id="25_mglpj"]
+[ext_resource type="Texture2D" uid="uid://b1tl6shsicrs" path="res://assets/tutorial-arrow.png" id="25_sppe2"]
 [ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="26_0tae3"]
 [ext_resource type="PackedScene" uid="uid://db03lq6cgxid2" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedDoors.glb" id="26_7vwr8"]
-[ext_resource type="Texture2D" uid="uid://bnliw6xgnacr1" path="res://assets/tutorial-arrows.png" id="26_qovxq"]
 [ext_resource type="Script" uid="uid://ckobusjip2hti" path="res://scripts/Game/Systems/QuestSystem/QuestReaction.cs" id="27_0tae3"]
 [ext_resource type="Script" uid="uid://cqfwdw7wlks67" path="res://scripts/Game/Character/CharacterSaveData.cs" id="27_kdqke"]
 [ext_resource type="PackedScene" uid="uid://dcaqo4uenuwgu" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedWide.glb" id="27_qovxq"]
@@ -153,7 +154,7 @@ cull_mode = 2
 no_depth_test = true
 vertex_color_use_as_albedo = true
 albedo_color = Color(1, 1, 1, 0.5686275)
-albedo_texture = ExtResource("26_qovxq")
+albedo_texture = ExtResource("25_sppe2")
 disable_receive_shadows = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_sppe2"]
@@ -464,47 +465,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6931679, 0, 1.8831236)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.970758, 0, -0.07768965)
 _saveData = SubResource("Resource_qovxq")
 
-[node name="tutorial" type="Node3D" parent="Player" unique_id=1617046406]
+[node name="tutorial" type="Node3D" parent="Player" unique_id=1617046406 node_paths=PackedStringArray("_arrow", "_label")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2539379, 0)
+script = ExtResource("25_lhsq1")
+_arrow = NodePath("MeshInstance3D")
+_label = NodePath("Label")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player/tutorial" unique_id=1822487694]
-transform = Transform3D(0.7387687, 0, 0, 0, 1, 0, 0, 0, 0.7387687, 0, 0.04558456, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.135, 0, 0, 0, 0.308, 0.19259548, 0.055394895, 0)
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_sppe2")
 
-[node name="Right" type="Label3D" parent="Player/tutorial" unique_id=320560823]
+[node name="Label" type="Label3D" parent="Player/tutorial" unique_id=320560823]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7231178, 0.1523425, 0.07759935)
 billboard = 1
 no_depth_test = true
 text = "D"
-
-[node name="Left" type="Label3D" parent="Player/tutorial" unique_id=1209077766]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75131035, 0.1523425, 0.07759935)
-billboard = 1
-no_depth_test = true
-text = "Q"
-
-[node name="Up" type="Label3D" parent="Player/tutorial" unique_id=1673694638]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013881683, 0.1523425, -0.73908746)
-billboard = 1
-no_depth_test = true
-text = "Z"
-
-[node name="Down" type="Label3D" parent="Player/tutorial" unique_id=1211620603]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006181717, 0.1523425, 0.8005708)
-billboard = 1
-no_depth_test = true
-text = "S"
-
-[node name="Jump" type="Label3D" parent="Player/tutorial" unique_id=596378753]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006181717, -0.24529779, 0.11606294)
-visible = false
-billboard = 1
-no_depth_test = true
-modulate = Color(0, 0, 0, 1)
-outline_modulate = Color(1, 1, 1, 1)
-text = "space"
-font_size = 24
 
 [node name="dad" parent="." unique_id=1460930038 instance=ExtResource("25_14bvk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5396967, 0, 1.8358989)

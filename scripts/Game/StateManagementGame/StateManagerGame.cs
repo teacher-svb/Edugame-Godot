@@ -17,15 +17,23 @@ namespace TnT.EduGame.GameState
         public static StateManagerGame Instance { get; private set; }
 
         [Export] public InputAction OpenInventoryAction { get; private set; }
+        [Export] public InputAction PauseGameAction { get; private set; }
         [Export] public InputAction PickupItemAction { get; private set; }
         [Export] public InputAction2D MovePlayerAction { get; private set; }
         [Export] public InputAction JumpPlayerAction { get; private set; }
+        Player _player;
+        PlayerTutorial _tutorial;
 
-        public InputActionBase[] InputActions => [OpenInventoryAction, PickupItemAction, MovePlayerAction, JumpPlayerAction];
+        public InputActionBase[] InputActions => [
+            OpenInventoryAction,
+            PickupItemAction,
+            MovePlayerAction,
+            JumpPlayerAction,
+            PauseGameAction
+        ];
 
         [Signal] public delegate void SceneLoadedEventHandler(string scenePath);
 
-        Player _player;
 
         List<BaseGameState> _registeredStates = new();
         public override void _EnterTree()
@@ -36,13 +44,20 @@ namespace TnT.EduGame.GameState
         public override async void _Ready()
         {
             _player = GetTree().FindAnyObjectByType<Player>();
+            _tutorial = GetTree().FindAnyObjectByType<PlayerTutorial>();
 
             var state = _registeredStates.OfType<GameStatePlay>().FirstOrDefault()
                 ?? throw new Exception("no play state assigned");
 
-            Push(state.GetState(new() { openInventory = OpenInventoryAction, pickupItem = PickupItemAction }));
-
-            // EmitSignal(SignalName.SceneLoaded, "");
+            Push(state.GetState(
+                new() {
+                    openInventory = OpenInventoryAction,
+                    pauseGame = PauseGameAction,
+                    pickupItem = PickupItemAction,
+                    jump = JumpPlayerAction,
+                    move = MovePlayerAction,
+                    tutorial = _tutorial
+                }));
         }
 
         public void ShowQuestMessage(QuestObjective o)
@@ -82,17 +97,40 @@ namespace TnT.EduGame.GameState
             Push(state.GetState<LocationLoaderOptions>(new() { targetLocation = targetLocation }));
         }
 
-        internal void RegisterState(BaseGameState gameState)
-        {
-            _registeredStates.Add(gameState);
-        }
-
         public void OpenInventory()
         {
             var state = _registeredStates.OfType<GameStateInventory>().FirstOrDefault()
                 ?? throw new Exception("no inventory state assigned");
 
             Push(state.GetState(new() { close = ManagerUI.Instance.Close }));
+        }
+
+        public void OpenPauseMenu()
+        {
+            var state = _registeredStates.OfType<GameStatePauseMenu>().FirstOrDefault()
+                ?? throw new Exception("no pause menu state assigned");
+
+            Push(state.GetState(new() { close = ManagerUI.Instance.Close }));
+        }
+
+        public void OpenSettings(bool audio = true, bool display = true, bool controls = true, bool accessibility = true)
+        {
+            var state = _registeredStates.OfType<GameStateSettings>().FirstOrDefault()
+                ?? throw new Exception("no settings state assigned");
+
+            Push(state.GetState(new()
+            {
+                close            = ManagerUI.Instance.Close,
+                showAudio        = audio,
+                showDisplay      = display,
+                showControls     = controls,
+                showAccessibility = accessibility,
+            }));
+        }
+
+        internal void RegisterState(BaseGameState gameState)
+        {
+            _registeredStates.Add(gameState);
         }
     }
 }
