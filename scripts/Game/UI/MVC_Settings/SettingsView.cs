@@ -20,7 +20,7 @@ namespace TnT.Systems.UI
         {
             // ProcessMode = ProcessModeEnum.Always;
             Modulate = Colors.Transparent;
-            // Visible = false;
+            Visible = false;
             // _backButton.Pressed += () => OnBack?.Invoke();
         }
 
