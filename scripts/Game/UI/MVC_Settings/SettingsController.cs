@@ -18,13 +18,13 @@ namespace TnT.Systems.UI
 
         public override void _Ready()
         {
-            // view.OnBack += () => OnBack?.Invoke();
+            view.OnBack += () => OnBack?.Invoke();
         }
 
         public async Task Show(bool audio, bool display, bool controls, bool accessibility)
         {
-            // view.ShowPanels(audio, display, controls, accessibility);
-            // await view.ShowView();
+            view.ShowPanels(audio, display, controls, accessibility);
+            await view.ShowView();
         }
 
         public async Task Hide() => await view.HideView();

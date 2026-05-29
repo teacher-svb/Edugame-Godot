@@ -41,6 +41,12 @@ namespace TnT.Systems.State
             _states.Push(state);
         }
 
+        // protected void ResetStack()
+        // {
+        //     _states.Clear();
+        //     _currentState = null;
+        // }
+
         public virtual async Task Pop()
         {
             if (StateCount <= 1) return;

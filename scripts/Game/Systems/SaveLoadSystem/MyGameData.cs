@@ -4,19 +4,17 @@ using TnT.Extensions;
 using TnT.Systems.Persistence;
 using Godot;
 using TnT.EduGame.Characters;
+using TnT.EduGame.QuestSystem;
 
 namespace TnT.EduGame
 {
     [GlobalClass]
     public partial class MyGameData : GameData
     {
-        [Export] public string CurrentLevelName;
-        [Export]
-        public CharacterSaveData playerData = null;
-        // [Export]
+        [Export] 
+        public string CurrentLevelName;
         public List<CharacterSaveData> characterData = new();
-        // [SerializeField]
-        // public QuestManager.QuestManagerSaveData questData = null;
+        public QuestManagerSaveData questData = null;
         public List<DoorSaveData> doorData = new();
         public TutorialSaveData tutorialData = null;
     }

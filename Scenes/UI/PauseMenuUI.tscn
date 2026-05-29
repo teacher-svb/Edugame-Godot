@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ejrfvfbpy3gr" path="res://scripts/Game/UI/MVC_PauseMenu/PauseMenuView.cs" id="1_28jtb"]
 [ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="1_padb0"]
 
-[node name="PauseMenuView" type="Control" unique_id=35513525 node_paths=PackedStringArray("_resumeButton", "_settingsButton")]
+[node name="PauseMenuView" type="Control" unique_id=35513525 node_paths=PackedStringArray("_resumeButton", "_settingsButton", "_saveButton", "_loadButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +13,8 @@ grow_vertical = 2
 script = ExtResource("1_28jtb")
 _resumeButton = NodePath("CenterContainer/VBoxContainer/Resume")
 _settingsButton = NodePath("CenterContainer/VBoxContainer/Settings")
+_saveButton = NodePath("CenterContainer/VBoxContainer/Save")
+_loadButton = NodePath("CenterContainer/VBoxContainer/Load")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1417072373]
 layout_mode = 1
@@ -30,6 +32,16 @@ theme_override_constants/separation = 16
 layout_mode = 2
 theme = ExtResource("1_padb0")
 text = "Verder spelen"
+
+[node name="Save" type="Button" parent="CenterContainer/VBoxContainer" unique_id=654200171]
+layout_mode = 2
+theme = ExtResource("1_padb0")
+text = "Opslaan"
+
+[node name="Load" type="Button" parent="CenterContainer/VBoxContainer" unique_id=834094018]
+layout_mode = 2
+theme = ExtResource("1_padb0")
+text = "Laden"
 
 [node name="Settings" type="Button" parent="CenterContainer/VBoxContainer" unique_id=788719596]
 layout_mode = 2

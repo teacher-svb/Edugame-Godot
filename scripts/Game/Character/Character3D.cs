@@ -114,15 +114,12 @@ namespace TnT.EduGame.Characters
 
         #region SAVE/LOAD
 
-        [Export]
+        [Export] public string PersistentId { get; set; } = Guid.NewGuid().ToString();
         CharacterSaveData _saveData;
-
-        public UniqueId UniqueId { get; set; } = new() { Id = Guid.NewGuid().ToString() };
 
         public void Bind(CharacterSaveData data)
         {
             _saveData = data;
-            _saveData.Id = UniqueId.Id;
             if (!data.IsNew)
                 this.Position = _saveData.position;
             LoadCharacter(_saveData.characterId);

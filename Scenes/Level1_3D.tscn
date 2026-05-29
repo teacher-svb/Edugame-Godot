@@ -27,7 +27,6 @@
 [ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="26_0tae3"]
 [ext_resource type="PackedScene" uid="uid://db03lq6cgxid2" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedDoors.glb" id="26_7vwr8"]
 [ext_resource type="Script" uid="uid://ckobusjip2hti" path="res://scripts/Game/Systems/QuestSystem/QuestReaction.cs" id="27_0tae3"]
-[ext_resource type="Script" uid="uid://cqfwdw7wlks67" path="res://scripts/Game/Character/CharacterSaveData.cs" id="27_kdqke"]
 [ext_resource type="PackedScene" uid="uid://dcaqo4uenuwgu" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosedWide.glb" id="27_qovxq"]
 [ext_resource type="PackedScene" uid="uid://5ac2eh7lcw6p" path="res://assets/3D/Furniture Kit/Models/GLTF format/bookcaseClosed.glb" id="28_7n07m"]
 [ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="28_kdqke"]
@@ -143,10 +142,6 @@ _data = {
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sppe2"]
 size = Vector3(0.6619873, 1.5184326, 0.19494629)
-
-[sub_resource type="Resource" id="Resource_qovxq"]
-script = ExtResource("27_kdqke")
-metadata/_custom_type_script = "uid://cqfwdw7wlks67"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_csk8p"]
 transparency = 1
@@ -463,7 +458,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6931679, 0, 1.8831236)
 
 [node name="Player" parent="." unique_id=926984674 instance=ExtResource("21_ycjjd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.970758, 0, -0.07768965)
-_saveData = SubResource("Resource_qovxq")
+PersistentId = "Player"
 
 [node name="tutorial" type="Node3D" parent="Player" unique_id=1617046406 node_paths=PackedStringArray("_arrow", "_label")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2539379, 0)
@@ -484,9 +479,11 @@ text = "D"
 
 [node name="dad" parent="." unique_id=1460930038 instance=ExtResource("25_14bvk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5396967, 0, 1.8358989)
+PersistentId = "dad"
 
 [node name="avocado" parent="." unique_id=15025039 instance=ExtResource("25_mglpj")]
 transform = Transform3D(0.6180243, 0, 0.78615904, 0, 1, 0, -0.78615904, 0, 0.6180243, -1.2369477, 2.3841858e-07, 3.860877)
+PersistentId = "avocado"
 
 [node name="transporters" type="Node" parent="." unique_id=838434594]
 

@@ -4,12 +4,16 @@
 		{
 			"type": "dotnet",
 			"task": "build",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
+			"group": "build",
 			"problemMatcher": [],
 			"label": "dotnet: build"
+		},
+		{
+			"type": "dotnet",
+			"task": "watch EduGame",
+			"file": "/home/syndias/Projects/TnT/Edugame-Godot/EduGame.csproj",
+			"problemMatcher": [],
+			"label": "dotnet: watch EduGame"
 		}
 	]
 }

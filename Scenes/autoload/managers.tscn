@@ -181,7 +181,7 @@ metadata/_custom_type_script = "uid://cypyw7658ri5r"
 [node name="SaveLoadManager" type="Node" parent="." unique_id=977596409]
 script = ExtResource("1_3yhdi")
 GameData = SubResource("Resource_72h8h")
-_startSceneName = "Level1"
+_startScene = "uid://lsbk05nndu58"
 _gameName = "FooBar"
 
 [node name="InputManager" type="Node" parent="." unique_id=1531480527]

@@ -82,8 +82,7 @@ namespace TnT.EduGame.GameState
             await FadeIn();
 
             var gameplayScene = GD.Load<PackedScene>(scenePath);
-            var gameplayInstance = gameplayScene.Instantiate();
-            gameplayInstance.Name = "GameplaySceneInstance";
+            ArgumentNullException.ThrowIfNull(gameplayScene, $"Scene not found at path: '{scenePath}'. Use full res:// path.");
 
             var tree = ManagerUI.Instance.GetTree();
 
@@ -98,7 +97,8 @@ namespace TnT.EduGame.GameState
 
                 onSceneReady?.Invoke(scenePath);
 
-                tree.FindAnyObjectByType<Player>().MoveTo(target);
+                if (target != Vector3.Zero)
+                    tree.FindAnyObjectByType<Player>().MoveTo(target);
                 _loadingFinished = true;
             }
         }

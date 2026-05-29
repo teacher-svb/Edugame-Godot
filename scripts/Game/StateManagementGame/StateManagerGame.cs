@@ -86,6 +86,7 @@ namespace TnT.EduGame.GameState
             var state = _registeredStates.OfType<GameStateLoadingScreen>().FirstOrDefault()
                 ?? throw new Exception("no scene loader state assigned");
 
+            // ResetStack();
             Push(state.GetState<SceneLoaderOptions>(new() { scenePath = scenePath, targetLocation = targetLocation, onSceneReady = p => EmitSignal(SignalName.SceneLoaded, p) }));
         }
 
@@ -126,6 +127,17 @@ namespace TnT.EduGame.GameState
                 showControls     = controls,
                 showAccessibility = accessibility,
             }));
+        }
+
+        public void StartPlay()
+        {
+            _player = GetTree().FindAnyObjectByType<Player>();
+            _tutorial = GetTree().FindAnyObjectByType<PlayerTutorial>();
+
+            var state = _registeredStates.OfType<GameStatePlay>().FirstOrDefault()
+                ?? throw new Exception("no play state assigned");
+
+            Push(state.GetState(new() { openInventory = OpenInventoryAction, pickupItem = PickupItemAction, pauseGame = PauseGameAction, tutorial = _tutorial }));
         }
 
         internal void RegisterState(BaseGameState gameState)

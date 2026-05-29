@@ -13,7 +13,7 @@ namespace TnT.Systems.Persistence
     public abstract partial class SaveLoadSystem<T> : Node where T : GameData, new()
     {
         protected IDataService<T> dataService;
-        [Export] protected string _startSceneName;
+        [Export(PropertyHint.File,"*.tscn,*.tsc")] protected string _startScene;
         [Export] protected string _gameName;
 
         public abstract T GameData { get; set; }
@@ -21,15 +21,11 @@ namespace TnT.Systems.Persistence
         // [ExportToolButton("Save!")] // You can pass an icon as second argument if you want.
         // public Callable Save => Callable.From(SaveGame);
 
-        public override async void _Ready()
+        public override void _Ready()
         {
-            // base.Awake();
-            NewGame();
             dataService = new FileDataService<T>(new JsonSerializer());
-
             StateManagerGame.Instance.SceneLoaded += OnSceneLoaded;
-            
-            OnSceneLoaded("");
+            NewGame();
         }
 
         // void Start() => NewGame();
@@ -46,7 +42,7 @@ namespace TnT.Systems.Persistence
                 return;
 
             if (data == null)
-                data = new TData { Id = entity.UniqueId.Id, IsNew = true };
+                data = new TData { Id = entity.PersistentId, IsNew = true };
 
             entity.Bind(data);
             data.IsNew = false;
@@ -59,10 +55,10 @@ namespace TnT.Systems.Persistence
 
             foreach (var entity in entities)
             {
-                var data = datas.FirstOrDefault(d => d.Id == entity.UniqueId.Id);
+                var data = datas.FirstOrDefault(d => d.Id == entity.PersistentId);
                 if (data == null)
                 {
-                    data = new TData { Id = entity.UniqueId.Id, IsNew = true };
+                    data = new TData { Id = entity.PersistentId, IsNew = true };
                     datas.Add(data);
                 }
                 entity.Bind(data);
@@ -107,15 +103,9 @@ namespace TnT.Systems.Persistence
     //     }
     // }
 
-    public class UniqueId
-    {
-        [Export]
-        public string Id = Guid.NewGuid().ToString();
-    }
-
     public interface IUnique
     {
-        UniqueId UniqueId { get; set; }
+        string PersistentId { get; }
     }
 
     public interface IBind<TData> : IUnique where TData : ISaveable

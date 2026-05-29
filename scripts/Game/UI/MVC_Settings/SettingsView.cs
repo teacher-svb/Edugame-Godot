@@ -10,7 +10,7 @@ namespace TnT.Systems.UI
     {
         [Export] Control _audioPanel;
         [Export] Control _displayPanel;
-        [Export] Control _controlsPanel;
+        // [Export] Control _controlsPanel;
         [Export] Control _accessibilityPanel;
         [Export] Button _backButton;
 
@@ -18,34 +18,34 @@ namespace TnT.Systems.UI
 
         public override void _Ready()
         {
-            // ProcessMode = ProcessModeEnum.Always;
+            ProcessMode = ProcessModeEnum.Always;
             Modulate = Colors.Transparent;
             Visible = false;
-            // _backButton.Pressed += () => OnBack?.Invoke();
+            _backButton.Pressed += () => OnBack?.Invoke();
         }
 
         public void ShowPanels(bool audio, bool display, bool controls, bool accessibility)
         {
-            // _audioPanel.Visible         = audio;
-            // _displayPanel.Visible       = display;
+            _audioPanel.Visible         = audio;
+            _displayPanel.Visible       = display;
             // _controlsPanel.Visible      = controls;
-            // _accessibilityPanel.Visible = accessibility;
+            _accessibilityPanel.Visible = accessibility;
         }
 
         public async Task ShowView(float duration = 0.2f)
         {
-            // Visible = true;
-            // var start = Modulate;
-            // await foreach (var t in Easings.Easings.Animate(duration, Ease.Linear))
-            //     Modulate = start.Lerp(Colors.White, t);
+            Visible = true;
+            var start = Modulate;
+            await foreach (var t in Easings.Easings.Animate(duration, Ease.Linear))
+                Modulate = start.Lerp(Colors.White, t);
         }
 
         public async Task HideView(float duration = 0.2f)
         {
-            // var start = Modulate;
-            // await foreach (var t in Easings.Easings.Animate(duration, Ease.Linear))
-            //     Modulate = start.Lerp(Colors.Transparent, t);
-            // Visible = false;
+            var start = Modulate;
+            await foreach (var t in Easings.Easings.Animate(duration, Ease.Linear))
+                Modulate = start.Lerp(Colors.Transparent, t);
+            Visible = false;
         }
     }
 }

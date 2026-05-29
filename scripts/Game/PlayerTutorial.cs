@@ -11,11 +11,11 @@ public partial class PlayerTutorial : Node3D, IBind<TutorialSaveData>
     public InputAction2D MoveAction { get; set; }
 
     TutorialSaveData _saveData;
-    public UniqueId UniqueId { get; set; } = new UniqueId();
+    public string PersistentId { get; private set; }
 
     public override void _EnterTree()
     {
-        UniqueId.Id = GetPath().ToString();
+        PersistentId = GetPath().ToString();
     }
 
     public void Bind(TutorialSaveData data)

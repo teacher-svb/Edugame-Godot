@@ -1,9 +1,10 @@
 using System;
-using System.Collections.Generic;
 using TnT.Extensions;
 using TnT.Systems.Persistence;
 using Godot;
 using TnT.EduGame.Characters;
+using TnT.EduGame.QuestSystem;
+using TnT.EduGame.GameState;
 
 namespace TnT.EduGame
 {
@@ -14,29 +15,26 @@ namespace TnT.EduGame
 
         public override void _Ready()
         {
+            _gameName = "test";
             base._Ready();
             Instance = this;
         }
         
         protected override void OnSceneLoaded(string scenePath)
         {
-            // if (scene.name == "_startScene") return;
-
             GD.Print("SaveLoadManager OnSceneLoaded");
 
-            // Bind<Character, Character.CharacterSaveData>(ref GameData.playerData);
             Bind<Character3D, CharacterSaveData>(ref GameData.characterData);
-            // Bind<QuestManager, QuestManager.QuestManagerSaveData>(ref GameData.questData);
+            Bind<QuestManager, QuestManagerSaveData>(ref GameData.questData);
             Bind<Door, DoorSaveData>(ref GameData.doorData);
             Bind<PlayerTutorial, TutorialSaveData>(ref GameData.tutorialData);
 
-            // GameData.CurrentLevelName = scene.name;
+            StateManagerGame.Instance.StartPlay();
         }
 
-        protected void LoadScene(string sceneName)
+        protected void LoadScene(string scenePath)
         {
-            // var player = GetTree().FindAnyObjectByType<Player>();
-            // StateManagerGame.Instance.LoadScene(sceneName, player.transform.position);
+            StateManagerGame.Instance.LoadScene(scenePath, Vector3.Zero);
         }
 
         public override void NewGame()
@@ -45,10 +43,10 @@ namespace TnT.EduGame
             GameData = new MyGameData
             {
                 Name = _gameName,
-                CurrentLevelName = _startSceneName,
+                CurrentLevelName = _startScene,
             };
-            GD.Print(GameData.CurrentLevelName);
-            LoadScene(GameData.CurrentLevelName);
+            // GD.Print(GameData.CurrentLevelName);
+            // LoadScene(GameData.CurrentLevelName);
         }
 
         public override void LoadGame(string gameName)
@@ -60,7 +58,7 @@ namespace TnT.EduGame
 
             if (String.IsNullOrWhiteSpace(GameData.CurrentLevelName))
             {
-                GameData.CurrentLevelName = _startSceneName;
+                GameData.CurrentLevelName = _startScene;
             }
             LoadScene(GameData.CurrentLevelName);
         }

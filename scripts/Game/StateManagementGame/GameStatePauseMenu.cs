@@ -38,6 +38,8 @@ namespace TnT.EduGame.GameState
             _options.close.Enable();
             PauseMenuController.Instance.OnResume   += HandleResume;
             PauseMenuController.Instance.OnSettings += HandleSettings;
+            PauseMenuController.Instance.OnSave     += HandleSave;
+            PauseMenuController.Instance.OnLoad     += HandleLoad;
             await PauseMenuController.Instance.Show();
         }
 
@@ -45,6 +47,8 @@ namespace TnT.EduGame.GameState
         {
             PauseMenuController.Instance.OnResume   -= HandleResume;
             PauseMenuController.Instance.OnSettings -= HandleSettings;
+            PauseMenuController.Instance.OnSave     -= HandleSave;
+            PauseMenuController.Instance.OnLoad     -= HandleLoad;
             _options.close.Disable();
             await PauseMenuController.Instance.Hide();
             ManagerUI.Instance.GetTree().Paused = false;
@@ -54,5 +58,19 @@ namespace TnT.EduGame.GameState
 
         private void HandleSettings() =>
             StateManagerGame.Instance.OpenSettings(audio: true, display: false, controls: false, accessibility: true);
+
+        private void HandleSave() => SaveLoadManager.Instance.SaveGame();
+
+        private void HandleLoad()
+        {
+            // ResetStack() will wipe this state without calling Close() — clean up manually
+            PauseMenuController.Instance.OnResume   -= HandleResume;
+            PauseMenuController.Instance.OnSettings -= HandleSettings;
+            PauseMenuController.Instance.OnSave     -= HandleSave;
+            PauseMenuController.Instance.OnLoad     -= HandleLoad;
+            _options.close.Disable();
+            ManagerUI.Instance.GetTree().Paused = false;
+            SaveLoadManager.Instance.ReloadGame();
+        }
     }
 }

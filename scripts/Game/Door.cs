@@ -12,11 +12,11 @@ public partial class Door : Node3D, IBind<DoorSaveData>
 	AnimationPlayer _animPlayer;
 	DoorSaveData _saveData;
 
-	public UniqueId UniqueId { get; set; } = new UniqueId();
+	public string PersistentId { get; private set; }
 
 	public override void _EnterTree()
 	{
-		UniqueId.Id = GetPath().ToString();
+		PersistentId = GetPath().ToString();
 	}
 
 	public override void _Ready()

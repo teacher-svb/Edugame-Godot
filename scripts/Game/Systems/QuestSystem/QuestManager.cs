@@ -60,16 +60,13 @@ namespace TnT.EduGame.QuestSystem
 
 
         #region SAVE/LOAD
-        public UniqueId UniqueId { get; set; } = new() { Id = Guid.NewGuid().ToString() };
-        // [Export] public UniqueId UniqueId { get; set; } = new() { Id = Guid.NewGuid().ToString() };
-        // [field: SerializeField, ReadOnly] public string Id { get; set; } = Guid.NewGuid().ToString();
-        [Export]
+        public string PersistentId { get; private set; } = "QuestManager";
         QuestManagerSaveData _saveData;
 
         public void Bind(QuestManagerSaveData data)
         {
             _saveData = data;
-            _saveData.Id = UniqueId.Id;
+            _saveData.Id = PersistentId;
             Quests.ForEach(q => q.Bind(_saveData.quests?.FirstOrDefault(s => s.Id == q.Id)));
         }
         #endregion

@@ -3,14 +3,7 @@
 [ext_resource type="Script" uid="uid://blmeierxcviwj" path="res://scripts/Game/UI/MVC_Settings/SettingsView.cs" id="1_0o640"]
 [ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="1_qep6s"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qep6s"]
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-expand_margin_left = 8.0
-expand_margin_top = 8.0
-expand_margin_right = 8.0
-
-[node name="Control" type="Control" unique_id=29440267]
+[node name="Control" type="Control" unique_id=29440267 node_paths=PackedStringArray("_audioPanel", "_displayPanel", "_accessibilityPanel", "_backButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,166 +12,156 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_qep6s")
 script = ExtResource("1_0o640")
+_audioPanel = NodePath("PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Audio")
+_displayPanel = NodePath("PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Graphics")
+_accessibilityPanel = NodePath("PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Accessibility")
+_backButton = NodePath("Button")
 
-[node name="TabContainer" type="TabContainer" parent="." unique_id=2086386001]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1758009128]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 275.0
-offset_top = 50.0
-offset_right = -277.0
-offset_bottom = -98.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -340.0
+offset_top = -310.0
+offset_right = 355.0
+offset_bottom = 308.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 16
-theme_override_styles/tab_selected = SubResource("StyleBoxFlat_qep6s")
-tab_alignment = 1
-current_tab = 0
+theme = ExtResource("1_qep6s")
+theme_type_variation = &"DarkPanel"
 
-[node name="Audio" type="MarginContainer" parent="TabContainer" unique_id=13016287]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=59633529]
 layout_mode = 2
+theme_override_constants/margin_right = 48
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer" unique_id=2144567920]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/ScrollContainer" unique_id=2207354]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer" unique_id=581414384]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=2043043646]
+layout_mode = 2
+text = "Audio"
+
+[node name="Audio" type="PanelContainer" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=971504858]
+layout_mode = 2
+theme_type_variation = &"LightPanel"
+
+[node name="Audio" type="MarginContainer" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Audio" unique_id=13016287]
+layout_mode = 2
+theme_type_variation = &"DarkPanel"
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
-metadata/_tab_index = 0
 
-[node name="GridContainer" type="GridContainer" parent="TabContainer/Audio" unique_id=784767594]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Audio/Audio" unique_id=784767594]
 layout_mode = 2
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 2
 
-[node name="Music" type="Label" parent="TabContainer/Audio/GridContainer" unique_id=211822201]
+[node name="Music" type="Label" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Audio/Audio/GridContainer" unique_id=211822201]
 layout_mode = 2
 text = "Muziek"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="TabContainer/Audio/GridContainer" unique_id=1175562679]
+[node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Audio/Audio/GridContainer" unique_id=1175562679]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="Effects" type="Label" parent="TabContainer/Audio/GridContainer" unique_id=425162643]
+[node name="Effects" type="Label" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Audio/Audio/GridContainer" unique_id=425162643]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Effecten"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="HSlider2" type="HSlider" parent="TabContainer/Audio/GridContainer" unique_id=1481564759]
+[node name="HSlider2" type="HSlider" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Audio/Audio/GridContainer" unique_id=1481564759]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Graphics" type="MarginContainer" parent="TabContainer" unique_id=215072599]
-visible = false
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1765567734]
+layout_mode = 2
+text = "Graphics"
+
+[node name="Graphics" type="PanelContainer" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=797264792]
+layout_mode = 2
+theme_type_variation = &"LightPanel"
+
+[node name="GraphicsSettings" type="MarginContainer" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Graphics" unique_id=877836027]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
-metadata/_tab_index = 1
 
-[node name="GridContainer" type="GridContainer" parent="TabContainer/Graphics" unique_id=1052198908]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Graphics/GraphicsSettings" unique_id=1285628489]
 layout_mode = 2
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 2
 
-[node name="Music" type="Label" parent="TabContainer/Graphics/GridContainer" unique_id=1383821320]
+[node name="Fullscreen" type="Label" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Graphics/GraphicsSettings/GridContainer" unique_id=1759023942]
 layout_mode = 2
-text = "Muziek"
+size_flags_horizontal = 3
+text = "Fullscreen"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="TabContainer/Graphics/GridContainer" unique_id=876044589]
+[node name="Toggle" type="CheckButton" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Graphics/GraphicsSettings/GridContainer" unique_id=1683357085]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
+size_flags_horizontal = 0
 
-[node name="Effects" type="Label" parent="TabContainer/Graphics/GridContainer" unique_id=1763014736]
+[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=1592936220]
+layout_mode = 2
+text = "Toegankelijkheid"
+
+[node name="Accessibility" type="PanelContainer" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer" unique_id=870768474]
+layout_mode = 2
+theme_type_variation = &"LightPanel"
+
+[node name="AccessibilitySettings" type="MarginContainer" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Accessibility" unique_id=935665567]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Accessibility/AccessibilitySettings" unique_id=1449429855]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="Text Size" type="Label" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Accessibility/AccessibilitySettings/GridContainer" unique_id=653719838]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Effecten"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="HSlider2" type="HSlider" parent="TabContainer/Graphics/GridContainer" unique_id=266980318]
+[node name="HSlider2" type="HSlider" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Accessibility/AccessibilitySettings/GridContainer" unique_id=1849538057]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Accessibility" type="MarginContainer" parent="TabContainer" unique_id=904224870]
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-metadata/_tab_index = 2
-
-[node name="GridContainer" type="GridContainer" parent="TabContainer/Accessibility" unique_id=1306357871]
-layout_mode = 2
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-columns = 2
-
-[node name="Music" type="Label" parent="TabContainer/Accessibility/GridContainer" unique_id=2134529236]
-layout_mode = 2
-text = "Muziek"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="TabContainer/Accessibility/GridContainer" unique_id=577424861]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-
-[node name="Effects" type="Label" parent="TabContainer/Accessibility/GridContainer" unique_id=1796392232]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Effecten"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="HSlider2" type="HSlider" parent="TabContainer/Accessibility/GridContainer" unique_id=1165879087]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Controls" type="MarginContainer" parent="TabContainer" unique_id=1079671174]
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-metadata/_tab_index = 3
-
-[node name="GridContainer" type="GridContainer" parent="TabContainer/Controls" unique_id=1609887009]
-layout_mode = 2
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-columns = 2
-
-[node name="Music" type="Label" parent="TabContainer/Controls/GridContainer" unique_id=638619554]
-layout_mode = 2
-text = "Muziek"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="TabContainer/Controls/GridContainer" unique_id=561739010]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-
-[node name="Effects" type="Label" parent="TabContainer/Controls/GridContainer" unique_id=1659622414]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Effecten"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="HSlider2" type="HSlider" parent="TabContainer/Controls/GridContainer" unique_id=1734303320]
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="Button" type="Button" parent="." unique_id=1205284516]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 148.0
+offset_top = 16.0
+offset_right = 220.0
+offset_bottom = 90.0
+text = ""

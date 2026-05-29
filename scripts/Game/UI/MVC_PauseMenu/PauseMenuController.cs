@@ -14,13 +14,17 @@ namespace TnT.Systems.UI
 
         public event Action OnResume;
         public event Action OnSettings;
+        public event Action OnSave;
+        public event Action OnLoad;
 
         public override void _EnterTree() => Instance = this;
 
         public override void _Ready()
         {
-            view.OnResume += () => OnResume?.Invoke();
+            view.OnResume   += () => OnResume?.Invoke();
             view.OnSettings += () => OnSettings?.Invoke();
+            view.OnSave     += () => OnSave?.Invoke();
+            view.OnLoad     += () => OnLoad?.Invoke();
         }
 
         public async Task Show() => await view.ShowView();
