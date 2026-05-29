@@ -29,7 +29,7 @@ namespace TnT.EduGame
             Bind<Door, DoorSaveData>(ref GameData.doorData);
             Bind<PlayerTutorial, TutorialSaveData>(ref GameData.tutorialData);
 
-            StateManagerGame.Instance.StartPlay();
+            // StateManagerGame.Instance.StartPlay();
         }
 
         protected void LoadScene(string scenePath)
