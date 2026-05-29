@@ -218,11 +218,12 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.01
 environment = SubResource("Environment_lkauf")
 
 [node name="Sun" type="DirectionalLight3D" parent="Environment" unique_id=2141871353]
-transform = Transform3D(0.9800221, -0.17101485, -0.10154131, 0.10437453, 0.0076344907, 0.9945089, -0.16930057, -0.9852391, 0.025331547, 0, 2, 0)
+transform = Transform3D(0.2040718, 0.97888064, 0.012142341, 0.4486767, -0.10454724, 0.8875579, 0.8700826, -0.17567772, -0.4605361, 0, 2, 0)
 light_color = Color(1, 0.94902, 0.827451, 1)
-light_energy = 0.8
+light_energy = 0.7
 light_angular_distance = 46.8
 shadow_enabled = true
+shadow_bias = 0.0
 shadow_normal_bias = 10.0
 shadow_opacity = 0.36
 directional_shadow_split_1 = 0.14

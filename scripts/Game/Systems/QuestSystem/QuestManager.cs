@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using TnT.EduGame.Characters;
-using TnT.Systems;
-using TnT.Systems.Persistence;
 
 namespace TnT.EduGame.QuestSystem
 {
-    public partial class QuestManager : Node, IBind<QuestManagerSaveData>
+    public partial class QuestManager : Node
     {
         public static QuestManager Instance { get; private set; }
         [Export]
@@ -59,17 +56,6 @@ namespace TnT.EduGame.QuestSystem
         }
 
 
-        #region SAVE/LOAD
-        public string PersistentId { get; private set; } = "QuestManager";
-        QuestManagerSaveData _saveData;
-
-        public void Bind(QuestManagerSaveData data)
-        {
-            _saveData = data;
-            _saveData.Id = PersistentId;
-            Quests.ForEach(q => q.Bind(_saveData.quests?.FirstOrDefault(s => s.Id == q.Id)));
-        }
-        #endregion
     }
 
     public interface IQuestProcessor

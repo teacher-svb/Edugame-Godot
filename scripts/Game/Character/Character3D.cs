@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TnT.Systems.Persistence;
 using Godot;
-using TnT.Systems;
 using TnT.Extensions;
 using TnT.Input;
 using TnT.EduGame.CharacterState;
@@ -11,8 +9,17 @@ using TnT.EduGame.QuestSystem;
 
 namespace TnT.EduGame.Characters
 {
+    public partial class Character3D : IQuestReactionObject
+    {
+        public event Action ReactionCompleted
+        {
+            add => Connect(SignalName.StateCompleted, Callable.From(value));
+            remove => Disconnect(SignalName.StateCompleted, Callable.From(value));
+        }
+    }
+    
     [GlobalClass]
-    public partial class Character3D : CharacterBody3D, IBind<CharacterSaveData>, IQuestReactionObject
+    public partial class Character3D : CharacterBody3D
     {
         [Export]
         CharacterData _characterData;
@@ -20,18 +27,12 @@ namespace TnT.EduGame.Characters
         public Attributes Attributes { get; private set; }
         CharacterStateManager _stateManager;
 
-        public event Action ReactionCompleted
-        {
-            add => Connect(SignalName.StateCompleted, Callable.From(value));
-            remove => Disconnect(SignalName.StateCompleted, Callable.From(value));
-        }
-
 
         [Signal] public delegate void StateCompletedEventHandler();
 
         public override void _Ready()
         {
-            _InitSubNodes();
+            // _InitSubNodes();
 
             if (this._characterData != null)
             {
@@ -112,18 +113,5 @@ namespace TnT.EduGame.Characters
             _ = _stateManager.Pop();
         }
 
-        #region SAVE/LOAD
-
-        [Export] public string PersistentId { get; set; } = Guid.NewGuid().ToString();
-        CharacterSaveData _saveData;
-
-        public void Bind(CharacterSaveData data)
-        {
-            _saveData = data;
-            if (!data.IsNew)
-                this.Position = _saveData.position;
-            LoadCharacter(_saveData.characterId);
-        }
-        #endregion
     }
 }
