@@ -9,8 +9,6 @@ namespace TnT.EduGame.CharacterState
     [GlobalClass]
     public partial class CharacterStateIdle : BaseCharacterState, IStateObject<CharacterStateIdle.IdleOptions>
     {
-        private IdleOptions _options;
-
         public struct IdleOptions
         {
             public int durationMs;
@@ -18,22 +16,19 @@ namespace TnT.EduGame.CharacterState
 
         public BaseState GetState(IdleOptions options = default)
         {
-            _options = options;
-            return new BaseState(new() { ExitOnNextUpdate = Stop, OnEnter = OnEnter });
-        }
+            var duration = options.durationMs;
 
-        private bool Stop()
-        {
-            return _options.durationMs == 0;
-        }
-
-        private async Task OnEnter()
-        {
-            if (_options.durationMs >= 0)
+            return new BaseState(new()
             {
-                await Task.Delay(_options.durationMs);
-                _options.durationMs = 0;
-            }
+                ExitOnNextUpdate = () => duration == 0,
+                OnEnter = async () =>
+                {
+                    if (duration < 0)
+                        return;
+                    await Task.Delay(duration);
+                    duration = 0;
+                }
+            });
         }
     }
 }

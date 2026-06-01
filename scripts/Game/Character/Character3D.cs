@@ -18,10 +18,20 @@ namespace TnT.EduGame.Characters
         public Attributes Attributes { get; private set; }
         CharacterStateManager _stateManager;
 
+        private readonly Dictionary<Action, Callable> _reactionCallables = [];
         public event Action ReactionCompleted
         {
-            add => Connect(SignalName.StateCompleted, Callable.From(value));
-            remove => Disconnect(SignalName.StateCompleted, Callable.From(value));
+            add
+            {
+                var callable = Callable.From(value);
+                _reactionCallables[value] = callable;
+                Connect(SignalName.StateCompleted, callable);
+            }
+            remove
+            {
+                if (_reactionCallables.Remove(value, out var callable))
+                    Disconnect(SignalName.StateCompleted, callable);
+            }
         }
 
         [Signal] public delegate void StateCompletedEventHandler();
