@@ -87,7 +87,7 @@ namespace TnT.EduGame.GameState
                 ?? throw new Exception("no scene loader state assigned");
 
             // ResetStack();
-            Push(state.GetState<SceneLoaderOptions>(new() { scenePath = scenePath, targetLocation = targetLocation, onSceneReady = p => EmitSignal(SignalName.SceneLoaded, p) }));
+            Push(state.GetState<SceneLoaderOptions>(new() { scenePath = scenePath, targetLocation = targetLocation, onSceneReady = p => { Pop(); EmitSignal(SignalName.SceneLoaded, p); } }));
         }
 
         public void LoadLocation(Vector3 targetLocation)

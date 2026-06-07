@@ -1,9 +1,60 @@
-[gd_scene load_steps=0 format=3 uid="uid://c80lbf6m105k2"]
+[gd_scene format=3 uid="uid://c80lbf6m105k2"]
 
-[node name="Control" type="Control"]
+[ext_resource type="Script" uid="uid://br0iwnrv7hk1g" path="res://scripts/Game/UI/MVC_StartMenu/Controller/StartMenuController.cs" id="1_controller"]
+[ext_resource type="Script" uid="uid://cgsxnuwd7g5jr" path="res://scripts/Game/UI/MVC_StartMenu/Model/StartMenuModel.cs" id="2_model"]
+[ext_resource type="Script" uid="uid://bmfobuh16qn1h" path="res://scripts/Game/UI/MVC_StartMenu/View/StartMenuView.cs" id="3_view"]
+[ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="4_theme"]
+
+[node name="StartMenuController" type="Node" unique_id=1043877728 node_paths=PackedStringArray("view", "model")]
+script = ExtResource("1_controller")
+view = NodePath("CanvasLayer/StartMenuView")
+model = NodePath("StartMenuModel")
+
+[node name="StartMenuModel" type="Node" parent="." unique_id=1192498697]
+script = ExtResource("2_model")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="StartMenuView" type="Control" parent="CanvasLayer" unique_id=1449964898 node_paths=PackedStringArray("_newGameButton", "_loadGameButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_view")
+_newGameButton = NodePath("CenterContainer/VBoxContainer/NewGame")
+_loadGameButton = NodePath("CenterContainer/VBoxContainer/Load")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/StartMenuView" unique_id=95930037]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/StartMenuView/CenterContainer" unique_id=1881239574]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="NewGame" type="Button" parent="CanvasLayer/StartMenuView/CenterContainer/VBoxContainer" unique_id=637017699]
+layout_mode = 2
+theme = ExtResource("4_theme")
+text = "Nieuw spel"
+
+[node name="Load" type="Button" parent="CanvasLayer/StartMenuView/CenterContainer/VBoxContainer" unique_id=1775453468]
+layout_mode = 2
+theme = ExtResource("4_theme")
+text = "Laden"
+
+[node name="Settings" type="Button" parent="CanvasLayer/StartMenuView/CenterContainer/VBoxContainer" unique_id=1816552387]
+layout_mode = 2
+theme = ExtResource("4_theme")
+text = "Instellingen"
+
+[node name="Quit" type="Button" parent="CanvasLayer/StartMenuView/CenterContainer/VBoxContainer" unique_id=130691406]
+layout_mode = 2
+theme = ExtResource("4_theme")
+text = "Afsluiten"

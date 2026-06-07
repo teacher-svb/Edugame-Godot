@@ -18,18 +18,20 @@ namespace TnT.EduGame
             _gameName = "test";
             base._Ready();
             Instance = this;
+            GameData = new MyGameData { Name = _gameName, CurrentLevelName = _startScene };
         }
         
         protected override void OnSceneLoaded(string scenePath)
         {
             GD.Print("SaveLoadManager OnSceneLoaded");
+            GameData.CurrentLevelName = scenePath;
 
             Bind<Character3D, CharacterSaveData>(ref GameData.characterData);
             Bind<QuestManager, QuestManagerSaveData>(ref GameData.questData);
             Bind<Door, DoorSaveData>(ref GameData.doorData);
             Bind<PlayerTutorial, TutorialSaveData>(ref GameData.tutorialData);
 
-            // StateManagerGame.Instance.StartPlay();
+            StateManagerGame.Instance.StartPlay();
         }
 
         protected void LoadScene(string scenePath)
@@ -45,8 +47,7 @@ namespace TnT.EduGame
                 Name = _gameName,
                 CurrentLevelName = _startScene,
             };
-            // GD.Print(GameData.CurrentLevelName);
-            // LoadScene(GameData.CurrentLevelName);
+            LoadScene(GameData.CurrentLevelName);
         }
 
         public override void LoadGame(string gameName)

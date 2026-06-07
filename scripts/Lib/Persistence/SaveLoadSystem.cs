@@ -25,7 +25,6 @@ namespace TnT.Systems.Persistence
         {
             dataService = new FileDataService<T>(new JsonSerializer());
             StateManagerGame.Instance.SceneLoaded += OnSceneLoaded;
-            NewGame();
         }
 
         // void Start() => NewGame();
@@ -69,6 +68,8 @@ namespace TnT.Systems.Persistence
         public abstract void NewGame();
 
         public void SaveGame() => dataService.Save(GameData);
+
+        public bool HasSave() => dataService.ListSaves().Any(s => s == _gameName);
 
         public void ReloadGame() => LoadGame(GameData.Name);
 
