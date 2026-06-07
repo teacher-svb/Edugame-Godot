@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Godot;
-using TnT.Easings;
+using TnT.Systems.UIAnimation;
 
 namespace TnT.Systems.UI
 {
@@ -10,7 +10,6 @@ namespace TnT.Systems.UI
     {
         [Export] Control _audioPanel;
         [Export] Control _displayPanel;
-        // [Export] Control _controlsPanel;
         [Export] Control _accessibilityPanel;
         [Export] Button _backButton;
 
@@ -28,23 +27,18 @@ namespace TnT.Systems.UI
         {
             _audioPanel.Visible         = audio;
             _displayPanel.Visible       = display;
-            // _controlsPanel.Visible      = controls;
             _accessibilityPanel.Visible = accessibility;
         }
 
         public async Task ShowView(float duration = 0.2f)
         {
             Visible = true;
-            var start = Modulate;
-            await foreach (var t in Easings.Easings.Animate(duration, Ease.Linear))
-                Modulate = start.Lerp(Colors.White, t);
+            await this.FadeIn(duration);
         }
 
         public async Task HideView(float duration = 0.2f)
         {
-            var start = Modulate;
-            await foreach (var t in Easings.Easings.Animate(duration, Ease.Linear))
-                Modulate = start.Lerp(Colors.Transparent, t);
+            await this.FadeOut(duration);
             Visible = false;
         }
     }

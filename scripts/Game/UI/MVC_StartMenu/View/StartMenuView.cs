@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Godot;
-using TnT.Easings;
+using TnT.Systems.UIAnimation;
 
 namespace TnT.EduGame.UI
 {
@@ -16,7 +16,7 @@ namespace TnT.EduGame.UI
 
         public override void _Ready()
         {
-            _newGameButton.Pressed += () => OnNewGame?.Invoke();
+            _newGameButton.Pressed  += () => OnNewGame?.Invoke();
             _loadGameButton.Pressed += () => OnLoadGame?.Invoke();
         }
 
@@ -25,16 +25,12 @@ namespace TnT.EduGame.UI
         public async Task ShowView(float duration = 0.3f)
         {
             Visible = true;
-            var start = Modulate;
-            await foreach (var t in Easings.Easings.Animate(duration, Ease.Linear))
-                Modulate = start.Lerp(Colors.White, t);
+            await this.FadeIn(duration);
         }
 
         public async Task HideView(float duration = 0.3f)
         {
-            var start = Modulate;
-            await foreach (var t in Easings.Easings.Animate(duration, Ease.Linear))
-                Modulate = start.Lerp(Colors.Transparent, t);
+            await this.FadeOut(duration);
             Visible = false;
         }
     }

@@ -4,19 +4,18 @@ using TnT.Extensions;
 
 namespace TnT.Systems.UI
 {
-    public partial class FadeController : Control
+    [GlobalClass]
+    public partial class FadeController : Node
     {
-        [Export]
-        public FadeView view = new();
-        [Export]
-        public FadeModel model = new();
+        [Export] public FadeView view;
+        [Export] public FadeModel model;
 
         public override void _Ready()
         {
             Initialize();
         }
 
-        async void Initialize() => await view.InitializeView(this);
+        async void Initialize() => await view.InitializeView();
 
         public async Task ShowView()
         {

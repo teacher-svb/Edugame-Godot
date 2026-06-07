@@ -1,12 +1,8 @@
-
-using System;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Godot;
-using TnT.Easings;
 using TnT.EduGame.Question;
 using TnT.Extensions;
+using TnT.Systems.UIAnimation;
 
 namespace TnT.Systems.UI
 {
@@ -17,61 +13,32 @@ namespace TnT.Systems.UI
 
         public ChallengeUI ChallengeUI => _challengeUi;
 
-        public override void _Ready()
-        {
-        }
+        public override void _Ready() { }
 
         public async Task InitializeView(IMathChallenge challenge)
         {
-
             _challengeUi = this.FindAnyObjectByType<ChallengeUI>();
-            this.Modulate = Colors.Transparent;
-            this.Scale = new Vector2(0, 0);
+            Modulate = Colors.Transparent;
+            Scale = Vector2.Zero;
 
             await Task.Yield();
-
-            // Refresh(challenge);
         }
 
-        public async Task ShowView(float duration = .2f)
+        public async Task ShowView(float duration = 0.2f)
         {
-            var startColor = this.Modulate;
-            var targetColor = Colors.White;
-            var startScale = this.Scale;
-            var targetScale = new Vector2(1, 1);
-
-            await foreach (var t in Easings.Easings.Animate(duration, Ease.EaseOutCubic))
-            {
-                this.Modulate = startColor.Lerp(targetColor, t);
-                this.Scale = startScale.Lerp(targetScale, t);
-            }
-
-            this.Show();
+            await this.ScaleIn(duration);
+            Show();
         }
 
-        public async Task HideView(float duration = .2f)
+        public async Task HideView(float duration = 0.2f)
         {
-            var startColor = this.Modulate;
-            var targetColor = Colors.Transparent;
-            var startScale = this.Scale;
-            var targetScale = new Vector2(0, 0);
-
-            await foreach (var t in Easings.Easings.Animate(duration, Ease.EaseOutCubic))
-            {
-                this.Modulate = startColor.Lerp(targetColor, t);
-                this.Scale = startScale.Lerp(targetScale, t);
-            }
-
-            this.Hide();
+            await this.ScaleOut(duration);
+            Hide();
         }
 
         public void Refresh(IMathChallenge challenge)
         {
-            // if (_challengeUi != null && container.FindAnyObjectByType<ChallengeUI>() != null)
-            //     container.RemoveChild(_challengeUi);
-
             _challengeUi = ChallengeUIFactory.Build(challenge);
         }
     }
-
 }

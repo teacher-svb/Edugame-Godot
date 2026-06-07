@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ejrfvfbpy3gr" path="res://scripts/Game/UI/MVC_PauseMenu/PauseMenuView.cs" id="1_28jtb"]
 [ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="1_padb0"]
+[ext_resource type="Script" uid="uid://bpr1xsrq6lokd" path="res://scripts/Lib/UIAnimation/AnimatedButton.cs" id="3_luadu"]
 
 [node name="PauseMenuView" type="Control" unique_id=35513525 node_paths=PackedStringArray("_resumeButton", "_settingsButton", "_saveButton", "_loadButton")]
 layout_mode = 3
@@ -28,27 +29,37 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Resume" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1254672643]
+[node name="Resume" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1027078948]
 layout_mode = 2
 theme = ExtResource("1_padb0")
 text = "Verder spelen"
+script = ExtResource("3_luadu")
+metadata/_custom_type_script = "uid://bpr1xsrq6lokd"
 
-[node name="Save" type="Button" parent="CenterContainer/VBoxContainer" unique_id=654200171]
+[node name="Save" type="Button" parent="CenterContainer/VBoxContainer" unique_id=277331698]
 layout_mode = 2
 theme = ExtResource("1_padb0")
 text = "Opslaan"
+script = ExtResource("3_luadu")
+metadata/_custom_type_script = "uid://bpr1xsrq6lokd"
 
-[node name="Load" type="Button" parent="CenterContainer/VBoxContainer" unique_id=834094018]
+[node name="Load" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1471937072]
 layout_mode = 2
 theme = ExtResource("1_padb0")
 text = "Laden"
+script = ExtResource("3_luadu")
+metadata/_custom_type_script = "uid://bpr1xsrq6lokd"
 
-[node name="Settings" type="Button" parent="CenterContainer/VBoxContainer" unique_id=788719596]
+[node name="Settings" type="Button" parent="CenterContainer/VBoxContainer" unique_id=2088837802]
 layout_mode = 2
 theme = ExtResource("1_padb0")
 text = "Instellingen"
+script = ExtResource("3_luadu")
+metadata/_custom_type_script = "uid://bpr1xsrq6lokd"
 
-[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer" unique_id=89786240]
+[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1352200869]
 layout_mode = 2
 theme = ExtResource("1_padb0")
 text = "Afsluiten"
+script = ExtResource("3_luadu")
+metadata/_custom_type_script = "uid://bpr1xsrq6lokd"

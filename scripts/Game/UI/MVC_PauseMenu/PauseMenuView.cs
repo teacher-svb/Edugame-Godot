@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Godot;
-using TnT.Easings;
+using TnT.Systems.UIAnimation;
 
 namespace TnT.Systems.UI
 {
@@ -23,25 +23,21 @@ namespace TnT.Systems.UI
             ProcessMode = ProcessModeEnum.Always;
             Modulate = Colors.Transparent;
             Visible = false;
-            _resumeButton.Pressed  += () => OnResume?.Invoke();
+            _resumeButton.Pressed   += () => OnResume?.Invoke();
             _settingsButton.Pressed += () => OnSettings?.Invoke();
-            _saveButton.Pressed    += () => OnSave?.Invoke();
-            _loadButton.Pressed    += () => OnLoad?.Invoke();
+            _saveButton.Pressed     += () => OnSave?.Invoke();
+            _loadButton.Pressed     += () => OnLoad?.Invoke();
         }
 
         public async Task ShowView(float duration = 0.2f)
         {
             Visible = true;
-            var start = Modulate;
-            await foreach (var t in Easings.Easings.Animate(duration, Ease.Linear))
-                Modulate = start.Lerp(Colors.White, t);
+            await this.FadeIn(duration);
         }
 
         public async Task HideView(float duration = 0.2f)
         {
-            var start = Modulate;
-            await foreach (var t in Easings.Easings.Animate(duration, Ease.Linear))
-                Modulate = start.Lerp(Colors.Transparent, t);
+            await this.FadeOut(duration);
             Visible = false;
         }
     }

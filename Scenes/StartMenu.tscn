@@ -4,19 +4,20 @@
 [ext_resource type="Script" uid="uid://cgsxnuwd7g5jr" path="res://scripts/Game/UI/MVC_StartMenu/Model/StartMenuModel.cs" id="2_model"]
 [ext_resource type="Script" uid="uid://bmfobuh16qn1h" path="res://scripts/Game/UI/MVC_StartMenu/View/StartMenuView.cs" id="3_view"]
 [ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="4_theme"]
+[ext_resource type="Script" uid="uid://bpr1xsrq6lokd" path="res://scripts/Lib/UIAnimation/AnimatedButton.cs" id="5_ujd4t"]
 
-[node name="StartMenuController" type="Node" unique_id=1043877728 node_paths=PackedStringArray("view", "model")]
+[node name="Node" type="Node" unique_id=1133384526]
+
+[node name="StartMenuController" type="Node" parent="." unique_id=1834476258 node_paths=PackedStringArray("view", "model")]
 script = ExtResource("1_controller")
-view = NodePath("CanvasLayer/StartMenuView")
+view = NodePath("StartMenuView")
 model = NodePath("StartMenuModel")
 
-[node name="StartMenuModel" type="Node" parent="." unique_id=1192498697]
+[node name="StartMenuModel" type="Node" parent="StartMenuController" unique_id=1192498697]
 script = ExtResource("2_model")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
-
-[node name="StartMenuView" type="Control" parent="CanvasLayer" unique_id=1449964898 node_paths=PackedStringArray("_newGameButton", "_loadGameButton")]
+[node name="StartMenuView" type="Control" parent="StartMenuController" unique_id=1449964898 node_paths=PackedStringArray("_newGameButton", "_loadGameButton")]
+z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +28,7 @@ script = ExtResource("3_view")
 _newGameButton = NodePath("CenterContainer/VBoxContainer/NewGame")
 _loadGameButton = NodePath("CenterContainer/VBoxContainer/Load")
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/StartMenuView" unique_id=95930037]
+[node name="CenterContainer" type="CenterContainer" parent="StartMenuController/StartMenuView" unique_id=95930037]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,26 +36,34 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/StartMenuView/CenterContainer" unique_id=1881239574]
+[node name="VBoxContainer" type="VBoxContainer" parent="StartMenuController/StartMenuView/CenterContainer" unique_id=1881239574]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="NewGame" type="Button" parent="CanvasLayer/StartMenuView/CenterContainer/VBoxContainer" unique_id=637017699]
+[node name="NewGame" type="Button" parent="StartMenuController/StartMenuView/CenterContainer/VBoxContainer" unique_id=460126366]
 layout_mode = 2
 theme = ExtResource("4_theme")
 text = "Nieuw spel"
+script = ExtResource("5_ujd4t")
+metadata/_custom_type_script = "uid://bpr1xsrq6lokd"
 
-[node name="Load" type="Button" parent="CanvasLayer/StartMenuView/CenterContainer/VBoxContainer" unique_id=1775453468]
+[node name="Load" type="Button" parent="StartMenuController/StartMenuView/CenterContainer/VBoxContainer" unique_id=74884907]
 layout_mode = 2
 theme = ExtResource("4_theme")
 text = "Laden"
+script = ExtResource("5_ujd4t")
+metadata/_custom_type_script = "uid://bpr1xsrq6lokd"
 
-[node name="Settings" type="Button" parent="CanvasLayer/StartMenuView/CenterContainer/VBoxContainer" unique_id=1816552387]
+[node name="Settings" type="Button" parent="StartMenuController/StartMenuView/CenterContainer/VBoxContainer" unique_id=1007694961]
 layout_mode = 2
 theme = ExtResource("4_theme")
 text = "Instellingen"
+script = ExtResource("5_ujd4t")
+metadata/_custom_type_script = "uid://bpr1xsrq6lokd"
 
-[node name="Quit" type="Button" parent="CanvasLayer/StartMenuView/CenterContainer/VBoxContainer" unique_id=130691406]
+[node name="Quit" type="Button" parent="StartMenuController/StartMenuView/CenterContainer/VBoxContainer" unique_id=239029412]
 layout_mode = 2
 theme = ExtResource("4_theme")
 text = "Afsluiten"
+script = ExtResource("5_ujd4t")
+metadata/_custom_type_script = "uid://bpr1xsrq6lokd"

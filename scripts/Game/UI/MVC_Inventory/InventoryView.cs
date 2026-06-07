@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
-using TnT.Easings;
 using TnT.EduGame.Inventory;
 using TnT.Extensions;
+using TnT.Systems.UIAnimation;
 
 namespace TnT.Systems.UI
 {
@@ -42,30 +42,16 @@ namespace TnT.Systems.UI
             }
         }
 
-        public async Task ShowView(float duration = .2f)
+        public async Task ShowView(float duration = 0.2f)
         {
-            var startColor = this.Modulate;
-            var endColor = Colors.White;
-
-            await foreach (var t in Easings.Easings.Animate(duration, Ease.Linear))
-            {
-                this.Modulate = startColor.Lerp(endColor, t);
-            }
+            await this.FadeIn(duration);
             Visible = true;
-            await Task.CompletedTask;
         }
 
-        public async Task HideView(float duration = .2f)
+        public async Task HideView(float duration = 0.2f)
         {
-            var startColor = this.Modulate;
-            var endColor = Colors.Transparent;
-
-            await foreach (var t in Easings.Easings.Animate(duration, Ease.Linear))
-            {
-                this.Modulate = startColor.Lerp(endColor, t);
-            }
+            await this.FadeOut(duration);
             Visible = false;
-            await Task.CompletedTask;
         }
 
         private TextureRect MakeIcon(Texture2D texture)

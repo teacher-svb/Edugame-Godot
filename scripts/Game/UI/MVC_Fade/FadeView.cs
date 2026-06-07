@@ -1,54 +1,45 @@
-using System;
 using System.Threading.Tasks;
 using Godot;
-using TnT.Easings;
 using TnT.Extensions;
+using TnT.Systems.UIAnimation;
 
 namespace TnT.Systems.UI
 {
-
     [GlobalClass]
-    public partial class FadeView : Resource
+    public partial class FadeView : Control
     {
-        Control _root;
+        Node _root;
         ColorRect _fadeRect;
-        [Export] NodePath _fadeRectPath;
 
-        Color _from = Color.FromHsv(0, 0, 0, 1);
-        Color _to = Color.FromHsv(0, 0, 0, 0);
-
-        public async Task InitializeView(Control root)
+        public async Task InitializeView()
         {
-            _root = root;
+            _root = this.FindAncestorOfType<FadeController>();
 
-            _fadeRect = root.GetNode(_fadeRectPath) as ColorRect;
-            _fadeRect.Color = _to;
-            _fadeRect.SetAnchorsPreset(Control.LayoutPreset.FullRect);
+
+            _fadeRect = this.FindAnyObjectByType<ColorRect>();
+            _fadeRect.Modulate = new Color(1f, 1f, 1f, 0f);
+            _fadeRect.SetAnchorsPreset(LayoutPreset.FullRect);
+            _fadeRect.Visible = false;
 
             await Task.Yield();
         }
 
         public async Task Show(float durationSeconds = 1f)
         {
-            _root.ZIndex = 10;
-            var startColor = _fadeRect.Color;
+            var canvas = this.FindAncestorOfType<CanvasLayer>();
+            canvas.Layer = 999;
 
-            await foreach (var t in Easings.Easings.Animate(durationSeconds, Ease.Linear))
-            {
-                _fadeRect.Color = startColor.Lerp(_from, t);
-            }
+            _fadeRect.Visible = true;
+            await _fadeRect.FadeIn(durationSeconds);
         }
 
         public async Task Hide(float durationSeconds = 1f)
         {
-            var startColor = _fadeRect.Color;
+            await _fadeRect.FadeOut(durationSeconds);
+            _fadeRect.Visible = false;
 
-            await foreach (var t in Easings.Easings.Animate(durationSeconds, Ease.Linear))
-            {
-                _fadeRect.Color = startColor.Lerp(_to, t);
-            }
-
-            _root.ZIndex = 0;
+            var canvas = this.FindAncestorOfType<CanvasLayer>();
+            canvas.Layer = -1;
         }
     }
 }

@@ -4,15 +4,11 @@
 [ext_resource type="Script" uid="uid://cerfog7uyabpn" path="res://scripts/Game/Systems/SaveLoadSystem/MyGameData.cs" id="2_4v8vv"]
 [ext_resource type="Script" uid="uid://d3ttmxb4thh1c" path="res://scripts/Lib/Input/InputManager.cs" id="3_4v8vv"]
 [ext_resource type="Script" uid="uid://x737eafgbb37" path="res://scripts/Lib/Input/InputAction2D.cs" id="3_fkgmb"]
-[ext_resource type="Script" uid="uid://bu2vh3eo113s1" path="res://scripts/Game/UI/MVC_Fade/FadeController.cs" id="4_7g5um"]
 [ext_resource type="Script" uid="uid://7nvtadqep3kv" path="res://scripts/Game/Systems/QuestSystem/QuestManager.cs" id="4_347u6"]
 [ext_resource type="Script" uid="uid://bjnewwsvx7s8s" path="res://scripts/Game/Singletons/ManagerUI.cs" id="4_c37v5"]
-[ext_resource type="Script" uid="uid://7u5mhmxl340a" path="res://scripts/Game/UI/MVC_Fade/FadeView.cs" id="5_c37v5"]
-[ext_resource type="Script" uid="uid://cvgoslwqcj457" path="res://scripts/Game/UI/MVC_Fade/FadeModel.cs" id="6_8i7bo"]
 [ext_resource type="Resource" uid="uid://bcgox3enbg4ph" path="res://GameData/quests/LookingForAvocado.tres" id="6_pnf1h"]
 [ext_resource type="Script" uid="uid://c0ssbl3ew4s2d" path="res://scripts/Game/StateManagementGame/StateManagerGame.cs" id="7_0le2r"]
 [ext_resource type="Script" uid="uid://crvao34oeaf4m" path="res://scripts/Game/StateManagementGame/GameStateChallenge.cs" id="7_blwmm"]
-[ext_resource type="Script" uid="uid://bdql4ehll6w1t" path="res://scripts/Game/Systems/QuestSystem/QuestManagerSaveData.cs" id="7_iqbe2"]
 [ext_resource type="Script" uid="uid://ncf63o7hgool" path="res://scripts/Game/UI/MVC_Messages/Controller/MessageController.cs" id="8_0le2r"]
 [ext_resource type="Script" uid="uid://c673wplbelsyw" path="res://scripts/Game/StateManagementGame/GameStatePauseMenu.cs" id="9_56cnb"]
 [ext_resource type="PackedScene" uid="uid://b8eidkv5hpkk3" path="res://Scenes/UI/Notification.tscn" id="9_n5sdn"]
@@ -43,8 +39,11 @@
 [ext_resource type="Script" uid="uid://bj01trh2jwtl1" path="res://scripts/Game/UI/MVC_PauseMenu/PauseMenuModel.cs" id="38_8mpub"]
 [ext_resource type="PackedScene" uid="uid://c3qhgndpkvx23" path="res://Scenes/UI/PauseMenuUI.tscn" id="39_8mpub"]
 [ext_resource type="Script" uid="uid://vxn3gfrl3h1l" path="res://scripts/Game/UI/MVC_Settings/SettingsController.cs" id="40_v88nt"]
+[ext_resource type="Script" uid="uid://bu2vh3eo113s1" path="res://scripts/Game/UI/MVC_Fade/FadeController.cs" id="41_d2cak"]
 [ext_resource type="Script" uid="uid://c20c4ihxalgfu" path="res://scripts/Game/UI/MVC_Settings/SettingsModel.cs" id="41_n2kwl"]
+[ext_resource type="Script" uid="uid://cvgoslwqcj457" path="res://scripts/Game/UI/MVC_Fade/FadeModel.cs" id="42_56cnb"]
 [ext_resource type="PackedScene" uid="uid://ddarmu38cbcs" path="res://Scenes/UI/SettingsUI.tscn" id="42_n2kwl"]
+[ext_resource type="Script" uid="uid://7u5mhmxl340a" path="res://scripts/Game/UI/MVC_Fade/FadeView.cs" id="43_wgk6c"]
 
 [sub_resource type="Resource" id="Resource_hwrcp"]
 script = ExtResource("16_ut70p")
@@ -113,10 +112,6 @@ metadata/_custom_type_script = "uid://ch4u84myc17c2"
 script = ExtResource("2_4v8vv")
 metadata/_custom_type_script = "uid://cerfog7uyabpn"
 
-[sub_resource type="Resource" id="Resource_pnf1h"]
-script = ExtResource("7_iqbe2")
-metadata/_custom_type_script = "uid://bdql4ehll6w1t"
-
 [sub_resource type="Resource" id="Resource_5t4y7"]
 script = ExtResource("16_ut70p")
 InputReference = "next"
@@ -134,15 +129,6 @@ script = ExtResource("16_ut70p")
 InputReference = "open"
 ActionName = "open"
 metadata/_custom_type_script = "uid://ch4u84myc17c2"
-
-[sub_resource type="Resource" id="Resource_n5sdn"]
-script = ExtResource("5_c37v5")
-_fadeRectPath = NodePath("ColorRect")
-metadata/_custom_type_script = "uid://7u5mhmxl340a"
-
-[sub_resource type="Resource" id="Resource_eky4q"]
-script = ExtResource("6_8i7bo")
-metadata/_custom_type_script = "uid://cvgoslwqcj457"
 
 [node name="Managers" type="Node" unique_id=583445644]
 process_mode = 3
@@ -191,44 +177,25 @@ script = ExtResource("3_4v8vv")
 script = ExtResource("4_347u6")
 _quests = Array[ExtResource("11_aum7h")]([ExtResource("6_pnf1h")])
 eventChannel = ExtResource("13_pnf1h")
-_saveData = SubResource("Resource_pnf1h")
 
-[node name="UIManager" type="CanvasLayer" parent="." unique_id=379512689]
+[node name="UIManager" type="Node" parent="." unique_id=1207108139]
 script = ExtResource("4_c37v5")
 Next = SubResource("Resource_5t4y7")
 Close = SubResource("Resource_i1r4r")
 Open = SubResource("Resource_awodd")
 
-[node name="FadeController" type="Control" parent="UIManager" unique_id=1274864108]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("4_7g5um")
-view = SubResource("Resource_n5sdn")
-model = SubResource("Resource_eky4q")
+[node name="CanvasLayer" type="CanvasLayer" parent="UIManager" unique_id=99826408]
+layer = -1
 
-[node name="ColorRect" type="ColorRect" parent="UIManager/FadeController" unique_id=1091947856]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(1, 1, 1, 0)
-
-[node name="MessageController" type="Node" parent="UIManager" unique_id=189203661 node_paths=PackedStringArray("view", "model")]
+[node name="MessageController" type="Node" parent="UIManager/CanvasLayer" unique_id=189203661 node_paths=PackedStringArray("view", "model")]
 script = ExtResource("8_0le2r")
 view = NodePath("MessageView")
 model = NodePath("MessageModel")
 
-[node name="MessageModel" type="Node" parent="UIManager/MessageController" unique_id=503624646]
+[node name="MessageModel" type="Node" parent="UIManager/CanvasLayer/MessageController" unique_id=503624646]
 script = ExtResource("10_46vsp")
 
-[node name="MessageView" type="Control" parent="UIManager/MessageController" unique_id=132175026]
+[node name="MessageView" type="Control" parent="UIManager/CanvasLayer/MessageController" unique_id=132175026]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -239,16 +206,16 @@ pivot_offset = Vector2(578, 128)
 mouse_filter = 1
 script = ExtResource("9_ut70p")
 
-[node name="Notification" parent="UIManager/MessageController/MessageView" unique_id=756365186 instance=ExtResource("9_n5sdn")]
+[node name="Notification" parent="UIManager/CanvasLayer/MessageController/MessageView" unique_id=756365186 instance=ExtResource("9_n5sdn")]
 layout_mode = 1
 
-[node name="ChallengeController" type="Node" parent="UIManager" unique_id=162030598 node_paths=PackedStringArray("view", "model")]
+[node name="ChallengeController" type="Node" parent="UIManager/CanvasLayer" unique_id=162030598 node_paths=PackedStringArray("view", "model")]
 unique_name_in_owner = true
 script = ExtResource("23_aum7h")
 view = NodePath("ChallengeView")
 model = NodePath("ChallengeModel")
 
-[node name="ChallengeView" type="Control" parent="UIManager/ChallengeController" unique_id=366009643]
+[node name="ChallengeView" type="Control" parent="UIManager/CanvasLayer/ChallengeController" unique_id=366009643]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -258,15 +225,15 @@ grow_vertical = 2
 script = ExtResource("24_qelhd")
 metadata/_custom_type_script = "uid://dlqolcp4oddju"
 
-[node name="ChallengeUI" parent="UIManager/ChallengeController/ChallengeView" unique_id=12389747 instance=ExtResource("25_blwmm")]
+[node name="ChallengeUI" parent="UIManager/CanvasLayer/ChallengeController/ChallengeView" unique_id=12389747 instance=ExtResource("25_blwmm")]
 layout_mode = 1
 
-[node name="ChallengeModel" type="Node" parent="UIManager/ChallengeController" unique_id=1213671079]
+[node name="ChallengeModel" type="Node" parent="UIManager/CanvasLayer/ChallengeController" unique_id=1213671079]
 script = ExtResource("26_2a8cd")
 _challenge = ExtResource("27_kpb3h")
 metadata/_custom_type_script = "uid://bmfvn3p4u73k5"
 
-[node name="InventoryController" type="Node" parent="UIManager" unique_id=898957681 node_paths=PackedStringArray("view", "model", "_pickupItemListener")]
+[node name="InventoryController" type="Node" parent="UIManager/CanvasLayer" unique_id=898957681 node_paths=PackedStringArray("view", "model", "_pickupItemListener")]
 script = ExtResource("29_yi7uc")
 view = NodePath("InventoryView")
 model = NodePath("InventoryModel")
@@ -274,38 +241,67 @@ _pickupItemListener = NodePath("PickupItemEventListener")
 _useItemChannel = ExtResource("30_fkgmb")
 _removeItemChannel = ExtResource("31_hwrcp")
 
-[node name="PickupItemEventListener" type="Node" parent="UIManager/InventoryController" unique_id=1242244140]
+[node name="PickupItemEventListener" type="Node" parent="UIManager/CanvasLayer/InventoryController" unique_id=1242244140]
 script = ExtResource("30_i1r4r")
 eventChannel = ExtResource("30_5t4y7")
 
-[node name="InventoryModel" type="Node" parent="UIManager/InventoryController" unique_id=391958656]
+[node name="InventoryModel" type="Node" parent="UIManager/CanvasLayer/InventoryController" unique_id=391958656]
 script = ExtResource("30_j8mgp")
 
-[node name="InventoryView" parent="UIManager/InventoryController" unique_id=1662155608 instance=ExtResource("32_j8mgp")]
+[node name="InventoryView" parent="UIManager/CanvasLayer/InventoryController" unique_id=1662155608 instance=ExtResource("32_j8mgp")]
 
-[node name="PauseMenuController" type="Node" parent="UIManager" unique_id=924298833 node_paths=PackedStringArray("view", "model")]
+[node name="PauseMenuController" type="Node" parent="UIManager/CanvasLayer" unique_id=924298833 node_paths=PackedStringArray("view", "model")]
 script = ExtResource("37_wdqj0")
 view = NodePath("PauseMenuView")
 model = NodePath("PauseMenuModel")
 metadata/_custom_type_script = "uid://cp5bj565jyei0"
 
-[node name="PauseMenuModel" type="Node" parent="UIManager/PauseMenuController" unique_id=588791433]
+[node name="PauseMenuModel" type="Node" parent="UIManager/CanvasLayer/PauseMenuController" unique_id=588791433]
 script = ExtResource("38_8mpub")
 metadata/_custom_type_script = "uid://bj01trh2jwtl1"
 
-[node name="PauseMenuView" parent="UIManager/PauseMenuController" unique_id=35513525 instance=ExtResource("39_8mpub")]
+[node name="PauseMenuView" parent="UIManager/CanvasLayer/PauseMenuController" unique_id=35513525 instance=ExtResource("39_8mpub")]
 
-[node name="SettingsController" type="Node" parent="UIManager" unique_id=1391147643 node_paths=PackedStringArray("view", "model")]
+[node name="SettingsController" type="Node" parent="UIManager/CanvasLayer" unique_id=1391147643 node_paths=PackedStringArray("view", "model")]
 script = ExtResource("40_v88nt")
 view = NodePath("Control")
 model = NodePath("SettingsModel")
 metadata/_custom_type_script = "uid://vxn3gfrl3h1l"
 
-[node name="SettingsModel" type="Node" parent="UIManager/SettingsController" unique_id=14836353]
+[node name="SettingsModel" type="Node" parent="UIManager/CanvasLayer/SettingsController" unique_id=14836353]
 script = ExtResource("41_n2kwl")
 metadata/_custom_type_script = "uid://c20c4ihxalgfu"
 
-[node name="Control" parent="UIManager/SettingsController" unique_id=29440267 instance=ExtResource("42_n2kwl")]
+[node name="Control" parent="UIManager/CanvasLayer/SettingsController" unique_id=29440267 instance=ExtResource("42_n2kwl")]
+
+[node name="FadeController" type="Node" parent="UIManager/CanvasLayer" unique_id=2005056650 node_paths=PackedStringArray("view", "model")]
+script = ExtResource("41_d2cak")
+view = NodePath("FadeView")
+model = NodePath("FadeModel")
+
+[node name="FadeModel" type="Node" parent="UIManager/CanvasLayer/FadeController" unique_id=692979143]
+script = ExtResource("42_56cnb")
+metadata/_custom_type_script = "uid://cvgoslwqcj457"
+
+[node name="FadeView" type="Control" parent="UIManager/CanvasLayer/FadeController" unique_id=671778685]
+z_index = -1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("43_wgk6c")
+metadata/_custom_type_script = "uid://7u5mhmxl340a"
+
+[node name="ColorRect" type="ColorRect" parent="UIManager/CanvasLayer/FadeController/FadeView" unique_id=1217746912]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=358640137]
 stream = ExtResource("34_5t4y7")

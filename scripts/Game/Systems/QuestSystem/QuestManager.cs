@@ -36,7 +36,8 @@ namespace TnT.EduGame.QuestSystem
                 quest.OnObjectiveStateChanged += QuestObjectStateChanged;
             }
 
-            _saveData.quests = _quests.Select(q => q.GetSaveData()).ToArray();
+            if (_saveData != null)
+                _saveData.quests = _quests.Select(q => q.GetSaveData()).ToArray();
         }
 
         private void QuestObjectStateChanged(QuestObjective o)

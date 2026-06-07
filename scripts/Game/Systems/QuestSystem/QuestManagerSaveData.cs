@@ -10,6 +10,6 @@ namespace TnT.EduGame.QuestSystem
             [Export] public string Id { get; set; }
             [Export] public bool IsNew { get; set; }
 
-            public QuestSaveData[] quests;
+            public QuestSaveData[] quests = [];
 }
         }
