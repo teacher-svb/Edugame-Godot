@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://b8qgygjc4vci3"]
+
+[ext_resource type="PackedScene" uid="uid://ri147ckev4hj" path="res://assets/3D/Mini Characters 1/Models/GLB format/avocado.glb" id="1_26m57"]
+[ext_resource type="Script" uid="uid://bpr1xsrq6lokd" path="res://scripts/Lib/UIAnimation/AnimatedButton.cs" id="3_6488b"]
+[ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="3_afi11"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_afi11"]
+load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6488b"]
+atlas = SubResource("CompressedTexture2D_afi11")
+region = Rect2(258, 256, 188, 64)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e0qxm"]
+texture = SubResource("AtlasTexture_6488b")
+texture_margin_left = 78.0
+texture_margin_top = 37.0
+texture_margin_right = 78.0
+texture_margin_bottom = 37.0
+
+[sub_resource type="InputEventKey" id="InputEventKey_mh00s"]
+device = -1
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_afi11"]
+events = [SubResource("InputEventKey_mh00s")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_6488b"]
+device = -1
+keycode = 81
+unicode = 113
+
+[sub_resource type="Shortcut" id="Shortcut_e0qxm"]
+events = [SubResource("InputEventKey_6488b")]
+
+[node name="Control" type="Control" unique_id=860686304]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_afi11")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2051200352]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=521922310]
+layout_mode = 2
+theme_override_constants/separation = -42
+
+[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=1907453780]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="titlePanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/CenterContainer2" unique_id=1541326000]
+z_index = 1
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_e0qxm")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer2/titlePanel" unique_id=996976604]
+layout_mode = 2
+theme = ExtResource("3_afi11")
+text = "Vraagstuk 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1404621437]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.29
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=1894457021]
+layout_mode = 2
+
+[node name="AnimatedButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer" unique_id=1123059114]
+layout_mode = 2
+shortcut = SubResource("Shortcut_afi11")
+text = "Klaar!"
+script = ExtResource("3_6488b")
+metadata/_custom_type_script = "uid://bpr1xsrq6lokd"
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/CenterContainer" unique_id=1857658064]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureButton" parent="." unique_id=1221378139]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_bottom = 136.0
+grow_horizontal = 0
+toggle_mode = true
+shortcut = SubResource("Shortcut_e0qxm")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="TextureRect" unique_id=1254546033]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="TextureRect/SubViewportContainer" unique_id=987366564]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(160, 136)
+render_target_update_mode = 4
+
+[node name="avocado2" parent="TextureRect/SubViewportContainer/SubViewport" unique_id=1975359764 instance=ExtResource("1_26m57")]
+
+[node name="Skeleton3D" parent="TextureRect/SubViewportContainer/SubViewport/avocado2/Armature" parent_id_path=PackedInt32Array(1975359764, 1923085597) index="0" unique_id=559322183]
+bones/1/rotation = Quaternion(-0.122428946, 0.027743451, 0.07656861, 0.9891304)
+bones/3/rotation = Quaternion(-0.072635084, -0.026248384, 0.12224877, 0.98949003)
+bones/4/rotation = Quaternion(0.003679679, -0.043463893, -0.0842781, 0.9954871)
+
+[node name="AnimationPlayer" parent="TextureRect/SubViewportContainer/SubViewport/avocado2" index="1" unique_id=2069938185]
+autoplay = &"idle"
+
+[node name="Camera3D" type="Camera3D" parent="TextureRect/SubViewportContainer/SubViewport" unique_id=1924245623]
+transform = Transform3D(0.34447905, 0.37839606, -0.8591569, 1.37531035e-08, 0.91517085, 0.4030661, 0.938794, -0.13884784, 0.3152572, -0.26115054, 0.31432372, 0.09535728)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="TextureRect/SubViewportContainer/SubViewport" unique_id=503928868]
+transform = Transform3D(0.15496598, 0.83786166, -0.5234247, -0.23785341, 0.54588264, 0.8033915, 0.9588594, 0, 0.2838815, 0, 0, 0)
+
+[editable path="TextureRect/SubViewportContainer/SubViewport/avocado2"]

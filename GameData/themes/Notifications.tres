@@ -3,43 +3,100 @@
 [ext_resource type="Texture2D" uid="uid://nul7wtmt3kpc" path="res://assets/uipack_rpg_sheet.png" id="1_jafkh"]
 [ext_resource type="FontFile" uid="uid://cw1vj1tfcdwao" path="res://assets/Fonts/BigBlueTerminal/BigBlueTerm437NerdFontPropo-Regular.ttf" id="2_jafkh"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_q0lhn"]
-atlas = ExtResource("1_jafkh")
-region = Rect2(0, 188, 190, 49)
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0n5pi"]
+load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_44jsj"]
-texture = SubResource("AtlasTexture_q0lhn")
-texture_margin_left = 25.0
-texture_margin_top = 25.0
-texture_margin_right = 25.0
-texture_margin_bottom = 25.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_iu03x"]
+atlas = SubResource("CompressedTexture2D_0n5pi")
+region = Rect2(190, 128, 66, 64)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g6hso"]
+texture = SubResource("AtlasTexture_iu03x")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+modulate_color = Color(0.28118682, 0.28118688, 0.28118682, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_32qsq"]
+load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aj1bb"]
+atlas = SubResource("CompressedTexture2D_32qsq")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ryc7f"]
+texture = SubResource("AtlasTexture_aj1bb")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7fkjd"]
-atlas = ExtResource("1_jafkh")
-region = Rect2(0, 98, 190, 45)
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iu03x"]
+load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n0102"]
-texture = SubResource("AtlasTexture_7fkjd")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryc7f"]
+atlas = SubResource("CompressedTexture2D_iu03x")
+region = Rect2(256, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jafkh"]
-atlas = ExtResource("1_jafkh")
-region = Rect2(0, 98, 190, 44)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_32qsq"]
+texture = SubResource("AtlasTexture_ryc7f")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q0lhn"]
-texture = SubResource("AtlasTexture_jafkh")
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_altsn"]
+load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r150k"]
-atlas = ExtResource("1_jafkh")
-region = Rect2(0, 49, 190, 49)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8s6lq"]
+atlas = SubResource("CompressedTexture2D_altsn")
+region = Rect2(190, 128, 66, 64)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oclf0"]
-texture = SubResource("AtlasTexture_r150k")
-texture_margin_left = 25.0
-texture_margin_top = 25.0
-texture_margin_right = 25.0
-texture_margin_bottom = 25.0
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rf0mi"]
+texture = SubResource("AtlasTexture_8s6lq")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ryc7f"]
+load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32qsq"]
+atlas = SubResource("CompressedTexture2D_ryc7f")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aj1bb"]
+texture = SubResource("AtlasTexture_32qsq")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_aj1bb"]
+load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0i35j"]
+atlas = SubResource("CompressedTexture2D_aj1bb")
+region = Rect2(190, 128, 66, 64)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0i35j"]
+texture = SubResource("AtlasTexture_0i35j")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
@@ -68,24 +125,37 @@ texture_margin_top = 25.0
 texture_margin_right = 25.0
 texture_margin_bottom = 35.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jafkh"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0i35j"]
+load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7fkjd"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-expand_margin_left = 16.0
-expand_margin_top = 16.0
-expand_margin_right = 16.0
-expand_margin_bottom = 16.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6hso"]
+atlas = SubResource("CompressedTexture2D_0i35j")
+region = Rect2(320, 64, 64, 64)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_altsn"]
+texture = SubResource("AtlasTexture_g6hso")
+texture_margin_left = 38.0
+texture_margin_top = 25.0
+texture_margin_right = 25.0
+texture_margin_bottom = 38.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8s6lq"]
+load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rf0mi"]
+atlas = SubResource("CompressedTexture2D_8s6lq")
+region = Rect2(320, 64, 64, 64)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1kb3a"]
+texture = SubResource("AtlasTexture_rf0mi")
+texture_margin_left = 38.0
+texture_margin_top = 25.0
+texture_margin_right = 25.0
+texture_margin_bottom = 38.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jafkh"]
 
@@ -99,11 +169,12 @@ content_margin_bottom = 16.0
 default_font = ExtResource("2_jafkh")
 default_font_size = 24
 BoxContainer/constants/separation = 16
-Button/styles/disabled = SubResource("StyleBoxTexture_44jsj")
-Button/styles/focus = SubResource("StyleBoxTexture_n0102")
-Button/styles/hover = SubResource("StyleBoxTexture_q0lhn")
-Button/styles/normal = SubResource("StyleBoxTexture_oclf0")
-Button/styles/pressed = SubResource("StyleBoxTexture_n0102")
+Button/styles/disabled = SubResource("StyleBoxTexture_g6hso")
+Button/styles/focus = SubResource("StyleBoxTexture_ryc7f")
+Button/styles/hover = SubResource("StyleBoxTexture_32qsq")
+Button/styles/hover_pressed = SubResource("StyleBoxTexture_rf0mi")
+Button/styles/normal = SubResource("StyleBoxTexture_aj1bb")
+Button/styles/pressed = SubResource("StyleBoxTexture_0i35j")
 DarkPanel/base_type = &"Panel"
 DarkPanel/styles/panel = SubResource("StyleBoxTexture_r150k")
 LightPanel/base_type = &"Panel"
@@ -112,8 +183,8 @@ MarginContainer/constants/margin_bottom = 16
 MarginContainer/constants/margin_left = 16
 MarginContainer/constants/margin_right = 16
 MarginContainer/constants/margin_top = 16
-Panel/styles/panel = SubResource("StyleBoxFlat_jafkh")
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_7fkjd")
+Panel/styles/panel = SubResource("StyleBoxTexture_altsn")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_1kb3a")
 RichTextButton/base_type = &"RichTextLabel"
 RichTextButton/colors/default_color = Color(0, 0, 0, 1)
 RichTextButton/colors/font_outline_color = Color(0, 0, 0, 1)
