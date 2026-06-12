@@ -1,0 +1,14 @@
+# This is an Asset Catalog Definition file for Blender.
+#
+# Empty lines and lines starting with `#` will be ignored.
+# The first non-ignored line should be the version indicator.
+# Other lines are of the format "UUID:catalog/path/for/assets:simple catalog name"
+
+VERSION 1
+
+c4ea0dbe-de92-4c8e-a757-3cbfeba284a5:Castle:Castle
+70bceb66-eabf-4341-a03b-246ad4b328fa:Dungeon:Dungeon
+a5fc0c1e-933a-435b-ba82-af2ca6d49376:Fantasy Town:Fantasy Town
+e687b8d1-364b-4bd1-89aa-5f57f7eb4053:Graveyard:Graveyard
+69f8a9a2-a9ac-40c2-aeda-ec5bda8b8d8d:Nature:Nature
+227268f3-3b30-439e-9244-f487c1028f33:Pirates:Pirates
