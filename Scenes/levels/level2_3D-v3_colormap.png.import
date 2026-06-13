@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7tde105kgr0f"
-path.s3tc="res://.godot/imported/colormap.png-0fe58017438e236a5e5d2bdacee0bcba.s3tc.ctex"
+uid="uid://dslfvm2vq32vd"
+path.s3tc="res://.godot/imported/level2_3D-v3_colormap.png-1a5fd9238b14bb54a61d86c0d400b0db.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "2c2ace150b11bb1168672d092f519f02"
+}
 
 [deps]
 
-source_file="res://assets/3D/Pirate Kit/textures/colormap.png"
-dest_files=["res://.godot/imported/colormap.png-0fe58017438e236a5e5d2bdacee0bcba.s3tc.ctex"]
+source_file="res://Scenes/levels/level2_3D-v3_colormap.png"
+dest_files=["res://.godot/imported/level2_3D-v3_colormap.png-1a5fd9238b14bb54a61d86c0d400b0db.s3tc.ctex"]
 
 [params]
 

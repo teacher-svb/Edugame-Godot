@@ -2,17 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7tde105kgr0f"
-path.s3tc="res://.godot/imported/colormap.png-0fe58017438e236a5e5d2bdacee0bcba.s3tc.ctex"
+uid="uid://bs4ynragvncn8"
+path.s3tc="res://.godot/imported/fantasy-town-colormap.png-8a7903aeaae1797d938b0f0b52757fdd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://assets/3D/Pirate Kit/textures/colormap.png"
-dest_files=["res://.godot/imported/colormap.png-0fe58017438e236a5e5d2bdacee0bcba.s3tc.ctex"]
+source_file="res://Scenes/textures/fantasy-town-colormap.png"
+dest_files=["res://.godot/imported/fantasy-town-colormap.png-8a7903aeaae1797d938b0f0b52757fdd.s3tc.ctex"]
 
 [params]
 
