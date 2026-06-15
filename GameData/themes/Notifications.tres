@@ -1,12 +1,11 @@
 [gd_resource type="Theme" format=3 uid="uid://les3xc8lryk4"]
 
+[ext_resource type="Texture2D" uid="uid://dqv2i3q1udwkt" path="res://assets/UI/kenney_ui-pack-pixel-adventure/Tilesheets/Thick outline/tilemap_packed.png" id="1_iu03x"]
 [ext_resource type="Texture2D" uid="uid://nul7wtmt3kpc" path="res://assets/uipack_rpg_sheet.png" id="1_jafkh"]
 [ext_resource type="FontFile" uid="uid://cw1vj1tfcdwao" path="res://assets/Fonts/BigBlueTerminal/BigBlueTerm437NerdFontPropo-Regular.ttf" id="2_jafkh"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0n5pi"]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_iu03x"]
-atlas = SubResource("CompressedTexture2D_0n5pi")
+atlas = ExtResource("1_iu03x")
 region = Rect2(190, 128, 66, 64)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g6hso"]
@@ -20,6 +19,7 @@ axis_stretch_vertical = 2
 modulate_color = Color(0.28118682, 0.28118688, 0.28118682, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_32qsq"]
+load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aj1bb"]
 atlas = SubResource("CompressedTexture2D_32qsq")
@@ -35,6 +35,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iu03x"]
+load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ryc7f"]
 atlas = SubResource("CompressedTexture2D_iu03x")
@@ -50,6 +51,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_altsn"]
+load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8s6lq"]
 atlas = SubResource("CompressedTexture2D_altsn")
@@ -65,6 +67,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ryc7f"]
+load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_32qsq"]
 atlas = SubResource("CompressedTexture2D_ryc7f")
@@ -80,6 +83,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_aj1bb"]
+load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0i35j"]
 atlas = SubResource("CompressedTexture2D_aj1bb")
@@ -119,10 +123,8 @@ texture_margin_top = 25.0
 texture_margin_right = 25.0
 texture_margin_bottom = 35.0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0i35j"]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_g6hso"]
-atlas = SubResource("CompressedTexture2D_0i35j")
+atlas = ExtResource("1_iu03x")
 region = Rect2(320, 64, 64, 64)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_altsn"]
