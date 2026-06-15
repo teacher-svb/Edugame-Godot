@@ -29,20 +29,22 @@ namespace TnT.Systems.OcclusionFade
 
         private float _currentRadius = 0.0f;
 
+        private const string ExcludeGroup = "occlusion_exclude";
+
         public override void _Ready()
         {
             _playerCharacter = GetTree()
                 .FindAnyObjectByType<Player>()
                 .FindAncestorOfType<Character3D>();
-                
+
             _camera = _playerCharacter.FindAnyObjectByType<CharacterController3D>().Camera;
             _playerRayCast = _playerCharacter.FindAnyObjectByType<CharacterController3D>().OcclusionRaycast;
             GetTree()
                 .FindObjectsByType<MeshInstance3D>()
-                .Where(n => n.FindAncestorOfType<Character3D>() == null)
+                .Where(n => n.FindAncestorOfType<Character3D>() == null && !n.IsInGroup(ExcludeGroup))
                 .ForEach(ApplyToMeshInstance);
 
-            foreach (var gm in GetTree().FindObjectsByType<GridMap>())
+            foreach (var gm in GetTree().FindObjectsByType<GridMap>().Where(gm => !gm.IsInGroup(ExcludeGroup)))
                 ApplyToGridMap(gm);
 
             RenderingServer.GlobalShaderParameterSet("occlusion_voffset", VerticalOffset);

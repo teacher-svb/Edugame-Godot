@@ -31,6 +31,10 @@ project/assembly_name="EduGame"
 
 enabled=PackedStringArray("res://addons/ChallengeUIFactoryPlugin/plugin.cfg", "res://addons/UpFaceMultiMesh/plugin.cfg")
 
+[global_group]
+
+occlusion_exclude="exclude object from occlusion fader"
+
 [input]
 
 move_up={
@@ -120,4 +124,12 @@ occlusion_radius={
 occlusion_voffset={
 "type": "float",
 "value": 1.0
+}
+wind_intensity={
+"type": "float",
+"value": 1.0
+}
+wind_direction={
+"type": "vec3",
+"value": Vector3(0.1, 1, 0.1)
 }
