@@ -28,9 +28,9 @@ buffer = PackedFloat32Array(-2.1219077, 0.19491196, 0.38599616, -58.52174, 0.199
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_obrew"]
 material = ExtResource("4_j2q71")
-size = Vector2(10, 10)
+size = Vector2(100, 50)
 subdivide_width = 20
-subdivide_depth = 20
+subdivide_depth = 10
 
 [node name="Node3D" type="Node3D" unique_id=1964158039]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -3, 4)
@@ -48,17 +48,15 @@ light_color = Color(0.9999996, 0.8925514, 0.49034446, 1)
 light_energy = 0.64
 shadow_enabled = true
 
-[node name="level2_3D-v3" parent="." unique_id=2095826827 instance=ExtResource("1_fg5v5")]
+[node name="level2_3D-v3" parent="." unique_id=1063244789 instance=ExtResource("1_fg5v5")]
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="." unique_id=528516125]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, -2, 1)
 multimesh = SubResource("MultiMesh_dcdmp")
 
 [node name="Player" parent="." unique_id=926984674 instance=ExtResource("3_t1xty")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -26)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=788402519 groups=["occlusion_exclude"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.3, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -0.5, -51)
 mesh = SubResource("PlaneMesh_obrew")
-
-[editable path="level2_3D-v3"]

@@ -127,9 +127,9 @@ occlusion_voffset={
 }
 wind_intensity={
 "type": "float",
-"value": 1.0
+"value": 0.1
 }
 wind_direction={
 "type": "vec3",
-"value": Vector3(0.1, 1, 0.1)
+"value": Vector3(0.1, 1, -0.1)
 }
