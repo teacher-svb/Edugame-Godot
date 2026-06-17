@@ -54,12 +54,24 @@ namespace TnT.Systems.OcclusionFade
         {
             _playerRayCast.TargetPosition = _playerRayCast.ToLocal(_camera.GlobalPosition);
 
-            float targetRadius = _playerRayCast.IsColliding() ? MaxRadius : 0.0f;
+            float targetRadius = IsCollidingWithOccluder() ? MaxRadius : 0.0f;
             _currentRadius = Mathf.MoveToward(_currentRadius, targetRadius, (float)delta * FadeSpeed * MaxRadius);
 
             RenderingServer.GlobalShaderParameterSet("player_pos", _playerCharacter.GlobalPosition);
             RenderingServer.GlobalShaderParameterSet("occlusion_radius", _currentRadius);
             RenderingServer.GlobalShaderParameterSet("camera_pos", _camera.GlobalPosition);
+        }
+
+        private bool IsCollidingWithOccluder()
+        {
+            if (!_playerRayCast.IsColliding()) return false;
+            var node = _playerRayCast.GetCollider() as Node;
+            while (node != null)
+            {
+                if (node.IsInGroup(ExcludeGroup)) return false;
+                node = node.GetParent();
+            }
+            return true;
         }
 
         private void ApplyToMeshInstance(MeshInstance3D meshInstance)
