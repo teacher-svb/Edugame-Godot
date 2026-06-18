@@ -4,9 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://pggfg6qusqnq" path="res://Scenes/levels/level2_3D-v3.blend" id="1_fg5v5"]
 [ext_resource type="ArrayMesh" uid="uid://c85qyc0sfae5i" path="res://assets/3D/Nature Kit/Models/tree_detailed.res" id="2_dcdmp"]
 [ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://scripts/Lib/OcclusionFader/occlusionFader.gdshader" id="2_obrew"]
+[ext_resource type="Shader" uid="uid://bkktv7833qkb0" path="res://scripts/Trail/trail_process.gdshader" id="3_n1vbe"]
 [ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="3_t1xty"]
+[ext_resource type="Shader" uid="uid://b2x22th280fpm" path="res://scripts/Trail/trail_draw.gdshader" id="4_h55p7"]
 [ext_resource type="Material" uid="uid://d34k3ljvagp8q" path="res://materials/RoystanToonWaterShader.tres" id="4_j2q71"]
 [ext_resource type="ArrayMesh" uid="uid://jjy6atmp2inn" path="res://assets/3D/Nature Kit/Models/tree_oak.res" id="5_1hw7q"]
+[ext_resource type="Script" uid="uid://6214kgglowmy" path="res://scripts/Trail/GPUTrail3D.cs" id="5_wcmwa"]
 [ext_resource type="Shader" uid="uid://ncgi0kci5c4x" path="res://scripts/shaders/water.gdshader" id="8_de3fq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dcdmp"]
@@ -21,6 +24,103 @@ background_mode = 2
 sky = SubResource("Sky_t1xty")
 tonemap_mode = 2
 volumetric_fog_density = 0.0
+
+[sub_resource type="Curve3D" id="Curve3D_h55p7"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -3, 0, 0, -0.5, -0.1, 0.1, 0.5, 0.1, -0.1, 3, 0, 0, 0.2, -0.4, -0.2, -0.2, 0.4, 0.2, 3.6000001, 0.9, 0, 0.1, 0.6, 0, -0.1, -0.6, 0, 2.1000001, 0.5, 1, 0, 0, 0, 0, 0, 0, 6, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fnhue"]
+shader = ExtResource("3_n1vbe")
+
+[sub_resource type="Gradient" id="Gradient_ygl0x"]
+offsets = PackedFloat32Array(0, 0.49392712, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.16862746, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tuys8"]
+gradient = SubResource("Gradient_ygl0x")
+
+[sub_resource type="Curve" id="Curve_sd8ud"]
+_limits = [0.0, 0.025189199, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.49450552, 0.025189199), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wfhh5"]
+curve = SubResource("Curve_sd8ud")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ogn0y"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_h55p7")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_tuys8")
+shader_parameter/width_curve = SubResource("CurveTexture_wfhh5")
+
+[sub_resource type="QuadMesh" id="QuadMesh_evy3n"]
+material = SubResource("ShaderMaterial_ogn0y")
+
+[sub_resource type="Animation" id="Animation_ygl0x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUTrail3D:Restart")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_tuys8"]
+resource_name = "gust"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUTrail3D:Restart")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sd8ud"]
+_data = {
+&"RESET": SubResource("Animation_ygl0x"),
+&"gust": SubResource("Animation_tuys8")
+}
 
 [sub_resource type="MultiMesh" id="MultiMesh_de3fq"]
 transform_format = 1
@@ -132,11 +232,37 @@ light_color = Color(0.9999996, 0.8925514, 0.49034446, 1)
 light_energy = 0.64
 shadow_enabled = true
 
+[node name="WeatherEffects" type="Node" parent="Environment" unique_id=1209452278]
+
+[node name="Path3D" type="Path3D" parent="Environment/WeatherEffects" unique_id=782482986]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 1, 11)
+curve = SubResource("Curve3D_h55p7")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Environment/WeatherEffects/Path3D" unique_id=1451001580]
+transform = Transform3D(-0.018176552, 0.018169958, -0.99948204, 9.3120656e-10, 0.9996779, 0.018172402, 0.9997102, 0.00033036197, -0.018172404, -3, 0, 0)
+
+[node name="GPUTrail3D" type="GPUParticles3D" parent="Environment/WeatherEffects/Path3D/PathFollow3D" unique_id=1257666664]
+amount = 60
+lifetime = 60.0
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ShaderMaterial_fnhue")
+draw_pass_1 = SubResource("QuadMesh_evy3n")
+script = ExtResource("5_wcmwa")
+ColorRamp = SubResource("GradientTexture1D_tuys8")
+WidthCurve = SubResource("CurveTexture_wfhh5")
+metadata/_custom_type_script = "uid://6214kgglowmy"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/WeatherEffects/Path3D" unique_id=234396148]
+root_node = NodePath("../PathFollow3D")
+libraries/ = SubResource("AnimationLibrary_sd8ud")
+autoplay = &"gust"
+
 [node name="level2_3D-v3" parent="." unique_id=1339739881 instance=ExtResource("1_fg5v5")]
 
-[node name="049-ground_grass" parent="level2_3D-v3" index="2" unique_id=1526337239 groups=["occlusion_exclude"]]
+[node name="049-ground_grass" parent="level2_3D-v3" index="2" unique_id=1166344412 groups=["occlusion_exclude"]]
 
-[node name="CollisionShape3D" parent="level2_3D-v3/049-ground_grass" index="0" unique_id=1311595424 groups=["occlusion_exclude"]]
+[node name="CollisionShape3D" parent="level2_3D-v3/049-ground_grass" index="0" unique_id=1483808984 groups=["occlusion_exclude"]]
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="." unique_id=528516125]
 multimesh = SubResource("MultiMesh_de3fq")

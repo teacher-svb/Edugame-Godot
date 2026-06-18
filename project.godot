@@ -29,7 +29,7 @@ project/assembly_name="EduGame"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/ChallengeUIFactoryPlugin/plugin.cfg", "res://addons/UpFaceMultiMesh/plugin.cfg")
+enabled=PackedStringArray("res://addons/ChallengeUIFactoryPlugin/plugin.cfg", "res://addons/GPUTrail-main/plugin.cfg", "res://addons/UpFaceMultiMesh/plugin.cfg")
 
 [global_group]
 
