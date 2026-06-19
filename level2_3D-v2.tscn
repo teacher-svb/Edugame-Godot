@@ -25,14 +25,14 @@ sky = SubResource("Sky_t1xty")
 tonemap_mode = 2
 volumetric_fog_density = 0.0
 
-[sub_resource type="Curve3D" id="Curve3D_h55p7"]
+[sub_resource type="Curve3D" id="Curve3D_n1vbe"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -3, 0, 0, -0.5, -0.1, 0.1, 0.5, 0.1, -0.1, 3, 0, 0, 0.2, -0.4, -0.2, -0.2, 0.4, 0.2, 3.6000001, 0.9, 0, 0.1, 0.6, 0, -0.1, -0.6, 0, 2.1000001, 0.5, 1, 0, 0, 0, 0, 0, 0, 6, 0, 0),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, -1.3945191, 0, 0, 1.3945191, 0, 0, 0, 0, -1.3945191, 0, 0, 1.3945191, 0, 0, 2.525, 2.525, 0, 0, 1.3945191, 0, 0, -1.3945191, 0, 5.05, 0, 0, 0, 1.3945191, 0, 0, -1.3945191, 0, 5.05, 0, 0, -1.3945191, 0, 0, 1.3945191, 0, 0, 7.5750003, -2.525, 0, 0, -1.3945191, 0, 0, 1.3945191, 0, 10.1, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
 }
-point_count = 5
+point_count = 6
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fnhue"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h55p7"]
 shader = ExtResource("3_n1vbe")
 
 [sub_resource type="Gradient" id="Gradient_ygl0x"]
@@ -50,18 +50,19 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_wfhh5"]
 curve = SubResource("Curve_sd8ud")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ogn0y"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wcmwa"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_h55p7")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_tuys8")
 shader_parameter/width_curve = SubResource("CurveTexture_wfhh5")
 
-[sub_resource type="QuadMesh" id="QuadMesh_evy3n"]
-material = SubResource("ShaderMaterial_ogn0y")
+[sub_resource type="QuadMesh" id="QuadMesh_fnhue"]
+material = SubResource("ShaderMaterial_wcmwa")
 
 [sub_resource type="Animation" id="Animation_ygl0x"]
-length = 0.001
+length = 2.2
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -69,22 +70,22 @@ tracks/0/path = NodePath(".:progress_ratio")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0]
+"values": [0.0, 1.0, 1.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("GPUTrail3D:Restart")
+tracks/1/path = NodePath("GPUTrail3D:ClearTrail")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_tuys8"]
@@ -106,7 +107,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("GPUTrail3D:Restart")
+tracks/1/path = NodePath("GPUTrail3D:ClearTrail")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -235,19 +236,19 @@ shadow_enabled = true
 [node name="WeatherEffects" type="Node" parent="Environment" unique_id=1209452278]
 
 [node name="Path3D" type="Path3D" parent="Environment/WeatherEffects" unique_id=782482986]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 1, 11)
-curve = SubResource("Curve3D_h55p7")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 4, 11)
+curve = SubResource("Curve3D_n1vbe")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Environment/WeatherEffects/Path3D" unique_id=1451001580]
-transform = Transform3D(-0.018176552, 0.018169958, -0.99948204, 9.3120656e-10, 0.9996779, 0.018172402, 0.9997102, 0.00033036197, -0.018172404, -3, 0, 0)
+transform = Transform3D(-4.3705754e-08, 0.9998409, -4.3703288e-08, 0, -4.3704436e-08, -0.9998147, -0.9998711, -4.3704436e-08, 1.9103314e-15, 0, 0, 0)
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="Environment/WeatherEffects/Path3D/PathFollow3D" unique_id=1257666664]
 amount = 60
 lifetime = 60.0
 explosiveness = 1.0
 fixed_fps = 60
-process_material = SubResource("ShaderMaterial_fnhue")
-draw_pass_1 = SubResource("QuadMesh_evy3n")
+process_material = SubResource("ShaderMaterial_h55p7")
+draw_pass_1 = SubResource("QuadMesh_fnhue")
 script = ExtResource("5_wcmwa")
 ColorRamp = SubResource("GradientTexture1D_tuys8")
 WidthCurve = SubResource("CurveTexture_wfhh5")
@@ -256,7 +257,7 @@ metadata/_custom_type_script = "uid://6214kgglowmy"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/WeatherEffects/Path3D" unique_id=234396148]
 root_node = NodePath("../PathFollow3D")
 libraries/ = SubResource("AnimationLibrary_sd8ud")
-autoplay = &"gust"
+autoplay = &"RESET"
 
 [node name="level2_3D-v3" parent="." unique_id=1339739881 instance=ExtResource("1_fg5v5")]
 
