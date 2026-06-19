@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b76ufahn571on"
-path.s3tc="res://.godot/imported/level2_3D-v3_colormap.png-1a5fd9238b14bb54a61d86c0d400b0db.s3tc.ctex"
+uid="uid://dcunl0ktqjak4"
+path.s3tc="res://.godot/imported/level2_3D-v3_colormap_3.png-ca7ae77e2b450230956fdf9fb38d7bef.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "ba059759a6d1a5c00589abf403baad91"
+"md5": "5b3d5ba64d94fac3176b804d1a1d3433"
 }
 
 [deps]
 
-source_file="res://Scenes/levels/level2_3D-v3_colormap.png"
-dest_files=["res://.godot/imported/level2_3D-v3_colormap.png-1a5fd9238b14bb54a61d86c0d400b0db.s3tc.ctex"]
+source_file="res://Scenes/levels/level2_3D-v3_colormap_3.png"
+dest_files=["res://.godot/imported/level2_3D-v3_colormap_3.png-ca7ae77e2b450230956fdf9fb38d7bef.s3tc.ctex"]
 
 [params]
 

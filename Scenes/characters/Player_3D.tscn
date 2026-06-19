@@ -4,13 +4,8 @@
 [ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_022_CharacterData.tres" id="2_7dxc7"]
 [ext_resource type="PackedScene" uid="uid://cdou2t4bule12" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-b.glb" id="2_sb0or"]
 [ext_resource type="PackedScene" uid="uid://dwmsot5m0pw1o" path="res://Scenes/characters/PlayerCamera.tscn" id="3_eym15"]
-[ext_resource type="Script" uid="uid://cqfwdw7wlks67" path="res://scripts/Game/Character/CharacterSaveData.cs" id="3_yx5mg"]
 [ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="4_cvtri"]
 [ext_resource type="Texture2D" uid="uid://22l4wvbueyg3" path="res://assets/ring.png" id="10_lgshl"]
-
-[sub_resource type="Resource" id="Resource_hnwjb"]
-script = ExtResource("3_yx5mg")
-metadata/_custom_type_script = "uid://cqfwdw7wlks67"
 
 [sub_resource type="Curve" id="Curve_2u77j"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.2936442, 0.0, 0, 0]
@@ -48,7 +43,6 @@ height = 0.6599045
 
 [node name="Player" unique_id=926984674 instance=ExtResource("1_v5scr")]
 _characterData = ExtResource("2_7dxc7")
-_saveData = SubResource("Resource_hnwjb")
 
 [node name="CharacterController3D" parent="." index="0" unique_id=631752590 node_paths=PackedStringArray("OcclusionRaycast", "Camera", "VisualRoot")]
 _speed = 3.0
@@ -59,11 +53,11 @@ VisualRoot = NodePath("../character-female-b2")
 
 [node name="character-female-b2" parent="." index="1" unique_id=371834684 instance=ExtResource("2_sb0or")]
 
-[node name="Skeleton3D" parent="character-female-b2/character-female-b" parent_id_path=PackedInt32Array(371834684, 1357584895) index="0" unique_id=421653466]
-bones/3/rotation = Quaternion(0.019323101, 0, 0, 0.9998134)
-bones/4/rotation = Quaternion(0, 0, -0.34640172, 0.93808633)
-bones/5/rotation = Quaternion(0, 0, 0.34640172, 0.93808633)
-bones/6/rotation = Quaternion(0, -0.019323101, 0, 0.9998134)
+[node name="Skeleton3D" parent="character-female-b2/character-female-b" parent_id_path=PackedInt32Array(371834684, 471268041) index="0" unique_id=462334782]
+bones/3/rotation = Quaternion(0.001954153, 0, 0, 0.9999981)
+bones/4/rotation = Quaternion(0, 0, -0.37726074, 0.92610717)
+bones/5/rotation = Quaternion(0, 0, 0.37726074, 0.92610717)
+bones/6/rotation = Quaternion(0, -0.001954153, 0, 0.9999981)
 
 [node name="PlayerController" type="Node" parent="." index="2" unique_id=1092226004 node_paths=PackedStringArray("_stateManager")]
 script = ExtResource("4_cvtri")
@@ -71,6 +65,10 @@ _stateManager = NodePath("../stateManager")
 
 [node name="PlayerCamera" parent="." index="3" unique_id=741163845 node_paths=PackedStringArray("Target") instance=ExtResource("3_eym15")]
 Target = NodePath("../character-female-b2")
+
+[node name="Camera3D" parent="PlayerCamera" index="0" unique_id=1676918431]
+near = 0.172
+far = 50.0
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." index="4" unique_id=1538626892]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07240015, 0)
