@@ -29,7 +29,6 @@ public partial class BezierPathGenerator : EditorPlugin
         Circle,
         SemiCircle,
         Loop,
-        DoubleLoop,
         Wave,
         Spiral,
     }
@@ -182,12 +181,6 @@ public partial class BezierPathGenerator : EditorPlugin
                 _paramDiameter = AddSpinRow("Loop Diameter", 6f, 0.1f, 200f, 0.5f);
                 break;
 
-            case CurveType.DoubleLoop:
-                _paramLength = AddSpinRow("Length", 16f, 0.1f, 1000f, 0.5f);
-                _paramDiameter = AddSpinRow("Loop Diameter", 6f, 0.1f, 200f, 0.5f);
-                _paramGap = AddSpinRow("Gap Between Loops", 2f, 0f, 100f, 0.25f);
-                break;
-
             case CurveType.Wave:
                 _paramLength = AddSpinRow("Length", 20f, 0.1f, 1000f, 0.5f);
                 _paramAmplitude = AddSpinRow("Amplitude", 3f, 0.1f, 200f, 0.25f);
@@ -231,8 +224,7 @@ public partial class BezierPathGenerator : EditorPlugin
             CurveType.SCurve => Beziers.SCurve(start, end),
             CurveType.Circle => BuildCircle(),
             CurveType.SemiCircle => BuildSemiCircle(),
-            CurveType.Loop => Beziers.Looping(start, end, (float)_paramDiameter.Value),
-            CurveType.DoubleLoop => Beziers.DoubleLooping(start, end, (float)_paramDiameter.Value, (float)_paramGap.Value),
+            CurveType.Loop => Beziers.Looping(start, end, (float)_paramDiameter.Value, (float)_paramDiameter.Value),
             CurveType.Wave => Beziers.Wave(start, end, (float)_paramAmplitude.Value, (int)_paramCycles.Value),
             CurveType.Spiral => Beziers.Spiral(start, end, (float)_paramRadius.Value, (int)_paramTurns.Value),
             _ => null,
