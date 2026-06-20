@@ -25,7 +25,6 @@ public partial class BezierPathGenerator : EditorPlugin
     {
         Straight,
         Parabolic,
-        SCurve,
         Circle,
         SemiCircle,
         Loop,
@@ -162,11 +161,6 @@ public partial class BezierPathGenerator : EditorPlugin
                 _paramHeight = AddSpinRow("Height", 5f, 0.1f, 500f, 0.5f);
                 break;
 
-            case CurveType.SCurve:
-                _paramLength = AddSpinRow("Length", 10f, 0.1f, 1000f, 0.5f);
-                _paramPlane = AddPlaneRow();
-                break;
-
             case CurveType.Circle:
                 _paramRadius = AddSpinRow("Radius", 5f, 0.1f, 500f, 0.5f);
                 _paramPlane = AddPlaneRow();
@@ -223,7 +217,6 @@ public partial class BezierPathGenerator : EditorPlugin
         {
             CurveType.Straight => Beziers.Straight(start, end),
             CurveType.Parabolic => Beziers.Parabolic(start, end, (float)_paramHeight.Value),
-            CurveType.SCurve => BuildSCurve(),
             CurveType.Circle => BuildCircle(),
             CurveType.SemiCircle => BuildSemiCircle(),
             CurveType.Loop => Beziers.Looping(start, end, (float)_paramDiameter.Value, (float)_paramDiameter.Value),
@@ -243,21 +236,6 @@ public partial class BezierPathGenerator : EditorPlugin
             _ => Vector3.Right, // YZ vertical side
         };
         return Beziers.Circle(Vector3.Zero, r, normal);
-    }
-
-    private Curve3D BuildSCurve()
-    {
-        float length = (float)(_paramLength?.Value ?? 10.0);
-        Vector3 start = Vector3.Zero;
-        Vector3 end = new Vector3(length, 0f, 0f);
-
-        Vector3 normal = _paramPlane.Selected switch
-        {
-            0 => Vector3.Forward,  // XY vertical front
-            1 => Vector3.Up,    // XZ horizontal
-            _ => Vector3.Right, // YZ vertical side
-        };
-        return Beziers.SCurve(start, end, normal);
     }
 
     private Curve3D BuildWave()

@@ -50,44 +50,6 @@ public static class Beziers
         return curve;
     }
 
-    /// <summary>
-    /// Creates an S-curve between two points in the plane defined by <paramref name="normal"/>.
-    /// </summary>
-    /// <param name="startPoint">World-space position of the first anchor point.</param>
-    /// <param name="endPoint">World-space position of the last anchor point.</param>
-    /// <param name="normal">Plane normal used to compute the sideways bend direction.</param>
-    /// <returns>A <see cref="Curve3D"/> made of two joined semi-elliptic segments.</returns>
-    public static Curve3D SCurve(Vector3 startPoint, Vector3 endPoint, Vector3 normal)
-    {
-        normal = normal.Normalized();
-
-        var dir = endPoint - startPoint;
-        var distance = dir.Length();
-        var radius = distance / 4f;
-        var right = normal.Cross(dir.Normalized()).Normalized();
-
-        var curve = new Curve3D();
-        var first = GetSemiEllipse(
-            startPoint,
-            -right,
-            normal,
-            radius * 2f,
-            radius * 2f
-        );
-        var second = GetSemiEllipse(
-            first[^1].Position,
-            first[^1].Out,
-            normal * -1,
-            radius * 2f,
-            radius * 2f
-        );
-
-        Curve3DPoint[] points = [.. first, .. second.Skip(1)];
-        points.ForEach(p => curve.AddPoint(p.Position, p.In, p.Out));
-
-        return curve;
-    }
-
     // ─── Closed shapes ────────────────────────────────────────────────────────
 
     /// <summary>
