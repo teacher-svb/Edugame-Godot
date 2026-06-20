@@ -41,30 +41,33 @@ public static class Beziers
     /// <summary>
     /// S-curve from start to end, deflecting sideways by offset (local right of the path).
     /// </summary>
-    public static Curve3D SCurve(Vector3 startPoint, Vector3 endPoint)
+    public static Curve3D SCurve(Vector3 startPoint, Vector3 endPoint, Vector3 normal)
     {
+        normal = normal.Normalized();
+
+        var dir = endPoint - startPoint;
+        var distance = dir.Length();
+        var radius = distance / 4f;
+        var right = normal.Cross(dir.Normalized()).Normalized();
+
         var curve = new Curve3D();
+        var first = GetSemiEllipse(
+            startPoint,
+            -right,
+            normal,
+            radius * 2f,
+            radius * 2f
+        );
+        var second = GetSemiEllipse(
+            first[^1].Position,
+            first[^1].Out,
+            normal * -1,
+            radius * 2f,
+            radius * 2f
+        );
 
-        // var semiCircle1 = SemiEllipse(
-        //     center: startPoint + endPoint * 0.25f,
-        //     width: startPoint.DistanceTo(endPoint) / 2,
-        //     height: startPoint.DistanceTo(endPoint) / 2,
-        //     normal: Vector3.Back);
-
-        // var semiCircle2 = SemiEllipse(
-        //     center: startPoint + endPoint * 0.75f,
-        //     width: startPoint.DistanceTo(endPoint) / 2,
-        //     height: startPoint.DistanceTo(endPoint) / 2,
-        //     normal: Vector3.Forward,
-        //     2);
-
-
-        // Curve3DPoint[] stitched = [
-        //     .. semiCircle1,
-        //     .. semiCircle2.Skip(1),
-        //     ];
-
-        // stitched.ForEach(p => curve.AddPoint(p.Position, p.In, p.Out));
+        Curve3DPoint[] points = [.. first, .. second.Skip(1)];
+        points.ForEach(p => curve.AddPoint(p.Position, p.In, p.Out));
 
         return curve;
     }
@@ -79,7 +82,6 @@ public static class Beziers
         var startPoint = CircleStartPoint(center, radius * 2f, normal);
 
         var curve = new Curve3D();
-        // 4. Pass it directly to the ellipse method (width and height are both equal to diameter)
         GetEllipse(startPoint.Position, startPoint.Out, normal, radius * 2f, radius * 2f)
             .ForEach(p => curve.AddPoint(p.Position, p.In, p.Out));
 
@@ -96,7 +98,6 @@ public static class Beziers
         var startPoint = CircleStartPoint(center, radius * 2f, normal);
 
         var curve = new Curve3D();
-        // 4. Pass it directly to the ellipse method (width and height are both equal to diameter)
         GetSemiEllipse(
             startPoint.Position,
             startPoint.Out,
@@ -148,31 +149,44 @@ public static class Beziers
     /// Sine-wave approximation from start to end. cycles controls how many full waves to fit.
     /// amplitude offsets perpendicular to the path in world up.
     /// </summary>
-    public static Curve3D Wave(Vector3 startPoint, Vector3 endPoint, float amplitude = 3f, int cycles = 2)
+    public static Curve3D Wave(Vector3 startPoint, Vector3 endPoint, Vector3 normal, float amplitude = 3f, int cycles = 2)
     {
-        int halfCycles = cycles * 2;
-        Vector3 span = endPoint - startPoint;
-        Vector3 step = span / halfCycles;
+        normal = normal.Normalized();
 
-        // π/3 control offset gives best sine approximation for half-arc bezier
-        float cpy = amplitude * Mathf.Pi / 3f;
-        Vector3 cpX = step / 3f;
-        Vector3 cpUp = Vector3.Up * cpy;
+        var span = endPoint - startPoint;
+        var distance = span.Length();
+
+        var cycleLength = distance / cycles;
+        var semiAdvance = cycleLength / 2f;
+        var semiSpan = amplitude * 2f;
+
+        var dir = span.Normalized();
+        var right = normal.Cross(dir).Normalized();
+
+        Curve3DPoint[] points = [new Curve3DPoint(startPoint, Vector3.Zero, -right * Kappa * (semiSpan / 2f))];
+
+        for (int i = 0; i < cycles; i++)
+        {
+            var firstHalf = GetSemiEllipse(
+                points[^1].Position,
+                points[^1].Out,
+                normal,
+                semiSpan,
+                semiAdvance
+            );
+            var secondHalf = GetSemiEllipse(
+                firstHalf[^1].Position,
+                firstHalf[^1].Out,
+                normal * -1,
+                semiSpan,
+                semiAdvance
+            );
+
+            points = [.. points, .. firstHalf.Skip(1), .. secondHalf.Skip(1)];
+        }
 
         var curve = new Curve3D();
-
-        for (int i = 0; i <= halfCycles; i++)
-        {
-            Vector3 pos = startPoint + step * i;
-            // odd half-cycles go negative
-            float sign = (i % 2 == 0) ? 1f : -1f;
-            float prevSign = -sign;
-
-            Vector3 inHandle = (i == 0) ? Vector3.Zero : -cpX + cpUp * prevSign;
-            Vector3 outHandle = (i == halfCycles) ? Vector3.Zero : cpX + cpUp * sign;
-
-            curve.AddPoint(pos, inHandle, outHandle);
-        }
+        points.ForEach(p => curve.AddPoint(p.Position, p.In, p.Out));
 
         return curve;
     }
@@ -183,37 +197,34 @@ public static class Beziers
     /// </summary>
     public static Curve3D Spiral(Vector3 startPoint, Vector3 endPoint, float radius = 3f, int turns = 2)
     {
-        int steps = turns * 4;
-        Vector3 axis = (endPoint - startPoint) / steps;
-        float axisK = axis.Length() / 3f;
-        float circleK = Kappa * radius;
+        var span = endPoint - startPoint;
+        var distance = span.Length();
+        var distPerPoint = distance / (turns * 4);
+        var normal = span.Normalized();
+        Curve3DPoint[] points = [CircleStartPoint(startPoint, radius * 2f, normal)];
 
-        // build two orthogonal vectors perpendicular to axis
-        Vector3 axisDir = axis.Normalized();
-        Vector3 t1 = axisDir.Cross(Vector3.Up);
-        if (t1.LengthSquared() < 0.001f) t1 = axisDir.Cross(Vector3.Right);
-        t1 = t1.Normalized();
-        Vector3 t2 = axisDir.Cross(t1).Normalized();
+        for (int i = 0; i < turns * 2; i++)
+        {
+            var circle = GetEllipse(
+                points[^1].Position,
+                points[^1].Out,
+                normal,
+                radius * 2f,
+                radius * 2f
+            );
+
+            points = [.. points, .. circle.Skip(1)];
+        }
+
+        for (int i = 1; i < points.Length; i++)
+        {
+            // Progressively advance each point along the normal axis to create the spiral effect
+            float advance = (distPerPoint * i) / (turns * 4);
+            points[i].Position += normal * advance;
+        }
 
         var curve = new Curve3D();
-
-        for (int i = 0; i <= steps; i++)
-        {
-            float angle = i * Mathf.Pi * 0.5f;
-            float s = Mathf.Sin(angle);
-            float c = Mathf.Cos(angle);
-
-            Vector3 pos = startPoint + axis * i + (t1 * c + t2 * s) * radius;
-
-            // tangent in the circle plane: d/dθ(c*t1 + s*t2) = -s*t1 + c*t2
-            Vector3 circleTangent = (-t1 * s + t2 * c) * circleK;
-            Vector3 axialTangent = axisDir * axisK;
-
-            Vector3 outHandle = (i == steps) ? Vector3.Zero : circleTangent + axialTangent;
-            Vector3 inHandle = (i == 0) ? Vector3.Zero : -circleTangent - axialTangent;
-
-            curve.AddPoint(pos, inHandle, outHandle);
-        }
+        points.ForEach(p => curve.AddPoint(p.Position, p.In, p.Out));
 
         return curve;
     }
@@ -233,60 +244,6 @@ public static class Beziers
             Out = @out;
         }
     }
-
-    // private static void AddLoopPoints(Curve3D curve, Vector3 center, float radius, float k, Vector3 flatDir, Vector3 up)
-    // {
-    //     Vector3 bottom = center - up * radius;
-    //     Vector3 topPos = center + up * radius;
-    //     Vector3 entrySide = center - flatDir * radius;
-    //     Vector3 exitSide = center + flatDir * radius;
-
-    //     curve.AddPoint(bottom, @in: -flatDir * k, @out: flatDir * k);
-    //     curve.AddPoint(entrySide, @in: -up * k, @out: up * k);
-    //     curve.AddPoint(topPos, @in: flatDir * k, @out: -flatDir * k);
-    //     curve.AddPoint(exitSide, @in: up * k, @out: -up * k);
-    // }
-
-    // // rotation steps: 0=bottom, 1=right, 2=top, 3=left
-    // private static Curve3DPoint[] Ellipse(Vector3 center, float width, float height, Vector3 normal, int rotation = 0)
-    // {
-    //     normal = normal.Normalized();
-
-    //     Vector3 t1 = normal.Cross(Vector3.Up);
-    //     if (t1.LengthSquared() < 0.001f)
-    //         t1 = normal.Cross(Vector3.Right);
-    //     t1 = t1.Normalized();
-    //     Vector3 t2 = normal.Cross(t1).Normalized();
-
-    //     float hw = width * 0.5f;
-    //     float hh = height * 0.5f;
-    //     float kW = Kappa * hw;
-    //     float kH = Kappa * hh;
-
-    //     Vector3 p0 = center + t2 * hh;
-    //     Vector3 p1 = center + t1 * hw;
-    //     Vector3 p2 = center - t2 * hh;
-    //     Vector3 p3 = center - t1 * hw;
-
-    //     Curve3DPoint[] points =
-    //     [
-    //         new Curve3DPoint(p0, @in: -t1 * kW, @out:  t1 * kW),  // bottom → right
-    //         new Curve3DPoint(p1, @in:  t2 * kH, @out: -t2 * kH),  // right  → up
-    //         new Curve3DPoint(p2, @in:  t1 * kW, @out: -t1 * kW),  // top    → left
-    //         new Curve3DPoint(p3, @in: -t2 * kH, @out:  t2 * kH),  // left   → down
-    //     ];
-
-    //     var rotated = points.Rotate(rotation).ToArray();
-    //     return [.. rotated, rotated[0]];
-    // }
-
-    // // rotation steps: 0=bottom, 1=right, 2=top, 3=left
-    // private static Curve3DPoint[] SemiEllipse(Vector3 center, float width, float height, Vector3 normal, int rotation = 0)
-    // {
-    //     var points = Ellipse(center, width, height, normal, rotation);
-
-    //     return [.. points.Take(1..4)];
-    // }
 
     /// <summary>
     /// Converts a center, diameter, and normal into a starting point (Position) and a starting tangent (Out).
@@ -319,25 +276,28 @@ public static class Beziers
         float handleW = halfWidth * Kappa;
         float handleH = halfHeight * Kappa;
 
+        // Tangent magnitude should not affect geometry; only direction is meaningful here.
+        Vector3 tangentDir = tangent.Normalized();
+
         // Vector pointing directly from startPoint toward the center
-        Vector3 ToCenter = normal.Cross(tangent).Normalized();
+        Vector3 ToCenter = normal.Cross(tangentDir).Normalized();
         Vector3 center = startPoint + (ToCenter * halfHeight);
 
         // Node Positions
         Vector3 p0 = startPoint;
-        Vector3 p1 = center + (tangent * halfWidth); // 90° Peak
+        Vector3 p1 = center + (tangentDir * halfWidth); // 90° Peak
         Vector3 p2 = center + (ToCenter * halfHeight); // 180° endpoint (opposite side of center)
 
         Curve3DPoint[] halfPoints =
         [
             // Node 0: Start (0°)
-            new Curve3DPoint(p0, -handleW * tangent, handleW * tangent),
+            new Curve3DPoint(p0, -handleW * tangentDir, handleW * tangentDir),
         
             // Node 1: Peak (90°) - Handles run parallel to the center axis, pointing away from each other
             new Curve3DPoint(p1, -handleH * ToCenter, handleH * ToCenter),
             
             // Node 2: End (180°) - Handles parallel to Tangent0, keeping the curve continuous
-            new Curve3DPoint(p2, handleW * tangent, -handleW * tangent)
+            new Curve3DPoint(p2, handleW * tangentDir, -handleW * tangentDir)
         ];
 
         return halfPoints;
@@ -348,11 +308,8 @@ public static class Beziers
         // 1. Generate the first half (Nodes 0, 1, 2)
         Curve3DPoint[] firstHalf = GetSemiEllipse(startPoint, startPointTangent, normal, width, height);
 
-        // 2. The tangent at 180° points in the exact opposite direction of the start tangent
-        Vector3 secondHalfTangent = -startPointTangent;
-
         // 3. Generate the second half (Nodes 2, 3, 4) using the last element [^1]
-        Curve3DPoint[] secondHalf = GetSemiEllipse(firstHalf[^1].Position, secondHalfTangent, normal, width, height);
+        Curve3DPoint[] secondHalf = GetSemiEllipse(firstHalf[^1].Position, firstHalf[^1].Out, normal, width, height);
 
         // 4. Merge them seamlessly
         return [.. firstHalf, .. secondHalf.Skip(1)];

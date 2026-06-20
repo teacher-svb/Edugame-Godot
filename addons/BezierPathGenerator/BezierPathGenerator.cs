@@ -164,6 +164,7 @@ public partial class BezierPathGenerator : EditorPlugin
 
             case CurveType.SCurve:
                 _paramLength = AddSpinRow("Length", 10f, 0.1f, 1000f, 0.5f);
+                _paramPlane = AddPlaneRow();
                 break;
 
             case CurveType.Circle:
@@ -185,6 +186,7 @@ public partial class BezierPathGenerator : EditorPlugin
                 _paramLength = AddSpinRow("Length", 20f, 0.1f, 1000f, 0.5f);
                 _paramAmplitude = AddSpinRow("Amplitude", 3f, 0.1f, 200f, 0.25f);
                 _paramCycles = AddSpinRow("Cycles", 2f, 1f, 32f, 1f);
+                _paramPlane = AddPlaneRow();
                 break;
 
             case CurveType.Spiral:
@@ -221,11 +223,11 @@ public partial class BezierPathGenerator : EditorPlugin
         {
             CurveType.Straight => Beziers.Straight(start, end),
             CurveType.Parabolic => Beziers.Parabolic(start, end, (float)_paramHeight.Value),
-            CurveType.SCurve => Beziers.SCurve(start, end),
+            CurveType.SCurve => BuildSCurve(),
             CurveType.Circle => BuildCircle(),
             CurveType.SemiCircle => BuildSemiCircle(),
             CurveType.Loop => Beziers.Looping(start, end, (float)_paramDiameter.Value, (float)_paramDiameter.Value),
-            CurveType.Wave => Beziers.Wave(start, end, (float)_paramAmplitude.Value, (int)_paramCycles.Value),
+            CurveType.Wave => BuildWave(),
             CurveType.Spiral => Beziers.Spiral(start, end, (float)_paramRadius.Value, (int)_paramTurns.Value),
             _ => null,
         };
@@ -241,6 +243,36 @@ public partial class BezierPathGenerator : EditorPlugin
             _ => Vector3.Right, // YZ vertical side
         };
         return Beziers.Circle(Vector3.Zero, r, normal);
+    }
+
+    private Curve3D BuildSCurve()
+    {
+        float length = (float)(_paramLength?.Value ?? 10.0);
+        Vector3 start = Vector3.Zero;
+        Vector3 end = new Vector3(length, 0f, 0f);
+
+        Vector3 normal = _paramPlane.Selected switch
+        {
+            0 => Vector3.Forward,  // XY vertical front
+            1 => Vector3.Up,    // XZ horizontal
+            _ => Vector3.Right, // YZ vertical side
+        };
+        return Beziers.SCurve(start, end, normal);
+    }
+
+    private Curve3D BuildWave()
+    {
+        float length = (float)(_paramLength?.Value ?? 10.0);
+        Vector3 start = Vector3.Zero;
+        Vector3 end = new Vector3(length, 0f, 0f);
+
+        Vector3 normal = _paramPlane.Selected switch
+        {
+            0 => Vector3.Forward,  // XY vertical front
+            1 => Vector3.Up,    // XZ horizontal
+            _ => Vector3.Right, // YZ vertical side
+        };
+        return Beziers.Wave(start, end, normal, (float)_paramAmplitude.Value, (int)_paramCycles.Value);
     }
 
     private Curve3D BuildSemiCircle()

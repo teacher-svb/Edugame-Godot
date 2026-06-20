@@ -1,27 +1,15 @@
-- GODOT_REFACTOR
-    - [x] GODOT_REFACTOR save/load system
-    - [x] GODOT_REFACTOR statemachines
-    - [ ] GODOT_REFACTOR flyweightsystem
-    - [x] GODOT_REFACTOR stats & attributes
-    - [x] GODOT_REFACTOR ability system
-    - [x] GODOT_REFACTOR challenges
-    - [x] GODOT_REFACTOR quests
-    - [1] GODOT_REFACTOR inventory
-    - [x] GODOT_REFACTOR UI systems
-    - [x] GODOT_REFACTOR EventSystem
 - GAME
     - [ ] GAME Add animations to loading screen
     - [x] GAME Add character selection screen to statestack
 - GAMEPLAY
-    - [ ] GAMEPLAY Add sequence: quest-start/NPC-approach/Conversation/PC-follow/Conversation/quest-end
+    - [x] GAMEPLAY Add sequence: quest-start/NPC-approach/Conversation/PC-follow/Conversation/quest-end
 - INVENTORY
     - [x] INVENTORY refactor inventory system
     - [x] INVENTORY open/close inventory
     - [x] INVENTORY add zoom effect on opening inventory
-    - [ ] INVENTORY allow only equipable items in the gear slots
 - QUESTS
     - [x] QUESTS add new quest system
-    - [ ] QUESTS refactor to separate quest data from game data
+    - [x] QUESTS refactor to separate quest data from game data
 - SAVE
     - [x] SAVE add new save/load system
 - MESSAGES
@@ -43,3 +31,7 @@
         - [ ] COMBAT track ability status in UI
         - [ ] COMBAT add enemy AI
         - [ ] COMBAT make equipable items in gear slots trigger stat modifiers on the player
+- VFX
+    - [x] VFX add wind gusts
+    - [ ] VFX add grass
+    - [x] VFX add water
