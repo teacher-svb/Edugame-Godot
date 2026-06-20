@@ -3,6 +3,9 @@ using System;
 using System.Linq;
 using TnT.Extensions;
 
+/// <summary>
+/// Factory helpers for generating common <see cref="Curve3D"/> shapes using cubic Bezier control points.
+/// </summary>
 public static class Beziers
 {
     private const float Kappa = 0.5522847498f; // 4/3 * tan(π/8) — best 4-segment circle approximation
@@ -10,8 +13,14 @@ public static class Beziers
     // ─── Flat / 2-D shapes ────────────────────────────────────────────────────
 
     /// <summary>
-    /// Straight line from start to end with smooth tangent handles.
+    /// Creates a two-point cubic Bezier that represents a straight segment.
     /// </summary>
+    /// <param name="startPoint">World-space position of the first anchor point.</param>
+    /// <param name="endPoint">World-space position of the second anchor point.</param>
+    /// <returns>
+    /// A <see cref="Curve3D"/> containing two points with symmetric handles,
+    /// producing linear interpolation between <paramref name="startPoint"/> and <paramref name="endPoint"/>.
+    /// </returns>
     public static Curve3D Straight(Vector3 startPoint, Vector3 endPoint)
     {
         Vector3 dir = (endPoint - startPoint) / 3f;
@@ -22,9 +31,12 @@ public static class Beziers
     }
 
     /// <summary>
-    /// Parabolic arch from start to end, peaking at height above the midpoint.
-    /// height is measured along world up.
+    /// Creates a parabolic-like arch from start to end that peaks above the midpoint.
     /// </summary>
+    /// <param name="startPoint">World-space position of the first anchor point.</param>
+    /// <param name="endPoint">World-space position of the second anchor point.</param>
+    /// <param name="height">Peak offset above the midpoint measured along <see cref="Vector3.Up"/>.</param>
+    /// <returns>A two-point <see cref="Curve3D"/> configured as a smooth arch.</returns>
     public static Curve3D Parabolic(Vector3 startPoint, Vector3 endPoint, float height = 5f)
     {
         Vector3 span = endPoint - startPoint;
@@ -39,8 +51,12 @@ public static class Beziers
     }
 
     /// <summary>
-    /// S-curve from start to end, deflecting sideways by offset (local right of the path).
+    /// Creates an S-curve between two points in the plane defined by <paramref name="normal"/>.
     /// </summary>
+    /// <param name="startPoint">World-space position of the first anchor point.</param>
+    /// <param name="endPoint">World-space position of the last anchor point.</param>
+    /// <param name="normal">Plane normal used to compute the sideways bend direction.</param>
+    /// <returns>A <see cref="Curve3D"/> made of two joined semi-elliptic segments.</returns>
     public static Curve3D SCurve(Vector3 startPoint, Vector3 endPoint, Vector3 normal)
     {
         normal = normal.Normalized();
@@ -75,8 +91,12 @@ public static class Beziers
     // ─── Closed shapes ────────────────────────────────────────────────────────
 
     /// <summary>
-    /// Full circle in the plane defined by normal. Starts and ends at center + right * radius.
+    /// Creates a closed circle in the plane defined by <paramref name="normal"/>.
     /// </summary>
+    /// <param name="center">Circle center in world space.</param>
+    /// <param name="radius">Circle radius.</param>
+    /// <param name="normal">Normal vector of the circle plane.</param>
+    /// <returns>A closed <see cref="Curve3D"/> approximating a circle with cubic segments.</returns>
     public static Curve3D Circle(Vector3 center, float radius, Vector3 normal)
     {
         var startPoint = CircleStartPoint(center, radius * 2f, normal);
@@ -91,8 +111,12 @@ public static class Beziers
     // ─── Closed shapes ────────────────────────────────────────────────────────
 
     /// <summary>
-    /// Full circle in the plane defined by normal. Starts and ends at center + right * radius.
+    /// Creates a semicircle in the plane defined by <paramref name="normal"/>.
     /// </summary>
+    /// <param name="center">Semicircle center in world space.</param>
+    /// <param name="radius">Semicircle radius.</param>
+    /// <param name="normal">Normal vector of the semicircle plane.</param>
+    /// <returns>An open <see cref="Curve3D"/> representing half of an ellipse/circle.</returns>
     public static Curve3D SemiCircle(Vector3 center, float radius, Vector3 normal)
     {
         var startPoint = CircleStartPoint(center, radius * 2f, normal);
@@ -113,9 +137,13 @@ public static class Beziers
     // ─── Path-through shapes ──────────────────────────────────────────────────
 
     /// <summary>
-    /// Path that enters the bottom of a vertical loop, traverses it, and exits.
-    /// startPoint and endPoint define the bottom of the loop.
+    /// Creates a path that enters a vertical loop, traverses the loop, then exits.
     /// </summary>
+    /// <param name="startPoint">Entry point before the loop.</param>
+    /// <param name="endPoint">Exit point after the loop.</param>
+    /// <param name="loopWidth">Loop diameter measured along the tangent direction.</param>
+    /// <param name="loopHeight">Loop diameter measured along the loop normal axis.</param>
+    /// <returns>A <see cref="Curve3D"/> composed of entry, loop, and exit control points.</returns>
     public static Curve3D Looping(
         Vector3 startPoint,
         Vector3 endPoint,
@@ -146,9 +174,14 @@ public static class Beziers
     // ─── Repeating shapes ─────────────────────────────────────────────────────
 
     /// <summary>
-    /// Sine-wave approximation from start to end. cycles controls how many full waves to fit.
-    /// amplitude offsets perpendicular to the path in world up.
+    /// Creates a sine-like wave approximation between two points.
     /// </summary>
+    /// <param name="startPoint">Wave start position.</param>
+    /// <param name="endPoint">Wave end position.</param>
+    /// <param name="normal">Normal used to orient the wave plane.</param>
+    /// <param name="amplitude">Peak offset from the centerline.</param>
+    /// <param name="cycles">Number of full wave cycles to fit across the span.</param>
+    /// <returns>A <see cref="Curve3D"/> built from repeated semi-ellipse segments.</returns>
     public static Curve3D Wave(Vector3 startPoint, Vector3 endPoint, Vector3 normal, float amplitude = 3f, int cycles = 2)
     {
         normal = normal.Normalized();
@@ -192,9 +225,13 @@ public static class Beziers
     }
 
     /// <summary>
-    /// Helix (constant-radius spiral) from start to end.
-    /// The circle is in the YZ plane and progresses along the start→end axis.
+    /// Creates a constant-radius helix progressing from <paramref name="startPoint"/> to <paramref name="endPoint"/>.
     /// </summary>
+    /// <param name="startPoint">Helix start position.</param>
+    /// <param name="endPoint">Helix end position and axis direction reference.</param>
+    /// <param name="radius">Radius of each turn.</param>
+    /// <param name="turns">Number of full turns along the axis.</param>
+    /// <returns>A <see cref="Curve3D"/> approximating a 3D spiral.</returns>
     public static Curve3D Spiral(Vector3 startPoint, Vector3 endPoint, float radius = 3f, int turns = 2)
     {
         var span = endPoint - startPoint;
@@ -246,8 +283,14 @@ public static class Beziers
     }
 
     /// <summary>
-    /// Converts a center, diameter, and normal into a starting point (Position) and a starting tangent (Out).
+    /// Computes a deterministic start anchor and tangent for a circle/ellipse in a plane.
     /// </summary>
+    /// <param name="center">Center of the shape.</param>
+    /// <param name="diameter">Full diameter of the shape.</param>
+    /// <param name="normal">Normal vector of the shape plane.</param>
+    /// <returns>
+    /// A <see cref="Curve3DPoint"/> where <c>Position</c> is the first anchor and <c>Out</c> is the initial tangent.
+    /// </returns>
     private static Curve3DPoint CircleStartPoint(Vector3 center, float diameter, Vector3 normal)
     {
         float radius = diameter / 2f;
@@ -266,8 +309,14 @@ public static class Beziers
     }
 
     /// <summary>
-    /// Generates a 3-point Bezier segment representing a half-ellipse.
+    /// Generates one half of an ellipse as three anchor points with bezier handles.
     /// </summary>
+    /// <param name="startPoint">Start anchor of the half-ellipse.</param>
+    /// <param name="tangent">Outgoing tangent direction at <paramref name="startPoint"/>.</param>
+    /// <param name="normal">Plane normal used to orient the segment.</param>
+    /// <param name="width">Full width of the ellipse.</param>
+    /// <param name="height">Full height of the ellipse.</param>
+    /// <returns>Three <see cref="Curve3DPoint"/> values describing the half segment.</returns>
     private static Curve3DPoint[] GetSemiEllipse(Vector3 startPoint, Vector3 tangent, Vector3 normal, float width, float height)
     {
         float halfWidth = width / 2f;
@@ -303,6 +352,15 @@ public static class Beziers
         return halfPoints;
     }
 
+    /// <summary>
+    /// Generates a full ellipse by stitching two semi-ellipse segments.
+    /// </summary>
+    /// <param name="startPoint">Start anchor of the ellipse.</param>
+    /// <param name="startPointTangent">Outgoing tangent direction at the start anchor.</param>
+    /// <param name="normal">Plane normal used to orient the ellipse.</param>
+    /// <param name="width">Full width of the ellipse.</param>
+    /// <param name="height">Full height of the ellipse.</param>
+    /// <returns>Five <see cref="Curve3DPoint"/> values describing the full ellipse.</returns>
     private static Curve3DPoint[] GetEllipse(Vector3 startPoint, Vector3 startPointTangent, Vector3 normal, float width, float height)
     {
         // 1. Generate the first half (Nodes 0, 1, 2)
