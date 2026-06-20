@@ -180,10 +180,8 @@ public static class Beziers
             points = [.. points, .. firstHalf.Skip(1), .. secondHalf.Skip(1)];
         }
 
-        var curve = new Curve3D();
-        points.ForEach(p => curve.AddPoint(p.Position, p.In, p.Out));
 
-        return curve;
+        return points.ToCurve();
     }
 
     /// <summary>
@@ -222,15 +220,12 @@ public static class Beziers
             points[i].Position += normal * advance;
         }
 
-        var curve = new Curve3D();
-        points.ForEach(p => curve.AddPoint(p.Position, p.In, p.Out));
-
-        return curve;
+        return points.ToCurve();
     }
 
     // ─── Private helpers ──────────────────────────────────────────────────────
 
-    private struct Curve3DPoint
+    public struct Curve3DPoint
     {
         public Vector3 Position;
         public Vector3 In;
@@ -242,6 +237,23 @@ public static class Beziers
             In = @in;
             Out = @out;
         }
+
+    }
+
+    public static Curve3DPoint[] ToArray(this Curve3D curve)
+    {
+        Curve3DPoint[] points = new Curve3DPoint[curve.PointCount];
+        for (int i = 0; i < curve.PointCount; ++i)
+        {
+            points[i] = new Curve3DPoint(curve.GetPointPosition(i), curve.GetPointIn(i), curve.GetPointOut(i));
+        }
+        return points;
+    }
+    public static Curve3D ToCurve(this Curve3DPoint[] points)
+    {
+        var curve = new Curve3D();
+        points.ForEach(p => curve.AddPoint(p.Position, p.In, p.Out));
+        return curve;
     }
 
     /// <summary>
