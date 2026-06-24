@@ -27,10 +27,10 @@ volumetric_fog_density = 0.0
 
 [sub_resource type="Curve3D" id="Curve3D_hq36d"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 1.7120827, 0, 0, 0, 0, -0.6938078, 0, 0, 0.6938078, 0, 0, 1.25625, 3.1, 0, 0, 1.7120827, 0, 0, -1.7120827, 0, 2.5125, 0, 0, -0.6938078, 0, 0, 0.6938078, 0, 0, 3.7687502, -3.1, 0, 0, -1.7120827, 0, 0, 1.7120827, 0, 5.025, 0, 0, -0.6938078, 0, 0, 0.6938078, 0, 0, 6.28125, 3.1, 0, 0, 1.7120827, 0, 0, -1.7120827, 0, 7.5375, 0, 0, -0.6938078, 0, 0, 0.6938078, 0, 0, 8.79375, -3.1, 0, 0, -1.7120827, 0, 0, 1.7120827, 0, 10.05, 0, 0, -0.6938078, 0, 0, 0.6938078, 0, 0, 11.306251, 3.1, 0, 0, 1.7120827, 0, 0, -1.7120827, 0, 12.562501, 0, 0, -0.6938078, 0, 0, 0.6938078, 0, 0, 13.818751, -3.1, 0, 0, -1.7120827, 0, 0, 1.7120827, 0, 15.075002, 0, 0, -0.6938078, 0, 0, 0.6938078, 0, 0, 16.331251, 3.1, 0, 0, 1.7120827, 0, 0, -1.7120827, 0, 17.587502, 0, 0, -0.6938078, 0, 0, 0.6938078, 0, 0, 18.843752, -3.1, 0, 0, -1.7120827, 0, 0, 1.7120827, 0, 20.100002, 0, 0),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 1, 0, 0, 0, 0, 0, -0.8560414, 0, 0, 0.8560414, 0, 0, 5.049999, 0, 0.47696686, 0, -0.8560414, 0, 0, 0.8560414, 0, 6.6000004, 1.5500002, 0.32573128, 0.8560414, 0, 0, -0.8560414, 0, 0, 5.05, 3.1, 0, 0, 0.8560414, 0, 0, -0.8560414, 0, 3.5000002, 1.55, 0, -0.8560414, 0, 0, 0.8560414, 0, 0, 5.05, 0, 0, -1, 0, 0, 0, 0, 0, 10.1, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 17
+point_count = 7
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hq36d"]
 shader = ExtResource("3_n1vbe")
@@ -61,7 +61,7 @@ shader_parameter/width_curve = SubResource("CurveTexture_wfhh5")
 material = SubResource("ShaderMaterial_qidrr")
 
 [sub_resource type="Animation" id="Animation_ygl0x"]
-length = 2.2
+length = 6.0666666
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -70,7 +70,7 @@ tracks/0/path = NodePath(".:progress_ratio")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2.2),
+"times": PackedFloat32Array(0, 5.0333333, 6.0666666),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 1.0, 1.0]
@@ -236,11 +236,11 @@ shadow_enabled = true
 [node name="WeatherEffects" type="Node" parent="Environment" unique_id=1209452278]
 
 [node name="Path3D" type="Path3D" parent="Environment/WeatherEffects" unique_id=782482986]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 4, 11)
+transform = Transform3D(0.7464586, 0, 0.66543186, 0, 1, 0, -0.66543186, 0, 0.7464586, 11, 4, 11)
 curve = SubResource("Curve3D_hq36d")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Environment/WeatherEffects/Path3D" unique_id=1451001580]
-transform = Transform3D(-4.3705647e-08, 0.99984014, -4.3703338e-08, 0, -4.37044e-08, -0.9998158, -0.99986863, -4.37044e-08, 1.9103335e-15, 0, 0, 0)
+transform = Transform3D(-4.3704738e-08, 0, -0.9998474, 0, 0.99982816, 0, 0.9998478, 0, -4.370472e-08, 0, 0, 0)
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="Environment/WeatherEffects/Path3D/PathFollow3D" unique_id=1257666664]
 amount = 60
@@ -261,7 +261,7 @@ autoplay = &"RESET"
 
 [node name="level2_3D-v3" parent="." unique_id=1339739881 instance=ExtResource("1_fg5v5")]
 
-[node name="049-ground_grass" parent="level2_3D-v3" index="2" unique_id=689194202 groups=["occlusion_exclude"]]
+[node name="049-ground_grass" parent="level2_3D-v3" index="1" unique_id=946030804 groups=["occlusion_exclude"]]
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="." unique_id=528516125]
 multimesh = SubResource("MultiMesh_de3fq")
