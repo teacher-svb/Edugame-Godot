@@ -281,36 +281,134 @@ A noticeboard in the village square lists all outstanding repair requests submit
 
 ```mermaid
 flowchart TD
-    A --> q
-    q --> B
-    q --> C
-    q --> D
-    q --> E
-    q --> F
-    B --> G
-    C --> G
-    D --> G
-    E --> G
-    F --> G
-    G --> H
-    H --> I
-    H --> J
-    H --> K
-    H --> L
+    subgraph act1[ACT I]
+        home01 --> corn01
+        home01 --> lies01
+        home01 --> hend01
+        home01 --> veld01
+        subgraph g1["parallel quests \n [The Ambition]"]
+            corn01
+            lies01
+            hend01
+            veld01
+        end
+        corn01 --> schl01
+        lies01 --> schl01
+        hend01 --> schl01
+        veld01 --> schl01
 
-A["home\n[moving around]"]
-q{"the wizards backlog\nEach quest\nprogresses the day\nuntil its evening"}
-B["Cornelis\n[fixing the drawbridge pt.1]"]
-C["Liesbeth\n[fixing the bakers scales pt.1]"]
-D["Hendrik\n[fixing the mill pt.1]"]
-E["Veld family\n[fixing the well pt.1]"]
-F["Ms Bram\n[fixing the schoolbell pt.1]"]
-G["home\n[Going to sleep]"]
-H["Cornelis\n[fixing the drawbridge pt.2]"]
-I["Liesbeth\n[fixing the bakers scales pt.2]"]
-J["Hendrik\n[fixing the mill pt.2]"]
-K["Veld family\n[fixing the well pt.2]"]
-L["Ms Bram\n[fixing the schoolbell pt.2]"]
+        subgraph g2["parallel quests \n The Wizard School Trials"]
+            wzrd2
+            wzrd3
+            wzrd4
+        end
+        schl01 --> wzrd2
+        schl01 --> wzrd3
+        schl01 --> wzrd4
+        wzrd2 --> home02
+        wzrd3 --> home02
+        wzrd4 --> home02
+    end
+    home02 --> corn02
+    subgraph act2[ACT II]
+        corn02 --> lies02
+        corn02 --> hend02
+        corn02 --> veld02
+        corn02 --> schl02
+        subgraph g3["parallel quests \n The Busy Week"]
+            lies02
+            hend02
+            veld02
+            schl02
+        end
+        lies02 --> wzrd05
+        hend02 --> wzrd05
+        veld02 --> wzrd05
+        schl02 --> wzrd05
+        wzrd05 --> home03
+    end
+    home03 --> engi01
+    subgraph act3[ACT III]
+        subgraph g5["parallel quests \n The Ghost of Beaverford"]
+            engi05
+            engi06
+            engi07
+        end
+        subgraph g4["parallel quests \n The Night Shift"]
+            engi02
+            engi03
+            engi04
+        end
+        engi05 --> engi02
+        engi06 --> engi03
+        engi07 --> engi04
+        engi01 --> g5
+        g4 --> engi08 --> g5
+    end
+
+    engi08 --> engi09
+    subgraph act4[ACT IV]
+        engi09 --> engi10
+        engi10 --> engi11
+        engi11 --> wzrd06
+        wzrd06 --> wzrd07
+    end
+
+    wzrd07 --> g6
+
+    subgraph act5[ACT V]
+        subgraph g6["parallel quests \n The Great Conversion"]
+            engi12
+            engi13
+            engi14
+        end
+        subgraph g7["parallel quests \n The Lesson"]
+            engi15
+            engi16
+            engi17
+        end
+        engi12 --> engi15
+        engi13 --> engi16
+        engi14 --> engi17
+        g7 --> schl03
+        schl03 --> schl04
+    end
+
+home01["home         \n [Morning in Beaverford]                          \n @home"]
+home02["home         \n [The Heavy Heart]                                \n @home"]
+corn01["Cornelis     \n [fixing the drawbridge pt.1]                     \n @moat house"]
+lies01["Liesbeth     \n [fixing the bakers scales pt.1]                  \n @bakery"]
+hend01["Hendrik      \n [fixing the mill pt.1]                           \n @windmill"]
+veld01["Veld family  \n [fixing the well pt.1]                           \n @well"]
+schl01["Ms Bram      \n [fixing the schoolbell pt.1]                     \n @school"]
+corn02["Cornelis     \n [The Desperate Help (fixing the drawbridge pt.2)]\n @moat house"]
+lies02["Liesbeth     \n [fixing the bakers scales pt.2]                  \n @bakery"]
+hend02["Hendrik      \n [fixing the mill pt.2]                           \n @windmill"]
+veld02["Veld family  \n [fixing the well pt.2]                           \n @well"]
+schl02["Ms Bram      \n [fixing the schoolbell pt.2]                     \n @school"]
+wzrd05["wizard       \n [The Exposure]                                   \n @village"]
+home03["home         \n [The Mysterious Letter]                          \n @home"]
+engi01["engineers    \n [The Hidden Workshop]                            \n @engineer workshop"]
+engi02["engineers    \n [The Night Shift]                                \n @village"]
+engi03["engineers    \n [The Night Shift]                                \n @village"]
+engi04["engineers    \n [The Night Shift]                                \n @village"]
+engi05["engineers    \n [The Ghost of Beaverford]                        \n @village"]
+engi06["engineers    \n [The Ghost of Beaverford]                        \n @village"]
+engi07["engineers    \n [The Ghost of Beaverford]                        \n @village"]
+engi08["engineers    \n [The Flickering World]                           \n @village"]
+engi09["engineers    \n [The Great Blackout]                             \n @village"]
+engi10["engineers    \n [The Unguarded Forest]                           \n @forest"]
+engi11["engineers    \n [The Mana Mine]                                  \n @mine"]
+wzrd06["wizard       \n [The Master of Gears Reveal]                     \n @mine"]
+wzrd07["wizard       \n [The Realization]                                \n @mine"]
+engi12["engineers    \n [The Great Conversion]                           \n @village"]
+engi13["engineers    \n [The Great Conversion]                           \n @village"]
+engi14["engineers    \n [The Great Conversion]                           \n @village"]
+engi15["engineers    \n [The Lesson]                                     \n @village"]
+engi16["engineers    \n [The Lesson]                                     \n @village"]
+engi17["engineers    \n [The Lesson]                                     \n @village"]
+schl03["Ms Bram      \n [The Arcanum Shift]                              \n @school"]
+schl04["Mabel        \n [Professor Mabel]                                \n @school"]
 ```
 
 Mabel tries to help each villager before deciding to apply to the Wizard School. She approaches Cornelis first — player solves the M1 counterweight problem — but Cornelis refuses the solution: *"I don't trust arithmetic. Magic is precise. I'll wait."* Each subsequent attempt ends in rejection. Mevrouw Bram caps the sequence by encouraging Mabel to apply to the Wizard School — sincerely, and completely missing the point.
