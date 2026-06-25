@@ -80,8 +80,8 @@ The Wizard leaves alone to find a new mana source. Mabel returns to the village 
 | Chapter | Title                   | Summary                                                                                                                                                          |
 | ------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | III.1   | The Hidden Workshop     | Mabel finds the secret entrance (L1 logic puzzle). First exposure to engineering tools and the Guild mentors.                                                    |
-| III.2   | The Night Shift         | Night-time sequences fixing the town. M3 math challenges — multi-step problems arising from machine calibration and repair.                                      |
-| III.3   | The Ghost of Beaverford | Villagers try to work out who is fixing things. First R3 challenge: player must piece together meaning from multiple dialogue fragments and environmental clues. |
+| III.2   | The Night Shift         | Five sequential night-time repair missions, one per villager. Follows each Ghost beat where a character revealed a new problem. M3 math challenges — multi-step problems arising from machine calibration and repair. Flicker advances after each mission.          |
+| III.3   | The Ghost of Beaverford | Five sequential village exploration rounds, interleaved with The Night Shift. Mabel walks the village; most characters discuss the mysterious ghost fixer. One character per round reveals a new problem directly (R3 challenge: extended dialogue).               |
 | III.4   | The Flickering World    | Magic is failing. Mabel investigates. L2 logic puzzle — multi-step world puzzle with intermediate states, framed as diagnosing a failing system.                 |
 
 ### Act IV — The Secret of the Wizards
@@ -269,16 +269,6 @@ Hidden underground. Mabel finds it in III.1. Contains engineering tools, schemat
 
 ### The Backlog (Acts I–II)
 
-A noticeboard in the village square lists all outstanding repair requests submitted to the Wizard. It is visible from the start of I.1 and serves as the player's map of what needs fixing. Items are checked off as Mabel resolves them across Acts I–II.
-
-| #   | Owner        | Location            | Problem                  | Chapter | Skill | Level |
-| --- | ------------ | ------------------- | ------------------------ | ------- | ----- | ----- |
-| 1   | Cornelis     | neighbour with moat | Drawbridge counterweight | II.1    | Math  | M1    |
-| 2   | Liesbeth     | bakery              | Broken scales            | II.3    | Math  | M2    |
-| 3   | Hendrik      | windmill            | Millstone gear drift     | II.3    | Math  | M2    |
-| 4   | Veld family  | well                | Water pump               | II.3    | Math  | M2    |
-| 5   | Mevrouw Bram | school              | Bell striker mechanism   | II.3    | Math  | M2    |
-
 ```mermaid
 flowchart TD
     subgraph act1[ACT I]
@@ -329,21 +319,31 @@ flowchart TD
     end
     home03 --> engi01
     subgraph act3[ACT III]
-        subgraph g5["parallel quests \n The Ghost of Beaverford"]
-            engi05
-            engi06
-            engi07
+        subgraph g5["sequential cycles \n The Ghost of Beaverford"]
+            ghost_corn
+            ghost_lies
+            ghost_hend
+            ghost_veld
+            ghost_bram
         end
-        subgraph g4["parallel quests \n The Night Shift"]
-            engi02
-            engi03
-            engi04
+        subgraph g4["sequential cycles \n The Night Shift"]
+            shift_corn
+            shift_lies
+            shift_hend
+            shift_veld
+            shift_bram
         end
-        engi05 --> engi02
-        engi06 --> engi03
-        engi07 --> engi04
-        engi01 --> g5
-        g4 --> engi08 --> g5
+        ghost_corn --> shift_corn
+        ghost_lies --> shift_lies
+        ghost_hend --> shift_hend
+        ghost_veld --> shift_veld
+        ghost_bram --> shift_bram
+        engi01 --> ghost_corn
+        shift_corn -->|"flicker 1"| ghost_lies
+        shift_lies -->|"flicker 2"| ghost_hend
+        shift_hend -->|"flicker 3"| ghost_veld
+        shift_veld -->|"flicker 4"| ghost_bram
+        shift_bram --> engi08
     end
 
     engi08 --> engi09
@@ -374,63 +374,67 @@ flowchart TD
         schl03 --> schl04
     end
 
-home01["home         \n [Morning in Beaverford]                          \n @home"]
-home02["home         \n [The Heavy Heart]                                \n @home"]
-corn01["Cornelis     \n [fixing the drawbridge pt.1]                     \n @moat house"]
-lies01["Liesbeth     \n [fixing the bakers scales pt.1]                  \n @bakery"]
-hend01["Hendrik      \n [fixing the mill pt.1]                           \n @windmill"]
-veld01["Veld family  \n [fixing the well pt.1]                           \n @well"]
-schl01["Ms Bram      \n [fixing the schoolbell pt.1]                     \n @school"]
-corn02["Cornelis     \n [The Desperate Help (fixing the drawbridge pt.2)]\n @moat house"]
-lies02["Liesbeth     \n [fixing the bakers scales pt.2]                  \n @bakery"]
-hend02["Hendrik      \n [fixing the mill pt.2]                           \n @windmill"]
-veld02["Veld family  \n [fixing the well pt.2]                           \n @well"]
-schl02["Ms Bram      \n [fixing the schoolbell pt.2]                     \n @school"]
-wzrd05["wizard       \n [The Exposure]                                   \n @village"]
-home03["home         \n [The Mysterious Letter]                          \n @home"]
-engi01["engineers    \n [The Hidden Workshop]                            \n @engineer workshop"]
-engi02["engineers    \n [The Night Shift]                                \n @village"]
-engi03["engineers    \n [The Night Shift]                                \n @village"]
-engi04["engineers    \n [The Night Shift]                                \n @village"]
-engi05["engineers    \n [The Ghost of Beaverford]                        \n @village"]
-engi06["engineers    \n [The Ghost of Beaverford]                        \n @village"]
-engi07["engineers    \n [The Ghost of Beaverford]                        \n @village"]
-engi08["engineers    \n [The Flickering World]                           \n @village"]
-engi09["engineers    \n [The Great Blackout]                             \n @village"]
-engi10["engineers    \n [The Unguarded Forest]                           \n @forest"]
-engi11["engineers    \n [The Mana Mine]                                  \n @mine"]
-wzrd06["wizard       \n [The Master of Gears Reveal]                     \n @mine"]
-wzrd07["wizard       \n [The Realization]                                \n @mine"]
-engi12["engineers    \n [The Great Conversion]                           \n @village"]
-engi13["engineers    \n [The Great Conversion]                           \n @village"]
-engi14["engineers    \n [The Great Conversion]                           \n @village"]
-engi15["engineers    \n [The Lesson]                                     \n @village"]
-engi16["engineers    \n [The Lesson]                                     \n @village"]
-engi17["engineers    \n [The Lesson]                                     \n @village"]
-schl03["Ms Bram      \n [The Arcanum Shift]                              \n @school"]
-schl04["Mabel        \n [Professor Mabel]                                \n @school"]
+home01["home             \n [Morning in Beaverford]                           \n @home              \n —   \n bg: R1"]
+home02["home             \n [The Heavy Heart]                                 \n @home              \n —   \n bg: R1"]
+corn01["Cornelis         \n [fixing the drawbridge pt.1]                      \n @moat house        \n M1  \n bg: R1"]
+lies01["Liesbeth         \n [fixing the bakers scales pt.1]                   \n @bakery            \n M1  \n bg: R1"]
+hend01["Hendrik          \n [fixing the mill pt.1]                            \n @windmill          \n M1  \n bg: R1"]
+veld01["Veld family      \n [fixing the well pt.1]                            \n @well              \n M1  \n bg: R1"]
+schl01["Ms Bram          \n [fixing the schoolbell pt.1]                      \n @school            \n M1  \n bg: R1"]
+wzrd2["wizard            \n [The Wizard School Trials]                        \n @wizard school     \n L1  \n bg: R1 M1"]
+wzrd3["wizard            \n [The Wizard School Trials]                        \n @wizard school     \n L1  \n bg: R1 M1"]
+wzrd4["wizard            \n [The Wizard School Trials]                        \n @wizard school     \n L1  \n bg: R1 M1"]
+corn02["Cornelis         \n [The Desperate Help (fixing the drawbridge pt.2)] \n @moat house        \n M1  \n bg: R1"]
+lies02["Liesbeth         \n [fixing the bakers scales pt.2]                   \n @bakery            \n M2  \n bg: R1"]
+hend02["Hendrik          \n [fixing the mill pt.2]                            \n @windmill          \n M2  \n bg: R1"]
+veld02["Veld family      \n [fixing the well pt.2]                            \n @well              \n M2  \n bg: R1"]
+schl02["Ms Bram          \n [fixing the schoolbell pt.2]                      \n @school            \n M2  \n bg: R1"]
+wzrd05["wizard           \n [The Exposure]                                    \n @village           \n —   \n bg: R2"]
+home03["home             \n [The Mysterious Letter]                           \n @home              \n R2  \n bg: M1"]
+engi01["engineers        \n [The Hidden Workshop]                             \n @engineer workshop \n L1  \n bg: R2 M1"]
+ghost_corn["Cornelis     \n [The Ghost of Beaverford]                         \n @moat house        \n R3  \n bg: R2"]
+ghost_lies["Liesbeth     \n [The Ghost of Beaverford]                         \n @bakery            \n R3  \n bg: R2"]
+ghost_hend["Hendrik      \n [The Ghost of Beaverford]                         \n @windmill          \n R3  \n bg: R2"]
+ghost_veld["Veld family  \n [The Ghost of Beaverford]                         \n @well              \n R3  \n bg: R2"]
+ghost_bram["Ms Bram      \n [The Ghost of Beaverford]                         \n @school            \n R3  \n bg: R2"]
+shift_corn["Cornelis     \n [The Night Shift]                                 \n @moat house        \n M3  \n bg: R1"]
+shift_lies["Liesbeth     \n [The Night Shift]                                 \n @bakery            \n M3  \n bg: R1"]
+shift_hend["Hendrik      \n [The Night Shift]                                 \n @windmill          \n M3  \n bg: R1"]
+shift_veld["Veld family  \n [The Night Shift]                                 \n @well              \n M3  \n bg: R1"]
+shift_bram["Ms Bram      \n [The Night Shift]                                 \n @school            \n M3  \n bg: R1"]
+engi08["engineers        \n [The Flickering World]                            \n @village           \n L2  \n bg: R2 M2"]
+engi09["engineers        \n [The Great Blackout]                              \n @village           \n M3  \n bg: R1"]
+engi10["engineers        \n [The Unguarded Forest]                            \n @forest            \n L2  \n bg: R2"]
+engi11["engineers        \n [The Mana Mine]                                   \n @mine              \n R3  \n bg: M1"]
+wzrd06["wizard           \n [The Master of Gears Reveal]                      \n @mine              \n —   \n bg: R2"]
+wzrd07["wizard           \n [The Realization]                                 \n @mine              \n —   \n bg: R3"]
+engi12["engineers        \n [The Great Conversion]                            \n @village           \n M4  \n bg: R2"]
+engi13["engineers        \n [The Great Conversion]                            \n @village           \n M4  \n bg: R2"]
+engi14["engineers        \n [The Great Conversion]                            \n @village           \n M4  \n bg: R2"]
+engi15["engineers        \n [The Lesson]                                      \n @village           \n L3  \n bg: R2 M2"]
+engi16["engineers        \n [The Lesson]                                      \n @village           \n L3  \n bg: R2 M2"]
+engi17["engineers        \n [The Lesson]                                      \n @village           \n L3  \n bg: R2 M2"]
+schl03["Ms Bram          \n [The Arcanum Shift]                               \n @school            \n —   \n bg: R2"]
+schl04["Mabel            \n [Professor Mabel]                                 \n @school            \n M4  \n bg: R2"]
 ```
 
-Mabel tries to help each villager before deciding to apply to the Wizard School. She approaches Cornelis first — player solves the M1 counterweight problem — but Cornelis refuses the solution: *"I don't trust arithmetic. Magic is precise. I'll wait."* Each subsequent attempt ends in rejection. Mevrouw Bram caps the sequence by encouraging Mabel to apply to the Wizard School — sincerely, and completely missing the point.
+### Quest: The Ghost of Beaverford / The Night Shift (Act III)
 
-The player has already solved the first math problem correctly. The rejection is not about the answer.
+Chapters III.2 and III.3 run as an interleaved loop with five sequential cycles — one per villager. Each cycle:
 
-### Quest: The Desperate Help (II.1)
+1. **Ghost of Beaverford** — Mabel walks the village. Most characters are discussing the mysterious ghost fixer. One character directly tells Mabel about a new problem caused by the failing magic. The R3 challenge is the extended dialogue itself.
+2. **Night Shift** — That night, Mabel returns to fix the problem (M3 multi-step repair challenge).
+3. Magical flickering advances one step.
 
-Cornelis has been stuck inside for five days and is out of food. The Wizard has not come. This is the first time a villager's situation is urgent enough to override their resistance to non-magical solutions. Mabel fixes the drawbridge using the same approach Cornelis refused in I.2. He accepts it now not because he changed his mind, but because he has no choice.
+After the fifth cycle the lights go out completely, triggering The Flickering World (III.4).
 
-**Challenge:** M1 — calculate the correct counterweight given the bridge mass and lever ratio. Single operation, all values given.
-
-### Quest: The Busy Week (II.3)
-
-With the rumor spreading that Mabel can "cast spells without a wand," the remaining Backlog owners are now willing to accept her help. Mabel works through items 2–5 in sequence.
-
-Each fix is a self-contained M2 challenge embedded in the repair itself:
-
-- **Liesbeth's scales:** Calculate ingredient amounts for multiple loaf sizes from a single reference recipe.
-- **Hendrik's millstone:** Calculate gear ratio adjustment to reach a target grinding speed.
-- **Veld pump:** Calculate bucket trips versus pipe flow to find the efficient solution.
-- **School bell:** Calculate timing intervals, then translate to gear teeth count for a mechanical striker.
+| Cycle | Quest giver  | Location   | Problem                                        | Night Shift fix                 | M3 challenge                                              |
+| ----- | ------------ | ---------- | ---------------------------------------------- | ------------------------------- | --------------------------------------------------------- |
+| 1     | Cornelis     | Moat house | Moat gate stuck open — magic water valve dead  | Mechanical gate lever           | Calculate lever arm ratio to hold gate at target position |
+| 2     | Liesbeth     | Bakery     | Street lantern dark — magic light failing      | Oil lantern installation        | Calculate oil volume, burn rate, days until refill        |
+| 3     | Hendrik      | Windmill   | Mill speed regulator failing                   | Mechanical centrifugal governor | Calculate gear ratio for target RPM given variable wind   |
+| 4     | Veld family  | Well       | Water pressure dropping — magic assist failing | Hand pump upgrade               | Calculate pump stroke volume vs. daily household need     |
+| 5     | Mevrouw Bram | School     | Heating spell failing — too cold to teach      | Cast iron stove + flue          | Calculate heat output for room volume and fuel load       |
 
 ---
 
