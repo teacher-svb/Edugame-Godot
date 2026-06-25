@@ -1,4 +1,5 @@
 # Game Design Document
+
 ## Mabel the Engineer
 
 **Genre:** Educational Adventure / Puzzle  
@@ -17,6 +18,7 @@ Mabel the Engineer is a story-driven educational game in which a young girl disc
 **Design principle:** Every challenge the player faces is one Mabel faces too. The game never breaks frame to present an abstract exercise. Math problems arise from broken machines. Logic puzzles arise from obstacles in the world. Reading challenges arise from letters, signage, and overheard conversations. The fiction and the curriculum are the same thing.
 
 **Primary skills trained:**
+
 - Reading comprehension (R1–R3)
 - Mathematical reasoning (M1–M4)
 - Logical / systemic thinking (L1–L3)
@@ -191,60 +193,74 @@ Each chapter has one **primary skill** (the challenge presented) and optional **
 ## 6. Characters
 
 ### Mabel
+
 Protagonist. A curious, capable girl who cannot do magic. She is practical and persistent — when one path closes, she finds another. Her arc moves from self-doubt (failed the Spark Test) to confidence (teaching a classroom). She never gains magical ability; she never needs it.
 
 ### The Wizard
+
 Antagonist — but not a villain. He genuinely believes magic is the natural order of the world and that engineering is only a tool to preserve it. His control over both systems (magic and the Guild) is a double bind: no one was ever meant to truly understand. He leaves rather than accept a world where knowledge is shared.
 
 ### Guild Mentors
+
 Secondary characters encountered in Act III. They teach Mabel specific engineering disciplines corresponding to the game's skill domains. Their identities and personalities are to be developed in subsequent design passes.
 
 ### Villagers
+
 Recurring characters who represent the community Mabel serves. Each has a specific problem in the Backlog that maps to a challenge in Acts I–II. They are not obstacles; they are the reason the work matters.
 
-| Location | Character | Problem |
-|---|---|---|
-| Moat house | Cornelis | Drawbridge counterweight miscalibrated — bridge won't lower |
-| School | Mevrouw Bram | School bell striker mechanism broken — class times in chaos |
-| Empty plot 1 | Liesbeth (baker) | Enchanted scales broken — bread comes out wrong |
+| Location     | Character        | Problem                                                         |
+| ------------ | ---------------- | --------------------------------------------------------------- |
+| Moat house   | Cornelis         | Drawbridge counterweight miscalibrated — bridge won't lower     |
+| School       | Mevrouw Bram     | School bell striker mechanism broken — class times in chaos     |
+| Empty plot 1 | Liesbeth (baker) | Enchanted scales broken — bread comes out wrong                 |
 | Empty plot 2 | Hendrik (miller) | Millstone grinding speed drifted — flour too coarse or too fine |
-| Empty plot 3 | Veld family | Enchanted water pump broken — hauling buckets from the well |
+| Empty plot 3 | Veld family      | Enchanted water pump broken — hauling buckets from the well     |
 
 #### Cornelis — the moat neighbor
+
 Fussy and self-important. Convinced the moat makes him the safest man in Beaverford. Shouts from his window. The Wizard was "on his way."
 
 #### Liesbeth — the baker
+
 Warm and anxious. The village depends on her bread. Trusts the Wizard completely but is running out of patience.
 
 #### Hendrik — the miller
+
 Grumpy and nostalgic. Everything was better before. Filed a complaint with the Wizard two weeks ago and has heard nothing.
 
 #### The Veld family
+
 Exhausted parents, one young child (around 6–7, younger than Mabel). The parents are polite but dismissive. The young child thinks Mabel's ideas are interesting — a small moment of contrast against every adult in Act I.
 
 #### Mevrouw Bram — the schoolteacher
+
 Prim, orderly, genuinely kind, and completely captured by the Wizard's system. Teaches that magic is how civilization solves real problems. Math appears in her curriculum only as a stepping stone to understanding magical formulas — not as a tool in its own right.
 
 ---
 
 ## 7. World & Setting
 
-### Beaverford
+### The village: Beaverford
+
 A small, self-contained village with a town square, a handful of homes, and a wizard's house on the edge. The world is storybook-warm but not saccharine — things break here, the wizard is unreliable, and the infrastructure is older than it looks.
 
 Key locations:
+
 - **Town Square** — Backlog noticeboard, meeting point, rumor hub
 - **Wizard's House** — prominent, eventually empty
 - **Wizard School** — elemental chambers (Fire, Water, Earth) for Act I trials
 - **Mabel's Home** — starting point, receives the gear-sealed letter
 
 ### The Forest
+
 The path between Beaverford and the Mana Spring. Dark and navigable only with the Mechanical Lantern in Act IV. The Spring's entrance is normally guarded.
 
-### The Mana Spring / Mine
+### The mine: Mana Spring
+
 A clearing in the forest where the mana was once abundant. Now a mine — machinery extracting the last of the mana from underground. The moral and narrative crux of Act IV.
 
 ### The Guild Workshop
+
 Hidden underground. Mabel finds it in III.1. Contains engineering tools, schematics, and the mentors. The player spends most of Act III here between night missions.
 
 ---
@@ -252,30 +268,67 @@ Hidden underground. Mabel finds it in III.1. Contains engineering tools, schemat
 ## 8. Quests
 
 ### The Backlog (Acts I–II)
+
 A noticeboard in the village square lists all outstanding repair requests submitted to the Wizard. It is visible from the start of I.1 and serves as the player's map of what needs fixing. Items are checked off as Mabel resolves them across Acts I–II.
 
-| # | Owner | Problem | Chapter | Skill | Level |
-|---|---|---|---|---|---|
-| 1 | Cornelis | Drawbridge counterweight | II.1 | Math | M1 |
-| 2 | Liesbeth | Broken scales | II.3 | Math | M2 |
-| 3 | Hendrik | Millstone gear drift | II.3 | Math | M2 |
-| 4 | Veld family | Water pump | II.3 | Math | M2 |
-| 5 | Mevrouw Bram | Bell striker mechanism | II.3 | Math | M2 |
+| #   | Owner        | Location            | Problem                  | Chapter | Skill | Level |
+| --- | ------------ | ------------------- | ------------------------ | ------- | ----- | ----- |
+| 1   | Cornelis     | neighbour with moat | Drawbridge counterweight | II.1    | Math  | M1    |
+| 2   | Liesbeth     | bakery              | Broken scales            | II.3    | Math  | M2    |
+| 3   | Hendrik      | windmill            | Millstone gear drift     | II.3    | Math  | M2    |
+| 4   | Veld family  | well                | Water pump               | II.3    | Math  | M2    |
+| 5   | Mevrouw Bram | school              | Bell striker mechanism   | II.3    | Math  | M2    |
 
-### Quest: The Ambition (I.2)
+```mermaid
+flowchart TD
+    A --> q
+    q --> B
+    q --> C
+    q --> D
+    q --> E
+    q --> F
+    B --> G
+    C --> G
+    D --> G
+    E --> G
+    F --> G
+    G --> H
+    H --> I
+    H --> J
+    H --> K
+    H --> L
+
+A["home\n[moving around]"]
+q{"the wizards backlog\nEach quest\nprogresses the day\nuntil its evening"}
+B["Cornelis\n[fixing the drawbridge pt.1]"]
+C["Liesbeth\n[fixing the bakers scales pt.1]"]
+D["Hendrik\n[fixing the mill pt.1]"]
+E["Veld family\n[fixing the well pt.1]"]
+F["Ms Bram\n[fixing the schoolbell pt.1]"]
+G["home\n[Going to sleep]"]
+H["Cornelis\n[fixing the drawbridge pt.2]"]
+I["Liesbeth\n[fixing the bakers scales pt.2]"]
+J["Hendrik\n[fixing the mill pt.2]"]
+K["Veld family\n[fixing the well pt.2]"]
+L["Ms Bram\n[fixing the schoolbell pt.2]"]
+```
+
 Mabel tries to help each villager before deciding to apply to the Wizard School. She approaches Cornelis first — player solves the M1 counterweight problem — but Cornelis refuses the solution: *"I don't trust arithmetic. Magic is precise. I'll wait."* Each subsequent attempt ends in rejection. Mevrouw Bram caps the sequence by encouraging Mabel to apply to the Wizard School — sincerely, and completely missing the point.
 
 The player has already solved the first math problem correctly. The rejection is not about the answer.
 
 ### Quest: The Desperate Help (II.1)
+
 Cornelis has been stuck inside for five days and is out of food. The Wizard has not come. This is the first time a villager's situation is urgent enough to override their resistance to non-magical solutions. Mabel fixes the drawbridge using the same approach Cornelis refused in I.2. He accepts it now not because he changed his mind, but because he has no choice.
 
 **Challenge:** M1 — calculate the correct counterweight given the bridge mass and lever ratio. Single operation, all values given.
 
 ### Quest: The Busy Week (II.3)
+
 With the rumor spreading that Mabel can "cast spells without a wand," the remaining Backlog owners are now willing to accept her help. Mabel works through items 2–5 in sequence.
 
 Each fix is a self-contained M2 challenge embedded in the repair itself:
+
 - **Liesbeth's scales:** Calculate ingredient amounts for multiple loaf sizes from a single reference recipe.
 - **Hendrik's millstone:** Calculate gear ratio adjustment to reach a target grinding speed.
 - **Veld pump:** Calculate bucket trips versus pipe flow to find the efficient solution.
@@ -286,7 +339,9 @@ Each fix is a self-contained M2 challenge embedded in the repair itself:
 ## 10. UI & UX
 
 ### State Stack
+
 The game uses a push/pop state stack for navigation. States overlay cleanly:
+
 - **Play** — normal exploration
 - **Challenge** — math/logic challenge overlaid on the world
 - **Message** — NPC dialogue / notifications
@@ -294,6 +349,7 @@ The game uses a push/pop state stack for navigation. States overlay cleanly:
 - **Loading Screen** — scene transitions
 
 ### Challenge UI Types
+
 Each challenge type has a distinct visual metaphor appropriate to its fiction:
 
 | Type            | Visual           | Use Case                                 |
@@ -306,9 +362,11 @@ Each challenge type has a distinct visual metaphor appropriate to its fiction:
 | SearchGrid      | Grid scan        | Hidden information, letter/symbol search |
 
 ### HUD
+
 Player stats and active quest info displayed during exploration. Action menu accessible via dedicated input. Currently being refactored to combine stats view and actions view.
 
 ### Accessibility
+
 - All dialogue and challenge text is large and high-contrast
 - No timed challenges (players can think without penalty)
 - Hint system planned for math challenges (to be designed)
