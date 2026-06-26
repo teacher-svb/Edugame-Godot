@@ -320,30 +320,32 @@ flowchart TD
     home03 --> engi01
     subgraph act3[ACT III]
         subgraph g5["sequential cycles \n The Ghost of Beaverford"]
-            ghost_corn
-            ghost_lies
-            ghost_hend
-            ghost_veld
-            ghost_bram
+            corn03
+            lies03
+            hend03
+            veld03
+            bram03
         end
         subgraph g4["sequential cycles \n The Night Shift"]
-            shift_corn
-            shift_lies
-            shift_hend
-            shift_veld
-            shift_bram
+            corn04
+            lies04
+            hend04
+            veld04
+            bram04
         end
-        ghost_corn --> shift_corn
-        ghost_lies --> shift_lies
-        ghost_hend --> shift_hend
-        ghost_veld --> shift_veld
-        ghost_bram --> shift_bram
-        engi01 --> ghost_corn
-        shift_corn -->|"flicker 1"| ghost_lies
-        shift_lies -->|"flicker 2"| ghost_hend
-        shift_hend -->|"flicker 3"| ghost_veld
-        shift_veld -->|"flicker 4"| ghost_bram
-        shift_bram --> engi08
+        engi01 --> corn03
+        corn03 --> corn04
+        lies03 --> lies04
+        hend03 --> hend04
+        veld03 --> veld04
+        bram03 --> bram04
+        corn04 --|flicker|--> isdark
+        lies04 --|flicker|--> isdark
+        hend04 --|flicker|--> isdark
+        veld04 --|flicker|--> isdark
+        bram04 --|flicker|--> isdark
+        isdark --|no|--> g5
+        isdark --|yes|--> engi08
     end
 
     engi08 --> engi09
@@ -374,6 +376,7 @@ flowchart TD
         schl03 --> schl04
     end
 
+isdark{is dark?}
 home01["home             \n [Morning in Beaverford]                           \n @home              \n —   \n bg: R1"]
 home02["home             \n [The Heavy Heart]                                 \n @home              \n —   \n bg: R1"]
 corn01["Cornelis         \n [fixing the drawbridge pt.1]                      \n @moat house        \n M1  \n bg: R1"]
@@ -392,16 +395,16 @@ schl02["Ms Bram          \n [fixing the schoolbell pt.2]                      \n
 wzrd05["wizard           \n [The Exposure]                                    \n @village           \n —   \n bg: R2"]
 home03["home             \n [The Mysterious Letter]                           \n @home              \n R2  \n bg: M1"]
 engi01["engineers        \n [The Hidden Workshop]                             \n @engineer workshop \n L1  \n bg: R2 M1"]
-ghost_corn["Cornelis     \n [The Ghost of Beaverford]                         \n @moat house        \n R3  \n bg: R2"]
-ghost_lies["Liesbeth     \n [The Ghost of Beaverford]                         \n @bakery            \n R3  \n bg: R2"]
-ghost_hend["Hendrik      \n [The Ghost of Beaverford]                         \n @windmill          \n R3  \n bg: R2"]
-ghost_veld["Veld family  \n [The Ghost of Beaverford]                         \n @well              \n R3  \n bg: R2"]
-ghost_bram["Ms Bram      \n [The Ghost of Beaverford]                         \n @school            \n R3  \n bg: R2"]
-shift_corn["Cornelis     \n [The Night Shift]                                 \n @moat house        \n M3  \n bg: R1"]
-shift_lies["Liesbeth     \n [The Night Shift]                                 \n @bakery            \n M3  \n bg: R1"]
-shift_hend["Hendrik      \n [The Night Shift]                                 \n @windmill          \n M3  \n bg: R1"]
-shift_veld["Veld family  \n [The Night Shift]                                 \n @well              \n M3  \n bg: R1"]
-shift_bram["Ms Bram      \n [The Night Shift]                                 \n @school            \n M3  \n bg: R1"]
+corn03["Cornelis         \n [The Ghost of Beaverford]                         \n @moat house        \n R3  \n bg: R2"]
+lies03["Liesbeth         \n [The Ghost of Beaverford]                         \n @bakery            \n R3  \n bg: R2"]
+hend03["Hendrik          \n [The Ghost of Beaverford]                         \n @windmill          \n R3  \n bg: R2"]
+veld03["Veld family      \n [The Ghost of Beaverford]                         \n @well              \n R3  \n bg: R2"]
+bram03["Ms Bram          \n [The Ghost of Beaverford]                         \n @school            \n R3  \n bg: R2"]
+corn04["Cornelis         \n [The Night Shift]                                 \n @moat house        \n M3  \n bg: R1"]
+lies04["Liesbeth         \n [The Night Shift]                                 \n @bakery            \n M3  \n bg: R1"]
+hend04["Hendrik          \n [The Night Shift]                                 \n @windmill          \n M3  \n bg: R1"]
+veld04["Veld family      \n [The Night Shift]                                 \n @well              \n M3  \n bg: R1"]
+bram04["Ms Bram          \n [The Night Shift]                                 \n @school            \n M3  \n bg: R1"]
 engi08["engineers        \n [The Flickering World]                            \n @village           \n L2  \n bg: R2 M2"]
 engi09["engineers        \n [The Great Blackout]                              \n @village           \n M3  \n bg: R1"]
 engi10["engineers        \n [The Unguarded Forest]                            \n @forest            \n L2  \n bg: R2"]
