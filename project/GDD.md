@@ -178,7 +178,7 @@ Each chapter has one **primary skill** (the challenge presented) and optional **
 | V.1 The Great Conversion      | Math        | M4    | R2         |
 | V.2 The Lesson                | Logic       | L3    | R2, M2     |
 | V.3 The Arcanum Shift         | — narrative | —     | R2         |
-| V.4 Professor Mabel           | Math        | M4    | R2         |
+| V.4 Professor Mabel           | — narrative | —     | R2         |
 
 ### 5.3 Progression Notes
 
@@ -272,49 +272,33 @@ Hidden underground. Mabel finds it in III.1. Contains engineering tools, schemat
 ```mermaid
 flowchart TD
     subgraph act1[ACT I]
-        home01 --> corn01
-        home01 --> lies01
-        home01 --> hend01
-        home01 --> veld01
+        home01 --> g1
         subgraph g1["parallel quests \n [The Ambition]"]
             corn01
             lies01
             hend01
             veld01
         end
-        corn01 --> schl01
-        lies01 --> schl01
-        hend01 --> schl01
-        veld01 --> schl01
+        g1 --> schl01
 
         subgraph g2["parallel quests \n The Wizard School Trials"]
             wzrd2
             wzrd3
             wzrd4
         end
-        schl01 --> wzrd2
-        schl01 --> wzrd3
-        schl01 --> wzrd4
-        wzrd2 --> home02
-        wzrd3 --> home02
-        wzrd4 --> home02
+        schl01 --> g2
+        g2 --> home02
     end
     home02 --> corn02
     subgraph act2[ACT II]
-        corn02 --> lies02
-        corn02 --> hend02
-        corn02 --> veld02
-        corn02 --> schl02
+        corn02 --> g3
         subgraph g3["parallel quests \n The Busy Week"]
             lies02
             hend02
             veld02
             schl02
         end
-        lies02 --> wzrd05
-        hend02 --> wzrd05
-        veld02 --> wzrd05
-        schl02 --> wzrd05
+        g3 --> wzrd05
         wzrd05 --> home03
     end
     home03 --> engi01
@@ -384,9 +368,9 @@ lies01["Liesbeth         \n [fixing the bakers scales pt.1]                   \n
 hend01["Hendrik          \n [fixing the mill pt.1]                            \n @windmill          \n M1  \n bg: R1"]
 veld01["Veld family      \n [fixing the well pt.1]                            \n @well              \n M1  \n bg: R1"]
 schl01["Ms Bram          \n [fixing the schoolbell pt.1]                      \n @school            \n M1  \n bg: R1"]
-wzrd2["wizard            \n [The Wizard School Trials]                        \n @wizard school     \n L1  \n bg: R1 M1"]
-wzrd3["wizard            \n [The Wizard School Trials]                        \n @wizard school     \n L1  \n bg: R1 M1"]
-wzrd4["wizard            \n [The Wizard School Trials]                        \n @wizard school     \n L1  \n bg: R1 M1"]
+wzrd2["wizard            \n [trial: fire]                                     \n @wizard school     \n L1  \n bg: R1 M1"]
+wzrd3["wizard            \n [trial: water]                                    \n @wizard school     \n L1  \n bg: R1 M1"]
+wzrd4["wizard            \n [trial: earth]                                    \n @wizard school     \n L1  \n bg: R1 M1"]
 corn02["Cornelis         \n [The Desperate Help (fixing the drawbridge pt.2)] \n @moat house        \n M1  \n bg: R1"]
 lies02["Liesbeth         \n [fixing the bakers scales pt.2]                   \n @bakery            \n M2  \n bg: R1"]
 hend02["Hendrik          \n [fixing the mill pt.2]                            \n @windmill          \n M2  \n bg: R1"]
@@ -421,7 +405,152 @@ schl03["Ms Bram          \n [The Arcanum Shift]                               \n
 schl04["Mabel            \n [Professor Mabel]                                 \n @school            \n M4  \n bg: R2"]
 ```
 
-### Quest: The Ghost of Beaverford / The Night Shift (Act III)
+---
+
+### Act I
+
+#### I.1 — Morning in Beaverford
+
+1. Mabel wakes up at home.
+2. Player explores Beaverford — meets villagers, hears about broken things around town.
+3. Player finds the Backlog of Broken Things noticeboard in the town square.
+4. Villagers mention the Wizard is overdue; things have been broken for weeks.
+
+#### I.2 — The Ambition
+
+##### Cornelis (drawbridge)
+
+1. Mabel approaches the drawbridge and sees the counterweight problem.
+2. M1 challenge: calculate the correct counterweight to balance the bridge.
+3. Mabel goes to tell Cornelis her solution.
+4. Cornelis dismisses her from his window — she has no magic, she can't touch an enchanted mechanism.
+
+##### Liesbeth (scales)
+
+1. Mabel approaches the bakery and sees the enchanted scales are broken.
+2. M1 challenge: calculate the correct measurement to calibrate the scales.
+3. Mabel goes to tell Liesbeth her solution.
+4. Liesbeth is apologetic but firm — the Wizard will sort it when he arrives.
+
+##### Hendrik (mill)
+
+1. Mabel approaches the windmill and sees the millstone speed has drifted.
+2. M1 challenge: calculate the correct adjustment to restore the grinding speed.
+3. Mabel goes to tell Hendrik her solution.
+4. Hendrik dismisses her — everything was better before, and real problems need real magic.
+
+##### Veld family (well)
+
+1. Mabel approaches the well and sees the enchanted water pump is broken.
+2. M1 challenge: calculate the water flow or pressure needed.
+3. Mabel goes to tell the Veld parents her solution.
+4. The parents turn her away politely. Their young child thinks her ideas sound interesting.
+
+##### Mevrouw Bram (school bell)
+
+1. Mabel approaches the school and sees the bell striker mechanism is broken.
+2. M1 challenge: calculate the correct timing or striker force to fix the bell.
+3. Mabel goes to tell Mevrouw Bram her solution.
+4. Mevrouw Bram declines — but suggests that if Mabel wants to help people, she should apply to Wizard School.
+
+#### I.3 — The Wizard School Trials
+
+##### Trial: Fire
+
+1. Mabel enters the Fire chamber — jets of flame block the path.
+2. L1 challenge: navigate to the wizard's platform by timing movement through the flame patterns.
+3. Mabel takes the Spark Test and produces nothing.
+4. The Fire wizard sends her on.
+
+##### Trial: Water
+
+1. Mabel enters the Water chamber — rushing water and moving platforms block the path.
+2. L1 challenge: cross to the wizard's platform by timing jumps across the moving platforms.
+3. Mabel takes the Spark Test and produces nothing.
+4. The Water wizard sends her on.
+
+##### Trial: Earth
+
+1. Mabel enters the Earth chamber — falling rocks and shifting ground block the path.
+2. L1 challenge: reach the wizard's platform by navigating through the falling debris.
+3. Mabel takes the Spark Test and produces nothing.
+4. The Earth wizard delivers the verdict: no mana. She is not admitted.
+
+#### I.4 — The Heavy Heart
+
+1. Mabel is turned away and leaves Wizard School alone.
+2. She walks home through the forest.
+3. She arrives home, defeated.
+
+---
+
+### Act II
+
+#### II.1 — The Desperate Help (Cornelis)
+
+1. Mabel is walking past the moat house when Cornelis shouts at her from his side of the raised drawbridge — he's been trapped and hungry since it jammed.
+2. Mabel takes a look at the counterweight mechanism.
+3. M1 challenge: calculate the correct counterweight to balance the bridge.
+4. Mabel applies the fix. The drawbridge lowers.
+5. Cornelis is astonished.
+
+#### II.2 — The Rumor Mill
+
+1. Cornelis tells Mabel he's going to tell everyone about what she did, and leaves.
+2. Mabel returns to the other villagers — they've heard the news and now accept her help.
+
+#### II.3 — The Busy Week
+
+##### Liesbeth (scales)
+
+1. Liesbeth asks Mabel to fix the enchanted scales.
+2. M2 challenge: multi-step calculation to calibrate the scales correctly.
+3. Scales fixed. Liesbeth's bread comes out right again.
+
+##### Hendrik (mill)
+
+1. Hendrik asks Mabel to fix the millstone grinding speed.
+2. M2 challenge: multi-step calculation to restore the correct speed.
+3. Mill fixed. Flour comes out right again.
+
+##### Veld family (well)
+
+1. The Veld family asks Mabel to fix the water pump.
+2. M2 challenge: multi-step calculation for pump flow or pressure.
+3. Pump fixed. No more hauling buckets from the well.
+
+##### Mevrouw Bram (school bell)
+
+1. Mevrouw Bram asks Mabel to fix the school bell striker.
+2. M2 challenge: multi-step calculation to restore the correct timing.
+3. Bell fixed. Class times are back in order.
+
+#### II.4 — The Exposure
+
+1. A traveling wizard arrives in Beaverford and hears the rumors about Mabel.
+2. He tests her publicly — she produces no mana.
+3. He declares her a fraud: she cannot do magic at all.
+4. The villagers are confused and feel misled.
+5. Mabel retreats to her home in shame.
+
+#### II.5 — The Mysterious Letter
+
+1. Mabel arrives home to find a gear-sealed letter waiting for her.
+2. R2 challenge: the player reads the letter — it's longer and requires careful reading to understand what it says and what it's asking.
+3. The letter is an invitation from the Secret Guild of Engineers — they have heard what she can do.
+
+---
+
+### Act III
+
+#### III.1 — The Hidden Workshop
+
+1. Mabel follows the directions from the letter.
+2. L1 puzzle: find and open the secret entrance to the underground workshop.
+3. Mabel meets the Guild mentors for the first time.
+4. She sees engineering tools and schematics she has never encountered before.
+
+#### III.2 / III.3 — The Ghost of Beaverford & The Night Shift
 
 Chapters III.2 and III.3 run as an interleaved loop with five sequential cycles — one per villager. Each cycle:
 
@@ -431,13 +560,125 @@ Chapters III.2 and III.3 run as an interleaved loop with five sequential cycles 
 
 After the fifth cycle the lights go out completely, triggering The Flickering World (III.4).
 
-| Cycle | Quest giver  | Location   | Problem                                        | Night Shift fix                 | M3 challenge                                              |
-| ----- | ------------ | ---------- | ---------------------------------------------- | ------------------------------- | --------------------------------------------------------- |
-| 1     | Cornelis     | Moat house | Moat gate stuck open — magic water valve dead  | Mechanical gate lever           | Calculate lever arm ratio to hold gate at target position |
-| 2     | Liesbeth     | Bakery     | Street lantern dark — magic light failing      | Oil lantern installation        | Calculate oil volume, burn rate, days until refill        |
-| 3     | Hendrik      | Windmill   | Mill speed regulator failing                   | Mechanical centrifugal governor | Calculate gear ratio for target RPM given variable wind   |
-| 4     | Veld family  | Well       | Water pressure dropping — magic assist failing | Hand pump upgrade               | Calculate pump stroke volume vs. daily household need     |
-| 5     | Mevrouw Bram | School     | Heating spell failing — too cold to teach      | Cast iron stove + flue          | Calculate heat output for room volume and fuel load       |
+##### Cycle 1 — Cornelis
+
+**Ghost:** Cornelis tells Mabel that the moat gate is stuck open — the magic water valve controlling it has stopped working. (R3: extended dialogue)
+
+**Night Shift:** Mabel installs a mechanical gate lever. M3 challenge: calculate the lever arm ratio to hold the gate at the correct position.
+
+**Flicker:** Magical lighting dims one step.
+
+##### Cycle 2 — Liesbeth
+
+**Ghost:** Liesbeth tells Mabel that the street lantern outside the bakery has gone dark — the magic light is failing. (R3: extended dialogue)
+
+**Night Shift:** Mabel installs an oil lantern. M3 challenge: calculate the oil volume, burn rate, and days until refill needed.
+
+**Flicker:** Magical lighting dims one step.
+
+##### Cycle 3 — Hendrik
+
+**Ghost:** Hendrik tells Mabel that the mill speed regulator is failing — the millstone is grinding unevenly again. (R3: extended dialogue)
+
+**Night Shift:** Mabel installs a mechanical centrifugal governor. M3 challenge: calculate the gear ratio to achieve the target RPM given variable wind.
+
+**Flicker:** Magical lighting dims one step.
+
+##### Cycle 4 — Veld family
+
+**Ghost:** The Veld family tells Mabel that water pressure at the well is dropping — the magic assist is failing. (R3: extended dialogue)
+
+**Night Shift:** Mabel installs a hand pump upgrade. M3 challenge: calculate the pump stroke volume needed to meet the household's daily water need.
+
+**Flicker:** Magical lighting dims one step.
+
+##### Cycle 5 — Mevrouw Bram
+
+**Ghost:** Mevrouw Bram tells Mabel that the heating spell in the school is failing — it's too cold to teach. (R3: extended dialogue)
+
+**Night Shift:** Mabel installs a cast iron stove and flue. M3 challenge: calculate the heat output needed for the room volume and fuel load.
+
+**Flicker:** Lights go out completely — triggering The Flickering World (III.4).
+
+#### III.4 — The Flickering World
+
+1. After the fifth Night Shift cycle, Mabel notices small blue orbs drifting through the village — mana, visibly leaving.
+2. She follows them through the streets.
+3. L2 challenge: chase the orbs through the village — faster obstacles and tighter timing than the Wizard School trials.
+4. The orbs lead her to the forest entrance and disappear inside.
+
+---
+
+### Act IV
+
+#### IV.1 — The Great Blackout
+
+1. Everything goes dark — total magical failure across the village.
+2. Mabel returns to the Guild workshop.
+3. M3 challenge: calculate the specifications needed to build the Mechanical Lantern.
+4. Mabel builds the lantern.
+
+#### IV.2 — The Unguarded Forest
+
+1. Mabel enters the dark forest with her Mechanical Lantern.
+2. L2 challenge: navigate through the woods — timing and obstacles in the dark, the lantern only illuminates a small area.
+3. The entrance to the Mana Spring is unguarded — the guards have no light and have abandoned their post.
+4. Mabel passes through.
+
+#### IV.3 — The Mana Mine
+
+1. Mabel enters a clearing deep in the forest — nothing grows here.
+2. At the centre: a mine, with machinery everywhere.
+3. R3 challenge: Mabel finds a map and a riddle — the riddle explains how to read the map. The player must understand the riddle to interpret what the map reveals.
+4. The full picture begins to take shape.
+
+#### IV.4 — Master of Gears Reveal
+
+1. Mabel ventures deeper into the mine.
+2. She finds the Wizard — he is the secret leader of the Guild of Engineers.
+3. He has been using the Guild's machines to extract the last of the mana from the earth.
+
+#### IV.5 — The Realization
+
+1. The Wizard asks Mabel to help him find a new mana vein.
+2. Mabel refuses — she sees the full truth: he controlled both magic and the Guild, ensuring the village always depended on him. Neither world was ever meant to truly understand.
+3. The Wizard cannot accept a world where knowledge is shared. He leaves alone.
+4. By morning, his house is empty.
+
+---
+
+### Act V
+
+#### V.1 / V.2 — The Great Conversion & The Lesson
+
+##### Hendrik (windmill)
+
+**Conversion:** Mabel speaks to Hendrik about replacing the mana extractor with a wind turbine. M4 challenge: given a word description of the windmill's needs, the player must construct the equation to calculate the turbine's required output. Wind turbine installed.
+
+**Lesson:** Mabel teaches Hendrik how to operate and maintain the wind turbine. L3 challenge: reason about the full system — wind speed, gear ratio, output — to keep the mill running correctly.
+
+##### Liesbeth (bakery)
+
+**Conversion:** Mabel speaks to Liesbeth about replacing the mana-heated oven with a real fire. M4 challenge: given a word description of the oven's baking requirements, the player must construct the equation to calculate the fuel and airflow needed. Real fire installed.
+
+**Lesson:** Mabel teaches Liesbeth how to manage the fire oven. L3 challenge: reason about fuel load, heat output, and airflow as interacting variables to bake correctly.
+
+##### Veld family (well)
+
+**Conversion:** Mabel speaks to the Veld family about adding a hand crank to the well. M4 challenge: given a word description of the family's daily water needs, the player must construct the equation to calculate the crank mechanism required. Hand crank installed.
+
+**Lesson:** Mabel teaches the Veld family how to use the hand crank. L3 challenge: reason about stroke volume, daily need, and effort as a system to plan their water usage.
+
+#### V.3 — The Arcanum Shift
+
+1. Mabel visits Mevrouw Bram at the school.
+2. Together they rebrand the Wizard School as an engineering school.
+3. Grimoires are replaced by blueprints.
+
+#### V.4 — Professor Mabel
+
+1. Mabel stands at the chalkboard in front of a class of children.
+2. Credits roll over the animation.
 
 ---
 
