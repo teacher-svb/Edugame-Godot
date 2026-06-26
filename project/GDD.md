@@ -77,12 +77,12 @@ The Wizard leaves alone to find a new mana source. Mabel returns to the village 
 
 ### Act III — The Guild of Engineers
 
-| Chapter | Title                   | Summary                                                                                                                                                          |
-| ------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| III.1   | The Hidden Workshop     | Mabel finds the secret entrance (L1 logic puzzle). First exposure to engineering tools and the Guild mentors.                                                    |
-| III.2   | The Night Shift         | Five sequential night-time repair missions, one per villager. Follows each Ghost beat where a character revealed a new problem. M3 math challenges — multi-step problems arising from machine calibration and repair. Flicker advances after each mission.          |
-| III.3   | The Ghost of Beaverford | Five sequential village exploration rounds, interleaved with The Night Shift. Mabel walks the village; most characters discuss the mysterious ghost fixer. One character per round reveals a new problem directly (R3 challenge: extended dialogue).               |
-| III.4   | The Flickering World    | Magic is failing. Mabel investigates. L2 logic puzzle — multi-step world puzzle with intermediate states, framed as diagnosing a failing system.                 |
+| Chapter | Title                   | Summary                                                                                                                                                                                                                                                    |
+| ------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| III.1   | The Hidden Workshop     | Mabel finds the secret entrance (L1 logic puzzle). First exposure to engineering tools and the Guild mentors.                                                                                                                                              |
+| III.2   | The Night Shift         | Five sequential night-time repair missions, one per villager. Follows each Ghost beat where a character revealed a new problem. M3 math challenges — multi-step problems arising from machine calibration and repair. Flicker advances after each mission. |
+| III.3   | The Ghost of Beaverford | Five sequential village exploration rounds, interleaved with The Night Shift. Mabel walks the village; most characters discuss the mysterious ghost fixer. One character per round reveals a new problem directly (R3 challenge: extended dialogue).       |
+| III.4   | The Flickering World    | Magic is failing. Mabel investigates. L2 logic puzzle — multi-step world puzzle with intermediate states, framed as diagnosing a failing system.                                                                                                           |
 
 ### Act IV — The Secret of the Wizards
 
@@ -196,45 +196,37 @@ Each chapter has one **primary skill** (the challenge presented) and optional **
 
 Protagonist. A curious, capable girl who cannot do magic. She is practical and persistent — when one path closes, she finds another. Her arc moves from self-doubt (failed the Spark Test) to confidence (teaching a classroom). She never gains magical ability; she never needs it.
 
+### Avocado
+
+Mabel's avocado-shaped cuddle toy — found at the start of I.1 before Mabel leaves home. Avocado is her constant companion and the game's hint-giver throughout the story. Neither Avocado nor Mabel has magic; they figure things out together.
+
+Hints are delivered as Mabel talking to Avocado, with imagined responses appearing as thought bubbles — never breaking the fiction. Hints take the form of guiding questions ("What type of sum is this?" / "What is the height of x?"), not direct answers. This keeps the player thinking rather than bypassing the challenge. Hints are player-requested only; Avocado does not interrupt.
+
 ### The Wizard
 
 Antagonist — but not a villain. He genuinely believes magic is the natural order of the world and that engineering is only a tool to preserve it. His control over both systems (magic and the Guild) is a double bind: no one was ever meant to truly understand. He leaves rather than accept a world where knowledge is shared.
 
 ### Guild Mentors
 
-Secondary characters encountered in Act III. They teach Mabel specific engineering disciplines corresponding to the game's skill domains. Their identities and personalities are to be developed in subsequent design passes.
+Three secondary characters encountered in Act III. Each is tied to one of the game's skill domains and has one distinguishing personality trait. Full backstories are deferred to a later design pass — minimum viable design is name + discipline + one trait.
+
+| Name  | Discipline                         | Role                                                                                                                                                                       |
+| ----- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Alfa  | Construction / mechanics           | Teaches Mabel how to build specific items (e.g. the Mechanical Lantern). Unlocks build recipes.                                                                            |
+| Beta  | Materials / elemental substitution | Teaches how to reproduce magic effects using base materials — oil for light, wood for heat, wind for motion. The Guild's answer to the Wizard School's Fire, Water, Earth. |
+| Gamma | Knowledge / documents              | Provides access to blueprints and texts required as prerequisites for math challenges. Unlocks reading material before challenges that depend on it.                       |
 
 ### Villagers
 
-Recurring characters who represent the community Mabel serves. Each has a specific problem in the Backlog that maps to a challenge in Acts I–II. They are not obstacles; they are the reason the work matters.
+Recurring characters who represent the community Mabel serves. They are not obstacles; they are the reason the work matters.
 
-| Location     | Character        | Problem                                                         |
-| ------------ | ---------------- | --------------------------------------------------------------- |
-| Moat house   | Cornelis         | Drawbridge counterweight miscalibrated — bridge won't lower     |
-| School       | Mevrouw Bram     | School bell striker mechanism broken — class times in chaos     |
-| Empty plot 1 | Liesbeth (baker) | Enchanted scales broken — bread comes out wrong                 |
-| Empty plot 2 | Hendrik (miller) | Millstone grinding speed drifted — flour too coarse or too fine |
-| Empty plot 3 | Veld family      | Enchanted water pump broken — hauling buckets from the well     |
-
-#### Cornelis — the moat neighbor
-
-Fussy and self-important. Convinced the moat makes him the safest man in Beaverford. Shouts from his window. The Wizard was "on his way."
-
-#### Liesbeth — the baker
-
-Warm and anxious. The village depends on her bread. Trusts the Wizard completely but is running out of patience.
-
-#### Hendrik — the miller
-
-Grumpy and nostalgic. Everything was better before. Filed a complaint with the Wizard two weeks ago and has heard nothing.
-
-#### The Veld family
-
-Exhausted parents, one young child (around 6–7, younger than Mabel). The parents are polite but dismissive. The young child thinks Mabel's ideas are interesting — a small moment of contrast against every adult in Act I.
-
-#### Mevrouw Bram — the schoolteacher
-
-Prim, orderly, genuinely kind, and completely captured by the Wizard's system. Teaches that magic is how civilization solves real problems. Math appears in her curriculum only as a stepping stone to understanding magical formulas — not as a tool in its own right.
+| Character    | Description                                                                                                                                                                                                                                                                                |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Cornelis     | Fussy and self-important. Convinced the moat makes him the safest man in Beaverford. Shouts from his window. The Wizard was "on his way."                                                                                                                                                  |
+| Liesbeth     | The baker. Warm and anxious. The village depends on her bread. Trusts the Wizard completely but is running out of patience.                                                                                                                                                                |
+| Hendrik      | The miller. Grumpy and nostalgic. Everything was better before. Filed a complaint with the Wizard two weeks ago and has heard nothing.                                                                                                                                                     |
+| Veld family  | Exhausted parents, one young child (around 6–7, younger than Mabel). The parents are polite but dismissive. The young child thinks Mabel's ideas are interesting — a small moment of contrast against every adult in Act I.                                                                |
+| Mevrouw Bram | The schoolteacher. Prim, orderly, genuinely kind, and completely captured by the Wizard's system. Teaches that magic is how civilization solves real problems. Math appears in her curriculum only as a stepping stone to understanding magical formulas — not as a tool in its own right. |
 
 ---
 
@@ -249,7 +241,12 @@ Key locations:
 - **Town Square** — Backlog noticeboard, meeting point, rumor hub
 - **Wizard's House** — prominent, eventually empty
 - **Wizard School** — elemental chambers (Fire, Water, Earth) for Act I trials
-- **Mabel's Home** — starting point, receives the gear-sealed letter
+- **Mabel's Home** — starting point; where Avocado is found in I.1; receives the gear-sealed letter in II.5
+- **Cornelis' House** — moat house with a drawbridge; Cornelis shouts from the window
+- **Bakery** — Liesbeth's shop; enchanted scales, later a real-fire oven
+- **Windmill** — Hendrik's mill; millstone speed challenges in Acts I–III, wind turbine in Act V
+- **The Well** — Veld family's water source; enchanted pump, later a hand crank
+- **School** — Mevrouw Bram's classroom; bell striker challenges, becomes an engineering school in V.3
 
 ### The Forest
 
@@ -412,9 +409,10 @@ schl04["Mabel            \n [Professor Mabel]                                 \n
 #### I.1 — Morning in Beaverford
 
 1. Mabel wakes up at home.
-2. Player explores Beaverford — meets villagers, hears about broken things around town.
-3. Player finds the Backlog of Broken Things noticeboard in the town square.
-4. Villagers mention the Wizard is overdue; things have been broken for weeks.
+2. Player explores the house and finds Avocado (her avocado-shaped cuddle toy) — Avocado is introduced as her companion and hint-giver.
+3. Player explores Beaverford with Avocado — meets villagers, hears about broken things around town.
+4. Player finds the Backlog of Broken Things noticeboard in the town square.
+5. Villagers mention the Wizard is overdue; things have been broken for weeks.
 
 #### I.2 — The Ambition
 
@@ -698,14 +696,19 @@ The game uses a push/pop state stack for navigation. States overlay cleanly:
 
 Each challenge type has a distinct visual metaphor appropriate to its fiction:
 
-| Type            | Visual           | Use Case                                 |
-| --------------- | ---------------- | ---------------------------------------- |
-| TextInput       | Typewriter panel | Direct numerical answer                  |
-| CombinationLock | Rotary dials     | Multi-digit lock/code                    |
-| Cogwheel        | Gear alignment   | Machine calibration                      |
-| Dropdown        | Selection panel  | Multiple choice, classification          |
-| Radar           | Radial display   | Pattern matching, spatial reasoning      |
-| SearchGrid      | Grid scan        | Hidden information, letter/symbol search |
+| Type            | Visual                    | Use Case                                                                 |
+| --------------- | ------------------------- | ------------------------------------------------------------------------ |
+| TextInput       | Typewriter panel          | Direct numerical answer                                                  |
+| CombinationLock | Rotary dials              | Multi-digit lock/code                                                    |
+| Cogwheel        | Gear alignment            | Machine calibration                                                      |
+| Radar           | Radial instrument display | Reading a gauge or radial readout and computing a value from it (e.g. pump pressure, mill speed, wind measurement) |
+| SearchGrid      | Grid scan                 | Area or grid-based calculation — player reads dimensions from a highlighted grid and computes the result |
+| FormulaRing     | Concentric spinning rings | Equation construction — rings alternate value/operator from outer to inner; center shows the fixed target result. Variable ring count per challenge resource: 3 rings for `a op b = c`, 5 rings for `a op b op c = d`. Used for M4 challenges. |
+| Sequence        | Number series panel       | Pattern recognition — a sequence of numbers with one missing value; player identifies the rule and inputs or selects the answer. Maps to M2+ challenges and diagnostic readouts. |
+| BarGraph        | Bar chart display         | Read two or more bars, extract values, compute a result (difference, total, ratio). Used for consumption and output comparisons. |
+| LineGraph       | Line chart display        | Trace a value on a continuous graph (e.g. RPM over wind speed, oil burn over days). Player reads the graph to answer a question about the relationship. |
+
+> **Implementation note:** TextInput, BarGraph, and LineGraph share the same initial resource structure — a static image alongside a numerical input field. BarGraph and LineGraph display a pre-authored graph image; the player reads it and types the answer. In a later pass, BarGraph and LineGraph will be replaced with a procedural graph renderer driven by parameters in the challenge resource, enabling randomised values per playthrough. The resource format should be designed to support this upgrade without breaking existing challenges.
 
 ### HUD
 
@@ -715,15 +718,11 @@ Player stats and active quest info displayed during exploration. Action menu acc
 
 - All dialogue and challenge text is large and high-contrast
 - No timed challenges (players can think without penalty)
-- Hint system planned for math challenges (to be designed)
+- Hint system planned for math challenges through the Avocado cuddle
 
 ---
 
 ## 11. Open Questions
 
-- Guild mentor characters need individual design (names, disciplines, personalities)
-- Hint system for math challenges: when triggered, how many hints, what form?
-- Does the player encounter the Wizard before Act IV, or only through reputation?
-- Backlog items in Acts I–II need specific enumeration with challenge mappings
-- Act V machine-replacement puzzles need detailed design (Water Pump, Wind Turbine interactions)
-- Localization scope: Dutch and English from launch? Other languages?
+- **Guild mentor personalities** — Alfa, Beta, Gamma have defined roles; individual personalities and traits deferred to next design pass
+- **Wizard visibility** — does the player encounter the Wizard before Act IV, or only through reputation? TBD
