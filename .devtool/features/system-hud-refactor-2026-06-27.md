@@ -4,7 +4,7 @@ status: "backlog"
 priority: "high"
 assignee: null
 epic: "systems"
-dueDate: null
+dueDate: "2026-07-31"
 created: "2026-06-27T12:00:00.000Z"
 modified: "2026-06-27T12:00:00.000Z"
 completedAt: null
