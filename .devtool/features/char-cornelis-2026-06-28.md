@@ -1,15 +1,15 @@
 ---
 id: "char-cornelis-2026-06-28"
-status: "todo"
+status: "in-progress"
 priority: "high"
 assignee: null
 epic: "characters"
 dueDate: "2026-07-31"
 created: "2026-06-28T12:00:00.000Z"
-modified: "2026-06-28T12:00:00.000Z"
+modified: "2026-06-29T08:43:59.530Z"
 completedAt: null
 labels: ["character", "villager", "world"]
-order: "chr-3"
+order: "ZzG"
 ---
 # Character: Cornelis (villager)
 

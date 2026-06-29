@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://crkyo8y8iqgx1"]
 
-[ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_3D.tscn" id="1_v5scr"]
-[ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_022_CharacterData.tres" id="2_7dxc7"]
+[ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_base.tscn" id="1_v5scr"]
+[ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="2_7dxc7"]
 [ext_resource type="PackedScene" uid="uid://cdou2t4bule12" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-b.glb" id="2_sb0or"]
-[ext_resource type="PackedScene" uid="uid://dwmsot5m0pw1o" path="res://Scenes/characters/PlayerCamera.tscn" id="3_eym15"]
+[ext_resource type="PackedScene" uid="uid://dwmsot5m0pw1o" path="res://Scenes/PlayerCamera.tscn" id="3_eym15"]
 [ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="4_cvtri"]
 [ext_resource type="Texture2D" uid="uid://22l4wvbueyg3" path="res://assets/ring.png" id="10_lgshl"]
 

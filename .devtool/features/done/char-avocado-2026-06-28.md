@@ -1,15 +1,15 @@
 ---
 id: "char-avocado-2026-06-28"
-status: "in-progress"
+status: "done"
 priority: "high"
 assignee: null
 epic: "characters"
 dueDate: "2026-07-31"
 created: "2026-06-28T12:00:00.000Z"
-modified: "2026-06-28T10:10:19.568Z"
-completedAt: null
+modified: "2026-06-29T08:44:02.430Z"
+completedAt: "2026-06-29T08:44:02.430Z"
 labels: ["character", "companion", "world"]
-order: "a0"
+order: "a1"
 ---
 # Character: Avocado (companion)
 

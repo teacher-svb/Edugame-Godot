@@ -9,21 +9,12 @@ namespace TnT.EduGame.Characters
     public partial class CharacterData : Resource, IInputActionable
     {
         [Export]
-        string _id = Guid.NewGuid().ToString();
-        [Export]
         string _name;
         [Export]
-        SpriteFrames _animatorController;
-        [Export]
         Texture2D _face;
-        [Export]
-        Texture2D _body;
 
         public string CharacterName => this._name;
         public Texture2D CharacterFace => this._face;
-        public Texture2D CharacterBody => this._body;
-        public string Id => this._id;
-        public SpriteFrames animatorController => this._animatorController;
 
         [Export]
         public Godot.Collections.Dictionary<InputAction, Ability> CharacterAbilities { get; private set; }

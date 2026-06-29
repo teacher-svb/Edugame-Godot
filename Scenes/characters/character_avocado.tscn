@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dv3mlsoycb230"]
 
-[ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_3D.tscn" id="1_7k8ld"]
+[ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_base.tscn" id="1_7k8ld"]
 [ext_resource type="PackedScene" uid="uid://ri147ckev4hj" path="res://assets/3D/Mini Characters 1/Models/GLB format/avocado.glb" id="2_xpawx"]
 [ext_resource type="Script" uid="uid://dm0yib0bvn1ee" path="res://scripts/Game/Systems/InventorySystem/Item.cs" id="3_ch0qv"]
 [ext_resource type="Resource" uid="uid://dsctdv3pdwt0h" path="res://GameData/Items/item_test.tres" id="4_da6yh"]

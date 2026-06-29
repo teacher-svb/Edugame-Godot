@@ -63,19 +63,19 @@ namespace TnT.EduGame.Characters
 
         public string CharacterId
         {
-            get { return _characterData.Id; }
-            set
-            {
-                _characterData =
-                    ResourceFinder
-                        .FindObjectsOfTypeAll<CharacterData>()
-                        .FirstOrDefault(c => c.Id == value) ?? _characterData;
-            }
+            get { return this.PersistentId; }
+            // set
+            // {
+            //     _characterData =
+            //         ResourceFinder
+            //             .FindObjectsOfTypeAll<CharacterData>()
+            //             .FirstOrDefault(c => c. == value) ?? _characterData;
+            // }
         }
 
         public void LoadCharacter(string characterId)
         {
-            CharacterId = characterId;
+            this.PersistentId = characterId;
             if (_characterData == null)
                 return;
 

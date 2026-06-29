@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://by56kgwnxfbe5"]
+
+[ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_base.tscn" id="1_yni83"]
+[ext_resource type="PackedScene" uid="uid://bb3q4mngyn8pm" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-male-e.glb" id="2_av5ms"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yni83"]
+radius = 0.2
+height = 0.8
+
+[node name="Character" unique_id=497783338 instance=ExtResource("1_yni83")]
+
+[node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
+VisualRoot = NodePath("../../character-male-e2")
+
+[node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
+root_node = NodePath("../../character-male-e2")
+anim_player = NodePath("../../character-male-e2/AnimationPlayer")
+
+[node name="CollisionShape3D" parent="." index="3" unique_id=293151575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("CapsuleShape3D_yni83")
+
+[node name="character-male-e2" parent="." index="5" unique_id=58853703 instance=ExtResource("2_av5ms")]
+
+[node name="Skeleton3D" parent="character-male-e2/character-male-e" parent_id_path=PackedInt32Array(58853703, 1701689072) index="0" unique_id=2125994684]
+bones/4/rotation = Quaternion(0, 0, -0.3826835, 0.92387956)
+bones/5/rotation = Quaternion(0, 0, 0.3826835, 0.92387956)
+
+[editable path="character-male-e2"]

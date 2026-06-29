@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://selmqjc4dpgf"]
 
 [ext_resource type="Script" uid="uid://coeco3nsaywj6" path="res://scripts/Lib/OcclusionFader/OcclusionFader.cs" id="1_4ns31"]
-[ext_resource type="PackedScene" uid="uid://pggfg6qusqnq" path="res://Scenes/levels/level2_3D-v3.blend" id="1_fg5v5"]
+[ext_resource type="PackedScene" uid="uid://pggfg6qusqnq" path="res://assets/levels/level2_3D-v3.blend" id="1_fg5v5"]
 [ext_resource type="ArrayMesh" uid="uid://c85qyc0sfae5i" path="res://assets/3D/Nature Kit/Models/tree_detailed.res" id="2_dcdmp"]
 [ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://scripts/Lib/OcclusionFader/occlusionFader.gdshader" id="2_obrew"]
 [ext_resource type="Shader" uid="uid://bkktv7833qkb0" path="res://scripts/Trail/trail_process.gdshader" id="3_n1vbe"]
@@ -10,7 +10,7 @@
 [ext_resource type="Material" uid="uid://d34k3ljvagp8q" path="res://materials/RoystanToonWaterShader.tres" id="4_j2q71"]
 [ext_resource type="ArrayMesh" uid="uid://jjy6atmp2inn" path="res://assets/3D/Nature Kit/Models/tree_oak.res" id="5_1hw7q"]
 [ext_resource type="Script" uid="uid://6214kgglowmy" path="res://scripts/Trail/GPUTrail3D.cs" id="5_wcmwa"]
-[ext_resource type="Shader" uid="uid://ncgi0kci5c4x" path="res://scripts/shaders/water.gdshader" id="8_de3fq"]
+[ext_resource type="Shader" path="res://scripts/shaders/water.gdshader" id="8_de3fq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dcdmp"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -335,7 +335,7 @@ autoplay = &"RESET"
 
 [node name="level2_3D-v3" parent="." unique_id=1339739881 instance=ExtResource("1_fg5v5")]
 
-[node name="049-ground_grass" parent="level2_3D-v3" index="1" unique_id=889695540 groups=["occlusion_exclude"]]
+[node name="049-ground_grass" parent="level2_3D-v3" index="1" unique_id=995460507 groups=["occlusion_exclude"]]
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="." unique_id=528516125]
 multimesh = SubResource("MultiMesh_de3fq")

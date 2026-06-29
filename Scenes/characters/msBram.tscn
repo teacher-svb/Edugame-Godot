@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bx1wyqdgkro24"]
+
+[ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_base.tscn" id="1_n8coo"]
+[ext_resource type="PackedScene" uid="uid://cpwcng6oti6wh" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-female-c.glb" id="2_qwssi"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_srdbs"]
+radius = 0.2
+height = 0.8
+
+[node name="Character" unique_id=497783338 instance=ExtResource("1_n8coo")]
+
+[node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
+VisualRoot = NodePath("../../character-female-c2")
+
+[node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
+root_node = NodePath("../../character-female-c2")
+anim_player = NodePath("../../character-female-c2/AnimationPlayer")
+
+[node name="CollisionShape3D" parent="." index="3" unique_id=293151575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("CapsuleShape3D_srdbs")
+
+[node name="character-female-c2" parent="." index="5" unique_id=847242639 instance=ExtResource("2_qwssi")]
+
+[node name="Skeleton3D" parent="character-female-c2/character-female-c" parent_id_path=PackedInt32Array(847242639, 1343009157) index="0" unique_id=1129778094]
+bones/3/rotation = Quaternion(0.041512586, 0, 0, 0.999138)
+bones/4/rotation = Quaternion(0, 0, -0.2676658, 0.9635118)
+bones/5/rotation = Quaternion(0, 0, 0.2676658, 0.9635118)
+bones/6/rotation = Quaternion(0, -0.041512586, 0, 0.999138)
+
+[editable path="character-female-c2"]

@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cakf2iol6cyyp"
-path.s3tc="res://.godot/imported/level2_3D-v3_colormap_1.png-ccd9ba6943d3b1be004cbce30e917b46.s3tc.ctex"
+uid="uid://dll1cerlasamc"
+path.s3tc="res://.godot/imported/level2_3D-v3_tiny_treats_texture_1.png-3ae5b35afebc7c58252002c909594454.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "2c2ace150b11bb1168672d092f519f02"
+"md5": "fc25b922799f122c8b038b3c3d068730"
 }
 
 [deps]
 
-source_file="res://Scenes/levels/level2_3D-v3_colormap_1.png"
-dest_files=["res://.godot/imported/level2_3D-v3_colormap_1.png-ccd9ba6943d3b1be004cbce30e917b46.s3tc.ctex"]
+source_file="res://assets/levels/level2_3D-v3_tiny_treats_texture_1.png"
+dest_files=["res://.godot/imported/level2_3D-v3_tiny_treats_texture_1.png-3ae5b35afebc7c58252002c909594454.s3tc.ctex"]
 
 [params]
 
