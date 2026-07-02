@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dv3mlsoycb230"]
 
 [ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_base.tscn" id="1_7k8ld"]
+[ext_resource type="Resource" uid="uid://dks7i46ib37or" path="res://GameData/characterData/avocado_CharacterData.tres" id="2_u4rbu"]
 [ext_resource type="PackedScene" uid="uid://ri147ckev4hj" path="res://assets/3D/characters/Mini Characters 1/Models/GLB format/avocado.glb" id="2_xpawx"]
 [ext_resource type="Script" uid="uid://dm0yib0bvn1ee" path="res://scripts/Game/Systems/InventorySystem/Item.cs" id="3_ch0qv"]
 [ext_resource type="Resource" uid="uid://dsctdv3pdwt0h" path="res://GameData/Items/item_test.tres" id="4_da6yh"]
@@ -42,19 +43,22 @@ height = 0.47583008
 radius = 0.5307617
 
 [node name="avocado" unique_id=926984674 instance=ExtResource("1_7k8ld")]
+_characterData = ExtResource("2_u4rbu")
+PersistentId = "avocado"
 
 [node name="CharacterController3D" parent="." index="0" unique_id=631752590 node_paths=PackedStringArray("VisualRoot")]
 VisualRoot = NodePath("../avocado2")
 
 [node name="avocado2" parent="." index="1" unique_id=1975359764 instance=ExtResource("2_xpawx")]
 
-[node name="Skeleton3D" parent="avocado2/Armature" parent_id_path=PackedInt32Array(1975359764, 1923085597) index="0" unique_id=559322183]
+[node name="Skeleton3D" parent="avocado2/Armature" parent_id_path=PackedInt32Array(1975359764, 1544087868) index="0" unique_id=1423553409]
 bones/1/rotation = Quaternion(-0.122428946, 0.027743451, 0.07656861, 0.9891304)
 bones/3/rotation = Quaternion(-0.072635084, -0.026248384, 0.12224877, 0.98949003)
-bones/4/rotation = Quaternion(0.006515396, -0.039644435, -0.0842903, 0.99563104)
+bones/4/rotation = Quaternion(0.0091526015, 0.03703259, -0.084296994, 0.99571025)
 
-[node name="avocado" parent="avocado2/Armature/Skeleton3D" index="0" unique_id=1533239025]
+[node name="avocado" parent="avocado2/Armature/Skeleton3D" index="0" unique_id=1676244862]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 0, 0)
+layers = 524289
 
 [node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
 root_node = NodePath("../../avocado2")
@@ -91,6 +95,9 @@ autoplay = &"updown"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=1623215847]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22790527, 0)
 shape = SubResource("CylinderShape3D_da6yh")
+
+[node name="dialogCamera" parent="." index="8" unique_id=534549197]
+transform = Transform3D(1, 0, 0, 0, 0.9961948, 0.08715574, 0, -0.08715574, 0.9961948, -0.013557843, 0.25833327, 0.34706593)
 
 [connection signal="body_entered" from="Area3D" to="ItemRef" method="_OnBodyEntered"]
 

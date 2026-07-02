@@ -34,6 +34,7 @@ enabled=PackedStringArray("res://addons/BezierPathGenerator/plugin.cfg", "res://
 [global_group]
 
 occlusion_exclude="exclude object from occlusion fader"
+dialogCamera=""
 
 [input]
 
@@ -94,6 +95,7 @@ Pause={
 
 [layer_names]
 
+3d_render/layer_20="closesup"
 3d_physics/layer_31="dont occlude"
 3d_physics/layer_32="world boundaries"
 

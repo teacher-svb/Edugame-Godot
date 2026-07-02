@@ -53,11 +53,17 @@ VisualRoot = NodePath("../character-female-b2")
 
 [node name="character-female-b2" parent="." index="1" unique_id=371834684 instance=ExtResource("2_sb0or")]
 
-[node name="Skeleton3D" parent="character-female-b2/character-female-b" parent_id_path=PackedInt32Array(371834684, 471268041) index="0" unique_id=462334782]
-bones/3/rotation = Quaternion(0.001954153, 0, 0, 0.9999981)
-bones/4/rotation = Quaternion(0, 0, -0.37726074, 0.92610717)
-bones/5/rotation = Quaternion(0, 0, 0.37726074, 0.92610717)
-bones/6/rotation = Quaternion(0, -0.001954153, 0, 0.9999981)
+[node name="Skeleton3D" parent="character-female-b2/character-female-b" parent_id_path=PackedInt32Array(371834684, 1371905242) index="0" unique_id=654742884]
+bones/3/rotation = Quaternion(0.011072977, 0, 0, 0.99993867)
+bones/4/rotation = Quaternion(0, 0, -0.35178703, 0.9360801)
+bones/5/rotation = Quaternion(0, 0, 0.35178703, 0.9360801)
+bones/6/rotation = Quaternion(0, -0.011072977, 0, 0.99993867)
+
+[node name="body-mesh" parent="character-female-b2/character-female-b/Skeleton3D" index="0" unique_id=477755846]
+layers = 524289
+
+[node name="head-mesh" parent="character-female-b2/character-female-b/Skeleton3D" index="1" unique_id=158472465]
+layers = 524289
 
 [node name="PlayerController" type="Node" parent="." index="2" unique_id=1092226004 node_paths=PackedStringArray("_stateManager")]
 script = ExtResource("4_cvtri")

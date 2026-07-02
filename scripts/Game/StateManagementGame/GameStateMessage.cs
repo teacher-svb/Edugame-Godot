@@ -5,6 +5,8 @@ using Godot;
 using TnT.EduGame.Characters;
 using TnT.Input;
 using TnT.Systems.UI;
+using TnT.Extensions;
+using System.Linq;
 
 namespace TnT.EduGame.GameState
 {
@@ -27,7 +29,11 @@ namespace TnT.EduGame.GameState
         {
             _options = options;
             allMessagesRead = false;
-            MessageController.Instance.AddMessage(options.text, options.character.CharacterFace, options.character.CharacterName);
+
+            var character3d = GetTree().FindObjectsByType<Character3D>().Find(c => c.CharacterData == options.character);
+            var closeupCam = character3d.CloseupCamera;
+
+            MessageController.Instance.AddMessage(options.text, closeupCam, options.character.CharacterName);
             if (MessageController.Instance.Count > 1)
                 return new BaseState(new() { ExitOnNextUpdate = () => true });
 

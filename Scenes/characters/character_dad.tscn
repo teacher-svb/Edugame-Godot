@@ -19,14 +19,14 @@ VisualRoot = NodePath("../character-male-g")
 
 [node name="character-male-g" parent="." index="1" unique_id=2127119757 instance=ExtResource("2_6vton")]
 
-[node name="Skeleton3D" parent="character-male-g/character-male-b" parent_id_path=PackedInt32Array(2127119757, 1955340950) index="0" unique_id=195577631]
+[node name="Skeleton3D" parent="character-male-g/character-male-b" parent_id_path=PackedInt32Array(2127119757, 1207844339) index="0" unique_id=424768102]
 bones/0/rotation = Quaternion(-8.557136e-09, 2.4203237e-08, -4.142208e-16, 1)
 bones/1/rotation = Quaternion(1.1832914e-30, -2.5970621e-09, 1.774937e-30, 1)
 bones/2/rotation = Quaternion(1.1832914e-30, -2.5970621e-09, 1.774937e-30, 1)
-bones/3/rotation = Quaternion(-0.002183281, 2.1128985e-09, 4.6127793e-12, 0.9999976)
-bones/4/rotation = Quaternion(-2.898269e-09, -1.1411762e-09, -0.37662417, 0.9263662)
-bones/5/rotation = Quaternion(-2.8960838e-09, 1.1949373e-09, 0.37662417, 0.9263662)
-bones/6/rotation = Quaternion(4.1076577e-13, 0.002183276, 6.213193e-13, 0.9999976)
+bones/3/rotation = Quaternion(-0.035751384, 2.1115532e-09, 7.553873e-11, 0.99936074)
+bones/4/rotation = Quaternion(-3.2156187e-09, -1.528787e-10, -0.29037064, 0.95691425)
+bones/5/rotation = Quaternion(-2.8023306e-09, 6.4574995e-10, 0.29037064, 0.95691425)
+bones/6/rotation = Quaternion(2.8688897e-11, 0.03575133, -1.6211735e-11, 0.99936074)
 
 [node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
 root_node = NodePath("../../character-male-g")

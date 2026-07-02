@@ -219,6 +219,7 @@ environment = SubResource("Environment_lkauf")
 
 [node name="Sun" type="DirectionalLight3D" parent="Environment" unique_id=2141871353]
 transform = Transform3D(0.2040718, 0.97888064, 0.012142341, 0.4486767, -0.10454724, 0.8875579, 0.8700826, -0.17567772, -0.4605361, 0, 2, 0)
+layers = 524289
 light_color = Color(1, 0.94902, 0.827451, 1)
 light_energy = 0.7
 light_angular_distance = 46.8
@@ -244,37 +245,37 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.01
 [node name="tableCloth" parent="NavigationRegion3D/Livingroom" unique_id=1234716365 instance=ExtResource("16_oywso")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.9152344, 0, -2.0805285)
 
-[node name="tableCloth(Clone)" parent="NavigationRegion3D/Livingroom/tableCloth" index="0" unique_id=448750128]
+[node name="tableCloth(Clone)" parent="NavigationRegion3D/Livingroom/tableCloth" index="0" unique_id=1346714490]
 layers = 3
 
 [node name="tableCloth2" parent="NavigationRegion3D/Livingroom" unique_id=839416735 instance=ExtResource("16_oywso")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3125439, 0, -2.0805285)
 
-[node name="tableCloth(Clone)" parent="NavigationRegion3D/Livingroom/tableCloth2" index="0" unique_id=448750128]
+[node name="tableCloth(Clone)" parent="NavigationRegion3D/Livingroom/tableCloth2" index="0" unique_id=1346714490]
 layers = 3
 
 [node name="chairCushion" parent="NavigationRegion3D/Livingroom" unique_id=1838283608 instance=ExtResource("17_oc118")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.0146303, 0, -2.8287356)
 
-[node name="chairCushion(Clone)" parent="NavigationRegion3D/Livingroom/chairCushion" index="0" unique_id=2103639662]
+[node name="chairCushion(Clone)" parent="NavigationRegion3D/Livingroom/chairCushion" index="0" unique_id=67083421]
 layers = 3
 
 [node name="chairCushion2" parent="NavigationRegion3D/Livingroom" unique_id=885769154 instance=ExtResource("17_oc118")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.0146303, 0, -2.4769497)
 
-[node name="chairCushion(Clone)" parent="NavigationRegion3D/Livingroom/chairCushion2" index="0" unique_id=2103639662]
+[node name="chairCushion(Clone)" parent="NavigationRegion3D/Livingroom/chairCushion2" index="0" unique_id=67083421]
 layers = 3
 
 [node name="chairCushion3" parent="NavigationRegion3D/Livingroom" unique_id=850914252 instance=ExtResource("17_oc118")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -2.630958, 0, -2.2982376)
 
-[node name="chairCushion(Clone)" parent="NavigationRegion3D/Livingroom/chairCushion3" index="0" unique_id=2103639662]
+[node name="chairCushion(Clone)" parent="NavigationRegion3D/Livingroom/chairCushion3" index="0" unique_id=67083421]
 layers = 3
 
 [node name="chairCushion4" parent="NavigationRegion3D/Livingroom" unique_id=203546859 instance=ExtResource("17_oc118")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -2.630958, 0, -2.6500235)
 
-[node name="chairCushion(Clone)" parent="NavigationRegion3D/Livingroom/chairCushion4" index="0" unique_id=2103639662]
+[node name="chairCushion(Clone)" parent="NavigationRegion3D/Livingroom/chairCushion4" index="0" unique_id=67083421]
 layers = 3
 
 [node name="rugSquare" parent="NavigationRegion3D/Livingroom" unique_id=812307430 instance=ExtResource("18_oc118")]
@@ -289,7 +290,7 @@ script = ExtResource("20_7vwr8")
 
 [node name="doorwayFront" parent="NavigationRegion3D/Livingroom/frontDoor" unique_id=1330932814 instance=ExtResource("19_0yx1s")]
 
-[node name="door" parent="NavigationRegion3D/Livingroom/frontDoor/doorwayFront/doorwayFront(Clone)" parent_id_path=PackedInt32Array(1330932814, 418970659) index="0" unique_id=320560320]
+[node name="door" parent="NavigationRegion3D/Livingroom/frontDoor/doorwayFront/doorwayFront(Clone)" parent_id_path=PackedInt32Array(1330932814, 1144389903) index="0" unique_id=474528930]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0.028349997, 0, -0.044549998)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Livingroom/frontDoor" unique_id=1068424579]
@@ -331,25 +332,25 @@ skeleton = NodePath("")
 [node name="bedSingle" parent="NavigationRegion3D/Bedroom" unique_id=1094179095 instance=ExtResource("22_0tae3")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 14.178923, 0, -0.6990976)
 
-[node name="bedSingle(Clone)" parent="NavigationRegion3D/Bedroom/bedSingle" index="0" unique_id=1807592228]
+[node name="bedSingle(Clone)" parent="NavigationRegion3D/Bedroom/bedSingle" index="0" unique_id=1218195702]
 layers = 3
 
 [node name="benchCushionLow" parent="NavigationRegion3D/Bedroom" unique_id=1755434884 instance=ExtResource("23_7n07m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.691968, 0, 0.46061492)
 
-[node name="benchCushionLow(Clone)" parent="NavigationRegion3D/Bedroom/benchCushionLow" index="0" unique_id=2030656660]
+[node name="benchCushionLow(Clone)" parent="NavigationRegion3D/Bedroom/benchCushionLow" index="0" unique_id=776291250]
 layers = 3
 
 [node name="cabinetBedDrawer" parent="NavigationRegion3D/Bedroom" unique_id=1138683894 instance=ExtResource("24_kdqke")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 14.076734, 0, 0.25556684)
 
-[node name="cabinetBedDrawer(Clone)" parent="NavigationRegion3D/Bedroom/cabinetBedDrawer" index="0" unique_id=772969223]
+[node name="cabinetBedDrawer(Clone)" parent="NavigationRegion3D/Bedroom/cabinetBedDrawer" index="0" unique_id=457738682]
 layers = 3
 
 [node name="desk" parent="NavigationRegion3D/Bedroom" unique_id=1198519338 instance=ExtResource("25_kb3qt")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 10.908302, 0, -0.1342783)
 
-[node name="desk(Clone)" parent="NavigationRegion3D/Bedroom/desk" index="0" unique_id=1756768374]
+[node name="desk(Clone)" parent="NavigationRegion3D/Bedroom/desk" index="0" unique_id=1192605354]
 layers = 3
 
 [node name="bookcaseClosedDoors" parent="NavigationRegion3D/Bedroom" unique_id=374552429 instance=ExtResource("26_7vwr8")]
@@ -358,13 +359,13 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 12.9
 [node name="bookcaseClosedWide" parent="NavigationRegion3D/Bedroom" unique_id=1796271444 instance=ExtResource("27_qovxq")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 14.222402, 2.3841858e-07, -0.8225241)
 
-[node name="bookcaseClosedWide(Clone)" parent="NavigationRegion3D/Bedroom/bookcaseClosedWide" index="0" unique_id=1013339077]
+[node name="bookcaseClosedWide(Clone)" parent="NavigationRegion3D/Bedroom/bookcaseClosedWide" index="0" unique_id=2117752073]
 layers = 3
 
 [node name="bookcaseClosed" parent="NavigationRegion3D/Bedroom" unique_id=191902409 instance=ExtResource("28_7n07m")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 12.518359, 0, 0.22696567)
 
-[node name="bookcaseClosed(Clone)" parent="NavigationRegion3D/Bedroom/bookcaseClosed" index="0" unique_id=1841427134]
+[node name="bookcaseClosed(Clone)" parent="NavigationRegion3D/Bedroom/bookcaseClosed" index="0" unique_id=171442906]
 layers = 3
 
 [node name="books" parent="NavigationRegion3D/Bedroom" unique_id=1307336697 instance=ExtResource("29_kdqke")]
@@ -400,7 +401,7 @@ script = ExtResource("20_7vwr8")
 
 [node name="doorway" parent="NavigationRegion3D/Bedroom/StaticBody3D" unique_id=110300816 instance=ExtResource("19_kb3qt")]
 
-[node name="door" parent="NavigationRegion3D/Bedroom/StaticBody3D/doorway/doorway(Clone)" parent_id_path=PackedInt32Array(110300816, 1890856199) index="0" unique_id=1293466936]
+[node name="door" parent="NavigationRegion3D/Bedroom/StaticBody3D/doorway/doorway(Clone)" parent_id_path=PackedInt32Array(110300816, 940476907) index="0" unique_id=107165920]
 transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 0.028349997, 0, -0.044549998)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="NavigationRegion3D/Bedroom/StaticBody3D/doorway" unique_id=778274891]
@@ -434,13 +435,13 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 [node name="hoodModern" parent="NavigationRegion3D/Kitchen" unique_id=1669411966 instance=ExtResource("13_ycjjd")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.027, 0.854, -0.813)
 
-[node name="hoodModern(Clone)" parent="NavigationRegion3D/Kitchen/hoodModern" index="0" unique_id=1722349281]
+[node name="hoodModern(Clone)" parent="NavigationRegion3D/Kitchen/hoodModern" index="0" unique_id=1968510085]
 layers = 3
 
 [node name="kitchenMicrowave" parent="NavigationRegion3D/Kitchen" unique_id=1319709699 instance=ExtResource("15_d3gh3")]
 transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, 1.3037117, 0.43290854, -0.9465704)
 
-[node name="kitchenMicrowave(Clone)" parent="NavigationRegion3D/Kitchen/kitchenMicrowave" index="0" unique_id=802499712]
+[node name="kitchenMicrowave(Clone)" parent="NavigationRegion3D/Kitchen/kitchenMicrowave" index="0" unique_id=910153993]
 layers = 3
 
 [node name="Waypoints" type="Node" parent="." unique_id=331121236]
@@ -480,11 +481,9 @@ text = "D"
 
 [node name="dad" parent="." unique_id=1460930038 instance=ExtResource("25_14bvk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5396967, 0, 1.8358989)
-PersistentId = "dad"
 
 [node name="avocado" parent="." unique_id=15025039 instance=ExtResource("25_mglpj")]
 transform = Transform3D(0.6180243, 0, 0.78615904, 0, 1, 0, -0.78615904, 0, 0.6180243, -1.2369477, 2.3841858e-07, 3.860877)
-PersistentId = "avocado"
 
 [node name="transporters" type="Node" parent="." unique_id=838434594]
 

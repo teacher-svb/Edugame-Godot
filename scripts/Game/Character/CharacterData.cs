@@ -14,7 +14,6 @@ namespace TnT.EduGame.Characters
         Texture2D _face;
 
         public string CharacterName => this._name;
-        public Texture2D CharacterFace => this._face;
 
         [Export]
         public Godot.Collections.Dictionary<InputAction, Ability> CharacterAbilities { get; private set; }

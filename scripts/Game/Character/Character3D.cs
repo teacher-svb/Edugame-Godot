@@ -14,6 +14,8 @@ namespace TnT.EduGame.Characters
     {
         [Export]
         CharacterData _characterData;
+        [Export]
+        Camera3D _closeupCamera;
         public Stats Stats { get; private set; }
         public Attributes Attributes { get; private set; }
         CharacterStateManager _stateManager;
@@ -72,6 +74,9 @@ namespace TnT.EduGame.Characters
             //             .FirstOrDefault(c => c. == value) ?? _characterData;
             // }
         }
+
+        public CharacterData CharacterData { get => _characterData; }
+        public Camera3D CloseupCamera { get => _closeupCamera; }
 
         public void LoadCharacter(string characterId)
         {

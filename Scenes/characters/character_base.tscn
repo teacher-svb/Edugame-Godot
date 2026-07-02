@@ -67,8 +67,9 @@ states/walk/position = Vector2(563, 186)
 transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_60cj0"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_aebyh"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_iikk8"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_0ft5a"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_yj0bu"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_sikog"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_w8kji"), "land", "walk", SubResource("AnimationNodeStateMachineTransition_0qrrf"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_58mlp")]
 graph_offset = Vector2(-260, 38)
 
-[node name="Character" type="CharacterBody3D" unique_id=497783338]
+[node name="Character" type="CharacterBody3D" unique_id=497783338 node_paths=PackedStringArray("_closeupCamera")]
 script = ExtResource("1_u1x07")
+_closeupCamera = NodePath("dialogCamera")
 metadata/_custom_type_script = "uid://c861mplcf03p7"
 
 [node name="CharacterController3D" type="Node" parent="." unique_id=631752590]
@@ -111,3 +112,8 @@ target_desired_distance = 0.2
 path_height_offset = 0.75
 debug_enabled = true
 debug_path_custom_color = Color(1, 0, 1, 1)
+
+[node name="dialogCamera" type="Camera3D" parent="." unique_id=534549197 groups=["dialogCamera"]]
+transform = Transform3D(1, 0, 0, 0, 0.9961948, 0.08715574, 0, -0.08715574, 0.9961948, -0.013557843, 0.66471577, 0.70199466)
+cull_mask = 524288
+fov = 60.3

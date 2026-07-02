@@ -31,10 +31,10 @@ namespace TnT.Systems.UI
 
         public async Task HideView(float duration = 0.2f) => await this.ScaleOut(duration);
 
-        public void SetMessage(string text, Texture2D sprite, string charName)
+        public void SetMessage(string text,Camera3D closeupCam, string charName)
         {
             _message.Text = text;
-            _message.CharacterSprite = sprite;
+            _message.CloseupCam = closeupCam;
             _message.CharacterName = charName;
         }
     }

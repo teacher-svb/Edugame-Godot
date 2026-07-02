@@ -8,7 +8,7 @@ namespace TnT.Systems.UI
     {
         [Export] Button _closeBtn;
         [Export] Button _nxtBtn;
-        [Export] TextureRect _characterSprite;
+        [Export] SubViewport _closeup;
 
         [Export] RichTextLabel _message;
         [Export] Label _characterName;
@@ -25,7 +25,7 @@ namespace TnT.Systems.UI
             }
         }
         public string CharacterName { get => _characterName.Text; set => _characterName.Text = value; }
-        public Texture2D CharacterSprite { set => _characterSprite.Texture = value; }
+        public Camera3D CloseupCam { set => value.Reparent(_closeup); }
 
         public override async void _Ready()
         {
