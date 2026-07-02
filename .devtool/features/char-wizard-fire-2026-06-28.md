@@ -6,10 +6,10 @@ assignee: null
 epic: "characters"
 dueDate: "2026-07-31"
 created: "2026-06-28T12:00:00.000Z"
-modified: "2026-06-28T12:00:00.000Z"
+modified: "2026-07-02T14:08:43.161Z"
 completedAt: null
 labels: ["character", "wizard", "world"]
-order: "chr-8"
+order: "a1V"
 ---
 # Character: Fire Wizard (elemental)
 

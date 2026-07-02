@@ -1,15 +1,15 @@
 ---
 id: "char-wizard-water-2026-06-28"
-status: "todo"
+status: "in-progress"
 priority: "high"
 assignee: null
 epic: "characters"
 dueDate: "2026-07-31"
 created: "2026-06-28T12:00:00.000Z"
-modified: "2026-06-28T12:00:00.000Z"
+modified: "2026-07-02T13:28:53.903Z"
 completedAt: null
 labels: ["character", "wizard", "world"]
-order: "chr-9"
+order: "Zz1"
 ---
 # Character: Water Wizard (elemental)
 

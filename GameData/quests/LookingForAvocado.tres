@@ -1,42 +1,52 @@
 [gd_resource type="Resource" script_class="Quest" format=3 uid="uid://bcgox3enbg4ph"]
 
 [ext_resource type="Script" uid="uid://bkc5aqh43okjh" path="res://scripts/Game/Systems/QuestSystem/QuestObjective.cs" id="1_4h7u6"]
-[ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="2_xpsoe"]
 [ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="3_4fxks"]
-[ext_resource type="Resource" uid="uid://cmyotajgoscmu" path="res://GameData/characterData/Character_dad_CharacterData.tres" id="3_r6kp3"]
 [ext_resource type="Resource" uid="uid://dks7i46ib37or" path="res://GameData/characterData/avocado_CharacterData.tres" id="4_xpsoe"]
+
+[sub_resource type="Resource" id="Resource_6ex72"]
+metadata/__load_path__ = "res://GameData/characterData/Character_022_CharacterData.tres"
 
 [sub_resource type="Resource" id="Resource_xx3qb"]
 script = ExtResource("1_4h7u6")
 _startText = "Ik wil Avocado meenemen! Ik denk dat hij nog in m'n bed ligt..."
 _progressText = "Heb je al eens gekeken in je bed?"
 _completeText = "Hmmmm... Avocado ligt hier niet. "
-_characterData = ExtResource("2_xpsoe")
+_characterData = SubResource("Resource_6ex72")
 _objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8921"
 metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[sub_resource type="Resource" id="Resource_xpsoe"]
+metadata/__load_path__ = "res://GameData/characterData/Character_022_CharacterData.tres"
 
 [sub_resource type="Resource" id="Resource_ftla8"]
 script = ExtResource("1_4h7u6")
 _startText = "Ik zal beneden eens gaan zoeken."
 _progressText = "Je kan best eens goed rondkijken of je Avocado vindt!"
 _completeText = "Goed! Ik zal hier eens rondkijken!"
-_characterData = ExtResource("2_xpsoe")
+_characterData = SubResource("Resource_xpsoe")
 _objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8922"
 metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[sub_resource type="Resource" id="Resource_x4ds5"]
+metadata/__load_path__ = "res://GameData/characterData/Character_007_CharacterData.tres"
 
 [sub_resource type="Resource" id="Resource_mx3ai"]
 script = ExtResource("1_4h7u6")
 _startText = "Hallo! Zal ik je even rondleiden?"
 _completeText = "Langs deze deur kan je naar buiten!"
-_characterData = ExtResource("3_r6kp3")
+_characterData = SubResource("Resource_x4ds5")
 _objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
 metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[sub_resource type="Resource" id="Resource_qssud"]
+metadata/__load_path__ = "res://GameData/characterData/Character_007_CharacterData.tres"
 
 [sub_resource type="Resource" id="Resource_hakfr"]
 script = ExtResource("1_4h7u6")
 _startText = "Zullen we verder gaan?"
 _completeText = "Hier is de keuken. Ik ben er zeker van dat Avocado hier ergens ligt..."
-_characterData = ExtResource("3_r6kp3")
+_characterData = SubResource("Resource_qssud")
 _objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8924"
 metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 

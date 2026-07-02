@@ -18,6 +18,9 @@ animation = &"idle"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xbk2r"]
 animation = &"jump"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ljt0r"]
+animation = &"land"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_im6n0"]
 animation = &"walk"
 
@@ -27,16 +30,10 @@ xfade_time = 0.2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aebyh"]
 xfade_time = 0.2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0qrrf"]
-xfade_time = 0.2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iikk8"]
 xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0ft5a"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w8kji"]
 xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yj0bu"]
@@ -45,19 +42,30 @@ xfade_time = 0.2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sikog"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w8kji"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0qrrf"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_58mlp"]
+xfade_time = 0.2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hr8he"]
 states/End/position = Vector2(864, 160)
 states/Start/position = Vector2(193, 173)
 states/fall/node = SubResource("AnimationNodeAnimation_sikog")
-states/fall/position = Vector2(591, 309)
+states/fall/position = Vector2(714, 181)
 states/idle/node = SubResource("AnimationNodeAnimation_nq4sg")
 states/idle/position = Vector2(344, 181)
 states/jump/node = SubResource("AnimationNodeAnimation_xbk2r")
-states/jump/position = Vector2(591, 101)
+states/jump/position = Vector2(563, 99)
+states/land/node = SubResource("AnimationNodeAnimation_ljt0r")
+states/land/position = Vector2(563, 282)
 states/walk/node = SubResource("AnimationNodeAnimation_im6n0")
-states/walk/position = Vector2(515, 189)
-transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_60cj0"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_aebyh"), "fall", "walk", SubResource("AnimationNodeStateMachineTransition_0qrrf"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_iikk8"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_0ft5a"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_w8kji"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_yj0bu"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_sikog")]
-graph_offset = Vector2(-8, 8)
+states/walk/position = Vector2(563, 186)
+transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_60cj0"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_aebyh"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_iikk8"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_0ft5a"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_yj0bu"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_sikog"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_w8kji"), "land", "walk", SubResource("AnimationNodeStateMachineTransition_0qrrf"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_58mlp")]
+graph_offset = Vector2(-260, 38)
 
 [node name="Character" type="CharacterBody3D" unique_id=497783338]
 script = ExtResource("1_u1x07")
@@ -89,12 +97,10 @@ metadata/_custom_type_script = "uid://dw3ggojroh7rn"
 
 [node name="Animation" type="Node" parent="." unique_id=2085856052]
 
-[node name="CharacterAnimator" type="Node" parent="Animation" unique_id=1328867310 node_paths=PackedStringArray("AnimationTree")]
+[node name="CharacterAnimator" type="Node" parent="Animation" unique_id=1328867310]
 script = ExtResource("1_1wrgq")
-AnimationTree = NodePath("../AnimationTree")
 
 [node name="AnimationTree" type="AnimationTree" parent="Animation" unique_id=58694043]
-root_node = NodePath("../../CharacterController3D")
 tree_root = SubResource("AnimationNodeStateMachine_hr8he")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=293151575]
