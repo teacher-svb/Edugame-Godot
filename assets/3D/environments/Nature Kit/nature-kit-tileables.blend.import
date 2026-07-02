@@ -1,0 +1,435 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://xp1wjr7gvrvr"
+path="res://.godot/imported/nature-kit-tileables.blend-6eba0f9e681941e05033f7d867f06a1a.scn"
+
+[deps]
+
+source_file="res://assets/3D/environments/Nature Kit/nature-kit-tileables.blend"
+dest_files=["res://.godot/imported/nature-kit-tileables.blend-6eba0f9e681941e05033f7d867f06a1a.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+mesh_library/use_node_names_as_mesh_names=false
+array_mesh/deduplicate_surfaces=true
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"nodes": {
+"PATH:bridge_center_stone": {
+"generate/physics": true
+},
+"PATH:bridge_center_stoneRound": {
+"generate/physics": true
+},
+"PATH:bridge_center_wood": {
+"generate/physics": true
+},
+"PATH:bridge_center_woodRound": {
+"generate/physics": true
+},
+"PATH:bridge_side_stone": {
+"generate/physics": true
+},
+"PATH:bridge_side_stoneRound": {
+"generate/physics": true
+},
+"PATH:bridge_side_wood": {
+"generate/physics": true
+},
+"PATH:bridge_side_woodRound": {
+"generate/physics": true
+},
+"PATH:bridge_stone": {
+"generate/physics": true
+},
+"PATH:bridge_stoneNarrow": {
+"generate/physics": true
+},
+"PATH:bridge_stoneRound": {
+"generate/physics": true
+},
+"PATH:bridge_stoneRoundNarrow": {
+"generate/physics": true
+},
+"PATH:bridge_wood": {
+"generate/physics": true
+},
+"PATH:bridge_woodNarrow": {
+"generate/physics": true
+},
+"PATH:bridge_woodRound": {
+"generate/physics": true
+},
+"PATH:bridge_woodRoundNarrow": {
+"generate/physics": true
+},
+"PATH:cliff_blockCave_rock": {
+"generate/physics": true
+},
+"PATH:cliff_blockCave_stone": {
+"generate/physics": true
+},
+"PATH:cliff_blockDiagonal_rock": {
+"generate/physics": true
+},
+"PATH:cliff_blockDiagonal_stone": {
+"generate/physics": true
+},
+"PATH:cliff_blockHalf_rock": {
+"generate/physics": true
+},
+"PATH:cliff_blockHalf_stone": {
+"generate/physics": true
+},
+"PATH:cliff_blockQuarter_rock": {
+"generate/physics": true
+},
+"PATH:cliff_blockQuarter_stone": {
+"generate/physics": true
+},
+"PATH:cliff_blockSlopeHalfWalls_rock": {
+"generate/physics": true
+},
+"PATH:cliff_blockSlopeHalfWalls_stone": {
+"generate/physics": true
+},
+"PATH:cliff_blockSlopeWalls_rock": {
+"generate/physics": true
+},
+"PATH:cliff_blockSlopeWalls_stone": {
+"generate/physics": true
+},
+"PATH:cliff_blockSlope_rock": {
+"generate/physics": true
+},
+"PATH:cliff_blockSlope_stone": {
+"generate/physics": true
+},
+"PATH:cliff_block_rock": {
+"generate/physics": true
+},
+"PATH:cliff_block_stone": {
+"generate/physics": true
+},
+"PATH:cliff_cave_rock": {
+"generate/physics": true
+},
+"PATH:cliff_cave_stone": {
+"generate/physics": true
+},
+"PATH:cliff_cornerInnerLarge_rock": {
+"generate/physics": true
+},
+"PATH:cliff_cornerInnerLarge_stone": {
+"generate/physics": true
+},
+"PATH:cliff_cornerInnerTop_rock": {
+"generate/physics": true
+},
+"PATH:cliff_cornerInnerTop_stone": {
+"generate/physics": true
+},
+"PATH:cliff_cornerInner_rock": {
+"generate/physics": true
+},
+"PATH:cliff_cornerInner_stone": {
+"generate/physics": true
+},
+"PATH:cliff_cornerLarge_rock": {
+"generate/physics": true
+},
+"PATH:cliff_cornerLarge_stone": {
+"generate/physics": true
+},
+"PATH:cliff_cornerTop_rock": {
+"generate/physics": true
+},
+"PATH:cliff_cornerTop_stone": {
+"generate/physics": true
+},
+"PATH:cliff_corner_rock": {
+"generate/physics": true
+},
+"PATH:cliff_corner_stone": {
+"generate/physics": true
+},
+"PATH:cliff_diagonal_rock": {
+"generate/physics": true
+},
+"PATH:cliff_diagonal_stone": {
+"generate/physics": true
+},
+"PATH:cliff_halfCornerInner_rock": {
+"generate/physics": true
+},
+"PATH:cliff_halfCornerInner_stone": {
+"generate/physics": true
+},
+"PATH:cliff_halfCorner_rock": {
+"generate/physics": true
+},
+"PATH:cliff_halfCorner_stone": {
+"generate/physics": true
+},
+"PATH:cliff_half_rock": {
+"generate/physics": true
+},
+"PATH:cliff_half_stone": {
+"generate/physics": true
+},
+"PATH:cliff_large_rock": {
+"generate/physics": true
+},
+"PATH:cliff_large_stone": {
+"generate/physics": true
+},
+"PATH:cliff_rock": {
+"generate/physics": true
+},
+"PATH:cliff_stepsCornerInner_rock": {
+"generate/physics": true
+},
+"PATH:cliff_stepsCornerInner_stone": {
+"generate/physics": true
+},
+"PATH:cliff_stepsCorner_rock": {
+"generate/physics": true
+},
+"PATH:cliff_stepsCorner_stone": {
+"generate/physics": true
+},
+"PATH:cliff_steps_rock": {
+"generate/physics": true
+},
+"PATH:cliff_steps_stone": {
+"generate/physics": true
+},
+"PATH:cliff_stone": {
+"generate/physics": true
+},
+"PATH:cliff_topDiagonal_rock": {
+"generate/physics": true
+},
+"PATH:cliff_topDiagonal_stone": {
+"generate/physics": true
+},
+"PATH:cliff_top_rock": {
+"generate/physics": true
+},
+"PATH:cliff_top_stone": {
+"generate/physics": true
+},
+"PATH:cliff_waterfallTop_rock": {
+"generate/physics": true
+},
+"PATH:cliff_waterfallTop_stone": {
+"generate/physics": true
+},
+"PATH:cliff_waterfall_rock": {
+"generate/physics": true
+},
+"PATH:cliff_waterfall_stone": {
+"generate/physics": true
+},
+"PATH:fence_bend": {
+"generate/physics": true
+},
+"PATH:fence_bendCenter": {
+"generate/physics": true
+},
+"PATH:fence_corner": {
+"generate/physics": true
+},
+"PATH:fence_gate": {
+"generate/physics": true
+},
+"PATH:fence_planks": {
+"generate/physics": true
+},
+"PATH:fence_planksDouble": {
+"generate/physics": true
+},
+"PATH:fence_simple": {
+"generate/physics": true
+},
+"PATH:fence_simpleCenter": {
+"generate/physics": true
+},
+"PATH:fence_simpleDiagonal": {
+"generate/physics": true
+},
+"PATH:fence_simpleDiagonalCenter": {
+"generate/physics": true
+},
+"PATH:fence_simpleHigh": {
+"generate/physics": true
+},
+"PATH:fence_simpleLow": {
+"generate/physics": true
+},
+"PATH:ground_grass": {
+"generate/physics": true
+},
+"PATH:ground_pathBend": {
+"generate/physics": true
+},
+"PATH:ground_pathBendBank": {
+"generate/physics": true
+},
+"PATH:ground_pathCorner": {
+"generate/physics": true
+},
+"PATH:ground_pathCornerSmall": {
+"generate/physics": true
+},
+"PATH:ground_pathCross": {
+"generate/physics": true
+},
+"PATH:ground_pathEnd": {
+"generate/physics": true
+},
+"PATH:ground_pathEndClosed": {
+"generate/physics": true
+},
+"PATH:ground_pathOpen": {
+"generate/physics": true
+},
+"PATH:ground_pathRocks": {
+"generate/physics": true
+},
+"PATH:ground_pathSide": {
+"generate/physics": true
+},
+"PATH:ground_pathSideOpen": {
+"generate/physics": true
+},
+"PATH:ground_pathSplit": {
+"generate/physics": true
+},
+"PATH:ground_pathStraight": {
+"generate/physics": true
+},
+"PATH:ground_pathTile": {
+"generate/physics": true
+},
+"PATH:ground_riverBend": {
+"generate/physics": true
+},
+"PATH:ground_riverBendBank": {
+"generate/physics": true
+},
+"PATH:ground_riverCorner": {
+"generate/physics": true
+},
+"PATH:ground_riverCornerSmall": {
+"generate/physics": true
+},
+"PATH:ground_riverCross": {
+"generate/physics": true
+},
+"PATH:ground_riverEnd": {
+"generate/physics": true
+},
+"PATH:ground_riverEndClosed": {
+"generate/physics": true
+},
+"PATH:ground_riverOpen": {
+"generate/physics": true
+},
+"PATH:ground_riverRocks": {
+"generate/physics": true
+},
+"PATH:ground_riverSide": {
+"generate/physics": true
+},
+"PATH:ground_riverSideOpen": {
+"generate/physics": true
+},
+"PATH:ground_riverSplit": {
+"generate/physics": true
+},
+"PATH:ground_riverStraight": {
+"generate/physics": true
+},
+"PATH:ground_riverTile": {
+"generate/physics": true
+},
+"PATH:path_stone": {
+"generate/physics": true
+},
+"PATH:path_stoneCircle": {
+"generate/physics": true
+},
+"PATH:path_stoneCorner": {
+"generate/physics": true
+},
+"PATH:path_stoneEnd": {
+"generate/physics": true
+},
+"PATH:path_wood": {
+"generate/physics": true
+},
+"PATH:path_woodCorner": {
+"generate/physics": true
+},
+"PATH:path_woodEnd": {
+"generate/physics": true
+},
+"PATH:platform_beach": {
+"generate/physics": true
+},
+"PATH:platform_grass": {
+"generate/physics": true
+},
+"PATH:platform_stone": {
+"generate/physics": true
+}
+}
+}
+blender/nodes/visible=0
+blender/nodes/active_collection_only=false
+blender/nodes/punctual_lights=true
+blender/nodes/cameras=true
+blender/nodes/custom_properties=true
+blender/nodes/modifiers=1
+blender/meshes/vertex_colors=2
+blender/meshes/uvs=true
+blender/meshes/normals=true
+blender/meshes/export_geometry_nodes_instances=false
+blender/meshes/gpu_instances=false
+blender/meshes/tangents=true
+blender/meshes/skins=2
+blender/meshes/export_bones_deforming_mesh_only=false
+blender/materials/unpack_enabled=true
+blender/materials/export_materials=1
+blender/animation/limit_playback=true
+blender/animation/always_sample=true
+blender/animation/group_tracks=true
+gltf/naming_version=2
+gltf/texture_map_mode=0

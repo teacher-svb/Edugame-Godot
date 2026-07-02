@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b8qgygjc4vci3"]
 
-[ext_resource type="PackedScene" uid="uid://ri147ckev4hj" path="res://assets/3D/Mini Characters 1/Models/GLB format/avocado.glb" id="1_26m57"]
+[ext_resource type="PackedScene" uid="uid://ri147ckev4hj" path="res://assets/3D/characters/Mini Characters 1/Models/GLB format/avocado.glb" id="1_26m57"]
 [ext_resource type="Script" uid="uid://bpr1xsrq6lokd" path="res://scripts/Lib/UIAnimation/AnimatedButton.cs" id="3_6488b"]
 [ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="3_afi11"]
 

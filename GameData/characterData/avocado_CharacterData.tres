@@ -11,6 +11,5 @@ region = Rect2(10, 7.964868, 12, 17.310106)
 script = ExtResource("1_lcybp")
 _name = "Avocado"
 _face = SubResource("AtlasTexture_1edip")
-_body = ExtResource("1_yqos7")
 CharacterAbilities = null
 metadata/_custom_type_script = "uid://bqblbalohjolq"

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d11od8uonxhra"]
 
 [ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_base.tscn" id="1_a2d18"]
-[ext_resource type="PackedScene" uid="uid://n2jqt6oke3v2" path="res://assets/3D/Mini Characters 1/Models/GLB format/character-male-g.glb" id="2_6vton"]
+[ext_resource type="PackedScene" uid="uid://n2jqt6oke3v2" path="res://assets/3D/characters/Mini Characters 1/Models/GLB format/character-male-g.glb" id="2_6vton"]
 [ext_resource type="Resource" uid="uid://cmyotajgoscmu" path="res://GameData/characterData/Character_dad_CharacterData.tres" id="2_hmi31"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a2d18"]
