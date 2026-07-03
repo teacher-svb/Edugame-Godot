@@ -58,82 +58,90 @@ shape = SubResource("CapsuleShape3D_kl5mj")
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Engineer3/Rig_Medium" parent_id_path=PackedInt32Array(1473802298, 588855115) index="0" unique_id=522226090]
-bones/1/position = Vector3(0, 0.38798666, 0)
-bones/1/rotation = Quaternion(0.002360651, 0.043157626, 0.000101978534, 0.99906546)
+bones/1/position = Vector3(0, 0.38885456, 0)
+bones/1/rotation = Quaternion(0.0018716622, 0.043157678, 8.085508e-05, 0.9990666)
 bones/1/scale = Vector3(0.99999994, 1, 0.99999994)
 bones/2/position = Vector3(0.17094508, 0.1135872, 1.5994095e-08)
-bones/2/rotation = Quaternion(0.9908275, 0.05780827, 0.07098264, 0.09940153)
+bones/2/rotation = Quaternion(0.99116236, 0.057868373, 0.07087392, 0.09604894)
 bones/2/scale = Vector3(0.9999999, 0.9999997, 1.0000008)
-bones/3/rotation = Quaternion(0.3002654, 6.4646244e-08, -2.0646772e-07, 0.95385575)
+bones/3/rotation = Quaternion(0.2926832, 6.493926e-08, -1.9825583e-07, 0.95620954)
 bones/3/scale = Vector3(1.0000004, 0.99999994, 1.0000001)
-bones/4/rotation = Quaternion(-0.55069697, -0.11325377, 0.045324367, 0.8257434)
+bones/4/rotation = Quaternion(-0.5465052, -0.1134929, 0.04459564, 0.8285305)
 bones/4/scale = Vector3(1.0000004, 1.0000007, 0.9999993)
-bones/5/rotation = Quaternion(-7.9197224e-07, 0.9202349, -0.39136663, 2.4933806e-07)
+bones/5/rotation = Quaternion(2.223634e-06, 0.92023975, -0.39135504, -4.3412018e-07)
 bones/5/scale = Vector3(1.0000001, 0.9999975, 1.0000027)
 bones/6/position = Vector3(-0.17094508, 0.11358732, 1.557549e-08)
-bones/6/rotation = Quaternion(0.9962316, -0.030332375, 0.031233553, 0.075014226)
+bones/6/rotation = Quaternion(0.9964763, -0.03014878, 0.031293605, 0.071741275)
 bones/6/scale = Vector3(0.9999999, 0.99999976, 1.0000008)
-bones/7/rotation = Quaternion(0.3109565, -6.069215e-08, 2.145384e-07, 0.9504242)
+bones/7/rotation = Quaternion(0.3034148, -6.185587e-08, 2.0927965e-07, 0.9528587)
 bones/7/scale = Vector3(0.99999994, 0.99999976, 0.99999994)
-bones/8/rotation = Quaternion(-0.5792944, 0.11423415, -0.011800036, 0.80698776)
+bones/8/rotation = Quaternion(-0.5751506, 0.114299044, -0.011143477, 0.8099465)
 bones/8/scale = Vector3(0.99999976, 1.0000006, 0.9999992)
 bones/9/rotation = Quaternion(-8.934892e-05, 0.9202217, -0.3913977, 2.0290998e-05)
 bones/9/scale = Vector3(1.0000002, 0.9999979, 1.0000024)
-bones/10/rotation = Quaternion(0.0065596243, 1.8456104e-09, 0.0005677864, 0.9999784)
+bones/10/rotation = Quaternion(0.005148856, 2.2376498e-09, 0.00044567336, 0.99998665)
 bones/10/scale = Vector3(1.0000001, 1, 1.0000001)
-bones/11/rotation = Quaternion(-0.00079650176, 7.3359243e-09, -6.894342e-05, 0.99999976)
+bones/11/rotation = Quaternion(0.00045223482, 4.4227244e-09, 3.9144437e-05, 1)
 bones/11/scale = Vector3(1, 0.9999999, 1)
-bones/12/rotation = Quaternion(-0.0074110823, -0.03134088, -0.0004079909, 0.9994812)
+bones/12/rotation = Quaternion(-0.0065283435, -0.03134108, -0.00035939508, 0.99948746)
 bones/12/scale = Vector3(0.99999994, 1, 1)
 bones/13/position = Vector3(0.21200737, 0.13413215, 8.216504e-08)
-bones/13/rotation = Quaternion(-0.5367309, -0.10928168, -0.76722074, 0.33369118)
+bones/13/rotation = Quaternion(-0.5360746, -0.11088576, -0.768195, 0.33197147)
 bones/13/scale = Vector3(0.9999993, 0.99999905, 0.9999998)
-bones/14/rotation = Quaternion(1.7048887e-08, -6.647123e-08, -0.36922774, 0.92933893)
+bones/14/rotation = Quaternion(1.7368139e-08, -6.572553e-08, -0.36699232, 0.930224)
 bones/14/scale = Vector3(1.0000004, 0.9999998, 1)
 bones/15/rotation = Quaternion(1.514567e-08, -7.3584383e-09, 0.0266581, 0.99964464)
 bones/15/scale = Vector3(1.0000001, 1, 1)
-bones/16/rotation = Quaternion(-0.22109829, -0.34450626, 0.1814073, 0.8941602)
+bones/16/rotation = Quaternion(-0.22130737, -0.34479252, 0.18212545, 0.89385206)
 bones/16/scale = Vector3(0.99999976, 1.0000001, 1.0000004)
 bones/17/position = Vector3(5.138494e-10, 0.096125126, -0.057500005)
-bones/17/rotation = Quaternion(0.0012891117, 0.0012891258, -0.70235825, 0.7118213)
+bones/17/rotation = Quaternion(0.0010175215, 0.0010175335, -0.7033615, 0.7108309)
 bones/17/scale = Vector3(1, 1, 1)
 bones/18/position = Vector3(-0.21200736, 0.13413227, 8.62731e-08)
-bones/18/rotation = Quaternion(-0.56342614, 0.03943391, 0.73210645, 0.38080987)
+bones/18/rotation = Quaternion(-0.5628436, 0.0410071, 0.73313427, 0.37952575)
 bones/18/scale = Vector3(0.9999992, 0.9999988, 0.9999998)
-bones/19/rotation = Quaternion(-1.4731296e-09, 5.5707037e-08, 0.38424063, 0.9232331)
+bones/19/rotation = Quaternion(7.129508e-09, 4.756827e-08, 0.38260174, 0.9239135)
 bones/19/scale = Vector3(1.0000004, 0.99999976, 1.0000001)
 bones/20/rotation = Quaternion(2.249753e-10, 6.8246844e-09, -0.026658092, 0.99964464)
 bones/20/scale = Vector3(0.99999994, 0.99999994, 1)
-bones/21/rotation = Quaternion(-0.2114536, 0.3817331, -0.13574544, 0.88946074)
+bones/21/rotation = Quaternion(-0.21165149, 0.38224342, -0.13673028, 0.8890436)
 bones/21/scale = Vector3(0.9999995, 0.99999994, 1.0000005)
 bones/22/position = Vector3(-1.5415026e-08, 0.096125185, -0.057500005)
-bones/22/rotation = Quaternion(0.0012891133, -0.0012891234, 0.70235825, 0.7118213)
+bones/22/rotation = Quaternion(0.0010175221, -0.0010175323, 0.7033615, 0.7108309)
 bones/22/scale = Vector3(1, 1.0000001, 1.0000001)
 
 [node name="Engineer_ArmLeft" parent="Engineer3/Rig_Medium/Skeleton3D" index="0" unique_id=1874009141]
+layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
 [node name="Engineer_ArmRight" parent="Engineer3/Rig_Medium/Skeleton3D" index="1" unique_id=71718484]
+layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
 [node name="Engineer_Backpack" parent="Engineer3/Rig_Medium/Skeleton3D" index="2" unique_id=409439992]
 visible = false
+layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
 [node name="Engineer_Body" parent="Engineer3/Rig_Medium/Skeleton3D" index="3" unique_id=565117771]
+layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
 [node name="Engineer_Goggles" parent="Engineer3/Rig_Medium/Skeleton3D" index="4" unique_id=1126704807]
 visible = false
+layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
 [node name="Engineer_Head" parent="Engineer3/Rig_Medium/Skeleton3D" index="5" unique_id=1674624500]
+layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
 [node name="Engineer_LegLeft" parent="Engineer3/Rig_Medium/Skeleton3D" index="6" unique_id=251442836]
+layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
 [node name="Engineer_LegRight" parent="Engineer3/Rig_Medium/Skeleton3D" index="7" unique_id=781471406]
+layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Engineer3" index="1" unique_id=511934417]

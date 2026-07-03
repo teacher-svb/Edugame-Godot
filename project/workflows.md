@@ -23,5 +23,8 @@ Checklists and step-by-step guides for common development tasks.
 5. **Animation Tree**
   - [ ] Override `AnimationTree.root_node` → `../../<model-node-name>`
   - [ ] Override `AnimationTree.anim_player` → `../../<model-node-name>/AnimationPlayer`
+6. **Closeup Camera**
+  - [ ] Put 3D model meshes on layer 20
+  - [ ] Move Closeup Camera to frame the face of the character
 
 ---
