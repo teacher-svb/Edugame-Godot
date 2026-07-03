@@ -37,5 +37,11 @@ Discipline: knowledge / documents. Provides access to blueprints and texts requi
    - [ ] Override `AnimationTree.root_node` → `../../<model-node-name>`
    - [ ] Override `AnimationTree.anim_player` → `../../<model-node-name>/AnimationPlayer`
    - [ ] Animations needed: idle, walk (within workshop)
-6. **Dialogue**
-   - [ ] Set up dialogue nodes for III.1 introduction and blueprint-unlock interactions throughout Act III–V
+6. **Closeup Camera**
+   - [ ] Put 3D model meshes on layer 20
+   - [ ] Move Closeup Camera to frame the face of the character
+
+## Files
+
+- GameData/characterData/Gamma_CharacterData.tres (planned, not yet created)
+- Scenes/characters/gamma.tscn (planned, not yet created)

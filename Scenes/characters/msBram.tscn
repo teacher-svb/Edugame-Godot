@@ -1,31 +1,114 @@
 [gd_scene format=3 uid="uid://bx1wyqdgkro24"]
 
 [ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_base.tscn" id="1_n8coo"]
-[ext_resource type="PackedScene" uid="uid://cpwcng6oti6wh" path="res://assets/3D/characters/Mini Characters 1/Models/GLB format/character-female-c.glb" id="2_qwssi"]
+[ext_resource type="Resource" uid="uid://de6dkaimr20b4" path="res://GameData/characterData/MsBram_CharacterData.tres" id="2_sl66g"]
+[ext_resource type="PackedScene" uid="uid://d04qp8t6aykw4" path="res://assets/3D/characters/Mage.glb" id="3_odwu3"]
+[ext_resource type="Animation" uid="uid://dgo3s8hhg1xjl" path="res://assets/Animations/Medium/death.res" id="4_r2oy7"]
+[ext_resource type="Animation" uid="uid://dtrhbb0qqh3kx" path="res://assets/Animations/Medium/death_pose.res" id="5_sltvj"]
+[ext_resource type="Animation" uid="uid://bjn1bg4rf7mj0" path="res://assets/Animations/Medium/Death_B.res" id="6_nd3hi"]
+[ext_resource type="Animation" uid="uid://cs83oeeg7h3rb" path="res://assets/Animations/Medium/Death_B_Pose.res" id="7_4s50p"]
+[ext_resource type="Animation" uid="uid://bijrrrbs5exd7" path="res://assets/Animations/Medium/hit.res" id="8_h6rc3"]
+[ext_resource type="Animation" uid="uid://cocqv10vrxye6" path="res://assets/Animations/Medium/Hit_B.res" id="9_jfxhv"]
+[ext_resource type="Animation" uid="uid://bilgnxyaj6uwq" path="res://assets/Animations/Medium/idle.res" id="10_klaqp"]
+[ext_resource type="Animation" uid="uid://bu71bqswjvid1" path="res://assets/Animations/Medium/Idle_B.res" id="11_a18be"]
+[ext_resource type="Animation" uid="uid://bk148g6ge6nmg" path="res://assets/Animations/Medium/interact.res" id="12_j0yu6"]
+[ext_resource type="Animation" uid="uid://bolu5swuh4roj" path="res://assets/Animations/Medium/Jump_Full_Long.res" id="13_kcjnu"]
+[ext_resource type="Animation" uid="uid://csq7oju2swruf" path="res://assets/Animations/Medium/Jump_Full_Short.res" id="14_kpx7d"]
+[ext_resource type="Animation" uid="uid://bml3fmwodu2qq" path="res://assets/Animations/Medium/fall.res" id="15_i0jsl"]
+[ext_resource type="Animation" uid="uid://cy7q1181pxrpm" path="res://assets/Animations/Medium/land.res" id="16_js3pn"]
+[ext_resource type="Animation" uid="uid://c2t0tb4fswqfy" path="res://assets/Animations/Medium/jump.res" id="17_4qytv"]
+[ext_resource type="Animation" uid="uid://dbq75helwx6s5" path="res://assets/Animations/Medium/pickup.res" id="18_6ouq6"]
+[ext_resource type="Animation" uid="uid://cwmown8ut7nvc" path="res://assets/Animations/Medium/run.res" id="19_odjup"]
+[ext_resource type="Animation" uid="uid://cyy061swa0wab" path="res://assets/Animations/Medium/Running_B.res" id="20_ig7hy"]
+[ext_resource type="Animation" uid="uid://ct85poeusuqfv" path="res://assets/Animations/Medium/spawn.res" id="21_pagls"]
+[ext_resource type="Animation" uid="uid://dwj5mketyun5a" path="res://assets/Animations/Medium/Spawn_Ground.res" id="22_ij8f8"]
+[ext_resource type="Animation" uid="uid://bt6506uo2bk8x" path="res://assets/Animations/Medium/T-Pose.res" id="23_7hc7a"]
+[ext_resource type="Animation" uid="uid://mwe54oj3acth" path="res://assets/Animations/Medium/throw.res" id="24_kfd6t"]
+[ext_resource type="Animation" uid="uid://cqvxhcmwhnbp2" path="res://assets/Animations/Medium/use.res" id="25_ri6xf"]
+[ext_resource type="Animation" uid="uid://b36nkvhou7373" path="res://assets/Animations/Medium/walk.res" id="26_4wb4g"]
+[ext_resource type="Animation" uid="uid://dhb6te04sjmk6" path="res://assets/Animations/Medium/Walking_B.res" id="27_luy5x"]
+[ext_resource type="Animation" uid="uid://dx7i7c4uvtwte" path="res://assets/Animations/Medium/Walking_C.res" id="28_0qsuy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_srdbs"]
 radius = 0.2
 height = 0.8
 
-[node name="Character" unique_id=497783338 instance=ExtResource("1_n8coo")]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fjok7"]
+_data = {
+&"Death_A": ExtResource("4_r2oy7"),
+&"Death_A_Pose": ExtResource("5_sltvj"),
+&"Death_B": ExtResource("6_nd3hi"),
+&"Death_B_Pose": ExtResource("7_4s50p"),
+&"Hit_A": ExtResource("8_h6rc3"),
+&"Hit_B": ExtResource("9_jfxhv"),
+&"Idle_A": ExtResource("10_klaqp"),
+&"Idle_B": ExtResource("11_a18be"),
+&"Interact": ExtResource("12_j0yu6"),
+&"Jump_Full_Long": ExtResource("13_kcjnu"),
+&"Jump_Full_Short": ExtResource("14_kpx7d"),
+&"Jump_Idle": ExtResource("15_i0jsl"),
+&"Jump_Land": ExtResource("16_js3pn"),
+&"Jump_Start": ExtResource("17_4qytv"),
+&"PickUp": ExtResource("18_6ouq6"),
+&"Running_A": ExtResource("19_odjup"),
+&"Running_B": ExtResource("20_ig7hy"),
+&"Spawn_Air": ExtResource("21_pagls"),
+&"Spawn_Ground": ExtResource("22_ij8f8"),
+&"T-Pose": ExtResource("23_7hc7a"),
+&"Throw": ExtResource("24_kfd6t"),
+&"Use_Item": ExtResource("25_ri6xf"),
+&"Walking_A": ExtResource("26_4wb4g"),
+&"Walking_B": ExtResource("27_luy5x"),
+&"Walking_C": ExtResource("28_0qsuy")
+}
+
+[node name="MsBram" unique_id=497783338 instance=ExtResource("1_n8coo")]
+_characterData = ExtResource("2_sl66g")
+PersistentId = "MsBram"
 
 [node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
-VisualRoot = NodePath("../../character-female-c2")
+VisualRoot = NodePath("../../Mage4")
 
 [node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
-root_node = NodePath("../../character-female-c2")
-anim_player = NodePath("../../character-female-c2/AnimationPlayer")
+root_node = NodePath("../../Mage4")
+advance_expression_base_node = NodePath("")
+anim_player = NodePath("../../Mage4/AnimationPlayer")
 
 [node name="CollisionShape3D" parent="." index="3" unique_id=293151575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("CapsuleShape3D_srdbs")
 
-[node name="character-female-c2" parent="." index="5" unique_id=847242639 instance=ExtResource("2_qwssi")]
+[node name="Mage4" parent="." index="6" unique_id=1895689160 instance=ExtResource("3_odwu3")]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0.004745245, 0, 0)
 
-[node name="Skeleton3D" parent="character-female-c2/character-female-c" parent_id_path=PackedInt32Array(847242639, 1343009157) index="0" unique_id=1129778094]
-bones/3/rotation = Quaternion(0.041512586, 0, 0, 0.999138)
-bones/4/rotation = Quaternion(0, 0, -0.2676658, 0.9635118)
-bones/5/rotation = Quaternion(0, 0, 0.2676658, 0.9635118)
-bones/6/rotation = Quaternion(0, -0.041512586, 0, 0.999138)
+[node name="Mage_ArmLeft" parent="Mage4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1895689160, 493072791) index="0" unique_id=1856449493]
+layers = 524289
 
-[editable path="character-female-c2"]
+[node name="Mage_ArmRight" parent="Mage4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1895689160, 493072791) index="1" unique_id=1407209990]
+layers = 524289
+
+[node name="Mage_Body" parent="Mage4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1895689160, 493072791) index="2" unique_id=180451546]
+layers = 524289
+
+[node name="Mage_Cape" parent="Mage4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1895689160, 493072791) index="3" unique_id=2079059128]
+visible = false
+layers = 524289
+
+[node name="Mage_Hat" parent="Mage4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1895689160, 493072791) index="4" unique_id=1533454953]
+visible = false
+layers = 524289
+
+[node name="Mage_Head" parent="Mage4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1895689160, 493072791) index="5" unique_id=982050840]
+layers = 524289
+
+[node name="Mage_LegLeft" parent="Mage4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1895689160, 493072791) index="6" unique_id=1383984422]
+layers = 524289
+
+[node name="Mage_LegRight" parent="Mage4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1895689160, 493072791) index="7" unique_id=1529607936]
+layers = 524289
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Mage4" index="1" unique_id=2037976607]
+libraries/Mage = SubResource("AnimationLibrary_fjok7")
+autoplay = &"Mage/Idle_A"
+
+[editable path="Mage4"]

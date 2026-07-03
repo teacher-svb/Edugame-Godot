@@ -6,7 +6,7 @@ assignee: null
 epic: "characters"
 dueDate: "2026-07-31"
 created: "2026-06-28T12:00:00.000Z"
-modified: "2026-06-28T10:09:43.448Z"
+modified: "2026-07-03T09:35:08.391Z"
 completedAt: "2026-06-28T10:09:43.448Z"
 labels: ["character", "player", "world"]
 order: "a0"
@@ -18,6 +18,7 @@ order: "a0"
 Curious, practical, persistent. No magical ability. Arc: self-doubt → confidence. Never gains magic; never needs it.
 
 **Build tasks:**
+
 1. Assemble `CharacterController2D` node hierarchy with Mabel's 3D model/sprites.
 2. Configure `CharacterData` resource (ID, stats).
 3. Set up animations: idle (4 directions), walk (4 directions), interact.

@@ -10,8 +10,6 @@ namespace TnT.EduGame.Characters
     {
         [Export]
         string _name;
-        [Export]
-        Texture2D _face;
 
         public string CharacterName => this._name;
 

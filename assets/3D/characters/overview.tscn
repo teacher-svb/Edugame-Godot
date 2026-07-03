@@ -523,6 +523,12 @@ bones/20/rotation = Quaternion(0.88455087, 3.2204383e-08, -6.1429e-07, 0.4664439
 bones/21/rotation = Quaternion(-0.68916535, -7.552983e-08, 3.0558698e-07, 0.7246041)
 bones/22/rotation = Quaternion(4.3087862e-08, 0.9199059, -0.39213943, 7.361033e-08)
 
+[node name="Mage_Cape" parent="Mage4/Rig_Medium/Skeleton3D" index="3" unique_id=2079059128]
+visible = false
+
+[node name="Mage_Hat" parent="Mage4/Rig_Medium/Skeleton3D" index="4" unique_id=1533454953]
+visible = false
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Mage4" unique_id=556050997]
 libraries/Mage = SubResource("AnimationLibrary_v33bf")
 autoplay = &"Mage/Idle_A"

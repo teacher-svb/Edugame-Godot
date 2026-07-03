@@ -37,5 +37,11 @@ A traveling wizard who hears the rumors about Mabel. Tests her publicly, confirm
    - [ ] Override `AnimationTree.root_node` → `../../<model-node-name>`
    - [ ] Override `AnimationTree.anim_player` → `../../<model-node-name>/AnimationPlayer`
    - [ ] Animations needed: idle, walk (arrives in square)
-6. **Dialogue**
-   - [ ] Set up dialogue nodes for II.4 Exposure sequence
+6. **Closeup Camera**
+   - [ ] Put 3D model meshes on layer 20
+   - [ ] Move Closeup Camera to frame the face of the character
+
+## Files
+
+- GameData/characterData/TravelingWizard_CharacterData.tres (planned, not yet created)
+- Scenes/characters/traveling_wizard.tscn (planned, not yet created)

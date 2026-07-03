@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://bbk2oqbtmsp1u"]
+
+[ext_resource type="Script" uid="uid://bqblbalohjolq" path="res://scripts/Game/Character/CharacterData.cs" id="1_4p2mb"]
+
+[resource]
+script = ExtResource("1_4p2mb")
+_name = "Cornelis"
+CharacterAbilities = null
+metadata/_custom_type_script = "uid://bqblbalohjolq"

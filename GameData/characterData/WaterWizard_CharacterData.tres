@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://bvxqvh8o6cnc4"]
+
+[ext_resource type="Script" uid="uid://bqblbalohjolq" path="res://scripts/Game/Character/CharacterData.cs" id="1_g0xb6"]
+
+[resource]
+script = ExtResource("1_g0xb6")
+_name = "Water Wizard"
+CharacterAbilities = null
+metadata/_custom_type_script = "uid://bqblbalohjolq"

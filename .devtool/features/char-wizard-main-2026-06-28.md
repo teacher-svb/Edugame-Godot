@@ -39,5 +39,11 @@ Referenced by reputation throughout Acts I–III; his house is visible from Act 
    - [ ] Override `AnimationTree.root_node` → `../../<model-node-name>`
    - [ ] Override `AnimationTree.anim_player` → `../../<model-node-name>/AnimationPlayer`
    - [ ] Animations needed: idle, walk, departure (IV.5 exit)
-6. **Dialogue**
-   - [ ] Set up dialogue nodes for IV.4 (Reveal) and IV.5 (Realization / departure)
+6. **Closeup Camera**
+   - [ ] Put 3D model meshes on layer 20
+   - [ ] Move Closeup Camera to frame the face of the character
+
+## Files
+
+- GameData/characterData/Wizard_CharacterData.tres (planned, not yet created)
+- Scenes/characters/wizard.tscn (planned, not yet created)
