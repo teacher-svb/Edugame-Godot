@@ -375,7 +375,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.61164, -9.536743e-07, 0.46
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6740956, 0.0007059972, -26.58886)
 
 [node name="Cornelis" parent="." unique_id=1044258308 instance=ExtResource("15_26deu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0004008, -9.536743e-07, 9.009472)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.699755, -9.536743e-07, 9.377894)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2119697360]
 navigation_mesh = SubResource("NavigationMesh_igo7b")
