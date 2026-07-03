@@ -1,29 +1,148 @@
 [gd_scene format=3 uid="uid://qqmsfnp0h0nk"]
 
 [ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_base.tscn" id="1_skqj5"]
-[ext_resource type="PackedScene" uid="uid://c7wdumm6p64ys" path="res://assets/3D/characters/Mini Characters 1/Models/GLB format/character-female-d.glb" id="2_pn1dg"]
+[ext_resource type="PackedScene" uid="uid://bqx6fj2snhw4p" path="res://assets/3D/characters/Farmer_B.glb" id="2_d5ixk"]
+[ext_resource type="Texture2D" uid="uid://y1dgjp2ff1tu" path="res://assets/3D/characters/textures/farmer_texture_B.png" id="3_fobh5"]
+[ext_resource type="Animation" uid="uid://dgo3s8hhg1xjl" path="res://assets/Animations/Medium/death.res" id="3_tkp6x"]
+[ext_resource type="Animation" uid="uid://dtrhbb0qqh3kx" path="res://assets/Animations/Medium/death_pose.res" id="4_fobh5"]
+[ext_resource type="Animation" uid="uid://bml3fmwodu2qq" path="res://assets/Animations/Medium/fall.res" id="5_5et2s"]
+[ext_resource type="Animation" uid="uid://bijrrrbs5exd7" path="res://assets/Animations/Medium/hit.res" id="6_dkj43"]
+[ext_resource type="Animation" uid="uid://bilgnxyaj6uwq" path="res://assets/Animations/Medium/idle.res" id="7_4wu2y"]
+[ext_resource type="Animation" uid="uid://bk148g6ge6nmg" path="res://assets/Animations/Medium/interact.res" id="8_k0ir2"]
+[ext_resource type="Animation" uid="uid://c2t0tb4fswqfy" path="res://assets/Animations/Medium/jump.res" id="9_ut836"]
+[ext_resource type="Animation" uid="uid://cy7q1181pxrpm" path="res://assets/Animations/Medium/land.res" id="10_jkr5t"]
+[ext_resource type="Animation" uid="uid://dbq75helwx6s5" path="res://assets/Animations/Medium/pickup.res" id="11_m7qow"]
+[ext_resource type="Animation" uid="uid://cwmown8ut7nvc" path="res://assets/Animations/Medium/run.res" id="12_kpc6x"]
+[ext_resource type="Animation" uid="uid://ct85poeusuqfv" path="res://assets/Animations/Medium/spawn.res" id="13_1bocu"]
+[ext_resource type="Animation" uid="uid://mwe54oj3acth" path="res://assets/Animations/Medium/throw.res" id="14_gf04s"]
+[ext_resource type="Animation" uid="uid://cqvxhcmwhnbp2" path="res://assets/Animations/Medium/use.res" id="15_y6eu1"]
+[ext_resource type="Animation" uid="uid://b36nkvhou7373" path="res://assets/Animations/Medium/walk.res" id="16_tqc6f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pn1dg"]
 radius = 0.2
 height = 0.8
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5ixk"]
+albedo_texture = ExtResource("3_fobh5")
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ar618"]
+_data = {
+&"death": ExtResource("3_tkp6x"),
+&"death_pose": ExtResource("4_fobh5"),
+&"fall": ExtResource("5_5et2s"),
+&"hit": ExtResource("6_dkj43"),
+&"idle": ExtResource("7_4wu2y"),
+&"interact": ExtResource("8_k0ir2"),
+&"jump": ExtResource("9_ut836"),
+&"land": ExtResource("10_jkr5t"),
+&"pickup": ExtResource("11_m7qow"),
+&"run": ExtResource("12_kpc6x"),
+&"spawn": ExtResource("13_1bocu"),
+&"throw": ExtResource("14_gf04s"),
+&"use": ExtResource("15_y6eu1"),
+&"walk": ExtResource("16_tqc6f")
+}
+
 [node name="Character" unique_id=497783338 instance=ExtResource("1_skqj5")]
 
 [node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
-VisualRoot = NodePath("../../character-female-d2")
+VisualRoot = NodePath("../../Farmer_B")
 
 [node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
-root_node = NodePath("../../character-female-d2")
-anim_player = NodePath("../../character-female-d2/AnimationPlayer")
+root_node = NodePath("../../Farmer_B")
+advance_expression_base_node = NodePath("")
+anim_player = NodePath("../../Farmer_B/AnimationPlayer")
 
 [node name="CollisionShape3D" parent="." index="3" unique_id=293151575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("CapsuleShape3D_pn1dg")
 
-[node name="character-female-d2" parent="." index="5" unique_id=436328959 instance=ExtResource("2_pn1dg")]
+[node name="Farmer_B" parent="." index="6" unique_id=2092872470 instance=ExtResource("2_d5ixk")]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
 
-[node name="Skeleton3D" parent="character-female-d2/character-female-d" parent_id_path=PackedInt32Array(436328959, 485383186) index="0" unique_id=955797469]
-bones/4/rotation = Quaternion(0, 0, -0.3826835, 0.92387956)
-bones/5/rotation = Quaternion(0, 0, 0.3826835, 0.92387956)
+[node name="Skeleton3D" parent="Farmer_B/Rig_Medium" parent_id_path=PackedInt32Array(2092872470, 1494805248) index="0" unique_id=1224484209]
+bones/1/position = Vector3(0, 0.39118055, 0)
+bones/1/rotation = Quaternion(0.00057599024, 0.04315774, 2.4884339e-05, 0.99906814)
+bones/1/scale = Vector3(0.99999994, 1, 0.99999994)
+bones/2/position = Vector3(-0.17094508, 0.11358732, 1.557549e-08)
+bones/2/rotation = Quaternion(0.99713, -0.029623823, 0.031471025, 0.06216111)
+bones/2/scale = Vector3(0.9999999, 0.99999976, 1.0000008)
+bones/3/rotation = Quaternion(0.28124332, -6.328448e-08, 1.9612996e-07, 0.95963657)
+bones/3/scale = Vector3(0.99999994, 0.99999976, 0.99999994)
+bones/4/rotation = Quaternion(-0.5629966, 0.11446592, -0.0092400545, 0.81844187)
+bones/4/scale = Vector3(0.99999976, 1.0000006, 0.9999992)
+bones/5/rotation = Quaternion(-8.934892e-05, 0.9202217, -0.3913977, 2.0290998e-05)
+bones/5/scale = Vector3(1.0000002, 0.9999979, 1.0000024)
+bones/6/rotation = Quaternion(0.0013093143, 1.8910427e-09, 0.000113331334, 0.99999917)
+bones/6/scale = Vector3(1.0000001, 1, 1.0000001)
+bones/7/rotation = Quaternion(0.0038507544, 3.6834282e-09, 0.0003333127, 0.9999926)
+bones/7/scale = Vector3(1, 0.9999999, 1)
+bones/8/position = Vector3(0.21200737, 0.13413215, 8.216504e-08)
+bones/8/rotation = Quaternion(-0.53420424, -0.115380965, -0.7709065, 0.32713345)
+bones/8/scale = Vector3(0.9999993, 0.99999905, 0.9999998)
+bones/9/rotation = Quaternion(1.2643978e-08, -5.6579708e-08, -0.3606068, 0.9327179)
+bones/9/scale = Vector3(1.0000004, 0.9999998, 1)
+bones/10/rotation = Quaternion(1.514567e-08, -7.3584383e-09, 0.0266581, 0.99964464)
+bones/10/scale = Vector3(1.0000001, 1, 1)
+bones/11/rotation = Quaternion(-0.22194059, -0.34558684, 0.18405917, 0.89299184)
+bones/11/scale = Vector3(0.99999976, 1.0000001, 1.0000004)
+bones/12/position = Vector3(5.138494e-10, 0.096125126, -0.057500005)
+bones/12/rotation = Quaternion(0.0002587503, 0.0002587504, -0.7061565, 0.70805573)
+bones/12/scale = Vector3(1, 1, 1)
+bones/13/rotation = Quaternion(-0.004313544, -0.03134146, -0.0002374676, 0.99949944)
+bones/13/scale = Vector3(0.99999994, 1, 1)
+bones/14/position = Vector3(-0.21200736, 0.13413227, 8.62731e-08)
+bones/14/rotation = Quaternion(-0.5611589, 0.045455642, 0.73603535, 0.37588093)
+bones/14/scale = Vector3(0.9999992, 0.9999988, 0.9999998)
+bones/15/rotation = Quaternion(-2.1977913e-09, 6.2715564e-08, 0.3778666, 0.92586017)
+bones/15/scale = Vector3(1.0000004, 0.99999976, 1.0000001)
+bones/16/rotation = Quaternion(2.2497532e-10, 6.8246844e-09, -0.026658092, 0.99964464)
+bones/16/scale = Vector3(0.99999994, 0.99999994, 1)
+bones/17/rotation = Quaternion(-0.21224268, 0.38367534, -0.13943908, 0.88786435)
+bones/17/scale = Vector3(0.9999995, 0.99999994, 1.0000005)
+bones/18/position = Vector3(-1.5415026e-08, 0.096125185, -0.057500005)
+bones/18/rotation = Quaternion(0.00025874245, -0.00025875826, 0.7061565, 0.70805573)
+bones/18/scale = Vector3(1, 1.0000001, 1.0000001)
+bones/19/position = Vector3(0.17094508, 0.1135872, 1.5994095e-08)
+bones/19/rotation = Quaternion(0.9920768, 0.05807213, 0.07054297, 0.08622625)
+bones/19/scale = Vector3(0.9999999, 0.9999997, 1.0000008)
+bones/20/rotation = Quaternion(0.2702514, 6.690392e-08, -1.8176085e-07, 0.96278983)
+bones/20/scale = Vector3(1.0000004, 0.99999994, 1.0000001)
+bones/21/rotation = Quaternion(-0.53417957, -0.11416446, 0.042484447, 0.8365488)
+bones/21/scale = Vector3(1.0000004, 1.0000007, 0.9999993)
+bones/22/rotation = Quaternion(9.592575e-06, 0.9202512, -0.39132807, -2.1088142e-06)
+bones/22/scale = Vector3(1.0000001, 0.9999975, 1.0000027)
 
-[editable path="character-female-d2"]
+[node name="Farmer_ArmLeft" parent="Farmer_B/Rig_Medium/Skeleton3D" index="0" unique_id=1008590209]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_d5ixk")
+
+[node name="Farmer_ArmRight" parent="Farmer_B/Rig_Medium/Skeleton3D" index="1" unique_id=352474038]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_d5ixk")
+
+[node name="Farmer_B_Hat" parent="Farmer_B/Rig_Medium/Skeleton3D" index="2" unique_id=1944267845]
+visible = false
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_d5ixk")
+
+[node name="Farmer_B_Head" parent="Farmer_B/Rig_Medium/Skeleton3D" index="3" unique_id=2082614679]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_d5ixk")
+
+[node name="Farmer_Body" parent="Farmer_B/Rig_Medium/Skeleton3D" index="4" unique_id=2069104810]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_d5ixk")
+
+[node name="Farmer_LegLeft" parent="Farmer_B/Rig_Medium/Skeleton3D" index="5" unique_id=1645536848]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_d5ixk")
+
+[node name="Farmer_LegRight" parent="Farmer_B/Rig_Medium/Skeleton3D" index="6" unique_id=1308440827]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_d5ixk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Farmer_B" index="1" unique_id=913136334]
+libraries/ = SubResource("AnimationLibrary_ar618")
+
+[editable path="Farmer_B"]

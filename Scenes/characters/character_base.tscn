@@ -9,6 +9,9 @@
 [ext_resource type="Script" uid="uid://ds2u0dlloavie" path="res://scripts/Game/StateManagementCharacter/CharacterStatePatrolling.cs" id="6_v1v05"]
 [ext_resource type="Script" uid="uid://dw3ggojroh7rn" path="res://scripts/Game/StateManagementCharacter/CharacterStateMoveInput.cs" id="7_w8mnd"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_evgpa"]
+animation = &"death"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sikog"]
 animation = &"fall"
 
@@ -20,6 +23,9 @@ animation = &"jump"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ljt0r"]
 animation = &"land"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0f1yx"]
+animation = &"spawn"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_im6n0"]
 animation = &"walk"
@@ -39,9 +45,6 @@ xfade_time = 0.2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yj0bu"]
 xfade_time = 0.2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sikog"]
-advance_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w8kji"]
 xfade_time = 0.2
 
@@ -51,9 +54,22 @@ xfade_time = 0.2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_58mlp"]
 xfade_time = 0.2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0f1yx"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6wyfi"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sikog"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_evgpa"]
+xfade_time = 1.0
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hr8he"]
 states/End/position = Vector2(864, 160)
-states/Start/position = Vector2(193, 173)
+states/Start/position = Vector2(8, 176)
+states/death/node = SubResource("AnimationNodeAnimation_evgpa")
+states/death/position = Vector2(344, 92)
 states/fall/node = SubResource("AnimationNodeAnimation_sikog")
 states/fall/position = Vector2(714, 181)
 states/idle/node = SubResource("AnimationNodeAnimation_nq4sg")
@@ -62,9 +78,11 @@ states/jump/node = SubResource("AnimationNodeAnimation_xbk2r")
 states/jump/position = Vector2(563, 99)
 states/land/node = SubResource("AnimationNodeAnimation_ljt0r")
 states/land/position = Vector2(563, 282)
+states/spawn/node = SubResource("AnimationNodeAnimation_0f1yx")
+states/spawn/position = Vector2(177, 181)
 states/walk/node = SubResource("AnimationNodeAnimation_im6n0")
 states/walk/position = Vector2(563, 186)
-transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_60cj0"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_aebyh"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_iikk8"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_0ft5a"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_yj0bu"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_sikog"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_w8kji"), "land", "walk", SubResource("AnimationNodeStateMachineTransition_0qrrf"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_58mlp")]
+transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_60cj0"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_aebyh"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_iikk8"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_0ft5a"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_yj0bu"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_w8kji"), "land", "walk", SubResource("AnimationNodeStateMachineTransition_0qrrf"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_58mlp"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_0f1yx"), "death", "spawn", SubResource("AnimationNodeStateMachineTransition_6wyfi"), "Start", "spawn", SubResource("AnimationNodeStateMachineTransition_sikog"), "spawn", "idle", SubResource("AnimationNodeStateMachineTransition_evgpa")]
 graph_offset = Vector2(-260, 38)
 
 [node name="Character" type="CharacterBody3D" unique_id=497783338 node_paths=PackedStringArray("_closeupCamera")]

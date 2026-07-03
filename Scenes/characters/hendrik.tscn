@@ -1,29 +1,136 @@
 [gd_scene format=3 uid="uid://by56kgwnxfbe5"]
 
 [ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_base.tscn" id="1_yni83"]
-[ext_resource type="PackedScene" uid="uid://bb3q4mngyn8pm" path="res://assets/3D/characters/Mini Characters 1/Models/GLB format/character-male-e.glb" id="2_av5ms"]
+[ext_resource type="PackedScene" uid="uid://dokmc5a2yeulo" path="res://assets/3D/characters/Farmer_A.glb" id="2_wsxdp"]
+[ext_resource type="Animation" uid="uid://dgo3s8hhg1xjl" path="res://assets/Animations/Medium/death.res" id="3_ipxpy"]
+[ext_resource type="Animation" uid="uid://dtrhbb0qqh3kx" path="res://assets/Animations/Medium/death_pose.res" id="4_unpkv"]
+[ext_resource type="Animation" uid="uid://bml3fmwodu2qq" path="res://assets/Animations/Medium/fall.res" id="5_jkafe"]
+[ext_resource type="Animation" uid="uid://bijrrrbs5exd7" path="res://assets/Animations/Medium/hit.res" id="6_d8i8s"]
+[ext_resource type="Animation" uid="uid://bilgnxyaj6uwq" path="res://assets/Animations/Medium/idle.res" id="7_alqwb"]
+[ext_resource type="Animation" uid="uid://bk148g6ge6nmg" path="res://assets/Animations/Medium/interact.res" id="8_78s0a"]
+[ext_resource type="Animation" uid="uid://c2t0tb4fswqfy" path="res://assets/Animations/Medium/jump.res" id="9_eu0iv"]
+[ext_resource type="Animation" uid="uid://cy7q1181pxrpm" path="res://assets/Animations/Medium/land.res" id="10_g2fx1"]
+[ext_resource type="Animation" uid="uid://dbq75helwx6s5" path="res://assets/Animations/Medium/pickup.res" id="11_jj4b1"]
+[ext_resource type="Animation" uid="uid://cwmown8ut7nvc" path="res://assets/Animations/Medium/run.res" id="12_0f701"]
+[ext_resource type="Animation" uid="uid://ct85poeusuqfv" path="res://assets/Animations/Medium/spawn.res" id="13_dvbc2"]
+[ext_resource type="Animation" uid="uid://mwe54oj3acth" path="res://assets/Animations/Medium/throw.res" id="14_ntw3m"]
+[ext_resource type="Animation" uid="uid://cqvxhcmwhnbp2" path="res://assets/Animations/Medium/use.res" id="15_gawb7"]
+[ext_resource type="Animation" uid="uid://b36nkvhou7373" path="res://assets/Animations/Medium/walk.res" id="16_6su31"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yni83"]
 radius = 0.2
 height = 0.8
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_svwi6"]
+_data = {
+&"death": ExtResource("3_ipxpy"),
+&"death_pose": ExtResource("4_unpkv"),
+&"fall": ExtResource("5_jkafe"),
+&"hit": ExtResource("6_d8i8s"),
+&"idle": ExtResource("7_alqwb"),
+&"interact": ExtResource("8_78s0a"),
+&"jump": ExtResource("9_eu0iv"),
+&"land": ExtResource("10_g2fx1"),
+&"pickup": ExtResource("11_jj4b1"),
+&"run": ExtResource("12_0f701"),
+&"spawn": ExtResource("13_dvbc2"),
+&"throw": ExtResource("14_ntw3m"),
+&"use": ExtResource("15_gawb7"),
+&"walk": ExtResource("16_6su31")
+}
+
 [node name="Character" unique_id=497783338 instance=ExtResource("1_yni83")]
 
 [node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
-VisualRoot = NodePath("../../character-male-e2")
+VisualRoot = NodePath("../../Farmer_A")
 
 [node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
-root_node = NodePath("../../character-male-e2")
-anim_player = NodePath("../../character-male-e2/AnimationPlayer")
+root_node = NodePath("../../Farmer_A")
+advance_expression_base_node = NodePath("")
+anim_player = NodePath("../../Farmer_A/AnimationPlayer")
 
 [node name="CollisionShape3D" parent="." index="3" unique_id=293151575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("CapsuleShape3D_yni83")
 
-[node name="character-male-e2" parent="." index="5" unique_id=58853703 instance=ExtResource("2_av5ms")]
+[node name="Farmer_A" parent="." index="6" unique_id=1854764491 instance=ExtResource("2_wsxdp")]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
 
-[node name="Skeleton3D" parent="character-male-e2/character-male-e" parent_id_path=PackedInt32Array(58853703, 1701689072) index="0" unique_id=2125994684]
-bones/4/rotation = Quaternion(0, 0, -0.3826835, 0.92387956)
-bones/5/rotation = Quaternion(0, 0, 0.3826835, 0.92387956)
+[node name="Skeleton3D" parent="Farmer_A/Rig_Medium" parent_id_path=PackedInt32Array(1854764491, 1468960249) index="0" unique_id=977507319]
+bones/1/position = Vector3(0, 0.38404343, 0)
+bones/1/rotation = Quaternion(0.0046212794, 0.043157283, 0.0001996337, 0.9990576)
+bones/1/scale = Vector3(0.99999994, 1, 0.99999994)
+bones/2/rotation = Quaternion(0.012310244, 2.317258e-09, 0.0010655472, 0.99992365)
+bones/2/scale = Vector3(1.0000001, 1, 1.0000001)
+bones/3/rotation = Quaternion(-0.0058867717, 4.229884e-09, -0.00050954556, 0.99998254)
+bones/3/scale = Vector3(1, 0.9999999, 1)
+bones/4/position = Vector3(0.21200737, 0.13413215, 8.216504e-08)
+bones/4/rotation = Quaternion(-0.5396968, -0.10184242, -0.76265866, 0.34162438)
+bones/4/scale = Vector3(0.9999993, 0.99999905, 0.9999998)
+bones/5/rotation = Quaternion(3.980855e-09, -6.3651115e-08, -0.37872323, 0.92551005)
+bones/5/scale = Vector3(1.0000004, 0.9999998, 1)
+bones/6/rotation = Quaternion(1.514567e-08, -7.3584383e-09, 0.0266581, 0.99964464)
+bones/6/scale = Vector3(1.0000001, 1, 1)
+bones/7/rotation = Quaternion(-0.22023517, -0.34319317, 0.17800687, 0.89556044)
+bones/7/scale = Vector3(0.99999976, 1.0000001, 1.0000004)
+bones/8/position = Vector3(5.138494e-10, 0.096125126, -0.057500005)
+bones/8/rotation = Quaternion(0.002432767, 0.0024327687, -0.69811684, 0.7159756)
+bones/8/scale = Vector3(1, 1, 1)
+bones/9/rotation = Quaternion(-0.014478637, -0.031338446, -0.0007970686, 0.99940366)
+bones/9/scale = Vector3(0.99999994, 1, 1)
+bones/10/position = Vector3(-0.21200736, 0.13413227, 8.62731e-08)
+bones/10/rotation = Quaternion(-0.5659212, 0.032533713, 0.7275701, 0.38641512)
+bones/10/scale = Vector3(0.9999992, 0.9999988, 0.9999998)
+bones/11/rotation = Quaternion(2.6081342e-08, 3.683536e-08, 0.39160833, 0.92013204)
+bones/11/scale = Vector3(1.0000004, 0.99999976, 1.0000001)
+bones/12/rotation = Quaternion(2.2497532e-10, 6.8246844e-09, -0.026658092, 0.99964464)
+bones/12/scale = Vector3(0.99999994, 0.99999994, 1)
+bones/13/rotation = Quaternion(-0.21071914, 0.37963885, -0.13158104, 0.89115566)
+bones/13/scale = Vector3(0.9999995, 0.99999994, 1.0000005)
+bones/14/position = Vector3(-1.5415026e-08, 0.096125185, -0.057500005)
+bones/14/rotation = Quaternion(0.0024327654, -0.0024327703, 0.69811684, 0.7159756)
+bones/14/scale = Vector3(1, 1.0000001, 1.0000001)
+bones/15/position = Vector3(0.17094508, 0.1135872, 1.5994095e-08)
+bones/15/rotation = Quaternion(0.98922706, 0.05760683, 0.071432345, 0.11405599)
+bones/15/scale = Vector3(0.9999999, 0.9999997, 1.0000008)
+bones/16/rotation = Quaternion(0.3331384, 6.067088e-08, -2.3087424e-07, 0.942878)
+bones/16/scale = Vector3(1.0000004, 0.99999994, 1.0000001)
+bones/17/rotation = Quaternion(-0.56887674, -0.11214908, 0.048550773, 0.8132925)
+bones/17/scale = Vector3(1.0000004, 1.0000007, 0.9999993)
+bones/18/rotation = Quaternion(-9.890429e-07, 0.9202346, -0.39136732, 2.7897335e-07)
+bones/18/scale = Vector3(1.0000001, 0.9999975, 1.0000027)
+bones/19/position = Vector3(-0.17094508, 0.11358732, 1.557549e-08)
+bones/19/rotation = Quaternion(0.9950326, -0.031163523, 0.030974373, 0.08932913)
+bones/19/scale = Vector3(0.9999999, 0.99999976, 1.0000008)
+bones/20/rotation = Quaternion(0.34363288, -6.16272e-08, 2.3933165e-07, 0.93910414)
+bones/20/scale = Vector3(0.99999994, 0.99999976, 0.99999994)
+bones/21/rotation = Quaternion(-0.5973185, 0.11390213, -0.014702985, 0.79373854)
+bones/21/scale = Vector3(0.99999976, 1.0000006, 0.9999992)
+bones/22/rotation = Quaternion(-8.934892e-05, 0.9202217, -0.3913977, 2.0290998e-05)
+bones/22/scale = Vector3(1.0000002, 0.9999979, 1.0000024)
 
-[editable path="character-male-e2"]
+[node name="Farmer_A_Hat" parent="Farmer_A/Rig_Medium/Skeleton3D" index="0" unique_id=1877762429]
+layers = 524289
+
+[node name="Farmer_A_Head" parent="Farmer_A/Rig_Medium/Skeleton3D" index="1" unique_id=2024658321]
+layers = 524289
+
+[node name="Farmer_ArmLeft" parent="Farmer_A/Rig_Medium/Skeleton3D" index="2" unique_id=1262427658]
+layers = 524289
+
+[node name="Farmer_ArmRight" parent="Farmer_A/Rig_Medium/Skeleton3D" index="3" unique_id=994923848]
+layers = 524289
+
+[node name="Farmer_Body" parent="Farmer_A/Rig_Medium/Skeleton3D" index="4" unique_id=1022261412]
+layers = 524289
+
+[node name="Farmer_LegLeft" parent="Farmer_A/Rig_Medium/Skeleton3D" index="5" unique_id=1577888208]
+layers = 524289
+
+[node name="Farmer_LegRight" parent="Farmer_A/Rig_Medium/Skeleton3D" index="6" unique_id=902724092]
+layers = 524289
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Farmer_A" index="1" unique_id=871261006]
+libraries/ = SubResource("AnimationLibrary_svwi6")
+
+[editable path="Farmer_A"]
