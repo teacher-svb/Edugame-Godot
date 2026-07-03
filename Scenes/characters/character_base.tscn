@@ -8,6 +8,20 @@
 [ext_resource type="Script" uid="uid://fumvv65m5aig" path="res://scripts/Game/StateManagementCharacter/CharacterStateFollowing.cs" id="5_mu1lf"]
 [ext_resource type="Script" uid="uid://ds2u0dlloavie" path="res://scripts/Game/StateManagementCharacter/CharacterStatePatrolling.cs" id="6_v1v05"]
 [ext_resource type="Script" uid="uid://dw3ggojroh7rn" path="res://scripts/Game/StateManagementCharacter/CharacterStateMoveInput.cs" id="7_w8mnd"]
+[ext_resource type="Animation" uid="uid://dgo3s8hhg1xjl" path="res://assets/Animations/Medium/death.res" id="9_vab70"]
+[ext_resource type="Animation" uid="uid://dtrhbb0qqh3kx" path="res://assets/Animations/Medium/death_pose.res" id="10_x6e6t"]
+[ext_resource type="Animation" uid="uid://bml3fmwodu2qq" path="res://assets/Animations/Medium/fall.res" id="11_e5ffi"]
+[ext_resource type="Animation" uid="uid://bijrrrbs5exd7" path="res://assets/Animations/Medium/hit.res" id="12_xfi2d"]
+[ext_resource type="Animation" uid="uid://bilgnxyaj6uwq" path="res://assets/Animations/Medium/idle.res" id="13_fjc6b"]
+[ext_resource type="Animation" uid="uid://bk148g6ge6nmg" path="res://assets/Animations/Medium/interact.res" id="14_wfdhu"]
+[ext_resource type="Animation" uid="uid://c2t0tb4fswqfy" path="res://assets/Animations/Medium/jump.res" id="15_w7ttq"]
+[ext_resource type="Animation" uid="uid://cy7q1181pxrpm" path="res://assets/Animations/Medium/land.res" id="16_exkih"]
+[ext_resource type="Animation" uid="uid://dbq75helwx6s5" path="res://assets/Animations/Medium/pickup.res" id="17_7u765"]
+[ext_resource type="Animation" uid="uid://cwmown8ut7nvc" path="res://assets/Animations/Medium/run.res" id="18_ktt3s"]
+[ext_resource type="Animation" uid="uid://ct85poeusuqfv" path="res://assets/Animations/Medium/spawn.res" id="19_533u4"]
+[ext_resource type="Animation" uid="uid://mwe54oj3acth" path="res://assets/Animations/Medium/throw.res" id="20_ovc5r"]
+[ext_resource type="Animation" uid="uid://cqvxhcmwhnbp2" path="res://assets/Animations/Medium/use.res" id="21_a5n7i"]
+[ext_resource type="Animation" uid="uid://b36nkvhou7373" path="res://assets/Animations/Medium/walk.res" id="22_quibf"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_evgpa"]
 animation = &"death"
@@ -85,13 +99,32 @@ states/walk/position = Vector2(563, 186)
 transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_60cj0"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_aebyh"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_iikk8"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_0ft5a"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_yj0bu"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_w8kji"), "land", "walk", SubResource("AnimationNodeStateMachineTransition_0qrrf"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_58mlp"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_0f1yx"), "death", "spawn", SubResource("AnimationNodeStateMachineTransition_6wyfi"), "Start", "spawn", SubResource("AnimationNodeStateMachineTransition_sikog"), "spawn", "idle", SubResource("AnimationNodeStateMachineTransition_evgpa")]
 graph_offset = Vector2(-260, 38)
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vsga2"]
+_data = {
+&"death": ExtResource("9_vab70"),
+&"death_pose": ExtResource("10_x6e6t"),
+&"fall": ExtResource("11_e5ffi"),
+&"hit": ExtResource("12_xfi2d"),
+&"idle": ExtResource("13_fjc6b"),
+&"interact": ExtResource("14_wfdhu"),
+&"jump": ExtResource("15_w7ttq"),
+&"land": ExtResource("16_exkih"),
+&"pickup": ExtResource("17_7u765"),
+&"run": ExtResource("18_ktt3s"),
+&"spawn": ExtResource("19_533u4"),
+&"throw": ExtResource("20_ovc5r"),
+&"use": ExtResource("21_a5n7i"),
+&"walk": ExtResource("22_quibf")
+}
+
 [node name="Character" type="CharacterBody3D" unique_id=497783338 node_paths=PackedStringArray("_closeupCamera")]
 script = ExtResource("1_u1x07")
-_closeupCamera = NodePath("dialogCamera")
+_closeupCamera = NodePath("VisualRoot/dialogCamera")
 metadata/_custom_type_script = "uid://c861mplcf03p7"
 
-[node name="CharacterController3D" type="Node" parent="." unique_id=631752590]
+[node name="CharacterController3D" type="Node" parent="." unique_id=631752590 node_paths=PackedStringArray("VisualRoot")]
 script = ExtResource("1_707x3")
+VisualRoot = NodePath("../VisualRoot")
 metadata/_custom_type_script = "uid://dc4u7vqilp6dd"
 
 [node name="stateManager" type="Node" parent="." unique_id=2020265289]
@@ -116,11 +149,15 @@ metadata/_custom_type_script = "uid://dw3ggojroh7rn"
 
 [node name="Animation" type="Node" parent="." unique_id=2085856052]
 
-[node name="CharacterAnimator" type="Node" parent="Animation" unique_id=1328867310]
+[node name="CharacterAnimator" type="Node" parent="Animation" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
 script = ExtResource("1_1wrgq")
+VisualRoot = NodePath("../../VisualRoot")
 
 [node name="AnimationTree" type="AnimationTree" parent="Animation" unique_id=58694043]
+root_node = NodePath("../../VisualRoot")
 tree_root = SubResource("AnimationNodeStateMachine_hr8he")
+advance_expression_base_node = NodePath("")
+anim_player = NodePath("../../VisualRoot/AnimationPlayer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=293151575]
 
@@ -131,7 +168,12 @@ path_height_offset = 0.75
 debug_enabled = true
 debug_path_custom_color = Color(1, 0, 1, 1)
 
-[node name="dialogCamera" type="Camera3D" parent="." unique_id=534549197 groups=["dialogCamera"]]
+[node name="VisualRoot" type="Node3D" parent="." unique_id=1420670141]
+
+[node name="dialogCamera" type="Camera3D" parent="VisualRoot" unique_id=534549197 groups=["dialogCamera"]]
 transform = Transform3D(1, 0, 0, 0, 0.9961948, 0.08715574, 0, -0.08715574, 0.9961948, -0.013557843, 0.66471577, 0.70199466)
 cull_mask = 524288
 fov = 60.3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualRoot" unique_id=933369381]
+libraries/ = SubResource("AnimationLibrary_vsga2")

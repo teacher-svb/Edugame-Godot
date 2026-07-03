@@ -31,6 +31,7 @@ namespace TnT.EduGame.GameState
             allMessagesRead = false;
 
             var character3d = GetTree().FindObjectsByType<Character3D>().Find(c => c.CharacterData == options.character);
+            GD.Print(character3d.Name);
             var closeupCam = character3d.CloseupCamera;
 
             MessageController.Instance.AddMessage(options.text, closeupCam, options.character.CharacterName);

@@ -162,7 +162,7 @@ size = Vector3(0.4958725, 1.8308105, 1.285881)
 script = ExtResource("27_0tae3")
 _targetPath = NodePath("../../../../dad")
 _methodName = "SetStateToIdle"
-_params = [2000]
+_params = [200]
 metadata/_custom_type_script = "uid://ckobusjip2hti"
 
 [sub_resource type="Resource" id="Resource_kb3qt"]
@@ -176,7 +176,7 @@ metadata/_custom_type_script = "uid://ckobusjip2hti"
 script = ExtResource("27_0tae3")
 _targetPath = NodePath("../../../../dad")
 _methodName = "SetStateToIdle"
-_params = [2000]
+_params = [200]
 metadata/_custom_type_script = "uid://ckobusjip2hti"
 
 [sub_resource type="Resource" id="Resource_kdqke"]

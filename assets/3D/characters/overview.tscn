@@ -4,29 +4,29 @@
 [ext_resource type="Texture2D" uid="uid://byxn7fql4mxrp" path="res://assets/3D/characters/textures/mage_texture_alt_A.png" id="2_5hstn"]
 [ext_resource type="Animation" uid="uid://dgo3s8hhg1xjl" path="res://assets/Animations/Medium/death.res" id="3_flhv1"]
 [ext_resource type="Animation" uid="uid://dtrhbb0qqh3kx" path="res://assets/Animations/Medium/death_pose.res" id="4_rmgfs"]
-[ext_resource type="Animation" uid="uid://bjn1bg4rf7mj0" path="res://assets/Animations/Medium/Death_B.res" id="5_6sv8p"]
-[ext_resource type="Animation" uid="uid://cs83oeeg7h3rb" path="res://assets/Animations/Medium/Death_B_Pose.res" id="6_di6tf"]
+[ext_resource type="Animation" uid="uid://cfus7xau17iuj" path="res://assets/Animations/Medium/Death_B.res" id="5_6sv8p"]
+[ext_resource type="Animation" uid="uid://dat3h8jvu5heb" path="res://assets/Animations/Medium/Death_B_Pose.res" id="6_di6tf"]
 [ext_resource type="Animation" uid="uid://bijrrrbs5exd7" path="res://assets/Animations/Medium/hit.res" id="7_ar3be"]
-[ext_resource type="Animation" uid="uid://cocqv10vrxye6" path="res://assets/Animations/Medium/Hit_B.res" id="8_mf10y"]
+[ext_resource type="Animation" uid="uid://c40c4rowts7uk" path="res://assets/Animations/Medium/Hit_B.res" id="8_mf10y"]
 [ext_resource type="Animation" uid="uid://bilgnxyaj6uwq" path="res://assets/Animations/Medium/idle.res" id="9_2qeqc"]
-[ext_resource type="Animation" uid="uid://bu71bqswjvid1" path="res://assets/Animations/Medium/Idle_B.res" id="10_7sns3"]
+[ext_resource type="Animation" uid="uid://utqopspofs8y" path="res://assets/Animations/Medium/Idle_B.res" id="10_7sns3"]
 [ext_resource type="Animation" uid="uid://bk148g6ge6nmg" path="res://assets/Animations/Medium/interact.res" id="11_f61el"]
-[ext_resource type="Animation" uid="uid://bolu5swuh4roj" path="res://assets/Animations/Medium/Jump_Full_Long.res" id="12_faygj"]
-[ext_resource type="Animation" uid="uid://csq7oju2swruf" path="res://assets/Animations/Medium/Jump_Full_Short.res" id="13_5bxy8"]
+[ext_resource type="Animation" uid="uid://c2dev1n64jw07" path="res://assets/Animations/Medium/Jump_Full_Long.res" id="12_faygj"]
+[ext_resource type="Animation" uid="uid://dn0j3eji7pf1q" path="res://assets/Animations/Medium/Jump_Full_Short.res" id="13_5bxy8"]
 [ext_resource type="Animation" uid="uid://bml3fmwodu2qq" path="res://assets/Animations/Medium/fall.res" id="14_87xxf"]
 [ext_resource type="Animation" uid="uid://cy7q1181pxrpm" path="res://assets/Animations/Medium/land.res" id="15_ddjwc"]
 [ext_resource type="Animation" uid="uid://c2t0tb4fswqfy" path="res://assets/Animations/Medium/jump.res" id="16_m5m3x"]
 [ext_resource type="Animation" uid="uid://dbq75helwx6s5" path="res://assets/Animations/Medium/pickup.res" id="17_p2ud6"]
 [ext_resource type="Animation" uid="uid://cwmown8ut7nvc" path="res://assets/Animations/Medium/run.res" id="18_puv7f"]
-[ext_resource type="Animation" uid="uid://cyy061swa0wab" path="res://assets/Animations/Medium/Running_B.res" id="19_blv4s"]
+[ext_resource type="Animation" uid="uid://dxufs1gs144mo" path="res://assets/Animations/Medium/Running_B.res" id="19_blv4s"]
 [ext_resource type="Animation" uid="uid://ct85poeusuqfv" path="res://assets/Animations/Medium/spawn.res" id="20_sywxc"]
-[ext_resource type="Animation" uid="uid://dwj5mketyun5a" path="res://assets/Animations/Medium/Spawn_Ground.res" id="21_i87dl"]
+[ext_resource type="Animation" uid="uid://b7so65s6wabwl" path="res://assets/Animations/Medium/Spawn_Ground.res" id="21_i87dl"]
 [ext_resource type="Animation" uid="uid://bt6506uo2bk8x" path="res://assets/Animations/Medium/T-Pose.res" id="22_0jgvn"]
 [ext_resource type="Animation" uid="uid://mwe54oj3acth" path="res://assets/Animations/Medium/throw.res" id="23_mi06o"]
 [ext_resource type="Animation" uid="uid://cqvxhcmwhnbp2" path="res://assets/Animations/Medium/use.res" id="24_26c4f"]
 [ext_resource type="Animation" uid="uid://b36nkvhou7373" path="res://assets/Animations/Medium/walk.res" id="25_nhhy5"]
-[ext_resource type="Animation" uid="uid://dhb6te04sjmk6" path="res://assets/Animations/Medium/Walking_B.res" id="26_ff8g2"]
-[ext_resource type="Animation" uid="uid://dx7i7c4uvtwte" path="res://assets/Animations/Medium/Walking_C.res" id="27_762g2"]
+[ext_resource type="Animation" uid="uid://v0xe7tk2kiou" path="res://assets/Animations/Medium/Walking_B.res" id="26_ff8g2"]
+[ext_resource type="Animation" uid="uid://qntrqnnq8quc" path="res://assets/Animations/Medium/Walking_C.res" id="27_762g2"]
 [ext_resource type="Texture2D" uid="uid://byunqbwyph5a8" path="res://assets/3D/characters/textures/mage_texture_alt_B.png" id="28_5hstn"]
 [ext_resource type="Texture2D" uid="uid://dg6cjk7f3fu6o" path="res://assets/3D/characters/textures/mage_texture_alt_C.png" id="28_flhv1"]
 [ext_resource type="PackedScene" uid="uid://dtujrckbw1coe" path="res://assets/3D/characters/Lorekeeper.glb" id="30_ah37l"]
@@ -287,7 +287,7 @@ albedo_texture = ExtResource("46_ksmdf")
 [node name="Mage" parent="." unique_id=225768544 instance=ExtResource("1_1srmw")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, -1)
 
-[node name="Skeleton3D" parent="Mage/Rig_Medium" parent_id_path=PackedInt32Array(225768544, 1709638862) index="0" unique_id=493072791]
+[node name="Skeleton3D" parent="Mage/Rig_Medium" parent_id_path=PackedInt32Array(225768544, 2021025981) index="0" unique_id=1757248692]
 bones/1/position = Vector3(4.3561184e-18, 0.36031148, 1.0385796e-24)
 bones/2/position = Vector3(-0.17094506, 0.08358726, -0.01999999)
 bones/2/rotation = Quaternion(0.99897593, 2.624242e-07, 3.6084767e-08, -0.04524396)
@@ -317,28 +317,28 @@ bones/20/rotation = Quaternion(0.3766119, 6.3959284e-08, -2.6154382e-07, 0.92637
 bones/21/rotation = Quaternion(-0.644513, -4.2805716e-08, 2.3152316e-08, 0.76459336)
 bones/22/rotation = Quaternion(2.132097e-08, 0.9201128, -0.39165363, 6.444806e-08)
 
-[node name="Mage_ArmLeft" parent="Mage/Rig_Medium/Skeleton3D" index="0" unique_id=1856449493]
+[node name="Mage_ArmLeft" parent="Mage/Rig_Medium/Skeleton3D" index="0" unique_id=189092488]
 surface_material_override/0 = SubResource("StandardMaterial3D_3il27")
 
-[node name="Mage_ArmRight" parent="Mage/Rig_Medium/Skeleton3D" index="1" unique_id=1407209990]
+[node name="Mage_ArmRight" parent="Mage/Rig_Medium/Skeleton3D" index="1" unique_id=967111806]
 surface_material_override/0 = SubResource("StandardMaterial3D_um8lb")
 
-[node name="Mage_Body" parent="Mage/Rig_Medium/Skeleton3D" index="2" unique_id=180451546]
+[node name="Mage_Body" parent="Mage/Rig_Medium/Skeleton3D" index="2" unique_id=1788421397]
 surface_material_override/0 = SubResource("StandardMaterial3D_rosuv")
 
-[node name="Mage_Cape" parent="Mage/Rig_Medium/Skeleton3D" index="3" unique_id=2079059128]
+[node name="Mage_Cape" parent="Mage/Rig_Medium/Skeleton3D" index="3" unique_id=836179510]
 surface_material_override/0 = SubResource("StandardMaterial3D_fv3j6")
 
-[node name="Mage_Hat" parent="Mage/Rig_Medium/Skeleton3D" index="4" unique_id=1533454953]
+[node name="Mage_Hat" parent="Mage/Rig_Medium/Skeleton3D" index="4" unique_id=1135392135]
 surface_material_override/0 = SubResource("StandardMaterial3D_0gy5x")
 
-[node name="Mage_Head" parent="Mage/Rig_Medium/Skeleton3D" index="5" unique_id=982050840]
+[node name="Mage_Head" parent="Mage/Rig_Medium/Skeleton3D" index="5" unique_id=302408158]
 surface_material_override/0 = SubResource("StandardMaterial3D_bxjy3")
 
-[node name="Mage_LegLeft" parent="Mage/Rig_Medium/Skeleton3D" index="6" unique_id=1383984422]
+[node name="Mage_LegLeft" parent="Mage/Rig_Medium/Skeleton3D" index="6" unique_id=975460740]
 surface_material_override/0 = SubResource("StandardMaterial3D_jwwkl")
 
-[node name="Mage_LegRight" parent="Mage/Rig_Medium/Skeleton3D" index="7" unique_id=1529607936]
+[node name="Mage_LegRight" parent="Mage/Rig_Medium/Skeleton3D" index="7" unique_id=428572195]
 surface_material_override/0 = SubResource("StandardMaterial3D_g6832")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Mage" unique_id=226217770]
@@ -348,7 +348,7 @@ autoplay = &"Mage/Idle_A"
 [node name="Mage2" parent="." unique_id=1021996681 instance=ExtResource("1_1srmw")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0.004745245, 0, -2)
 
-[node name="Skeleton3D" parent="Mage2/Rig_Medium" parent_id_path=PackedInt32Array(1021996681, 1709638862) index="0" unique_id=493072791]
+[node name="Skeleton3D" parent="Mage2/Rig_Medium" parent_id_path=PackedInt32Array(1021996681, 2021025981) index="0" unique_id=1757248692]
 bones/1/position = Vector3(3.2609445e-18, 0.4295572, 7.7746975e-25)
 bones/1/rotation = Quaternion(0.09959397, -1.1861658e-07, 1.1872524e-08, 0.99502814)
 bones/2/position = Vector3(-0.1709451, 0.113587305, 0.09606488)
@@ -379,28 +379,28 @@ bones/20/rotation = Quaternion(0.38764578, 6.3644265e-08, -2.6920648e-07, 0.9218
 bones/21/rotation = Quaternion(-0.45577693, -7.065811e-08, 8.696068e-08, 0.89009416)
 bones/22/rotation = Quaternion(8.162845e-09, 0.92024785, -0.3913359, 7.416612e-08)
 
-[node name="Mage_ArmLeft" parent="Mage2/Rig_Medium/Skeleton3D" index="0" unique_id=1856449493]
+[node name="Mage_ArmLeft" parent="Mage2/Rig_Medium/Skeleton3D" index="0" unique_id=189092488]
 surface_material_override/0 = SubResource("StandardMaterial3D_rmgfs")
 
-[node name="Mage_ArmRight" parent="Mage2/Rig_Medium/Skeleton3D" index="1" unique_id=1407209990]
+[node name="Mage_ArmRight" parent="Mage2/Rig_Medium/Skeleton3D" index="1" unique_id=967111806]
 surface_material_override/0 = SubResource("StandardMaterial3D_rmgfs")
 
-[node name="Mage_Body" parent="Mage2/Rig_Medium/Skeleton3D" index="2" unique_id=180451546]
+[node name="Mage_Body" parent="Mage2/Rig_Medium/Skeleton3D" index="2" unique_id=1788421397]
 surface_material_override/0 = SubResource("StandardMaterial3D_6sv8p")
 
-[node name="Mage_Cape" parent="Mage2/Rig_Medium/Skeleton3D" index="3" unique_id=2079059128]
+[node name="Mage_Cape" parent="Mage2/Rig_Medium/Skeleton3D" index="3" unique_id=836179510]
 surface_material_override/0 = SubResource("StandardMaterial3D_di6tf")
 
-[node name="Mage_Hat" parent="Mage2/Rig_Medium/Skeleton3D" index="4" unique_id=1533454953]
+[node name="Mage_Hat" parent="Mage2/Rig_Medium/Skeleton3D" index="4" unique_id=1135392135]
 surface_material_override/0 = SubResource("StandardMaterial3D_ar3be")
 
-[node name="Mage_Head" parent="Mage2/Rig_Medium/Skeleton3D" index="5" unique_id=982050840]
+[node name="Mage_Head" parent="Mage2/Rig_Medium/Skeleton3D" index="5" unique_id=302408158]
 surface_material_override/0 = SubResource("StandardMaterial3D_mf10y")
 
-[node name="Mage_LegLeft" parent="Mage2/Rig_Medium/Skeleton3D" index="6" unique_id=1383984422]
+[node name="Mage_LegLeft" parent="Mage2/Rig_Medium/Skeleton3D" index="6" unique_id=975460740]
 surface_material_override/0 = SubResource("StandardMaterial3D_2qeqc")
 
-[node name="Mage_LegRight" parent="Mage2/Rig_Medium/Skeleton3D" index="7" unique_id=1529607936]
+[node name="Mage_LegRight" parent="Mage2/Rig_Medium/Skeleton3D" index="7" unique_id=428572195]
 surface_material_override/0 = SubResource("StandardMaterial3D_7sns3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Mage2" unique_id=107015863]
@@ -411,7 +411,7 @@ autoplay = &"Mage/Idle_A"
 [node name="Mage3" parent="." unique_id=2014014686 instance=ExtResource("1_1srmw")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0.004745245, 0, -3)
 
-[node name="Skeleton3D" parent="Mage3/Rig_Medium" parent_id_path=PackedInt32Array(2014014686, 1709638862) index="0" unique_id=493072791]
+[node name="Skeleton3D" parent="Mage3/Rig_Medium" parent_id_path=PackedInt32Array(2014014686, 2021025981) index="0" unique_id=1757248692]
 bones/1/position = Vector3(0, 0.3840641, 0)
 bones/1/rotation = Quaternion(0.004606089, 0.043157287, 0.00019897748, 0.99905765)
 bones/1/scale = Vector3(0.99999994, 1, 0.99999994)
@@ -464,28 +464,28 @@ bones/21/scale = Vector3(1.0000004, 1.0000007, 0.9999993)
 bones/22/rotation = Quaternion(-9.888006e-07, 0.9202346, -0.39136732, 2.790723e-07)
 bones/22/scale = Vector3(1.0000001, 0.9999975, 1.0000027)
 
-[node name="Mage_ArmLeft" parent="Mage3/Rig_Medium/Skeleton3D" index="0" unique_id=1856449493]
+[node name="Mage_ArmLeft" parent="Mage3/Rig_Medium/Skeleton3D" index="0" unique_id=189092488]
 surface_material_override/0 = SubResource("StandardMaterial3D_flhv1")
 
-[node name="Mage_ArmRight" parent="Mage3/Rig_Medium/Skeleton3D" index="1" unique_id=1407209990]
+[node name="Mage_ArmRight" parent="Mage3/Rig_Medium/Skeleton3D" index="1" unique_id=967111806]
 surface_material_override/0 = SubResource("StandardMaterial3D_flhv1")
 
-[node name="Mage_Body" parent="Mage3/Rig_Medium/Skeleton3D" index="2" unique_id=180451546]
+[node name="Mage_Body" parent="Mage3/Rig_Medium/Skeleton3D" index="2" unique_id=1788421397]
 surface_material_override/0 = SubResource("StandardMaterial3D_flhv1")
 
-[node name="Mage_Cape" parent="Mage3/Rig_Medium/Skeleton3D" index="3" unique_id=2079059128]
+[node name="Mage_Cape" parent="Mage3/Rig_Medium/Skeleton3D" index="3" unique_id=836179510]
 surface_material_override/0 = SubResource("StandardMaterial3D_flhv1")
 
-[node name="Mage_Hat" parent="Mage3/Rig_Medium/Skeleton3D" index="4" unique_id=1533454953]
+[node name="Mage_Hat" parent="Mage3/Rig_Medium/Skeleton3D" index="4" unique_id=1135392135]
 surface_material_override/0 = SubResource("StandardMaterial3D_flhv1")
 
-[node name="Mage_Head" parent="Mage3/Rig_Medium/Skeleton3D" index="5" unique_id=982050840]
+[node name="Mage_Head" parent="Mage3/Rig_Medium/Skeleton3D" index="5" unique_id=302408158]
 surface_material_override/0 = SubResource("StandardMaterial3D_flhv1")
 
-[node name="Mage_LegLeft" parent="Mage3/Rig_Medium/Skeleton3D" index="6" unique_id=1383984422]
+[node name="Mage_LegLeft" parent="Mage3/Rig_Medium/Skeleton3D" index="6" unique_id=975460740]
 surface_material_override/0 = SubResource("StandardMaterial3D_flhv1")
 
-[node name="Mage_LegRight" parent="Mage3/Rig_Medium/Skeleton3D" index="7" unique_id=1529607936]
+[node name="Mage_LegRight" parent="Mage3/Rig_Medium/Skeleton3D" index="7" unique_id=428572195]
 surface_material_override/0 = SubResource("StandardMaterial3D_flhv1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Mage3" unique_id=1462356865]
@@ -495,7 +495,7 @@ autoplay = &"Mage/Idle_A"
 [node name="Mage4" parent="." unique_id=398703821 instance=ExtResource("1_1srmw")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0.004745245, 0, 0)
 
-[node name="Skeleton3D" parent="Mage4/Rig_Medium" parent_id_path=PackedInt32Array(398703821, 1709638862) index="0" unique_id=493072791]
+[node name="Skeleton3D" parent="Mage4/Rig_Medium" parent_id_path=PackedInt32Array(398703821, 2021025981) index="0" unique_id=1757248692]
 bones/1/position = Vector3(0, 0.3539472, 0)
 bones/2/position = Vector3(-0.17094506, 0.08879873, 0.0024222583)
 bones/2/rotation = Quaternion(0.99686646, 2.3221588e-07, -4.329749e-09, 0.07910278)
@@ -523,10 +523,10 @@ bones/20/rotation = Quaternion(0.88455087, 3.2204383e-08, -6.1429e-07, 0.4664439
 bones/21/rotation = Quaternion(-0.68916535, -7.552983e-08, 3.0558698e-07, 0.7246041)
 bones/22/rotation = Quaternion(4.3087862e-08, 0.9199059, -0.39213943, 7.361033e-08)
 
-[node name="Mage_Cape" parent="Mage4/Rig_Medium/Skeleton3D" index="3" unique_id=2079059128]
+[node name="Mage_Cape" parent="Mage4/Rig_Medium/Skeleton3D" index="3" unique_id=836179510]
 visible = false
 
-[node name="Mage_Hat" parent="Mage4/Rig_Medium/Skeleton3D" index="4" unique_id=1533454953]
+[node name="Mage_Hat" parent="Mage4/Rig_Medium/Skeleton3D" index="4" unique_id=1135392135]
 visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Mage4" unique_id=556050997]
@@ -536,18 +536,18 @@ autoplay = &"Mage/Idle_A"
 [node name="Lorekeeper" parent="." unique_id=689550507 instance=ExtResource("30_ah37l")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 1, 0, 0)
 
-[node name="Lorekeeper_Backpack" parent="Lorekeeper/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(689550507, 71792529) index="2" unique_id=1572324750]
+[node name="Lorekeeper_Backpack" parent="Lorekeeper/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(689550507, 559740830) index="2" unique_id=1923175956]
 visible = false
 
-[node name="Mage_Cape" type="MeshInstance3D" parent="Lorekeeper/Rig_Medium/Skeleton3D/Lorekeeper_Body" parent_id_path=PackedInt32Array(689550507, 1085179026) index="0" unique_id=1936616684]
+[node name="Mage_Cape" type="MeshInstance3D" parent="Lorekeeper/Rig_Medium/Skeleton3D/Lorekeeper_Body" parent_id_path=PackedInt32Array(689550507, 1868120414) index="0" unique_id=1936616684]
 mesh = SubResource("ArrayMesh_2lh8k")
 skin = SubResource("Skin_ykvgm")
 skeleton = NodePath("../../../..")
 
-[node name="Lorekeeper_Glasses" parent="Lorekeeper/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(689550507, 71792529) index="4" unique_id=143764002]
+[node name="Lorekeeper_Glasses" parent="Lorekeeper/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(689550507, 559740830) index="4" unique_id=951325948]
 visible = false
 
-[node name="Mage_Hat" type="MeshInstance3D" parent="Lorekeeper/Rig_Medium/Skeleton3D/Lorekeeper_Head" parent_id_path=PackedInt32Array(689550507, 1037189967) index="0" unique_id=559041354]
+[node name="Mage_Hat" type="MeshInstance3D" parent="Lorekeeper/Rig_Medium/Skeleton3D/Lorekeeper_Head" parent_id_path=PackedInt32Array(689550507, 705617820) index="0" unique_id=559041354]
 mesh = SubResource("ArrayMesh_paeq5")
 skin = SubResource("Skin_ykvgm")
 skeleton = NodePath("../../../..")
@@ -561,90 +561,93 @@ transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 3, 0, 0)
 [node name="Farmer_B" parent="." unique_id=2092872470 instance=ExtResource("33_6ci75")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 4, 0, 0)
 
+[node name="Farmer_B_Hat" parent="Farmer_B/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2092872470, 550087582) index="2" unique_id=1457676031]
+visible = false
+
 [node name="Engineer" parent="." unique_id=1473802298 instance=ExtResource("34_vlon1")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 5, 0, 0)
 
 [node name="Engineer2" parent="." unique_id=2102828207 instance=ExtResource("34_vlon1")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 5, 0, -1)
 
-[node name="Engineer_ArmLeft" parent="Engineer2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2102828207, 522226090) index="0" unique_id=1874009141]
+[node name="Engineer_ArmLeft" parent="Engineer2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2102828207, 552517992) index="0" unique_id=191204572]
 surface_material_override/0 = SubResource("StandardMaterial3D_x1rje")
 
-[node name="Engineer_ArmRight" parent="Engineer2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2102828207, 522226090) index="1" unique_id=71718484]
+[node name="Engineer_ArmRight" parent="Engineer2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2102828207, 552517992) index="1" unique_id=1209550892]
 surface_material_override/0 = SubResource("StandardMaterial3D_x1rje")
 
-[node name="Engineer_Backpack" parent="Engineer2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2102828207, 522226090) index="2" unique_id=409439992]
+[node name="Engineer_Backpack" parent="Engineer2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2102828207, 552517992) index="2" unique_id=73038579]
 surface_material_override/0 = SubResource("StandardMaterial3D_x1rje")
 
-[node name="Engineer_Body" parent="Engineer2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2102828207, 522226090) index="3" unique_id=565117771]
+[node name="Engineer_Body" parent="Engineer2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2102828207, 552517992) index="3" unique_id=2114029621]
 surface_material_override/0 = SubResource("StandardMaterial3D_x1rje")
 
-[node name="Engineer_Goggles" parent="Engineer2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2102828207, 522226090) index="4" unique_id=1126704807]
+[node name="Engineer_Goggles" parent="Engineer2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2102828207, 552517992) index="4" unique_id=568108285]
 surface_material_override/0 = SubResource("StandardMaterial3D_x1rje")
 
-[node name="Engineer_Head" parent="Engineer2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2102828207, 522226090) index="5" unique_id=1674624500]
+[node name="Engineer_Head" parent="Engineer2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2102828207, 552517992) index="5" unique_id=1574254128]
 surface_material_override/0 = SubResource("StandardMaterial3D_x1rje")
 
-[node name="Engineer_LegLeft" parent="Engineer2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2102828207, 522226090) index="6" unique_id=251442836]
+[node name="Engineer_LegLeft" parent="Engineer2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2102828207, 552517992) index="6" unique_id=1923108924]
 surface_material_override/0 = SubResource("StandardMaterial3D_x1rje")
 
-[node name="Engineer_LegRight" parent="Engineer2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2102828207, 522226090) index="7" unique_id=781471406]
+[node name="Engineer_LegRight" parent="Engineer2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(2102828207, 552517992) index="7" unique_id=1048888592]
 surface_material_override/0 = SubResource("StandardMaterial3D_x1rje")
 
 [node name="Engineer3" parent="." unique_id=1931716658 instance=ExtResource("34_vlon1")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 5, 0, -2)
 
-[node name="Engineer_ArmLeft" parent="Engineer3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1931716658, 522226090) index="0" unique_id=1874009141]
+[node name="Engineer_ArmLeft" parent="Engineer3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1931716658, 552517992) index="0" unique_id=191204572]
 surface_material_override/0 = SubResource("StandardMaterial3D_5ipqa")
 
-[node name="Engineer_ArmRight" parent="Engineer3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1931716658, 522226090) index="1" unique_id=71718484]
+[node name="Engineer_ArmRight" parent="Engineer3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1931716658, 552517992) index="1" unique_id=1209550892]
 surface_material_override/0 = SubResource("StandardMaterial3D_5ipqa")
 
-[node name="Engineer_Backpack" parent="Engineer3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1931716658, 522226090) index="2" unique_id=409439992]
+[node name="Engineer_Backpack" parent="Engineer3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1931716658, 552517992) index="2" unique_id=73038579]
 visible = false
 surface_material_override/0 = SubResource("StandardMaterial3D_5ipqa")
 
-[node name="Engineer_Body" parent="Engineer3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1931716658, 522226090) index="3" unique_id=565117771]
+[node name="Engineer_Body" parent="Engineer3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1931716658, 552517992) index="3" unique_id=2114029621]
 surface_material_override/0 = SubResource("StandardMaterial3D_5ipqa")
 
-[node name="Engineer_Goggles" parent="Engineer3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1931716658, 522226090) index="4" unique_id=1126704807]
+[node name="Engineer_Goggles" parent="Engineer3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1931716658, 552517992) index="4" unique_id=568108285]
 visible = false
 surface_material_override/0 = SubResource("StandardMaterial3D_5ipqa")
 
-[node name="Engineer_Head" parent="Engineer3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1931716658, 522226090) index="5" unique_id=1674624500]
+[node name="Engineer_Head" parent="Engineer3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1931716658, 552517992) index="5" unique_id=1574254128]
 surface_material_override/0 = SubResource("StandardMaterial3D_5ipqa")
 
-[node name="Engineer_LegLeft" parent="Engineer3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1931716658, 522226090) index="6" unique_id=251442836]
+[node name="Engineer_LegLeft" parent="Engineer3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1931716658, 552517992) index="6" unique_id=1923108924]
 surface_material_override/0 = SubResource("StandardMaterial3D_5ipqa")
 
-[node name="Engineer_LegRight" parent="Engineer3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1931716658, 522226090) index="7" unique_id=781471406]
+[node name="Engineer_LegRight" parent="Engineer3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1931716658, 552517992) index="7" unique_id=1048888592]
 surface_material_override/0 = SubResource("StandardMaterial3D_5ipqa")
 
 [node name="Engineer4" parent="." unique_id=616691376 instance=ExtResource("34_vlon1")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 5, 0, -3)
 
-[node name="Engineer_ArmLeft" parent="Engineer4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(616691376, 522226090) index="0" unique_id=1874009141]
+[node name="Engineer_ArmLeft" parent="Engineer4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(616691376, 552517992) index="0" unique_id=191204572]
 surface_material_override/0 = SubResource("StandardMaterial3D_xi73e")
 
-[node name="Engineer_ArmRight" parent="Engineer4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(616691376, 522226090) index="1" unique_id=71718484]
+[node name="Engineer_ArmRight" parent="Engineer4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(616691376, 552517992) index="1" unique_id=1209550892]
 surface_material_override/0 = SubResource("StandardMaterial3D_xi73e")
 
-[node name="Engineer_Backpack" parent="Engineer4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(616691376, 522226090) index="2" unique_id=409439992]
+[node name="Engineer_Backpack" parent="Engineer4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(616691376, 552517992) index="2" unique_id=73038579]
 surface_material_override/0 = SubResource("StandardMaterial3D_xi73e")
 
-[node name="Engineer_Body" parent="Engineer4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(616691376, 522226090) index="3" unique_id=565117771]
+[node name="Engineer_Body" parent="Engineer4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(616691376, 552517992) index="3" unique_id=2114029621]
 surface_material_override/0 = SubResource("StandardMaterial3D_xi73e")
 
-[node name="Engineer_Goggles" parent="Engineer4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(616691376, 522226090) index="4" unique_id=1126704807]
+[node name="Engineer_Goggles" parent="Engineer4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(616691376, 552517992) index="4" unique_id=568108285]
 surface_material_override/0 = SubResource("StandardMaterial3D_xi73e")
 
-[node name="Engineer_Head" parent="Engineer4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(616691376, 522226090) index="5" unique_id=1674624500]
+[node name="Engineer_Head" parent="Engineer4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(616691376, 552517992) index="5" unique_id=1574254128]
 surface_material_override/0 = SubResource("StandardMaterial3D_xi73e")
 
-[node name="Engineer_LegLeft" parent="Engineer4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(616691376, 522226090) index="6" unique_id=251442836]
+[node name="Engineer_LegLeft" parent="Engineer4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(616691376, 552517992) index="6" unique_id=1923108924]
 surface_material_override/0 = SubResource("StandardMaterial3D_xi73e")
 
-[node name="Engineer_LegRight" parent="Engineer4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(616691376, 522226090) index="7" unique_id=781471406]
+[node name="Engineer_LegRight" parent="Engineer4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(616691376, 552517992) index="7" unique_id=1048888592]
 surface_material_override/0 = SubResource("StandardMaterial3D_xi73e")
 
 [node name="Cleric" parent="." unique_id=968806173 instance=ExtResource("35_cdxkl")]
@@ -656,82 +659,82 @@ transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 7, 0, 0)
 [node name="Ranger2" parent="." unique_id=1220103891 instance=ExtResource("36_57304")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 7, 0, -1)
 
-[node name="Ranger_ArmLeft" parent="Ranger2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1220103891, 1862386463) index="0" unique_id=472897698]
+[node name="Ranger_ArmLeft" parent="Ranger2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1220103891, 451305418) index="0" unique_id=978363265]
 surface_material_override/0 = SubResource("StandardMaterial3D_d3cxn")
 
-[node name="Ranger_ArmRight" parent="Ranger2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1220103891, 1862386463) index="1" unique_id=1136384925]
+[node name="Ranger_ArmRight" parent="Ranger2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1220103891, 451305418) index="1" unique_id=1493974829]
 surface_material_override/0 = SubResource("StandardMaterial3D_d3cxn")
 
-[node name="Ranger_Body" parent="Ranger2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1220103891, 1862386463) index="2" unique_id=1536648369]
+[node name="Ranger_Body" parent="Ranger2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1220103891, 451305418) index="2" unique_id=1511718933]
 surface_material_override/0 = SubResource("StandardMaterial3D_d3cxn")
 
-[node name="Ranger_Cape" parent="Ranger2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1220103891, 1862386463) index="3" unique_id=1436302409]
+[node name="Ranger_Cape" parent="Ranger2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1220103891, 451305418) index="3" unique_id=1318429662]
 surface_material_override/0 = SubResource("StandardMaterial3D_d3cxn")
 
-[node name="Ranger_Head" parent="Ranger2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1220103891, 1862386463) index="4" unique_id=1904984895]
+[node name="Ranger_Head" parent="Ranger2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1220103891, 451305418) index="4" unique_id=132425405]
 surface_material_override/0 = SubResource("StandardMaterial3D_d3cxn")
 
-[node name="Ranger_LegLeft" parent="Ranger2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1220103891, 1862386463) index="5" unique_id=1524870137]
+[node name="Ranger_LegLeft" parent="Ranger2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1220103891, 451305418) index="5" unique_id=2005970610]
 surface_material_override/0 = SubResource("StandardMaterial3D_d3cxn")
 
-[node name="Ranger_LegRight" parent="Ranger2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1220103891, 1862386463) index="6" unique_id=1189252189]
+[node name="Ranger_LegRight" parent="Ranger2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1220103891, 451305418) index="6" unique_id=1032778849]
 surface_material_override/0 = SubResource("StandardMaterial3D_d3cxn")
 
-[node name="Ranger_Quiver" parent="Ranger2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1220103891, 1862386463) index="7" unique_id=1168440881]
+[node name="Ranger_Quiver" parent="Ranger2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1220103891, 451305418) index="7" unique_id=1383799118]
 surface_material_override/0 = SubResource("StandardMaterial3D_d3cxn")
 
 [node name="Ranger3" parent="." unique_id=279733692 instance=ExtResource("36_57304")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 7, 0, -2)
 
-[node name="Ranger_ArmLeft" parent="Ranger3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(279733692, 1862386463) index="0" unique_id=472897698]
+[node name="Ranger_ArmLeft" parent="Ranger3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(279733692, 451305418) index="0" unique_id=978363265]
 surface_material_override/0 = SubResource("StandardMaterial3D_bfys7")
 
-[node name="Ranger_ArmRight" parent="Ranger3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(279733692, 1862386463) index="1" unique_id=1136384925]
+[node name="Ranger_ArmRight" parent="Ranger3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(279733692, 451305418) index="1" unique_id=1493974829]
 surface_material_override/0 = SubResource("StandardMaterial3D_bfys7")
 
-[node name="Ranger_Body" parent="Ranger3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(279733692, 1862386463) index="2" unique_id=1536648369]
+[node name="Ranger_Body" parent="Ranger3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(279733692, 451305418) index="2" unique_id=1511718933]
 surface_material_override/0 = SubResource("StandardMaterial3D_bfys7")
 
-[node name="Ranger_Cape" parent="Ranger3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(279733692, 1862386463) index="3" unique_id=1436302409]
+[node name="Ranger_Cape" parent="Ranger3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(279733692, 451305418) index="3" unique_id=1318429662]
 surface_material_override/0 = SubResource("StandardMaterial3D_bfys7")
 
-[node name="Ranger_Head" parent="Ranger3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(279733692, 1862386463) index="4" unique_id=1904984895]
+[node name="Ranger_Head" parent="Ranger3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(279733692, 451305418) index="4" unique_id=132425405]
 surface_material_override/0 = SubResource("StandardMaterial3D_bfys7")
 
-[node name="Ranger_LegLeft" parent="Ranger3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(279733692, 1862386463) index="5" unique_id=1524870137]
+[node name="Ranger_LegLeft" parent="Ranger3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(279733692, 451305418) index="5" unique_id=2005970610]
 surface_material_override/0 = SubResource("StandardMaterial3D_bfys7")
 
-[node name="Ranger_LegRight" parent="Ranger3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(279733692, 1862386463) index="6" unique_id=1189252189]
+[node name="Ranger_LegRight" parent="Ranger3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(279733692, 451305418) index="6" unique_id=1032778849]
 surface_material_override/0 = SubResource("StandardMaterial3D_bfys7")
 
-[node name="Ranger_Quiver" parent="Ranger3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(279733692, 1862386463) index="7" unique_id=1168440881]
+[node name="Ranger_Quiver" parent="Ranger3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(279733692, 451305418) index="7" unique_id=1383799118]
 surface_material_override/0 = SubResource("StandardMaterial3D_bfys7")
 
 [node name="Ranger4" parent="." unique_id=1019404571 instance=ExtResource("36_57304")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 7, 0, -3)
 
-[node name="Ranger_ArmLeft" parent="Ranger4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1019404571, 1862386463) index="0" unique_id=472897698]
+[node name="Ranger_ArmLeft" parent="Ranger4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1019404571, 451305418) index="0" unique_id=978363265]
 surface_material_override/0 = SubResource("StandardMaterial3D_hbub6")
 
-[node name="Ranger_ArmRight" parent="Ranger4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1019404571, 1862386463) index="1" unique_id=1136384925]
+[node name="Ranger_ArmRight" parent="Ranger4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1019404571, 451305418) index="1" unique_id=1493974829]
 surface_material_override/0 = SubResource("StandardMaterial3D_hbub6")
 
-[node name="Ranger_Body" parent="Ranger4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1019404571, 1862386463) index="2" unique_id=1536648369]
+[node name="Ranger_Body" parent="Ranger4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1019404571, 451305418) index="2" unique_id=1511718933]
 surface_material_override/0 = SubResource("StandardMaterial3D_hbub6")
 
-[node name="Ranger_Cape" parent="Ranger4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1019404571, 1862386463) index="3" unique_id=1436302409]
+[node name="Ranger_Cape" parent="Ranger4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1019404571, 451305418) index="3" unique_id=1318429662]
 surface_material_override/0 = SubResource("StandardMaterial3D_hbub6")
 
-[node name="Ranger_Head" parent="Ranger4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1019404571, 1862386463) index="4" unique_id=1904984895]
+[node name="Ranger_Head" parent="Ranger4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1019404571, 451305418) index="4" unique_id=132425405]
 surface_material_override/0 = SubResource("StandardMaterial3D_hbub6")
 
-[node name="Ranger_LegLeft" parent="Ranger4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1019404571, 1862386463) index="5" unique_id=1524870137]
+[node name="Ranger_LegLeft" parent="Ranger4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1019404571, 451305418) index="5" unique_id=2005970610]
 surface_material_override/0 = SubResource("StandardMaterial3D_hbub6")
 
-[node name="Ranger_LegRight" parent="Ranger4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1019404571, 1862386463) index="6" unique_id=1189252189]
+[node name="Ranger_LegRight" parent="Ranger4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1019404571, 451305418) index="6" unique_id=1032778849]
 surface_material_override/0 = SubResource("StandardMaterial3D_hbub6")
 
-[node name="Ranger_Quiver" parent="Ranger4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1019404571, 1862386463) index="7" unique_id=1168440881]
+[node name="Ranger_Quiver" parent="Ranger4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1019404571, 451305418) index="7" unique_id=1383799118]
 surface_material_override/0 = SubResource("StandardMaterial3D_hbub6")
 
 [node name="Rogue" parent="." unique_id=59590468 instance=ExtResource("37_6ci75")]
@@ -740,73 +743,73 @@ transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 8, 0, 0)
 [node name="Rogue2" parent="." unique_id=1488988783 instance=ExtResource("37_6ci75")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 8, 0, -1)
 
-[node name="Rogue_ArmLeft" parent="Rogue2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1488988783, 45707731) index="0" unique_id=218359089]
+[node name="Rogue_ArmLeft" parent="Rogue2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1488988783, 368218762) index="0" unique_id=1251932641]
 surface_material_override/0 = SubResource("StandardMaterial3D_vlon1")
 
-[node name="Rogue_ArmRight" parent="Rogue2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1488988783, 45707731) index="1" unique_id=1789854395]
+[node name="Rogue_ArmRight" parent="Rogue2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1488988783, 368218762) index="1" unique_id=2014014266]
 surface_material_override/0 = SubResource("StandardMaterial3D_vlon1")
 
-[node name="Rogue_Body" parent="Rogue2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1488988783, 45707731) index="2" unique_id=1329199846]
+[node name="Rogue_Body" parent="Rogue2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1488988783, 368218762) index="2" unique_id=1210971319]
 surface_material_override/0 = SubResource("StandardMaterial3D_vlon1")
 
-[node name="Rogue_Cape" parent="Rogue2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1488988783, 45707731) index="3" unique_id=1810490329]
+[node name="Rogue_Cape" parent="Rogue2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1488988783, 368218762) index="3" unique_id=1500341934]
 surface_material_override/0 = SubResource("StandardMaterial3D_vlon1")
 
-[node name="Rogue_Head" parent="Rogue2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1488988783, 45707731) index="4" unique_id=683156998]
+[node name="Rogue_Head" parent="Rogue2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1488988783, 368218762) index="4" unique_id=180078036]
 surface_material_override/0 = SubResource("StandardMaterial3D_vlon1")
 
-[node name="Rogue_LegLeft" parent="Rogue2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1488988783, 45707731) index="5" unique_id=550000264]
+[node name="Rogue_LegLeft" parent="Rogue2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1488988783, 368218762) index="5" unique_id=520702392]
 surface_material_override/0 = SubResource("StandardMaterial3D_vlon1")
 
-[node name="Rogue_LegRight" parent="Rogue2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1488988783, 45707731) index="6" unique_id=1341020355]
+[node name="Rogue_LegRight" parent="Rogue2/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1488988783, 368218762) index="6" unique_id=1661051917]
 surface_material_override/0 = SubResource("StandardMaterial3D_vlon1")
 
 [node name="Rogue3" parent="." unique_id=1822112195 instance=ExtResource("37_6ci75")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 8, 0, -2)
 
-[node name="Rogue_ArmLeft" parent="Rogue3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1822112195, 45707731) index="0" unique_id=218359089]
+[node name="Rogue_ArmLeft" parent="Rogue3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1822112195, 368218762) index="0" unique_id=1251932641]
 surface_material_override/0 = SubResource("StandardMaterial3D_cdxkl")
 
-[node name="Rogue_ArmRight" parent="Rogue3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1822112195, 45707731) index="1" unique_id=1789854395]
+[node name="Rogue_ArmRight" parent="Rogue3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1822112195, 368218762) index="1" unique_id=2014014266]
 surface_material_override/0 = SubResource("StandardMaterial3D_cdxkl")
 
-[node name="Rogue_Body" parent="Rogue3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1822112195, 45707731) index="2" unique_id=1329199846]
+[node name="Rogue_Body" parent="Rogue3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1822112195, 368218762) index="2" unique_id=1210971319]
 surface_material_override/0 = SubResource("StandardMaterial3D_cdxkl")
 
-[node name="Rogue_Cape" parent="Rogue3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1822112195, 45707731) index="3" unique_id=1810490329]
+[node name="Rogue_Cape" parent="Rogue3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1822112195, 368218762) index="3" unique_id=1500341934]
 surface_material_override/0 = SubResource("StandardMaterial3D_cdxkl")
 
-[node name="Rogue_Head" parent="Rogue3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1822112195, 45707731) index="4" unique_id=683156998]
+[node name="Rogue_Head" parent="Rogue3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1822112195, 368218762) index="4" unique_id=180078036]
 surface_material_override/0 = SubResource("StandardMaterial3D_cdxkl")
 
-[node name="Rogue_LegLeft" parent="Rogue3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1822112195, 45707731) index="5" unique_id=550000264]
+[node name="Rogue_LegLeft" parent="Rogue3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1822112195, 368218762) index="5" unique_id=520702392]
 surface_material_override/0 = SubResource("StandardMaterial3D_cdxkl")
 
-[node name="Rogue_LegRight" parent="Rogue3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1822112195, 45707731) index="6" unique_id=1341020355]
+[node name="Rogue_LegRight" parent="Rogue3/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1822112195, 368218762) index="6" unique_id=1661051917]
 surface_material_override/0 = SubResource("StandardMaterial3D_cdxkl")
 
 [node name="Rogue4" parent="." unique_id=1627718395 instance=ExtResource("37_6ci75")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 8, 0, -3)
 
-[node name="Rogue_ArmLeft" parent="Rogue4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1627718395, 45707731) index="0" unique_id=218359089]
+[node name="Rogue_ArmLeft" parent="Rogue4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1627718395, 368218762) index="0" unique_id=1251932641]
 surface_material_override/0 = SubResource("StandardMaterial3D_uidhc")
 
-[node name="Rogue_ArmRight" parent="Rogue4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1627718395, 45707731) index="1" unique_id=1789854395]
+[node name="Rogue_ArmRight" parent="Rogue4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1627718395, 368218762) index="1" unique_id=2014014266]
 surface_material_override/0 = SubResource("StandardMaterial3D_uidhc")
 
-[node name="Rogue_Body" parent="Rogue4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1627718395, 45707731) index="2" unique_id=1329199846]
+[node name="Rogue_Body" parent="Rogue4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1627718395, 368218762) index="2" unique_id=1210971319]
 surface_material_override/0 = SubResource("StandardMaterial3D_uidhc")
 
-[node name="Rogue_Cape" parent="Rogue4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1627718395, 45707731) index="3" unique_id=1810490329]
+[node name="Rogue_Cape" parent="Rogue4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1627718395, 368218762) index="3" unique_id=1500341934]
 surface_material_override/0 = SubResource("StandardMaterial3D_uidhc")
 
-[node name="Rogue_Head" parent="Rogue4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1627718395, 45707731) index="4" unique_id=683156998]
+[node name="Rogue_Head" parent="Rogue4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1627718395, 368218762) index="4" unique_id=180078036]
 surface_material_override/0 = SubResource("StandardMaterial3D_uidhc")
 
-[node name="Rogue_LegLeft" parent="Rogue4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1627718395, 45707731) index="5" unique_id=550000264]
+[node name="Rogue_LegLeft" parent="Rogue4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1627718395, 368218762) index="5" unique_id=520702392]
 surface_material_override/0 = SubResource("StandardMaterial3D_uidhc")
 
-[node name="Rogue_LegRight" parent="Rogue4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1627718395, 45707731) index="6" unique_id=1341020355]
+[node name="Rogue_LegRight" parent="Rogue4/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(1627718395, 368218762) index="6" unique_id=1661051917]
 surface_material_override/0 = SubResource("StandardMaterial3D_uidhc")
 
 [editable path="Mage"]
@@ -815,6 +818,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_uidhc")
 [editable path="Mage4"]
 [editable path="Lorekeeper"]
 [editable path="Hoarder"]
+[editable path="Farmer_B"]
 [editable path="Engineer2"]
 [editable path="Engineer3"]
 [editable path="Engineer4"]

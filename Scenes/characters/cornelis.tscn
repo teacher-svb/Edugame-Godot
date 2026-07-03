@@ -4,20 +4,6 @@
 [ext_resource type="Resource" uid="uid://bbk2oqbtmsp1u" path="res://GameData/characterData/Cornelis_CharacterData.tres" id="2_ivm3q"]
 [ext_resource type="PackedScene" uid="uid://bvuwve83ln3s0" path="res://assets/3D/characters/Engineer.glb" id="2_ob1j5"]
 [ext_resource type="Texture2D" uid="uid://blxvge1gc183s" path="res://assets/3D/characters/textures/engineer_texture_alt_B.png" id="3_ivm3q"]
-[ext_resource type="Animation" uid="uid://dgo3s8hhg1xjl" path="res://assets/Animations/Medium/death.res" id="4_ub80e"]
-[ext_resource type="Animation" uid="uid://dtrhbb0qqh3kx" path="res://assets/Animations/Medium/death_pose.res" id="5_vu4uv"]
-[ext_resource type="Animation" uid="uid://bml3fmwodu2qq" path="res://assets/Animations/Medium/fall.res" id="6_8yi55"]
-[ext_resource type="Animation" uid="uid://bijrrrbs5exd7" path="res://assets/Animations/Medium/hit.res" id="7_ggrhy"]
-[ext_resource type="Animation" uid="uid://bilgnxyaj6uwq" path="res://assets/Animations/Medium/idle.res" id="8_qfo54"]
-[ext_resource type="Animation" uid="uid://bk148g6ge6nmg" path="res://assets/Animations/Medium/interact.res" id="9_bnrnw"]
-[ext_resource type="Animation" uid="uid://c2t0tb4fswqfy" path="res://assets/Animations/Medium/jump.res" id="10_72moi"]
-[ext_resource type="Animation" uid="uid://cy7q1181pxrpm" path="res://assets/Animations/Medium/land.res" id="11_gecqe"]
-[ext_resource type="Animation" uid="uid://dbq75helwx6s5" path="res://assets/Animations/Medium/pickup.res" id="12_3gg18"]
-[ext_resource type="Animation" uid="uid://cwmown8ut7nvc" path="res://assets/Animations/Medium/run.res" id="13_pckcn"]
-[ext_resource type="Animation" uid="uid://ct85poeusuqfv" path="res://assets/Animations/Medium/spawn.res" id="14_w21i2"]
-[ext_resource type="Animation" uid="uid://mwe54oj3acth" path="res://assets/Animations/Medium/throw.res" id="15_rdv1h"]
-[ext_resource type="Animation" uid="uid://cqvxhcmwhnbp2" path="res://assets/Animations/Medium/use.res" id="16_xs2f8"]
-[ext_resource type="Animation" uid="uid://b36nkvhou7373" path="res://assets/Animations/Medium/walk.res" id="17_kkar2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kl5mj"]
 radius = 0.2
@@ -26,131 +12,114 @@ height = 0.8
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8afov"]
 albedo_texture = ExtResource("3_ivm3q")
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_uxqvp"]
-_data = {
-&"death": ExtResource("4_ub80e"),
-&"death_pose": ExtResource("5_vu4uv"),
-&"fall": ExtResource("6_8yi55"),
-&"hit": ExtResource("7_ggrhy"),
-&"idle": ExtResource("8_qfo54"),
-&"interact": ExtResource("9_bnrnw"),
-&"jump": ExtResource("10_72moi"),
-&"land": ExtResource("11_gecqe"),
-&"pickup": ExtResource("12_3gg18"),
-&"run": ExtResource("13_pckcn"),
-&"spawn": ExtResource("14_w21i2"),
-&"throw": ExtResource("15_rdv1h"),
-&"use": ExtResource("16_xs2f8"),
-&"walk": ExtResource("17_kkar2")
-}
-
 [node name="Cornelis" unique_id=497783338 instance=ExtResource("1_kl5mj")]
 _characterData = ExtResource("2_ivm3q")
 PersistentId = "Cornelis"
 
 [node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
-VisualRoot = NodePath("../../Engineer3")
+VisualRoot = NodePath("../../VisualRoot/Engineer3")
 
 [node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
-root_node = NodePath("../../Engineer3")
-advance_expression_base_node = NodePath("")
-anim_player = NodePath("../../Engineer3/AnimationPlayer")
+root_node = NodePath("../../VisualRoot/Engineer3")
 
 [node name="CollisionShape3D" parent="." index="3" unique_id=293151575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("CapsuleShape3D_kl5mj")
 
-[node name="Engineer3" parent="." index="6" unique_id=1473802298 instance=ExtResource("2_ob1j5")]
+[node name="dialogCamera" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="0" unique_id=534549197]
+far = 1.0
+
+[node name="AnimationPlayer" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="1" unique_id=933369381]
+root_node = NodePath("../Engineer3")
+
+[node name="Engineer3" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="2" unique_id=1473802298 instance=ExtResource("2_ob1j5")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
 
-[node name="Skeleton3D" parent="Engineer3/Rig_Medium" parent_id_path=PackedInt32Array(1473802298, 588855115) index="0" unique_id=522226090]
-bones/1/position = Vector3(0, 0.38426393, 0)
-bones/1/rotation = Quaternion(0.0044594044, 0.043157317, 0.00019264096, 0.99905837)
+[node name="Skeleton3D" parent="VisualRoot/Engineer3/Rig_Medium" parent_id_path=PackedInt32Array(1473802298, 2103153527) index="0" unique_id=552517992]
+bones/1/position = Vector3(0, 0.38442862, 0)
+bones/1/rotation = Quaternion(0.0043767355, 0.04315733, 0.00018906983, 0.9990587)
 bones/1/scale = Vector3(0.99999994, 1, 0.99999994)
 bones/2/position = Vector3(0.17094508, 0.1135872, 1.5994095e-08)
-bones/2/rotation = Quaternion(0.9892309, 0.057607174, 0.07143136, 0.1140227)
+bones/2/rotation = Quaternion(0.98938674, 0.0576215, 0.071391866, 0.11268063)
 bones/2/scale = Vector3(0.9999999, 0.9999997, 1.0000008)
-bones/3/rotation = Quaternion(0.33313835, 6.154819e-08, -2.307805e-07, 0.94287795)
+bones/3/rotation = Quaternion(0.3301774, 6.511106e-08, -2.1964141e-07, 0.94391894)
 bones/3/scale = Vector3(1.0000004, 0.99999994, 1.0000001)
-bones/4/rotation = Quaternion(-0.56887674, -0.112149075, 0.048550766, 0.8132925)
+bones/4/rotation = Quaternion(-0.5672351, -0.11225354, 0.048254948, 0.8144416)
 bones/4/scale = Vector3(1.0000004, 1.0000007, 0.9999993)
-bones/5/rotation = Quaternion(-9.864606e-07, 0.9202346, -0.39136732, 2.8002881e-07)
+bones/5/rotation = Quaternion(-9.942896e-07, 0.9202346, -0.39136732, 2.7682879e-07)
 bones/5/scale = Vector3(1.0000001, 0.9999975, 1.0000027)
 bones/6/position = Vector3(-0.17094508, 0.11358732, 1.557549e-08)
-bones/6/rotation = Quaternion(0.9950355, -0.031161584, 0.03097495, 0.08929664)
+bones/6/rotation = Quaternion(0.9951541, -0.031083554, 0.03099849, 0.08798535)
 bones/6/scale = Vector3(0.9999999, 0.99999976, 1.0000008)
-bones/7/rotation = Quaternion(0.34363288, -6.187461e-08, 2.393052e-07, 0.93910414)
+bones/7/rotation = Quaternion(0.34068543, -6.57389e-08, 2.3680069e-07, 0.9401774)
 bones/7/scale = Vector3(0.99999994, 0.99999976, 0.99999994)
-bones/8/rotation = Quaternion(-0.5973185, 0.11390213, -0.014702985, 0.79373854)
+bones/8/rotation = Quaternion(-0.59568787, 0.113935545, -0.014437248, 0.79496306)
 bones/8/scale = Vector3(0.99999976, 1.0000006, 0.9999992)
 bones/9/rotation = Quaternion(-8.934892e-05, 0.9202217, -0.3913977, 2.0290998e-05)
 bones/9/scale = Vector3(1.0000002, 0.9999979, 1.0000024)
-bones/10/rotation = Quaternion(0.0120792715, 2.603905e-09, 0.0010455548, 0.99992657)
+bones/10/rotation = Quaternion(0.012472731, 1.8306738e-09, 0.0010796117, 0.9999217)
 bones/10/scale = Vector3(1.0000001, 1, 1.0000001)
-bones/11/rotation = Quaternion(-0.005682316, 4.5149444e-09, -0.0004918484, 0.9999837)
+bones/11/rotation = Quaternion(-0.006030603, 4.029904e-09, -0.00052199524, 0.99998176)
 bones/11/scale = Vector3(1, 0.9999999, 1)
-bones/12/rotation = Quaternion(-0.013832589, -0.031338736, -0.00076150283, 0.99941283)
+bones/12/rotation = Quaternion(-0.01554162, -0.03133795, -0.00085558696, 0.9993877)
 bones/12/scale = Vector3(0.99999994, 1, 1)
 bones/13/position = Vector3(0.21200737, 0.13413215, 8.216504e-08)
-bones/13/rotation = Quaternion(-0.53968996, -0.101859994, -0.7626696, 0.3416057)
+bones/13/rotation = Quaternion(-0.5394126, -0.10256917, -0.76310766, 0.34085247)
 bones/13/scale = Vector3(0.9999993, 0.99999905, 0.9999998)
-bones/14/rotation = Quaternion(7.533402e-09, -6.521249e-08, -0.37872326, 0.92551)
+bones/14/rotation = Quaternion(4.0144213e-10, -5.993327e-08, -0.37842008, 0.925634)
 bones/14/scale = Vector3(1.0000004, 0.9999998, 1)
 bones/15/rotation = Quaternion(1.514567e-08, -7.3584383e-09, 0.0266581, 0.99964464)
 bones/15/scale = Vector3(1.0000001, 1, 1)
-bones/16/rotation = Quaternion(-0.22028005, -0.3432673, 0.17820318, 0.89548194)
+bones/16/rotation = Quaternion(-0.2203136, -0.34332272, 0.17834975, 0.89542335)
 bones/16/scale = Vector3(0.99999976, 1.0000001, 1.0000004)
 bones/17/position = Vector3(5.138494e-10, 0.096125126, -0.057500005)
-bones/17/rotation = Quaternion(0.0023871213, 0.0023871246, -0.6982867, 0.71581024)
+bones/17/rotation = Quaternion(0.002464879, 0.0024648781, -0.69799745, 0.7160919)
 bones/17/scale = Vector3(1, 1, 1)
 bones/18/position = Vector3(-0.21200736, 0.13413227, 8.62731e-08)
-bones/18/rotation = Quaternion(-0.5659212, 0.032533713, 0.7275701, 0.38641512)
+bones/18/rotation = Quaternion(-0.5658421, 0.032757353, 0.72771764, 0.386234)
 bones/18/scale = Vector3(0.9999992, 0.9999988, 0.9999998)
-bones/19/rotation = Quaternion(1.6737422e-08, 4.0212285e-08, 0.39133036, 0.9202503)
+bones/19/rotation = Quaternion(2.1838373e-08, 2.7113444e-08, 0.39099136, 0.92039436)
 bones/19/scale = Vector3(1.0000004, 0.99999976, 1.0000001)
 bones/20/rotation = Quaternion(2.249753e-10, 6.8246844e-09, -0.026658092, 0.99964464)
 bones/20/scale = Vector3(0.99999994, 0.99999994, 1)
-bones/21/rotation = Quaternion(-0.2107466, 0.379723, -0.13175166, 0.891088)
+bones/21/rotation = Quaternion(-0.21069981, 0.3795796, -0.131461, 0.8912032)
 bones/21/scale = Vector3(0.9999995, 0.99999994, 1.0000005)
 bones/22/position = Vector3(-1.5415026e-08, 0.096125185, -0.057500005)
-bones/22/rotation = Quaternion(0.0023871195, -0.002387127, 0.6982867, 0.71581024)
+bones/22/rotation = Quaternion(0.002464879, -0.0024648781, 0.69799745, 0.7160919)
 bones/22/scale = Vector3(1, 1.0000001, 1.0000001)
 
-[node name="Engineer_ArmLeft" parent="Engineer3/Rig_Medium/Skeleton3D" index="0" unique_id=1874009141]
+[node name="Engineer_ArmLeft" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="0" unique_id=191204572]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
-[node name="Engineer_ArmRight" parent="Engineer3/Rig_Medium/Skeleton3D" index="1" unique_id=71718484]
+[node name="Engineer_ArmRight" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="1" unique_id=1209550892]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
-[node name="Engineer_Backpack" parent="Engineer3/Rig_Medium/Skeleton3D" index="2" unique_id=409439992]
+[node name="Engineer_Backpack" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="2" unique_id=73038579]
 visible = false
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
-[node name="Engineer_Body" parent="Engineer3/Rig_Medium/Skeleton3D" index="3" unique_id=565117771]
+[node name="Engineer_Body" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="3" unique_id=2114029621]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
-[node name="Engineer_Goggles" parent="Engineer3/Rig_Medium/Skeleton3D" index="4" unique_id=1126704807]
+[node name="Engineer_Goggles" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="4" unique_id=568108285]
 visible = false
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
-[node name="Engineer_Head" parent="Engineer3/Rig_Medium/Skeleton3D" index="5" unique_id=1674624500]
+[node name="Engineer_Head" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="5" unique_id=1574254128]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
-[node name="Engineer_LegLeft" parent="Engineer3/Rig_Medium/Skeleton3D" index="6" unique_id=251442836]
+[node name="Engineer_LegLeft" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="6" unique_id=1923108924]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
-[node name="Engineer_LegRight" parent="Engineer3/Rig_Medium/Skeleton3D" index="7" unique_id=781471406]
+[node name="Engineer_LegRight" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="7" unique_id=1048888592]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Engineer3" index="1" unique_id=511934417]
-libraries/ = SubResource("AnimationLibrary_uxqvp")
-
-[editable path="Engineer3"]
+[editable path="VisualRoot/Engineer3"]

@@ -18,11 +18,11 @@
 | M4    | Modeled — must construct the equation from a word problem     |
 
 ### Logical Thinking
-| Level | Description                                                              |
-| ----- | ------------------------------------------------------------------------ |
+| Level | Description                                                                    |
+| ----- | ------------------------------------------------------------------------------ |
 | L1    | Single-step world puzzle — one action, obvious goal (push block to reach door) |
-| L2    | Multi-step puzzle — sequence matters, intermediate steps needed          |
-| L3    | Systemic puzzle — multiple moving parts, must reason about interactions  |
+| L2    | Multi-step puzzle — sequence matters, intermediate steps needed                |
+| L3    | Systemic puzzle — multiple moving parts, must reason about interactions        |
 
 ---
 

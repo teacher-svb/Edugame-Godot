@@ -2,9 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_base.tscn" id="1_v5scr"]
 [ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="2_7dxc7"]
-[ext_resource type="PackedScene" uid="uid://cdou2t4bule12" path="res://assets/3D/characters/Mini Characters 1/Models/GLB format/character-female-b.glb" id="2_sb0or"]
 [ext_resource type="PackedScene" uid="uid://dwmsot5m0pw1o" path="res://Scenes/PlayerCamera.tscn" id="3_eym15"]
 [ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="4_cvtri"]
+[ext_resource type="PackedScene" uid="uid://cavfw5nv28qmx" path="res://assets/3D/characters/Rogue.glb" id="6_7dxc7"]
+[ext_resource type="Texture2D" uid="uid://qf76v0037sfl" path="res://assets/3D/characters/textures/rogue_texture_D.png" id="7_yx5mg"]
 [ext_resource type="Texture2D" uid="uid://22l4wvbueyg3" path="res://assets/ring.png" id="10_lgshl"]
 
 [sub_resource type="Curve" id="Curve_2u77j"]
@@ -41,42 +42,29 @@ orientation = 1
 radius = 0.12109375
 height = 0.6599045
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dxc7"]
+albedo_texture = ExtResource("7_yx5mg")
+
 [node name="Player" unique_id=926984674 instance=ExtResource("1_v5scr")]
 _characterData = ExtResource("2_7dxc7")
 
-[node name="CharacterController3D" parent="." index="0" unique_id=631752590 node_paths=PackedStringArray("OcclusionRaycast", "Camera", "VisualRoot")]
+[node name="CharacterController3D" parent="." index="0" unique_id=631752590 node_paths=PackedStringArray("OcclusionRaycast", "Camera")]
 _speed = 3.0
 _jumpVelocity = 3.0
 OcclusionRaycast = NodePath("../PlayerCamera/RayCast3D")
 Camera = NodePath("../PlayerCamera/Camera3D")
-VisualRoot = NodePath("../character-female-b2")
 
-[node name="character-female-b2" parent="." index="1" unique_id=371834684 instance=ExtResource("2_sb0or")]
-
-[node name="Skeleton3D" parent="character-female-b2/character-female-b" parent_id_path=PackedInt32Array(371834684, 980547883) index="0" unique_id=883778758]
-bones/3/rotation = Quaternion(0.00093823066, 0, 0, 0.99999964)
-bones/4/rotation = Quaternion(0, 0, -0.38008153, 0.92495304)
-bones/5/rotation = Quaternion(0, 0, 0.38008153, 0.92495304)
-bones/6/rotation = Quaternion(0, -0.00093823066, 0, 0.99999964)
-
-[node name="body-mesh" parent="character-female-b2/character-female-b/Skeleton3D" index="0" unique_id=2075308188]
-layers = 524289
-
-[node name="head-mesh" parent="character-female-b2/character-female-b/Skeleton3D" index="1" unique_id=1569866480]
-layers = 524289
-
-[node name="PlayerController" type="Node" parent="." index="2" unique_id=1092226004 node_paths=PackedStringArray("_stateManager")]
+[node name="PlayerController" type="Node" parent="." index="1" unique_id=1092226004 node_paths=PackedStringArray("_stateManager")]
 script = ExtResource("4_cvtri")
 _stateManager = NodePath("../stateManager")
 
-[node name="PlayerCamera" parent="." index="3" unique_id=741163845 node_paths=PackedStringArray("Target") instance=ExtResource("3_eym15")]
-Target = NodePath("../character-female-b2")
+[node name="PlayerCamera" parent="." index="2" unique_id=741163845 instance=ExtResource("3_eym15")]
 
 [node name="Camera3D" parent="PlayerCamera" index="0" unique_id=1676918431]
 near = 0.172
 far = 50.0
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="4" unique_id=1538626892]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="3" unique_id=1538626892]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07240015, 0)
 emitting = false
 amount = 2
@@ -86,17 +74,107 @@ explosiveness = 0.54
 process_material = SubResource("ParticleProcessMaterial_hcta7")
 draw_pass_1 = SubResource("QuadMesh_rvcpu")
 
-[node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot", "LandingParticles")]
-VisualRoot = NodePath("../../character-female-b2")
+[node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("LandingParticles")]
 LandingParticles = NodePath("../../GPUParticles3D")
 
 [node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
-root_node = NodePath("../../character-female-b2")
-anim_player = NodePath("../../character-female-b2/AnimationPlayer")
+root_node = NodePath("../../VisualRoot/Rogue")
 
-[node name="CollisionShape3D" parent="." index="7" unique_id=293151575]
+[node name="CollisionShape3D" parent="." index="6" unique_id=293151575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3380165, 0)
 shape = SubResource("CapsuleShape3D_7dxc7")
 
-[editable path="character-female-b2"]
+[node name="dialogCamera" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="0" unique_id=534549197]
+transform = Transform3D(1, 0, 0, 0, 0.9961948, 0.08715574, 0, -0.08715574, 0.9961948, -0.013557843, 0.66471577, 0.5822214)
+script = null
+
+[node name="AnimationPlayer" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="1" unique_id=933369381]
+root_node = NodePath("../Rogue")
+
+[node name="Rogue" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="2" unique_id=983150367 instance=ExtResource("6_7dxc7")]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
+
+[node name="Skeleton3D" parent="VisualRoot/Rogue/Rig_Medium" parent_id_path=PackedInt32Array(983150367, 553996913) index="0" unique_id=368218762]
+bones/1/position = Vector3(0, 0.3909772, 0)
+bones/1/rotation = Quaternion(0.0007103159, 0.043157738, 3.068697e-05, 0.999068)
+bones/1/scale = Vector3(0.99999994, 1, 0.99999994)
+bones/2/position = Vector3(0.17094508, 0.1135872, 1.5994095e-08)
+bones/2/rotation = Quaternion(0.99197876, 0.05804734, 0.07058116, 0.087332875)
+bones/2/scale = Vector3(0.9999999, 0.9999997, 1.0000008)
+bones/3/rotation = Quaternion(0.27278477, 6.483483e-08, -1.8867622e-07, 0.9620751)
+bones/3/scale = Vector3(1.0000004, 0.99999994, 1.0000001)
+bones/4/rotation = Quaternion(-0.5355718, -0.11409079, 0.042720784, 0.83565605)
+bones/4/scale = Vector3(1.0000004, 1.0000007, 0.9999993)
+bones/5/rotation = Quaternion(8.606002e-06, 0.92024964, -0.3913317, -1.8846017e-06)
+bones/5/scale = Vector3(1.0000001, 0.9999975, 1.0000027)
+bones/6/position = Vector3(-0.17094508, 0.11358732, 1.557549e-08)
+bones/6/rotation = Quaternion(0.997061, -0.029682124, 0.03145095, 0.06323985)
+bones/6/scale = Vector3(0.9999999, 0.99999976, 1.0000008)
+bones/7/rotation = Quaternion(0.2837472, -6.375716e-08, 1.9816233e-07, 0.95889914)
+bones/7/scale = Vector3(0.99999994, 0.99999976, 0.99999994)
+bones/8/rotation = Quaternion(-0.56436753, 0.11444875, -0.009453226, 0.81749713)
+bones/8/scale = Vector3(0.99999976, 1.0000006, 0.9999992)
+bones/9/rotation = Quaternion(-8.934892e-05, 0.9202217, -0.3913977, 2.0290998e-05)
+bones/9/scale = Vector3(1.0000002, 0.9999979, 1.0000024)
+bones/10/rotation = Quaternion(0.0016926653, 9.402755e-10, 0.00014651335, 0.9999986)
+bones/10/scale = Vector3(1.0000001, 1, 1.0000001)
+bones/11/rotation = Quaternion(0.0035114384, 4.6339137e-09, 0.0003039422, 0.9999938)
+bones/11/scale = Vector3(1, 0.9999999, 1)
+bones/12/position = Vector3(-0.21200736, 0.13413227, 8.62731e-08)
+bones/12/rotation = Quaternion(-0.5613455, 0.044968862, 0.73571867, 0.37628067)
+bones/12/scale = Vector3(0.9999992, 0.9999988, 0.9999998)
+bones/13/rotation = Quaternion(1.8028914e-09, 6.124749e-08, 0.37838778, 0.9256472)
+bones/13/scale = Vector3(1.0000004, 0.99999976, 1.0000001)
+bones/14/rotation = Quaternion(2.249753e-10, 6.8246844e-09, -0.026658092, 0.99964464)
+bones/14/scale = Vector3(0.99999994, 0.99999994, 1)
+bones/15/rotation = Quaternion(-0.21217118, 0.3835069, -0.13912332, 0.8880037)
+bones/15/scale = Vector3(0.9999995, 0.99999994, 1.0000005)
+bones/16/position = Vector3(-1.5415026e-08, 0.096125185, -0.057500005)
+bones/16/rotation = Quaternion(0.00033450217, -0.00033451527, 0.70587796, 0.70833343)
+bones/16/scale = Vector3(1, 1.0000001, 1.0000001)
+bones/17/rotation = Quaternion(-0.0044936365, -0.031341437, -0.0002473819, 0.9994986)
+bones/17/scale = Vector3(0.99999994, 1, 1)
+bones/18/position = Vector3(0.21200737, 0.13413215, 8.216504e-08)
+bones/18/rotation = Quaternion(-0.53441125, -0.11488892, -0.77061105, 0.3276642)
+bones/18/scale = Vector3(0.9999993, 0.99999905, 0.9999998)
+bones/19/rotation = Quaternion(5.2518336e-09, -5.595111e-08, -0.3613122, 0.93244493)
+bones/19/scale = Vector3(1.0000004, 0.9999998, 1)
+bones/20/rotation = Quaternion(1.514567e-08, -7.3584383e-09, 0.0266581, 0.99964464)
+bones/20/scale = Vector3(1.0000001, 1, 1)
+bones/21/rotation = Quaternion(-0.22186399, -0.34549373, 0.18383521, 0.893093)
+bones/21/scale = Vector3(0.99999976, 1.0000001, 1.0000004)
+bones/22/position = Vector3(5.138494e-10, 0.096125126, -0.057500005)
+bones/22/rotation = Quaternion(0.00033451137, 0.000334506, -0.70587796, 0.70833343)
+bones/22/scale = Vector3(1, 1, 1)
+
+[node name="Rogue_ArmLeft" parent="VisualRoot/Rogue/Rig_Medium/Skeleton3D" index="0" unique_id=1251932641]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_7dxc7")
+
+[node name="Rogue_ArmRight" parent="VisualRoot/Rogue/Rig_Medium/Skeleton3D" index="1" unique_id=2014014266]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_7dxc7")
+
+[node name="Rogue_Body" parent="VisualRoot/Rogue/Rig_Medium/Skeleton3D" index="2" unique_id=1210971319]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_7dxc7")
+
+[node name="Rogue_Cape" parent="VisualRoot/Rogue/Rig_Medium/Skeleton3D" index="3" unique_id=1500341934]
+visible = false
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_7dxc7")
+
+[node name="Rogue_Head" parent="VisualRoot/Rogue/Rig_Medium/Skeleton3D" index="4" unique_id=180078036]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_7dxc7")
+
+[node name="Rogue_LegLeft" parent="VisualRoot/Rogue/Rig_Medium/Skeleton3D" index="5" unique_id=520702392]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_7dxc7")
+
+[node name="Rogue_LegRight" parent="VisualRoot/Rogue/Rig_Medium/Skeleton3D" index="6" unique_id=1661051917]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_7dxc7")
+
 [editable path="PlayerCamera"]
+[editable path="VisualRoot/Rogue"]
