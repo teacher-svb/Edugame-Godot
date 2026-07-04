@@ -147,18 +147,6 @@ metadata/_custom_type_script = "uid://ds2u0dlloavie"
 script = ExtResource("7_w8mnd")
 metadata/_custom_type_script = "uid://dw3ggojroh7rn"
 
-[node name="Animation" type="Node" parent="." unique_id=2085856052]
-
-[node name="CharacterAnimator" type="Node" parent="Animation" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
-script = ExtResource("1_1wrgq")
-VisualRoot = NodePath("../../VisualRoot")
-
-[node name="AnimationTree" type="AnimationTree" parent="Animation" unique_id=58694043]
-root_node = NodePath("../../VisualRoot")
-tree_root = SubResource("AnimationNodeStateMachine_hr8he")
-advance_expression_base_node = NodePath("")
-anim_player = NodePath("../../VisualRoot/AnimationPlayer")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=293151575]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1876010761]
@@ -169,11 +157,25 @@ debug_enabled = true
 debug_path_custom_color = Color(1, 0, 1, 1)
 
 [node name="VisualRoot" type="Node3D" parent="." unique_id=1420670141]
+process_mode = 3
 
 [node name="dialogCamera" type="Camera3D" parent="VisualRoot" unique_id=534549197 groups=["dialogCamera"]]
 transform = Transform3D(1, 0, 0, 0, 0.9961948, 0.08715574, 0, -0.08715574, 0.9961948, -0.013557843, 0.66471577, 0.70199466)
 cull_mask = 524288
 fov = 60.3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualRoot" unique_id=933369381]
+[node name="Animation" type="Node" parent="VisualRoot" unique_id=2085856052]
+
+[node name="CharacterAnimator" type="Node" parent="VisualRoot/Animation" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
+script = ExtResource("1_1wrgq")
+VisualRoot = NodePath("../..")
+
+[node name="AnimationTree" type="AnimationTree" parent="VisualRoot/Animation" unique_id=58694043]
+root_node = NodePath("../..")
+tree_root = SubResource("AnimationNodeStateMachine_hr8he")
+advance_expression_base_node = NodePath("")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualRoot/Animation" unique_id=933369381]
+root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_vsga2")

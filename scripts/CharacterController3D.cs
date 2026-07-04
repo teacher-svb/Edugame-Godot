@@ -28,7 +28,7 @@ public partial class CharacterController3D : Node, ICharacterController
     /// </summary>
     [Export] public Camera3D Camera { get; private set; }
 
-    [Export] private Node3D VisualRoot { get; set; }
+    [Export] public Node3D VisualRoot { get; private set; }
     public float Speed { get => _speed; set => _speed = value; }
 
     /// <summary>

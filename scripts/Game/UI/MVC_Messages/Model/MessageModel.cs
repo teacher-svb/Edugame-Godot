@@ -25,7 +25,7 @@ namespace TnT.Systems.UI
         public string text;
         public string name;
         // public Texture2D sprite;
-        public Camera3D closeupCam;
+        public string characterScenePath;
         public MessageType Type;
     }
 }

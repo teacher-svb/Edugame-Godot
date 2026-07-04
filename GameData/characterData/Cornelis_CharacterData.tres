@@ -5,5 +5,6 @@
 [resource]
 script = ExtResource("1_4p2mb")
 _name = "Cornelis"
+CharacterScenePath = "res://Scenes/characters/cornelis.tscn"
 CharacterAbilities = null
 metadata/_custom_type_script = "uid://bqblbalohjolq"

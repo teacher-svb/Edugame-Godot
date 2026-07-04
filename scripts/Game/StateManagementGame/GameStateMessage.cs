@@ -30,11 +30,7 @@ namespace TnT.EduGame.GameState
             _options = options;
             allMessagesRead = false;
 
-            var character3d = GetTree().FindObjectsByType<Character3D>().Find(c => c.CharacterData == options.character);
-            GD.Print(character3d.Name);
-            var closeupCam = character3d.CloseupCamera;
-
-            MessageController.Instance.AddMessage(options.text, closeupCam, options.character.CharacterName);
+            MessageController.Instance.AddMessage(options.text, options.character.CharacterScenePath, options.character.CharacterName);
             if (MessageController.Instance.Count > 1)
                 return new BaseState(new() { ExitOnNextUpdate = () => true });
 

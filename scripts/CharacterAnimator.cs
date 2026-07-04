@@ -20,7 +20,8 @@ public partial class CharacterAnimator : Node, IMovementAnimator
 
     public override void _Ready()
     {
-        CharacterController3D cc = this.FindAncestorOfType<Character3D>().FindAnyObjectByType<CharacterController3D>();
+        CharacterController3D cc = this.FindAncestorOfType<Character3D>()?.FindAnyObjectByType<CharacterController3D>();
+        if (cc == null) return;
         cc.MovementStateChanged += OnMovementStateChanged;
 
         AnimationTree = this.FindAncestorOfType<Character3D>().FindAnyObjectByType<AnimationTree>();

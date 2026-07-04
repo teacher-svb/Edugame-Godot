@@ -31,7 +31,7 @@ namespace TnT.Systems.UI
         public async Task Show(float duration = .2f)
         {
             var nextMsg = model.messages.Dequeue();
-            view.SetMessage(nextMsg.text, nextMsg.closeupCam, nextMsg.name);
+            view.SetMessage(nextMsg.text, nextMsg.characterScenePath, nextMsg.name);
             await view.ShowView(duration);
         }
 
@@ -40,9 +40,9 @@ namespace TnT.Systems.UI
             await view.HideView(duration);
         }
 
-        public void AddMessage(string text, Camera3D closeupCam, string name)
+        public void AddMessage(string text, string characterScenePath, string name)
         {
-            model.messages.Enqueue(new() { text = text, closeupCam = closeupCam, name = name });
+            model.messages.Enqueue(new() { text = text, characterScenePath = characterScenePath, name = name });
         }
 
         public void AddMessage(string text)

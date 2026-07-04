@@ -13,6 +13,9 @@ namespace TnT.EduGame.Characters
 
         public string CharacterName => this._name;
 
+        [Export(PropertyHint.FilePath, "*.tscn")]
+        public string CharacterScenePath;
+
         [Export]
         public Godot.Collections.Dictionary<InputAction, Ability> CharacterAbilities { get; private set; }
         [Export]
