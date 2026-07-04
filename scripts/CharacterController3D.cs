@@ -108,15 +108,15 @@ public partial class CharacterController3D : Node, ICharacterController
 
         if (_justJumped)
         {
-            state = "jumped";
+            state = "jump";
             _justJumped = false;
         }
         else if (!_wasOnFloor && _character.IsOnFloor())
-            state = "landed";
+            state = "land";
         else if (_character.IsOnFloor() == false)
             state = _character.Velocity.Y > 0 ? "jump" : "fall";
         else if (direction != Vector3.Zero)
-            state = "walk";
+            state = "run";
         else
             state = "idle";
 
