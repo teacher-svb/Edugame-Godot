@@ -30,6 +30,8 @@ namespace TnT.Systems.UI
         {
             set
             {
+                if (value == null)
+                    return;
                 var cam = _closeup.FindAnyObjectByType<Camera3D>();
                 var pos = value.GlobalPosition;
                 var rot = value.GlobalRotation;

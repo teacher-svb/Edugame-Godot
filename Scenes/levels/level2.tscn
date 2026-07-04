@@ -36,7 +36,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rb227"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pjwhy"]
 shader = ExtResource("3_n1vbe")
 
 [sub_resource type="Gradient" id="Gradient_uhrdb"]
@@ -54,15 +54,15 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_wfhh5"]
 curve = SubResource("Curve_1x8p3")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_trh4x"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pudda"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_h55p7")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_tuys8")
 shader_parameter/width_curve = SubResource("CurveTexture_wfhh5")
 
-[sub_resource type="QuadMesh" id="QuadMesh_i72j7"]
-material = SubResource("ShaderMaterial_trh4x")
+[sub_resource type="QuadMesh" id="QuadMesh_muxm6"]
+material = SubResource("ShaderMaterial_pudda")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8ah0f"]
 emission_shape = 3
@@ -321,8 +321,8 @@ amount = 60
 lifetime = 60.0
 explosiveness = 1.0
 fixed_fps = 60
-process_material = SubResource("ShaderMaterial_rb227")
-draw_pass_1 = SubResource("QuadMesh_i72j7")
+process_material = SubResource("ShaderMaterial_pjwhy")
+draw_pass_1 = SubResource("QuadMesh_muxm6")
 script = ExtResource("5_wcmwa")
 ColorRamp = SubResource("GradientTexture1D_tuys8")
 WidthCurve = SubResource("CurveTexture_wfhh5")
@@ -375,13 +375,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.61164, -9.536743e-07, 0.46
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6740956, 0.0007059972, -26.58886)
 
 [node name="Cornelis" parent="." unique_id=1044258308 instance=ExtResource("15_26deu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.699755, -9.536743e-07, 9.377894)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1340637, 1.0991005, 6.9955792)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2119697360]
 navigation_mesh = SubResource("NavigationMesh_igo7b")
 
 [node name="level2_3D-v3" parent="NavigationRegion3D" unique_id=1339739881 instance=ExtResource("1_fg5v5")]
 
-[node name="049-ground_grass" parent="NavigationRegion3D/level2_3D-v3" index="1" unique_id=1067829475 groups=["occlusion_exclude"]]
+[node name="049-ground_grass" parent="NavigationRegion3D/level2_3D-v3" index="1" unique_id=1658044469 groups=["occlusion_exclude"]]
 
 [editable path="NavigationRegion3D/level2_3D-v3"]
