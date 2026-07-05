@@ -1,0 +1,7 @@
+QuestReaction: Execute 'SetStateToIdle' at 2026-07-05 20:01:09.098
+QuestReaction: Execute 'SetStateToFollow' at 2026-07-05 20:01:09.112
+QuestReaction: Execute 'SetStateToPatrolling' at 2026-07-05 20:01:10.634
+QuestReaction: Execute 'SetStateToIdle' at 2026-07-05 20:01:14.511
+QuestReaction: Execute 'SetStateToPatrolling' at 2026-07-05 20:01:14.724
+QuestReaction: Execute 'SetStateToIdle' at 2026-07-05 20:01:21.569
+QuestReaction: Execute 'PopCurrentState' at 2026-07-05 20:01:23.582
