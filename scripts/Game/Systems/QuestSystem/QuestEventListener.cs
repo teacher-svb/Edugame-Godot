@@ -36,7 +36,9 @@ namespace TnT.EduGame.QuestSystem
             try
             {
                 foreach (var reaction in _reactions)
+                {
                     await reaction.Execute(this);
+                }
             }
             finally
             {
