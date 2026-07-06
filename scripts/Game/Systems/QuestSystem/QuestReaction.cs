@@ -95,6 +95,8 @@ namespace TnT.EduGame.QuestSystem
         // Entry point. Validates target and method, then maps params and invokes.
         public async Task Execute(Node context)
         {
+            GD.Print($"QuestReaction: Execute '{_methodName}' at {DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}");
+
             var target = context.GetNodeOrNull(_targetPath);
             if (!IsInstanceValid(target) || target is not IQuestReactionObject completionObject)
             {
