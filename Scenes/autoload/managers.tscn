@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://x737eafgbb37" path="res://scripts/Lib/Input/InputAction2D.cs" id="3_fkgmb"]
 [ext_resource type="Script" uid="uid://7nvtadqep3kv" path="res://scripts/Game/Systems/QuestSystem/QuestManager.cs" id="4_347u6"]
 [ext_resource type="Script" uid="uid://bjnewwsvx7s8s" path="res://scripts/Game/Singletons/ManagerUI.cs" id="4_c37v5"]
-[ext_resource type="Resource" uid="uid://bcgox3enbg4ph" path="res://GameData/quests/LookingForAvocado.tres" id="6_pnf1h"]
+[ext_resource type="Resource" uid="uid://bcgox3enbg4ph" path="res://GameData/quests/I.1-MorningInBeaverford.tres" id="6_pnf1h"]
 [ext_resource type="Script" uid="uid://c0ssbl3ew4s2d" path="res://scripts/Game/StateManagementGame/StateManagerGame.cs" id="7_0le2r"]
 [ext_resource type="Script" uid="uid://crvao34oeaf4m" path="res://scripts/Game/StateManagementGame/GameStateChallenge.cs" id="7_blwmm"]
 [ext_resource type="Script" uid="uid://ncf63o7hgool" path="res://scripts/Game/UI/MVC_Messages/Controller/MessageController.cs" id="8_0le2r"]

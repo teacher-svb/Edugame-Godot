@@ -10,7 +10,7 @@
 [ext_resource type="Material" uid="uid://d34k3ljvagp8q" path="res://materials/RoystanToonWaterShader.tres" id="4_j2q71"]
 [ext_resource type="ArrayMesh" uid="uid://jjy6atmp2inn" path="res://assets/3D/environments/Nature Kit/Models/tree_oak.res" id="5_1hw7q"]
 [ext_resource type="Script" uid="uid://6214kgglowmy" path="res://scripts/Trail/GPUTrail3D.cs" id="5_wcmwa"]
-[ext_resource type="Shader" uid="uid://ncgi0kci5c4x" path="res://scripts/shaders/water.gdshader" id="8_de3fq"]
+[ext_resource type="Shader" path="res://scripts/shaders/water.gdshader" id="8_de3fq"]
 [ext_resource type="PackedScene" uid="uid://by56kgwnxfbe5" path="res://Scenes/characters/hendrik.tscn" id="12_pjwhy"]
 [ext_resource type="PackedScene" uid="uid://qqmsfnp0h0nk" path="res://Scenes/characters/liesbeth.tscn" id="13_pudda"]
 [ext_resource type="PackedScene" uid="uid://bx1wyqdgkro24" path="res://Scenes/characters/msBram.tscn" id="14_muxm6"]
@@ -382,6 +382,6 @@ navigation_mesh = SubResource("NavigationMesh_igo7b")
 
 [node name="level2_3D-v3" parent="NavigationRegion3D" unique_id=1339739881 instance=ExtResource("1_fg5v5")]
 
-[node name="049-ground_grass" parent="NavigationRegion3D/level2_3D-v3" index="1" unique_id=1658044469 groups=["occlusion_exclude"]]
+[node name="049-ground_grass" parent="NavigationRegion3D/level2_3D-v3" index="1" unique_id=1695486227 groups=["occlusion_exclude"]]
 
 [editable path="NavigationRegion3D/level2_3D-v3"]

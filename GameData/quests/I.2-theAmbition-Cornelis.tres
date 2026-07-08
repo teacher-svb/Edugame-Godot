@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://bu3fwc67ikdd6"]
+
+[ext_resource type="Script" uid="uid://bkc5aqh43okjh" path="res://scripts/Game/Systems/QuestSystem/QuestObjective.cs" id="1_oqjkn"]
+[ext_resource type="Resource" uid="uid://bbk2oqbtmsp1u" path="res://GameData/characterData/Cornelis_CharacterData.tres" id="2_5ya8u"]
+[ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="3_ao87s"]
+[ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="4_b2vlj"]
+
+[sub_resource type="Resource" id="Resource_4y6do"]
+script = ExtResource("1_oqjkn")
+_startText = "Help! Mijn brug werkt niet meer!"
+_progressText = "Sta daar niet zo! Kijk toch, mijn brug is stuk!"
+_completeText = "Kan jij zien wat er mis is met de brug?"
+_characterData = ExtResource("2_5ya8u")
+_objectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa01"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[sub_resource type="Resource" id="Resource_pjwhy"]
+script = ExtResource("1_oqjkn")
+_startText = "Ik heb de oplossing gevonden!"
+_completeText = "Het zit zo..."
+_characterData = ExtResource("3_ao87s")
+_objectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa02"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[sub_resource type="Resource" id="Resource_pudda"]
+script = ExtResource("1_oqjkn")
+_startText = "Nee, nee, ik wil dat een tovenaar het oplost, niet een kind zoals jij! Wat weet jij daar nu van?"
+_progressText = "Ga weg."
+_completeText = "Ga liever de tovenaar zoeken."
+_characterData = ExtResource("2_5ya8u")
+_objectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa03"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[resource]
+script = ExtResource("4_b2vlj")
+_id = "65dd09e4-9554-43bd-9595-e67fc459aa00"
+_name = "The Ambition: Cornelis"
+_objectives = Array[ExtResource("1_oqjkn")]([SubResource("Resource_4y6do"), SubResource("Resource_pjwhy"), SubResource("Resource_pudda")])
+metadata/_custom_type_script = "uid://k32terbd7gqc"

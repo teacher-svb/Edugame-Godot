@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://b4r7x8oy4xdtc"]
+
+[ext_resource type="Script" uid="uid://bkc5aqh43okjh" path="res://scripts/Game/Systems/QuestSystem/QuestObjective.cs" id="1_d8sls"]
+[ext_resource type="Resource" uid="uid://d0807nvddacru" path="res://GameData/characterData/Liesbeth_CharacterData.tres" id="2_m1kkc"]
+[ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="3_1cevw"]
+[ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="4_mbl01"]
+
+[sub_resource type="Resource" id="Resource_t6hrq"]
+script = ExtResource("1_d8sls")
+_startText = "Hallo Mabel! Vandaag heb ik spijtig genoeg geen brood. Mijn weegschaal is stuk."
+_completeText = "Ik heb geen idee wat er mis is."
+_characterData = ExtResource("2_m1kkc")
+_objectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd01"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[sub_resource type="Resource" id="Resource_lb2ob"]
+script = ExtResource("1_d8sls")
+_startText = "Ik heb de oplossing gevonden!"
+_completeText = "Het zit zo..."
+_characterData = ExtResource("4_mbl01")
+_objectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd02"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[sub_resource type="Resource" id="Resource_lb3fn"]
+script = ExtResource("1_d8sls")
+_startText = "Ach Mabel, wat knap van je! Maar deze weegschaal is betoverd — ik durf ze niet zelf aan te raken."
+_progressText = "Ik meen het, kindje. Betoveringen zijn geen zaak voor een bakker."
+_completeText = "Zodra de Tovenaar terug is, zal hij dit zeker oplossen. Tot dan kan ik helaas geen brood bakken."
+_characterData = ExtResource("2_m1kkc")
+_objectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd03"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[resource]
+script = ExtResource("3_1cevw")
+_id = "3cd9cc64-f69b-4d80-beb6-1290468dfd00"
+_name = "the Ambition: Liesbeth"
+_objectives = Array[ExtResource("1_d8sls")]([SubResource("Resource_t6hrq"), SubResource("Resource_lb2ob"), SubResource("Resource_lb3fn")])
+metadata/_custom_type_script = "uid://k32terbd7gqc"

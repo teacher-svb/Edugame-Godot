@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://clle2xma7ungv"]
+
+[ext_resource type="Script" uid="uid://bkc5aqh43okjh" path="res://scripts/Game/Systems/QuestSystem/QuestObjective.cs" id="1_hd8sl"]
+[ext_resource type="Resource" uid="uid://bet0adq1t2ipo" path="res://GameData/characterData/Hendrik_CharacterData.tres" id="2_hend1"]
+[ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="3_hd1ce"]
+[ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="4_hmbl1"]
+
+[sub_resource type="Resource" id="Resource_vh82f"]
+script = ExtResource("1_hd8sl")
+_startText = "M'n molen draait niet meer zoals het hoort! De molensteen loopt veel te traag."
+_progressText = "Nou, sta daar niet zo besluiteloos! Kijk dan naar dat rad!"
+_completeText = "Denk je dat jij kan uitvissen wat er mis is met de snelheid?"
+_characterData = ExtResource("2_hend1")
+_objectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee01"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[sub_resource type="Resource" id="Resource_bzpdt"]
+script = ExtResource("1_hd8sl")
+_startText = "Ik heb de oplossing gevonden!"
+_completeText = "Het zit zo..."
+_characterData = ExtResource("4_hmbl1")
+_objectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee02"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[sub_resource type="Resource" id="Resource_ifhgx"]
+script = ExtResource("1_hd8sl")
+_startText = "Ach, vroeger draaide alles vanzelf goed, zonder rekenwerk of kinderstreken."
+_progressText = "Ga nu maar, ik heb geen tijd voor spelletjes."
+_completeText = "Voor een echt probleem heb je echte magie nodig, geen sommetjes."
+_characterData = ExtResource("2_hend1")
+_objectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee03"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[resource]
+script = ExtResource("3_hd1ce")
+_id = "d31f51c6-cbd8-4285-800f-0bd317caee00"
+_name = "the Ambition: Hendrik"
+_objectives = Array[ExtResource("1_hd8sl")]([SubResource("Resource_vh82f"), SubResource("Resource_bzpdt"), SubResource("Resource_ifhgx")])
+metadata/_custom_type_script = "uid://k32terbd7gqc"

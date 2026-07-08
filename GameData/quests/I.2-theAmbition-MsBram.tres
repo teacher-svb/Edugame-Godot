@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://bx6bq5o64me5r"]
+
+[ext_resource type="Script" uid="uid://bkc5aqh43okjh" path="res://scripts/Game/Systems/QuestSystem/QuestObjective.cs" id="1_br8sl"]
+[ext_resource type="Resource" uid="uid://de6dkaimr20b4" path="res://GameData/characterData/MsBram_CharacterData.tres" id="2_bram1"]
+[ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="3_br1ce"]
+[ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="4_bmbl1"]
+
+[sub_resource type="Resource" id="Resource_3lbet"]
+script = ExtResource("1_br8sl")
+_startText = "De schoolbel is stuk! De klepel raakt de bel niet meer op het juiste moment."
+_progressText = "Sta daar niet zomaar, kindje, kijk eens naar het mechaniek."
+_completeText = "Kan jij uitvissen hoe de klepel weer op tijd moet slaan?"
+_characterData = ExtResource("2_bram1")
+_objectiveId = "3a861b47-c25e-4265-8205-81e4394e3901"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[sub_resource type="Resource" id="Resource_x73wi"]
+script = ExtResource("1_br8sl")
+_startText = "Ik heb de oplossing gevonden!"
+_completeText = "Het zit zo..."
+_characterData = ExtResource("4_bmbl1")
+_objectiveId = "3a861b47-c25e-4265-8205-81e4394e3902"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[sub_resource type="Resource" id="Resource_ayd0y"]
+script = ExtResource("1_br8sl")
+_startText = "Knap gerekend, Mabel, maar ik kan de bel niet zomaar laten herstellen door een leerling."
+_progressText = "Ik meen het — dit is werk voor een echte tovenaar."
+_completeText = "Als je zo graag mensen wil helpen, waarom schrijf je je dan niet in bij de Tovenaarsschool?"
+_characterData = ExtResource("2_bram1")
+_objectiveId = "3a861b47-c25e-4265-8205-81e4394e3903"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[resource]
+script = ExtResource("3_br1ce")
+_id = "3a861b47-c25e-4265-8205-81e4394e3900"
+_name = "the Ambition: Mevrouw Bram"
+_objectives = Array[ExtResource("1_br8sl")]([SubResource("Resource_3lbet"), SubResource("Resource_x73wi"), SubResource("Resource_ayd0y")])
+metadata/_custom_type_script = "uid://k32terbd7gqc"
