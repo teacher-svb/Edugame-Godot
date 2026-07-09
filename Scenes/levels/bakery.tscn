@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://grbltwhh28a5"]
+
+[ext_resource type="PackedScene" uid="uid://bdkr4ee0ud6cm" path="res://assets/levels/bakery-interior.blend" id="1_jt4j1"]
+
+[sub_resource type="Gradient" id="Gradient_jt4j1"]
+offsets = PackedFloat32Array(0.117647, 1)
+colors = PackedColorArray(0.0277098, 0.0773411, 0.103768, 1, 1, 0.939093, 0.819838, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1tfd6"]
+gradient = SubResource("Gradient_jt4j1")
+width = 512
+
+[sub_resource type="Sky" id="Sky_6sqd8"]
+
+[sub_resource type="Environment" id="Environment_23qlo"]
+background_mode = 2
+sky = SubResource("Sky_6sqd8")
+tonemap_mode = 3
+ssao_enabled = true
+adjustment_enabled = true
+adjustment_saturation = 1.2
+adjustment_color_correction = SubResource("GradientTexture1D_1tfd6")
+
+[node name="Bakery" type="Node3D" unique_id=681950039]
+
+[node name="bakery-interior" parent="." unique_id=1094872015 instance=ExtResource("1_jt4j1")]
+
+[node name="building_church_red" parent="bakery-interior" index="31" unique_id=875463346]
+visible = false
+
+[node name="building_stables_red" parent="bakery-interior" index="33" unique_id=1714707239]
+visible = false
+
+[node name="floor_wood_large_001" parent="bakery-interior" index="35" unique_id=1109945215]
+visible = false
+
+[node name="floor_wood_large_002" parent="bakery-interior" index="36" unique_id=2083913524]
+visible = false
+
+[node name="floor_wood_large_003" parent="bakery-interior" index="37" unique_id=2005405470]
+visible = false
+
+[node name="floor_wood_large_004" parent="bakery-interior" index="38" unique_id=550870390]
+visible = false
+
+[node name="Environment" type="Node3D" parent="." unique_id=781837544]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.012903452, 0, 0.0022169743)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=1631444709]
+environment = SubResource("Environment_23qlo")
+
+[node name="Sun" type="DirectionalLight3D" parent="Environment" unique_id=1832336641]
+transform = Transform3D(0.2040718, 0.97888064, 0.012142341, 0.4486767, -0.10454724, 0.8875579, 0.8700826, -0.17567772, -0.4605361, 0, 2, 0)
+layers = 524289
+light_color = Color(1, 0.94902, 0.827451, 1)
+light_energy = 0.9
+light_angular_distance = 4.0
+shadow_enabled = true
+shadow_normal_bias = 10.0
+shadow_opacity = 0.44
+directional_shadow_split_1 = 0.14
+directional_shadow_split_2 = 0.393
+directional_shadow_split_3 = 0.607
+directional_shadow_blend_splits = true
+directional_shadow_fade_start = 0.46
+directional_shadow_max_distance = 25.0
+directional_shadow_pancake_size = 2.0
+sky_mode = 1
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1597915998]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1920929e-07, 0.25585207, -1.1630238)
+light_color = Color(1, 0.6313726, 0.11764706, 1)
+light_energy = 0.4
+light_size = 0.089
+shadow_enabled = true
+
+[editable path="bakery-interior"]
