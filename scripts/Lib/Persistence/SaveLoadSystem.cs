@@ -18,19 +18,11 @@ namespace TnT.Systems.Persistence
 
         public abstract T GameData { get; set; }
 
-        // [ExportToolButton("Save!")] // You can pass an icon as second argument if you want.
-        // public Callable Save => Callable.From(SaveGame);
-
         public override void _Ready()
         {
             dataService = new FileDataService<T>(new JsonSerializer());
             StateManagerGame.Instance.SceneLoaded += OnSceneLoaded;
         }
-
-        // void Start() => NewGame();
-
-        // void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
-        // void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
         protected abstract void OnSceneLoaded(string scenePath);
 
@@ -84,26 +76,6 @@ namespace TnT.Systems.Persistence
         bool IsNew { get; set; }
     }
 
-    // [CustomPropertyDrawer(typeof(UniqueId))]
-    // public class UniqueIdDrawer : PropertyDrawer
-    // {
-    //     public override VisualElement CreatePropertyGUI(SerializedProperty property)
-    //     {
-    //         // Create property container element.
-    //         var container = new VisualElement();
-
-    //         var target = property.serializedObject.targetObject as IUnique;
-    //         var copyFound = GameObject.FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IUnique>().Any(go => go != target && go.UniqueId.Id == target.UniqueId.Id);
-    //         if (copyFound)
-    //             target.UniqueId.Id = Guid.NewGuid().ToString();
-
-    //         var idField = new PropertyField(property.FindPropertyRelative("Id"));
-    //         container.Add(idField);
-
-    //         return container;
-    //     }
-    // }
-
     public interface IUnique
     {
         string PersistentId { get; }
@@ -150,7 +122,7 @@ namespace TnT.Systems.Persistence
 
         public FileDataService(ISerializer serializer)
         {
-            this.dataPath = ProjectSettings.GlobalizePath("user://"); //Application.persistentDataPath;
+            this.dataPath = ProjectSettings.GlobalizePath("user://");
             this.fileExtension = "json";
             this.serializer = serializer;
         }
@@ -170,9 +142,7 @@ namespace TnT.Systems.Persistence
             }
 
             GD.Print($"Saving GameData to '{fileLocation}'");
-            // Variant v = Variant.From(data);
             var json = JsonConvert.SerializeObject(data);
-            // File.WriteAllText(fileLocation, serializer.Serialize(v));
             File.WriteAllText(fileLocation, json);
         }
 
@@ -187,7 +157,6 @@ namespace TnT.Systems.Persistence
 
             GD.Print($"Loading GameData from '{fileLocation}'");
             return JsonConvert.DeserializeObject<T>(File.ReadAllText(fileLocation));
-            // return serializer.Deserialize(File.ReadAllText(fileLocation)).As<T>();
         }
 
         public void Delete(string name)

@@ -28,28 +28,6 @@ namespace TnT.EduGame.QuestSystem
         [Export]
         public QuestState State;
 
-        #region LOAD/SAVE
-        QuestObjectiveSaveData _saveData;
-        public QuestObjectiveSaveData SaveData => _saveData;
-        public void Bind(QuestObjectiveSaveData data)
-        {
-            if (data == null)
-                return;
-            _saveData = data;
-            State = _saveData.State;
-            _objectiveId = _saveData.Id;
-        }
-
-        public QuestObjectiveSaveData GetSaveData()
-        {
-            if (_saveData == null)
-                _saveData = new();
-            _saveData.Id = _objectiveId;
-            _saveData.State = State;
-            return _saveData;
-        }
-        #endregion
-
         public string GetText()
         {
             return GetText(State);

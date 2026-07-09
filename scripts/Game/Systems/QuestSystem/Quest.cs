@@ -74,43 +74,31 @@ namespace TnT.EduGame.QuestSystem
 
         public void Reset() => Objectives.ForEach(o => o.State = QuestState.NOTSTARTED);
 
-        #region LOAD/SAVE
-        private QuestSaveData _saveData;
-        public QuestSaveData SaveData => _saveData;
+        // #region LOAD/SAVE
+        // private QuestSaveData _saveData;
+        // public QuestSaveData SaveData => _saveData;
 
-        public void Bind(QuestSaveData data)
-        {
-            if (data == null)
-            {
-                Reset();
-                return;
-            }
-            _saveData = data;
-            _id = _saveData.Id;
-            Objectives.ForEach(o => o.Bind(data.Objectives.FirstOrDefault(s => s.Id == o.ObjectiveId)));
-        }
+        // public void Bind(QuestSaveData data)
+        // {
+        //     if (data == null)
+        //     {
+        //         Reset();
+        //         return;
+        //     }
+        //     _saveData = data;
+        //     _id = _saveData.Id;
+        //     Objectives.ForEach(o => o.Bind(data.Objectives.FirstOrDefault(s => s.Id == o.ObjectiveId)));
+        // }
 
-        public QuestSaveData GetSaveData()
-        {
-            if (_saveData == null)
-                _saveData = new();
-            _saveData.Id = _id;
-            _saveData.Objectives = _objectives.Select(o => o.GetSaveData()).ToArray();
-            return _saveData;
-        }
-        #endregion
+        // public QuestSaveData GetSaveData()
+        // {
+        //     if (_saveData == null)
+        //         _saveData = new();
+        //     _saveData.Id = _id;
+        //     _saveData.Objectives = _objectives.Select(o => o.GetSaveData()).ToArray();
+        //     return _saveData;
+        // }
+        // #endregion
 
-    }
-
-    public class QuestSaveData
-    {
-        public string Id;
-        public QuestObjectiveSaveData[] Objectives;
-    }
-
-    public class QuestObjectiveSaveData
-    {
-        public string Id;
-        public QuestState State;
     }
 }

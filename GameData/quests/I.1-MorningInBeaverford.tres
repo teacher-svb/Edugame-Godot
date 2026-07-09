@@ -52,6 +52,6 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 [resource]
 script = ExtResource("5_m8ryb")
 _id = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
-_name = "Avocado"
+_name = "Morning in Beaverford"
 _objectives = Array[ExtResource("1_7pv84")]([SubResource("Resource_xx3qb"), SubResource("Resource_ftla8"), SubResource("Resource_mx3ai"), SubResource("Resource_hakfr"), SubResource("Resource_r6kp3")])
 metadata/_custom_type_script = "uid://k32terbd7gqc"
