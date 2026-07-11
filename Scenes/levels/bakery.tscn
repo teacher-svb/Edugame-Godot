@@ -25,22 +25,22 @@ adjustment_color_correction = SubResource("GradientTexture1D_1tfd6")
 
 [node name="bakery-interior" parent="." unique_id=1094872015 instance=ExtResource("1_jt4j1")]
 
-[node name="building_church_red" parent="bakery-interior" index="31" unique_id=875463346]
+[node name="building_church_red" parent="bakery-interior" index="31" unique_id=1315633264]
 visible = false
 
-[node name="building_stables_red" parent="bakery-interior" index="33" unique_id=1714707239]
+[node name="building_stables_red" parent="bakery-interior" index="33" unique_id=770422905]
 visible = false
 
-[node name="floor_wood_large_001" parent="bakery-interior" index="35" unique_id=1109945215]
+[node name="floor_wood_large_001" parent="bakery-interior" index="35" unique_id=1223253120]
 visible = false
 
-[node name="floor_wood_large_002" parent="bakery-interior" index="36" unique_id=2083913524]
+[node name="floor_wood_large_002" parent="bakery-interior" index="36" unique_id=1293596849]
 visible = false
 
-[node name="floor_wood_large_003" parent="bakery-interior" index="37" unique_id=2005405470]
+[node name="floor_wood_large_003" parent="bakery-interior" index="37" unique_id=439899027]
 visible = false
 
-[node name="floor_wood_large_004" parent="bakery-interior" index="38" unique_id=550870390]
+[node name="floor_wood_large_004" parent="bakery-interior" index="38" unique_id=1733721418]
 visible = false
 
 [node name="Environment" type="Node3D" parent="." unique_id=781837544]
