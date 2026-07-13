@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://qqmsfnp0h0nk" path="res://Scenes/characters/liesbeth.tscn" id="13_pudda"]
 [ext_resource type="PackedScene" uid="uid://bx1wyqdgkro24" path="res://Scenes/characters/msBram.tscn" id="14_muxm6"]
 [ext_resource type="PackedScene" uid="uid://brhrj77wopxwb" path="res://Scenes/characters/cornelis.tscn" id="15_26deu"]
-[ext_resource type="PackedScene" uid="uid://bdkr4ee0ud6cm" path="res://assets/levels/bakery-interior.blend" id="15_muxm6"]
+[ext_resource type="PackedScene" uid="uid://bnt0g8i341cd3" path="res://assets/levels/bakery-exterior.blend" id="16_muxm6"]
 [ext_resource type="Script" uid="uid://dbtd0oguw4wdj" path="res://scripts/Game/Systems/QuestSystem/QuestTrigger.cs" id="16_pudda"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dcdmp"]
@@ -38,7 +38,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_muxm6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_26deu"]
 shader = ExtResource("3_n1vbe")
 
 [sub_resource type="Gradient" id="Gradient_uhrdb"]
@@ -56,15 +56,15 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_wfhh5"]
 curve = SubResource("Curve_1x8p3")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_26deu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rb227"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_h55p7")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_tuys8")
 shader_parameter/width_curve = SubResource("CurveTexture_wfhh5")
 
-[sub_resource type="QuadMesh" id="QuadMesh_rb227"]
-material = SubResource("ShaderMaterial_26deu")
+[sub_resource type="QuadMesh" id="QuadMesh_trh4x"]
+material = SubResource("ShaderMaterial_rb227")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8ah0f"]
 emission_shape = 3
@@ -323,8 +323,8 @@ amount = 60
 lifetime = 60.0
 explosiveness = 1.0
 fixed_fps = 60
-process_material = SubResource("ShaderMaterial_muxm6")
-draw_pass_1 = SubResource("QuadMesh_rb227")
+process_material = SubResource("ShaderMaterial_26deu")
+draw_pass_1 = SubResource("QuadMesh_trh4x")
 script = ExtResource("5_wcmwa")
 ColorRamp = SubResource("GradientTexture1D_tuys8")
 WidthCurve = SubResource("CurveTexture_wfhh5")
@@ -382,12 +382,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1340637, 1.0991005, 6.99557
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2119697360]
 navigation_mesh = SubResource("NavigationMesh_igo7b")
 
-[node name="bakery-interior" parent="NavigationRegion3D" unique_id=712308829 instance=ExtResource("15_muxm6")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 25, 0.05, 0)
-
 [node name="level2_3D-v3" parent="NavigationRegion3D" unique_id=1339739881 instance=ExtResource("1_fg5v5")]
 
-[node name="049-ground_grass" parent="NavigationRegion3D/level2_3D-v3" index="1" unique_id=1332818120 groups=["occlusion_exclude"]]
+[node name="bakery-exterior" parent="NavigationRegion3D" unique_id=1689562523 instance=ExtResource("16_muxm6")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 25, 0, 0)
 
 [node name="Quests" type="Node" parent="." unique_id=1154009112]
 
