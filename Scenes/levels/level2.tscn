@@ -10,7 +10,7 @@
 [ext_resource type="Material" uid="uid://d34k3ljvagp8q" path="res://materials/RoystanToonWaterShader.tres" id="4_j2q71"]
 [ext_resource type="ArrayMesh" uid="uid://jjy6atmp2inn" path="res://assets/3D/environments/Nature Kit/Models/tree_oak.res" id="5_1hw7q"]
 [ext_resource type="Script" uid="uid://6214kgglowmy" path="res://scripts/Trail/GPUTrail3D.cs" id="5_wcmwa"]
-[ext_resource type="Shader" uid="uid://ncgi0kci5c4x" path="res://scripts/shaders/water.gdshader" id="8_de3fq"]
+[ext_resource type="Shader" path="res://scripts/shaders/water.gdshader" id="8_de3fq"]
 [ext_resource type="PackedScene" uid="uid://by56kgwnxfbe5" path="res://Scenes/characters/hendrik.tscn" id="12_pjwhy"]
 [ext_resource type="PackedScene" uid="uid://qqmsfnp0h0nk" path="res://Scenes/characters/liesbeth.tscn" id="13_pudda"]
 [ext_resource type="PackedScene" uid="uid://bx1wyqdgkro24" path="res://Scenes/characters/msBram.tscn" id="14_muxm6"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="18_rb227"]
 [ext_resource type="Script" uid="uid://ckobusjip2hti" path="res://scripts/Game/Systems/QuestSystem/QuestReaction.cs" id="19_i72j7"]
 [ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="19_trh4x"]
+[ext_resource type="Script" uid="uid://cxpiel6srrphe" path="res://scripts/test/Challenge.cs" id="21_i72j7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dcdmp"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -41,7 +42,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rl30s"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trh4x"]
 shader = ExtResource("3_n1vbe")
 
 [sub_resource type="Gradient" id="Gradient_uhrdb"]
@@ -59,15 +60,15 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_wfhh5"]
 curve = SubResource("Curve_1x8p3")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bivhb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i72j7"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_h55p7")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_tuys8")
 shader_parameter/width_curve = SubResource("CurveTexture_wfhh5")
 
-[sub_resource type="QuadMesh" id="QuadMesh_u2llv"]
-material = SubResource("ShaderMaterial_bivhb")
+[sub_resource type="QuadMesh" id="QuadMesh_lb6rx"]
+material = SubResource("ShaderMaterial_i72j7")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8ah0f"]
 emission_shape = 3
@@ -298,7 +299,7 @@ agent_max_slope = 60.0
 
 [sub_resource type="Resource" id="Resource_rb227"]
 script = ExtResource("19_i72j7")
-_targetPath = null
+_targetPath = NodePath("")
 metadata/_custom_type_script = "uid://ckobusjip2hti"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_igo7b"]
@@ -334,8 +335,8 @@ amount = 60
 lifetime = 60.0
 explosiveness = 1.0
 fixed_fps = 60
-process_material = SubResource("ShaderMaterial_rl30s")
-draw_pass_1 = SubResource("QuadMesh_u2llv")
+process_material = SubResource("ShaderMaterial_trh4x")
+draw_pass_1 = SubResource("QuadMesh_lb6rx")
 script = ExtResource("5_wcmwa")
 ColorRamp = SubResource("GradientTexture1D_tuys8")
 WidthCurve = SubResource("CurveTexture_wfhh5")
@@ -552,6 +553,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3000002)
 shape = SubResource("BoxShape3D_igo7b")
 
 [node name="Challenges" type="Node" parent="." unique_id=1808815040]
+
+[node name="Cornelis-1" type="Node" parent="Challenges" unique_id=263870539]
+script = ExtResource("21_i72j7")
 
 [connection signal="body_entered" from="Area3D" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective1-init" method="_OnPlayerTrigger"]
 
