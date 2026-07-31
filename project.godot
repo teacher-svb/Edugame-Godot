@@ -98,6 +98,7 @@ Pause={
 
 [layer_names]
 
+3d_render/layer_10="UI-3D-Elements"
 3d_render/layer_20="closesup"
 3d_physics/layer_31="dont occlude"
 3d_physics/layer_32="world boundaries"

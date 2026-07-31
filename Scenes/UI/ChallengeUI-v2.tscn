@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b8qgygjc4vci3"]
 
 [ext_resource type="PackedScene" uid="uid://ri147ckev4hj" path="res://assets/3D/characters/Mini Characters 1/Models/GLB format/avocado.glb" id="1_26m57"]
+[ext_resource type="Script" uid="uid://qjrt84cjuqwm" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeUI.cs" id="2_afi11"]
 [ext_resource type="Script" uid="uid://bpr1xsrq6lokd" path="res://scripts/Lib/UIAnimation/AnimatedButton.cs" id="3_6488b"]
 [ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="3_afi11"]
 
@@ -33,7 +34,7 @@ unicode = 113
 [sub_resource type="Shortcut" id="Shortcut_e0qxm"]
 events = [SubResource("InputEventKey_6488b")]
 
-[node name="Control" type="Control" unique_id=860686304]
+[node name="View" type="Control" unique_id=860686304 node_paths=PackedStringArray("_left", "_right", "_challengeContainer", "_questionContainer", "_answerContainer", "_submitContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,6 +44,13 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_afi11")
+script = ExtResource("2_afi11")
+_left = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/left")
+_right = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/right")
+_challengeContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/left/ChallengeContainer")
+_questionContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/right/margins/QuestionContainer")
+_answerContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/right/margins/AnswerContainer")
+_submitContainer = NodePath("MarginContainer/VBoxContainer/SubmitContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2051200352]
 layout_mode = 1
@@ -81,21 +89,82 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.29
+theme_type_variation = &"LightPanel"
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=1894457021]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel" unique_id=451323559]
+layout_mode = 2
+theme_override_constants/margin_left = -44
+theme_override_constants/margin_top = 17
+theme_override_constants/margin_right = -9
+theme_override_constants/margin_bottom = 13
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer" unique_id=971803413]
 layout_mode = 2
 
-[node name="AnimatedButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer" unique_id=1123059114]
+[node name="left" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer" unique_id=1254695605]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ChallengeContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/left" unique_id=1504843259]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"TransparentPanelContainer"
+
+[node name="right" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer" unique_id=1625617167]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margins" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/right" unique_id=153241266]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="QuestionContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/right/margins" unique_id=561893668]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"TransparentPanelContainer"
+
+[node name="AnswerContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/right/margins" unique_id=566805748]
+layout_mode = 2
+theme_type_variation = &"TransparentPanelContainer"
+
+[node name="AnswerContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/right" unique_id=214016910]
+layout_mode = 2
+
+[node name="SubmitContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=1894457021]
+layout_mode = 2
+
+[node name="SubmitButton" type="Button" parent="MarginContainer/VBoxContainer/SubmitContainer" unique_id=1123059114]
 layout_mode = 2
 shortcut = SubResource("Shortcut_afi11")
 text = "Klaar!"
 script = ExtResource("3_6488b")
 metadata/_custom_type_script = "uid://bpr1xsrq6lokd"
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/CenterContainer" unique_id=1857658064]
+[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/SubmitContainer/SubmitButton" unique_id=966201780]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -91.0
+offset_top = -43.0
+offset_right = 92.0
+offset_bottom = 5.0
+grow_horizontal = 2
+theme_type_variation = &"TransparentPanelContainer"
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = -12
+
+[node name="Spinbox" type="SpinBox" parent="MarginContainer/VBoxContainer/SubmitContainer/SubmitButton/Margin" unique_id=971967114]
 layout_mode = 2
+theme_type_variation = &"SpinboxLineEdit"
+rounded = true
+alignment = 1
+custom_arrow_step = 1.0
 
 [node name="TextureRect" type="TextureButton" parent="." unique_id=1221378139]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -119,22 +188,27 @@ stretch = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(160, 136)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="avocado2" parent="TextureRect/SubViewportContainer/SubViewport" unique_id=1975359764 instance=ExtResource("1_26m57")]
 
-[node name="Skeleton3D" parent="TextureRect/SubViewportContainer/SubViewport/avocado2/Armature" parent_id_path=PackedInt32Array(1975359764, 1923085597) index="0" unique_id=559322183]
+[node name="Skeleton3D" parent="TextureRect/SubViewportContainer/SubViewport/avocado2/Armature" parent_id_path=PackedInt32Array(1975359764, 1110046006) index="0" unique_id=2010913038]
 bones/1/rotation = Quaternion(-0.122428946, 0.027743451, 0.07656861, 0.9891304)
 bones/3/rotation = Quaternion(-0.072635084, -0.026248384, 0.12224877, 0.98949003)
 bones/4/rotation = Quaternion(0.003679679, -0.043463893, -0.0842781, 0.9954871)
 
-[node name="AnimationPlayer" parent="TextureRect/SubViewportContainer/SubViewport/avocado2" index="1" unique_id=2069938185]
+[node name="avocado" parent="TextureRect/SubViewportContainer/SubViewport/avocado2/Armature/Skeleton3D" index="0" unique_id=1832545946]
+layers = 512
+
+[node name="AnimationPlayer" parent="TextureRect/SubViewportContainer/SubViewport/avocado2" index="1" unique_id=340928583]
 autoplay = &"idle"
 
 [node name="Camera3D" type="Camera3D" parent="TextureRect/SubViewportContainer/SubViewport" unique_id=1924245623]
 transform = Transform3D(0.34447905, 0.37839606, -0.8591569, 1.37531035e-08, 0.91517085, 0.4030661, 0.938794, -0.13884784, 0.3152572, -0.26115054, 0.31432372, 0.09535728)
+cull_mask = 512
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="TextureRect/SubViewportContainer/SubViewport" unique_id=503928868]
 transform = Transform3D(0.15496598, 0.83786166, -0.5234247, -0.23785341, 0.54588264, 0.8033915, 0.9588594, 0, 0.2838815, 0, 0, 0)
+layers = 512
 
 [editable path="TextureRect/SubViewportContainer/SubViewport/avocado2"]
