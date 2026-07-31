@@ -26,6 +26,16 @@ keycode = 4194309
 [sub_resource type="Shortcut" id="Shortcut_afi11"]
 events = [SubResource("InputEventKey_mh00s")]
 
+[sub_resource type="Gradient" id="Gradient_afi11"]
+offsets = PackedFloat32Array(0.7176287, 0.7285491, 0.97659904, 1)
+colors = PackedColorArray(0.4509804, 0.7254902, 0.3019608, 1, 0.31764707, 0.53333336, 0.20784314, 1, 0.31764707, 0.53333336, 0.20784314, 1, 0.39151636, 0.4661066, 0.52508664, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_igo7b"]
+gradient = SubResource("Gradient_afi11")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.97863245, 0.517094)
+
 [sub_resource type="InputEventKey" id="InputEventKey_6488b"]
 device = -1
 keycode = 81
@@ -45,12 +55,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_afi11")
 script = ExtResource("2_afi11")
-_left = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/left")
-_right = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/right")
-_challengeContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/left/ChallengeContainer")
-_questionContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/right/margins/QuestionContainer")
-_answerContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/right/margins/AnswerContainer")
-_submitContainer = NodePath("MarginContainer/VBoxContainer/SubmitContainer")
+_left = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/left")
+_right = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right")
+_challengeContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/left/ChallengeContainer")
+_questionContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right/margins/QuestionContainer")
+_answerContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right/margins/AnswerContainer")
+_submitContainer = NodePath("MarginContainer/VBoxContainer/InputContainer/SubmitButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2051200352]
 layout_mode = 1
@@ -66,7 +76,7 @@ theme_override_constants/margin_bottom = 32
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=521922310]
 layout_mode = 2
-theme_override_constants/separation = -42
+theme_override_constants/separation = -38
 
 [node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=1907453780]
 layout_mode = 2
@@ -96,72 +106,96 @@ layout_mode = 2
 theme_override_constants/margin_left = -44
 theme_override_constants/margin_top = 17
 theme_override_constants/margin_right = -9
-theme_override_constants/margin_bottom = 13
+theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer" unique_id=971803413]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer" unique_id=1198055358]
 layout_mode = 2
 
-[node name="left" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer" unique_id=1254695605]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="ChallengeContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/left" unique_id=1504843259]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"TransparentPanelContainer"
-
-[node name="right" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer" unique_id=1625617167]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="margins" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/right" unique_id=153241266]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=971803413]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="QuestionContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/right/margins" unique_id=561893668]
+[node name="left" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1254695605]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ChallengeContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/left" unique_id=1504843259]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"TransparentPanelContainer"
+
+[node name="right" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1625617167]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="margins" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right" unique_id=153241266]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="QuestionContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right/margins" unique_id=561893668]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"TransparentPanelContainer"
 
-[node name="AnswerContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/right/margins" unique_id=566805748]
+[node name="AnswerContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right/margins" unique_id=566805748]
 layout_mode = 2
 theme_type_variation = &"TransparentPanelContainer"
 
-[node name="AnswerContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/right" unique_id=214016910]
+[node name="AnswerContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right" unique_id=214016910]
 layout_mode = 2
 
-[node name="SubmitContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=1894457021]
+[node name="InputContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=244899220]
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.06, 1.06)
+offset_transform_visual_only = false
 
-[node name="SubmitButton" type="Button" parent="MarginContainer/VBoxContainer/SubmitContainer" unique_id=1123059114]
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/InputContainer" unique_id=1841458174]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"TransparentPanel"
+
+[node name="Spinbox" type="SpinBox" parent="MarginContainer/VBoxContainer/InputContainer" unique_id=971967114]
+layout_mode = 2
+size_flags_vertical = 0
+rounded = true
+alignment = 1
+update_on_text_changed = true
+custom_arrow_step = 1.0
+select_all_on_focus = true
+
+[node name="SubmitButton" type="Button" parent="MarginContainer/VBoxContainer/InputContainer" unique_id=1123059114]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 10
+theme_type_variation = &"SubmitButton"
 shortcut = SubResource("Shortcut_afi11")
-text = "Klaar!"
+text = "KLAAR!"
+clip_text = true
 script = ExtResource("3_6488b")
 metadata/_custom_type_script = "uid://bpr1xsrq6lokd"
 
-[node name="Margin" type="MarginContainer" parent="MarginContainer/VBoxContainer/SubmitContainer/SubmitButton" unique_id=966201780]
+[node name="ColorRect" type="TextureRect" parent="MarginContainer/VBoxContainer/InputContainer/SubmitButton" unique_id=1850809251]
+z_as_relative = false
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -91.0
-offset_top = -43.0
-offset_right = 92.0
-offset_bottom = 5.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-theme_type_variation = &"TransparentPanelContainer"
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = -12
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_igo7b")
 
-[node name="Spinbox" type="SpinBox" parent="MarginContainer/VBoxContainer/SubmitContainer/SubmitButton/Margin" unique_id=971967114]
-layout_mode = 2
-theme_type_variation = &"SpinboxLineEdit"
-rounded = true
-alignment = 1
-custom_arrow_step = 1.0
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/InputContainer/SubmitButton" unique_id=1636473560]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 18
+text = "Klaar!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect" type="TextureButton" parent="." unique_id=1221378139]
 visible = false
@@ -192,12 +226,7 @@ render_target_update_mode = 0
 
 [node name="avocado2" parent="TextureRect/SubViewportContainer/SubViewport" unique_id=1975359764 instance=ExtResource("1_26m57")]
 
-[node name="Skeleton3D" parent="TextureRect/SubViewportContainer/SubViewport/avocado2/Armature" parent_id_path=PackedInt32Array(1975359764, 1110046006) index="0" unique_id=2010913038]
-bones/1/rotation = Quaternion(-0.122428946, 0.027743451, 0.07656861, 0.9891304)
-bones/3/rotation = Quaternion(-0.072635084, -0.026248384, 0.12224877, 0.98949003)
-bones/4/rotation = Quaternion(0.003679679, -0.043463893, -0.0842781, 0.9954871)
-
-[node name="avocado" parent="TextureRect/SubViewportContainer/SubViewport/avocado2/Armature/Skeleton3D" index="0" unique_id=1832545946]
+[node name="avocado" parent="TextureRect/SubViewportContainer/SubViewport/avocado2/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1975359764, 2010913038) index="0" unique_id=1832545946]
 layers = 512
 
 [node name="AnimationPlayer" parent="TextureRect/SubViewportContainer/SubViewport/avocado2" index="1" unique_id=340928583]
