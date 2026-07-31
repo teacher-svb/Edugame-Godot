@@ -17,6 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://brhrj77wopxwb" path="res://Scenes/characters/cornelis.tscn" id="15_26deu"]
 [ext_resource type="PackedScene" uid="uid://bnt0g8i341cd3" path="res://assets/levels/bakery-exterior.blend" id="16_muxm6"]
 [ext_resource type="Script" uid="uid://dbtd0oguw4wdj" path="res://scripts/Game/Systems/QuestSystem/QuestTrigger.cs" id="16_pudda"]
+[ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="18_rb227"]
+[ext_resource type="Script" uid="uid://ckobusjip2hti" path="res://scripts/Game/Systems/QuestSystem/QuestReaction.cs" id="19_i72j7"]
+[ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="19_trh4x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dcdmp"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -38,7 +41,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_26deu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rl30s"]
 shader = ExtResource("3_n1vbe")
 
 [sub_resource type="Gradient" id="Gradient_uhrdb"]
@@ -56,15 +59,15 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_wfhh5"]
 curve = SubResource("Curve_1x8p3")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rb227"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bivhb"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_h55p7")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_tuys8")
 shader_parameter/width_curve = SubResource("CurveTexture_wfhh5")
 
-[sub_resource type="QuadMesh" id="QuadMesh_trh4x"]
-material = SubResource("ShaderMaterial_rb227")
+[sub_resource type="QuadMesh" id="QuadMesh_u2llv"]
+material = SubResource("ShaderMaterial_bivhb")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8ah0f"]
 emission_shape = 3
@@ -293,6 +296,14 @@ agent_radius = 0.1
 agent_max_climb = 0.1
 agent_max_slope = 60.0
 
+[sub_resource type="Resource" id="Resource_rb227"]
+script = ExtResource("19_i72j7")
+_targetPath = null
+metadata/_custom_type_script = "uid://ckobusjip2hti"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_igo7b"]
+size = Vector3(3, 1, 1.6)
+
 [node name="Node3D" type="Node3D" unique_id=1964158039]
 script = ExtResource("1_4ns31")
 OcclusionShader = ExtResource("2_obrew")
@@ -323,8 +334,8 @@ amount = 60
 lifetime = 60.0
 explosiveness = 1.0
 fixed_fps = 60
-process_material = SubResource("ShaderMaterial_26deu")
-draw_pass_1 = SubResource("QuadMesh_trh4x")
+process_material = SubResource("ShaderMaterial_rl30s")
+draw_pass_1 = SubResource("QuadMesh_u2llv")
 script = ExtResource("5_wcmwa")
 ColorRamp = SubResource("GradientTexture1D_tuys8")
 WidthCurve = SubResource("CurveTexture_wfhh5")
@@ -424,6 +435,16 @@ metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
 
 [node name="Reactions" type="Node" parent="Quests/I_2-the Ambition/Cornelis" unique_id=93343950]
 
+[node name="QuestEventListener" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Reactions" unique_id=366235268]
+script = ExtResource("18_rb227")
+_checkObjectiveId = true
+_objectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa01"
+_checkState = true
+_state = 2
+_reactions = Array[ExtResource("19_i72j7")]([SubResource("Resource_rb227")])
+eventChannel = ExtResource("19_trh4x")
+metadata/_custom_type_script = "uid://dd1g4qvshevqa"
+
 [node name="Hendrik" type="Node" parent="Quests/I_2-the Ambition" unique_id=853748344]
 
 [node name="Triggers" type="Node" parent="Quests/I_2-the Ambition/Hendrik" unique_id=1911028866]
@@ -522,5 +543,16 @@ _questObjectiveId = "3a861b47-c25e-4265-8205-81e4394e3903"
 metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
 
 [node name="Reactions" type="Node" parent="Quests/I_2-the Ambition/MsBram" unique_id=951135631]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=475543381]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1605957359]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3000002)
+shape = SubResource("BoxShape3D_igo7b")
+
+[node name="Challenges" type="Node" parent="." unique_id=1808815040]
+
+[connection signal="body_entered" from="Area3D" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective1-init" method="_OnPlayerTrigger"]
 
 [editable path="NavigationRegion3D/level2_3D-v3"]

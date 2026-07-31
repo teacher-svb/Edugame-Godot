@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="1_ck7ko"]
 [ext_resource type="Script" uid="uid://qjrt84cjuqwm" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeUI.cs" id="2_ubp0e"]
 
-[node name="ChallengeUI" type="Control" node_paths=PackedStringArray("_left", "_right", "_challengeContainer", "_questionContainer", "_answerContainer", "_submitContainer")]
+[node name="ChallengeUI" type="Control" unique_id=2128952073 node_paths=PackedStringArray("_left", "_right", "_challengeContainer", "_questionContainer", "_answerContainer", "_submitContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,7 +20,7 @@ _answerContainer = NodePath("Panel/MarginContainer/HBoxContainer/Right/SubmitCon
 _submitContainer = NodePath("Panel/MarginContainer/HBoxContainer/Right/SubmitContainer/VBoxContainer")
 _challengeScenes = Dictionary[int, Resource]({})
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=332430301]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,7 +29,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"DarkPanel"
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1166778918]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,16 +37,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer" unique_id=1437155335]
 layout_mode = 2
 
-[node name="Left" type="Panel" parent="Panel/MarginContainer/HBoxContainer"]
+[node name="Left" type="Panel" parent="Panel/MarginContainer/HBoxContainer" unique_id=1147064207]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme_type_variation = &"LightPanel"
 
-[node name="Content" type="MarginContainer" parent="Panel/MarginContainer/HBoxContainer/Left"]
+[node name="Content" type="MarginContainer" parent="Panel/MarginContainer/HBoxContainer/Left" unique_id=1255275212]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,16 +54,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Right" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer"]
+[node name="Right" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer" unique_id=1544209534]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="QuestionContainer" type="Panel" parent="Panel/MarginContainer/HBoxContainer/Right"]
+[node name="QuestionContainer" type="Panel" parent="Panel/MarginContainer/HBoxContainer/Right" unique_id=1645191434]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"LightPanel"
 
-[node name="PanelContainer" type="PanelContainer" parent="Panel/MarginContainer/HBoxContainer/Right/QuestionContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Panel/MarginContainer/HBoxContainer/Right/QuestionContainer" unique_id=1475031646]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,7 +71,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Question" type="RichTextLabel" parent="Panel/MarginContainer/HBoxContainer/Right/QuestionContainer/PanelContainer"]
+[node name="Question" type="RichTextLabel" parent="Panel/MarginContainer/HBoxContainer/Right/QuestionContainer/PanelContainer" unique_id=1833972674]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Lorem ipsum dolor sit amet, consectet adipiscing elit. 
@@ -80,16 +80,16 @@ Integer ac maximus erat, non viverra est. Suspendisse vel erat in erat rhoncus f
 horizontal_alignment = 3
 justification_flags = 35
 
-[node name="SubmitContainer" type="MarginContainer" parent="Panel/MarginContainer/HBoxContainer/Right"]
+[node name="SubmitContainer" type="MarginContainer" parent="Panel/MarginContainer/HBoxContainer/Right" unique_id=785108830]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer/Right/SubmitContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer/Right/SubmitContainer" unique_id=1294683004]
 layout_mode = 2
 alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/HBoxContainer/Right/SubmitContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/HBoxContainer/Right/SubmitContainer/VBoxContainer" unique_id=414091657]
 layout_mode = 2
 
-[node name="SubmitButton" type="Button" parent="Panel/MarginContainer/HBoxContainer/Right/SubmitContainer/VBoxContainer"]
+[node name="SubmitButton" type="Button" parent="Panel/MarginContainer/HBoxContainer/Right/SubmitContainer/VBoxContainer" unique_id=1482770011]
 layout_mode = 2
 text = "Klaar!"

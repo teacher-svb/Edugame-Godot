@@ -16,26 +16,23 @@ albedo_texture = ExtResource("3_ivm3q")
 _characterData = ExtResource("2_ivm3q")
 PersistentId = "Cornelis"
 
-[node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
-VisualRoot = NodePath("../../VisualRoot/Engineer3")
-
-[node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
-root_node = NodePath("../../VisualRoot/Engineer3")
-
-[node name="CollisionShape3D" parent="." index="3" unique_id=293151575]
+[node name="CollisionShape3D" parent="." index="2" unique_id=293151575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("CapsuleShape3D_kl5mj")
 
 [node name="dialogCamera" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="0" unique_id=534549197]
 far = 1.0
 
-[node name="AnimationPlayer" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="1" unique_id=933369381]
-root_node = NodePath("../Engineer3")
+[node name="AnimationTree" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
+root_node = NodePath("..")
+
+[node name="AnimationPlayer" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="2" unique_id=933369381]
+root_node = NodePath("..")
 
 [node name="Engineer3" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="2" unique_id=1473802298 instance=ExtResource("2_ob1j5")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
 
-[node name="Skeleton3D" parent="VisualRoot/Engineer3/Rig_Medium" parent_id_path=PackedInt32Array(1473802298, 2103153527) index="0" unique_id=552517992]
+[node name="Skeleton3D" parent="VisualRoot/Engineer3/Rig_Medium" parent_id_path=PackedInt32Array(1473802298, 588855115) index="0" unique_id=522226090]
 bones/1/position = Vector3(0, 0.38442862, 0)
 bones/1/rotation = Quaternion(0.0043767355, 0.04315733, 0.00018906983, 0.9990587)
 bones/1/scale = Vector3(0.99999994, 1, 0.99999994)
@@ -88,37 +85,37 @@ bones/22/position = Vector3(-1.5415026e-08, 0.096125185, -0.057500005)
 bones/22/rotation = Quaternion(0.002464879, -0.0024648781, 0.69799745, 0.7160919)
 bones/22/scale = Vector3(1, 1.0000001, 1.0000001)
 
-[node name="Engineer_ArmLeft" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="0" unique_id=191204572]
+[node name="Engineer_ArmLeft" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="0" unique_id=1874009141]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
-[node name="Engineer_ArmRight" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="1" unique_id=1209550892]
+[node name="Engineer_ArmRight" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="1" unique_id=71718484]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
-[node name="Engineer_Backpack" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="2" unique_id=73038579]
+[node name="Engineer_Backpack" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="2" unique_id=409439992]
 visible = false
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
-[node name="Engineer_Body" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="3" unique_id=2114029621]
+[node name="Engineer_Body" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="3" unique_id=565117771]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
-[node name="Engineer_Goggles" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="4" unique_id=568108285]
+[node name="Engineer_Goggles" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="4" unique_id=1126704807]
 visible = false
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
-[node name="Engineer_Head" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="5" unique_id=1574254128]
+[node name="Engineer_Head" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="5" unique_id=1674624500]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
-[node name="Engineer_LegLeft" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="6" unique_id=1923108924]
+[node name="Engineer_LegLeft" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="6" unique_id=251442836]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 
-[node name="Engineer_LegRight" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="7" unique_id=1048888592]
+[node name="Engineer_LegRight" parent="VisualRoot/Engineer3/Rig_Medium/Skeleton3D" index="7" unique_id=781471406]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_8afov")
 

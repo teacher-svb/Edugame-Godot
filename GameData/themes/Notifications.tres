@@ -123,6 +123,20 @@ texture_margin_top = 25.0
 texture_margin_right = 25.0
 texture_margin_bottom = 35.0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0i35j"]
+load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_altsn"]
+atlas = SubResource("CompressedTexture2D_0i35j")
+region = Rect2(132, 260, 56, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8s6lq"]
+texture = SubResource("AtlasTexture_altsn")
+texture_margin_left = 22.0
+texture_margin_top = 16.0
+texture_margin_right = 22.0
+texture_margin_bottom = 16.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_g6hso"]
 atlas = ExtResource("1_iu03x")
 region = Rect2(320, 64, 64, 64)
@@ -144,6 +158,64 @@ content_margin_top = 16.0
 content_margin_right = 16.0
 content_margin_bottom = 16.0
 
+[sub_resource type="DPITexture" id="DPITexture_iu03x"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"8\"><path fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" d=\"m12 2-4 3.5L4 2\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_ryc7f"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"8\"><path fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" d=\"m4 6 4-3.5L12 6\"/></svg>
+"
+
+[sub_resource type="ImageTexture" id="ImageTexture_32qsq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aj1bb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0i35j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6hso"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.225, 0.225, 0.225, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_altsn"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8s6lq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rf0mi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1kb3a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ybpo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e0qxm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afi11"]
+bg_color = Color(1, 0.26712936, 0.60776824, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6488b"]
+bg_color = Color(1, 0.28074336, 0.5713759, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_afi11"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iu03x"]
+
 [resource]
 default_font = ExtResource("2_jafkh")
 default_font_size = 24
@@ -158,6 +230,7 @@ DarkPanel/base_type = &"Panel"
 DarkPanel/styles/panel = SubResource("StyleBoxTexture_r150k")
 LightPanel/base_type = &"Panel"
 LightPanel/styles/panel = SubResource("StyleBoxTexture_7fkjd")
+LineEdit/styles/normal = SubResource("StyleBoxTexture_8s6lq")
 MarginContainer/constants/margin_bottom = 16
 MarginContainer/constants/margin_left = 16
 MarginContainer/constants/margin_right = 16
@@ -184,3 +257,42 @@ RichTextButton/constants/text_highlight_h_padding = 0
 RichTextButton/constants/text_highlight_v_padding = 0
 RichTextButton/styles/normal = SubResource("StyleBoxEmpty_jafkh")
 RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_n0102")
+SpinBox/colors/down_disabled_icon_modulate = Color(0.875, 0.875, 0.875, 0.5)
+SpinBox/colors/down_hover_icon_modulate = Color(0.95, 0.95, 0.95, 1)
+SpinBox/colors/down_icon_modulate = Color(0.875, 0.875, 0.875, 1)
+SpinBox/colors/down_pressed_icon_modulate = Color(0.95, 0.95, 0.95, 1)
+SpinBox/colors/up_disabled_icon_modulate = Color(0.875, 0.875, 0.875, 0.5)
+SpinBox/colors/up_hover_icon_modulate = Color(0.95, 0.95, 0.95, 1)
+SpinBox/colors/up_icon_modulate = Color(0.875, 0.875, 0.875, 1)
+SpinBox/colors/up_pressed_icon_modulate = Color(0.95, 0.95, 0.95, 1)
+SpinBox/constants/buttons_vertical_separation = 0
+SpinBox/constants/buttons_width = 16
+SpinBox/constants/field_and_buttons_separation = 2
+SpinBox/constants/set_min_buttons_width_from_icons = 1
+SpinBox/icons/down = SubResource("DPITexture_iu03x")
+SpinBox/icons/down_disabled = SubResource("DPITexture_iu03x")
+SpinBox/icons/down_hover = SubResource("DPITexture_iu03x")
+SpinBox/icons/down_pressed = SubResource("DPITexture_iu03x")
+SpinBox/icons/up = SubResource("DPITexture_ryc7f")
+SpinBox/icons/up_disabled = SubResource("DPITexture_ryc7f")
+SpinBox/icons/up_hover = SubResource("DPITexture_ryc7f")
+SpinBox/icons/up_pressed = SubResource("DPITexture_ryc7f")
+SpinBox/icons/updown = SubResource("ImageTexture_32qsq")
+SpinBox/styles/down_background = SubResource("StyleBoxEmpty_aj1bb")
+SpinBox/styles/down_background_disabled = SubResource("StyleBoxEmpty_0i35j")
+SpinBox/styles/down_background_hovered = SubResource("StyleBoxFlat_g6hso")
+SpinBox/styles/down_background_pressed = SubResource("StyleBoxFlat_altsn")
+SpinBox/styles/field_and_buttons_separator = SubResource("StyleBoxEmpty_8s6lq")
+SpinBox/styles/up_background = SubResource("StyleBoxEmpty_rf0mi")
+SpinBox/styles/up_background_disabled = SubResource("StyleBoxEmpty_1kb3a")
+SpinBox/styles/up_background_hovered = SubResource("StyleBoxFlat_g6hso")
+SpinBox/styles/up_background_pressed = SubResource("StyleBoxFlat_altsn")
+SpinBox/styles/up_down_buttons_separator = SubResource("StyleBoxEmpty_6ybpo")
+SpinboxLineEdit/base_type = &"LineEdit"
+SpinboxLineEdit/styles/focus = SubResource("StyleBoxEmpty_e0qxm")
+SpinboxLineEdit/styles/normal = SubResource("StyleBoxFlat_afi11")
+SpinboxLineEdit/styles/read_only = SubResource("StyleBoxFlat_6488b")
+TransparentPanel/base_type = &"Panel"
+TransparentPanel/styles/panel = SubResource("StyleBoxEmpty_afi11")
+TransparentPanelContainer/base_type = &"PanelContainer"
+TransparentPanelContainer/styles/panel = SubResource("StyleBoxEmpty_iu03x")
