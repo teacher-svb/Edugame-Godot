@@ -17,17 +17,17 @@ _characterData = ExtResource("2_fobh5")
 PersistentId = "Liesbeth"
 
 [node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
-VisualRoot = NodePath("../../VisualRoot/Farmer_B")
+VisualRoot = NodePath("../../Farmer_B")
 
 [node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
-root_node = NodePath("../../VisualRoot/Farmer_B")
+root_node = NodePath("../../Farmer_B")
 
 [node name="CollisionShape3D" parent="." index="3" unique_id=293151575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("CapsuleShape3D_pn1dg")
 
 [node name="AnimationPlayer" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="1" unique_id=933369381]
-root_node = NodePath("../Farmer_B")
+root_node = NodePath("../../Farmer_B")
 
 [node name="Farmer_B" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="2" unique_id=2092872470 instance=ExtResource("2_d5ixk")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)

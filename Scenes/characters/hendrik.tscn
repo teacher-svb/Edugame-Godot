@@ -13,17 +13,17 @@ _characterData = ExtResource("2_ipxpy")
 PersistentId = "Hendrik"
 
 [node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
-VisualRoot = NodePath("../../Farmer_A")
+VisualRoot = NodePath("../../../Farmer_A")
 
 [node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
-root_node = NodePath("../../Farmer_A")
+root_node = NodePath("../../../Farmer_A")
 
 [node name="CollisionShape3D" parent="." index="3" unique_id=293151575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("CapsuleShape3D_yni83")
 
 [node name="AnimationPlayer" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="1" unique_id=933369381]
-root_node = NodePath("../../Farmer_A")
+root_node = NodePath("../../../Farmer_A")
 
 [node name="Farmer_A" parent="." index="6" unique_id=1854764491 instance=ExtResource("2_wsxdp")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)

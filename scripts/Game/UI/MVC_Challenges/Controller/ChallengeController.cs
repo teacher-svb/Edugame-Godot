@@ -12,6 +12,9 @@ namespace TnT.Systems.UI
         public ChallengeView view = new();
         [Export]
         public ChallengeModel model = new();
+
+        [Signal] public delegate void AnsweredEventHandler(bool isCorrect);
+
         public override void _Ready()
         {
             Instance = this;
@@ -41,6 +44,7 @@ namespace TnT.Systems.UI
             {
                 var isCorrect = model.Challenge.CheckAnswer();
                 GD.Print($"Is Correct: {isCorrect}");
+                EmitSignal(SignalName.Answered, isCorrect);
             }
             catch(Exception ex)
             {
