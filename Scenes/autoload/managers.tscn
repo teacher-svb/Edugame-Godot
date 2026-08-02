@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://clgnpunn4d55j" path="res://scripts/Game/StateManagementGame/GameStateMessage.cs" id="13_vkax6"]
 [ext_resource type="Script" uid="uid://bvn0ypsbartdv" path="res://scripts/Game/StateManagementGame/GameStateInventory.cs" id="14_ut70p"]
 [ext_resource type="Script" uid="uid://ch4u84myc17c2" path="res://scripts/Lib/Input/InputAction.cs" id="16_ut70p"]
+[ext_resource type="Resource" uid="uid://bu3fwc67ikdd6" path="res://GameData/quests/I.2-theAmbition-Cornelis.tres" id="17_56cnb"]
 [ext_resource type="Script" uid="uid://bf6jiou3no26s" path="res://scripts/Game/UI/MVC_Challenges/Controller/ChallengeController.cs" id="23_aum7h"]
 [ext_resource type="Script" uid="uid://dlqolcp4oddju" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeView.cs" id="24_qelhd"]
 [ext_resource type="PackedScene" uid="uid://b8qgygjc4vci3" path="res://Scenes/UI/ChallengeUI-v2.tscn" id="25_d2cak"]
@@ -175,7 +176,7 @@ script = ExtResource("3_4v8vv")
 
 [node name="QuestManager" type="Node" parent="." unique_id=600992704]
 script = ExtResource("4_347u6")
-_quests = Array[ExtResource("11_aum7h")]([ExtResource("6_pnf1h")])
+_quests = Array[ExtResource("11_aum7h")]([ExtResource("6_pnf1h"), ExtResource("17_56cnb")])
 eventChannel = ExtResource("13_pnf1h")
 
 [node name="UIManager" type="Node" parent="." unique_id=1207108139]

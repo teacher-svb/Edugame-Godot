@@ -11,7 +11,13 @@ namespace TnT.EduGame.Question
     {
         [Export] MathChallenge _challenge;
 
-        public event Action ReactionCompleted;
+        [Signal] public delegate void ChallengeCompletedEventHandler();
+
+        public event Action ReactionCompleted
+        {
+            add => Connect(SignalName.ChallengeCompleted, Callable.From(value));
+            remove => Disconnect(SignalName.ChallengeCompleted, Callable.From(value));
+        }
 
         public void TriggerChallenge()
         {
@@ -25,7 +31,7 @@ namespace TnT.EduGame.Question
 
             ChallengeController.Instance.Answered -= OnAnswered;
             await StateManagerGame.Instance.Pop();
-            ReactionCompleted?.Invoke();
+            EmitSignal(SignalName.ChallengeCompleted);
         }
     }
 }

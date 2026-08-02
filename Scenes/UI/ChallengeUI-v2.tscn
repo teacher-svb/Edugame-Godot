@@ -240,6 +240,7 @@ cull_mask = 512
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="TextureRect/SubViewportContainer/SubViewport" unique_id=503928868]
 transform = Transform3D(0.15496598, 0.83786166, -0.5234247, -0.23785341, 0.54588264, 0.8033915, 0.9588594, 0, 0.2838815, 0, 0, 0)
+visible = false
 layers = 512
 
 [editable path="TextureRect/SubViewportContainer/SubViewport/avocado2"]
