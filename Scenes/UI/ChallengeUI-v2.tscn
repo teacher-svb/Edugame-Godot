@@ -218,14 +218,15 @@ grow_vertical = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="TextureRect/SubViewportContainer" unique_id=987366564]
+own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(202, 113)
 render_target_update_mode = 4
 
-[node name="avocado2" parent="TextureRect/SubViewportContainer/SubViewport" unique_id=1975359764 instance=ExtResource("1_26m57")]
+[node name="avocado2" parent="TextureRect/SubViewportContainer/SubViewport" unique_id=1975359764 groups=["occlusion_exclude"] instance=ExtResource("1_26m57")]
 
-[node name="avocado" parent="TextureRect/SubViewportContainer/SubViewport/avocado2/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1975359764, 2010913038) index="0" unique_id=1832545946]
+[node name="avocado" parent="TextureRect/SubViewportContainer/SubViewport/avocado2/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1975359764, 2010913038) index="0" unique_id=1832545946 groups=["occlusion_exclude"]]
 layers = 512
 
 [node name="AnimationPlayer" parent="TextureRect/SubViewportContainer/SubViewport/avocado2" index="1" unique_id=340928583]
