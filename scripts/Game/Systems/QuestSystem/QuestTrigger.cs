@@ -31,7 +31,6 @@ namespace TnT.EduGame.QuestSystem
 
         void _OnPlayerTrigger(Node other)
         {
-            GD.Print($"QuestTrigger: {other.FindAnyObjectByType<Player>()}");
             if (other.FindAnyObjectByType<Player>() == null)
                 return;
 
@@ -45,7 +44,6 @@ namespace TnT.EduGame.QuestSystem
 
         void _OnTrigger()
         {
-            GD.Print($"QuestTrigger: {_action} for QuestId: {_questId}, ObjectiveId: {_questObjectiveId}");
             switch (_action)
             {
                 case TriggerType.INITOBJECTIVE: _questManager.UpdateQuest(new QuestMessageStart { QuestId = _questId, ObjectiveId = _questObjectiveId }); break;

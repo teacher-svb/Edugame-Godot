@@ -23,7 +23,6 @@ namespace TnT.EduGame
         
         protected override void OnSceneLoaded(string scenePath)
         {
-            GD.Print("SaveLoadManager OnSceneLoaded");
             GameData.CurrentLevelName = scenePath;
 
             Bind<Character3D, CharacterSaveData>(ref GameData.characterData);
@@ -41,7 +40,6 @@ namespace TnT.EduGame
 
         public override void NewGame()
         {
-            GD.Print("SaveLoadManager newgame");
             GameData = new MyGameData
             {
                 Name = _gameName,
@@ -52,10 +50,7 @@ namespace TnT.EduGame
 
         public override void LoadGame(string gameName)
         {
-            GD.Print("SaveLoadManager LoadGame");
             GameData = dataService.Load(gameName);
-
-            GD.Print($"GameData.CurrentLevelName: {GameData.CurrentLevelName}");
 
             if (String.IsNullOrWhiteSpace(GameData.CurrentLevelName))
             {

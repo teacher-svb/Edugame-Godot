@@ -21,10 +21,6 @@ namespace TnT.EduGame.Question
 
         public void TriggerChallenge()
         {
-            GD.Print($"TriggerChallenge: {_challenge.Name}");
-            GD.Print($"TriggerChallenge: {ChallengeController.Instance}");
-            GD.Print($"TriggerChallenge: {StateManagerGame.Instance}");
-            GD.Print($"TriggerChallenge: {_challenge}");
             ChallengeController.Instance.Answered += OnAnswered;
             StateManagerGame.Instance.ShowChallenge((MathChallenge)_challenge.Duplicate());
         }

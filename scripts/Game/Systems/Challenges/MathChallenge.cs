@@ -120,8 +120,6 @@ namespace TnT.EduGame.Question
             // then select a random one from the list of possible answers
             // and store it as the answer to this challenge
             var dt = new DataTable();
-            // Answer = 3;
-            GD.Print(Values.Count);
             Answer = Values
                 .Select(v => v.Value)
                 .GetPermutations(FormulaParams.Length)

@@ -68,8 +68,6 @@ namespace TnT.Systems.UI
                 SceneTree tree = (SceneTree)Engine.GetMainLoop();
                 var ui = tree.FindAnyObjectByType<ChallengeUI>();
 
-                GD.Print($"Build: {_submitContainer.FindObjectsByType<Button>().ToList().First().Name}");
-
                 _submitContainer
                     .FindObjectsByType<Button>()
                     .ToList()
