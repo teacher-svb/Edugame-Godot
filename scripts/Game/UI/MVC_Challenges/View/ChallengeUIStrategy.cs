@@ -139,7 +139,7 @@ namespace TnT.Systems.UI
             return new ChallengeUI
                 .Builder(challenge)
                 .WithQuestionElement()
-                .WithParamInputs(CreateTextInputs)
+                // .WithParamInputs(CreateTextInputs)
                 .WithSubmitButton()
                 .Build();
         }

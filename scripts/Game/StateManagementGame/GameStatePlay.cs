@@ -33,7 +33,6 @@ namespace TnT.EduGame.GameState
                 StateManagerGame.Instance.OpenInventory();
             else if (_options.pauseGame.Triggered)
             {
-                GD.Print("pause");
                 StateManagerGame.Instance.OpenPauseMenu();
             }
         }

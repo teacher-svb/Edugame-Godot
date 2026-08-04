@@ -58,9 +58,9 @@ script = ExtResource("2_afi11")
 _left = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/left")
 _right = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right")
 _challengeContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/left/ChallengeContainer")
-_questionContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right/margins/QuestionContainer")
-_answerContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right/margins/AnswerContainer")
-_submitContainer = NodePath("MarginContainer/VBoxContainer/InputContainer/SubmitButton")
+_questionContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right/QuestionContainer")
+_answerContainer = NodePath("MarginContainer/VBoxContainer/InputContainer/AnswerContainer")
+_submitContainer = NodePath("MarginContainer/VBoxContainer/InputContainer/SubmitContainer")
 _challengeScenes = Dictionary[int, Resource]({})
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2051200352]
@@ -129,21 +129,10 @@ theme_type_variation = &"TransparentPanelContainer"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="margins" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right" unique_id=153241266]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="QuestionContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right/margins" unique_id=561893668]
+[node name="QuestionContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right" unique_id=561893668]
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"TransparentPanelContainer"
-
-[node name="AnswerContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right/margins" unique_id=566805748]
-layout_mode = 2
-theme_type_variation = &"TransparentPanelContainer"
-
-[node name="AnswerContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right" unique_id=214016910]
-layout_mode = 2
 
 [node name="InputContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=244899220]
 layout_mode = 2
@@ -156,7 +145,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"TransparentPanel"
 
-[node name="Spinbox" type="SpinBox" parent="MarginContainer/VBoxContainer/InputContainer" unique_id=971967114]
+[node name="AnswerContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/InputContainer" unique_id=1772471743]
+layout_mode = 2
+
+[node name="Spinbox" type="SpinBox" parent="MarginContainer/VBoxContainer/InputContainer/AnswerContainer" unique_id=971967114]
 layout_mode = 2
 size_flags_vertical = 4
 max_value = 99.0
@@ -166,8 +158,13 @@ update_on_text_changed = true
 custom_arrow_step = 1.0
 select_all_on_focus = true
 
-[node name="SubmitButton" type="Button" parent="MarginContainer/VBoxContainer/InputContainer" unique_id=1123059114]
-z_index = 1
+[node name="SubmitContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/InputContainer" unique_id=1714464510]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"TransparentPanelContainer"
+
+[node name="SubmitButton" type="Button" parent="MarginContainer/VBoxContainer/InputContainer/SubmitContainer" unique_id=1123059114]
+z_index = 2
 layout_mode = 2
 size_flags_horizontal = 10
 theme_type_variation = &"SubmitButton"
@@ -177,8 +174,8 @@ clip_text = true
 script = ExtResource("3_6488b")
 metadata/_custom_type_script = "uid://bpr1xsrq6lokd"
 
-[node name="ColorRect" type="TextureRect" parent="MarginContainer/VBoxContainer/InputContainer/SubmitButton" unique_id=1850809251]
-z_as_relative = false
+[node name="ColorRect" type="TextureRect" parent="MarginContainer/VBoxContainer/InputContainer/SubmitContainer/SubmitButton" unique_id=1850809251]
+z_index = -1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -187,7 +184,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_igo7b")
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/InputContainer/SubmitButton" unique_id=1636473560]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/InputContainer/SubmitContainer/SubmitButton" unique_id=1636473560]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -240,7 +237,6 @@ cull_mask = 512
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="TextureRect/SubViewportContainer/SubViewport" unique_id=503928868]
 transform = Transform3D(0.15496598, 0.83786166, -0.5234247, -0.23785341, 0.54588264, 0.8033915, 0.9588594, 0, 0.2838815, 0, 0, 0)
-visible = false
 layers = 512
 
 [editable path="TextureRect/SubViewportContainer/SubViewport/avocado2"]

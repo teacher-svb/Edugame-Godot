@@ -150,7 +150,6 @@ public partial class CharacterController3D : Node, ICharacterController
     /// <param name="position">The target position in world space.</param>
     public void MoveTo(Vector3 position)
     {
-        GD.Print($"Move To : {position}");
         _character.Position = position;
     }
 }

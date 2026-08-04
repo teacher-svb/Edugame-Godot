@@ -60,12 +60,15 @@ namespace TnT.Systems.UI
                 _submitContainer = ui._submitContainer;
                 _questionContainer = ui._questionContainer;
                 _answerContainer = ui._answerContainer;
+                _submitContainer.Visible = false;
             }
             public ChallengeUI Build()
             {
 
                 SceneTree tree = (SceneTree)Engine.GetMainLoop();
                 var ui = tree.FindAnyObjectByType<ChallengeUI>();
+
+                GD.Print($"Build: {_submitContainer.FindObjectsByType<Button>().ToList().First().Name}");
 
                 _submitContainer
                     .FindObjectsByType<Button>()
@@ -137,10 +140,9 @@ namespace TnT.Systems.UI
             }
             public Builder WithSubmitButton()
             {
-                _submitContainer.Clear();
-                var btn = _submitContainer.CreateChild<Button>();
-                btn.Text = "Klaar!";
-                btn.Disabled = _challenge.Values.Where(v => v.ParamName != "").Count() != _challenge.FormulaParams.Length;
+                _submitContainer.Visible = true;
+
+                _submitContainer.FindObjectsByType<Button>().First().Disabled = _challenge.Values.Count(v => v.ParamName != "") != _challenge.FormulaParams.Length;
 
                 return this;
             }

@@ -55,7 +55,7 @@ namespace TnT.EduGame
             GD.Print("SaveLoadManager LoadGame");
             GameData = dataService.Load(gameName);
 
-            GD.Print(GameData.CurrentLevelName);
+            GD.Print($"GameData.CurrentLevelName: {GameData.CurrentLevelName}");
 
             if (String.IsNullOrWhiteSpace(GameData.CurrentLevelName))
             {

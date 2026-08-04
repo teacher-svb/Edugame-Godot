@@ -340,7 +340,9 @@ environment = SubResource("Environment_j2q71")
 transform = Transform3D(0.49999994, 0.7500001, -0.4330127, 2.7805946e-08, 0.49999994, 0.86602545, 0.8660255, -0.43301263, 0.2499999, 0, 0, 0)
 light_color = Color(0.9999996, 0.8925514, 0.49034446, 1)
 light_energy = 0.64
+light_cull_mask = 4294442495
 shadow_enabled = true
+shadow_caster_mask = 4294442495
 
 [node name="WeatherEffects" type="Node" parent="Environment" unique_id=1209452278]
 
@@ -573,22 +575,22 @@ metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
 
 [node name="Reactions" type="Node" parent="Quests/I_2-the Ambition/MsBram" unique_id=951135631]
 
-[node name="Area3D" type="Area3D" parent="." unique_id=475543381]
+[node name="CornelisDrawbridgeArea" type="Area3D" parent="." unique_id=475543381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1605957359]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CornelisDrawbridgeArea" unique_id=1605957359]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 shape = SubResource("BoxShape3D_igo7b")
 
-[node name="Area3D2" type="Area3D" parent="." unique_id=1958182607]
+[node name="CornelisDrawbridgeCloseArea" type="Area3D" parent="." unique_id=1958182607]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=1394947006]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CornelisDrawbridgeCloseArea" unique_id=1394947006]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.14999962)
 shape = SubResource("BoxShape3D_igo7b")
 
 [connection signal="ChallengeCompleted" from="Quests/I_2-the Ambition/Cornelis/Challenges/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective2-complete" method="_OnTrigger"]
-[connection signal="body_entered" from="Area3D" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective1-init" method="_OnPlayerTrigger"]
-[connection signal="body_entered" from="Area3D2" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective1-complete" method="_OnPlayerTrigger"]
+[connection signal="body_entered" from="CornelisDrawbridgeArea" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective1-init" method="_OnPlayerTrigger"]
+[connection signal="body_entered" from="CornelisDrawbridgeCloseArea" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective1-complete" method="_OnPlayerTrigger"]
 
 [editable path="NavigationRegion3D/level2_3D-v3"]

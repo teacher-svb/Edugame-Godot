@@ -62,7 +62,6 @@ namespace TnT.EduGame.GameState
 
         async Task FadeIn()
         {
-            GD.Print("fadein");
             var tree = ManagerUI.Instance.GetTree();
             tree.Paused = true;
             await this.FadeController.ShowView();
@@ -106,7 +105,6 @@ namespace TnT.EduGame.GameState
 
         async Task FadeOut()
         {
-            GD.Print("fadeout");
             await Task.Delay(1000);
 
             await this.FadeController.HideView();

@@ -28,10 +28,13 @@ namespace TnT.Systems.UI
         {
             await this.ScaleIn(duration);
             Show();
+            this.ZIndex = 1000;
+            
         }
 
         public async Task HideView(float duration = 0.2f)
         {
+            this.ZIndex = -1;
             await this.ScaleOut(duration);
             Hide();
         }

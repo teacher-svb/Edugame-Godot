@@ -19,7 +19,7 @@ namespace TnT.Systems.UI
             _fadeRect = this.FindAnyObjectByType<ColorRect>();
             _fadeRect.Modulate = new Color(1f, 1f, 1f, 0f);
             _fadeRect.SetAnchorsPreset(LayoutPreset.FullRect);
-            _fadeRect.Visible = false;
+            this.Visible = false;
 
             await Task.Yield();
         }
@@ -29,14 +29,14 @@ namespace TnT.Systems.UI
             var canvas = this.FindAncestorOfType<CanvasLayer>();
             canvas.Layer = 999;
 
-            _fadeRect.Visible = true;
+            this.Visible = true;
             await _fadeRect.FadeIn(durationSeconds);
         }
 
         public async Task Hide(float durationSeconds = 1f)
         {
             await _fadeRect.FadeOut(durationSeconds);
-            _fadeRect.Visible = false;
+            this.Visible = false;
 
             var canvas = this.FindAncestorOfType<CanvasLayer>();
             canvas.Layer = -1;
