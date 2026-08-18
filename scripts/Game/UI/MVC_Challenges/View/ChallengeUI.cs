@@ -31,9 +31,27 @@ namespace TnT.Systems.UI
         Control _answerContainer;
         [Export]
         Control _submitContainer;
+        [Export]
+        SpinBox _answerSpinbox;
 
         [Export]
         Dictionary<ChallengeUIType, Resource> _challengeScenes;
+
+        // Persistent forwarders: _submitContainer/_answerSpinbox are static scene furniture,
+        // never freed/recreated between challenges (unlike the containers Build() clears),
+        // so they're wired once here instead of re-subscribed per Build() to avoid stacking handlers.
+        string _answerParamName;
+
+        public override void _Ready()
+        {
+            _submitContainer.FindObjectsByType<Button>().First().Pressed += () => EmitSignal(SignalName.OnSubmit);
+            _answerSpinbox.ValueChanged += value =>
+            {
+                if (_answerParamName == null)
+                    return;
+                EmitSignal(SignalName.OnValueChanged, _answerParamName, ((int)value).ToString());
+            };
+        }
 
         public class Builder
         {
@@ -47,6 +65,7 @@ namespace TnT.Systems.UI
             private Control _submitContainer;
             private Control _questionContainer;
             Control _answerContainer;
+            private readonly ChallengeUI _ui;
             private readonly IMathChallenge _challenge;
 
             public Builder(IMathChallenge challenge)
@@ -54,24 +73,19 @@ namespace TnT.Systems.UI
                 _challenge = challenge;
 
                 SceneTree tree = (SceneTree)Engine.GetMainLoop();
-                var ui = tree.FindAnyObjectByType<ChallengeUI>();
+                _ui = tree.FindAnyObjectByType<ChallengeUI>();
 
-                _challengeContainer = ui._challengeContainer;
-                _submitContainer = ui._submitContainer;
-                _questionContainer = ui._questionContainer;
-                _answerContainer = ui._answerContainer;
-                _submitContainer.Visible = false;
+                _challengeContainer = _ui._challengeContainer;
+                _submitContainer = _ui._submitContainer;
+                _questionContainer = _ui._questionContainer;
+                _answerContainer = _ui._answerContainer;
+
+                _ui._answerSpinbox.Visible = false;
+                _ui._answerParamName = null;
             }
             public ChallengeUI Build()
             {
-
-                SceneTree tree = (SceneTree)Engine.GetMainLoop();
-                var ui = tree.FindAnyObjectByType<ChallengeUI>();
-
-                _submitContainer
-                    .FindObjectsByType<Button>()
-                    .ToList()
-                    .ForEach(button => button.Pressed += () => ui.EmitSignal(SignalName.OnSubmit));
+                var ui = _ui;
 
                 ui
                     .FindObjectsByType<ChallengeValueSelect>()
@@ -138,9 +152,15 @@ namespace TnT.Systems.UI
             }
             public Builder WithSubmitButton()
             {
-                _submitContainer.Visible = true;
-
                 _submitContainer.FindObjectsByType<Button>().First().Disabled = _challenge.Values.Count(v => v.ParamName != "") != _challenge.FormulaParams.Length;
+
+                return this;
+            }
+            public Builder WithSpinboxAnswer()
+            {
+                _ui._answerSpinbox.Visible = true;
+                _ui._answerSpinbox.SetValueNoSignal(0);
+                _ui._answerParamName = _challenge.FormulaParams[0];
 
                 return this;
             }

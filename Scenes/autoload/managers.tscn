@@ -25,7 +25,7 @@
 [ext_resource type="Resource" uid="uid://bu3fwc67ikdd6" path="res://GameData/quests/I.2-theAmbition-Cornelis.tres" id="17_56cnb"]
 [ext_resource type="Script" uid="uid://bf6jiou3no26s" path="res://scripts/Game/UI/MVC_Challenges/Controller/ChallengeController.cs" id="23_aum7h"]
 [ext_resource type="Script" uid="uid://dlqolcp4oddju" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeView.cs" id="24_qelhd"]
-[ext_resource type="PackedScene" uid="uid://b8qgygjc4vci3" path="res://Scenes/UI/ChallengeUI-v2.tscn" id="25_d2cak"]
+[ext_resource type="PackedScene" uid="uid://b8qgygjc4vci3" path="res://Scenes/UI/ChallengeUI.tscn" id="25_d2cak"]
 [ext_resource type="Script" uid="uid://bmfvn3p4u73k5" path="res://scripts/Game/UI/MVC_Challenges/Model/ChallengeModel.cs" id="26_2a8cd"]
 [ext_resource type="Resource" uid="uid://bvtaxgkyu400b" path="res://GameData/challenges/SelectThree_easy.tres" id="27_kpb3h"]
 [ext_resource type="Script" uid="uid://bfyn33tven763" path="res://scripts/Game/UI/MVC_Inventory/InventoryController.cs" id="29_yi7uc"]

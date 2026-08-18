@@ -139,24 +139,9 @@ namespace TnT.Systems.UI
             return new ChallengeUI
                 .Builder(challenge)
                 .WithQuestionElement()
-                // .WithParamInputs(CreateTextInputs)
+                .WithSpinboxAnswer()
                 .WithSubmitButton()
                 .Build();
-        }
-
-        ChallengeParamInput CreateTextInputs(IMathChallenge challenge)
-        {
-            var input = new ChallengeParamInput();
-
-            challenge.FormulaParams
-                .ForEach(p =>
-                {
-                    var valueInput = input.CreateChild<ChallengeValueInput>();
-                    valueInput.Init(p);
-                    valueInput.ValueChanged += i => input.OnParamChanged?.Invoke(p, i.ToString());
-                });
-
-            return input;
         }
     }
 
