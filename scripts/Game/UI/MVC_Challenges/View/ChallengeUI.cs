@@ -152,7 +152,11 @@ namespace TnT.Systems.UI
             }
             public Builder WithSubmitButton()
             {
-                _submitContainer.FindObjectsByType<Button>().First().Disabled = _challenge.Values.Count(v => v.ParamName != "") != _challenge.FormulaParams.Length;
+                // Value-assignment challenges (cogwheel/dropdown/combination lock) gate submit until every
+                // shuffled Value has been placed into a formula param. Free-typed answers (WithSpinboxAnswer)
+                // carry no Values to place, so they're always submittable.
+                _submitContainer.FindObjectsByType<Button>().First().Disabled = _challenge.Values.Count > 0
+                    && _challenge.Values.Count(v => v.ParamName != "") != _challenge.FormulaParams.Length;
 
                 return this;
             }

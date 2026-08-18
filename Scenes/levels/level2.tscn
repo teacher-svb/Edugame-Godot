@@ -305,22 +305,14 @@ _targetPath = NodePath("../../Challenges/MathChallengeTrigger")
 _methodName = "TriggerChallenge"
 metadata/_custom_type_script = "uid://ckobusjip2hti"
 
-[sub_resource type="Resource" id="Resource_bivhb"]
-script = ExtResource("22_trgkc")
-Value = 5
-
-[sub_resource type="Resource" id="Resource_u2llv"]
-script = ExtResource("22_trgkc")
-Value = 3
-
 [sub_resource type="Resource" id="Resource_igo7b"]
 script = ExtResource("23_rl30s")
 Name = "Cornelis' bridge"
-Formula = "x-z"
-FormulaParams = PackedStringArray("x", "z")
+Formula = "answer"
+FormulaParams = PackedStringArray("answer")
 QuestionText = "Hoeveel is 5 - 3?"
 Answer = 2
-Values = Array[ExtResource("22_trgkc")]([SubResource("Resource_bivhb"), SubResource("Resource_u2llv")])
+Values = Array[ExtResource("22_trgkc")]([])
 metadata/_custom_type_script = "uid://sup7lp6karaf"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_igo7b"]
