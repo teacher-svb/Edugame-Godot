@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
+using TnT.EduGame.GameState;
 
 namespace TnT.EduGame.QuestSystem
 {
@@ -34,6 +35,7 @@ namespace TnT.EduGame.QuestSystem
             {
                 quest.Reset();
                 quest.OnObjectiveStateChanged += QuestObjectStateChanged;
+                quest.ObjectiveTransitionRequested += QuestObjectTransitionRequested;
             }
 
             if (_saveData != null)
@@ -43,6 +45,11 @@ namespace TnT.EduGame.QuestSystem
         private void QuestObjectStateChanged(QuestObjective o)
         {
             EmitSignal(SignalName.OnQuestUpdated, o);
+        }
+
+        private void QuestObjectTransitionRequested(QuestObjective o, QuestState requestedState, Action commit)
+        {
+            StateManagerGame.Instance.ShowQuestMessage(o, requestedState, commit);
         }
 
         public void UpdateQuest(QuestMessage msg)

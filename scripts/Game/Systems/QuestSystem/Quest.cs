@@ -35,6 +35,9 @@ namespace TnT.EduGame.QuestSystem
         public delegate void OnQuestObjectiveStateChanged(QuestObjective objective);
         public OnQuestObjectiveStateChanged OnObjectiveStateChanged;
 
+        public delegate void OnQuestObjectiveTransitionRequested(QuestObjective objective, QuestState requestedState, Action commit);
+        public OnQuestObjectiveTransitionRequested ObjectiveTransitionRequested;
+
         [Export]
         public QuestState State
         {
@@ -45,17 +48,30 @@ namespace TnT.EduGame.QuestSystem
                 if (currentObjective == null)
                     return;
 
-                currentObjective.State = value;
-                OnObjectiveStateChanged?.Invoke(currentObjective);
-                // QuestManager.Instance.QuestObjectivesChannel.Invoke(currentObjective.ObjectiveId, currentObjective.State);
-
-                if (value == QuestState.COMPLETED)
+                // Defer the actual mutation until whoever is showing the associated
+                // quest message calls back (i.e. the player dismissed it), so other
+                // systems never observe the new state before the player has.
+                if (ObjectiveTransitionRequested == null)
                 {
-                    var nextObjective = _objectives?.FirstOrDefault(s => s.State != QuestState.COMPLETED);
-                    if (nextObjective != null)
-                        QuestManager.Instance.UpdateQuest(new QuestMessageStart { QuestId = Id, ObjectiveId = nextObjective.ObjectiveId });
-
+                    CommitTransition(currentObjective, value);
+                    return;
                 }
+
+                ObjectiveTransitionRequested.Invoke(currentObjective, value, () => CommitTransition(currentObjective, value));
+            }
+        }
+
+        void CommitTransition(QuestObjective currentObjective, QuestState value)
+        {
+            currentObjective.State = value;
+            OnObjectiveStateChanged?.Invoke(currentObjective);
+
+            if (value == QuestState.COMPLETED)
+            {
+                var nextObjective = _objectives?.FirstOrDefault(s => s.State != QuestState.COMPLETED);
+                if (nextObjective != null)
+                    QuestManager.Instance.UpdateQuest(new QuestMessageStart { QuestId = Id, ObjectiveId = nextObjective.ObjectiveId });
+
             }
         }
 

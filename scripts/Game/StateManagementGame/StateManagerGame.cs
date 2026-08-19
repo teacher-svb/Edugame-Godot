@@ -60,17 +60,17 @@ namespace TnT.EduGame.GameState
                 }));
         }
 
-        public void ShowQuestMessage(QuestObjective o)
+        public void ShowQuestMessage(QuestObjective o, QuestState requestedState, Action onDismissed = null)
         {
-            ShowMessage(o.GetText(), o.CharacterData);
+            ShowMessage(o.GetText(requestedState), o.CharacterData, onDismissed);
         }
 
-        public void ShowMessage(string text, CharacterData character)
+        public void ShowMessage(string text, CharacterData character, Action onDismissed = null)
         {
             var state = _registeredStates.OfType<GameStateMessage>().FirstOrDefault()
                 ?? throw new Exception("no dialog state assigned");
 
-            Push(state.GetState(new() { text = text, character = character, next = ManagerUI.Instance.Next, close = ManagerUI.Instance.Close }));
+            Push(state.GetState(new() { text = text, character = character, next = ManagerUI.Instance.Next, close = ManagerUI.Instance.Close, onDismissed = onDismissed }));
         }
 
         public void ShowChallenge(IMathChallenge challenge)

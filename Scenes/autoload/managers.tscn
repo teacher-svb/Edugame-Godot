@@ -310,5 +310,3 @@ color = Color(0, 0, 0, 1)
 stream = ExtResource("34_5t4y7")
 volume_db = -20.678
 autoplay = true
-
-[connection signal="OnQuestUpdated" from="QuestManager" to="StateManagerGame" method="ShowQuestMessage"]

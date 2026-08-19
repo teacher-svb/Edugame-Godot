@@ -19,6 +19,7 @@ namespace TnT.EduGame.GameState
             public CharacterData character;
             public InputAction next;
             public InputAction close;
+            public Action onDismissed;
         }
 
         private bool retrievingNextMsg;
@@ -101,6 +102,11 @@ namespace TnT.EduGame.GameState
             await MessageController.Instance.Hide();
             var tree = ManagerUI.Instance.GetTree();
             tree.Paused = false;
+            // Fires after this state is fully popped (see AbstractStateStack.TransitionOut,
+            // which pops before awaiting ExitState), so any quest-message pushed in response
+            // (e.g. auto-starting the next objective) lands cleanly instead of stacking on
+            // top of a state that was never popped.
+            _options.onDismissed?.Invoke();
         }
     }
 }
