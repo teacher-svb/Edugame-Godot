@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b8qgygjc4vci3"]
+[gd_scene format=3 uid="uid://dx5c0meqksg8l"]
 
 [ext_resource type="PackedScene" uid="uid://ri147ckev4hj" path="res://assets/3D/characters/Mini Characters 1/Models/GLB format/avocado.glb" id="1_26m57"]
 [ext_resource type="Script" uid="uid://qjrt84cjuqwm" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeUI.cs" id="2_afi11"]
@@ -18,6 +18,9 @@ texture_margin_left = 78.0
 texture_margin_top = 37.0
 texture_margin_right = 78.0
 texture_margin_bottom = 37.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 192, 70)
 
 [sub_resource type="InputEventKey" id="InputEventKey_mh00s"]
 device = -1
@@ -85,7 +88,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="titlePanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/CenterContainer2" unique_id=1541326000]
-z_index = 1
+z_index = 2
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxTexture_e0qxm")
