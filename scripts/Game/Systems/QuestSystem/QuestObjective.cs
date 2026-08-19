@@ -13,8 +13,8 @@ namespace TnT.EduGame.QuestSystem
         string _startText;
         public string StartText => _startText;
         [Export]
-        string _progressText;
-        public string ProgressText => _progressText;
+        string _failText;
+        public string FailText => _failText;
         [Export]
         string _completeText;
         [Export]
@@ -40,7 +40,9 @@ namespace TnT.EduGame.QuestSystem
             switch (state)
             {
                 case QuestState.NOTSTARTED:
-                    icon = "";
+                    // Only ever reached via a failed transition (Quest.Reset() writes State
+                    // directly and bypasses GetText), so this doubles as the fail message.
+                    icon = $"[color=red]{FailText}[/color]";
                     break;
                 case QuestState.INPROGRESS:
                     icon = $"[color=#FFD700][font_size=50]󰲼[/font_size][/color] {StartText}";

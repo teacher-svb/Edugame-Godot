@@ -11,7 +11,8 @@ namespace TnT.EduGame.QuestSystem
         public enum TriggerType
         {
             INITOBJECTIVE,
-            COMPLETEOBJECTIVE
+            COMPLETEOBJECTIVE,
+            FAILOBJECTIVE
         }
         QuestManager _questManager;
 
@@ -48,6 +49,7 @@ namespace TnT.EduGame.QuestSystem
             {
                 case TriggerType.INITOBJECTIVE: _questManager.UpdateQuest(new QuestMessageStart { QuestId = _questId, ObjectiveId = _questObjectiveId }); break;
                 case TriggerType.COMPLETEOBJECTIVE: _questManager.UpdateQuest(new QuestMessageComplete { QuestId = _questId, ObjectiveId = _questObjectiveId }); break;
+                case TriggerType.FAILOBJECTIVE: _questManager.UpdateQuest(new QuestMessageFail { QuestId = _questId, ObjectiveId = _questObjectiveId }); break;
             }
         }
     }

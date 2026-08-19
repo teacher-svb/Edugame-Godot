@@ -73,6 +73,13 @@ namespace TnT.EduGame.QuestSystem
                     QuestManager.Instance.UpdateQuest(new QuestMessageStart { QuestId = Id, ObjectiveId = nextObjective.ObjectiveId });
 
             }
+            else if (value == QuestState.NOTSTARTED)
+            {
+                // A failed challenge resets its own objective to NOTSTARTED (QuestProcessor<QuestMessageFail>).
+                // Re-arm the same objective immediately so whatever reacts to it going INPROGRESS
+                // (e.g. a QuestEventListener re-triggering a MathChallengeTrigger) fires again.
+                QuestManager.Instance.UpdateQuest(new QuestMessageStart { QuestId = Id, ObjectiveId = currentObjective.ObjectiveId });
+            }
         }
 
         public string CurrentObjectiveId

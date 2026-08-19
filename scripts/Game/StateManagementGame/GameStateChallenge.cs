@@ -18,7 +18,7 @@ namespace TnT.EduGame.GameState
         public BaseState GetState(ChallengeOptions options)
         {
             ChallengeController.Instance.SetChallenge(options.challenge);
-            return new BaseState(new() { OnEnter = StartChallenge });
+            return new BaseState(new() { OnEnter = StartChallenge, OnExit = CloseChallenge });
         }
 
         async Task StartChallenge()
@@ -26,6 +26,11 @@ namespace TnT.EduGame.GameState
             await ChallengeController.Instance.Show();
 
             await Task.Yield();
+        }
+
+        async Task CloseChallenge()
+        {
+            await ChallengeController.Instance.Hide();
         }
     }
 }

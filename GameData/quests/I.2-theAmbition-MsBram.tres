@@ -8,7 +8,7 @@
 [sub_resource type="Resource" id="Resource_3lbet"]
 script = ExtResource("1_br8sl")
 _startText = "De schoolbel is stuk! De klepel raakt de bel niet meer op het juiste moment."
-_progressText = "Sta daar niet zomaar, kindje, kijk eens naar het mechaniek."
+_failText = "Sta daar niet zomaar, kindje, kijk eens naar het mechaniek."
 _completeText = "Kan jij uitvissen hoe de klepel weer op tijd moet slaan?"
 _characterData = ExtResource("2_bram1")
 _objectiveId = "3a861b47-c25e-4265-8205-81e4394e3901"
@@ -25,7 +25,7 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 [sub_resource type="Resource" id="Resource_ayd0y"]
 script = ExtResource("1_br8sl")
 _startText = "Knap gerekend, Mabel, maar ik kan de bel niet zomaar laten herstellen door een leerling."
-_progressText = "Ik meen het — dit is werk voor een echte tovenaar."
+_failText = "Ik meen het — dit is werk voor een echte tovenaar."
 _completeText = "Als je zo graag mensen wil helpen, waarom schrijf je je dan niet in bij de Tovenaarsschool?"
 _characterData = ExtResource("2_bram1")
 _objectiveId = "3a861b47-c25e-4265-8205-81e4394e3903"

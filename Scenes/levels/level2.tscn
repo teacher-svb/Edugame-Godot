@@ -444,6 +444,13 @@ _questId = "65dd09e4-9554-43bd-9595-e67fc459aa00"
 _questObjectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa02"
 metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
 
+[node name="Objective2-fail" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Triggers" unique_id=2140101986]
+script = ExtResource("16_pudda")
+_action = 2
+_questId = "65dd09e4-9554-43bd-9595-e67fc459aa00"
+_questObjectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa02"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
 [node name="Objective3-complete" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Triggers" unique_id=1096006525]
 script = ExtResource("16_pudda")
 _action = 1
@@ -584,6 +591,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.19999981)
 shape = SubResource("BoxShape3D_bivhb")
 
 [connection signal="ChallengeCompleted" from="Quests/I_2-the Ambition/Cornelis/Challenges/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective2-complete" method="_OnTrigger"]
+[connection signal="ChallengeFailed" from="Quests/I_2-the Ambition/Cornelis/Challenges/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective2-fail" method="_OnTrigger"]
 [connection signal="body_entered" from="CornelisDrawbridgeArea" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective1-init" method="_OnPlayerTrigger"]
 [connection signal="body_entered" from="CornelisDrawbridgeCloseArea" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective1-complete" method="_OnPlayerTrigger"]
 

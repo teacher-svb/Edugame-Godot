@@ -24,7 +24,7 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 [sub_resource type="Resource" id="Resource_lb3fn"]
 script = ExtResource("1_d8sls")
 _startText = "Ach Mabel, wat knap van je! Maar deze weegschaal is betoverd — ik durf ze niet zelf aan te raken."
-_progressText = "Ik meen het, kindje. Betoveringen zijn geen zaak voor een bakker."
+_failText = "Ik meen het, kindje. Betoveringen zijn geen zaak voor een bakker."
 _completeText = "Zodra de Tovenaar terug is, zal hij dit zeker oplossen. Tot dan kan ik helaas geen brood bakken."
 _characterData = ExtResource("2_m1kkc")
 _objectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd03"

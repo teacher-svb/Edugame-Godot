@@ -12,6 +12,7 @@ namespace TnT.EduGame.Question
         [Export] MathChallenge _challenge;
 
         [Signal] public delegate void ChallengeCompletedEventHandler();
+        [Signal] public delegate void ChallengeFailedEventHandler();
 
         public event Action ReactionCompleted
         {
@@ -27,11 +28,9 @@ namespace TnT.EduGame.Question
 
         private async void OnAnswered(bool isCorrect)
         {
-            if (!isCorrect) return;
-
             ChallengeController.Instance.Answered -= OnAnswered;
             await StateManagerGame.Instance.Pop();
-            EmitSignal(SignalName.ChallengeCompleted);
+            EmitSignal(isCorrect ? SignalName.ChallengeCompleted : SignalName.ChallengeFailed);
         }
     }
 }

@@ -8,7 +8,7 @@
 [sub_resource type="Resource" id="Resource_4y6do"]
 script = ExtResource("1_oqjkn")
 _startText = "Help! Mijn brug werkt niet meer!"
-_progressText = "Sta daar niet zo! Kijk toch, mijn brug is stuk!"
+_failText = "Sta daar niet zo! Kijk toch, mijn brug is stuk!"
 _completeText = "Kan jij zien wat er mis is met de brug?"
 _characterData = ExtResource("2_5ya8u")
 _objectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa01"
@@ -17,6 +17,7 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 [sub_resource type="Resource" id="Resource_pjwhy"]
 script = ExtResource("1_oqjkn")
 _startText = "Ik zal eens kijken!"
+_failText = "Hmm, dat klopt nog niet. Laat me het nog eens proberen."
 _completeText = "Ik heb de oplossing gevonden! Het zit zo..."
 _characterData = ExtResource("3_ao87s")
 _objectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa02"
@@ -25,7 +26,7 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 [sub_resource type="Resource" id="Resource_pudda"]
 script = ExtResource("1_oqjkn")
 _startText = "Nee, nee, ik wil dat je een tovenaar gaat halen, niet dat JIJ het oplost!"
-_progressText = "Ga weg."
+_failText = "Ga weg."
 _completeText = "Wat weet een kind zoals jij daar nu van?"
 _characterData = ExtResource("2_5ya8u")
 _objectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa03"
