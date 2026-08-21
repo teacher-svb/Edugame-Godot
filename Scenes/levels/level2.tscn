@@ -308,6 +308,7 @@ metadata/_custom_type_script = "uid://ckobusjip2hti"
 [sub_resource type="Resource" id="Resource_igo7b"]
 script = ExtResource("23_rl30s")
 Name = "Cornelis' bridge"
+ChallengeUIType = 5
 Formula = "answer"
 FormulaParams = PackedStringArray("answer")
 QuestionText = "Hoeveel is 5 - 3?"

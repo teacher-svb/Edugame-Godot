@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dbvcnscfhenkb"]
+
+[ext_resource type="Script" uid="uid://bxokmugo3ijd1" path="res://scripts/Game/UI/Carrousel/CarrouselController.cs" id="1_vddxj"]
+
+[node name="CarrouselController" type="BoxContainer" unique_id=182065477 node_paths=PackedStringArray("_btnPrevious", "_btnNext")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+script = ExtResource("1_vddxj")
+_btnPrevious = NodePath("Previous")
+_btnNext = NodePath("Next")
+
+[node name="Previous" type="Button" parent="." unique_id=46591576]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.66
+
+[node name="Panel" type="Panel" parent="." unique_id=1323232741]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Panel" unique_id=876292984]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "hallo"
+
+[node name="Next" type="Button" parent="." unique_id=1309425251]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.66

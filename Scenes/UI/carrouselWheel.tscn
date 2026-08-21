@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://1gfw32adgml"]
+
+[ext_resource type="Script" uid="uid://b8asxjxujh54w" path="res://scripts/Game/UI/Carrousel/Carrousel.cs" id="1_u1lvx"]
+[ext_resource type="Script" uid="uid://ciun5glrym66e" path="res://scripts/Game/UI/Carrousel/CarrouselValue.cs" id="2_mr26p"]
+
+[node name="Carrousel" type="BoxContainer" unique_id=1093325572]
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+vertical = true
+script = ExtResource("1_u1lvx")
+
+[node name="val1" type="PanelContainer" parent="." unique_id=757028558]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+script = ExtResource("2_mr26p")
+Value = "1"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="val1" unique_id=1676214742]
+layout_mode = 2
+text = "1"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="val2" type="PanelContainer" parent="." unique_id=576407869]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.66
+script = ExtResource("2_mr26p")
+Value = "2"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="val2" unique_id=1000644641]
+layout_mode = 2
+text = "2"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="val3" type="PanelContainer" parent="." unique_id=2008846109]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_mr26p")
+Value = "3"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="val3" unique_id=333833536]
+layout_mode = 2
+text = "3"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="val4" type="PanelContainer" parent="." unique_id=454780703]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.66
+script = ExtResource("2_mr26p")
+Value = "4"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="val4" unique_id=1522464183]
+layout_mode = 2
+text = "4"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="val5" type="PanelContainer" parent="." unique_id=1453373170]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+script = ExtResource("2_mr26p")
+Value = "5"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="val5" unique_id=630104079]
+layout_mode = 2
+text = "5"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="val6" type="PanelContainer" parent="." unique_id=913695538]
+layout_mode = 2
+script = ExtResource("2_mr26p")
+Value = "6"
+metadata/_custom_type_script = "uid://ciun5glrym66e"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="val6" unique_id=1738399386]
+layout_mode = 2
+text = "6"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="val7" type="PanelContainer" parent="." unique_id=1037561169]
+layout_mode = 2
+script = ExtResource("2_mr26p")
+Value = "7"
+metadata/_custom_type_script = "uid://ciun5glrym66e"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="val7" unique_id=1894989027]
+layout_mode = 2
+text = "7"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
