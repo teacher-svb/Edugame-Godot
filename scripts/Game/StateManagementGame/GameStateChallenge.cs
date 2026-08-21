@@ -23,6 +23,7 @@ namespace TnT.EduGame.GameState
 
         async Task StartChallenge()
         {
+            ManagerUI.Instance.GetTree().Paused = true;
             await ChallengeController.Instance.Show();
 
             await Task.Yield();
@@ -31,6 +32,7 @@ namespace TnT.EduGame.GameState
         async Task CloseChallenge()
         {
             await ChallengeController.Instance.Hide();
+            ManagerUI.Instance.GetTree().Paused = false;
         }
     }
 }

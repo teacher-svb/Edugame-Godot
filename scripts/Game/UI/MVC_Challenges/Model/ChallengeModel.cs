@@ -1,5 +1,4 @@
 
-using System;
 using System.Collections.Generic;
 using Godot;
 using TnT.EduGame.Question;
@@ -18,32 +17,20 @@ namespace TnT.Systems.UI
         public string Hint => Challenge.Hint;
         public int ParamCount => Challenge.ParamCount;
 
+        readonly Dictionary<string, int> _answers = new();
 
-        Queue<string> _formulaParams;
+        public bool IsComplete => _answers.Count == Challenge.FormulaParams.Length;
 
-        public void SetParameter(int index, string name)
+        public void AssignValue(string paramName, int value)
         {
-            Challenge.SetFormulaParam(index, name);
+            _answers[paramName] = value;
+            Challenge.ChangeValue(paramName, value);
         }
-        public void SetParameter(string name, int value)
-        {
-            Challenge.ChangeValue(name, value);
-        }
-        public void SetParameter(int index)
-        {
-            if (_formulaParams == null)
-                _formulaParams = new(Challenge?.FormulaParams);
 
-            if (Challenge.Values[index].ParamName != "")
-                return;
-
-            string name = _formulaParams.Dequeue();
-            _formulaParams.Enqueue(name);
-            this.SetParameter(index, name);
-        }
         public void SetChallenge(MathChallenge challenge)
         {
             Challenge = challenge;
+            _answers.Clear();
         }
     }
 }

@@ -23,19 +23,25 @@ namespace TnT.Systems.UI
 
         public void SetChallenge(IMathChallenge challenge)
         {
-            model.Challenge = challenge as MathChallenge;
+            model.SetChallenge(challenge as MathChallenge);
             Refresh();
         }
 
         async void Initialize()
         {
             await view.InitializeView(model.Challenge);
+
+            // ChallengeUI is scene-singleton furniture, never recreated between
+            // challenges, so it's wired once here rather than re-subscribed on
+            // every Refresh (which used to stack handlers per challenge shown).
+            view.ChallengeUI.OnValueAssigned += ValueAssigned;
+            view.ChallengeUI.OnSubmit += SubmitChallenge;
         }
 
-        private void ValueChanged(string paramName, string value)
+        private void ValueAssigned(string paramName, int value)
         {
-            model.SetParameter(paramName, int.Parse(value));
-            // Refresh();
+            model.AssignValue(paramName, value);
+            view.ChallengeUI.SetSubmitEnabled(model.IsComplete);
         }
 
         private void SubmitChallenge()
@@ -52,18 +58,10 @@ namespace TnT.Systems.UI
             }
         }
 
-        private void ValueSelected(int index)
-        {
-            model.SetParameter(index);
-            // Refresh();
-        }
-
         void Refresh()
         {
             view.Refresh(model.Challenge);
-            view.ChallengeUI.OnValueSelected += ValueSelected;
-            view.ChallengeUI.OnValueChanged += ValueChanged;
-            view.ChallengeUI.OnSubmit += SubmitChallenge;
+            view.ChallengeUI.SetSubmitEnabled(model.IsComplete);
         }
 
         public async Task Show()

@@ -2,8 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://ri147ckev4hj" path="res://assets/3D/characters/Mini Characters 1/Models/GLB format/avocado.glb" id="1_26m57"]
 [ext_resource type="Script" uid="uid://qjrt84cjuqwm" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeUI.cs" id="2_afi11"]
+[ext_resource type="PackedScene" uid="uid://dtmvg33ao3d6f" path="res://Scenes/UI/ChallengeStrategies/TextInput.tscn" id="3_60f6p"]
 [ext_resource type="Script" uid="uid://bpr1xsrq6lokd" path="res://scripts/Lib/UIAnimation/AnimatedButton.cs" id="3_6488b"]
 [ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="3_afi11"]
+[ext_resource type="PackedScene" uid="uid://dfrwmsw62sq1x" path="res://Scenes/UI/ChallengeStrategies/CogWheel.tscn" id="4_kxumt"]
+[ext_resource type="PackedScene" uid="uid://bto667p1mkq14" path="res://Scenes/UI/ChallengeStrategies/Radar.tscn" id="5_j5erl"]
+[ext_resource type="PackedScene" uid="uid://bi0bdv4o4le1w" path="res://Scenes/UI/ChallengeStrategies/SearchGrid.tscn" id="6_iokxa"]
+[ext_resource type="PackedScene" uid="uid://rvmsjxn4wwms" path="res://Scenes/UI/ChallengeStrategies/Dropdown.tscn" id="7_7gj8i"]
+[ext_resource type="PackedScene" uid="uid://chg82r7d2dgtt" path="res://Scenes/UI/ChallengeStrategies/CombinationLock.tscn" id="8_j5erl"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_afi11"]
 load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
@@ -47,7 +53,7 @@ unicode = 113
 [sub_resource type="Shortcut" id="Shortcut_e0qxm"]
 events = [SubResource("InputEventKey_6488b")]
 
-[node name="View" type="Control" unique_id=860686304 node_paths=PackedStringArray("_left", "_right", "_challengeContainer", "_questionContainer", "_answerContainer", "_submitContainer", "_answerSpinbox")]
+[node name="View" type="Control" unique_id=860686304 node_paths=PackedStringArray("_left", "_right", "_challengeContainer", "_questionContainer", "_submitContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,10 +68,15 @@ _left = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContai
 _right = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right")
 _challengeContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/left/ChallengeContainer")
 _questionContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right/QuestionContainer")
-_answerContainer = NodePath("MarginContainer/VBoxContainer/InputContainer/AnswerContainer")
 _submitContainer = NodePath("MarginContainer/VBoxContainer/InputContainer/SubmitContainer")
-_answerSpinbox = NodePath("MarginContainer/VBoxContainer/InputContainer/AnswerContainer/Spinbox")
-_challengeScenes = Dictionary[int, Resource]({})
+_challengeScenes = Dictionary[int, Resource]({
+0: ExtResource("4_kxumt"),
+1: ExtResource("5_j5erl"),
+2: ExtResource("6_iokxa"),
+3: ExtResource("7_7gj8i"),
+4: ExtResource("3_60f6p"),
+5: ExtResource("8_j5erl")
+})
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2051200352]
 layout_mode = 1
@@ -125,8 +136,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ChallengeContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/left" unique_id=1504843259]
+z_index = 1
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_type_variation = &"TransparentPanelContainer"
 
 [node name="right" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1625617167]
@@ -143,32 +156,17 @@ layout_mode = 2
 offset_transform_enabled = true
 offset_transform_scale = Vector2(1.06, 1.06)
 offset_transform_visual_only = false
-
-[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/InputContainer" unique_id=1841458174]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"TransparentPanel"
-
-[node name="AnswerContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/InputContainer" unique_id=1772471743]
-layout_mode = 2
-
-[node name="Spinbox" type="SpinBox" parent="MarginContainer/VBoxContainer/InputContainer/AnswerContainer" unique_id=971967114]
-layout_mode = 2
-size_flags_vertical = 4
-max_value = 99.0
-rounded = true
-alignment = 1
-update_on_text_changed = true
-custom_arrow_step = 1.0
-select_all_on_focus = true
+mouse_filter = 2
 
 [node name="SubmitContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/InputContainer" unique_id=1714464510]
+z_index = -1
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_type_variation = &"TransparentPanelContainer"
 
 [node name="SubmitButton" type="Button" parent="MarginContainer/VBoxContainer/InputContainer/SubmitContainer" unique_id=1123059114]
-z_index = 2
+z_index = 4
 layout_mode = 2
 size_flags_horizontal = 10
 theme_type_variation = &"SubmitButton"
@@ -212,7 +210,15 @@ grow_horizontal = 0
 toggle_mode = true
 shortcut = SubResource("Shortcut_e0qxm")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="TextureRect" unique_id=1254546033]
+[node name="TextureButton" type="TextureButton" parent="TextureRect" unique_id=1008309888]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="TextureRect/TextureButton" unique_id=1254546033]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -221,27 +227,27 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="TextureRect/SubViewportContainer" unique_id=987366564]
+[node name="SubViewport" type="SubViewport" parent="TextureRect/TextureButton/SubViewportContainer" unique_id=987366564]
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(202, 113)
 render_target_update_mode = 4
 
-[node name="avocado2" parent="TextureRect/SubViewportContainer/SubViewport" unique_id=1975359764 groups=["occlusion_exclude"] instance=ExtResource("1_26m57")]
+[node name="avocado2" parent="TextureRect/TextureButton/SubViewportContainer/SubViewport" unique_id=1975359764 groups=["occlusion_exclude"] instance=ExtResource("1_26m57")]
 
-[node name="avocado" parent="TextureRect/SubViewportContainer/SubViewport/avocado2/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1975359764, 2010913038) index="0" unique_id=1832545946 groups=["occlusion_exclude"]]
+[node name="avocado" parent="TextureRect/TextureButton/SubViewportContainer/SubViewport/avocado2/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1975359764, 2010913038) index="0" unique_id=1832545946 groups=["occlusion_exclude"]]
 layers = 512
 
-[node name="AnimationPlayer" parent="TextureRect/SubViewportContainer/SubViewport/avocado2" index="1" unique_id=340928583]
+[node name="AnimationPlayer" parent="TextureRect/TextureButton/SubViewportContainer/SubViewport/avocado2" index="1" unique_id=340928583]
 autoplay = &"idle"
 
-[node name="Camera3D" type="Camera3D" parent="TextureRect/SubViewportContainer/SubViewport" unique_id=1924245623]
+[node name="Camera3D" type="Camera3D" parent="TextureRect/TextureButton/SubViewportContainer/SubViewport" unique_id=1924245623]
 transform = Transform3D(0.34447905, 0.37839606, -0.8591569, 1.37531035e-08, 0.91517085, 0.4030661, 0.938794, -0.13884784, 0.3152572, -0.26115054, 0.31432372, 0.09535728)
 cull_mask = 512
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="TextureRect/SubViewportContainer/SubViewport" unique_id=503928868]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="TextureRect/TextureButton/SubViewportContainer/SubViewport" unique_id=503928868]
 transform = Transform3D(0.15496598, 0.83786166, -0.5234247, -0.23785341, 0.54588264, 0.8033915, 0.9588594, 0, 0.2838815, 0, 0, 0)
 layers = 512
 
-[editable path="TextureRect/SubViewportContainer/SubViewport/avocado2"]
+[editable path="TextureRect/TextureButton/SubViewportContainer/SubViewport/avocado2"]

@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dtmvg33ao3d6f"]
+
+[ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="1_lwu4v"]
+[ext_resource type="Script" uid="uid://c2236rmyxdelh" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeUIElements/Widgets/TextInputWidget.cs" id="1_widget"]
+
+[node name="TextInput" type="Control" unique_id=1381543291]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_lwu4v")
+script = ExtResource("1_widget")
+
+[node name="Spinbox" type="SpinBox" parent="." unique_id=320630999]
+z_index = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = 66.0
+offset_right = 120.5
+offset_bottom = 97.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_vertical = 4
+max_value = 99.0
+rounded = true
+alignment = 1
+update_on_text_changed = true
+custom_arrow_step = 1.0
+select_all_on_focus = true

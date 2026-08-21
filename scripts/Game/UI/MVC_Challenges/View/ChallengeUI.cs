@@ -15,9 +15,7 @@ namespace TnT.Systems.UI
         [Signal]
         public delegate void OnSubmitEventHandler();
         [Signal]
-        public delegate void OnValueSelectedEventHandler(int valueIndex);
-        [Signal]
-        public delegate void OnValueChangedEventHandler(string name, string value);
+        public delegate void OnValueAssignedEventHandler(string paramName, int value);
 
         [Export]
         Control _left;
@@ -28,43 +26,25 @@ namespace TnT.Systems.UI
         [Export]
         Control _questionContainer;
         [Export]
-        Control _answerContainer;
-        [Export]
         Control _submitContainer;
-        [Export]
-        SpinBox _answerSpinbox;
 
         [Export]
         Dictionary<ChallengeUIType, Resource> _challengeScenes;
 
-        // Persistent forwarders: _submitContainer/_answerSpinbox are static scene furniture,
-        // never freed/recreated between challenges (unlike the containers Build() clears),
-        // so they're wired once here instead of re-subscribed per Build() to avoid stacking handlers.
-        string _answerParamName;
+        Button _submitButton;
 
         public override void _Ready()
         {
-            _submitContainer.FindObjectsByType<Button>().First().Pressed += () => EmitSignal(SignalName.OnSubmit);
-            _answerSpinbox.ValueChanged += value =>
-            {
-                if (_answerParamName == null)
-                    return;
-                EmitSignal(SignalName.OnValueChanged, _answerParamName, ((int)value).ToString());
-            };
+            _submitButton = _submitContainer.FindObjectsByType<Button>().First();
+            _submitButton.Pressed += () => EmitSignal(SignalName.OnSubmit);
         }
+
+        public void SetSubmitEnabled(bool enabled) => _submitButton.Disabled = !enabled;
 
         public class Builder
         {
-            public enum Location
-            {
-                CHALLENGE,
-                ANSWER,
-                QUESTION
-            }
-            private Control _challengeContainer;
-            private Control _submitContainer;
-            private Control _questionContainer;
-            Control _answerContainer;
+            private readonly Control _challengeContainer;
+            private readonly Control _questionContainer;
             private readonly ChallengeUI _ui;
             private readonly IMathChallenge _challenge;
 
@@ -76,68 +56,11 @@ namespace TnT.Systems.UI
                 _ui = tree.FindAnyObjectByType<ChallengeUI>();
 
                 _challengeContainer = _ui._challengeContainer;
-                _submitContainer = _ui._submitContainer;
                 _questionContainer = _ui._questionContainer;
-                _answerContainer = _ui._answerContainer;
-
-                _ui._answerSpinbox.Visible = false;
-                _ui._answerParamName = null;
-            }
-            public ChallengeUI Build()
-            {
-                var ui = _ui;
-
-                ui
-                    .FindObjectsByType<ChallengeValueSelect>()
-                    .ToList()
-                    .ForEach(select => select.OnValueSelected += (index) => ui.EmitSignal(SignalName.OnValueSelected, index));
-
-                ui
-                    .FindObjectsByType<ChallengeParamInput>()
-                    .ToList()
-                    .ForEach(input => input.OnParamChanged += (param, value) => ui.EmitSignal(SignalName.OnValueChanged, param, value));
-
-                return ui;
             }
 
-            private Control GetContainer(Location location)
-            {
-                switch (location)
-                {
-                    case Location.ANSWER: return _answerContainer;
-                    case Location.QUESTION: return _questionContainer;
-                    case Location.CHALLENGE:
-                    default: return _challengeContainer;
-                }
-            }
+            public ChallengeUI Build() => _ui;
 
-            public Builder WithValueSelect(Func<IMathChallenge, ChallengeValueSelect> createValueSelect, Location location = Location.CHALLENGE)
-            {
-                var container = GetContainer(location);
-
-                container.Clear();
-                container.AddChild(createValueSelect.Invoke(_challenge));
-
-                return this;
-            }
-            public Builder WithValueView(Func<IMathChallenge, ChallengeValueView> createValueView, Location location = Location.CHALLENGE)
-            {
-                var container = GetContainer(location);
-
-                container.Clear();
-                container.AddChild(createValueView.Invoke(_challenge));
-
-                return this;
-            }
-            public Builder WithParamInputs(Func<IMathChallenge, ChallengeParamInput> createParamInput, Location location = Location.CHALLENGE)
-            {
-                var container = GetContainer(location);
-
-                container.Clear();
-                container.AddChild(createParamInput.Invoke(_challenge));
-
-                return this;
-            }
             public Builder WithQuestionElement()
             {
                 _questionContainer.Clear();
@@ -150,21 +73,24 @@ namespace TnT.Systems.UI
 
                 return this;
             }
-            public Builder WithSubmitButton()
-            {
-                // Value-assignment challenges (cogwheel/dropdown/combination lock) gate submit until every
-                // shuffled Value has been placed into a formula param. Free-typed answers (WithSpinboxAnswer)
-                // carry no Values to place, so they're always submittable.
-                _submitContainer.FindObjectsByType<Button>().First().Disabled = _challenge.Values.Count > 0
-                    && _challenge.Values.Count(v => v.ParamName != "") != _challenge.FormulaParams.Length;
 
-                return this;
-            }
-            public Builder WithSpinboxAnswer()
+            // The one seam every challenge visualization goes through: instance
+            // the scene matched to this challenge's ChallengeUIType (wired in the
+            // _challengeScenes export), hand it the challenge, and drop it in the
+            // challenge container. Nothing upstream needs to know whether that
+            // scene is a spinbox, a set of cogwheels, or a hand-authored subscene
+            // full of custom controls.
+            public Builder WithSceneWidget()
             {
-                _ui._answerSpinbox.Visible = true;
-                _ui._answerSpinbox.SetValueNoSignal(0);
-                _ui._answerParamName = _challenge.FormulaParams[0];
+                _challengeContainer.Clear();
+
+                if (!_ui._challengeScenes.TryGetValue(_challenge.ChallengeUIType, out var resource) || resource is not PackedScene scene)
+                    throw new InvalidOperationException($"No widget scene assigned for {_challenge.ChallengeUIType} in ChallengeUI._challengeScenes");
+
+                var widget = scene.Instantiate<ChallengeInputWidget>();
+                widget.Init(_challenge);
+                widget.ValueAssigned += (paramName, value) => _ui.EmitSignal(SignalName.OnValueAssigned, paramName, value);
+                _challengeContainer.AddChild(widget);
 
                 return this;
             }
