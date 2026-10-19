@@ -38,8 +38,8 @@ namespace TnT.EduGame.Question
         protected override IEnumerable<string> ParamFields => [nameof(DistanceParam), nameof(AngleParam)];
 
         // the blip has to fit on the screen
-        public override IEnumerable<IChallengeConstraint> ImpliedConstraints() =>
-            [new ValueRange { Param = DistanceParam, Min = 1, HasMax = true, Max = Range }];
+        public override IEnumerable<string> ImpliedConstraints() =>
+            [$"{DistanceParam} >= 1 AND {DistanceParam} <= {Range}"];
 
         // blip direction in radians, 0 = up, clockwise
         public float BlipAngle(ChallengeRound round) =>

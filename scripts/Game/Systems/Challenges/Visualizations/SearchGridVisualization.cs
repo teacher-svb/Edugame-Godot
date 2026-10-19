@@ -36,15 +36,15 @@ namespace TnT.EduGame.Question
         protected override IEnumerable<string> ParamFields => [nameof(XParam), nameof(YParam)];
 
         // the marker has to land on the grid (on line crossings with SnapToLines)
-        public override IEnumerable<IChallengeConstraint> ImpliedConstraints()
+        public override IEnumerable<string> ImpliedConstraints()
         {
             foreach (var (param, start, step, end) in new[] { (XParam, XStart, XStep, XEnd), (YParam, YStart, YStep, YEnd) })
             {
                 if (param == "")
                     continue;
-                yield return new ValueRange { Param = param, Min = start, HasMax = true, Max = end };
-                if (SnapToLines)
-                    yield return new MultipleOf { Param = param, Step = step, Offset = start };
+                yield return $"{param} >= ({start}) AND {param} <= ({end})";
+                if (SnapToLines && step != 0)
+                    yield return $"({param} - ({start})) % {step} = 0";
             }
         }
 

@@ -16,10 +16,10 @@ namespace TnT.EduGame.Question
             ChallengeRound.Roll(challenge.Formula, challenge.Params, challenge.Unknowns, seed, ConstraintsFor(challenge));
 
         // rules this visualization needs on top of the challenge's own, e.g. the radar's blip within range
-        public virtual IEnumerable<IChallengeConstraint> ImpliedConstraints() => [];
+        public virtual IEnumerable<string> ImpliedConstraints() => [];
 
-        protected IEnumerable<IChallengeConstraint> ConstraintsFor(MathChallenge challenge) =>
-            challenge.Constraints.Where(c => c != null).Concat(ImpliedConstraints());
+        protected IEnumerable<string> ConstraintsFor(MathChallenge challenge) =>
+            (challenge.Constraints ?? []).Concat(ImpliedConstraints());
 
         // filled by the owning MathChallenge, so the fields in ParamFields get a dropdown
         string[] _availableParams = [];

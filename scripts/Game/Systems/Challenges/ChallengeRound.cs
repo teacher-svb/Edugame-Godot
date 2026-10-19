@@ -32,17 +32,18 @@ namespace TnT.EduGame.Question
         public IReadOnlyDictionary<string, int> Givens { get; }
 
         readonly Dictionary<string, ParamSpec> _specs;
-        readonly IReadOnlyList<IChallengeConstraint> _constraints;
+        // rules every round satisfies, shorthands already expanded (see FormulaEvaluator)
+        readonly IReadOnlyList<string> _rules;
 
         public ChallengeRound(int seed, string formula, IReadOnlyDictionary<string, int> values,
-            IEnumerable<string> unknowns, IEnumerable<ParamSpec> specs, IEnumerable<IChallengeConstraint> constraints = null)
+            IEnumerable<string> unknowns, IEnumerable<ParamSpec> specs, IEnumerable<string> rules = null)
         {
             Seed = seed;
             Formula = formula;
             Values = new Dictionary<string, int>(values);
             Unknowns = unknowns.Distinct().ToList();
             _specs = specs.Where(s => s != null).GroupBy(s => s.Name).ToDictionary(g => g.Key, g => g.First());
-            _constraints = (constraints ?? []).Where(c => c != null).ToList();
+            _rules = (rules ?? []).Where(r => !string.IsNullOrWhiteSpace(r)).Select(FormulaEvaluator.ExpandRule).ToList();
 
             var undefined = Unknowns.Where(u => !Values.ContainsKey(u)).ToList();
             if (undefined.Any())
@@ -55,12 +56,13 @@ namespace TnT.EduGame.Question
 
         // Rolls a value for every spec and computes `answer`, retrying (with the
         // same seeded rng, so still deterministic) until the answer is an integer
-        // and every constraint holds.
+        // and every rule holds.
         public static ChallengeRound Roll(string formula, IEnumerable<ParamSpec> specs, IEnumerable<string> unknowns,
-            int seed, IEnumerable<IChallengeConstraint> constraints = null)
+            int seed, IEnumerable<string> rules = null)
         {
             var specList = specs.Where(s => s != null).ToList();
-            var constraintList = (constraints ?? []).Where(c => c != null).ToList();
+            var ruleList = (rules ?? []).Where(r => !string.IsNullOrWhiteSpace(r)).ToList();
+            var expandedRules = ruleList.Select(FormulaEvaluator.ExpandRule).ToList();
 
             if (FormulaEvaluator.ExtractParamNames(formula).Contains(AnswerParam))
                 throw new ArgumentException($"Formula '{formula}' must not reference '{AnswerParam}'; it is the formula's result");
@@ -70,12 +72,8 @@ namespace TnT.EduGame.Question
                 throw new ArgumentException($"Formula '{formula}' has params without a ParamSpec: {string.Join(", ", unspecified)}");
 
             var known = specList.Select(s => s.Name).Append(AnswerParam).ToHashSet();
-            foreach (var constraint in constraintList)
-            {
-                var foreign = constraint.Params.Where(p => !known.Contains(p)).ToList();
-                if (foreign.Any())
-                    throw new ArgumentException($"Constraint '{constraint.Describe()}' refers to {string.Join(", ", foreign)}, which is not in formula '{formula}'");
-            }
+            for (int i = 0; i < ruleList.Count; i++)
+                FormulaEvaluator.ValidateRule(ruleList[i], expandedRules[i], known);
 
             var rng = RandomFor(seed, "roll");
             for (int attempt = 0; attempt < MaxRollAttempts; attempt++)
@@ -85,13 +83,13 @@ namespace TnT.EduGame.Question
                     continue;
 
                 values[AnswerParam] = answer;
-                if (constraintList.All(c => c.IsSatisfiedBy(values)))
-                    return new ChallengeRound(seed, formula, values, unknowns, specList, constraintList);
+                if (expandedRules.All(r => FormulaEvaluator.Holds(r, values)))
+                    return new ChallengeRound(seed, formula, values, unknowns, specList, ruleList);
             }
 
-            var rules = constraintList.Any() ? $" with {string.Join(", ", constraintList.Select(c => c.Describe()))}" : "";
+            var withRules = ruleList.Any() ? $" with rules {string.Join(", ", ruleList.Select(r => $"'{r}'"))}" : "";
             throw new InvalidOperationException(
-                $"Could not roll a valid round for '{formula}'{rules} in {MaxRollAttempts} attempts (seed {seed}); check the ParamSpec ranges and constraints");
+                $"Could not roll a valid round for '{formula}'{withRules} in {MaxRollAttempts} attempts (seed {seed}); check the ParamSpec ranges and rules");
         }
 
         // Correct as soon as the player's values satisfy the formula, which need
@@ -151,7 +149,7 @@ namespace TnT.EduGame.Question
         bool Allows(string param, int value)
         {
             var values = new Dictionary<string, int>(Values) { [param] = value };
-            return _constraints.All(c => c.IsSatisfiedBy(values));
+            return _rules.All(r => FormulaEvaluator.Holds(r, values));
         }
 
         // Independent random stream per purpose (e.g. "radar-angle"), so rolling,

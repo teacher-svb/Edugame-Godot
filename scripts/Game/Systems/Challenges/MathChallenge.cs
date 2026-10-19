@@ -30,14 +30,11 @@ namespace TnT.EduGame.Question
         [Export]
         public string[] Unknowns { get; set; } = [ChallengeRound.AnswerParam];
 
-        // rules every round must satisfy, e.g. "answer ≥ 0" (ValueRange) or "x divisible by y"
+        // Rules every round must satisfy, true/false expressions in the formula's language:
+        // `answer >= 0`, `x > y`, `x % y = 0`, `answer % 10 = 0`, `distinct(x, y, z)`,
+        // `x % 10 + y % 10 < 10` (no tens crossing), combined with AND / OR / NOT
         [Export]
-        public Godot.Collections.Array<ChallengeConstraint> Constraints
-        {
-            get => _constraints;
-            set { _constraints = value; ShareParamNames(); }
-        }
-        Godot.Collections.Array<ChallengeConstraint> _constraints = new();
+        public string[] Constraints { get; set; } = [];
 
         // empty means the question text alone carries the challenge
         [Export]
@@ -76,8 +73,8 @@ namespace TnT.EduGame.Question
                 .Select(name => existing.TryGetValue(name, out var spec) ? spec : new ParamSpec(name)));
         }
 
-        // lets rules and the visualization offer the formula's params (plus `answer`)
-        // as a dropdown in the inspector; runs whenever one of the three is (re)assigned
+        // lets the visualization offer the formula's params (plus `answer`) as a
+        // dropdown in the inspector; runs whenever Params or Visualization is (re)assigned
         void ShareParamNames()
         {
             var names = (_params ?? new())
@@ -86,8 +83,6 @@ namespace TnT.EduGame.Question
                 .Append(ChallengeRound.AnswerParam)
                 .ToArray();
 
-            foreach (var constraint in _constraints ?? new())
-                constraint?.SetAvailableParams(names);
             _visualization?.SetAvailableParams(names);
         }
 

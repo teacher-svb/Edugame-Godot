@@ -4,7 +4,7 @@ using Godot;
 
 namespace TnT.EduGame.Question
 {
-    // Resources with string fields that name a formula param (rules, visualizations).
+    // Resources with string fields that name a formula param (visualizations).
     // The owning MathChallenge passes its param names down, so the inspector can
     // offer them as a dropdown instead of free text.
     public interface IParamFieldOwner
