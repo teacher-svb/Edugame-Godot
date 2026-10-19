@@ -15,14 +15,10 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Carrousel" parent="." unique_id=1093325572 instance=ExtResource("1_tjtua")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="CarrouselController" parent="." unique_id=1681051368 instance=ExtResource("2_qxsj0")]
 layout_mode = 1
+
+[node name="CarrouselController" parent="." unique_id=1681051368 node_paths=PackedStringArray("_carrousel") instance=ExtResource("2_qxsj0")]
+layout_mode = 1
+_carrousel = NodePath("../Carrousel")
 
 [editable path="Carrousel"]

@@ -12,6 +12,8 @@ labels: ["math", "system"]
 order: "a0"
 ---
 
+> Progress 2026-10-19: display version done as `ConcentricCirclesVisualization` (rings spin to a seeded option and lock in, centre shows result or `?`, optional random operators). Remaining for this task: interactive version where the player spins rings to build the equation for a fixed centre target. Make the widget implement `IChallengeInput` (the builder then skips the Input slot).
+
 > Depends on the challenge-split tasks (challenge-split-1..6, 2026-10-19). Implement as a `ChallengeVisualization` resource (+ reuse existing inputs) instead of adding a `ChallengeUIType` enum value / `IChallengeUIStrategy`.
 # FormulaRing challenge UI
 

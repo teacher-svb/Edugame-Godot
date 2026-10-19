@@ -12,6 +12,8 @@ labels: ["math", "system"]
 order: "a2"
 ---
 
+> Progress 2026-10-19: phase 1 (static image + numbers) can use `ImageVisualization`: graph picture with `ImageAnnotation`s for the values, plus `TextChallengeInput`. Phase 2 (procedural graph) becomes its own `ChallengeVisualization` subclass, existing resources stay valid.
+
 > Depends on the challenge-split tasks (challenge-split-1..6, 2026-10-19). Implement as a `ChallengeVisualization` resource (+ reuse existing inputs) instead of adding a `ChallengeUIType` enum value / `IChallengeUIStrategy`.
 # BarGraph challenge UI
 

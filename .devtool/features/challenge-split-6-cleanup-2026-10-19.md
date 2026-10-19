@@ -28,7 +28,7 @@ Once everything runs on the new model, delete the old 1:1 type system.
    - [x] `MathChallenge` legacy members: `Answer`, `ComputeRandomAnswer`, `CheckAnswer`, `Question`/`Hint` getters, `ChallengeUIType`
    - [x] Orphaned `.uid` files under `MVC_Challenges/View/`
 2. **Radar**
-   - [x] Radar: dropped (empty placeholder); re-add as a `ChallengeVisualization` when designed
+   - [x] Radar: dropped (empty placeholder); since rebuilt as `RadarVisualization` (2026-10-19)
 3. **Docs**
    - [x] Rewrite "Challenge System" + "Adding a New Challenge Type" sections in `CLAUDE.md`
 4. **Verify**

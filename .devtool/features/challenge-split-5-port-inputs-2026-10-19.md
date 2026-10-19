@@ -12,6 +12,8 @@ labels: ["math", "ui", "challenge-split"]
 order: "Zw5"
 ---
 
+> Update 2026-10-19: CombinationLock now instances `Scenes/UI/carrousel.tscn` per unknown (overridable via `CombinationLockInput.WheelScene`), replacing the code-built `CombinationLockWheel`. Fixed carrousel.tscn: controller `_carrousel` was unset (null in `_Ready`) and the Carrousel anchors were zeroed (size 0).
+
 > Implemented 2026-10-19. Added `MathChallenge.DistinctValues` (no two params share a value in roll or answer; on for SelectThree) and a `ValueCleared` event on the input contract (used by Cogwheel deselect). CombinationLockWheel rebuilt as ▲ / values / ▼ (its controller was wired before its buttons existed). Headless smoke test passed for all three inputs incl. SelectThree loaded from .tres. Still to check: look and feel in-game.
 # Challenge split 5/7: port Dropdown, CombinationLock and Cogwheel inputs
 
