@@ -4,9 +4,9 @@ status: "backlog"
 priority: "medium"
 assignee: null
 epic: "world"
-dueDate: "2026-09-30"
+dueDate: "2026-11-20"
 created: "2026-06-28T12:00:00.000Z"
-modified: "2026-06-28T12:00:00.000Z"
+modified: "2026-10-19T12:00:00.000Z"
 completedAt: null
 labels: ["level", "act-3", "world"]
 order: "lvl-11"

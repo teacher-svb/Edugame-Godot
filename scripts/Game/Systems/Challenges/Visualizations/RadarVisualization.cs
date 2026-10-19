@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace TnT.EduGame.Question
@@ -30,37 +31,19 @@ namespace TnT.EduGame.Question
         // seeded blip directions stay this far from the label diagonal, so the blip never hides a label
         const float LabelClearance = Mathf.Pi / 6;
 
-        const int MaxRangeAttempts = 50;
-        // large prime, spreads retry seeds apart
-        const int SeedStride = 104729;
-
         public int Range => RingCount * RingStep;
 
         protected override string DefaultScenePath => "res://Scenes/UI/ChallengeVisualizations/Radar.tscn";
 
-        // reroll (deterministically) until the blip fits on the screen
-        public override ChallengeRound Generate(MathChallenge challenge, int seed)
-        {
-            for (int attempt = 0; attempt < MaxRangeAttempts; attempt++)
-            {
-                var round = base.Generate(challenge, unchecked(seed + attempt * SeedStride));
-                if (!round.Values.TryGetValue(DistanceParam, out var distance))
-                    throw new ArgumentException($"{challenge.Name}: radar DistanceParam '{DistanceParam}' is not in the formula");
-                if (AngleParam != "" && !round.Values.ContainsKey(AngleParam))
-                    throw new ArgumentException($"{challenge.Name}: radar AngleParam '{AngleParam}' is not in the formula");
-
-                if (distance > 0 && distance <= Range)
-                    return round;
-            }
-
-            throw new InvalidOperationException(
-                $"{challenge.Name}: '{DistanceParam}' never lands within the radar range (1..{Range}); check the ParamSpec ranges");
-        }
+        // the blip has to fit on the screen
+        public override IEnumerable<IChallengeConstraint> ImpliedConstraints() =>
+            [new ValueRange { Param = DistanceParam, Min = 1, HasMax = true, Max = Range }];
 
         // blip direction in radians, 0 = up, clockwise
         public float BlipAngle(ChallengeRound round) =>
             AngleParam != ""
-                ? Mathf.DegToRad(round.Values[AngleParam])
+                ? Mathf.DegToRad(round.Values.TryGetValue(AngleParam, out var degrees) ? degrees
+                    : throw new ArgumentException($"radar AngleParam '{AngleParam}' is not in formula '{round.Formula}'"))
                 : LabelAngle + LabelClearance + (float)round.RandomFor("radar-angle").NextDouble() * (Mathf.Tau - 2 * LabelClearance);
     }
 }

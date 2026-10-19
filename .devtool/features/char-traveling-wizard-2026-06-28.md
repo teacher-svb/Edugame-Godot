@@ -4,9 +4,9 @@ status: "backlog"
 priority: "medium"
 assignee: null
 epic: "characters"
-dueDate: "2026-08-31"
+dueDate: "2026-11-13"
 created: "2026-06-28T12:00:00.000Z"
-modified: "2026-06-28T12:00:00.000Z"
+modified: "2026-10-19T12:00:00.000Z"
 completedAt: null
 labels: ["character", "wizard", "world"]
 order: "chr-11"

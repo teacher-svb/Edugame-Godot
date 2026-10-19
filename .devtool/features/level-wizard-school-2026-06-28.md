@@ -4,9 +4,9 @@ status: "todo"
 priority: "high"
 assignee: null
 epic: "world"
-dueDate: "2026-07-31"
+dueDate: "2026-11-06"
 created: "2026-06-28T12:00:00.000Z"
-modified: "2026-06-28T12:00:00.000Z"
+modified: "2026-10-19T12:00:00.000Z"
 completedAt: null
 labels: ["level", "act-1", "world"]
 order: "lvl-9"

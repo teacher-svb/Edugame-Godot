@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 namespace TnT.EduGame.Question
@@ -18,6 +20,12 @@ namespace TnT.EduGame.Question
         public PackedScene ResolveScene() => Scene ?? GD.Load<PackedScene>(DefaultScenePath);
 
         public virtual ChallengeRound Generate(MathChallenge challenge, int seed) =>
-            ChallengeRound.Roll(challenge.Formula, challenge.Params, challenge.Unknowns, seed, challenge.AllowNegativeAnswer, challenge.DistinctValues);
+            ChallengeRound.Roll(challenge.Formula, challenge.Params, challenge.Unknowns, seed, ConstraintsFor(challenge));
+
+        // rules this visualization needs on top of the challenge's own, e.g. the radar's blip within range
+        public virtual IEnumerable<IChallengeConstraint> ImpliedConstraints() => [];
+
+        protected IEnumerable<IChallengeConstraint> ConstraintsFor(MathChallenge challenge) =>
+            challenge.Constraints.Where(c => c != null).Concat(ImpliedConstraints());
     }
 }

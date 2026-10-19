@@ -18,7 +18,11 @@ namespace TnT.EduGame.Question
     {
         public const string AnswerParam = "answer";
 
-        const int MaxRollAttempts = 100;
+        // strict rules (e.g. a grid snap on two axes passes ~1 in 100 rolls) need plenty of tries
+        const int MaxRollAttempts = 1000;
+        // answer distractors: start this far around the correct value, widen until enough pass the rules
+        const int MinDistractorSpread = 5;
+        const int MaxDistractorSpread = 10000;
         const int DefaultOptionCount = 4;
         const string ParamPattern = @"\b[a-zA-Z_][a-zA-Z0-9_]*\b";
 
@@ -37,19 +41,17 @@ namespace TnT.EduGame.Question
         public IReadOnlyDictionary<string, int> Givens { get; }
 
         readonly Dictionary<string, ParamSpec> _specs;
-        readonly bool _allowNegativeAnswer;
-        readonly bool _distinctValues;
+        readonly IReadOnlyList<IChallengeConstraint> _constraints;
 
         public ChallengeRound(int seed, string formula, IReadOnlyDictionary<string, int> values,
-            IEnumerable<string> unknowns, IEnumerable<ParamSpec> specs, bool allowNegativeAnswer = false, bool distinctValues = false)
+            IEnumerable<string> unknowns, IEnumerable<ParamSpec> specs, IEnumerable<IChallengeConstraint> constraints = null)
         {
             Seed = seed;
             Formula = formula;
             Values = new Dictionary<string, int>(values);
             Unknowns = unknowns.Distinct().ToList();
             _specs = specs.Where(s => s != null).GroupBy(s => s.Name).ToDictionary(g => g.Key, g => g.First());
-            _allowNegativeAnswer = allowNegativeAnswer;
-            _distinctValues = distinctValues;
+            _constraints = (constraints ?? []).Where(c => c != null).ToList();
 
             var undefined = Unknowns.Where(u => !Values.ContainsKey(u)).ToList();
             if (undefined.Any())
@@ -62,11 +64,12 @@ namespace TnT.EduGame.Question
 
         // Rolls a value for every spec and computes `answer`, retrying (with the
         // same seeded rng, so still deterministic) until the answer is an integer
-        // and, unless allowed, non-negative. With distinctValues no two params share a value.
+        // and every constraint holds.
         public static ChallengeRound Roll(string formula, IEnumerable<ParamSpec> specs, IEnumerable<string> unknowns,
-            int seed, bool allowNegativeAnswer = false, bool distinctValues = false)
+            int seed, IEnumerable<IChallengeConstraint> constraints = null)
         {
             var specList = specs.Where(s => s != null).ToList();
+            var constraintList = (constraints ?? []).Where(c => c != null).ToList();
 
             if (ExtractParamNames(formula).Contains(AnswerParam))
                 throw new ArgumentException($"Formula '{formula}' must not reference '{AnswerParam}'; it is the formula's result");
@@ -75,22 +78,29 @@ namespace TnT.EduGame.Question
             if (unspecified.Any())
                 throw new ArgumentException($"Formula '{formula}' has params without a ParamSpec: {string.Join(", ", unspecified)}");
 
+            var known = specList.Select(s => s.Name).Append(AnswerParam).ToHashSet();
+            foreach (var constraint in constraintList)
+            {
+                var foreign = constraint.Params.Where(p => !known.Contains(p)).ToList();
+                if (foreign.Any())
+                    throw new ArgumentException($"Constraint '{constraint.Describe()}' refers to {string.Join(", ", foreign)}, which is not in formula '{formula}'");
+            }
+
             var rng = new Random(seed);
             for (int attempt = 0; attempt < MaxRollAttempts; attempt++)
             {
                 var values = specList.ToDictionary(s => s.Name, s => Sample(s, rng));
-                if (distinctValues && !AreDistinct(values))
+                if (!TryEvaluate(formula, values, out var answer))
                     continue;
 
-                if (TryEvaluate(formula, values, out var answer) && (allowNegativeAnswer || answer >= 0))
-                {
-                    values[AnswerParam] = answer;
-                    return new ChallengeRound(seed, formula, values, unknowns, specList, allowNegativeAnswer, distinctValues);
-                }
+                values[AnswerParam] = answer;
+                if (constraintList.All(c => c.IsSatisfiedBy(values)))
+                    return new ChallengeRound(seed, formula, values, unknowns, specList, constraintList);
             }
 
+            var rules = constraintList.Any() ? $" with {string.Join(", ", constraintList.Select(c => c.Describe()))}" : "";
             throw new InvalidOperationException(
-                $"Could not roll a valid round for '{formula}' in {MaxRollAttempts} attempts (seed {seed}); check the ParamSpec ranges");
+                $"Could not roll a valid round for '{formula}'{rules} in {MaxRollAttempts} attempts (seed {seed}); check the ParamSpec ranges and constraints");
         }
 
         // Correct as soon as the player's values satisfy the formula, which need
@@ -104,9 +114,6 @@ namespace TnT.EduGame.Question
             var all = new Dictionary<string, int>(Givens);
             foreach (var unknown in Unknowns)
                 all[unknown] = playerValues[unknown];
-
-            if (_distinctValues && !AreDistinct(all.Where(kv => kv.Key != AnswerParam).ToDictionary(kv => kv.Key, kv => kv.Value)))
-                return false;
 
             return TryEvaluate(Formula, all, out var result) && result == all[AnswerParam];
         }
@@ -124,26 +131,36 @@ namespace TnT.EduGame.Question
             if (spec?.Pool is { Length: > 0 })
                 return spec.Pool.Distinct().OrderBy(_ => rng.Next()).ToList();
 
-            IEnumerable<int> candidates;
+            List<int> candidates;
             if (spec is { IsFixed: false })
-                candidates = Enumerable.Range(Math.Min(spec.Min, spec.Max), Math.Abs(spec.Max - spec.Min) + 1);
+                candidates = Enumerable.Range(Math.Min(spec.Min, spec.Max), Math.Abs(spec.Max - spec.Min) + 1)
+                    .Where(c => c != correct && Allows(param, c)).ToList();
             else
             {
-                // answer or fixed param: no range to draw from, so spread around the correct value
-                var spread = Math.Max(5, Math.Abs(correct) / 4);
-                candidates = Enumerable.Range(correct - spread, spread * 2 + 1);
+                // answer or fixed param: no range to draw from, so look around the correct value,
+                // widening until enough candidates pass the rules (e.g. only grid lines)
+                var spread = Math.Max(MinDistractorSpread, Math.Abs(correct) / 4);
+                do
+                {
+                    candidates = Enumerable.Range(correct - spread, spread * 2 + 1)
+                        .Where(c => c != correct && Allows(param, c)).ToList();
+                    spread *= 2;
+                } while (candidates.Count < count - 1 && spread <= MaxDistractorSpread);
             }
 
-            if (param == AnswerParam && !_allowNegativeAnswer)
-                candidates = candidates.Where(c => c >= 0);
-
             return candidates
-                .Where(c => c != correct)
                 .OrderBy(_ => rng.Next())
                 .Take(count - 1)
                 .Append(correct)
                 .OrderBy(_ => rng.Next())
                 .ToList();
+        }
+
+        // would the round still satisfy every rule with `param` set to `value`?
+        bool Allows(string param, int value)
+        {
+            var values = new Dictionary<string, int>(Values) { [param] = value };
+            return _constraints.All(c => c.IsSatisfiedBy(values));
         }
 
         // Independent random stream per purpose (e.g. "radar-angle"), so a
@@ -197,9 +214,6 @@ namespace TnT.EduGame.Question
             result = (int)number;
             return true;
         }
-
-        static bool AreDistinct(IReadOnlyDictionary<string, int> values) =>
-            values.Values.Distinct().Count() == values.Count;
 
         static int Sample(ParamSpec spec, Random rng)
         {

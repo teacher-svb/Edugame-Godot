@@ -5,6 +5,12 @@
 [ext_resource type="Script" uid="uid://c4bsojhn3af82" path="res://scripts/Game/Systems/Challenges/Visualizations/TextVisualization.cs" id="3_textvis"]
 [ext_resource type="Script" uid="uid://2chy7qh6qta8" path="res://scripts/Game/Systems/Challenges/Inputs/CombinationLockInput.cs" id="4_lock"]
 
+[ext_resource type="Script" path="res://scripts/Game/Systems/Challenges/Constraints/DistinctParams.cs" id="5_distinct"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/Challenges/ChallengeConstraint.cs" id="6_constraint"]
+
+[sub_resource type="Resource" id="Resource_distinct"]
+script = ExtResource("5_distinct")
+
 [sub_resource type="Resource" id="Resource_x"]
 script = ExtResource("1_q2d1b")
 Name = "x"
@@ -35,7 +41,7 @@ Name = "Selecteer 3 getallen"
 Formula = "x+y+z"
 Params = Array[ExtResource("1_q2d1b")]([SubResource("Resource_x"), SubResource("Resource_y"), SubResource("Resource_z")])
 Unknowns = PackedStringArray("x", "y", "z")
-DistinctValues = true
+Constraints = Array[ExtResource("6_constraint")]([SubResource("Resource_distinct")])
 QuestionText = "Selecteer 3 getallen die samen {Answer} vormen"
 Visualization = SubResource("Resource_vis")
 Input = SubResource("Resource_input")

@@ -4,7 +4,7 @@ status: "review"
 priority: "high"
 assignee: null
 epic: "systems"
-dueDate: "2026-11-30"
+dueDate: "2026-10-23"
 created: "2026-10-19T12:00:00.000Z"
 modified: "2026-10-19T12:00:00.000Z"
 completedAt: null

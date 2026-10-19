@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace TnT.EduGame.Question
@@ -31,29 +31,19 @@ namespace TnT.EduGame.Question
         // `{param}` placeholders allowed; shown next to the marker, empty for none
         [Export] public string MarkerLabel { get; set; } = "";
 
-        // snapping can reject many rolls (1 in XStep per axis), so allow plenty
-        const int MaxGridAttempts = 1000;
-        // large prime, spreads retry seeds apart
-        const int SeedStride = 104729;
-
         protected override string DefaultScenePath => "res://Scenes/UI/ChallengeVisualizations/SearchGrid.tscn";
 
-        // reroll (deterministically) until the marker lands on the grid
-        public override ChallengeRound Generate(MathChallenge challenge, int seed)
+        // the marker has to land on the grid (on line crossings with SnapToLines)
+        public override IEnumerable<IChallengeConstraint> ImpliedConstraints()
         {
-            for (int attempt = 0; attempt < MaxGridAttempts; attempt++)
+            foreach (var (param, start, step, end) in new[] { (XParam, XStart, XStep, XEnd), (YParam, YStart, YStep, YEnd) })
             {
-                var round = base.Generate(challenge, unchecked(seed + attempt * SeedStride));
-                RequireParam(challenge, round, XParam, nameof(XParam));
-                RequireParam(challenge, round, YParam, nameof(YParam));
-
-                if (Fits(round, XParam, XStart, XStep, Columns) && Fits(round, YParam, YStart, YStep, Rows))
-                    return round;
+                if (param == "")
+                    continue;
+                yield return new ValueRange { Param = param, Min = start, HasMax = true, Max = end };
+                if (SnapToLines)
+                    yield return new MultipleOf { Param = param, Step = step, Offset = start };
             }
-
-            throw new InvalidOperationException(
-                $"{challenge.Name}: marker never lands on the grid (X {XStart}..{XEnd} step {XStep}, Y {YStart}..{YEnd} step {YStep}); " +
-                "check the ParamSpec ranges, or give the params a Pool of grid values");
         }
 
         public int XEnd => XStart + Columns * XStep;
@@ -64,23 +54,8 @@ namespace TnT.EduGame.Question
             XParam != "" ? round.Values[XParam] : RandomLine(round, "grid-x", XStart, XStep, Columns),
             YParam != "" ? round.Values[YParam] : RandomLine(round, "grid-y", YStart, YStep, Rows));
 
-        bool Fits(ChallengeRound round, string param, int start, int step, int count)
-        {
-            if (param == "")
-                return true;
-            var value = round.Values[param];
-            var onAxis = value >= start && value <= start + count * step;
-            return onAxis && (!SnapToLines || (value - start) % step == 0);
-        }
-
         // inner lines only (when there are any), so a random coordinate never puts the marker on the frame
         static int RandomLine(ChallengeRound round, string purpose, int start, int step, int count) =>
             start + (count > 1 ? round.RandomFor(purpose).Next(1, count) : round.RandomFor(purpose).Next(count + 1)) * step;
-
-        static void RequireParam(MathChallenge challenge, ChallengeRound round, string param, string field)
-        {
-            if (param != "" && !round.Values.ContainsKey(param))
-                throw new ArgumentException($"{challenge.Name}: search grid {field} '{param}' is not in the formula");
-        }
     }
 }

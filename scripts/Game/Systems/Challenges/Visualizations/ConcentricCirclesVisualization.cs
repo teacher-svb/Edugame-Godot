@@ -48,7 +48,7 @@ namespace TnT.EduGame.Question
                 var formula = string.Join(" ", tokens.Select(t => IsOperator(t) ? Operators[rng.Next(Operators.Length)] : t));
                 try
                 {
-                    return ChallengeRound.Roll(formula, challenge.Params, challenge.Unknowns, seed, challenge.AllowNegativeAnswer, challenge.DistinctValues);
+                    return ChallengeRound.Roll(formula, challenge.Params, challenge.Unknowns, seed, ConstraintsFor(challenge));
                 }
                 catch (InvalidOperationException)
                 {

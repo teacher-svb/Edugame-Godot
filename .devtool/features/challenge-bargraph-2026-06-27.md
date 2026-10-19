@@ -4,9 +4,9 @@ status: "backlog"
 priority: "high"
 assignee: null
 epic: "systems"
-dueDate: "2026-08-31"
+dueDate: "2026-11-27"
 created: "2026-06-27T12:00:00.000Z"
-modified: "2026-06-27T12:00:00.000Z"
+modified: "2026-10-19T12:00:00.000Z"
 completedAt: null
 labels: ["math", "system"]
 order: "a2"

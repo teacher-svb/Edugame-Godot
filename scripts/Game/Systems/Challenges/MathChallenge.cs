@@ -36,12 +36,9 @@ namespace TnT.EduGame.Question
         [Export]
         public string[] Unknowns { get; set; } = [ChallengeRound.AnswerParam];
 
+        // rules every round must satisfy, e.g. "answer ≥ 0" (ValueRange) or "x divisible by y"
         [Export]
-        public bool AllowNegativeAnswer { get; set; }
-
-        // no two params share a value, in the roll and in the player's answer
-        [Export]
-        public bool DistinctValues { get; set; }
+        public Godot.Collections.Array<ChallengeConstraint> Constraints { get; set; } = new();
 
         [Export]
         public ChallengeVisualization Visualization { get; set; }
@@ -75,7 +72,7 @@ namespace TnT.EduGame.Question
         public ChallengeRound Roll(int seed) =>
             Visualization != null
                 ? Visualization.Generate(this, seed)
-                : ChallengeRound.Roll(Formula, Params, Unknowns, seed, AllowNegativeAnswer, DistinctValues);
+                : ChallengeRound.Roll(Formula, Params, Unknowns, seed, Constraints);
 
         public string QuestionFor(ChallengeRound round) => round.Format(QuestionText);
         public string HintFor(ChallengeRound round) => round.Format(HintText);

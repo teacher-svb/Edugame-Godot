@@ -4,7 +4,7 @@ status: "review"
 priority: "high"
 assignee: null
 epic: "systems"
-dueDate: "2026-11-30"
+dueDate: "2026-10-23"
 created: "2026-10-19T12:00:00.000Z"
 modified: "2026-10-19T12:00:00.000Z"
 completedAt: null
@@ -26,7 +26,7 @@ First visualisation that overrides value generation. Params map to a location on
    - [x] Draw grid with axis labels and a pulsing marker
 3. **Verify**
    - [x] Test challenge with TextInput; values always land on the grid (300 seeds)
-   - [ ] Dropdown input: not tested with the grid yet. Expect answer distractors of answer ± a few, not other grid lines (e.g. 70 → 67, 72); consider grid-aligned options
+   - [x] Dropdown input: options are other grid lines (constraint-filtered distractors, e.g. 60 → 50, 40, 70)
 
 ## Files
 
