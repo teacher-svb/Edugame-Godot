@@ -13,11 +13,12 @@ namespace TnT.EduGame.GameState
         public struct ChallengeOptions
         {
             public IMathChallenge challenge;
+            public int seed;
         }
 
         public BaseState GetState(ChallengeOptions options)
         {
-            ChallengeController.Instance.SetChallenge(options.challenge);
+            ChallengeController.Instance.SetChallenge(options.challenge, options.seed);
             return new BaseState(new() { OnEnter = StartChallenge, OnExit = CloseChallenge });
         }
 

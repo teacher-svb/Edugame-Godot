@@ -21,8 +21,10 @@
 [ext_resource type="Script" uid="uid://ckobusjip2hti" path="res://scripts/Game/Systems/QuestSystem/QuestReaction.cs" id="19_i72j7"]
 [ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="19_trh4x"]
 [ext_resource type="Script" uid="uid://diolsl1jtpyue" path="res://scripts/Game/Systems/Challenges/MathChallengeTrigger.cs" id="21_5h4vg"]
-[ext_resource type="Script" uid="uid://7k86hidqf8h4" path="res://scripts/Game/Systems/Challenges/ChallengeValue.cs" id="22_trgkc"]
+[ext_resource type="Script" uid="uid://cnfmeuouim0nn" path="res://scripts/Game/Systems/Challenges/ParamSpec.cs" id="22_rl30s"]
 [ext_resource type="Script" uid="uid://sup7lp6karaf" path="res://scripts/Game/Systems/Challenges/MathChallenge.cs" id="23_rl30s"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/Challenges/Visualizations/TextVisualization.cs" id="24_textvis"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/Challenges/Inputs/TextChallengeInput.cs" id="25_textin"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dcdmp"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -44,7 +46,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5h4vg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bivhb"]
 shader = ExtResource("3_n1vbe")
 
 [sub_resource type="Gradient" id="Gradient_uhrdb"]
@@ -62,15 +64,15 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_wfhh5"]
 curve = SubResource("Curve_1x8p3")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_trgkc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u2llv"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_h55p7")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_tuys8")
 shader_parameter/width_curve = SubResource("CurveTexture_wfhh5")
 
-[sub_resource type="QuadMesh" id="QuadMesh_rl30s"]
-material = SubResource("ShaderMaterial_trgkc")
+[sub_resource type="QuadMesh" id="QuadMesh_f1rck"]
+material = SubResource("ShaderMaterial_u2llv")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8ah0f"]
 emission_shape = 3
@@ -305,14 +307,35 @@ _targetPath = NodePath("../../Challenges/MathChallengeTrigger")
 _methodName = "TriggerChallenge"
 metadata/_custom_type_script = "uid://ckobusjip2hti"
 
+[sub_resource type="Resource" id="Resource_cornelis_x"]
+script = ExtResource("22_rl30s")
+Name = "x"
+IsFixed = true
+FixedValue = 5
+metadata/_custom_type_script = "uid://cnfmeuouim0nn"
+
+[sub_resource type="Resource" id="Resource_cornelis_y"]
+script = ExtResource("22_rl30s")
+Name = "y"
+IsFixed = true
+FixedValue = 3
+metadata/_custom_type_script = "uid://cnfmeuouim0nn"
+
+[sub_resource type="Resource" id="Resource_cornelis_vis"]
+script = ExtResource("24_textvis")
+
+[sub_resource type="Resource" id="Resource_cornelis_in"]
+script = ExtResource("25_textin")
+
 [sub_resource type="Resource" id="Resource_igo7b"]
 script = ExtResource("23_rl30s")
 Name = "Cornelis' bridge"
-ChallengeUIType = 5
-Formula = "answer"
-FormulaParams = PackedStringArray("answer")
-QuestionText = "Hoeveel is 5 - 3?"
-Answer = 2
+Formula = "x - y"
+Params = Array[ExtResource("22_rl30s")]([SubResource("Resource_cornelis_x"), SubResource("Resource_cornelis_y")])
+Unknowns = PackedStringArray("answer")
+QuestionText = "Hoeveel is {x} - {y}?"
+Visualization = SubResource("Resource_cornelis_vis")
+Input = SubResource("Resource_cornelis_in")
 metadata/_custom_type_script = "uid://sup7lp6karaf"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_igo7b"]
@@ -353,8 +376,8 @@ amount = 60
 lifetime = 60.0
 explosiveness = 1.0
 fixed_fps = 60
-process_material = SubResource("ShaderMaterial_5h4vg")
-draw_pass_1 = SubResource("QuadMesh_rl30s")
+process_material = SubResource("ShaderMaterial_bivhb")
+draw_pass_1 = SubResource("QuadMesh_f1rck")
 script = ExtResource("5_wcmwa")
 ColorRamp = SubResource("GradientTexture1D_tuys8")
 WidthCurve = SubResource("CurveTexture_wfhh5")

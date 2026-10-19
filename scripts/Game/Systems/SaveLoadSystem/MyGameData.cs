@@ -5,6 +5,7 @@ using TnT.Systems.Persistence;
 using Godot;
 using TnT.EduGame.Characters;
 using TnT.EduGame.QuestSystem;
+using TnT.EduGame.Question;
 
 namespace TnT.EduGame
 {
@@ -17,5 +18,6 @@ namespace TnT.EduGame
         public QuestManagerSaveData questData = null;
         public List<DoorSaveData> doorData = new();
         public TutorialSaveData tutorialData = null;
+        public List<ChallengeSaveData> challengeData = new();
     }
 }

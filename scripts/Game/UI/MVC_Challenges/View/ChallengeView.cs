@@ -39,9 +39,9 @@ namespace TnT.Systems.UI
             Hide();
         }
 
-        public void Refresh(IMathChallenge challenge)
+        public void Refresh(IMathChallenge challenge, ChallengeRound round)
         {
-            _challengeUi = ChallengeUIFactory.Build(challenge);
+            _challengeUi = ChallengeUIFactory.Build(challenge, round);
         }
     }
 }

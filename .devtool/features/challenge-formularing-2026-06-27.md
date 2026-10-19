@@ -11,6 +11,8 @@ completedAt: null
 labels: ["math", "system"]
 order: "a0"
 ---
+
+> Depends on the challenge-split tasks (challenge-split-1..6, 2026-10-19). Implement as a `ChallengeVisualization` resource (+ reuse existing inputs) instead of adding a `ChallengeUIType` enum value / `IChallengeUIStrategy`.
 # FormulaRing challenge UI
 
 Concentric spinning rings for equation construction. Rings alternate value/operator from outer to inner; centre shows a fixed target result. Ring count varies per challenge resource: 3 rings for `a op b = c`, 5 rings for `a op b op c = d`. Used for all M4 challenges (Great Conversion, Professor Mabel).

@@ -11,6 +11,8 @@ completedAt: null
 labels: ["math", "system"]
 order: "a2"
 ---
+
+> Depends on the challenge-split tasks (challenge-split-1..6, 2026-10-19). Implement as a `ChallengeVisualization` resource (+ reuse existing inputs) instead of adding a `ChallengeUIType` enum value / `IChallengeUIStrategy`.
 # BarGraph challenge UI
 
 Static bar chart image alongside a numerical input field. Player reads bar values and computes a result (difference, total, ratio). Used for consumption and output comparisons.

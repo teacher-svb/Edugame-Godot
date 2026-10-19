@@ -11,6 +11,8 @@ completedAt: null
 labels: ["math", "system"]
 order: "a1"
 ---
+
+> Depends on the challenge-split tasks (challenge-split-1..6, 2026-10-19). Implement as a `ChallengeVisualization` resource (+ reuse existing inputs) instead of adding a `ChallengeUIType` enum value / `IChallengeUIStrategy`.
 # Sequence challenge UI
 
 Number series panel showing a sequence with one missing value. Player identifies the rule and inputs or selects the answer. Maps to M2+ challenges and diagnostic readouts.

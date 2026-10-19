@@ -2,14 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://ri147ckev4hj" path="res://assets/3D/characters/Mini Characters 1/Models/GLB format/avocado.glb" id="1_26m57"]
 [ext_resource type="Script" uid="uid://qjrt84cjuqwm" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeUI.cs" id="2_afi11"]
-[ext_resource type="PackedScene" uid="uid://dtmvg33ao3d6f" path="res://Scenes/UI/ChallengeStrategies/TextInput.tscn" id="3_60f6p"]
 [ext_resource type="Script" uid="uid://bpr1xsrq6lokd" path="res://scripts/Lib/UIAnimation/AnimatedButton.cs" id="3_6488b"]
 [ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="3_afi11"]
-[ext_resource type="PackedScene" uid="uid://dfrwmsw62sq1x" path="res://Scenes/UI/ChallengeStrategies/CogWheel.tscn" id="4_kxumt"]
-[ext_resource type="PackedScene" uid="uid://bto667p1mkq14" path="res://Scenes/UI/ChallengeStrategies/Radar.tscn" id="5_j5erl"]
-[ext_resource type="PackedScene" uid="uid://bi0bdv4o4le1w" path="res://Scenes/UI/ChallengeStrategies/SearchGrid.tscn" id="6_iokxa"]
-[ext_resource type="PackedScene" uid="uid://rvmsjxn4wwms" path="res://Scenes/UI/ChallengeStrategies/Dropdown.tscn" id="7_7gj8i"]
-[ext_resource type="PackedScene" uid="uid://chg82r7d2dgtt" path="res://Scenes/UI/ChallengeStrategies/CombinationLock.tscn" id="8_j5erl"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_afi11"]
 load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
@@ -53,7 +47,7 @@ unicode = 113
 [sub_resource type="Shortcut" id="Shortcut_e0qxm"]
 events = [SubResource("InputEventKey_6488b")]
 
-[node name="View" type="Control" unique_id=860686304 node_paths=PackedStringArray("_left", "_right", "_challengeContainer", "_questionContainer", "_submitContainer")]
+[node name="View" type="Control" unique_id=860686304 node_paths=PackedStringArray("_visualizationContainer", "_questionContainer", "_inputContainer", "_submitContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,19 +58,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_afi11")
 script = ExtResource("2_afi11")
-_left = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/left")
-_right = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right")
-_challengeContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/left/ChallengeContainer")
+_visualizationContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/left/VisualizationContainer")
 _questionContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right/QuestionContainer")
+_inputContainer = NodePath("MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/InputSlot")
 _submitContainer = NodePath("MarginContainer/VBoxContainer/InputContainer/SubmitContainer")
-_challengeScenes = Dictionary[int, Resource]({
-0: ExtResource("4_kxumt"),
-1: ExtResource("5_j5erl"),
-2: ExtResource("6_iokxa"),
-3: ExtResource("7_7gj8i"),
-4: ExtResource("3_60f6p"),
-5: ExtResource("8_j5erl")
-})
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2051200352]
 layout_mode = 1
@@ -135,7 +120,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ChallengeContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/left" unique_id=1504843259]
+[node name="VisualizationContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/left" unique_id=1504843259]
 z_index = 1
 layout_mode = 2
 size_flags_horizontal = 3
@@ -149,6 +134,12 @@ size_flags_horizontal = 3
 [node name="QuestionContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/right" unique_id=561893668]
 layout_mode = 2
 size_flags_vertical = 3
+theme_type_variation = &"TransparentPanelContainer"
+
+[node name="InputSlot" type="PanelContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=1739204518]
+custom_minimum_size = Vector2(400, 64)
+layout_mode = 2
+size_flags_horizontal = 4
 theme_type_variation = &"TransparentPanelContainer"
 
 [node name="InputContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=244899220]

@@ -1,69 +1,64 @@
-
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Godot;
-using TnT.EduGame.Question;
-using TnT.Extensions;
 
 namespace TnT.Systems.UI
 {
+    // ▲ / vertical carrousel of values / ▼. Emits the centred value on init and after every spin.
     public partial class CombinationLockWheel : Control
     {
         [Signal]
         public delegate void ValueSelectedEventHandler(string paramName, int value);
 
-        Carrousel _carrousel;
-        CarrouselController _controller;
+        // Carrousel shows 5 slots; repeat short option lists so the wheel stays full
+        const int MinVisibleValues = 5;
 
-        CarrouselValue[] _values;
-
-        public void Init(string paramName, IEnumerable<ChallengeValue> values)
+        public void Init(string paramName, IReadOnlyList<int> values)
         {
-            this.SizeFlagsHorizontal = SizeFlags.ExpandFill;
-            this.SizeFlagsVertical = SizeFlags.ExpandFill;
-            this.SetAnchorsPreset(LayoutPreset.FullRect);
+            CustomMinimumSize = new Vector2(72, 200);
+            SizeFlagsVertical = SizeFlags.ExpandFill;
 
-            _carrousel = this.CreateChild<Carrousel>();
-            _carrousel.SetAnchorsPreset(LayoutPreset.FullRect);
-            _carrousel.Vertical = true;
+            var layout = new VBoxContainer();
+            layout.SetAnchorsPreset(LayoutPreset.FullRect);
 
-            _controller = this.CreateChild<CarrouselController>();
-            _controller.SizeFlagsHorizontal = SizeFlags.ExpandFill;
-            _controller.SizeFlagsVertical = SizeFlags.ExpandFill;
-            _controller.SetAnchorsPreset(LayoutPreset.FullRect);
-            _controller.Carrousel = _carrousel;
+            var previous = new Button { Text = "▲" };
+            var carrousel = new Carrousel { Vertical = true, SizeFlagsVertical = SizeFlags.ExpandFill };
+            var next = new Button { Text = "▼" };
 
-            var controllerContainer = _controller.CreateChild<VBoxContainer>();
-            controllerContainer.SetAnchorsPreset(LayoutPreset.FullRect);
-            _controller.BtnPrevious = controllerContainer.CreateChild<Button>();
-            _controller.BtnPrevious.SizeFlagsVertical = SizeFlags.ExpandFill;
-            var spacer = controllerContainer.CreateChild<Panel>();
-            spacer.SizeFlagsVertical = SizeFlags.ExpandFill;
-            _controller.BtnNext = controllerContainer.CreateChild<Button>();
-            _controller.BtnNext.SizeFlagsVertical = SizeFlags.ExpandFill;
+            var padded = values.AsEnumerable();
+            while (padded.Count() < MinVisibleValues)
+                padded = padded.Concat(values);
 
-            var paddedValues = values;
-            while (paddedValues.Count() < 5)
+            foreach (var v in padded)
             {
-                paddedValues = paddedValues.Concat(values);
+                var value = new CarrouselValue { Value = v.ToString() };
+                value.AddChild(new Label
+                {
+                    Text = v.ToString(),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                });
+                carrousel.AddChild(value);
             }
 
-            _values = paddedValues.Select(v =>
+            // CarrouselController wires its buttons in _Ready, so its references must
+            // be set before it enters the tree
+            var controller = new CarrouselController
             {
-                var value = _carrousel.CreateChild<CarrouselValue>();
-                var label = value.CreateChild<RichTextLabel>();
-                label.Text = v.Value.ToString();
-                label.HorizontalAlignment = HorizontalAlignment.Center;
-                label.VerticalAlignment = VerticalAlignment.Center;
-                label.ScrollActive = false;
-                value.Value = v.Value.ToString();
-                return value;
-            }).ToArray();
+                Carrousel = carrousel,
+                BtnPrevious = previous,
+                BtnNext = next,
+                MouseFilter = MouseFilterEnum.Ignore,
+            };
 
-            _carrousel.ValueSelected += v => EmitSignal(SignalName.ValueSelected, paramName, int.Parse(v));
-            _carrousel.Init();
+            layout.AddChild(previous);
+            layout.AddChild(carrousel);
+            layout.AddChild(next);
+            AddChild(layout);
+            AddChild(controller);
+
+            carrousel.ValueSelected += v => EmitSignal(SignalName.ValueSelected, paramName, int.Parse(v));
+            carrousel.Init();
         }
     }
 }

@@ -5,6 +5,7 @@ using Godot;
 using TnT.EduGame.Characters;
 using TnT.EduGame.QuestSystem;
 using TnT.EduGame.GameState;
+using TnT.EduGame.Question;
 
 namespace TnT.EduGame
 {
@@ -29,6 +30,7 @@ namespace TnT.EduGame
             Bind<QuestManager, QuestManagerSaveData>(ref GameData.questData);
             Bind<Door, DoorSaveData>(ref GameData.doorData);
             Bind<PlayerTutorial, TutorialSaveData>(ref GameData.tutorialData);
+            Bind<MathChallengeTrigger, ChallengeSaveData>(ref GameData.challengeData);
 
             StateManagerGame.Instance.StartPlay();
         }

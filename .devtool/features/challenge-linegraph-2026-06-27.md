@@ -11,6 +11,8 @@ completedAt: null
 labels: ["math", "system"]
 order: "a3"
 ---
+
+> Depends on the challenge-split tasks (challenge-split-1..6, 2026-10-19). Implement as a `ChallengeVisualization` resource (+ reuse existing inputs) instead of adding a `ChallengeUIType` enum value / `IChallengeUIStrategy`.
 # LineGraph challenge UI
 
 Static line graph image alongside a numerical input field. Player traces a value on a continuous graph (e.g. RPM over wind speed, oil burn over days) and answers a question about the relationship.

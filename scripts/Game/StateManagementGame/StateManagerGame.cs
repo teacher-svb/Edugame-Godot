@@ -73,12 +73,13 @@ namespace TnT.EduGame.GameState
             Push(state.GetState(new() { text = text, character = character, next = ManagerUI.Instance.Next, close = ManagerUI.Instance.Close, onDismissed = onDismissed }));
         }
 
-        public void ShowChallenge(IMathChallenge challenge)
+        // seed decides the round's values; pass the same seed to replay a round
+        public void ShowChallenge(IMathChallenge challenge, int? seed = null)
         {
             var state = _registeredStates.OfType<GameStateChallenge>().FirstOrDefault()
                 ?? throw new Exception("no challenge state assigned");
 
-            Push(state.GetState(new() { challenge = challenge }));
+            Push(state.GetState(new() { challenge = challenge, seed = seed ?? (int)GD.Randi() }));
         }
 
         public void LoadScene(string scenePath, Vector3 targetLocation)

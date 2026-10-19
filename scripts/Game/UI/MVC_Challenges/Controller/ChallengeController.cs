@@ -21,9 +21,9 @@ namespace TnT.Systems.UI
             Initialize();
         }
 
-        public void SetChallenge(IMathChallenge challenge)
+        public void SetChallenge(IMathChallenge challenge, int seed)
         {
-            model.SetChallenge(challenge as MathChallenge);
+            model.SetChallenge(challenge as MathChallenge, seed);
             Refresh();
         }
 
@@ -35,6 +35,7 @@ namespace TnT.Systems.UI
             // challenges, so it's wired once here rather than re-subscribed on
             // every Refresh (which used to stack handlers per challenge shown).
             view.ChallengeUI.OnValueAssigned += ValueAssigned;
+            view.ChallengeUI.OnValueCleared += ValueCleared;
             view.ChallengeUI.OnSubmit += SubmitChallenge;
         }
 
@@ -44,11 +45,17 @@ namespace TnT.Systems.UI
             view.ChallengeUI.SetSubmitEnabled(model.IsComplete);
         }
 
+        private void ValueCleared(string paramName)
+        {
+            model.ClearValue(paramName);
+            view.ChallengeUI.SetSubmitEnabled(model.IsComplete);
+        }
+
         private void SubmitChallenge()
         {
             try
             {
-                var isCorrect = model.Challenge.CheckAnswer();
+                var isCorrect = model.CheckAnswer();
                 GD.Print($"Is Correct: {isCorrect}");
                 EmitSignal(SignalName.Answered, isCorrect);
             }
@@ -60,7 +67,7 @@ namespace TnT.Systems.UI
 
         void Refresh()
         {
-            view.Refresh(model.Challenge);
+            view.Refresh(model.Challenge, model.Round);
             view.ChallengeUI.SetSubmitEnabled(model.IsComplete);
         }
 

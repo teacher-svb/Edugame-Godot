@@ -1,32 +1,42 @@
 [gd_resource type="Resource" script_class="MathChallenge" format=3 uid="uid://bvtaxgkyu400b"]
 
-[ext_resource type="Script" uid="uid://7k86hidqf8h4" path="res://scripts/Game/Systems/Challenges/ChallengeValue.cs" id="1_8ldht"]
+[ext_resource type="Script" uid="uid://cnfmeuouim0nn" path="res://scripts/Game/Systems/Challenges/ParamSpec.cs" id="1_q2d1b"]
 [ext_resource type="Script" uid="uid://sup7lp6karaf" path="res://scripts/Game/Systems/Challenges/MathChallenge.cs" id="2_h8h2r"]
+[ext_resource type="Script" uid="uid://c4bsojhn3af82" path="res://scripts/Game/Systems/Challenges/Visualizations/TextVisualization.cs" id="3_textvis"]
+[ext_resource type="Script" uid="uid://2chy7qh6qta8" path="res://scripts/Game/Systems/Challenges/Inputs/CombinationLockInput.cs" id="4_lock"]
 
-[sub_resource type="Resource" id="Resource_8ldht"]
-script = ExtResource("1_8ldht")
-Value = 1
+[sub_resource type="Resource" id="Resource_x"]
+script = ExtResource("1_q2d1b")
+Name = "x"
+Pool = PackedInt32Array(1, 2, 4, 8)
+metadata/_custom_type_script = "uid://cnfmeuouim0nn"
 
-[sub_resource type="Resource" id="Resource_h8h2r"]
-script = ExtResource("1_8ldht")
-Value = 2
+[sub_resource type="Resource" id="Resource_y"]
+script = ExtResource("1_q2d1b")
+Name = "y"
+Pool = PackedInt32Array(1, 2, 4, 8)
+metadata/_custom_type_script = "uid://cnfmeuouim0nn"
 
-[sub_resource type="Resource" id="Resource_5ysw8"]
-script = ExtResource("1_8ldht")
-Value = 4
+[sub_resource type="Resource" id="Resource_z"]
+script = ExtResource("1_q2d1b")
+Name = "z"
+Pool = PackedInt32Array(1, 2, 4, 8)
+metadata/_custom_type_script = "uid://cnfmeuouim0nn"
 
-[sub_resource type="Resource" id="Resource_mejgv"]
-script = ExtResource("1_8ldht")
-Value = 8
-metadata/_custom_type_script = "uid://7k86hidqf8h4"
+[sub_resource type="Resource" id="Resource_vis"]
+script = ExtResource("3_textvis")
+
+[sub_resource type="Resource" id="Resource_input"]
+script = ExtResource("4_lock")
 
 [resource]
 script = ExtResource("2_h8h2r")
 Name = "Selecteer 3 getallen"
-ChallengeUIType = 5
 Formula = "x+y+z"
-FormulaParams = PackedStringArray("x", "y", "z")
+Params = Array[ExtResource("1_q2d1b")]([SubResource("Resource_x"), SubResource("Resource_y"), SubResource("Resource_z")])
+Unknowns = PackedStringArray("x", "y", "z")
+DistinctValues = true
 QuestionText = "Selecteer 3 getallen die samen {Answer} vormen"
-Answer = 13
-Values = Array[ExtResource("1_8ldht")]([SubResource("Resource_8ldht"), SubResource("Resource_h8h2r"), SubResource("Resource_5ysw8"), SubResource("Resource_mejgv")])
+Visualization = SubResource("Resource_vis")
+Input = SubResource("Resource_input")
 metadata/_custom_type_script = "uid://sup7lp6karaf"

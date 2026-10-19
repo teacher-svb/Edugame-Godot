@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is an educational game built with **Godot 4.5** and **C# (.NET 8.0)**. The game features a sophisticated architecture with math challenges, quests, inventory systems, and a component-based character system.
+This is an educational game built with **Godot 4.7** and **C# (.NET 8.0)**. The game features a sophisticated architecture with math challenges, quests, inventory systems, and a component-based character system.
 
 ## Build and Development Commands
 
@@ -19,17 +19,17 @@ Use the gh CLI for all GitHub tasks, not MCP:
 ```bash
 dotnet build
 ```
-The project uses Godot.NET.Sdk/4.5.0 and requires .NET 8.0.
+The project uses Godot.NET.Sdk/4.7.0 and requires .NET 8.0.
 
 ### Running the Game
-Open the project in Godot Engine 4.5+ and press F5, or use:
+Open the project in Godot Engine 4.7+ and press F5, or use:
 ```bash
 godot --path . --editor  # Open in editor
 godot --path .           # Run directly
 ```
 
 ### Dependencies
-- **Godot Engine 4.5+** (with .NET support)
+- **Godot Engine 4.7+** (with .NET support)
 - **.NET 8.0 SDK**
 - **NuGet packages:**
   - Newtonsoft.Json 13.0.3 (for save/load serialization)
@@ -41,7 +41,7 @@ godot --path .           # Run directly
 /Scenes/              - Godot scene files (.tscn)
 /Scenes/autoload/     - Singleton managers scene
 /assets/              - Game assets (sprites, music, fonts)
-/challenges/          - Challenge resource files (.tres)
+/GameData/challenges/ - Challenge resource files (.tres)
 /quests/              - Quest resource files (.tres)
 /themes/              - UI theme resources
 ```
@@ -100,23 +100,23 @@ Implemented systems:
 
 Controllers are instantiated in `managers.tscn` with Model and View as child nodes.
 
-### 4. Challenge System (Strategy + Factory Pattern)
+### 4. Challenge System (Visualization × Input)
 
-The challenge system uses **strategy pattern** for different UI visualizations:
+A challenge is split into **what is asked** (math), **how it is shown** (visualization) and **how the player answers** (input). Visualizations and inputs combine freely.
 
-**Key components:**
-- `MathChallenge` (Resource) - Challenge definition with formula-based math using `System.Data.DataTable` for expression evaluation
-- `ChallengeUIType` enum - Defines visualization types (TextInput, Cogwheel, Dropdown, CombinationLock, Radar, SearchGrid)
-- `ChallengeUIRegistry` - Runtime reflection-based registry that scans for `IChallengeUIStrategy` implementations
-- `ChallengeUIFactory` - Creates appropriate UI based on challenge type
-- `ChallengeUIFactoryPlugin` - Editor plugin autoload that initializes the registry
+**Data** (`scripts/Game/Systems/Challenges/`):
+- `MathChallenge` (Resource) - `Formula` (expression; its result is the implicit `answer`), `Params` (one `ParamSpec` per formula param), `Unknowns` (params the player supplies, may include `answer`), `QuestionText`/`HintText` (`{param}` placeholders), `AllowNegativeAnswer`, `DistinctValues`, `Visualization`, `Input`. "Extract Params" tool button syncs `Params` with the formula.
+- `ParamSpec` (Resource) - how a param is rolled: fixed value → `Pool` → `[Min, Max]` range
+- `ChallengeRound` - one rolled instance: every value incl. `answer`, deterministic per seed. `Check()` re-evaluates the formula (any valid solution counts), `OptionsFor()` gives input options (pool or correct value + distractors), `Format()` fills placeholders (unknowns as `?`). Pure C#, expressions via `System.Data.DataTable`.
+- `ChallengeVisualization` / `ChallengeInput` (abstract Resources) - subclasses carry their own settings and a default scene (`Scene` export overrides it). `ChallengeVisualization.Generate()` is virtual so a visualization can constrain the rolled values.
+  - Visualizations: `TextVisualization` (in `Visualizations/`)
+  - Inputs: `TextChallengeInput`, `DropdownInput`, `CombinationLockInput`, `CogwheelInput` (in `Inputs/`)
 
-Challenge resources are stored as `.tres` files in `/challenges/`.
+**UI** (`scripts/Game/UI/MVC_Challenges/`): `ChallengeUI` has three slots: visualization (left), question text (right), input (bottom centre). `ChallengeUIFactory` builds them via `ChallengeUI.Builder`. Widgets derive from `ChallengeVisualizationWidget` / `ChallengeInputWidget` and get the challenge + round in `Init()` before `_Ready()`. Inputs report `ValueAssigned(param, value)` / `ValueCleared(param)`; a visualization widget implementing `IChallengeInput` doubles as input and the `Input` slot is skipped. Widget scenes live in `Scenes/UI/ChallengeVisualizations/` and `Scenes/UI/ChallengeInputs/`.
 
-**Important:** The registry enforces 1:1 correspondence between enum values and strategy implementations. If adding a new challenge type, you must:
-1. Add enum value to `ChallengeUIType`
-2. Implement corresponding `IChallengeUIStrategy` class
-3. Registry validates at startup and will error if mismatch exists
+**Flow:** `MathChallengeTrigger` → `StateManagerGame.ShowChallenge(challenge, seed)` → `ChallengeModel` rolls the round → `Answered(bool)` signal. The trigger keeps its seed (persisted as `ChallengeSaveData`) until the challenge is solved, so retries show the same values.
+
+Challenge resources are stored as `.tres` files in `/GameData/challenges/` or inline in level scenes.
 
 ### 5. Quest System (Chain of Responsibility + Event-Driven)
 
@@ -206,13 +206,13 @@ Quest states: NOTSTARTED, INPROGRESS, COMPLETED, FAILED
 
 ### Design Patterns in Use
 1. **Singleton** - Managers expose static `Instance` property set in `_EnterTree()` or `_Ready()`
-2. **Factory + Strategy** - Challenge UI system
+2. **Factory + Builder** - Challenge UI system
 3. **Chain of Responsibility** - Quest message processing
 4. **Mediator** - Stats/Attributes system
 5. **MVC** - All UI systems
 6. **Observer** - EventChannel/EventListener
 7. **Template Method** - SaveLoadSystem abstract base
-8. **Strategy** - Challenge UI implementations
+8. **Strategy** - Challenge visualizations/inputs (polymorphic Resources)
 
 ### Async/Await Usage
 The codebase **heavily uses async/await** for:
@@ -230,25 +230,30 @@ Code uses both **C# events** and **Godot Signals**:
 ### Resource-Based Configuration
 Heavy use of **Godot Resources** (.tres files) for data-driven design:
 - Quest definitions (`/quests/`)
-- Challenge definitions (`/challenges/`)
+- Challenge definitions (`/GameData/challenges/`)
 - CharacterData, ItemData, etc.
 - Allows content creation without code changes
 
 ### Reflection-Based Discovery
 Runtime reflection is used in:
-- `ChallengeUIRegistry` - Scans assemblies for strategy implementations
 - `InputManager` - Discovers InputAction resources in scene tree
 - Be aware of initialization order when adding new discoverable types
 
 ## Working with Specific Systems
 
-### Adding a New Challenge Type
-1. Add new enum value to `ChallengeUIType` in `scripts/Game/Challenges/ChallengeUIType.cs`
-2. Create new class implementing `IChallengeUIStrategy` in `scripts/Game/Challenges/Strategies/`
-3. Decorate class with `[ChallengeUIStrategy(ChallengeUIType.YourNewType)]`
-4. Implement `CreateUI()` method to build and return the UI
-5. Create challenge `.tres` resources in `/challenges/` using the new type
-6. Registry will automatically discover and validate the new strategy on startup
+### Adding a New Challenge Visualization or Input
+1. Create a Resource subclass of `ChallengeVisualization` (in `scripts/Game/Systems/Challenges/Visualizations/`) or `ChallengeInput` (in `.../Inputs/`) with `[GlobalClass, Tool]`, its settings as exports, and `DefaultScenePath`
+2. Create the widget: a `ChallengeVisualizationWidget` / `ChallengeInputWidget` subclass that builds itself from `Challenge` + `Round` in `_Ready()`
+3. Create the widget scene in `Scenes/UI/ChallengeVisualizations/` or `Scenes/UI/ChallengeInputs/` with the widget script on its root `Control`
+4. Inputs: call `EmitValueAssigned` / `EmitValueCleared`; use `Round.Unknowns` and `Round.OptionsFor()`
+5. Visualizations: render `Round.Givens`, hide unknowns; override `Generate()` to constrain values; implement `IChallengeInput` if the visualization is also the input
+6. Pick the new type in the `Visualization` / `Input` field of a `MathChallenge`; no registration needed
+
+### Adding a New Challenge
+1. Create a `MathChallenge` resource, set `Formula` and press "Extract Params"
+2. Configure each `ParamSpec` (fixed, pool or range), set `Unknowns`, `QuestionText`
+3. Pick a `Visualization` (optional) and an `Input`
+4. Reference it from a `MathChallengeTrigger` node
 
 ### Adding a New Quest
 1. Create `.tres` file in `/quests/` of type `Quest`
@@ -305,12 +310,12 @@ Runtime reflection is used in:
 ### Editor Tooling
 - Use `[Tool]` attribute for scripts that run in editor
 - `[ExportToolButton]` creates buttons in inspector
-- `ChallengeUIFactoryPlugin` demonstrates editor plugin pattern
+- `MathChallenge` "Extract Params" demonstrates the tool-button pattern
 
 ### Common Pitfalls
 1. **Singleton initialization order** - Managers initialize in `_EnterTree()`, use `_Ready()` cautiously
 2. **State transitions** - Never transition states while another transition is in progress
-3. **Challenge registry** - Ensure 1:1 correspondence between enum and strategy implementations
+3. **Challenge widgets** - `Init()` runs before the widget enters the tree; build UI in `_Ready()`, not the constructor
 4. **Async deadlocks** - Avoid blocking async calls; always await
 5. **Resource paths** - Use `res://` for project files, `user://` for save data
 
@@ -319,7 +324,7 @@ Runtime reflection is used in:
 - State management framework: `scripts/Lib/StateManagement/`
 - Game states implementation: `scripts/Game/StateManagementGame/`
 - UI systems: `scripts/Game/UI/MVC_*/`
-- Challenge system: `scripts/Game/Challenges/`
+- Challenge system: `scripts/Game/Systems/Challenges/` (data), `scripts/Game/UI/MVC_Challenges/` (UI)
 - Quest system: `scripts/Game/Quests/`
 - Character system: `scripts/Game/Character/`
 - Persistence: `scripts/Lib/Persistence/`

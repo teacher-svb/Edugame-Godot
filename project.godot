@@ -24,7 +24,6 @@ config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 [autoload]
 
 Managers="*res://Scenes/autoload/managers.tscn"
-ChallengeUiFactoryPlugin="*res://addons/ChallengeUIFactoryPlugin/ChallengeUIFactoryPlugin.cs"
 
 [dotnet]
 
@@ -32,7 +31,7 @@ project/assembly_name="EduGame"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/BezierPathGenerator/plugin.cfg", "res://addons/ChallengeUIFactoryPlugin/plugin.cfg", "res://addons/UpFaceMultiMesh/plugin.cfg")
+enabled=PackedStringArray("res://addons/BezierPathGenerator/plugin.cfg", "res://addons/UpFaceMultiMesh/plugin.cfg")
 
 [global_group]
 
