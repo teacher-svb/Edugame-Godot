@@ -146,6 +146,10 @@ namespace TnT.EduGame.Question
                 .ToList();
         }
 
+        // Independent random stream per purpose (e.g. "radar-angle"), so a
+        // visualization can draw extra, replayable randomness from the round's seed.
+        public Random RandomFor(string purpose) => new(Mix(unchecked(Seed * 31 + StableHash(purpose))));
+
         // Fills `{param}` placeholders with the round's values; unknowns become
         // `unknownPlaceholder`. Exact name match first, then case-insensitive, so
         // `{Answer}` in older resources still resolves.
@@ -204,6 +208,19 @@ namespace TnT.EduGame.Question
             if (spec.Pool is { Length: > 0 })
                 return spec.Pool[rng.Next(spec.Pool.Length)];
             return rng.Next(Math.Min(spec.Min, spec.Max), Math.Max(spec.Min, spec.Max) + 1);
+        }
+
+        // System.Random's first value barely differs between neighbouring seeds; scramble first
+        static int Mix(int seed)
+        {
+            unchecked
+            {
+                var x = (uint)seed * 0x9E3779B9u;
+                x ^= x >> 16;
+                x *= 0x85EBCA6Bu;
+                x ^= x >> 13;
+                return (int)x;
+            }
         }
 
         // string.GetHashCode is randomized per process; seeds must survive save/load

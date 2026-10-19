@@ -61,19 +61,6 @@ namespace TnT.EduGame.Question
         public float BlipAngle(ChallengeRound round) =>
             AngleParam != ""
                 ? Mathf.DegToRad(round.Values[AngleParam])
-                : LabelAngle + LabelClearance + (float)new Random(Mix(round.Seed)).NextDouble() * (Mathf.Tau - 2 * LabelClearance);
-
-        // System.Random's first value barely differs between neighbouring seeds; scramble first
-        static int Mix(int seed)
-        {
-            unchecked
-            {
-                var x = (uint)seed * 0x9E3779B9u;
-                x ^= x >> 16;
-                x *= 0x85EBCA6Bu;
-                x ^= x >> 13;
-                return (int)x;
-            }
-        }
+                : LabelAngle + LabelClearance + (float)round.RandomFor("radar-angle").NextDouble() * (Mathf.Tau - 2 * LabelClearance);
     }
 }

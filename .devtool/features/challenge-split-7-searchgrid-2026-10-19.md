@@ -1,6 +1,6 @@
 ---
 id: "challenge-split-7-searchgrid-2026-10-19"
-status: "todo"
+status: "review"
 priority: "high"
 assignee: null
 epic: "systems"
@@ -11,6 +11,8 @@ completedAt: null
 labels: ["math", "ui", "challenge-split"]
 order: "Zw7"
 ---
+
+> Implemented 2026-10-19. Also added `ChallengeRound.RandomFor(purpose)` (seed-scrambled random streams, now shared with RadarVisualization). Screenshot-verified layout.
 # Challenge split 7/7: SearchGrid visualisation
 
 First visualisation that overrides value generation. Params map to a location on a grid (e.g. column/row from formula results); the grid size constrains the generated values.
@@ -18,12 +20,13 @@ First visualisation that overrides value generation. Params map to a location on
 **Build tasks:**
 
 1. **Resource**
-   - [ ] `SearchGridVisualization`: `GridSize` (Vector2I), mapping of params → axis
-   - [ ] Override `Generate` to clamp/sample within grid bounds, on top of `ParamSpec` ranges
+   - [x] `SearchGridVisualization`: `Columns`/`Rows`, `XStart`/`XStep`/`YStart`/`YStep`, `XParam`/`YParam` (empty = seeded random inner line), optional `Background`, `MarkerLabel`
+   - [x] Override `Generate`: deterministic reroll until the marker is on the grid (and on line crossings with `SnapToLines`)
 2. **Widget**
-   - [ ] Draw grid with axis labels; mark given location(s); unknown location shown as `?` or left for the input
+   - [x] Draw grid with axis labels and a pulsing marker
 3. **Verify**
-   - [ ] Test challenge with TextInput and with Dropdown input; values always land inside the grid
+   - [x] Test challenge with TextInput; values always land on the grid (300 seeds)
+   - [ ] Dropdown input: not tested with the grid yet. Expect answer distractors of answer ± a few, not other grid lines (e.g. 70 → 67, 72); consider grid-aligned options
 
 ## Files
 
