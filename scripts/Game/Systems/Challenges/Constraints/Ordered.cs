@@ -15,6 +15,7 @@ namespace TnT.EduGame.Question
             AllowEqual ? values[Larger] >= values[Smaller] : values[Larger] > values[Smaller];
 
         public override IEnumerable<string> Params => [Larger, Smaller];
+        protected override IEnumerable<string> ParamFields => [nameof(Larger), nameof(Smaller)];
 
         public override string Describe() => $"{Larger} {(AllowEqual ? "≥" : ">")} {Smaller}";
     }

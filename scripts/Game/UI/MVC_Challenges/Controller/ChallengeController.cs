@@ -8,10 +8,11 @@ namespace TnT.Systems.UI
     public partial class ChallengeController : Node
     {
         public static ChallengeController Instance { get; private set; }
+        // assigned in managers.tscn; no `= new()` defaults, those created nodes nobody freed
         [Export]
-        public ChallengeView view = new();
+        public ChallengeView view;
         [Export]
-        public ChallengeModel model = new();
+        public ChallengeModel model;
 
         [Signal] public delegate void AnsweredEventHandler(bool isCorrect);
 
@@ -21,15 +22,15 @@ namespace TnT.Systems.UI
             Initialize();
         }
 
-        public void SetChallenge(IMathChallenge challenge, int seed)
+        public void SetChallenge(MathChallenge challenge, int seed)
         {
-            model.SetChallenge(challenge as MathChallenge, seed);
+            model.SetChallenge(challenge, seed);
             Refresh();
         }
 
         async void Initialize()
         {
-            await view.InitializeView(model.Challenge);
+            await view.InitializeView();
 
             // ChallengeUI is scene-singleton furniture, never recreated between
             // challenges, so it's wired once here rather than re-subscribed on
@@ -53,16 +54,19 @@ namespace TnT.Systems.UI
 
         private void SubmitChallenge()
         {
+            bool isCorrect;
             try
             {
-                var isCorrect = model.CheckAnswer();
-                GD.Print($"Is Correct: {isCorrect}");
-                EmitSignal(SignalName.Answered, isCorrect);
+                isCorrect = model.CheckAnswer();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                GD.PrintErr($"Error: {ex}");
+                // a broken challenge must not trap the player in the overlay:
+                // report it loudly and let the game carry on as a wrong answer
+                GD.PushError($"Checking challenge '{model.ChallengeName}' failed: {ex}");
+                isCorrect = false;
             }
+            EmitSignal(SignalName.Answered, isCorrect);
         }
 
         void Refresh()

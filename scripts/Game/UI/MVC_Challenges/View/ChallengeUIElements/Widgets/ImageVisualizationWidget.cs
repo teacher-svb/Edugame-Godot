@@ -8,19 +8,17 @@ namespace TnT.Systems.UI
 {
     // Shows the picture aspect-fitted and keeps each annotation on its spot of the
     // picture (not of the widget) whenever the widget resizes.
-    public partial class ImageVisualizationWidget : ChallengeVisualizationWidget
+    public partial class ImageVisualizationWidget : ChallengeVisualizationWidget<ImageVisualization>
     {
         TextureRect _image;
         readonly List<(ImageAnnotation annotation, Control label)> _labels = new();
 
         public override void _Ready()
         {
-            var visualization = (ImageVisualization)Challenge.Visualization;
-
             _image = this.FindAnyObjectByType<TextureRect>();
-            _image.Texture = visualization.Image;
+            _image.Texture = Settings.Image;
 
-            foreach (var annotation in visualization.Annotations.Where(a => a != null))
+            foreach (var annotation in Settings.Annotations.Where(a => a != null))
             {
                 var label = CreateLabel(annotation, Round.Format(annotation.Text));
                 AddChild(label);

@@ -10,6 +10,10 @@ namespace TnT.Systems.UI
     // one is assigned as soon as it's built and the player only has to spin.
     public partial class CombinationLockWidget : ChallengeInputWidget
     {
+        // Carrousel wheel instanced per unknown; its CarrouselValue children are
+        // placeholders, the first one is used as template for the round's options
+        const string WheelScenePath = "res://Scenes/UI/carrousel.tscn";
+
         // Carrousel shows 5 slots; repeat short option lists so the wheel stays full
         const int MinVisibleValues = 5;
 
@@ -18,7 +22,7 @@ namespace TnT.Systems.UI
         public override void _Ready()
         {
             var fields = this.FindAnyObjectByType<HBoxContainer>();
-            var wheelScene = ((CombinationLockInput)Challenge.Input).ResolveWheelScene();
+            var wheelScene = GD.Load<PackedScene>(WheelScenePath);
 
             foreach (var paramName in Round.Unknowns)
             {

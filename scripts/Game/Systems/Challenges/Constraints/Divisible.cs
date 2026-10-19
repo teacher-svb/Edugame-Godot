@@ -14,6 +14,7 @@ namespace TnT.EduGame.Question
             values[Divisor] != 0 && values[Dividend] % values[Divisor] == 0;
 
         public override IEnumerable<string> Params => [Dividend, Divisor];
+        protected override IEnumerable<string> ParamFields => [nameof(Dividend), nameof(Divisor)];
 
         public override string Describe() => $"{Dividend} divisible by {Divisor}";
     }

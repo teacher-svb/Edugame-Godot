@@ -16,6 +16,7 @@ namespace TnT.EduGame.Question
             Step == 0 ? values[Param] == Offset : (values[Param] - Offset) % Step == 0;
 
         public override IEnumerable<string> Params => [Param];
+        protected override IEnumerable<string> ParamFields => [nameof(Param)];
 
         public override string Describe() => Offset == 0 ? $"{Param} multiple of {Step}" : $"{Param} = {Offset} + k×{Step}";
     }

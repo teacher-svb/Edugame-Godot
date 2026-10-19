@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -13,7 +12,8 @@ namespace TnT.EduGame.Question
     // at least one integer solution. Deterministic for a given seed, so a failed
     // attempt can be replayed with the exact same values.
     //
-    // Deliberately free of Godot types (ParamSpec aside) so the math stays testable.
+    // Deliberately free of Godot types (ParamSpec aside) so the math stays testable;
+    // parsing and evaluating formulas lives in FormulaEvaluator.
     public class ChallengeRound
     {
         public const string AnswerParam = "answer";
@@ -24,15 +24,6 @@ namespace TnT.EduGame.Question
         const int MinDistractorSpread = 5;
         const int MaxDistractorSpread = 10000;
         const int DefaultOptionCount = 4;
-        const string ParamPattern = @"\b[a-zA-Z_][a-zA-Z0-9_]*\b";
-
-        // DataTable expression keywords/functions that the param regex would otherwise pick up
-        static readonly HashSet<string> ExpressionKeywords = new(StringComparer.OrdinalIgnoreCase)
-        {
-            "and", "or", "not", "true", "false", "null", "like", "in", "is",
-            "iif", "isnull", "len", "trim", "substring", "convert",
-        };
-
         public int Seed { get; }
         public string Formula { get; }
         // every param plus `answer`
@@ -71,10 +62,10 @@ namespace TnT.EduGame.Question
             var specList = specs.Where(s => s != null).ToList();
             var constraintList = (constraints ?? []).Where(c => c != null).ToList();
 
-            if (ExtractParamNames(formula).Contains(AnswerParam))
+            if (FormulaEvaluator.ExtractParamNames(formula).Contains(AnswerParam))
                 throw new ArgumentException($"Formula '{formula}' must not reference '{AnswerParam}'; it is the formula's result");
 
-            var unspecified = ExtractParamNames(formula).Except(specList.Select(s => s.Name)).ToList();
+            var unspecified = FormulaEvaluator.ExtractParamNames(formula).Except(specList.Select(s => s.Name)).ToList();
             if (unspecified.Any())
                 throw new ArgumentException($"Formula '{formula}' has params without a ParamSpec: {string.Join(", ", unspecified)}");
 
@@ -86,11 +77,11 @@ namespace TnT.EduGame.Question
                     throw new ArgumentException($"Constraint '{constraint.Describe()}' refers to {string.Join(", ", foreign)}, which is not in formula '{formula}'");
             }
 
-            var rng = new Random(seed);
+            var rng = RandomFor(seed, "roll");
             for (int attempt = 0; attempt < MaxRollAttempts; attempt++)
             {
                 var values = specList.ToDictionary(s => s.Name, s => Sample(s, rng));
-                if (!TryEvaluate(formula, values, out var answer))
+                if (!FormulaEvaluator.TryEvaluate(formula, values, out var answer))
                     continue;
 
                 values[AnswerParam] = answer;
@@ -115,7 +106,7 @@ namespace TnT.EduGame.Question
             foreach (var unknown in Unknowns)
                 all[unknown] = playerValues[unknown];
 
-            return TryEvaluate(Formula, all, out var result) && result == all[AnswerParam];
+            return FormulaEvaluator.TryEvaluate(Formula, all, out var result) && result == all[AnswerParam];
         }
 
         // Values an input widget may offer for `param`: the authored pool if there
@@ -125,7 +116,7 @@ namespace TnT.EduGame.Question
             if (!Values.TryGetValue(param, out var correct))
                 throw new ArgumentException($"Unknown param '{param}'");
 
-            var rng = new Random(unchecked(Seed * 31 + StableHash(param)));
+            var rng = RandomFor($"options:{param}");
             _specs.TryGetValue(param, out var spec);
 
             if (spec?.Pool is { Length: > 0 })
@@ -163,9 +154,11 @@ namespace TnT.EduGame.Question
             return _constraints.All(c => c.IsSatisfiedBy(values));
         }
 
-        // Independent random stream per purpose (e.g. "radar-angle"), so a
-        // visualization can draw extra, replayable randomness from the round's seed.
-        public Random RandomFor(string purpose) => new(Mix(unchecked(Seed * 31 + StableHash(purpose))));
+        // Independent random stream per purpose (e.g. "radar-angle"), so rolling,
+        // options and visualizations each draw their own replayable randomness from the seed.
+        public Random RandomFor(string purpose) => RandomFor(Seed, purpose);
+
+        public static Random RandomFor(int seed, string purpose) => new(Mix(unchecked(seed * 31 + StableHash(purpose))));
 
         // Fills `{param}` placeholders with the round's values; unknowns become
         // `unknownPlaceholder`. Exact name match first, then case-insensitive, so
@@ -181,39 +174,6 @@ namespace TnT.EduGame.Question
                     return m.Value;
                 return IsUnknown(key) ? unknownPlaceholder : Values[key].ToString(CultureInfo.InvariantCulture);
             });
-
-        public static string[] ExtractParamNames(string formula) =>
-            Regex.Matches(formula ?? "", ParamPattern)
-                .Select(m => m.Value)
-                .Where(name => !ExpressionKeywords.Contains(name))
-                .Distinct()
-                .ToArray();
-
-        // Integer result only: fractional, non-finite or unparsable results fail.
-        public static bool TryEvaluate(string formula, IReadOnlyDictionary<string, int> values, out int result)
-        {
-            result = 0;
-            var expression = Regex.Replace(formula, ParamPattern, m =>
-                values.TryGetValue(m.Value, out var v) ? $"({v.ToString(CultureInfo.InvariantCulture)})" : m.Value);
-
-            object raw;
-            try { raw = new DataTable().Compute(expression, null); }
-            catch (Exception e) when (e is EvaluateException or SyntaxErrorException or DivideByZeroException or OverflowException)
-            {
-                return false;
-            }
-
-            if (raw is null or DBNull)
-                return false;
-
-            var number = Convert.ToDouble(raw, CultureInfo.InvariantCulture);
-            if (double.IsNaN(number) || double.IsInfinity(number) || number != Math.Floor(number)
-                || number < int.MinValue || number > int.MaxValue)
-                return false;
-
-            result = (int)number;
-            return true;
-        }
 
         static int Sample(ParamSpec spec, Random rng)
         {

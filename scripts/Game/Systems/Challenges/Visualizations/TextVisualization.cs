@@ -13,11 +13,11 @@ namespace TnT.EduGame.Question
 
         protected override string DefaultScenePath => "res://Scenes/UI/ChallengeVisualizations/Text.tscn";
 
-        public string Render(IMathChallenge challenge, ChallengeRound round)
+        public string Render(MathChallenge challenge, ChallengeRound round)
         {
             var template = Template != ""
                 ? Template
-                : $"{Regex.Replace(challenge.Formula, @"\b[a-zA-Z_][a-zA-Z0-9_]*\b", m => $"{{{m.Value}}}")} = {{{ChallengeRound.AnswerParam}}}";
+                : $"{Regex.Replace(challenge.Formula, FormulaEvaluator.ParamPattern, m => $"{{{m.Value}}}")} = {{{ChallengeRound.AnswerParam}}}";
 
             return PrettifyOperators(round.Format(template));
         }

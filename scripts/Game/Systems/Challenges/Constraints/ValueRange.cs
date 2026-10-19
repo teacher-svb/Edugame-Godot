@@ -16,6 +16,7 @@ namespace TnT.EduGame.Question
             values[Param] >= Min && (!HasMax || values[Param] <= Max);
 
         public override IEnumerable<string> Params => [Param];
+        protected override IEnumerable<string> ParamFields => [nameof(Param)];
 
         public override string Describe() => HasMax ? $"{Min} ≤ {Param} ≤ {Max}" : $"{Param} ≥ {Min}";
     }

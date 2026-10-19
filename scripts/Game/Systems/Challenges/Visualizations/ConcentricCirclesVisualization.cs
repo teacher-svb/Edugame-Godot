@@ -42,7 +42,7 @@ namespace TnT.EduGame.Question
             if (Operators is not { Length: > 0 })
                 return base.Generate(challenge, seed);
 
-            var rng = new Random(seed);
+            var rng = ChallengeRound.RandomFor(seed, "operators");
             for (int attempt = 0; attempt < MaxOperatorAttempts; attempt++)
             {
                 var formula = string.Join(" ", tokens.Select(t => IsOperator(t) ? Operators[rng.Next(Operators.Length)] : t));

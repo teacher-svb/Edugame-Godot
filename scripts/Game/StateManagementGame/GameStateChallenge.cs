@@ -12,7 +12,7 @@ namespace TnT.EduGame.GameState
     {
         public struct ChallengeOptions
         {
-            public IMathChallenge challenge;
+            public MathChallenge challenge;
             public int seed;
         }
 

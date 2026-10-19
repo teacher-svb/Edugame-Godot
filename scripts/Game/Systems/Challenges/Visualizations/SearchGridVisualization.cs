@@ -33,6 +33,8 @@ namespace TnT.EduGame.Question
 
         protected override string DefaultScenePath => "res://Scenes/UI/ChallengeVisualizations/SearchGrid.tscn";
 
+        protected override IEnumerable<string> ParamFields => [nameof(XParam), nameof(YParam)];
+
         // the marker has to land on the grid (on line crossings with SnapToLines)
         public override IEnumerable<IChallengeConstraint> ImpliedConstraints()
         {

@@ -13,9 +13,7 @@ namespace TnT.Systems.UI
 
         public ChallengeUI ChallengeUI => _challengeUi;
 
-        public override void _Ready() { }
-
-        public async Task InitializeView(IMathChallenge challenge)
+        public async Task InitializeView()
         {
             _challengeUi = this.FindAnyObjectByType<ChallengeUI>();
             Modulate = Colors.Transparent;
@@ -39,9 +37,9 @@ namespace TnT.Systems.UI
             Hide();
         }
 
-        public void Refresh(IMathChallenge challenge, ChallengeRound round)
+        public void Refresh(MathChallenge challenge, ChallengeRound round)
         {
-            _challengeUi = ChallengeUIFactory.Build(challenge, round);
+            _challengeUi.ShowRound(challenge, round);
         }
     }
 }

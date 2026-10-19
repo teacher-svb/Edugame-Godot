@@ -35,6 +35,8 @@ namespace TnT.EduGame.Question
 
         protected override string DefaultScenePath => "res://Scenes/UI/ChallengeVisualizations/Radar.tscn";
 
+        protected override IEnumerable<string> ParamFields => [nameof(DistanceParam), nameof(AngleParam)];
+
         // the blip has to fit on the screen
         public override IEnumerable<IChallengeConstraint> ImpliedConstraints() =>
             [new ValueRange { Param = DistanceParam, Min = 1, HasMax = true, Max = Range }];

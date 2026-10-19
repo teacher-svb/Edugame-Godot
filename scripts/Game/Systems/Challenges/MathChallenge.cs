@@ -4,23 +4,12 @@ using Godot;
 
 namespace TnT.EduGame.Question
 {
-    public interface IMathChallenge
-    {
-        public string Name { get; }
-        public string Formula { get; }
-        public ChallengeVisualization Visualization { get; }
-        public ChallengeInput Input { get; }
-        public ChallengeRound Roll(int seed);
-        public string QuestionFor(ChallengeRound round);
-        public string HintFor(ChallengeRound round);
-    }
-
     // What a challenge asks, independent of how it's shown or answered: a formula
     // whose result is the implicit `answer`, how each param gets its value, and
     // which params (possibly `answer` itself) the player has to supply. Values only
     // exist per ChallengeRound, rolled from a seed.
     [GlobalClass, Tool]
-    public partial class MathChallenge : Resource, IMathChallenge
+    public partial class MathChallenge : Resource
     {
         [Export]
         public string Name { get; set; } = "";
@@ -30,7 +19,12 @@ namespace TnT.EduGame.Question
 
         // How each formula param is rolled; kept in sync with the formula by "Extract Params"
         [Export]
-        public Godot.Collections.Array<ParamSpec> Params { get; set; } = new();
+        public Godot.Collections.Array<ParamSpec> Params
+        {
+            get => _params;
+            set { _params = value; ShareParamNames(); }
+        }
+        Godot.Collections.Array<ParamSpec> _params = new();
 
         // Params the player supplies; may include `answer` (the formula's result)
         [Export]
@@ -38,10 +32,23 @@ namespace TnT.EduGame.Question
 
         // rules every round must satisfy, e.g. "answer ≥ 0" (ValueRange) or "x divisible by y"
         [Export]
-        public Godot.Collections.Array<ChallengeConstraint> Constraints { get; set; } = new();
+        public Godot.Collections.Array<ChallengeConstraint> Constraints
+        {
+            get => _constraints;
+            set { _constraints = value; ShareParamNames(); }
+        }
+        Godot.Collections.Array<ChallengeConstraint> _constraints = new();
 
+        // empty means the question text alone carries the challenge
         [Export]
-        public ChallengeVisualization Visualization { get; set; }
+        public ChallengeVisualization Visualization
+        {
+            get => _visualization;
+            set { _visualization = value; ShareParamNames(); }
+        }
+        ChallengeVisualization _visualization;
+
+        public ChallengeVisualization VisualizationOrNone => Visualization ?? NoVisualization.Instance;
 
         [Export]
         public ChallengeInput Input { get; set; }
@@ -64,15 +71,27 @@ namespace TnT.EduGame.Question
                 .Where(p => p != null)
                 .GroupBy(p => p.Name)
                 .ToDictionary(g => g.Key, g => g.First());
-            Params = new(ChallengeRound.ExtractParamNames(Formula)
+            Params = new(FormulaEvaluator.ExtractParamNames(Formula)
                 .Where(name => name != ChallengeRound.AnswerParam)
                 .Select(name => existing.TryGetValue(name, out var spec) ? spec : new ParamSpec(name)));
         }
 
-        public ChallengeRound Roll(int seed) =>
-            Visualization != null
-                ? Visualization.Generate(this, seed)
-                : ChallengeRound.Roll(Formula, Params, Unknowns, seed, Constraints);
+        // lets rules and the visualization offer the formula's params (plus `answer`)
+        // as a dropdown in the inspector; runs whenever one of the three is (re)assigned
+        void ShareParamNames()
+        {
+            var names = (_params ?? new())
+                .Where(p => p != null && p.Name != "")
+                .Select(p => p.Name)
+                .Append(ChallengeRound.AnswerParam)
+                .ToArray();
+
+            foreach (var constraint in _constraints ?? new())
+                constraint?.SetAvailableParams(names);
+            _visualization?.SetAvailableParams(names);
+        }
+
+        public ChallengeRound Roll(int seed) => VisualizationOrNone.Generate(this, seed);
 
         public string QuestionFor(ChallengeRound round) => round.Format(QuestionText);
         public string HintFor(ChallengeRound round) => round.Format(HintText);

@@ -12,7 +12,7 @@ namespace TnT.Systems.UI
     // Draws the rings outer → inner around a centre disc, spins each one to its
     // selected segment (staggered, alternating direction) and locks it in under
     // the window at the top.
-    public partial class ConcentricCirclesWidget : ChallengeVisualizationWidget
+    public partial class ConcentricCirclesWidget : ChallengeVisualizationWidget<ConcentricCirclesVisualization>
     {
         [Export] public Color NumberRingColor { get; set; } = new(0.93f, 0.86f, 0.70f);
         [Export] public Color OperatorRingColor { get; set; } = new(0.78f, 0.62f, 0.42f);
@@ -38,17 +38,16 @@ namespace TnT.Systems.UI
 
         public override void _Ready()
         {
-            var visualization = (ConcentricCirclesVisualization)Challenge.Visualization;
-            _rings = visualization.BuildRings(Round);
+            _rings = Settings.BuildRings(Round);
             _angles = new float[_rings.Count];
             _lock = new float[_rings.Count];
 
-            var rng = new Random(Round.Seed);
+            var rng = Round.RandomFor("ring-start");
             for (int i = 0; i < _rings.Count; i++)
                 _angles[i] = (float)(rng.NextDouble() * Mathf.Tau);
 
             for (int i = 0; i < _rings.Count; i++)
-                _ = Spin(i, visualization.SpinDuration + i * StaggerPerRing);
+                _ = Spin(i, Settings.SpinDuration + i * StaggerPerRing);
         }
 
         async Task Spin(int ring, float duration)
@@ -121,27 +120,17 @@ namespace TnT.Systems.UI
                     var angle = _angles[i] + k * step;
                     var locked = k == ring.SelectedIndex && _lock[i] > 0;
                     var size = locked ? (int)(ringFontSize * (1.4f - 0.25f * _lock[i])) : ringFontSize;
-                    DrawLabel(font, ring.Segments[k], center + Vector2.Up.Rotated(angle) * labelRadius, angle, size, locked ? LockedColor : TextColor);
+                    this.DrawTextCentered(font, ring.Segments[k], center + ChallengeDrawing.Direction(angle) * labelRadius, size, locked ? LockedColor : TextColor, angle);
                 }
             }
 
             // centre: the result, or `?` when that's what the player has to find
             var result = Round.IsUnknown(ChallengeRound.AnswerParam) ? "?" : Round.Values[ChallengeRound.AnswerParam].ToString();
-            DrawLabel(font, $"= {result}", center, 0, fontSize, TextColor);
+            this.DrawTextCentered(font, $"= {result}", center, fontSize, TextColor);
 
             // marker above the window
             var tip = new Vector2(center.X, center.Y - outer + 2);
             DrawColoredPolygon([tip, tip + new Vector2(-10, -14), tip + new Vector2(10, -14)], LineColor);
-        }
-
-        // centred on `position`, rotated with the ring so the top segment reads upright
-        void DrawLabel(Font font, string text, Vector2 position, float angle, int fontSize, Color color)
-        {
-            var textSize = font.GetStringSize(text, HorizontalAlignment.Left, -1, fontSize);
-            DrawSetTransform(position, angle);
-            DrawString(font, new Vector2(-textSize.X / 2, font.GetAscent(fontSize) - textSize.Y / 2), text,
-                HorizontalAlignment.Left, -1, fontSize, color);
-            DrawSetTransform(Vector2.Zero);
         }
     }
 }

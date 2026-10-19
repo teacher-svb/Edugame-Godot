@@ -74,7 +74,7 @@ namespace TnT.EduGame.GameState
         }
 
         // seed decides the round's values; pass the same seed to replay a round
-        public void ShowChallenge(IMathChallenge challenge, int? seed = null)
+        public void ShowChallenge(MathChallenge challenge, int? seed = null)
         {
             var state = _registeredStates.OfType<GameStateChallenge>().FirstOrDefault()
                 ?? throw new Exception("no challenge state assigned");

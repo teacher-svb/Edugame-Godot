@@ -38,89 +38,55 @@ namespace TnT.Systems.UI
 
         public void SetSubmitEnabled(bool enabled) => _submitButton.Disabled = !enabled;
 
-        public class Builder
+        // Fills the three slots for this round; a visualization that doubles as
+        // input (IChallengeInput) takes the place of the input slot.
+        public void ShowRound(MathChallenge challenge, ChallengeRound round)
         {
-            private readonly ChallengeUI _ui;
-            private readonly IMathChallenge _challenge;
-            private readonly ChallengeRound _round;
+            ShowQuestion(challenge.QuestionFor(round));
 
-            // set once a widget in any slot takes care of player input
-            private bool _hasInput;
+            var visualization = AddWidget<ChallengeVisualizationWidget>(_visualizationContainer, challenge.VisualizationOrNone, challenge, round);
 
-            public Builder(IMathChallenge challenge, ChallengeRound round)
+            _inputContainer.Clear();
+            if (visualization is IChallengeInput ownInput)
             {
-                _challenge = challenge;
-                _round = round;
-
-                SceneTree tree = (SceneTree)Engine.GetMainLoop();
-                _ui = tree.FindAnyObjectByType<ChallengeUI>();
+                if (challenge.Input != null)
+                    GD.PushWarning($"{challenge.Name}: visualization already handles input, ignoring {challenge.Input.GetType().Name}");
+                Wire(ownInput);
+                return;
             }
 
-            public ChallengeUI Build() => _ui;
+            if (challenge.Input == null)
+                throw new InvalidOperationException($"{challenge.Name}: no Input assigned and the visualization doesn't handle input");
+            Wire(AddWidget<ChallengeInputWidget>(_inputContainer, challenge.Input, challenge, round));
+        }
 
-            public Builder WithQuestion()
-            {
-                _ui._questionContainer.Clear();
+        void ShowQuestion(string text)
+        {
+            _questionContainer.Clear();
 
-                var label = _ui._questionContainer.CreateChild<RichTextLabel>();
-                label.SizeFlagsHorizontal = SizeFlags.ExpandFill;
-                label.SizeFlagsVertical = SizeFlags.ExpandFill;
-                label.SetAnchorsPreset(LayoutPreset.FullRect);
-                label.Text = _challenge.QuestionFor(_round);
+            var label = _questionContainer.CreateChild<RichTextLabel>();
+            label.SizeFlagsHorizontal = SizeFlags.ExpandFill;
+            label.SizeFlagsVertical = SizeFlags.ExpandFill;
+            label.SetAnchorsPreset(LayoutPreset.FullRect);
+            label.Text = text;
+        }
 
-                return this;
-            }
+        // replaces the slot's content with the element's widget scene
+        static T AddWidget<T>(Control slot, ChallengeElement element, MathChallenge challenge, ChallengeRound round) where T : ChallengeWidget
+        {
+            slot.Clear();
 
-            // A challenge without a visualization is fine: the question text alone carries it.
-            public Builder WithVisualization()
-            {
-                _ui._visualizationContainer.Clear();
+            var widget = element.ResolveScene()?.Instantiate() as T
+                ?? throw new InvalidOperationException($"{element.GetType().Name}: scene is missing or its root is not a {typeof(T).Name}");
+            widget.Init(challenge, round, element);
+            slot.AddChild(widget);
+            return widget;
+        }
 
-                if (_challenge.Visualization == null)
-                    return this;
-
-                var widget = Instantiate<ChallengeVisualizationWidget>(_challenge.Visualization.ResolveScene(), _challenge.Visualization);
-                widget.Init(_challenge, _round);
-                if (widget is IChallengeInput input)
-                    WireInput(input);
-                _ui._visualizationContainer.AddChild(widget);
-
-                return this;
-            }
-
-            // Call after WithVisualization, so a visualization that doubles as input wins.
-            public Builder WithInput()
-            {
-                _ui._inputContainer.Clear();
-
-                if (_hasInput)
-                {
-                    if (_challenge.Input != null)
-                        GD.PushWarning($"{_challenge.Name}: visualization already handles input, ignoring {_challenge.Input.GetType().Name}");
-                    return this;
-                }
-
-                if (_challenge.Input == null)
-                    throw new InvalidOperationException($"{_challenge.Name}: no Input assigned and the visualization doesn't handle input");
-
-                var widget = Instantiate<ChallengeInputWidget>(_challenge.Input.ResolveScene(), _challenge.Input);
-                widget.Init(_challenge, _round);
-                WireInput(widget);
-                _ui._inputContainer.AddChild(widget);
-
-                return this;
-            }
-
-            void WireInput(IChallengeInput input)
-            {
-                input.ValueAssigned += (paramName, value) => _ui.EmitSignal(SignalName.OnValueAssigned, paramName, value);
-                input.ValueCleared += paramName => _ui.EmitSignal(SignalName.OnValueCleared, paramName);
-                _hasInput = true;
-            }
-
-            static T Instantiate<T>(PackedScene scene, Resource owner) where T : Control =>
-                scene?.Instantiate() as T
-                    ?? throw new InvalidOperationException($"{owner.GetType().Name}: scene is missing or its root is not a {typeof(T).Name}");
+        void Wire(IChallengeInput input)
+        {
+            input.ValueAssigned += (paramName, value) => EmitSignal(SignalName.OnValueAssigned, paramName, value);
+            input.ValueCleared += paramName => EmitSignal(SignalName.OnValueCleared, paramName);
         }
     }
 }

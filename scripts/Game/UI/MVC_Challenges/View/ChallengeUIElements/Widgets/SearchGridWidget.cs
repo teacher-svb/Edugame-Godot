@@ -5,7 +5,7 @@ namespace TnT.Systems.UI
 {
     // Draws the grid with square cells, axis values along the bottom and left, an
     // optional background picture and a pulsing marker at the round's coordinates.
-    public partial class SearchGridWidget : ChallengeVisualizationWidget
+    public partial class SearchGridWidget : ChallengeVisualizationWidget<SearchGridVisualization>
     {
         [Export] public Color PaperColor { get; set; } = new(0.97f, 0.94f, 0.86f);
         [Export] public Color LineColor { get; set; } = new(0.35f, 0.25f, 0.15f, 0.45f);
@@ -18,14 +18,12 @@ namespace TnT.Systems.UI
 
         const float Margin = 8f;
 
-        SearchGridVisualization _grid;
         Vector2I _marker;
         float _time;
 
         public override void _Ready()
         {
-            _grid = (SearchGridVisualization)Challenge.Visualization;
-            _marker = _grid.MarkerCoordinates(Round);
+            _marker = Settings.MarkerCoordinates(Round);
         }
 
         public override void _Process(double delta)
@@ -36,51 +34,51 @@ namespace TnT.Systems.UI
 
         public override void _Draw()
         {
-            if (_grid == null)
+            if (Round == null)
                 return;
 
             var font = GetThemeDefaultFont();
             var fontSize = Mathf.Max(8, (int)(Mathf.Min(Size.X, Size.Y) * 0.035f));
             var labelWidth = Mathf.Max(
-                font.GetStringSize(_grid.YStart.ToString(), HorizontalAlignment.Left, -1, fontSize).X,
-                font.GetStringSize(_grid.YEnd.ToString(), HorizontalAlignment.Left, -1, fontSize).X);
+                font.TextSize(Settings.YStart.ToString(), fontSize).X,
+                font.TextSize(Settings.YEnd.ToString(), fontSize).X);
             var labelHeight = font.GetHeight(fontSize);
 
             // room for Y labels on the left and X labels below, then square cells, centred
             var available = Size - new Vector2(labelWidth + Margin * 3, labelHeight + Margin * 3);
-            var cell = Mathf.Min(available.X / _grid.Columns, available.Y / _grid.Rows);
+            var cell = Mathf.Min(available.X / Settings.Columns, available.Y / Settings.Rows);
             if (cell <= 0)
                 return;
-            var gridSize = new Vector2(_grid.Columns, _grid.Rows) * cell;
+            var gridSize = new Vector2(Settings.Columns, Settings.Rows) * cell;
             var origin = new Vector2(
                 labelWidth + Margin * 2 + (available.X - gridSize.X) / 2,
                 Margin + (available.Y - gridSize.Y) / 2);
             var area = new Rect2(origin, gridSize);
 
             DrawRect(area, PaperColor);
-            if (_grid.Background != null)
-                DrawTextureRect(_grid.Background, area, false);
+            if (Settings.Background != null)
+                DrawTextureRect(Settings.Background, area, false);
 
-            for (int i = 0; i <= _grid.Columns; i++)
+            for (int i = 0; i <= Settings.Columns; i++)
             {
                 var x = origin.X + i * cell;
                 DrawLine(new Vector2(x, area.Position.Y), new Vector2(x, area.End.Y), LineColor, 1);
-                DrawCentered(font, fontSize, (_grid.XStart + i * _grid.XStep).ToString(), new Vector2(x, area.End.Y + Margin + labelHeight / 2));
+                this.DrawTextCentered(font, (Settings.XStart + i * Settings.XStep).ToString(), new Vector2(x, area.End.Y + Margin + labelHeight / 2), fontSize, LabelColor);
             }
-            for (int j = 0; j <= _grid.Rows; j++)
+            for (int j = 0; j <= Settings.Rows; j++)
             {
                 // Y counts upwards
                 var y = area.End.Y - j * cell;
                 DrawLine(new Vector2(area.Position.X, y), new Vector2(area.End.X, y), LineColor, 1);
-                var text = (_grid.YStart + j * _grid.YStep).ToString();
-                var width = font.GetStringSize(text, HorizontalAlignment.Left, -1, fontSize).X;
-                DrawCentered(font, fontSize, text, new Vector2(area.Position.X - Margin - width / 2, y));
+                var text = (Settings.YStart + j * Settings.YStep).ToString();
+                var width = font.TextSize(text, fontSize).X;
+                this.DrawTextCentered(font, text, new Vector2(area.Position.X - Margin - width / 2, y), fontSize, LabelColor);
             }
             DrawRect(area, BorderColor, false, 2);
 
             DrawMarker(font, fontSize, new Vector2(
-                origin.X + (float)(_marker.X - _grid.XStart) / _grid.XStep * cell,
-                area.End.Y - (float)(_marker.Y - _grid.YStart) / _grid.YStep * cell), cell);
+                origin.X + (float)(_marker.X - Settings.XStart) / Settings.XStep * cell,
+                area.End.Y - (float)(_marker.Y - Settings.YStart) / Settings.YStep * cell), cell);
         }
 
         void DrawMarker(Font font, int fontSize, Vector2 position, float cell)
@@ -92,16 +90,9 @@ namespace TnT.Systems.UI
             DrawCircle(position, size, MarkerColor);
             DrawCircle(position, size * 0.4f, PaperColor);
 
-            if (_grid.MarkerLabel != "")
-                DrawString(font, position + new Vector2(size * 1.6f, -size * 0.8f), Round.Format(_grid.MarkerLabel),
+            if (Settings.MarkerLabel != "")
+                DrawString(font, position + new Vector2(size * 1.6f, -size * 0.8f), Round.Format(Settings.MarkerLabel),
                     HorizontalAlignment.Left, -1, (int)(fontSize * 1.3f), MarkerColor);
-        }
-
-        void DrawCentered(Font font, int fontSize, string text, Vector2 position)
-        {
-            var textSize = font.GetStringSize(text, HorizontalAlignment.Left, -1, fontSize);
-            DrawString(font, new Vector2(position.X - textSize.X / 2, position.Y - textSize.Y / 2 + font.GetAscent(fontSize)),
-                text, HorizontalAlignment.Left, -1, fontSize, LabelColor);
         }
     }
 }
