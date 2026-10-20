@@ -36,23 +36,30 @@ namespace TnT.EduGame.Question
         public static bool TryEvaluate(string formula, IReadOnlyDictionary<string, int> values, out int result)
         {
             result = 0;
-            object raw;
-            try { raw = Compute(formula, values); }
-            catch (Exception e) when (IsEvaluationFailure(e))
-            {
-                return false;
-            }
-
-            if (raw is null or DBNull)
-                return false;
-
-            var number = Convert.ToDouble(raw, CultureInfo.InvariantCulture);
-            if (double.IsNaN(number) || double.IsInfinity(number) || number != Math.Floor(number)
+            if (!TryEvaluateNumber(formula, values, out var number) || number != Math.Floor(number)
                 || number < int.MinValue || number > int.MaxValue)
                 return false;
 
             result = (int)number;
             return true;
+        }
+
+        // Any finite number (e.g. a graph point between gridlines); unparsable or non-numeric fails.
+        public static bool TryEvaluateNumber(string expression, IReadOnlyDictionary<string, int> values, out double result)
+        {
+            result = 0;
+            object raw;
+            try { raw = Compute(expression, values); }
+            catch (Exception e) when (IsEvaluationFailure(e))
+            {
+                return false;
+            }
+
+            if (raw is null or DBNull or bool)
+                return false;
+
+            result = Convert.ToDouble(raw, CultureInfo.InvariantCulture);
+            return !double.IsNaN(result) && !double.IsInfinity(result);
         }
 
         // Rule shorthands rewritten into plain expressions; apply once before Holds/ValidateRule.

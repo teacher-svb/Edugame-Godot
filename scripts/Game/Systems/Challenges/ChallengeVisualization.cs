@@ -10,7 +10,7 @@ namespace TnT.EduGame.Question
     // every param from its ParamSpec, subclasses override Generate to add their
     // own constraints (e.g. SearchGrid clamping to the grid bounds).
     [GlobalClass, Tool]
-    public abstract partial class ChallengeVisualization : ChallengeElement, IParamFieldOwner
+    public abstract partial class ChallengeVisualization : ChallengeElement
     {
         public virtual ChallengeRound Generate(MathChallenge challenge, int seed) =>
             ChallengeRound.Roll(challenge.Formula, challenge.Params, challenge.Unknowns, seed, ConstraintsFor(challenge));
@@ -20,21 +20,6 @@ namespace TnT.EduGame.Question
 
         protected IEnumerable<string> ConstraintsFor(MathChallenge challenge) =>
             (challenge.Constraints ?? []).Concat(ImpliedConstraints());
-
-        // filled by the owning MathChallenge, so the fields in ParamFields get a dropdown
-        string[] _availableParams = [];
-
-        public void SetAvailableParams(string[] names)
-        {
-            _availableParams = names;
-            NotifyPropertyListChanged();
-        }
-
-        // names of this resource's string properties that hold a param name
-        protected virtual IEnumerable<string> ParamFields => [];
-
-        public override void _ValidateProperty(Godot.Collections.Dictionary property) =>
-            ParamFieldHints.Apply(property, ParamFields, _availableParams);
 
     }
 }

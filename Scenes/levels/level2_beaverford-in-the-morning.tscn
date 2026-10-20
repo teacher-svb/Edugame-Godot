@@ -1,0 +1,504 @@
+[gd_scene format=3 uid="uid://selmqjc4dpgf"]
+
+[ext_resource type="Script" uid="uid://coeco3nsaywj6" path="res://scripts/Lib/OcclusionFader/OcclusionFader.cs" id="1_74s4i"]
+[ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://scripts/Lib/OcclusionFader/occlusionFader.gdshader" id="2_tpwq7"]
+[ext_resource type="Shader" uid="uid://bkktv7833qkb0" path="res://scripts/Trail/trail_process.gdshader" id="3_gom7j"]
+[ext_resource type="Shader" uid="uid://b2x22th280fpm" path="res://scripts/Trail/trail_draw.gdshader" id="4_wwkp4"]
+[ext_resource type="Script" uid="uid://6214kgglowmy" path="res://scripts/Trail/GPUTrail3D.cs" id="5_bqjii"]
+[ext_resource type="PackedScene" uid="uid://c7sx881ac5y6g" path="res://Scenes/levels/beaverford.tscn" id="6_dlsi4"]
+[ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="7_b0oxq"]
+[ext_resource type="PackedScene" uid="uid://by56kgwnxfbe5" path="res://Scenes/characters/hendrik.tscn" id="8_c8hg8"]
+[ext_resource type="PackedScene" uid="uid://qqmsfnp0h0nk" path="res://Scenes/characters/liesbeth.tscn" id="9_0audd"]
+[ext_resource type="PackedScene" uid="uid://bx1wyqdgkro24" path="res://Scenes/characters/msBram.tscn" id="10_ay62w"]
+[ext_resource type="PackedScene" uid="uid://brhrj77wopxwb" path="res://Scenes/characters/cornelis.tscn" id="11_xfoxv"]
+[ext_resource type="Script" uid="uid://dbtd0oguw4wdj" path="res://scripts/Game/Systems/QuestSystem/QuestTrigger.cs" id="12_nc7ib"]
+[ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="13_ymh3g"]
+[ext_resource type="Script" uid="uid://ckobusjip2hti" path="res://scripts/Game/Systems/QuestSystem/QuestReaction.cs" id="14_te4f7"]
+[ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="15_jttql"]
+[ext_resource type="Script" uid="uid://diolsl1jtpyue" path="res://scripts/Game/Systems/Challenges/MathChallengeTrigger.cs" id="16_wirkn"]
+[ext_resource type="Script" uid="uid://df1px4otq51h8" path="res://scripts/Game/Systems/Challenges/Inputs/TextChallengeInput.cs" id="17_v572t"]
+[ext_resource type="Script" uid="uid://cnfmeuouim0nn" path="res://scripts/Game/Systems/Challenges/ParamSpec.cs" id="18_gnjj1"]
+[ext_resource type="Script" uid="uid://cecfqkgbbnr2u" path="res://scripts/Game/Systems/Challenges/Visualizations/ImageAnnotation.cs" id="19_gom7j"]
+[ext_resource type="Texture2D" uid="uid://c72t1e36d3fgo" path="res://project/images/drawbridge-diagram.png" id="20_gom7j"]
+[ext_resource type="Script" uid="uid://sup7lp6karaf" path="res://scripts/Game/Systems/Challenges/MathChallenge.cs" id="20_kjadr"]
+[ext_resource type="Script" uid="uid://bduu2nqauu8sw" path="res://scripts/Game/Systems/Challenges/Visualizations/ImageVisualization.cs" id="21_bqjii"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dcdmp"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_t3qpp"]
+sky_material = SubResource("ProceduralSkyMaterial_dcdmp")
+
+[sub_resource type="Environment" id="Environment_j2q71"]
+background_mode = 2
+sky = SubResource("Sky_t3qpp")
+tonemap_mode = 2
+volumetric_fog_density = 0.0
+
+[sub_resource type="Curve3D" id="Curve3D_hq36d"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 1, 0, 0, 0, 0, 0, -0.8560414, 0, 0, 0.8560414, 0, 0, 5.049999, 0, 0.47696686, 0, -0.8560414, 0, 0, 0.8560414, 0, 6.6000004, 1.5500002, 0.32573128, 0.8560414, 0, 0, -0.8560414, 0, 0, 5.05, 3.1, 0, 0, 0.8560414, 0, 0, -0.8560414, 0, 3.5000002, 1.55, 0, -0.8560414, 0, 0, 0.8560414, 0, 0, 5.05, 0, 0, -1, 0, 0, 0, 0, 0, 10.1, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dlsi4"]
+shader = ExtResource("3_gom7j")
+
+[sub_resource type="Gradient" id="Gradient_kd8u4"]
+offsets = PackedFloat32Array(0, 0.49392712, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.21176471, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tuys8"]
+gradient = SubResource("Gradient_kd8u4")
+
+[sub_resource type="Curve" id="Curve_ne1q5"]
+_limits = [0.0, 0.1, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.50991505, 0.1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wfhh5"]
+curve = SubResource("Curve_ne1q5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b0oxq"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_wwkp4")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_tuys8")
+shader_parameter/width_curve = SubResource("CurveTexture_wfhh5")
+
+[sub_resource type="QuadMesh" id="QuadMesh_c8hg8"]
+material = SubResource("ShaderMaterial_b0oxq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8ah0f"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -29.99999
+angle_max = 30.000011
+use_rotation_3d = true
+rotation_3d_min = Vector3(-30, -30, -30)
+rotation_3d_max = Vector3(30, 30, 30)
+direction = Vector3(0, 0, 1)
+initial_velocity_min = -5.0
+initial_velocity_max = -5.0
+scale_min = 0.099999994
+scale_max = 0.5
+turbulence_enabled = true
+turbulence_noise_strength = 0.2
+turbulence_noise_scale = 1.0
+
+[sub_resource type="Gradient" id="Gradient_mbqte"]
+offsets = PackedFloat32Array(0.5888502, 0.6132404)
+colors = PackedColorArray(0.27450982, 0.36862746, 0.16470589, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i56uk"]
+gradient = SubResource("Gradient_mbqte")
+fill = 1
+fill_from = Vector2(0.50427353, 0.53418803)
+fill_to = Vector2(0.8034188, 0.5641026)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oh6fn"]
+transparency = 1
+cull_mode = 2
+albedo_texture = SubResource("GradientTexture2D_i56uk")
+
+[sub_resource type="QuadMesh" id="QuadMesh_igo7b"]
+material = SubResource("StandardMaterial3D_oh6fn")
+orientation = 1
+
+[sub_resource type="Animation" id="Animation_ygl0x"]
+length = 4.0666666
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 4.0666666),
+"transitions": PackedFloat32Array(0.43527523, 2.8284273, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUTrail3D:ClearTrail")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../PathFollow3D2:progress_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 1.9666667, 4.0666666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../PathFollow3D2/GPUParticles3D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_tuys8"]
+resource_name = "gust"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUTrail3D:ClearTrail")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sd8ud"]
+_data = {
+&"RESET": SubResource("Animation_ygl0x"),
+&"gust": SubResource("Animation_tuys8")
+}
+
+[sub_resource type="Resource" id="Resource_rb227"]
+script = ExtResource("14_te4f7")
+_targetPath = NodePath("../../Challenges/MathChallengeTrigger")
+_methodName = "TriggerChallenge"
+metadata/_custom_type_script = "uid://ckobusjip2hti"
+
+[sub_resource type="Resource" id="Resource_cornelis_in"]
+script = ExtResource("17_v572t")
+
+[sub_resource type="Resource" id="Resource_cornelis_x"]
+script = ExtResource("18_gnjj1")
+Name = "x"
+metadata/_custom_type_script = "uid://cnfmeuouim0nn"
+
+[sub_resource type="Resource" id="Resource_cornelis_y"]
+script = ExtResource("18_gnjj1")
+Name = "y"
+FixedValue = 3
+metadata/_custom_type_script = "uid://cnfmeuouim0nn"
+
+[sub_resource type="Resource" id="Resource_alwbg"]
+script = ExtResource("19_gom7j")
+Text = "{y}kg"
+Position = Vector2(0.5, 0.1)
+metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
+
+[sub_resource type="Resource" id="Resource_knjau"]
+script = ExtResource("19_gom7j")
+Text = "{x}kg"
+Position = Vector2(0.2, 0.3)
+metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
+
+[sub_resource type="Resource" id="Resource_unppr"]
+script = ExtResource("21_bqjii")
+Image = ExtResource("20_gom7j")
+Annotations = Array[ExtResource("19_gom7j")]([SubResource("Resource_alwbg"), SubResource("Resource_knjau")])
+metadata/_custom_type_script = "uid://bduu2nqauu8sw"
+
+[sub_resource type="Resource" id="Resource_igo7b"]
+script = ExtResource("20_kjadr")
+Name = "Cornelis' bridge"
+Formula = "x - y"
+Params = Array[ExtResource("18_gnjj1")]([SubResource("Resource_cornelis_x"), SubResource("Resource_cornelis_y")])
+Constraints = PackedStringArray("x <> y", "answer > 0")
+Visualization = SubResource("Resource_unppr")
+Input = SubResource("Resource_cornelis_in")
+QuestionText = "Hoeveel is {x} - {y}?"
+metadata/_custom_type_script = "uid://sup7lp6karaf"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_igo7b"]
+size = Vector3(2.4, 1, 1.8000001)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bivhb"]
+size = Vector3(1.2, 1, 1.4)
+
+[node name="Node3D" type="Node3D" unique_id=1964158039]
+script = ExtResource("1_74s4i")
+OcclusionShader = ExtResource("2_tpwq7")
+MaxRadius = 1.0
+
+[node name="Environment" type="Node3D" parent="." unique_id=1321630098]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=598042479]
+environment = SubResource("Environment_j2q71")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment" unique_id=542379847]
+transform = Transform3D(0.49999994, 0.7500001, -0.4330127, 2.7805946e-08, 0.49999994, 0.86602545, 0.8660255, -0.43301263, 0.2499999, 0, 0, 0)
+light_color = Color(0.9999996, 0.8925514, 0.49034446, 1)
+light_energy = 0.64
+light_cull_mask = 4294442495
+shadow_enabled = true
+shadow_caster_mask = 4294442495
+
+[node name="WeatherEffects" type="Node" parent="Environment" unique_id=1209452278]
+
+[node name="Path3D" type="Path3D" parent="Environment/WeatherEffects" unique_id=782482986]
+transform = Transform3D(0.7464586, 0, 0.66543186, 0, 1, 0, -0.66543186, 0, 0.7464586, 10.103573, 1.0990281, -0.68408775)
+curve = SubResource("Curve3D_hq36d")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Environment/WeatherEffects/Path3D" unique_id=1451001580]
+transform = Transform3D(-4.370419e-08, 0, -0.9998336, 0, 0.9998263, 0, 0.9998354, 0, -4.3704112e-08, 0, 0, 0)
+
+[node name="GPUTrail3D" type="GPUParticles3D" parent="Environment/WeatherEffects/Path3D/PathFollow3D" unique_id=1257666664]
+amount = 60
+lifetime = 60.0
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ShaderMaterial_dlsi4")
+draw_pass_1 = SubResource("QuadMesh_c8hg8")
+script = ExtResource("5_bqjii")
+ColorRamp = SubResource("GradientTexture1D_tuys8")
+WidthCurve = SubResource("CurveTexture_wfhh5")
+metadata/_custom_type_script = "uid://6214kgglowmy"
+
+[node name="PathFollow3D2" type="PathFollow3D" parent="Environment/WeatherEffects/Path3D" unique_id=1813851151]
+transform = Transform3D(7.844205e-08, 2.1235174e-09, -0.999832, -0.29911366, 0.95403206, -2.1441018e-08, 0.95403546, 0.29911262, 7.548522e-08, 10.1, 0, 0)
+progress = 19.89246
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Environment/WeatherEffects/Path3D/PathFollow3D2" unique_id=866254546]
+emitting = false
+amount = 32
+lifetime = 3.0
+one_shot = true
+preprocess = 1.67
+transform_align = 2
+process_material = SubResource("ParticleProcessMaterial_8ah0f")
+draw_pass_1 = SubResource("QuadMesh_igo7b")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/WeatherEffects/Path3D" unique_id=234396148]
+root_node = NodePath("../PathFollow3D")
+libraries/ = SubResource("AnimationLibrary_sd8ud")
+autoplay = &"RESET"
+
+[node name="Beaverford" parent="." unique_id=1966969946 instance=ExtResource("6_dlsi4")]
+
+[node name="Player" parent="." unique_id=926984674 instance=ExtResource("7_b0oxq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -36)
+
+[node name="Hendrik" parent="." unique_id=497783338 instance=ExtResource("8_c8hg8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.337013, -9.536743e-07, -18.067596)
+
+[node name="Liesbeth" parent="." unique_id=2040317346 instance=ExtResource("9_0audd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.61164, -9.536743e-07, 0.4628191)
+
+[node name="MsBram" parent="." unique_id=1516356363 instance=ExtResource("10_ay62w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6740956, 0.0007059972, -26.58886)
+
+[node name="Cornelis" parent="." unique_id=1044258308 instance=ExtResource("11_xfoxv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1340637, 1.0991005, 6.9955792)
+
+[node name="Quests" type="Node" parent="." unique_id=1154009112]
+
+[node name="I_2-the Ambition" type="Node" parent="Quests" unique_id=204093315]
+
+[node name="Cornelis" type="Node" parent="Quests/I_2-the Ambition" unique_id=832513922]
+
+[node name="Triggers" type="Node" parent="Quests/I_2-the Ambition/Cornelis" unique_id=392978708]
+
+[node name="Objective1-init" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Triggers" unique_id=687728109]
+script = ExtResource("12_nc7ib")
+_questId = "65dd09e4-9554-43bd-9595-e67fc459aa00"
+_questObjectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa01"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Objective1-complete" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Triggers" unique_id=854070052]
+script = ExtResource("12_nc7ib")
+_action = 1
+_questId = "65dd09e4-9554-43bd-9595-e67fc459aa00"
+_questObjectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa01"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Objective2-complete" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Triggers" unique_id=372723909]
+script = ExtResource("12_nc7ib")
+_action = 1
+_questId = "65dd09e4-9554-43bd-9595-e67fc459aa00"
+_questObjectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa02"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Objective2-fail" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Triggers" unique_id=2140101986]
+script = ExtResource("12_nc7ib")
+_action = 2
+_questId = "65dd09e4-9554-43bd-9595-e67fc459aa00"
+_questObjectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa02"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Objective3-complete" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Triggers" unique_id=1096006525]
+script = ExtResource("12_nc7ib")
+_action = 1
+_questId = "65dd09e4-9554-43bd-9595-e67fc459aa00"
+_questObjectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa03"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Reactions" type="Node" parent="Quests/I_2-the Ambition/Cornelis" unique_id=93343950]
+
+[node name="QuestEventListener" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Reactions" unique_id=366235268]
+script = ExtResource("13_ymh3g")
+_checkObjectiveId = true
+_objectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa02"
+_checkState = true
+_state = 1
+_reactions = Array[ExtResource("14_te4f7")]([SubResource("Resource_rb227")])
+eventChannel = ExtResource("15_jttql")
+metadata/_custom_type_script = "uid://dd1g4qvshevqa"
+
+[node name="Challenges" type="Node" parent="Quests/I_2-the Ambition/Cornelis" unique_id=1808815040]
+
+[node name="MathChallengeTrigger" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Challenges" unique_id=1211020917]
+script = ExtResource("16_wirkn")
+_challenge = SubResource("Resource_igo7b")
+metadata/_custom_type_script = "uid://diolsl1jtpyue"
+
+[node name="Hendrik" type="Node" parent="Quests/I_2-the Ambition" unique_id=853748344]
+
+[node name="Triggers" type="Node" parent="Quests/I_2-the Ambition/Hendrik" unique_id=1911028866]
+
+[node name="Objective1-init" type="Node" parent="Quests/I_2-the Ambition/Hendrik/Triggers" unique_id=2140101985]
+script = ExtResource("12_nc7ib")
+_questId = "d31f51c6-cbd8-4285-800f-0bd317caee00"
+_questObjectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee01"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Objective1-complete" type="Node" parent="Quests/I_2-the Ambition/Hendrik/Triggers" unique_id=1874865505]
+script = ExtResource("12_nc7ib")
+_action = 1
+_questId = "d31f51c6-cbd8-4285-800f-0bd317caee00"
+_questObjectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee01"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Objective2-complete" type="Node" parent="Quests/I_2-the Ambition/Hendrik/Triggers" unique_id=1690349951]
+script = ExtResource("12_nc7ib")
+_action = 1
+_questId = "d31f51c6-cbd8-4285-800f-0bd317caee00"
+_questObjectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee02"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Objective3-complete" type="Node" parent="Quests/I_2-the Ambition/Hendrik/Triggers" unique_id=808990094]
+script = ExtResource("12_nc7ib")
+_action = 1
+_questId = "d31f51c6-cbd8-4285-800f-0bd317caee00"
+_questObjectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee03"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Reactions" type="Node" parent="Quests/I_2-the Ambition/Hendrik" unique_id=876993112]
+
+[node name="Liesbeth" type="Node" parent="Quests/I_2-the Ambition" unique_id=1543397962]
+
+[node name="Triggers" type="Node" parent="Quests/I_2-the Ambition/Liesbeth" unique_id=219548287]
+
+[node name="Objective1-init" type="Node" parent="Quests/I_2-the Ambition/Liesbeth/Triggers" unique_id=242361852]
+script = ExtResource("12_nc7ib")
+_questId = "3cd9cc64-f69b-4d80-beb6-1290468dfd00"
+_questObjectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd01"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Objective1-complete" type="Node" parent="Quests/I_2-the Ambition/Liesbeth/Triggers" unique_id=1816811905]
+script = ExtResource("12_nc7ib")
+_action = 1
+_questId = "3cd9cc64-f69b-4d80-beb6-1290468dfd00"
+_questObjectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd01"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Objective2-complete" type="Node" parent="Quests/I_2-the Ambition/Liesbeth/Triggers" unique_id=2070285585]
+script = ExtResource("12_nc7ib")
+_action = 1
+_questId = "3cd9cc64-f69b-4d80-beb6-1290468dfd00"
+_questObjectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd02"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Objective3-complete" type="Node" parent="Quests/I_2-the Ambition/Liesbeth/Triggers" unique_id=473688080]
+script = ExtResource("12_nc7ib")
+_action = 1
+_questId = "3cd9cc64-f69b-4d80-beb6-1290468dfd00"
+_questObjectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd03"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Reactions" type="Node" parent="Quests/I_2-the Ambition/Liesbeth" unique_id=1250783119]
+
+[node name="MsBram" type="Node" parent="Quests/I_2-the Ambition" unique_id=1824263733]
+
+[node name="Triggers" type="Node" parent="Quests/I_2-the Ambition/MsBram" unique_id=420382455]
+
+[node name="Objective1-init" type="Node" parent="Quests/I_2-the Ambition/MsBram/Triggers" unique_id=299148558]
+script = ExtResource("12_nc7ib")
+_questId = "3a861b47-c25e-4265-8205-81e4394e3900"
+_questObjectiveId = "3a861b47-c25e-4265-8205-81e4394e3901"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Objective1-complete" type="Node" parent="Quests/I_2-the Ambition/MsBram/Triggers" unique_id=573677040]
+script = ExtResource("12_nc7ib")
+_action = 1
+_questId = "3a861b47-c25e-4265-8205-81e4394e3900"
+_questObjectiveId = "3a861b47-c25e-4265-8205-81e4394e3901"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Objective2-complete" type="Node" parent="Quests/I_2-the Ambition/MsBram/Triggers" unique_id=2085222934]
+script = ExtResource("12_nc7ib")
+_action = 1
+_questId = "3a861b47-c25e-4265-8205-81e4394e3900"
+_questObjectiveId = "3a861b47-c25e-4265-8205-81e4394e3902"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Objective3-complete" type="Node" parent="Quests/I_2-the Ambition/MsBram/Triggers" unique_id=1568361915]
+script = ExtResource("12_nc7ib")
+_action = 1
+_questId = "3a861b47-c25e-4265-8205-81e4394e3900"
+_questObjectiveId = "3a861b47-c25e-4265-8205-81e4394e3903"
+metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+
+[node name="Reactions" type="Node" parent="Quests/I_2-the Ambition/MsBram" unique_id=951135631]
+
+[node name="CornelisDrawbridgeArea" type="Area3D" parent="." unique_id=475543381]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CornelisDrawbridgeArea" unique_id=1605957359]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1920929e-07, 0, 0.75)
+shape = SubResource("BoxShape3D_igo7b")
+
+[node name="CornelisDrawbridgeCloseArea" type="Area3D" parent="." unique_id=1958182607]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CornelisDrawbridgeCloseArea" unique_id=1394947006]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.19999981)
+shape = SubResource("BoxShape3D_bivhb")
+
+[connection signal="ChallengeCompleted" from="Quests/I_2-the Ambition/Cornelis/Challenges/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective2-complete" method="_OnTrigger"]
+[connection signal="ChallengeFailed" from="Quests/I_2-the Ambition/Cornelis/Challenges/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective2-fail" method="_OnTrigger"]
+[connection signal="body_entered" from="CornelisDrawbridgeArea" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective1-init" method="_OnPlayerTrigger"]
+[connection signal="body_entered" from="CornelisDrawbridgeCloseArea" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective1-complete" method="_OnPlayerTrigger"]

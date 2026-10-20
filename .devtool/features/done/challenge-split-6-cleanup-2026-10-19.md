@@ -1,13 +1,13 @@
 ---
 id: "challenge-split-6-cleanup-2026-10-19"
-status: "review"
+status: "done"
 priority: "high"
 assignee: null
 epic: "systems"
 dueDate: "2026-10-23"
 created: "2026-10-19T12:00:00.000Z"
-modified: "2026-10-19T12:00:00.000Z"
-completedAt: null
+modified: "2026-10-20T12:00:00.000Z"
+completedAt: "2026-10-20T12:00:00.000Z"
 labels: ["system", "challenge-split", "cleanup"]
 order: "Zw6"
 ---

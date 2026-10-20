@@ -1,0 +1,249 @@
+[gd_scene format=3 uid="uid://cr3nwuawx7hye"]
+
+[ext_resource type="Shader" uid="uid://bkktv7833qkb0" path="res://scripts/Trail/trail_process.gdshader" id="1_yga7j"]
+[ext_resource type="Shader" uid="uid://b2x22th280fpm" path="res://scripts/Trail/trail_draw.gdshader" id="2_0etoc"]
+[ext_resource type="Script" uid="uid://6214kgglowmy" path="res://scripts/Trail/GPUTrail3D.cs" id="3_eeffx"]
+[ext_resource type="PackedScene" uid="uid://c7sx881ac5y6g" path="res://Scenes/levels/beaverford.tscn" id="4_tbltw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nkays"]
+sky_top_color = Color(0.03612628, 0.053521246, 0.07621951, 1)
+sky_horizon_color = Color(0.15471098, 0.15870944, 0.16671553, 1)
+sky_cover_modulate = Color(0.099985994, 0.099985994, 0.099985994, 1)
+ground_bottom_color = Color(0.09172753, 0.07351848, 0.053025566, 1)
+ground_horizon_color = Color(0.15117559, 0.15510923, 0.1629855, 1)
+
+[sub_resource type="Sky" id="Sky_t1xty"]
+sky_material = SubResource("ProceduralSkyMaterial_nkays")
+
+[sub_resource type="Environment" id="Environment_d2uqc"]
+background_mode = 2
+sky = SubResource("Sky_t1xty")
+ambient_light_sky_contribution = 0.23
+tonemap_mode = 2
+volumetric_fog_density = 0.0
+
+[sub_resource type="Curve3D" id="Curve3D_r4xyh"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 1, 0, 0, 0, 0, 0, -0.8560414, 0, 0, 0.8560414, 0, 0, 5.049999, 0, 0.47696686, 0, -0.8560414, 0, 0, 0.8560414, 0, 6.6000004, 1.5500002, 0.32573128, 0.8560414, 0, 0, -0.8560414, 0, 0, 5.05, 3.1, 0, 0, 0.8560414, 0, 0, -0.8560414, 0, 3.5000002, 1.55, 0, -0.8560414, 0, 0, 0.8560414, 0, 0, 5.05, 0, 0, -1, 0, 0, 0, 0, 0, 10.1, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j53q5"]
+shader = ExtResource("1_yga7j")
+
+[sub_resource type="Gradient" id="Gradient_uhrdb"]
+offsets = PackedFloat32Array(0, 0.49392712, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.21176471, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d2vkw"]
+gradient = SubResource("Gradient_uhrdb")
+
+[sub_resource type="Curve" id="Curve_1x8p3"]
+_limits = [0.0, 0.1, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.50991505, 0.1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_531o0"]
+curve = SubResource("Curve_1x8p3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_exsde"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_0etoc")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_d2vkw")
+shader_parameter/width_curve = SubResource("CurveTexture_531o0")
+
+[sub_resource type="QuadMesh" id="QuadMesh_j8gly"]
+material = SubResource("ShaderMaterial_exsde")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0fwbi"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -29.99999
+angle_max = 30.000011
+use_rotation_3d = true
+rotation_3d_min = Vector3(-30, -30, -30)
+rotation_3d_max = Vector3(30, 30, 30)
+direction = Vector3(0, 0, 1)
+initial_velocity_min = -5.0
+initial_velocity_max = -5.0
+scale_min = 0.099999994
+scale_max = 0.5
+turbulence_enabled = true
+turbulence_noise_strength = 0.2
+turbulence_noise_scale = 1.0
+
+[sub_resource type="Gradient" id="Gradient_hq36d"]
+offsets = PackedFloat32Array(0.5888502, 0.6132404)
+colors = PackedColorArray(0.27450982, 0.36862746, 0.16470589, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xik0l"]
+gradient = SubResource("Gradient_hq36d")
+fill = 1
+fill_from = Vector2(0.50427353, 0.53418803)
+fill_to = Vector2(0.8034188, 0.5641026)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4dfpr"]
+transparency = 1
+cull_mode = 2
+albedo_texture = SubResource("GradientTexture2D_xik0l")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ekdp4"]
+material = SubResource("StandardMaterial3D_4dfpr")
+orientation = 1
+
+[sub_resource type="Animation" id="Animation_ygl0x"]
+length = 4.0666666
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 4.0666666),
+"transitions": PackedFloat32Array(0.43527523, 2.8284273, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUTrail3D:ClearTrail")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../PathFollow3D2:progress_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 1.9666667, 4.0666666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../PathFollow3D2/GPUParticles3D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_tuys8"]
+resource_name = "gust"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUTrail3D:ClearTrail")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wg0sy"]
+_data = {
+&"RESET": SubResource("Animation_ygl0x"),
+&"gust": SubResource("Animation_tuys8")
+}
+
+[node name="Node3D" type="Node3D" unique_id=2030284742]
+
+[node name="Environment" type="Node3D" parent="." unique_id=561986193]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=1235354960]
+environment = SubResource("Environment_d2uqc")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment" unique_id=174320901]
+transform = Transform3D(0.48296285, 0.87001, -0.09914385, -0.25881904, 0.24999991, 0.9330126, 0.8365164, -0.42495012, 0.34591576, 0, 0, 0)
+light_color = Color(0.4105779, 0.48141384, 0.49727225, 1)
+light_energy = 0.1
+light_cull_mask = 4294442495
+shadow_enabled = true
+shadow_normal_bias = 10.0
+shadow_opacity = 0.87
+shadow_caster_mask = 4294442495
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Environment" unique_id=1879241524]
+transform = Transform3D(0.59283006, 0.80302274, 0.060886025, 0.2423625, -0.2500001, 0.9374221, 0.7679929, -0.5409756, -0.34283012, 0, 0, 0)
+light_color = Color(0.5827969, 0.4656899, 0.57378435, 1)
+light_energy = 0.1
+light_cull_mask = 4294442495
+shadow_normal_bias = 10.0
+shadow_opacity = 0.87
+shadow_caster_mask = 4294442495
+
+[node name="WeatherEffects" type="Node" parent="Environment" unique_id=1606212366]
+
+[node name="Path3D" type="Path3D" parent="Environment/WeatherEffects" unique_id=302181738]
+transform = Transform3D(0.7464586, 0, 0.66543186, 0, 1, 0, -0.66543186, 0, 0.7464586, 10.103573, 1.0990281, -0.68408775)
+curve = SubResource("Curve3D_r4xyh")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Environment/WeatherEffects/Path3D" unique_id=701598491]
+transform = Transform3D(-4.370419e-08, 0, -0.9998336, 0, 0.9998263, 0, 0.9998354, 0, -4.3704112e-08, 0, 0, 0)
+
+[node name="GPUTrail3D" type="GPUParticles3D" parent="Environment/WeatherEffects/Path3D/PathFollow3D" unique_id=1260273088]
+amount = 60
+lifetime = 60.0
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ShaderMaterial_j53q5")
+draw_pass_1 = SubResource("QuadMesh_j8gly")
+script = ExtResource("3_eeffx")
+ColorRamp = SubResource("GradientTexture1D_d2vkw")
+WidthCurve = SubResource("CurveTexture_531o0")
+metadata/_custom_type_script = "uid://6214kgglowmy"
+
+[node name="PathFollow3D2" type="PathFollow3D" parent="Environment/WeatherEffects/Path3D" unique_id=2103379866]
+transform = Transform3D(7.844205e-08, 2.1235174e-09, -0.999832, -0.29911366, 0.95403206, -2.1441018e-08, 0.95403546, 0.29911262, 7.548522e-08, 10.1, 0, 0)
+progress = 19.89246
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Environment/WeatherEffects/Path3D/PathFollow3D2" unique_id=154868310]
+emitting = false
+amount = 32
+lifetime = 3.0
+one_shot = true
+preprocess = 1.67
+transform_align = 2
+process_material = SubResource("ParticleProcessMaterial_0fwbi")
+draw_pass_1 = SubResource("QuadMesh_ekdp4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Environment/WeatherEffects/Path3D" unique_id=1114295255]
+root_node = NodePath("../PathFollow3D")
+libraries/ = SubResource("AnimationLibrary_wg0sy")
+autoplay = &"RESET"
+
+[node name="Beaverford" parent="." unique_id=1715006005 instance=ExtResource("4_tbltw")]
