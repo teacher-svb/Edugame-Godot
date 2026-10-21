@@ -1,6 +1,6 @@
 ---
 id: "challenge-bargraph-2026-06-27"
-status: "review"
+status: "todo"
 priority: "medium"
 assignee: null
 epic: "systems"
@@ -11,6 +11,8 @@ completedAt: null
 labels: ["math", "system"]
 order: "a2"
 ---
+
+> **Still to do (checked 2026-10-20):** code, widget and scene are in place, but no level challenge uses this visualization yet and the in-game look-and-feel check is still open. Use it in a real challenge, play it in-game, then mark done.
 
 > Implemented 2026-10-20 as `BarGraphVisualization` + `GraphBar`. Ranged bar params are narrowed to gridline values before rolling (rerolling would pass ~1 in 10 per bar), so their input options are gridline values too; an unknown bar is a full-height dashed slot with `?`. Screenshot-verified. Still to check: look and feel in-game.
 

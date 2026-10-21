@@ -1,6 +1,6 @@
 ---
 id: "challenge-linegraph-2026-06-27"
-status: "review"
+status: "todo"
 priority: "medium"
 assignee: null
 epic: "systems"
@@ -11,6 +11,8 @@ completedAt: null
 labels: ["math", "system"]
 order: "a3"
 ---
+
+> **Still to do (checked 2026-10-20):** code, widget and scene are in place, but no level challenge uses this visualization yet and the in-game look-and-feel check is still open. Use it in a real challenge, play it in-game, then mark done.
 
 > Implemented 2026-10-20 as `LineGraphVisualization`: `Line` expression in `Variable` (default `t`), drawn left to right and clipped to the axes; optional `MarkX` marker with dashed guides. Only the marked point is constrained (on the axes, on a gridline), so lines may run off the graph. Screenshot-verified with an oil-level line. Still to check: look and feel in-game.
 

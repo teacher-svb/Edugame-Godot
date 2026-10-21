@@ -11,9 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://qqmsfnp0h0nk" path="res://Scenes/characters/liesbeth.tscn" id="9_0audd"]
 [ext_resource type="PackedScene" uid="uid://bx1wyqdgkro24" path="res://Scenes/characters/msBram.tscn" id="10_ay62w"]
 [ext_resource type="PackedScene" uid="uid://brhrj77wopxwb" path="res://Scenes/characters/cornelis.tscn" id="11_xfoxv"]
-[ext_resource type="Script" uid="uid://dbtd0oguw4wdj" path="res://scripts/Game/Systems/QuestSystem/QuestTrigger.cs" id="12_nc7ib"]
+[ext_resource type="Script" uid="uid://bksw1ls1mwcv0" path="res://scripts/Game/Systems/QuestSystem/QuestNode.cs" id="13_bqjii"]
 [ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="13_ymh3g"]
-[ext_resource type="Script" uid="uid://ckobusjip2hti" path="res://scripts/Game/Systems/QuestSystem/QuestReaction.cs" id="14_te4f7"]
+[ext_resource type="Resource" uid="uid://bu3fwc67ikdd6" path="res://GameData/quests/I.2-theAmbition-Cornelis.tres" id="14_dlsi4"]
 [ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="15_jttql"]
 [ext_resource type="Script" uid="uid://diolsl1jtpyue" path="res://scripts/Game/Systems/Challenges/MathChallengeTrigger.cs" id="16_wirkn"]
 [ext_resource type="Script" uid="uid://df1px4otq51h8" path="res://scripts/Game/Systems/Challenges/Inputs/TextChallengeInput.cs" id="17_v572t"]
@@ -22,6 +22,11 @@
 [ext_resource type="Texture2D" uid="uid://c72t1e36d3fgo" path="res://project/images/drawbridge-diagram.png" id="20_gom7j"]
 [ext_resource type="Script" uid="uid://sup7lp6karaf" path="res://scripts/Game/Systems/Challenges/MathChallenge.cs" id="20_kjadr"]
 [ext_resource type="Script" uid="uid://bduu2nqauu8sw" path="res://scripts/Game/Systems/Challenges/Visualizations/ImageVisualization.cs" id="21_bqjii"]
+[ext_resource type="Script" uid="uid://d0ntv21juq2kk" path="res://scripts/Game/Systems/QuestSystem/Steps/ChallengeStep.cs" id="qs_challenge"]
+[ext_resource type="Script" uid="uid://v6ge3lx8r4vx" path="res://scripts/Game/Systems/QuestSystem/Steps/IdleStep.cs" id="qs_idle"]
+[ext_resource type="Resource" uid="uid://clle2xma7ungv" path="res://GameData/quests/I.2-theAmbition-Hendrik.tres" id="qs_quest_hendrik"]
+[ext_resource type="Resource" uid="uid://b4r7x8oy4xdtc" path="res://GameData/quests/I.2-theAmbition-Liesbeth.tres" id="qs_quest_liesbeth"]
+[ext_resource type="Resource" uid="uid://bx6bq5o64me5r" path="res://GameData/quests/I.2-theAmbition-MsBram.tres" id="qs_quest_msbram"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dcdmp"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -194,13 +199,7 @@ _data = {
 &"gust": SubResource("Animation_tuys8")
 }
 
-[sub_resource type="Resource" id="Resource_rb227"]
-script = ExtResource("14_te4f7")
-_targetPath = NodePath("../../Challenges/MathChallengeTrigger")
-_methodName = "TriggerChallenge"
-metadata/_custom_type_script = "uid://ckobusjip2hti"
-
-[sub_resource type="Resource" id="Resource_cornelis_in"]
+[sub_resource type="Resource" id="Resource_6k5pa"]
 script = ExtResource("17_v572t")
 
 [sub_resource type="Resource" id="Resource_cornelis_x"]
@@ -226,20 +225,20 @@ Text = "{x}kg"
 Position = Vector2(0.2, 0.3)
 metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
 
-[sub_resource type="Resource" id="Resource_unppr"]
+[sub_resource type="Resource" id="Resource_udlpy"]
 script = ExtResource("21_bqjii")
 Image = ExtResource("20_gom7j")
 Annotations = Array[ExtResource("19_gom7j")]([SubResource("Resource_alwbg"), SubResource("Resource_knjau")])
 metadata/_custom_type_script = "uid://bduu2nqauu8sw"
 
-[sub_resource type="Resource" id="Resource_igo7b"]
+[sub_resource type="Resource" id="Resource_qsk3u"]
 script = ExtResource("20_kjadr")
 Name = "Cornelis' bridge"
 Formula = "x - y"
 Params = Array[ExtResource("18_gnjj1")]([SubResource("Resource_cornelis_x"), SubResource("Resource_cornelis_y")])
 Constraints = PackedStringArray("x <> y", "answer > 0")
-Visualization = SubResource("Resource_unppr")
-Input = SubResource("Resource_cornelis_in")
+Visualization = SubResource("Resource_udlpy")
+Input = SubResource("Resource_6k5pa")
 QuestionText = "Hoeveel is {x} - {y}?"
 metadata/_custom_type_script = "uid://sup7lp6karaf"
 
@@ -328,161 +327,44 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1340637, 1.0991005, 6.99557
 
 [node name="I_2-the Ambition" type="Node" parent="Quests" unique_id=204093315]
 
-[node name="Cornelis" type="Node" parent="Quests/I_2-the Ambition" unique_id=832513922]
+[node name="Cornelis" type="Node" parent="Quests/I_2-the Ambition" unique_id=1884105571]
+script = ExtResource("13_bqjii")
+_quest = ExtResource("14_dlsi4")
 
-[node name="Triggers" type="Node" parent="Quests/I_2-the Ambition/Cornelis" unique_id=392978708]
+[node name="MathChallengeTrigger" type="Node" parent="Quests/I_2-the Ambition/Cornelis" unique_id=813255150]
+script = ExtResource("16_wirkn")
+_challenge = SubResource("Resource_qsk3u")
+metadata/_custom_type_script = "uid://diolsl1jtpyue"
 
-[node name="Objective1-init" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Triggers" unique_id=687728109]
-script = ExtResource("12_nc7ib")
-_questId = "65dd09e4-9554-43bd-9595-e67fc459aa00"
-_questObjectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa01"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Objective1-complete" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Triggers" unique_id=854070052]
-script = ExtResource("12_nc7ib")
-_action = 1
-_questId = "65dd09e4-9554-43bd-9595-e67fc459aa00"
-_questObjectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa01"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Objective2-complete" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Triggers" unique_id=372723909]
-script = ExtResource("12_nc7ib")
-_action = 1
-_questId = "65dd09e4-9554-43bd-9595-e67fc459aa00"
-_questObjectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa02"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Objective2-fail" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Triggers" unique_id=2140101986]
-script = ExtResource("12_nc7ib")
-_action = 2
-_questId = "65dd09e4-9554-43bd-9595-e67fc459aa00"
-_questObjectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa02"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Objective3-complete" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Triggers" unique_id=1096006525]
-script = ExtResource("12_nc7ib")
-_action = 1
-_questId = "65dd09e4-9554-43bd-9595-e67fc459aa00"
-_questObjectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa03"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Reactions" type="Node" parent="Quests/I_2-the Ambition/Cornelis" unique_id=93343950]
-
-[node name="QuestEventListener" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Reactions" unique_id=366235268]
+[node name="QuestEventListener" type="Node" parent="Quests/I_2-the Ambition/Cornelis" unique_id=609614438]
 script = ExtResource("13_ymh3g")
 _checkObjectiveId = true
 _objectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa02"
 _checkState = true
 _state = 1
-_reactions = Array[ExtResource("14_te4f7")]([SubResource("Resource_rb227")])
 eventChannel = ExtResource("15_jttql")
 metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 
-[node name="Challenges" type="Node" parent="Quests/I_2-the Ambition/Cornelis" unique_id=1808815040]
+[node name="IdleStep" type="Node" parent="Quests/I_2-the Ambition/Cornelis/QuestEventListener" unique_id=1384868661 node_paths=PackedStringArray("_character")]
+script = ExtResource("qs_idle")
+_character = NodePath("../../../../../Cornelis")
+_durationMs = 2000
 
-[node name="MathChallengeTrigger" type="Node" parent="Quests/I_2-the Ambition/Cornelis/Challenges" unique_id=1211020917]
-script = ExtResource("16_wirkn")
-_challenge = SubResource("Resource_igo7b")
-metadata/_custom_type_script = "uid://diolsl1jtpyue"
+[node name="ChallengeStep" type="Node" parent="Quests/I_2-the Ambition/Cornelis/QuestEventListener" unique_id=1435754350 node_paths=PackedStringArray("_trigger")]
+script = ExtResource("qs_challenge")
+_trigger = NodePath("../../MathChallengeTrigger")
 
 [node name="Hendrik" type="Node" parent="Quests/I_2-the Ambition" unique_id=853748344]
-
-[node name="Triggers" type="Node" parent="Quests/I_2-the Ambition/Hendrik" unique_id=1911028866]
-
-[node name="Objective1-init" type="Node" parent="Quests/I_2-the Ambition/Hendrik/Triggers" unique_id=2140101985]
-script = ExtResource("12_nc7ib")
-_questId = "d31f51c6-cbd8-4285-800f-0bd317caee00"
-_questObjectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee01"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Objective1-complete" type="Node" parent="Quests/I_2-the Ambition/Hendrik/Triggers" unique_id=1874865505]
-script = ExtResource("12_nc7ib")
-_action = 1
-_questId = "d31f51c6-cbd8-4285-800f-0bd317caee00"
-_questObjectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee01"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Objective2-complete" type="Node" parent="Quests/I_2-the Ambition/Hendrik/Triggers" unique_id=1690349951]
-script = ExtResource("12_nc7ib")
-_action = 1
-_questId = "d31f51c6-cbd8-4285-800f-0bd317caee00"
-_questObjectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee02"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Objective3-complete" type="Node" parent="Quests/I_2-the Ambition/Hendrik/Triggers" unique_id=808990094]
-script = ExtResource("12_nc7ib")
-_action = 1
-_questId = "d31f51c6-cbd8-4285-800f-0bd317caee00"
-_questObjectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee03"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Reactions" type="Node" parent="Quests/I_2-the Ambition/Hendrik" unique_id=876993112]
+script = ExtResource("13_bqjii")
+_quest = ExtResource("qs_quest_hendrik")
 
 [node name="Liesbeth" type="Node" parent="Quests/I_2-the Ambition" unique_id=1543397962]
-
-[node name="Triggers" type="Node" parent="Quests/I_2-the Ambition/Liesbeth" unique_id=219548287]
-
-[node name="Objective1-init" type="Node" parent="Quests/I_2-the Ambition/Liesbeth/Triggers" unique_id=242361852]
-script = ExtResource("12_nc7ib")
-_questId = "3cd9cc64-f69b-4d80-beb6-1290468dfd00"
-_questObjectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd01"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Objective1-complete" type="Node" parent="Quests/I_2-the Ambition/Liesbeth/Triggers" unique_id=1816811905]
-script = ExtResource("12_nc7ib")
-_action = 1
-_questId = "3cd9cc64-f69b-4d80-beb6-1290468dfd00"
-_questObjectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd01"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Objective2-complete" type="Node" parent="Quests/I_2-the Ambition/Liesbeth/Triggers" unique_id=2070285585]
-script = ExtResource("12_nc7ib")
-_action = 1
-_questId = "3cd9cc64-f69b-4d80-beb6-1290468dfd00"
-_questObjectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd02"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Objective3-complete" type="Node" parent="Quests/I_2-the Ambition/Liesbeth/Triggers" unique_id=473688080]
-script = ExtResource("12_nc7ib")
-_action = 1
-_questId = "3cd9cc64-f69b-4d80-beb6-1290468dfd00"
-_questObjectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd03"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Reactions" type="Node" parent="Quests/I_2-the Ambition/Liesbeth" unique_id=1250783119]
+script = ExtResource("13_bqjii")
+_quest = ExtResource("qs_quest_liesbeth")
 
 [node name="MsBram" type="Node" parent="Quests/I_2-the Ambition" unique_id=1824263733]
-
-[node name="Triggers" type="Node" parent="Quests/I_2-the Ambition/MsBram" unique_id=420382455]
-
-[node name="Objective1-init" type="Node" parent="Quests/I_2-the Ambition/MsBram/Triggers" unique_id=299148558]
-script = ExtResource("12_nc7ib")
-_questId = "3a861b47-c25e-4265-8205-81e4394e3900"
-_questObjectiveId = "3a861b47-c25e-4265-8205-81e4394e3901"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Objective1-complete" type="Node" parent="Quests/I_2-the Ambition/MsBram/Triggers" unique_id=573677040]
-script = ExtResource("12_nc7ib")
-_action = 1
-_questId = "3a861b47-c25e-4265-8205-81e4394e3900"
-_questObjectiveId = "3a861b47-c25e-4265-8205-81e4394e3901"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Objective2-complete" type="Node" parent="Quests/I_2-the Ambition/MsBram/Triggers" unique_id=2085222934]
-script = ExtResource("12_nc7ib")
-_action = 1
-_questId = "3a861b47-c25e-4265-8205-81e4394e3900"
-_questObjectiveId = "3a861b47-c25e-4265-8205-81e4394e3902"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Objective3-complete" type="Node" parent="Quests/I_2-the Ambition/MsBram/Triggers" unique_id=1568361915]
-script = ExtResource("12_nc7ib")
-_action = 1
-_questId = "3a861b47-c25e-4265-8205-81e4394e3900"
-_questObjectiveId = "3a861b47-c25e-4265-8205-81e4394e3903"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="Reactions" type="Node" parent="Quests/I_2-the Ambition/MsBram" unique_id=951135631]
+script = ExtResource("13_bqjii")
+_quest = ExtResource("qs_quest_msbram")
 
 [node name="CornelisDrawbridgeArea" type="Area3D" parent="." unique_id=475543381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
@@ -498,7 +380,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.19999981)
 shape = SubResource("BoxShape3D_bivhb")
 
-[connection signal="ChallengeCompleted" from="Quests/I_2-the Ambition/Cornelis/Challenges/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective2-complete" method="_OnTrigger"]
-[connection signal="ChallengeFailed" from="Quests/I_2-the Ambition/Cornelis/Challenges/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective2-fail" method="_OnTrigger"]
-[connection signal="body_entered" from="CornelisDrawbridgeArea" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective1-init" method="_OnPlayerTrigger"]
-[connection signal="body_entered" from="CornelisDrawbridgeCloseArea" to="Quests/I_2-the Ambition/Cornelis/Triggers/Objective1-complete" method="_OnPlayerTrigger"]
+[connection signal="ChallengeCompleted" from="Quests/I_2-the Ambition/Cornelis/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis" method="CompleteObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa02"]]
+[connection signal="ChallengeFailed" from="Quests/I_2-the Ambition/Cornelis/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis" method="FailObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa02"]]
+[connection signal="body_entered" from="CornelisDrawbridgeArea" to="Quests/I_2-the Ambition/Cornelis" method="_OnPlayerStartObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa01"]]
+[connection signal="body_entered" from="CornelisDrawbridgeCloseArea" to="Quests/I_2-the Ambition/Cornelis" method="_OnPlayerCompleteObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa01"]]

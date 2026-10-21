@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="21_ycjjd"]
 [ext_resource type="PackedScene" uid="uid://ci0qlbk7yu2cr" path="res://assets/3D/environments/Furniture Kit/Models/GLTF format/bedSingle.glb" id="22_0tae3"]
 [ext_resource type="Script" uid="uid://bhsdjlrhck4qd" path="res://scripts/test/Transporter.cs" id="22_182vs"]
-[ext_resource type="Script" uid="uid://dbtd0oguw4wdj" path="res://scripts/Game/Systems/QuestSystem/QuestTrigger.cs" id="22_ycjjd"]
 [ext_resource type="PackedScene" uid="uid://ct1kqwdhujc8n" path="res://assets/3D/environments/Furniture Kit/Models/GLTF format/benchCushionLow.glb" id="23_7n07m"]
 [ext_resource type="PackedScene" uid="uid://40rbyr5gq5lu" path="res://assets/3D/environments/Furniture Kit/Models/GLTF format/cabinetBedDrawer.glb" id="24_kdqke"]
 [ext_resource type="PackedScene" uid="uid://d11od8uonxhra" path="res://Scenes/characters/character_dad.tscn" id="25_14bvk"]
@@ -26,7 +25,6 @@
 [ext_resource type="Texture2D" uid="uid://b1tl6shsicrs" path="res://assets/tutorial-arrow.png" id="25_sppe2"]
 [ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="26_0tae3"]
 [ext_resource type="PackedScene" uid="uid://db03lq6cgxid2" path="res://assets/3D/environments/Furniture Kit/Models/GLTF format/bookcaseClosedDoors.glb" id="26_7vwr8"]
-[ext_resource type="Script" uid="uid://ckobusjip2hti" path="res://scripts/Game/Systems/QuestSystem/QuestReaction.cs" id="27_0tae3"]
 [ext_resource type="PackedScene" uid="uid://dcaqo4uenuwgu" path="res://assets/3D/environments/Furniture Kit/Models/GLTF format/bookcaseClosedWide.glb" id="27_qovxq"]
 [ext_resource type="PackedScene" uid="uid://5ac2eh7lcw6p" path="res://assets/3D/environments/Furniture Kit/Models/GLTF format/bookcaseClosed.glb" id="28_7n07m"]
 [ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="28_kdqke"]
@@ -34,6 +32,12 @@
 [ext_resource type="MeshLibrary" uid="uid://dn1i16n6um3sg" path="res://assets/3D/environments/Furniture Kit/furniture-kit-tileables.meshlib" id="30_kb3qt"]
 [ext_resource type="Script" uid="uid://cewycpjka78f3" path="res://scripts/Game/Systems/InventorySystem/ItemEventListener.cs" id="33_sppe2"]
 [ext_resource type="Resource" uid="uid://clf3iqsa6rjxf" path="res://GameData/EventChannels/PickupItemEventChannel.tres" id="34_lhsq1"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Steps/FollowStep.cs" id="qs_follow"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Steps/IdleStep.cs" id="qs_idle"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Steps/PatrolStep.cs" id="qs_patrol"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Steps/PopStateStep.cs" id="qs_pop"]
+[ext_resource type="Script" uid="uid://bksw1ls1mwcv0" path="res://scripts/Game/Systems/QuestSystem/QuestNode.cs" id="qs_questnode"]
+[ext_resource type="Resource" uid="uid://bcgox3enbg4ph" path="res://GameData/quests/I.1-MorningInBeaverford.tres" id="qs_quest_i1"]
 
 [sub_resource type="Gradient" id="Gradient_upsym"]
 offsets = PackedFloat32Array(0.117647, 1)
@@ -157,54 +161,6 @@ material = SubResource("StandardMaterial3D_csk8p")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qovxq"]
 size = Vector3(0.4958725, 1.8308105, 1.285881)
-
-[sub_resource type="Resource" id="Resource_0tae3"]
-script = ExtResource("27_0tae3")
-_targetPath = NodePath("../../../../dad")
-_methodName = "SetStateToIdle"
-_params = [200]
-metadata/_custom_type_script = "uid://ckobusjip2hti"
-
-[sub_resource type="Resource" id="Resource_kb3qt"]
-script = ExtResource("27_0tae3")
-_targetPath = NodePath("../../../../dad")
-_methodName = "SetStateToPatrolling"
-_params = [NodePath("../../../../Waypoints/Marker3D"), NodePath("../../../../Waypoints/Marker3D2")]
-metadata/_custom_type_script = "uid://ckobusjip2hti"
-
-[sub_resource type="Resource" id="Resource_7vwr8"]
-script = ExtResource("27_0tae3")
-_targetPath = NodePath("../../../../dad")
-_methodName = "SetStateToIdle"
-_params = [200]
-metadata/_custom_type_script = "uid://ckobusjip2hti"
-
-[sub_resource type="Resource" id="Resource_kdqke"]
-script = ExtResource("27_0tae3")
-_targetPath = NodePath("../../../../Player")
-_methodName = "SetStateToFollow"
-_params = [NodePath("../../../../dad")]
-metadata/_custom_type_script = "uid://ckobusjip2hti"
-
-[sub_resource type="Resource" id="Resource_sppe2"]
-script = ExtResource("27_0tae3")
-_targetPath = NodePath("../../../../dad")
-_methodName = "SetStateToPatrolling"
-_params = [NodePath("../../../../Waypoints/Marker3D3"), NodePath("../../../../Waypoints/Marker3D4")]
-metadata/_custom_type_script = "uid://ckobusjip2hti"
-
-[sub_resource type="Resource" id="Resource_lhsq1"]
-script = ExtResource("27_0tae3")
-_targetPath = NodePath("../../../../dad")
-_methodName = "SetStateToIdle"
-_params = [2000]
-metadata/_custom_type_script = "uid://ckobusjip2hti"
-
-[sub_resource type="Resource" id="Resource_csk8p"]
-script = ExtResource("27_0tae3")
-_targetPath = NodePath("../../../../Player")
-_methodName = "PopCurrentState"
-metadata/_custom_type_script = "uid://ckobusjip2hti"
 
 [node name="Node3D2" type="Node3D" unique_id=565024144]
 script = ExtResource("1_14bvk")
@@ -527,49 +483,8 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 [node name="Quests" type="Node" parent="." unique_id=371530256]
 
 [node name="LookingForAvocado" type="Node" parent="Quests" unique_id=819544074]
-
-[node name="Triggers" type="Node" parent="Quests/LookingForAvocado" unique_id=306189434]
-
-[node name="obj1-init" type="Node" parent="Quests/LookingForAvocado/Triggers" unique_id=412414297]
-script = ExtResource("22_ycjjd")
-_questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
-_questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8921"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="obj1-complete" type="Node" parent="Quests/LookingForAvocado/Triggers" unique_id=2137432142]
-script = ExtResource("22_ycjjd")
-_action = 1
-_questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
-_questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8921"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="obj2-complete" type="Node" parent="Quests/LookingForAvocado/Triggers" unique_id=157384859]
-script = ExtResource("22_ycjjd")
-_action = 1
-_questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
-_questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8922"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="obj3-complete" type="Node" parent="Quests/LookingForAvocado/Triggers" unique_id=455244076]
-script = ExtResource("22_ycjjd")
-_action = 1
-_questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
-_questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="obj4-complete" type="Node" parent="Quests/LookingForAvocado/Triggers" unique_id=1840155665]
-script = ExtResource("22_ycjjd")
-_action = 1
-_questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
-_questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8924"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
-
-[node name="obj5-complete" type="Node" parent="Quests/LookingForAvocado/Triggers" unique_id=1272349876]
-script = ExtResource("22_ycjjd")
-_action = 1
-_questId = "0d650e26-371d-4cb9-98cb-a9a7850b5bfc"
-_questObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8925"
-metadata/_custom_type_script = "uid://dbtd0oguw4wdj"
+script = ExtResource("qs_questnode")
+_quest = ExtResource("qs_quest_i1")
 
 [node name="Reactions" type="Node" parent="Quests/LookingForAvocado" unique_id=1622472242]
 
@@ -595,8 +510,22 @@ _checkObjectiveId = true
 _objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
 _checkState = true
 _state = 1
-_reactions = Array[ExtResource("27_0tae3")]([SubResource("Resource_0tae3"), SubResource("Resource_kb3qt"), SubResource("Resource_7vwr8")])
 eventChannel = ExtResource("28_kdqke")
+
+[node name="IdleStep" type="Node" parent="Quests/LookingForAvocado/Reactions/obj3-init-DadReaction" unique_id=896922654 node_paths=PackedStringArray("_character")]
+script = ExtResource("qs_idle")
+_character = NodePath("../../../../../dad")
+_durationMs = 200
+
+[node name="PatrolStep" type="Node" parent="Quests/LookingForAvocado/Reactions/obj3-init-DadReaction" unique_id=1390785772 node_paths=PackedStringArray("_character", "_waypoints")]
+script = ExtResource("qs_patrol")
+_character = NodePath("../../../../../dad")
+_waypoints = [NodePath("../../../../../Waypoints/Marker3D"), NodePath("../../../../../Waypoints/Marker3D2")]
+
+[node name="IdleStep2" type="Node" parent="Quests/LookingForAvocado/Reactions/obj3-init-DadReaction" unique_id=1090066048 node_paths=PackedStringArray("_character")]
+script = ExtResource("qs_idle")
+_character = NodePath("../../../../../dad")
+_durationMs = 200
 
 [node name="obj3-init-PlayerReaction" type="Node" parent="Quests/LookingForAvocado/Reactions" unique_id=2120547137]
 script = ExtResource("26_0tae3")
@@ -604,8 +533,12 @@ _checkObjectiveId = true
 _objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
 _checkState = true
 _state = 1
-_reactions = Array[ExtResource("27_0tae3")]([SubResource("Resource_kdqke")])
 eventChannel = ExtResource("28_kdqke")
+
+[node name="FollowStep" type="Node" parent="Quests/LookingForAvocado/Reactions/obj3-init-PlayerReaction" unique_id=351113575 node_paths=PackedStringArray("_follower", "_target")]
+script = ExtResource("qs_follow")
+_follower = NodePath("../../../../../Player")
+_target = NodePath("../../../../../dad")
 
 [node name="obj4-init-DadReaction" type="Node" parent="Quests/LookingForAvocado/Reactions" unique_id=557922724]
 script = ExtResource("26_0tae3")
@@ -613,8 +546,17 @@ _checkObjectiveId = true
 _objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8924"
 _checkState = true
 _state = 1
-_reactions = Array[ExtResource("27_0tae3")]([SubResource("Resource_sppe2"), SubResource("Resource_lhsq1")])
 eventChannel = ExtResource("28_kdqke")
+
+[node name="PatrolStep" type="Node" parent="Quests/LookingForAvocado/Reactions/obj4-init-DadReaction" unique_id=2144464097 node_paths=PackedStringArray("_character", "_waypoints")]
+script = ExtResource("qs_patrol")
+_character = NodePath("../../../../../dad")
+_waypoints = [NodePath("../../../../../Waypoints/Marker3D3"), NodePath("../../../../../Waypoints/Marker3D4")]
+
+[node name="IdleStep" type="Node" parent="Quests/LookingForAvocado/Reactions/obj4-init-DadReaction" unique_id=1011799464 node_paths=PackedStringArray("_character")]
+script = ExtResource("qs_idle")
+_character = NodePath("../../../../../dad")
+_durationMs = 2000
 
 [node name="obj4-completed-PlayerReaction" type="Node" parent="Quests/LookingForAvocado/Reactions" unique_id=9206748]
 script = ExtResource("26_0tae3")
@@ -622,8 +564,11 @@ _checkObjectiveId = true
 _objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8924"
 _checkState = true
 _state = 2
-_reactions = Array[ExtResource("27_0tae3")]([SubResource("Resource_csk8p")])
 eventChannel = ExtResource("28_kdqke")
+
+[node name="PopStateStep" type="Node" parent="Quests/LookingForAvocado/Reactions/obj4-completed-PlayerReaction" unique_id=450378919 node_paths=PackedStringArray("_character")]
+script = ExtResource("qs_pop")
+_character = NodePath("../../../../../Player")
 
 [node name="obj5-completed-OpenDoor" type="Node" parent="Quests/LookingForAvocado/Reactions" unique_id=810609432]
 script = ExtResource("26_0tae3")
@@ -631,8 +576,11 @@ _checkObjectiveId = true
 _objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8925"
 _checkState = true
 _state = 2
-_reactions = Array[ExtResource("27_0tae3")]([SubResource("Resource_csk8p")])
 eventChannel = ExtResource("28_kdqke")
+
+[node name="PopStateStep" type="Node" parent="Quests/LookingForAvocado/Reactions/obj5-completed-OpenDoor" unique_id=2069268610 node_paths=PackedStringArray("_character")]
+script = ExtResource("qs_pop")
+_character = NodePath("../../../../../Player")
 
 [node name="ItemEventListener" type="Node" parent="." unique_id=893104707]
 script = ExtResource("33_sppe2")
@@ -641,18 +589,18 @@ _itemId = "56de1c29-e358-4c5c-b698-e8b4892fbacb"
 eventChannel = ExtResource("34_lhsq1")
 metadata/_custom_type_script = "uid://cewycpjka78f3"
 
-[connection signal="body_entered" from="NavigationRegion3D/Livingroom/Area3D6" to="Quests/LookingForAvocado/Triggers/obj2-complete" method="_OnPlayerTrigger"]
-[connection signal="body_entered" from="NavigationRegion3D/Bedroom/Area3D" to="Quests/LookingForAvocado/Triggers/obj1-init" method="_OnPlayerTrigger"]
-[connection signal="body_entered" from="NavigationRegion3D/Bedroom/Area3D2" to="Quests/LookingForAvocado/Triggers/obj1-complete" method="_OnPlayerTrigger"]
+[connection signal="body_entered" from="NavigationRegion3D/Livingroom/Area3D6" to="Quests/LookingForAvocado" method="_OnPlayerCompleteObjective" binds= ["67bc9a4e-a340-4225-a816-1a8b2b1b8922"]]
+[connection signal="body_entered" from="NavigationRegion3D/Bedroom/Area3D" to="Quests/LookingForAvocado" method="_OnPlayerStartObjective" binds= ["67bc9a4e-a340-4225-a816-1a8b2b1b8921"]]
+[connection signal="body_entered" from="NavigationRegion3D/Bedroom/Area3D2" to="Quests/LookingForAvocado" method="_OnPlayerCompleteObjective" binds= ["67bc9a4e-a340-4225-a816-1a8b2b1b8921"]]
 [connection signal="body_entered" from="transporters/transporter_bedroom-livingroom" to="transporters/transporter_bedroom-livingroom" method="_OnBodyEntered"]
 [connection signal="body_entered" from="transporters/transporter_livingroom-bedroom" to="transporters/transporter_livingroom-bedroom" method="_OnBodyEntered"]
 [connection signal="body_entered" from="transporters/transporter_livingroom_level2" to="transporters/transporter_livingroom_level2" method="_OnBodyEntered"]
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj1-completed-OpenDoor" to="NavigationRegion3D/Bedroom/StaticBody3D" method="ToggleDoor"]
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj2-completed-removeTutorial" to="Player/tutorial" method="queue_free"]
-[connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj3-init-DadReaction" to="Quests/LookingForAvocado/Triggers/obj3-complete" method="_OnTrigger"]
-[connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj4-init-DadReaction" to="Quests/LookingForAvocado/Triggers/obj4-complete" method="_OnTrigger"]
+[connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj3-init-DadReaction" to="Quests/LookingForAvocado" method="CompleteObjective" binds= ["67bc9a4e-a340-4225-a816-1a8b2b1b8923"]]
+[connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj4-init-DadReaction" to="Quests/LookingForAvocado" method="CompleteObjective" binds= ["67bc9a4e-a340-4225-a816-1a8b2b1b8924"]]
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj5-completed-OpenDoor" to="NavigationRegion3D/Livingroom/frontDoor" method="ToggleDoor"]
-[connection signal="OnListen" from="ItemEventListener" to="Quests/LookingForAvocado/Triggers/obj5-complete" method="_OnTrigger"]
+[connection signal="OnListen" from="ItemEventListener" to="Quests/LookingForAvocado" method="CompleteObjective" unbinds=1 binds= ["67bc9a4e-a340-4225-a816-1a8b2b1b8925"]]
 
 [editable path="NavigationRegion3D/Livingroom/tableCloth"]
 [editable path="NavigationRegion3D/Livingroom/tableCloth2"]

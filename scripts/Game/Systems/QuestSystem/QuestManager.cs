@@ -63,6 +63,26 @@ namespace TnT.EduGame.QuestSystem
             _saveData.quests = _quests.Select(q => q.GetSaveData()).ToArray();
         }
 
+        // Starts the quest's first objective. Does nothing once any objective has been touched,
+        // so it is safe to call repeatedly (e.g. every time the player talks to the quest giver).
+        public void StartQuest(string questId)
+        {
+            var quest = _quests.FirstOrDefault(q => q.Id == questId);
+            if (quest == null)
+            {
+                GD.PrintErr($"QuestManager: No quest with id '{questId}'.");
+                return;
+            }
+
+            if (quest.Objectives.Any(o => o.State != QuestState.NOTSTARTED))
+                return;
+
+            UpdateQuest(new QuestMessageStart { QuestId = questId, ObjectiveId = quest.CurrentObjectiveId });
+        }
+
+        public void StartObjective(string questId, string objectiveId) => UpdateQuest(new QuestMessageStart { QuestId = questId, ObjectiveId = objectiveId });
+        public void CompleteObjective(string questId, string objectiveId) => UpdateQuest(new QuestMessageComplete { QuestId = questId, ObjectiveId = objectiveId });
+        public void FailObjective(string questId, string objectiveId) => UpdateQuest(new QuestMessageFail { QuestId = questId, ObjectiveId = objectiveId });
 
     }
 
@@ -90,10 +110,19 @@ namespace TnT.EduGame.QuestSystem
         }
         public override void Process(QuestMessage msg, List<Quest> quests)
         {
-            var quest = quests.FirstOrDefault(q => q.Id == msg.QuestId);
-            if (msg is T msgStart && quest != null)
+            if (msg is T)
             {
-                if (quest.State == _currentState && quest.CurrentObjectiveId == msgStart.ObjectiveId)
+                var quest = quests.FirstOrDefault(q => q.Id == msg.QuestId);
+
+                // Messages only apply to the current objective in the expected state; anything
+                // else is ignored, so warn instead of failing silently (usually a wiring mistake).
+                if (quest == null)
+                    GD.PushWarning($"QuestManager: {typeof(T).Name} ignored, no quest with id '{msg.QuestId}'.");
+                else if (quest.CurrentObjectiveId != msg.ObjectiveId)
+                    GD.PushWarning($"QuestManager: {typeof(T).Name} for objective '{msg.ObjectiveId}' ignored in '{quest.Name}', current objective is '{quest.CurrentObjectiveId}'.");
+                else if (quest.State != _currentState)
+                    GD.PushWarning($"QuestManager: {typeof(T).Name} for objective '{msg.ObjectiveId}' ignored in '{quest.Name}', it is {quest.State} but must be {_currentState}.");
+                else
                     quest.State = _resultState;
 
                 return;

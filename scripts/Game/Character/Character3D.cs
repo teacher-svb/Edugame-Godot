@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Godot;
 using TnT.Extensions;
 using TnT.Input;
 using TnT.EduGame.CharacterState;
-using TnT.EduGame.QuestSystem;
 
 namespace TnT.EduGame.Characters
 {
     [GlobalClass]
-    public partial class Character3D : CharacterBody3D, IQuestReactionObject
+    public partial class Character3D : CharacterBody3D
     {
         [Export]
         CharacterData _characterData;
@@ -19,22 +19,6 @@ namespace TnT.EduGame.Characters
         public Stats Stats { get; private set; }
         public Attributes Attributes { get; private set; }
         CharacterStateManager _stateManager;
-
-        private readonly Dictionary<Action, Callable> _reactionCallables = [];
-        public event Action ReactionCompleted
-        {
-            add
-            {
-                var callable = Callable.From(value);
-                _reactionCallables[value] = callable;
-                Connect(SignalName.StateCompleted, callable);
-            }
-            remove
-            {
-                if (_reactionCallables.Remove(value, out var callable))
-                    Disconnect(SignalName.StateCompleted, callable);
-            }
-        }
 
         [Signal] public delegate void StateCompletedEventHandler();
 
@@ -104,9 +88,31 @@ namespace TnT.EduGame.Characters
             _stateManager.Idling(durationMs);
         }
 
+        // Completes when the idle is over. Returns at once while patrolling/following,
+        // because Idling is ignored then and StateCompleted would never fire.
+        // Note: StateCompleted (used here and in PatrolAsync) only fires once the state stack
+        // is back to its base state, so these only complete when nothing else is pushed on top.
+        public async Task IdleAsync(int durationMs)
+        {
+            if (_stateManager.IsAutonomousBehaviorActive)
+                return;
+
+            var completed = ToSignal(this, SignalName.StateCompleted);
+            SetStateToIdle(durationMs);
+            await completed;
+        }
+
         public void SetStateToPatrolling(params Node[] patrolTargets)
         {
             _stateManager.StartPatrol(patrolTargets);
+        }
+
+        // Completes when the patrol ends; never completes for a looping patrol
+        public async Task PatrolAsync(Node3D[] waypoints)
+        {
+            var completed = ToSignal(this, SignalName.StateCompleted);
+            SetStateToPatrolling(waypoints);
+            await completed;
         }
 
         public void SetStateToInput(InputAction2D moveAction, InputAction jumpAction)
@@ -123,6 +129,8 @@ namespace TnT.EduGame.Characters
         {
             _ = _stateManager.Pop();
         }
+
+        public Task PopCurrentStateAsync() => _stateManager.Pop();
 
     }
 }

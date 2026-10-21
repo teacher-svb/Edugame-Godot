@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcrra7fh4nb6o"
-path="res://.godot/imported/drawbridge-diagram.jpeg-3e0e35fc4f04e008c0aa53ec16a829ce.ctex"
+uid="uid://kg55grkl3acm"
+path="res://.godot/imported/schoolbell.png-81b9805508bddcb97d06860046aa6cfa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://project/images/drawbridge-diagram.jpeg"
-dest_files=["res://.godot/imported/drawbridge-diagram.jpeg-3e0e35fc4f04e008c0aa53ec16a829ce.ctex"]
+source_file="res://project/images/schoolbell.png"
+dest_files=["res://.godot/imported/schoolbell.png-81b9805508bddcb97d06860046aa6cfa.ctex"]
 
 [params]
 

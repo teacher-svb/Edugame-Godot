@@ -42,7 +42,7 @@ godot --path .           # Run directly
 /Scenes/autoload/     - Singleton managers scene
 /assets/              - Game assets (sprites, music, fonts)
 /GameData/challenges/ - Challenge resource files (.tres)
-/quests/              - Quest resource files (.tres)
+/GameData/quests/     - Quest resource files (.tres)
 /themes/              - UI theme resources
 ```
 
@@ -128,8 +128,10 @@ Challenge resources are stored as `.tres` files in `/GameData/challenges/` or in
   - `QuestProcessor<QuestMessageComplete>` - INPROGRESS → COMPLETED
   - `QuestProcessor<QuestMessageFail>` - INPROGRESS → NOTSTARTED
 - `QuestEventChannel` - Broadcasts events when objectives update, connected to `StateManagerGame.ShowQuestMessage()`
+- `QuestEventListener` - Filters objective updates (id/state) and runs its child `QuestStep` nodes top to bottom, each awaited (Observer + Command). Steps (in `QuestSystem/Steps/`) hold their receiver and arguments as typed exports: `IdleStep`, `PatrolStep`, `FollowStep`, `PopStateStep`, `ChallengeStep`, plus generic `CallMethodStep` (any method, awaited if it returns a `Task`). A step throwing `OperationCanceledException` stops the remaining steps. New step: subclass `QuestStep` with `[Tool, GlobalClass]`, implement `Task Run(QuestObjective)`.
+- `QuestNode` - Quest root in a level; connect signals (e.g. `Area3D.body_entered` → `_OnPlayerStartObjective`) with the objective id as an extra call argument. Ignored quest messages (wrong objective/state) log a warning.
 
-Quest resources are stored as `.tres` files in `/quests/`.
+Quest resources are stored as `.tres` files in `/GameData/quests/`.
 
 Quest states: NOTSTARTED, INPROGRESS, COMPLETED, FAILED
 
@@ -230,7 +232,7 @@ Code uses both **C# events** and **Godot Signals**:
 
 ### Resource-Based Configuration
 Heavy use of **Godot Resources** (.tres files) for data-driven design:
-- Quest definitions (`/quests/`)
+- Quest definitions (`/GameData/quests/`)
 - Challenge definitions (`/GameData/challenges/`)
 - CharacterData, ItemData, etc.
 - Allows content creation without code changes
@@ -257,13 +259,12 @@ Runtime reflection is used in:
 4. Reference it from a `MathChallengeTrigger` node
 
 ### Adding a New Quest
-1. Create `.tres` file in `/quests/` of type `Quest`
-2. Define quest objectives as array of `QuestObjective`
-3. Quest states transition through message processors:
-   - Send `QuestMessageStart` to begin quest
-   - Send `QuestMessageComplete` to complete
-   - Send `QuestMessageFail` to fail
-4. Subscribe to `QuestEventChannel` for UI updates
+Full checklist: `project/workflows.md`. In short:
+1. Create a `Quest` `.tres` in `/GameData/quests/` with its `QuestObjective`s, and register it on `QuestManager` in `managers.tscn`
+2. In the level, add a `QuestNode` (with `_quest` set) under `Quests`
+3. Wire signals to the `QuestNode` (`_OnPlayerStartObjective`, `CompleteObjective`, `FailObjective`, ...) with the objective id as extra call argument
+4. Add `QuestEventListener`s under the `QuestNode` and give them step nodes as children for the reactions
+5. Never start a quest from `_Ready`: it runs mid scene load, and the quest message it pushes breaks the loading screen
 
 ### Adding a New UI System
 1. Create `MVC_[Feature]` directory in `scripts/Game/UI/`

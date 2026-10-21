@@ -1,14 +1,13 @@
-using System;
+using System.Threading.Tasks;
 using Godot;
 using TnT.EduGame.GameState;
-using TnT.EduGame.QuestSystem;
 using TnT.Systems.Persistence;
 using TnT.Systems.UI;
 
 namespace TnT.EduGame.Question
 {
     [GlobalClass]
-    public partial class MathChallengeTrigger : Node, IQuestReactionObject, IBind<ChallengeSaveData>
+    public partial class MathChallengeTrigger : Node, IBind<ChallengeSaveData>
     {
         [Export] MathChallenge _challenge;
 
@@ -19,12 +18,6 @@ namespace TnT.EduGame.Question
 
         // replaced by the persisted data once SaveLoadManager binds this trigger
         ChallengeSaveData _saveData = new();
-
-        public event Action ReactionCompleted
-        {
-            add => Connect(SignalName.ChallengeCompleted, Callable.From(value));
-            remove => Disconnect(SignalName.ChallengeCompleted, Callable.From(value));
-        }
 
         public override void _EnterTree()
         {
@@ -44,6 +37,28 @@ namespace TnT.EduGame.Question
 
             ChallengeController.Instance.Answered += OnAnswered;
             StateManagerGame.Instance.ShowChallenge((MathChallenge)_challenge.Duplicate(), _saveData.PendingSeed);
+        }
+
+        // Shows the challenge; true when solved, false when failed
+        public async Task<bool> RunChallengeAsync()
+        {
+            var answered = new TaskCompletionSource<bool>();
+            void OnCompleted() => answered.TrySetResult(true);
+            void OnFailed() => answered.TrySetResult(false);
+
+            // subscribe before triggering so a same-frame answer isn't missed
+            ChallengeCompleted += OnCompleted;
+            ChallengeFailed += OnFailed;
+            try
+            {
+                TriggerChallenge();
+                return await answered.Task;
+            }
+            finally
+            {
+                ChallengeCompleted -= OnCompleted;
+                ChallengeFailed -= OnFailed;
+            }
         }
 
         private async void OnAnswered(bool isCorrect)
