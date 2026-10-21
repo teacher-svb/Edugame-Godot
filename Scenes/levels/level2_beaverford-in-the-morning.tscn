@@ -27,6 +27,12 @@
 [ext_resource type="Resource" uid="uid://clle2xma7ungv" path="res://GameData/quests/I.2-theAmbition-Hendrik.tres" id="qs_quest_hendrik"]
 [ext_resource type="Resource" uid="uid://b4r7x8oy4xdtc" path="res://GameData/quests/I.2-theAmbition-Liesbeth.tres" id="qs_quest_liesbeth"]
 [ext_resource type="Resource" uid="uid://bx6bq5o64me5r" path="res://GameData/quests/I.2-theAmbition-MsBram.tres" id="qs_quest_msbram"]
+[ext_resource type="Resource" uid="uid://bcgox3enbg4ph" path="res://GameData/quests/I.1-MorningInBeaverford.tres" id="qs_quest_i1"]
+[ext_resource type="Script" uid="uid://4oiioqw1bbcc" path="res://scripts/Game/Systems/Challenges/Inputs/DropdownInput.cs" id="qs_dropdown"]
+[ext_resource type="Script" uid="uid://flglunvracvv" path="res://scripts/Game/Systems/Challenges/Inputs/CogwheelInput.cs" id="qs_cogwheel"]
+[ext_resource type="Texture2D" uid="uid://kg55grkl3acm" path="res://project/images/mill-diagram.png" id="qs_tex_mill"]
+[ext_resource type="Texture2D" uid="uid://dkonxtbg1hgms" path="res://project/images/bakehouse-diagram.png" id="qs_tex_bakery"]
+[ext_resource type="Texture2D" uid="uid://bwbnh2ruyuhhd" path="res://project/images/schoolbell.png" id="qs_tex_bell"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dcdmp"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -202,45 +208,219 @@ _data = {
 [sub_resource type="Resource" id="Resource_6k5pa"]
 script = ExtResource("17_v572t")
 
-[sub_resource type="Resource" id="Resource_cornelis_x"]
+[sub_resource type="Resource" id="Resource_cornelis_b"]
 script = ExtResource("18_gnjj1")
-Name = "x"
+Name = "b"
+Pool = PackedInt32Array(50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150)
 metadata/_custom_type_script = "uid://cnfmeuouim0nn"
 
-[sub_resource type="Resource" id="Resource_cornelis_y"]
+[sub_resource type="Resource" id="Resource_cornelis_c"]
 script = ExtResource("18_gnjj1")
-Name = "y"
-FixedValue = 3
+Name = "c"
+Pool = PackedInt32Array(20, 30, 40, 50, 60, 70, 80, 90, 100)
 metadata/_custom_type_script = "uid://cnfmeuouim0nn"
 
-[sub_resource type="Resource" id="Resource_alwbg"]
+[sub_resource type="Resource" id="Resource_cornelis_deck"]
 script = ExtResource("19_gom7j")
-Text = "{y}kg"
-Position = Vector2(0.5, 0.1)
+Text = "{b} kg"
+Position = Vector2(0.47, 0.36)
 metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
 
-[sub_resource type="Resource" id="Resource_knjau"]
+[sub_resource type="Resource" id="Resource_cornelis_weight"]
 script = ExtResource("19_gom7j")
-Text = "{x}kg"
-Position = Vector2(0.2, 0.3)
+Text = "{c} kg"
+Position = Vector2(0.16, 0.25)
+metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
+
+[sub_resource type="Resource" id="Resource_cornelis_missing"]
+script = ExtResource("19_gom7j")
+Text = "+ {answer} kg"
+Position = Vector2(0.16, 0.42)
 metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
 
 [sub_resource type="Resource" id="Resource_udlpy"]
 script = ExtResource("21_bqjii")
 Image = ExtResource("20_gom7j")
-Annotations = Array[ExtResource("19_gom7j")]([SubResource("Resource_alwbg"), SubResource("Resource_knjau")])
+Annotations = Array[ExtResource("19_gom7j")]([SubResource("Resource_cornelis_deck"), SubResource("Resource_cornelis_weight"), SubResource("Resource_cornelis_missing")])
 metadata/_custom_type_script = "uid://bduu2nqauu8sw"
 
 [sub_resource type="Resource" id="Resource_qsk3u"]
 script = ExtResource("20_kjadr")
-Name = "Cornelis' bridge"
-Formula = "x - y"
-Params = Array[ExtResource("18_gnjj1")]([SubResource("Resource_cornelis_x"), SubResource("Resource_cornelis_y")])
-Constraints = PackedStringArray("x <> y", "answer > 0")
+Name = "Cornelis' brug"
+Formula = "b - c"
+Params = Array[ExtResource("18_gnjj1")]([SubResource("Resource_cornelis_b"), SubResource("Resource_cornelis_c")])
+Constraints = PackedStringArray("b > c")
 Visualization = SubResource("Resource_udlpy")
 Input = SubResource("Resource_6k5pa")
-QuestionText = "Hoeveel is {x} - {y}?"
+QuestionText = "De brug weegt {b} kg. In de bak van het tegengewicht ligt maar {c} kg.
+Hoeveel kg moet er nog bij om de brug in evenwicht te brengen?"
+HintText = "Trek het gewicht in de bak af van het gewicht van de brug."
 metadata/_custom_type_script = "uid://sup7lp6karaf"
+
+[sub_resource type="Resource" id="Resource_hendrik_c"]
+script = ExtResource("18_gnjj1")
+Name = "c"
+Pool = PackedInt32Array(20, 25, 30, 35, 40, 45, 50)
+metadata/_custom_type_script = "uid://cnfmeuouim0nn"
+
+[sub_resource type="Resource" id="Resource_hendrik_t"]
+script = ExtResource("18_gnjj1")
+Name = "t"
+Pool = PackedInt32Array(40, 45, 50, 55, 60, 65, 70, 75, 80)
+metadata/_custom_type_script = "uid://cnfmeuouim0nn"
+
+[sub_resource type="Resource" id="Resource_hendrik_now"]
+script = ExtResource("19_gom7j")
+Text = "nu: {c} toeren/min"
+Position = Vector2(0.55, 0.5)
+metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
+
+[sub_resource type="Resource" id="Resource_hendrik_target"]
+script = ExtResource("19_gom7j")
+Text = "nodig: {t} toeren/min"
+Position = Vector2(0.55, 0.57)
+metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
+
+[sub_resource type="Resource" id="Resource_hendrik_adjust"]
+script = ExtResource("19_gom7j")
+Text = "sneller: + {answer}"
+Position = Vector2(0.55, 0.64)
+metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
+
+[sub_resource type="Resource" id="Resource_hendrik_vis"]
+script = ExtResource("21_bqjii")
+Image = ExtResource("qs_tex_mill")
+Annotations = Array[ExtResource("19_gom7j")]([SubResource("Resource_hendrik_now"), SubResource("Resource_hendrik_target"), SubResource("Resource_hendrik_adjust")])
+metadata/_custom_type_script = "uid://bduu2nqauu8sw"
+
+[sub_resource type="Resource" id="Resource_hendrik_input"]
+script = ExtResource("qs_dropdown")
+
+[sub_resource type="Resource" id="Resource_hendrik_challenge"]
+script = ExtResource("20_kjadr")
+Name = "Hendriks molen"
+Formula = "t - c"
+Params = Array[ExtResource("18_gnjj1")]([SubResource("Resource_hendrik_c"), SubResource("Resource_hendrik_t")])
+Constraints = PackedStringArray("t > c", "answer > 0", "answer % 5 = 0")
+Visualization = SubResource("Resource_hendrik_vis")
+Input = SubResource("Resource_hendrik_input")
+QuestionText = "De molensteen draait nu {c} toeren per minuut. Om goed te malen moet hij {t} toeren per minuut draaien.
+Hoeveel toeren per minuut moet hij sneller gaan?"
+HintText = "Trek de snelheid van nu af van de snelheid die nodig is."
+metadata/_custom_type_script = "uid://sup7lp6karaf"
+
+[sub_resource type="Resource" id="Resource_liesbeth_x"]
+script = ExtResource("18_gnjj1")
+Name = "x"
+Pool = PackedInt32Array(50, 100, 200, 500)
+metadata/_custom_type_script = "uid://cnfmeuouim0nn"
+
+[sub_resource type="Resource" id="Resource_liesbeth_y"]
+script = ExtResource("18_gnjj1")
+Name = "y"
+Pool = PackedInt32Array(50, 100, 200, 500)
+metadata/_custom_type_script = "uid://cnfmeuouim0nn"
+
+[sub_resource type="Resource" id="Resource_liesbeth_z"]
+script = ExtResource("18_gnjj1")
+Name = "z"
+Pool = PackedInt32Array(50, 100, 200, 500)
+metadata/_custom_type_script = "uid://cnfmeuouim0nn"
+
+[sub_resource type="Resource" id="Resource_liesbeth_loaf"]
+script = ExtResource("19_gom7j")
+Text = "brood: {answer} g"
+Position = Vector2(0.53, 0.5)
+metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
+
+[sub_resource type="Resource" id="Resource_liesbeth_weights"]
+script = ExtResource("19_gom7j")
+Text = "{x} g + {y} g + {z} g"
+Position = Vector2(0.5, 0.68)
+metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
+
+[sub_resource type="Resource" id="Resource_liesbeth_vis"]
+script = ExtResource("21_bqjii")
+Image = ExtResource("qs_tex_bakery")
+Annotations = Array[ExtResource("19_gom7j")]([SubResource("Resource_liesbeth_loaf"), SubResource("Resource_liesbeth_weights")])
+metadata/_custom_type_script = "uid://bduu2nqauu8sw"
+
+[sub_resource type="Resource" id="Resource_liesbeth_input"]
+script = ExtResource("qs_cogwheel")
+
+[sub_resource type="Resource" id="Resource_liesbeth_challenge"]
+script = ExtResource("20_kjadr")
+Name = "Liesbeths weegschaal"
+Formula = "x + y + z"
+Params = Array[ExtResource("18_gnjj1")]([SubResource("Resource_liesbeth_x"), SubResource("Resource_liesbeth_y"), SubResource("Resource_liesbeth_z")])
+Unknowns = PackedStringArray("x", "y", "z")
+Constraints = PackedStringArray("distinct(x, y, z)")
+Visualization = SubResource("Resource_liesbeth_vis")
+Input = SubResource("Resource_liesbeth_input")
+QuestionText = "Het brood weegt {answer} gram.
+Kies drie verschillende gewichten die samen even zwaar zijn als het brood."
+HintText = "Begin met het grootste gewicht dat nog past."
+metadata/_custom_type_script = "uid://sup7lp6karaf"
+
+[sub_resource type="Resource" id="Resource_msbram_s"]
+script = ExtResource("18_gnjj1")
+Name = "s"
+Pool = PackedInt32Array(5, 10, 15, 20, 25, 30, 35, 40, 45)
+metadata/_custom_type_script = "uid://cnfmeuouim0nn"
+
+[sub_resource type="Resource" id="Resource_msbram_d"]
+script = ExtResource("18_gnjj1")
+Name = "d"
+Pool = PackedInt32Array(20, 25, 30, 35, 40, 45, 50)
+metadata/_custom_type_script = "uid://cnfmeuouim0nn"
+
+[sub_resource type="Resource" id="Resource_msbram_start"]
+script = ExtResource("19_gom7j")
+Text = "start: {s} min na 8u"
+Position = Vector2(0.5, 0.05)
+metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
+
+[sub_resource type="Resource" id="Resource_msbram_length"]
+script = ExtResource("19_gom7j")
+Text = "les: {d} min"
+Position = Vector2(0.5, 0.84)
+metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
+
+[sub_resource type="Resource" id="Resource_msbram_bell"]
+script = ExtResource("19_gom7j")
+Text = "bel: {answer} min na 8u"
+Position = Vector2(0.5, 0.93)
+metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
+
+[sub_resource type="Resource" id="Resource_msbram_vis"]
+script = ExtResource("21_bqjii")
+Image = ExtResource("qs_tex_bell")
+Annotations = Array[ExtResource("19_gom7j")]([SubResource("Resource_msbram_start"), SubResource("Resource_msbram_length"), SubResource("Resource_msbram_bell")])
+metadata/_custom_type_script = "uid://bduu2nqauu8sw"
+
+[sub_resource type="Resource" id="Resource_msbram_input"]
+script = ExtResource("17_v572t")
+
+[sub_resource type="Resource" id="Resource_msbram_challenge"]
+script = ExtResource("20_kjadr")
+Name = "De schoolbel"
+Formula = "s + d"
+Params = Array[ExtResource("18_gnjj1")]([SubResource("Resource_msbram_s"), SubResource("Resource_msbram_d")])
+Visualization = SubResource("Resource_msbram_vis")
+Input = SubResource("Resource_msbram_input")
+QuestionText = "De les begint {s} minuten na 8 uur en duurt {d} minuten.
+Hoeveel minuten na 8 uur moet de bel gaan?"
+HintText = "Tel de lengte van de les op bij het begin van de les."
+metadata/_custom_type_script = "uid://sup7lp6karaf"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_npc_approach"]
+size = Vector3(6, 2, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_npc_close"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_village_edge"]
+size = Vector3(7, 2, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_igo7b"]
 size = Vector3(2.4, 1, 1.8000001)
@@ -325,6 +505,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1340637, 1.0991005, 6.99557
 
 [node name="Quests" type="Node" parent="." unique_id=1154009112]
 
+[node name="I_1-Morning in Beaverford" type="Node" parent="Quests" unique_id=951277046]
+script = ExtResource("13_bqjii")
+_quest = ExtResource("qs_quest_i1")
+
 [node name="I_2-the Ambition" type="Node" parent="Quests" unique_id=204093315]
 
 [node name="Cornelis" type="Node" parent="Quests/I_2-the Ambition" unique_id=1884105571]
@@ -336,7 +520,7 @@ script = ExtResource("16_wirkn")
 _challenge = SubResource("Resource_qsk3u")
 metadata/_custom_type_script = "uid://diolsl1jtpyue"
 
-[node name="QuestEventListener" type="Node" parent="Quests/I_2-the Ambition/Cornelis" unique_id=609614438]
+[node name="obj2-init-Challenge" type="Node" parent="Quests/I_2-the Ambition/Cornelis" unique_id=609614438]
 script = ExtResource("13_ymh3g")
 _checkObjectiveId = true
 _objectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa02"
@@ -345,26 +529,151 @@ _state = 1
 eventChannel = ExtResource("15_jttql")
 metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 
-[node name="IdleStep" type="Node" parent="Quests/I_2-the Ambition/Cornelis/QuestEventListener" unique_id=1384868661 node_paths=PackedStringArray("_character")]
+[node name="IdleStep" type="Node" parent="Quests/I_2-the Ambition/Cornelis/obj2-init-Challenge" unique_id=1384868661 node_paths=PackedStringArray("_character")]
 script = ExtResource("qs_idle")
 _character = NodePath("../../../../../Cornelis")
 _durationMs = 2000
 
-[node name="ChallengeStep" type="Node" parent="Quests/I_2-the Ambition/Cornelis/QuestEventListener" unique_id=1435754350 node_paths=PackedStringArray("_trigger")]
+[node name="ChallengeStep" type="Node" parent="Quests/I_2-the Ambition/Cornelis/obj2-init-Challenge" unique_id=1435754350 node_paths=PackedStringArray("_trigger")]
 script = ExtResource("qs_challenge")
 _trigger = NodePath("../../MathChallengeTrigger")
+
+[node name="obj3-init-Dismiss" type="Node" parent="Quests/I_2-the Ambition/Cornelis" unique_id=1272946981]
+script = ExtResource("13_ymh3g")
+_checkObjectiveId = true
+_objectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa03"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("15_jttql")
+metadata/_custom_type_script = "uid://dd1g4qvshevqa"
+
+[node name="IdleStep" type="Node" parent="Quests/I_2-the Ambition/Cornelis/obj3-init-Dismiss" unique_id=926490946 node_paths=PackedStringArray("_character")]
+script = ExtResource("qs_idle")
+_character = NodePath("../../../../../Cornelis")
+_durationMs = 1000
 
 [node name="Hendrik" type="Node" parent="Quests/I_2-the Ambition" unique_id=853748344]
 script = ExtResource("13_bqjii")
 _quest = ExtResource("qs_quest_hendrik")
 
+[node name="MathChallengeTrigger" type="Node" parent="Quests/I_2-the Ambition/Hendrik" unique_id=1346264907]
+script = ExtResource("16_wirkn")
+_challenge = SubResource("Resource_hendrik_challenge")
+metadata/_custom_type_script = "uid://diolsl1jtpyue"
+
+[node name="obj2-init-Challenge" type="Node" parent="Quests/I_2-the Ambition/Hendrik" unique_id=1929192805]
+script = ExtResource("13_ymh3g")
+_checkObjectiveId = true
+_objectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee02"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("15_jttql")
+metadata/_custom_type_script = "uid://dd1g4qvshevqa"
+
+[node name="IdleStep" type="Node" parent="Quests/I_2-the Ambition/Hendrik/obj2-init-Challenge" unique_id=123233874 node_paths=PackedStringArray("_character")]
+script = ExtResource("qs_idle")
+_character = NodePath("../../../../../Hendrik")
+_durationMs = 1000
+
+[node name="ChallengeStep" type="Node" parent="Quests/I_2-the Ambition/Hendrik/obj2-init-Challenge" unique_id=918557862 node_paths=PackedStringArray("_trigger")]
+script = ExtResource("qs_challenge")
+_trigger = NodePath("../../MathChallengeTrigger")
+
+[node name="obj3-init-Dismiss" type="Node" parent="Quests/I_2-the Ambition/Hendrik" unique_id=968405469]
+script = ExtResource("13_ymh3g")
+_checkObjectiveId = true
+_objectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee03"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("15_jttql")
+metadata/_custom_type_script = "uid://dd1g4qvshevqa"
+
+[node name="IdleStep" type="Node" parent="Quests/I_2-the Ambition/Hendrik/obj3-init-Dismiss" unique_id=774582017 node_paths=PackedStringArray("_character")]
+script = ExtResource("qs_idle")
+_character = NodePath("../../../../../Hendrik")
+_durationMs = 1000
+
 [node name="Liesbeth" type="Node" parent="Quests/I_2-the Ambition" unique_id=1543397962]
 script = ExtResource("13_bqjii")
 _quest = ExtResource("qs_quest_liesbeth")
 
+[node name="MathChallengeTrigger" type="Node" parent="Quests/I_2-the Ambition/Liesbeth" unique_id=956914814]
+script = ExtResource("16_wirkn")
+_challenge = SubResource("Resource_liesbeth_challenge")
+metadata/_custom_type_script = "uid://diolsl1jtpyue"
+
+[node name="obj2-init-Challenge" type="Node" parent="Quests/I_2-the Ambition/Liesbeth" unique_id=971181459]
+script = ExtResource("13_ymh3g")
+_checkObjectiveId = true
+_objectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd02"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("15_jttql")
+metadata/_custom_type_script = "uid://dd1g4qvshevqa"
+
+[node name="IdleStep" type="Node" parent="Quests/I_2-the Ambition/Liesbeth/obj2-init-Challenge" unique_id=100276952 node_paths=PackedStringArray("_character")]
+script = ExtResource("qs_idle")
+_character = NodePath("../../../../../Liesbeth")
+_durationMs = 1000
+
+[node name="ChallengeStep" type="Node" parent="Quests/I_2-the Ambition/Liesbeth/obj2-init-Challenge" unique_id=2050807499 node_paths=PackedStringArray("_trigger")]
+script = ExtResource("qs_challenge")
+_trigger = NodePath("../../MathChallengeTrigger")
+
+[node name="obj3-init-Dismiss" type="Node" parent="Quests/I_2-the Ambition/Liesbeth" unique_id=571795343]
+script = ExtResource("13_ymh3g")
+_checkObjectiveId = true
+_objectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd03"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("15_jttql")
+metadata/_custom_type_script = "uid://dd1g4qvshevqa"
+
+[node name="IdleStep" type="Node" parent="Quests/I_2-the Ambition/Liesbeth/obj3-init-Dismiss" unique_id=138945425 node_paths=PackedStringArray("_character")]
+script = ExtResource("qs_idle")
+_character = NodePath("../../../../../Liesbeth")
+_durationMs = 1000
+
 [node name="MsBram" type="Node" parent="Quests/I_2-the Ambition" unique_id=1824263733]
 script = ExtResource("13_bqjii")
 _quest = ExtResource("qs_quest_msbram")
+
+[node name="MathChallengeTrigger" type="Node" parent="Quests/I_2-the Ambition/MsBram" unique_id=1451274578]
+script = ExtResource("16_wirkn")
+_challenge = SubResource("Resource_msbram_challenge")
+metadata/_custom_type_script = "uid://diolsl1jtpyue"
+
+[node name="obj2-init-Challenge" type="Node" parent="Quests/I_2-the Ambition/MsBram" unique_id=232944441]
+script = ExtResource("13_ymh3g")
+_checkObjectiveId = true
+_objectiveId = "3a861b47-c25e-4265-8205-81e4394e3902"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("15_jttql")
+metadata/_custom_type_script = "uid://dd1g4qvshevqa"
+
+[node name="IdleStep" type="Node" parent="Quests/I_2-the Ambition/MsBram/obj2-init-Challenge" unique_id=358076534 node_paths=PackedStringArray("_character")]
+script = ExtResource("qs_idle")
+_character = NodePath("../../../../../MsBram")
+_durationMs = 1000
+
+[node name="ChallengeStep" type="Node" parent="Quests/I_2-the Ambition/MsBram/obj2-init-Challenge" unique_id=1091551106 node_paths=PackedStringArray("_trigger")]
+script = ExtResource("qs_challenge")
+_trigger = NodePath("../../MathChallengeTrigger")
+
+[node name="obj3-init-Dismiss" type="Node" parent="Quests/I_2-the Ambition/MsBram" unique_id=977377427]
+script = ExtResource("13_ymh3g")
+_checkObjectiveId = true
+_objectiveId = "3a861b47-c25e-4265-8205-81e4394e3903"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("15_jttql")
+metadata/_custom_type_script = "uid://dd1g4qvshevqa"
+
+[node name="IdleStep" type="Node" parent="Quests/I_2-the Ambition/MsBram/obj3-init-Dismiss" unique_id=294349187 node_paths=PackedStringArray("_character")]
+script = ExtResource("qs_idle")
+_character = NodePath("../../../../../MsBram")
+_durationMs = 1000
 
 [node name="CornelisDrawbridgeArea" type="Area3D" parent="." unique_id=475543381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
@@ -380,7 +689,79 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.19999981)
 shape = SubResource("BoxShape3D_bivhb")
 
+[node name="HendrikMillArea" type="Area3D" parent="." unique_id=1470465706]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.337013, 0, -18.067596)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HendrikMillArea" unique_id=1481059729]
+shape = SubResource("BoxShape3D_npc_approach")
+
+[node name="HendrikMillCloseArea" type="Area3D" parent="." unique_id=600818871]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.337013, 0, -18.067596)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HendrikMillCloseArea" unique_id=1134775141]
+shape = SubResource("BoxShape3D_npc_close")
+
+[node name="LiesbethScalesArea" type="Area3D" parent="." unique_id=215740431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.61164, 0, 0.4628191)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LiesbethScalesArea" unique_id=1563036971]
+shape = SubResource("BoxShape3D_npc_approach")
+
+[node name="LiesbethScalesCloseArea" type="Area3D" parent="." unique_id=1441486578]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.61164, 0, 0.4628191)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LiesbethScalesCloseArea" unique_id=1359724527]
+shape = SubResource("BoxShape3D_npc_close")
+
+[node name="MsBramBellArea" type="Area3D" parent="." unique_id=334275673]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6740956, 0, -26.58886)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MsBramBellArea" unique_id=761672957]
+shape = SubResource("BoxShape3D_npc_approach")
+
+[node name="MsBramBellCloseArea" type="Area3D" parent="." unique_id=1716861232]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6740956, 0, -26.58886)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MsBramBellCloseArea" unique_id=1921053802]
+shape = SubResource("BoxShape3D_npc_close")
+
+[node name="LeaveHomeArea" type="Area3D" parent="." unique_id=590053377]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 10)
+
+[node name="North" type="CollisionShape3D" parent="LeaveHomeArea" unique_id=632073794]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+shape = SubResource("BoxShape3D_village_edge")
+
+[node name="South" type="CollisionShape3D" parent="LeaveHomeArea" unique_id=2042628023]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+shape = SubResource("BoxShape3D_village_edge")
+
+[node name="West" type="CollisionShape3D" parent="LeaveHomeArea" unique_id=210833267]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3, 0, 0)
+shape = SubResource("BoxShape3D_village_edge")
+
+[node name="East" type="CollisionShape3D" parent="LeaveHomeArea" unique_id=172641768]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3, 0, 0)
+shape = SubResource("BoxShape3D_village_edge")
+
 [connection signal="ChallengeCompleted" from="Quests/I_2-the Ambition/Cornelis/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis" method="CompleteObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa02"]]
 [connection signal="ChallengeFailed" from="Quests/I_2-the Ambition/Cornelis/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis" method="FailObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa02"]]
 [connection signal="body_entered" from="CornelisDrawbridgeArea" to="Quests/I_2-the Ambition/Cornelis" method="_OnPlayerStartObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa01"]]
 [connection signal="body_entered" from="CornelisDrawbridgeCloseArea" to="Quests/I_2-the Ambition/Cornelis" method="_OnPlayerCompleteObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa01"]]
+[connection signal="ReactionEnd" from="Quests/I_2-the Ambition/Cornelis/obj3-init-Dismiss" to="Quests/I_2-the Ambition/Cornelis" method="CompleteObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa03"]]
+[connection signal="ChallengeCompleted" from="Quests/I_2-the Ambition/Hendrik/MathChallengeTrigger" to="Quests/I_2-the Ambition/Hendrik" method="CompleteObjective" binds= ["d31f51c6-cbd8-4285-800f-0bd317caee02"]]
+[connection signal="ChallengeFailed" from="Quests/I_2-the Ambition/Hendrik/MathChallengeTrigger" to="Quests/I_2-the Ambition/Hendrik" method="FailObjective" binds= ["d31f51c6-cbd8-4285-800f-0bd317caee02"]]
+[connection signal="ReactionEnd" from="Quests/I_2-the Ambition/Hendrik/obj3-init-Dismiss" to="Quests/I_2-the Ambition/Hendrik" method="CompleteObjective" binds= ["d31f51c6-cbd8-4285-800f-0bd317caee03"]]
+[connection signal="body_entered" from="HendrikMillArea" to="Quests/I_2-the Ambition/Hendrik" method="_OnPlayerStartObjective" binds= ["d31f51c6-cbd8-4285-800f-0bd317caee01"]]
+[connection signal="body_entered" from="HendrikMillCloseArea" to="Quests/I_2-the Ambition/Hendrik" method="_OnPlayerCompleteObjective" binds= ["d31f51c6-cbd8-4285-800f-0bd317caee01"]]
+[connection signal="ChallengeCompleted" from="Quests/I_2-the Ambition/Liesbeth/MathChallengeTrigger" to="Quests/I_2-the Ambition/Liesbeth" method="CompleteObjective" binds= ["3cd9cc64-f69b-4d80-beb6-1290468dfd02"]]
+[connection signal="ChallengeFailed" from="Quests/I_2-the Ambition/Liesbeth/MathChallengeTrigger" to="Quests/I_2-the Ambition/Liesbeth" method="FailObjective" binds= ["3cd9cc64-f69b-4d80-beb6-1290468dfd02"]]
+[connection signal="ReactionEnd" from="Quests/I_2-the Ambition/Liesbeth/obj3-init-Dismiss" to="Quests/I_2-the Ambition/Liesbeth" method="CompleteObjective" binds= ["3cd9cc64-f69b-4d80-beb6-1290468dfd03"]]
+[connection signal="body_entered" from="LiesbethScalesArea" to="Quests/I_2-the Ambition/Liesbeth" method="_OnPlayerStartObjective" binds= ["3cd9cc64-f69b-4d80-beb6-1290468dfd01"]]
+[connection signal="body_entered" from="LiesbethScalesCloseArea" to="Quests/I_2-the Ambition/Liesbeth" method="_OnPlayerCompleteObjective" binds= ["3cd9cc64-f69b-4d80-beb6-1290468dfd01"]]
+[connection signal="ChallengeCompleted" from="Quests/I_2-the Ambition/MsBram/MathChallengeTrigger" to="Quests/I_2-the Ambition/MsBram" method="CompleteObjective" binds= ["3a861b47-c25e-4265-8205-81e4394e3902"]]
+[connection signal="ChallengeFailed" from="Quests/I_2-the Ambition/MsBram/MathChallengeTrigger" to="Quests/I_2-the Ambition/MsBram" method="FailObjective" binds= ["3a861b47-c25e-4265-8205-81e4394e3902"]]
+[connection signal="ReactionEnd" from="Quests/I_2-the Ambition/MsBram/obj3-init-Dismiss" to="Quests/I_2-the Ambition/MsBram" method="CompleteObjective" binds= ["3a861b47-c25e-4265-8205-81e4394e3903"]]
+[connection signal="body_entered" from="MsBramBellArea" to="Quests/I_2-the Ambition/MsBram" method="_OnPlayerStartObjective" binds= ["3a861b47-c25e-4265-8205-81e4394e3901"]]
+[connection signal="body_entered" from="MsBramBellCloseArea" to="Quests/I_2-the Ambition/MsBram" method="_OnPlayerCompleteObjective" binds= ["3a861b47-c25e-4265-8205-81e4394e3901"]]
+[connection signal="body_entered" from="LeaveHomeArea" to="Quests/I_1-Morning in Beaverford" method="_OnPlayerCompleteObjective" binds= ["67bc9a4e-a340-4225-a816-1a8b2b1b8926"]]

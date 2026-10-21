@@ -16,8 +16,9 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 
 [sub_resource type="Resource" id="Resource_bzpdt"]
 script = ExtResource("1_hd8sl")
-_startText = "Ik heb de oplossing gevonden!"
-_completeText = "Het zit zo..."
+_startText = "Laat mij eens naar die molensteen kijken!"
+_failText = "Hmm, dat klopt nog niet. Ik probeer het nog eens."
+_completeText = "Ik heb de oplossing gevonden! Het zit zo..."
 _characterData = ExtResource("4_hmbl1")
 _objectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee02"
 metadata/_custom_type_script = "uid://bkc5aqh43okjh"
