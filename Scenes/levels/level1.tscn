@@ -32,10 +32,10 @@
 [ext_resource type="MeshLibrary" uid="uid://dn1i16n6um3sg" path="res://assets/3D/environments/Furniture Kit/furniture-kit-tileables.meshlib" id="30_kb3qt"]
 [ext_resource type="Script" uid="uid://cewycpjka78f3" path="res://scripts/Game/Systems/InventorySystem/ItemEventListener.cs" id="33_sppe2"]
 [ext_resource type="Resource" uid="uid://clf3iqsa6rjxf" path="res://GameData/EventChannels/PickupItemEventChannel.tres" id="34_lhsq1"]
-[ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Steps/FollowStep.cs" id="qs_follow"]
-[ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Steps/IdleStep.cs" id="qs_idle"]
-[ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Steps/PatrolStep.cs" id="qs_patrol"]
-[ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Steps/PopStateStep.cs" id="qs_pop"]
+[ext_resource type="Script" uid="uid://b0kimif38jyth" path="res://scripts/Game/Systems/QuestSystem/Steps/FollowStep.cs" id="qs_follow"]
+[ext_resource type="Script" uid="uid://v6ge3lx8r4vx" path="res://scripts/Game/Systems/QuestSystem/Steps/IdleStep.cs" id="qs_idle"]
+[ext_resource type="Script" uid="uid://ch4x6amfugyhw" path="res://scripts/Game/Systems/QuestSystem/Steps/PatrolStep.cs" id="qs_patrol"]
+[ext_resource type="Script" uid="uid://bon4b1kkdldu8" path="res://scripts/Game/Systems/QuestSystem/Steps/PopStateStep.cs" id="qs_pop"]
 [ext_resource type="Script" uid="uid://bksw1ls1mwcv0" path="res://scripts/Game/Systems/QuestSystem/QuestNode.cs" id="qs_questnode"]
 [ext_resource type="Resource" uid="uid://bcgox3enbg4ph" path="res://GameData/quests/I.1-MorningInBeaverford.tres" id="qs_quest_i1"]
 
@@ -466,17 +466,17 @@ shape = SubResource("BoxShape3D_shbgg")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
 [node name="transporter_livingroom_level2" type="Area3D" parent="transporters" unique_id=1664634794]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0.4, 42)
 script = ExtResource("22_182vs")
 _sceneToLoadPath = "uid://selmqjc4dpgf"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="transporters/transporter_livingroom_level2" unique_id=2109793199]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.431825, 0.43125337, -4.9323463)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0681753, -0.46874666, -36.932346)
 shape = SubResource("BoxShape3D_shbgg")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="transporters/transporter_livingroom_level2" unique_id=2034057283]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.782265, 0.86250675, -8.733428)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.282265, -0.03749329, -40.73343)
 shape = SubResource("BoxShape3D_shbgg")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 

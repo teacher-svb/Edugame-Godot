@@ -1,0 +1,320 @@
+{
+ "coordinate_system": "Godot: X = map x - 50, Y = height, Z = map z - 50 (same as the exported level); rotation is a quaternion [x, y, z, w]",
+ "count": 14,
+ "placements": [
+  {
+   "marker": "STRUCT_well",
+   "structure": "Well",
+   "structure_file": "well.glb",
+   "position": [
+    -10.0,
+    0.0,
+    6.0
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.707107,
+    -0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "animations": []
+  },
+  {
+   "marker": "STRUCT_windmill",
+   "structure": "Windmill",
+   "structure_file": "windmill.glb",
+   "position": [
+    -42.0,
+    1.5,
+    40.0
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "animations": []
+  },
+  {
+   "marker": "STRUCT_bakery",
+   "structure": "Bakery",
+   "structure_file": "bakery.glb",
+   "position": [
+    -23.0,
+    0.07,
+    15.65
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "animations": []
+  },
+  {
+   "marker": "STRUCT_drawbridge",
+   "structure": "Drawbridge",
+   "structure_file": "drawbridge.glb",
+   "position": [
+    27.0,
+    0.2,
+    16.75
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "animations": [
+    "Drawbridge_Raise",
+    "Drawbridge_Lower"
+   ]
+  },
+  {
+   "marker": "STRUCT_tavern",
+   "structure": "Tavern",
+   "structure_file": "tavern.glb",
+   "position": [
+    -40.01,
+    0.5,
+    6.38
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "animations": []
+  },
+  {
+   "marker": "STRUCT_school",
+   "structure": "School",
+   "structure_file": "school.glb",
+   "position": [
+    -2.0,
+    0.3,
+    -33.0
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "animations": []
+  },
+  {
+   "marker": "STRUCT_general_store",
+   "structure": "GeneralStore",
+   "structure_file": "general_store.glb",
+   "position": [
+    -23.01,
+    0.0,
+    -2.17
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "animations": []
+  },
+  {
+   "marker": "STRUCT_mabel_home",
+   "structure": "MabelHome",
+   "structure_file": "mabel_home.glb",
+   "position": [
+    -3.0,
+    0.4,
+    39.0
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "animations": []
+  },
+  {
+   "marker": "STRUCT_veld_home",
+   "structure": "VeldHome",
+   "structure_file": "veld_home.glb",
+   "position": [
+    -22.0,
+    0.3,
+    37.81
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "animations": []
+  },
+  {
+   "marker": "STRUCT_moat_house",
+   "structure": "MoatHouse",
+   "structure_file": "moat_house.glb",
+   "position": [
+    26.98,
+    0.3,
+    1.0
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "animations": []
+  },
+  {
+   "marker": "STRUCT_brick_house",
+   "structure": "BrickHouse",
+   "structure_file": "brick_house.glb",
+   "position": [
+    2.95,
+    0.0,
+    19.05
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "animations": []
+  },
+  {
+   "marker": "STRUCT_narrow_house",
+   "structure": "NarrowHouse",
+   "structure_file": "narrow_house.glb",
+   "position": [
+    3.0,
+    0.0,
+    -2.0
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "animations": []
+  },
+  {
+   "marker": "STRUCT_wizard_tower",
+   "structure": "WizardTower",
+   "structure_file": "wizard_tower.glb",
+   "position": [
+    -26.028,
+    1.2,
+    -31.817
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "animations": [
+    "WizardTower_Turn"
+   ]
+  },
+  {
+   "marker": "STRUCT_stream_bridge",
+   "structure": "StreamBridge",
+   "structure_file": "stream_bridge.glb",
+   "position": [
+    -10.0,
+    0.12,
+    -22.0
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "animations": []
+  }
+ ],
+ "note": "animations are the names Godot shows after import (glTF name WizardTower_Turn-loop becomes WizardTower_Turn, looping)."
+}

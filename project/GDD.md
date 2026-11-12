@@ -271,16 +271,16 @@ flowchart TD
     subgraph act1[ACT I]
         home01 --> g1
         subgraph g1["parallel quests \n [The Ambition]"]
-            corn01
-            lies01
-            hend01
+            corn01 ---
+            lies01 ---
+            hend01 ---
             veld01
         end
         g1 --> schl01
 
         subgraph g2["parallel quests \n The Wizard School Trials"]
-            wzrd2
-            wzrd3
+            wzrd2 ---
+            wzrd3 ---
             wzrd4
         end
         schl01 --> g2
@@ -290,9 +290,9 @@ flowchart TD
     subgraph act2[ACT II]
         corn02 --> g3
         subgraph g3["parallel quests \n The Busy Week"]
-            lies02
-            hend02
-            veld02
+            lies02 ---
+            hend02 ---
+            veld02 ---
             schl02
         end
         g3 --> wzrd05

@@ -31,6 +31,7 @@ namespace TnT.EduGame.QuestSystem
         [Export]
         Array<QuestObjective> _objectives = new();
         public List<QuestObjective> Objectives => _objectives.ToList();
+        public bool IsCompleted => _objectives.All(o => o.State == QuestState.COMPLETED);
 
         public delegate void OnQuestObjectiveStateChanged(QuestObjective objective);
         public OnQuestObjectiveStateChanged OnObjectiveStateChanged;

@@ -129,6 +129,7 @@ Challenge resources are stored as `.tres` files in `/GameData/challenges/` or in
   - `QuestProcessor<QuestMessageFail>` - INPROGRESS → NOTSTARTED
 - `QuestEventChannel` - Broadcasts events when objectives update, connected to `StateManagerGame.ShowQuestMessage()`
 - `QuestEventListener` - Filters objective updates (id/state) and runs its child `QuestStep` nodes top to bottom, each awaited (Observer + Command). Steps (in `QuestSystem/Steps/`) hold their receiver and arguments as typed exports: `IdleStep`, `PatrolStep`, `FollowStep`, `PopStateStep`, `ChallengeStep`, plus generic `CallMethodStep` (any method, awaited if it returns a `Task`). A step throwing `OperationCanceledException` stops the remaining steps. New step: subclass `QuestStep` with `[Tool, GlobalClass]`, implement `Task Run(QuestObjective)`.
+- `QuestsCompletedListener` - Runs its child steps once all listed quests are completed (also checked on `_Ready`, for quests finished in another scene); wire `ReactionEnd` to open up the next quest, e.g. enable its trigger `Area3D` (`set_deferred("monitoring", true)`). These are the arrows in the GDD quest diagram. Both listeners share `QuestStepListener` (runs the steps, `ReactionStart`/`ReactionEnd`)
 - `QuestNode` - Quest root in a level; connect signals (e.g. `Area3D.body_entered` → `_OnPlayerStartObjective`) with the objective id as an extra call argument. Ignored quest messages (wrong objective/state) log a warning.
 
 Quest resources are stored as `.tres` files in `/GameData/quests/`.

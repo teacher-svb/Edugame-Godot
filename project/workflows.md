@@ -70,3 +70,8 @@ scene root/
       - `IdleStep`, `PatrolStep`, `FollowStep`, `PopStateStep`, `ChallengeStep`
       - `CallMethodStep` for any other method (awaited if it returns a `Task`)
     - [ ] *optional* Link the `ReactionEnd` Signal (fires after the last step) to the object/character
+7. **Quest Order** *(optional, when the GDD quest diagram has arrows into this quest)*
+    - [ ] Set `monitoring = false` on the quest's start `Area3D`(s)
+    - [ ] Add a `QuestsCompletedListener` under the `QuestNode`, set `Event Channel` and list the quests that must be completed first in `Quests`
+    - [ ] Link its `ReactionEnd` to each area's `set_deferred` with extra call arguments `"monitoring"`, `true`
+    - Don't start the quest straight from the listener: when the quests were already completed it runs during `_Ready`, mid scene load
