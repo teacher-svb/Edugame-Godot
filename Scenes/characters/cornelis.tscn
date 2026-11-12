@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://blxvge1gc183s" path="res://assets/3D/characters/textures/engineer_texture_alt_B.png" id="3_ivm3q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kl5mj"]
-radius = 0.2
-height = 0.8
+radius = 0.3
+height = 1.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8afov"]
 albedo_texture = ExtResource("3_ivm3q")
@@ -17,11 +17,11 @@ _characterData = ExtResource("2_ivm3q")
 PersistentId = "Cornelis"
 
 [node name="CollisionShape3D" parent="." index="2" unique_id=293151575]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 shape = SubResource("CapsuleShape3D_kl5mj")
 
 [node name="dialogCamera" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="0" unique_id=534549197]
-far = 1.0
+far = 1.5
 
 [node name="AnimationTree" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
 root_node = NodePath("..")
@@ -30,7 +30,7 @@ root_node = NodePath("..")
 root_node = NodePath("..")
 
 [node name="Engineer3" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="2" unique_id=1473802298 instance=ExtResource("2_ob1j5")]
-transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
+transform = Transform3D(0.525, 0, 0, 0, 0.525, 0, 0, 0, 0.525, 0, 0, 0)
 
 [node name="Skeleton3D" parent="VisualRoot/Engineer3/Rig_Medium" parent_id_path=PackedInt32Array(1473802298, 588855115) index="0" unique_id=522226090]
 bones/1/position = Vector3(0, 0.38442862, 0)

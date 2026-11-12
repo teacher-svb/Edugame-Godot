@@ -8,8 +8,8 @@
 [ext_resource type="Resource" uid="uid://clf3iqsa6rjxf" path="res://GameData/EventChannels/PickupItemEventChannel.tres" id="5_da6yh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rqd8d"]
-radius = 0.118652344
-height = 0.3795166
+radius = 0.1779785
+height = 0.5692749
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u4rbu"]
 animation = &"idle"
@@ -51,7 +51,7 @@ tracks/0/enabled = true
 tracks/0/path = NodePath(".")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.5, 1, 0, 0.02, 0, 1, 1, 0, 0, 0)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.5, 1, 0, 0.03, 0, 1, 1, 0, 0, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_foxhp"]
 _data = {
@@ -60,19 +60,19 @@ _data = {
 }
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_da6yh"]
-height = 0.47583008
-radius = 0.5307617
+height = 0.7137451
+radius = 0.7961426
 
 [node name="avocado" unique_id=926984674 instance=ExtResource("1_7k8ld")]
 _characterData = ExtResource("2_u4rbu")
 PersistentId = "avocado"
 
 [node name="CollisionShape3D" parent="." index="2" unique_id=293151575]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18597412, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2789612, 0)
 shape = SubResource("CapsuleShape3D_rqd8d")
 
 [node name="dialogCamera" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="0" unique_id=534549197]
-transform = Transform3D(1, 0, 0, 0, 0.9961948, 0.08715574, 0, -0.08715574, 0.9961948, -0.013557843, 0.25833327, 0.34706593)
+transform = Transform3D(1, 0, 0, 0, 0.9961948, 0.0871557, 0, -0.0871557, 0.9961948, -0.0203368, 0.3874999, 0.5205989)
 
 [node name="AnimationTree" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
 root_node = NodePath("../../VisualRoot/avocado2")
@@ -83,6 +83,7 @@ anim_player = NodePath("../../VisualRoot/avocado2/AnimationPlayer")
 root_node = NodePath("")
 
 [node name="avocado2" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="2" unique_id=1975359764 instance=ExtResource("2_xpawx")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
 [node name="Skeleton3D" parent="VisualRoot/avocado2/Armature" parent_id_path=PackedInt32Array(1975359764, 1110046006) index="0" unique_id=2010913038]
 bones/1/rotation = Quaternion(-0.122428946, 0.027743451, 0.07656861, 0.9891304)
@@ -118,7 +119,7 @@ autoplay = &"updown"
 [node name="Area3D" type="Area3D" parent="." index="6" unique_id=1554866459]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=1623215847]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22790527, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3418579, 0)
 shape = SubResource("CylinderShape3D_da6yh")
 
 [connection signal="body_entered" from="Area3D" to="ItemRef" method="_OnBodyEntered"]

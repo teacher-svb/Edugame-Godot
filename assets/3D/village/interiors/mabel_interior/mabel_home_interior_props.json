@@ -1,0 +1,930 @@
+{
+ "coordinate_system": "Godot, same as the two level GLBs placed at the origin: position = (x, height, z); rotation is a quaternion [x, y, z, w]. position_in_floor is relative to the floor root (Interior_Ground / Interior_Upper).",
+ "count": 33,
+ "placements": [
+  {
+   "marker": "PROP_armchair_01",
+   "floor": "ground",
+   "prop_type": "prop_armchair",
+   "prop_file": "godot_exports/village/props/prop_armchair.glb",
+   "new": true,
+   "position": [
+    9.5,
+    0.0,
+    -3.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    9.5,
+    0.0,
+    -3.5
+   ]
+  },
+  {
+   "marker": "PROP_barrel_b_01",
+   "floor": "ground",
+   "prop_type": "prop_barrel_b",
+   "prop_file": "godot_exports/village/props/prop_barrel_b.glb",
+   "new": false,
+   "position": [
+    0.5,
+    0.0291,
+    -1.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    0.5,
+    0.0291,
+    -1.5
+   ]
+  },
+  {
+   "marker": "PROP_bookshelf_01",
+   "floor": "ground",
+   "prop_type": "prop_bookshelf",
+   "prop_file": "godot_exports/village/props/prop_bookshelf.glb",
+   "new": true,
+   "position": [
+    4.0,
+    0.0,
+    -7.76
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    4.0,
+    0.0,
+    -7.76
+   ]
+  },
+  {
+   "marker": "PROP_bucket_01",
+   "floor": "ground",
+   "prop_type": "prop_bucket",
+   "prop_file": "godot_exports/village/props/prop_bucket.glb",
+   "new": false,
+   "position": [
+    0.62,
+    0.0,
+    -7.38
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    0.62,
+    0.0,
+    -7.38
+   ]
+  },
+  {
+   "marker": "PROP_candle_01",
+   "floor": "ground",
+   "prop_type": "prop_candle",
+   "prop_file": "godot_exports/village/props/prop_candle.glb",
+   "new": true,
+   "position": [
+    10.45,
+    0.65,
+    -3.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    10.45,
+    0.65,
+    -3.5
+   ]
+  },
+  {
+   "marker": "PROP_chair_01",
+   "floor": "ground",
+   "prop_type": "prop_chair",
+   "prop_file": "godot_exports/village/props/prop_chair.glb",
+   "new": true,
+   "position": [
+    7.5,
+    0.0,
+    -3.42
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    7.5,
+    0.0,
+    -3.42
+   ]
+  },
+  {
+   "marker": "PROP_chair_02",
+   "floor": "ground",
+   "prop_type": "prop_chair",
+   "prop_file": "godot_exports/village/props/prop_chair.glb",
+   "new": true,
+   "position": [
+    8.5,
+    0.0,
+    -3.42
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    8.5,
+    0.0,
+    -3.42
+   ]
+  },
+  {
+   "marker": "PROP_chair_03",
+   "floor": "ground",
+   "prop_type": "prop_chair",
+   "prop_file": "godot_exports/village/props/prop_chair.glb",
+   "new": true,
+   "position": [
+    7.5,
+    0.0,
+    -1.58
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    7.5,
+    0.0,
+    -1.58
+   ]
+  },
+  {
+   "marker": "PROP_chair_04",
+   "floor": "ground",
+   "prop_type": "prop_chair",
+   "prop_file": "godot_exports/village/props/prop_chair.glb",
+   "new": true,
+   "position": [
+    8.5,
+    0.0,
+    -1.58
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    8.5,
+    0.0,
+    -1.58
+   ]
+  },
+  {
+   "marker": "PROP_coat_rack_01",
+   "floor": "ground",
+   "prop_type": "prop_coat_rack",
+   "prop_file": "godot_exports/village/props/prop_coat_rack.glb",
+   "new": true,
+   "position": [
+    5.5,
+    0.0,
+    -0.45
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    5.5,
+    0.0,
+    -0.45
+   ]
+  },
+  {
+   "marker": "PROP_cooking_pot_01",
+   "floor": "ground",
+   "prop_type": "prop_cooking_pot",
+   "prop_file": "godot_exports/village/props/prop_cooking_pot.glb",
+   "new": true,
+   "position": [
+    0.48,
+    0.975,
+    -5.3
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    0.48,
+    0.975,
+    -5.3
+   ]
+  },
+  {
+   "marker": "PROP_crockery_set_01",
+   "floor": "ground",
+   "prop_type": "prop_crockery_set",
+   "prop_file": "godot_exports/village/props/prop_crockery_set.glb",
+   "new": true,
+   "position": [
+    0.16,
+    2.13,
+    -4.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.707107,
+    -0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    0.16,
+    2.13,
+    -4.5
+   ]
+  },
+  {
+   "marker": "PROP_dining_table_01",
+   "floor": "ground",
+   "prop_type": "prop_dining_table",
+   "prop_file": "godot_exports/village/props/prop_dining_table.glb",
+   "new": true,
+   "position": [
+    8.0,
+    0.0,
+    -2.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    8.0,
+    0.0,
+    -2.5
+   ]
+  },
+  {
+   "marker": "PROP_doormat_01",
+   "floor": "ground",
+   "prop_type": "prop_doormat",
+   "prop_file": "godot_exports/village/props/prop_doormat.glb",
+   "new": true,
+   "position": [
+    6.5,
+    0.0,
+    -0.45
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    6.5,
+    0.0,
+    -0.45
+   ]
+  },
+  {
+   "marker": "PROP_hanging_pans_01",
+   "floor": "ground",
+   "prop_type": "prop_hanging_pans",
+   "prop_file": "godot_exports/village/props/prop_hanging_pans.glb",
+   "new": true,
+   "position": [
+    0.1,
+    1.62,
+    -4.0
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.707107,
+    -0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    0.1,
+    1.62,
+    -4.0
+   ]
+  },
+  {
+   "marker": "PROP_herb_bundles_01",
+   "floor": "ground",
+   "prop_type": "prop_herb_bundles",
+   "prop_file": "godot_exports/village/props/prop_herb_bundles.glb",
+   "new": true,
+   "position": [
+    2.3,
+    2.78,
+    -7.86
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    2.3,
+    2.78,
+    -7.86
+   ]
+  },
+  {
+   "marker": "PROP_jar_set_01",
+   "floor": "ground",
+   "prop_type": "prop_jar_set",
+   "prop_file": "godot_exports/village/props/prop_jar_set.glb",
+   "new": true,
+   "position": [
+    0.16,
+    2.13,
+    -3.6
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.707107,
+    -0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    0.16,
+    2.13,
+    -3.6
+   ]
+  },
+  {
+   "marker": "PROP_pot_flowers_01",
+   "floor": "ground",
+   "prop_type": "prop_pot_flowers",
+   "prop_file": "godot_exports/village/props/prop_pot_flowers.glb",
+   "new": false,
+   "position": [
+    10.4,
+    0.0,
+    -0.6
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    10.4,
+    0.0,
+    -0.6
+   ]
+  },
+  {
+   "marker": "PROP_pot_plant_01",
+   "floor": "ground",
+   "prop_type": "prop_pot_plant",
+   "prop_file": "godot_exports/village/props/prop_pot_plant.glb",
+   "new": false,
+   "position": [
+    2.5,
+    1.0,
+    -7.86
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    2.5,
+    1.0,
+    -7.86
+   ]
+  },
+  {
+   "marker": "PROP_rug_living_01",
+   "floor": "ground",
+   "prop_type": "prop_rug_living",
+   "prop_file": "godot_exports/village/props/prop_rug_living.glb",
+   "new": true,
+   "position": [
+    8.5,
+    0.0,
+    -5.0
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    8.5,
+    0.0,
+    -5.0
+   ]
+  },
+  {
+   "marker": "PROP_sack_a_01",
+   "floor": "ground",
+   "prop_type": "prop_sack_a",
+   "prop_file": "godot_exports/village/props/prop_sack_a.glb",
+   "new": false,
+   "position": [
+    0.5,
+    0.0465,
+    -0.85
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.130526,
+    -0.0,
+    0.991445
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    0.5,
+    0.0465,
+    -0.85
+   ]
+  },
+  {
+   "marker": "PROP_sack_b_01",
+   "floor": "ground",
+   "prop_type": "prop_sack_b",
+   "prop_file": "godot_exports/village/props/prop_sack_b.glb",
+   "new": false,
+   "position": [
+    0.95,
+    0.0664,
+    -0.45
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    -0.173648,
+    -0.0,
+    0.984808
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    0.95,
+    0.0664,
+    -0.45
+   ]
+  },
+  {
+   "marker": "PROP_side_table_01",
+   "floor": "ground",
+   "prop_type": "prop_side_table",
+   "prop_file": "godot_exports/village/props/prop_side_table.glb",
+   "new": true,
+   "position": [
+    10.45,
+    0.0,
+    -3.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    10.45,
+    0.0,
+    -3.5
+   ]
+  },
+  {
+   "marker": "PROP_water_barrel_01",
+   "floor": "ground",
+   "prop_type": "prop_water_barrel",
+   "prop_file": "godot_exports/village/props/prop_water_barrel.glb",
+   "new": false,
+   "position": [
+    1.5,
+    0.0383,
+    -7.46
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    1.5,
+    0.0383,
+    -7.46
+   ]
+  },
+  {
+   "marker": "PROP_avocado_plush_01",
+   "floor": "upper",
+   "prop_type": "prop_avocado_plush",
+   "prop_file": "godot_exports/village/props/prop_avocado_plush.glb",
+   "new": true,
+   "position": [
+    15.3,
+    0.5,
+    -2.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.573577,
+    -0.0,
+    0.819152
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    1.3,
+    0.5,
+    -2.5
+   ]
+  },
+  {
+   "marker": "PROP_bed_01",
+   "floor": "upper",
+   "prop_type": "prop_bed",
+   "prop_file": "godot_exports/village/props/prop_bed.glb",
+   "new": true,
+   "position": [
+    15.02,
+    0.0,
+    -2.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.707107,
+    -0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    1.02,
+    0.0,
+    -2.5
+   ]
+  },
+  {
+   "marker": "PROP_candle_02",
+   "floor": "upper",
+   "prop_type": "prop_candle",
+   "prop_file": "godot_exports/village/props/prop_candle.glb",
+   "new": true,
+   "position": [
+    14.5,
+    0.6,
+    -3.42
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    0.5,
+    0.6,
+    -3.42
+   ]
+  },
+  {
+   "marker": "PROP_chair_05",
+   "floor": "upper",
+   "prop_type": "prop_chair",
+   "prop_file": "godot_exports/village/props/prop_chair.glb",
+   "new": true,
+   "position": [
+    16.5,
+    0.0,
+    -4.55
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    2.5,
+    0.0,
+    -4.55
+   ]
+  },
+  {
+   "marker": "PROP_chest_01",
+   "floor": "upper",
+   "prop_type": "prop_chest",
+   "prop_file": "godot_exports/village/props/prop_chest.glb",
+   "new": true,
+   "position": [
+    14.45,
+    0.0,
+    -1.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.707107,
+    -0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    0.45,
+    0.0,
+    -1.5
+   ]
+  },
+  {
+   "marker": "PROP_desk_01",
+   "floor": "upper",
+   "prop_type": "prop_desk",
+   "prop_file": "godot_exports/village/props/prop_desk.glb",
+   "new": true,
+   "position": [
+    17.0,
+    0.0,
+    -5.6
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    3.0,
+    0.0,
+    -5.6
+   ]
+  },
+  {
+   "marker": "PROP_desk_clutter_01",
+   "floor": "upper",
+   "prop_type": "prop_desk_clutter",
+   "prop_file": "godot_exports/village/props/prop_desk_clutter.glb",
+   "new": true,
+   "position": [
+    16.9,
+    0.765,
+    -5.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    2.9,
+    0.765,
+    -5.5
+   ]
+  },
+  {
+   "marker": "PROP_nightstand_01",
+   "floor": "upper",
+   "prop_type": "prop_nightstand",
+   "prop_file": "godot_exports/village/props/prop_nightstand.glb",
+   "new": true,
+   "position": [
+    14.5,
+    0.0,
+    -3.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.707107,
+    -0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    0.5,
+    0.0,
+    -3.5
+   ]
+  },
+  {
+   "marker": "PROP_rug_bedroom_01",
+   "floor": "upper",
+   "prop_type": "prop_rug_bedroom",
+   "prop_file": "godot_exports/village/props/prop_rug_bedroom.glb",
+   "new": true,
+   "position": [
+    18.5,
+    0.0,
+    -2.0
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "position_in_floor": [
+    4.5,
+    0.0,
+    -2.0
+   ]
+  }
+ ]
+}

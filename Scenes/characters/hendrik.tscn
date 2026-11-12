@@ -5,15 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://dokmc5a2yeulo" path="res://assets/3D/characters/Farmer_A.glb" id="2_wsxdp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yni83"]
-radius = 0.2
-height = 0.8
+radius = 0.3
+height = 1.2
 
 [node name="Hendrik" unique_id=497783338 instance=ExtResource("1_yni83")]
 _characterData = ExtResource("2_ipxpy")
 PersistentId = "Hendrik"
 
 [node name="CollisionShape3D" parent="." index="2" unique_id=293151575]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 shape = SubResource("CapsuleShape3D_yni83")
 
 [node name="CharacterAnimator" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
@@ -26,7 +26,7 @@ root_node = NodePath("../../../Farmer_A")
 root_node = NodePath("../../../Farmer_A")
 
 [node name="Farmer_A" parent="." index="5" unique_id=1854764491 instance=ExtResource("2_wsxdp")]
-transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
+transform = Transform3D(0.525, 0, 0, 0, 0.525, 0, 0, 0, 0.525, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Farmer_A/Rig_Medium" parent_id_path=PackedInt32Array(1854764491, 1468960249) index="0" unique_id=977507319]
 bones/1/position = Vector3(0, 0.3868321, 0)

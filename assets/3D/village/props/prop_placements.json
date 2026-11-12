@@ -1,0 +1,1775 @@
+{
+ "coordinate_system": "Godot: X = map x - 50, Y = height, Z = map z - 50 (same as the exported level); rotation is a quaternion [x, y, z, w]",
+ "count": 43,
+ "placements": [
+  {
+   "marker": "PROP_barrel_a_01",
+   "prop_type": "prop_barrel_a",
+   "prop_file": "prop_barrel_a.glb",
+   "instance": "tavern_barrel_up_0",
+   "position": [
+    -33.75853,
+    0.50812,
+    3.77522
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_tavern",
+   "structure_file": "tavern.glb",
+   "relative_to_structure": {
+    "position": [
+     6.25146,
+     0.00812,
+     -2.60478
+    ],
+    "rotation_quaternion_xyzw": [
+     0.0,
+     0.0,
+     -0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_barrel_a_02",
+   "prop_type": "prop_barrel_a",
+   "prop_file": "prop_barrel_a.glb",
+   "instance": "tavern_barrel_up_1",
+   "position": [
+    -33.70853,
+    0.49096,
+    3.02522
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.342898,
+    0.0,
+    0.939373
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_tavern",
+   "structure_file": "tavern.glb",
+   "relative_to_structure": {
+    "position": [
+     6.30146,
+     -0.00904,
+     -3.35478
+    ],
+    "rotation_quaternion_xyzw": [
+     0.0,
+     0.342898,
+     0.0,
+     0.939373
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_barrel_a_03",
+   "prop_type": "prop_barrel_a",
+   "prop_file": "prop_barrel_a.glb",
+   "instance": "tavern_barrel_lying_0",
+   "position": [
+    -33.90592,
+    0.78535,
+    8.32659
+   ],
+   "rotation_quaternion_xyzw": [
+    0.404108,
+    -0.404108,
+    -0.580256,
+    0.580256
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_tavern",
+   "structure_file": "tavern.glb",
+   "relative_to_structure": {
+    "position": [
+     6.10408,
+     0.28535,
+     1.94659
+    ],
+    "rotation_quaternion_xyzw": [
+     0.404108,
+     -0.404108,
+     -0.580256,
+     0.580256
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_barrel_a_04",
+   "prop_type": "prop_barrel_a",
+   "prop_file": "prop_barrel_a.glb",
+   "instance": "tavern_barrel_lying_1",
+   "position": [
+    -34.05274,
+    0.79704,
+    8.37192
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.277373,
+    0.277373,
+    -0.650434,
+    0.650434
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_tavern",
+   "structure_file": "tavern.glb",
+   "relative_to_structure": {
+    "position": [
+     5.95726,
+     0.29704,
+     1.99192
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.277373,
+     0.277373,
+     -0.650434,
+     0.650434
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_barrel_a_05",
+   "prop_type": "prop_barrel_a",
+   "prop_file": "prop_barrel_a.glb",
+   "instance": "tavern_barrel_lying_2",
+   "position": [
+    -34.12152,
+    0.81719,
+    7.18417
+   ],
+   "rotation_quaternion_xyzw": [
+    0.190985,
+    -0.190985,
+    -0.680826,
+    0.680827
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_tavern",
+   "structure_file": "tavern.glb",
+   "relative_to_structure": {
+    "position": [
+     5.88847,
+     0.31719,
+     0.80417
+    ],
+    "rotation_quaternion_xyzw": [
+     0.190985,
+     -0.190985,
+     -0.680826,
+     0.680827
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_barrel_a_06",
+   "prop_type": "prop_barrel_a",
+   "prop_file": "prop_barrel_a.glb",
+   "instance": "tavern_barrel_lying_3",
+   "position": [
+    -33.81911,
+    1.3498,
+    8.81588
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.463,
+    0.463,
+    -0.534445,
+    0.534444
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_tavern",
+   "structure_file": "tavern.glb",
+   "relative_to_structure": {
+    "position": [
+     6.19089,
+     0.8498,
+     2.43588
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.463,
+     0.463,
+     -0.534445,
+     0.534444
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_barrel_a_07",
+   "prop_type": "prop_barrel_a",
+   "prop_file": "prop_barrel_a.glb",
+   "instance": "tavern_barrel_lying_4",
+   "position": [
+    -33.82394,
+    1.36644,
+    8.15516
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.45992,
+    0.45992,
+    -0.537098,
+    0.537097
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_tavern",
+   "structure_file": "tavern.glb",
+   "relative_to_structure": {
+    "position": [
+     6.18606,
+     0.86644,
+     1.77516
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.45992,
+     0.45992,
+     -0.537098,
+     0.537097
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_barrel_a_08",
+   "prop_type": "prop_barrel_a",
+   "prop_file": "prop_barrel_a.glb",
+   "instance": "tavern_barrel_lying_5",
+   "position": [
+    -33.40676,
+    1.91704,
+    7.82672
+   ],
+   "rotation_quaternion_xyzw": [
+    0.67596,
+    -0.67596,
+    -0.207551,
+    0.207551
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_tavern",
+   "structure_file": "tavern.glb",
+   "relative_to_structure": {
+    "position": [
+     6.60323,
+     1.41704,
+     1.44672
+    ],
+    "rotation_quaternion_xyzw": [
+     0.67596,
+     -0.67596,
+     -0.207551,
+     0.207551
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_barrel_b_01",
+   "prop_type": "prop_barrel_b",
+   "prop_file": "prop_barrel_b.glb",
+   "instance": "shop_barrel",
+   "position": [
+    -26.55848,
+    0.02229,
+    1.95134
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    0.198669,
+    -0.0,
+    0.980067
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_general_store",
+   "structure_file": "general_store.glb",
+   "relative_to_structure": {
+    "position": [
+     -3.54848,
+     0.02229,
+     4.12134
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     0.198669,
+     -0.0,
+     0.980067
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_barrel_chock_01",
+   "prop_type": "prop_barrel_chock",
+   "prop_file": "prop_barrel_chock.glb",
+   "instance": "tavern_barrel_chock_0",
+   "position": [
+    -34.15871,
+    0.51052,
+    8.07122
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.707107,
+    0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_tavern",
+   "structure_file": "tavern.glb",
+   "relative_to_structure": {
+    "position": [
+     5.85129,
+     0.01052,
+     1.69122
+    ],
+    "rotation_quaternion_xyzw": [
+     0.0,
+     0.707107,
+     0.0,
+     0.707107
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_barrel_chock_02",
+   "prop_type": "prop_barrel_chock",
+   "prop_file": "prop_barrel_chock.glb",
+   "instance": "tavern_barrel_chock_1",
+   "position": [
+    -33.35914,
+    0.51099,
+    8.07046
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.001659,
+    0.706995,
+    0.001706,
+    0.707215
+   ],
+   "scale": [
+    1.003,
+    1.003,
+    1.003
+   ],
+   "structure": "STRUCT_tavern",
+   "structure_file": "tavern.glb",
+   "relative_to_structure": {
+    "position": [
+     6.65086,
+     0.01099,
+     1.69046
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.001659,
+     0.706995,
+     0.001706,
+     0.707215
+    ],
+    "scale": [
+     1.003,
+     1.003,
+     1.003
+    ]
+   }
+  },
+  {
+   "marker": "PROP_water_barrel_01",
+   "prop_type": "prop_water_barrel",
+   "prop_file": "prop_water_barrel.glb",
+   "instance": "cottage_water_butt",
+   "position": [
+    0.45,
+    0.4002,
+    40.85
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    0.149438,
+    0.0,
+    0.988771
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_mabel_home",
+   "structure_file": "mabel_home.glb",
+   "relative_to_structure": {
+    "position": [
+     3.45,
+     0.0002,
+     1.85
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     0.149438,
+     0.0,
+     0.988771
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_water_barrel_02",
+   "prop_type": "prop_water_barrel",
+   "prop_file": "prop_water_barrel.glb",
+   "instance": "farm_water_barrel",
+   "position": [
+    29.27814,
+    0.34996,
+    3.99951
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.247404,
+    -0.0,
+    0.968912
+   ],
+   "scale": [
+    1.01365,
+    1.01365,
+    1.01365
+   ],
+   "structure": "STRUCT_moat_house",
+   "structure_file": "moat_house.glb",
+   "relative_to_structure": {
+    "position": [
+     2.29814,
+     0.04996,
+     2.99951
+    ],
+    "rotation_quaternion_xyzw": [
+     0.0,
+     0.247404,
+     -0.0,
+     0.968912
+    ],
+    "scale": [
+     1.01365,
+     1.01365,
+     1.01365
+    ]
+   }
+  },
+  {
+   "marker": "PROP_bench_a_01",
+   "prop_type": "prop_bench_a",
+   "prop_file": "prop_bench_a.glb",
+   "instance": "tavern_bench_back",
+   "position": [
+    -36.30498,
+    0.50118,
+    11.64624
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_tavern",
+   "structure_file": "tavern.glb",
+   "relative_to_structure": {
+    "position": [
+     3.70502,
+     0.00118,
+     5.26624
+    ],
+    "rotation_quaternion_xyzw": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_bench_a_02",
+   "prop_type": "prop_bench_a",
+   "prop_file": "prop_bench_a.glb",
+   "instance": "tavern_bench_front",
+   "position": [
+    -36.30498,
+    0.50118,
+    13.20624
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_tavern",
+   "structure_file": "tavern.glb",
+   "relative_to_structure": {
+    "position": [
+     3.70502,
+     0.00118,
+     6.82624
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_bench_b_01",
+   "prop_type": "prop_bench_b",
+   "prop_file": "prop_bench_b.glb",
+   "instance": "school_bench",
+   "position": [
+    0.84507,
+    0.30013,
+    -29.0484
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_school",
+   "structure_file": "school.glb",
+   "relative_to_structure": {
+    "position": [
+     2.84507,
+     0.00013,
+     3.9516
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_bench_c_01",
+   "prop_type": "prop_bench_c",
+   "prop_file": "prop_bench_c.glb",
+   "instance": "shop_bench",
+   "position": [
+    -24.75492,
+    0.01543,
+    2.10235
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_general_store",
+   "structure_file": "general_store.glb",
+   "relative_to_structure": {
+    "position": [
+     -1.74492,
+     0.01543,
+     4.27235
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_bench_d_01",
+   "prop_type": "prop_bench_d",
+   "prop_file": "prop_bench_d.glb",
+   "instance": "brick_bench",
+   "position": [
+    2.62612,
+    0.11346,
+    20.10019
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.707107,
+    -0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_brick_house",
+   "structure_file": "brick_house.glb",
+   "relative_to_structure": {
+    "position": [
+     -0.32388,
+     0.11346,
+     1.05019
+    ],
+    "rotation_quaternion_xyzw": [
+     0.0,
+     0.707107,
+     -0.0,
+     0.707107
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_pot_plant_01",
+   "prop_type": "prop_pot_plant",
+   "prop_file": "prop_pot_plant.glb",
+   "instance": "brick_pot_0",
+   "position": [
+    2.49516,
+    0.12,
+    19.50249
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    -0.811574,
+    0.0,
+    0.58425
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_brick_house",
+   "structure_file": "brick_house.glb",
+   "relative_to_structure": {
+    "position": [
+     -0.45484,
+     0.12,
+     0.45249
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     -0.811574,
+     0.0,
+     0.58425
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_pot_plant_02",
+   "prop_type": "prop_pot_plant",
+   "prop_file": "prop_pot_plant.glb",
+   "instance": "brick_pot_1",
+   "position": [
+    1.09516,
+    0.12,
+    19.40248
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    -0.811574,
+    0.0,
+    0.58425
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_brick_house",
+   "structure_file": "brick_house.glb",
+   "relative_to_structure": {
+    "position": [
+     -1.85484,
+     0.12,
+     0.35249
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     -0.811574,
+     0.0,
+     0.58425
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_boat_01",
+   "prop_type": "prop_boat",
+   "prop_file": "prop_boat.glb",
+   "instance": "boat",
+   "position": [
+    20.73663,
+    -0.3,
+    17.00699
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    -0.21644,
+    -0.0,
+    0.976296
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": null
+  },
+  {
+   "marker": "PROP_table_01",
+   "prop_type": "prop_table",
+   "prop_file": "prop_table.glb",
+   "instance": "tavern_table",
+   "position": [
+    -36.31011,
+    0.502,
+    12.42524
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_tavern",
+   "structure_file": "tavern.glb",
+   "relative_to_structure": {
+    "position": [
+     3.69989,
+     0.002,
+     6.04524
+    ],
+    "rotation_quaternion_xyzw": [
+     0.0,
+     -0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_trough_01",
+   "prop_type": "prop_trough",
+   "prop_file": "prop_trough.glb",
+   "instance": "tavern_trough",
+   "position": [
+    -44.60822,
+    0.49767,
+    13.05839
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_tavern",
+   "structure_file": "tavern.glb",
+   "relative_to_structure": {
+    "position": [
+     -4.59822,
+     -0.00233,
+     6.67839
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_cellar_hatch_01",
+   "prop_type": "prop_cellar_hatch",
+   "prop_file": "prop_cellar_hatch.glb",
+   "instance": "tavern_cellar_hatch",
+   "position": [
+    -46.05853,
+    0.5,
+    4.62522
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    -0.707107,
+    -0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_tavern",
+   "structure_file": "tavern.glb",
+   "relative_to_structure": {
+    "position": [
+     -6.04853,
+     0.0,
+     -1.75478
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     -0.707107,
+     -0.0,
+     0.707107
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_hitch_rail_01",
+   "prop_type": "prop_hitch_rail",
+   "prop_file": "prop_hitch_rail.glb",
+   "instance": "tavern_hitch_rail",
+   "position": [
+    -44.61018,
+    0.5,
+    12.32745
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_tavern",
+   "structure_file": "tavern.glb",
+   "relative_to_structure": {
+    "position": [
+     -4.60018,
+     0.0,
+     5.94745
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     0.0,
+     -0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_pot_flowers_01",
+   "prop_type": "prop_pot_flowers",
+   "prop_file": "prop_pot_flowers.glb",
+   "instance": "narrow_pot",
+   "position": [
+    2.99627,
+    -0.0,
+    0.866
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_narrow_house",
+   "structure_file": "narrow_house.glb",
+   "relative_to_structure": {
+    "position": [
+     -0.00373,
+     -0.0,
+     2.866
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     -0.0,
+     -0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_market_stand_01",
+   "prop_type": "prop_market_stand",
+   "prop_file": "prop_market_stand.glb",
+   "instance": "shop_market_stand",
+   "position": [
+    -21.15448,
+    -0.03122,
+    2.35194
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_general_store",
+   "structure_file": "general_store.glb",
+   "relative_to_structure": {
+    "position": [
+     1.85552,
+     -0.03122,
+     4.52194
+    ],
+    "rotation_quaternion_xyzw": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_sack_a_01",
+   "prop_type": "prop_sack_a",
+   "prop_file": "prop_sack_a.glb",
+   "instance": "shop_sack_0",
+   "position": [
+    -27.20902,
+    0.00905,
+    1.68907
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    0.149438,
+    -0.0,
+    0.988771
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_general_store",
+   "structure_file": "general_store.glb",
+   "relative_to_structure": {
+    "position": [
+     -4.19902,
+     0.00905,
+     3.85907
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     0.149438,
+     -0.0,
+     0.988771
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_sack_b_01",
+   "prop_type": "prop_sack_b",
+   "prop_file": "prop_sack_b.glb",
+   "instance": "shop_sack_1",
+   "position": [
+    -27.16743,
+    0.03614,
+    2.24486
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    0.564642,
+    0.0,
+    0.825336
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_general_store",
+   "structure_file": "general_store.glb",
+   "relative_to_structure": {
+    "position": [
+     -4.15743,
+     0.03614,
+     4.41486
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     0.564642,
+     0.0,
+     0.825336
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_sack_c_01",
+   "prop_type": "prop_sack_c",
+   "prop_file": "prop_sack_c.glb",
+   "instance": "shop_sack_2",
+   "position": [
+    -26.66875,
+    0.0583,
+    2.55314
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.841471,
+    -0.0,
+    0.540302
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_general_store",
+   "structure_file": "general_store.glb",
+   "relative_to_structure": {
+    "position": [
+     -3.65875,
+     0.0583,
+     4.72313
+    ],
+    "rotation_quaternion_xyzw": [
+     0.0,
+     0.841471,
+     -0.0,
+     0.540302
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_wheelbarrow_01",
+   "prop_type": "prop_wheelbarrow",
+   "prop_file": "prop_wheelbarrow.glb",
+   "instance": "farm_wheelbarrow",
+   "position": [
+    30.65289,
+    0.2918,
+    4.64174
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.17417,
+    -0.0,
+    0.984716
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_moat_house",
+   "structure_file": "moat_house.glb",
+   "relative_to_structure": {
+    "position": [
+     3.67289,
+     -0.0082,
+     3.64174
+    ],
+    "rotation_quaternion_xyzw": [
+     0.0,
+     0.17417,
+     -0.0,
+     0.984716
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_hay_pile_01",
+   "prop_type": "prop_hay_pile",
+   "prop_file": "prop_hay_pile.glb",
+   "instance": "farm_hay_pile",
+   "position": [
+    30.9841,
+    0.3,
+    0.17034
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.149438,
+    -0.0,
+    0.988771
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_moat_house",
+   "structure_file": "moat_house.glb",
+   "relative_to_structure": {
+    "position": [
+     4.0041,
+     0.0,
+     -0.82966
+    ],
+    "rotation_quaternion_xyzw": [
+     0.0,
+     0.149438,
+     -0.0,
+     0.988771
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_hayfork_01",
+   "prop_type": "prop_hayfork",
+   "prop_file": "prop_hayfork.glb",
+   "instance": "farm_hayfork",
+   "position": [
+    31.97392,
+    0.32959,
+    2.90921
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_moat_house",
+   "structure_file": "moat_house.glb",
+   "relative_to_structure": {
+    "position": [
+     4.99392,
+     0.02959,
+     1.90921
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     -0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_vegetable_garden_01",
+   "prop_type": "prop_vegetable_garden",
+   "prop_file": "prop_vegetable_garden.glb",
+   "instance": "farm_vegetable_garden",
+   "position": [
+    23.37568,
+    0.28481,
+    5.37612
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_moat_house",
+   "structure_file": "moat_house.glb",
+   "relative_to_structure": {
+    "position": [
+     -3.60432,
+     -0.01519,
+     4.37612
+    ],
+    "rotation_quaternion_xyzw": [
+     0.0,
+     -0.0,
+     -0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_chopping_block_01",
+   "prop_type": "prop_chopping_block",
+   "prop_file": "prop_chopping_block.glb",
+   "instance": "veld_chopping_block",
+   "position": [
+    -18.74934,
+    0.3,
+    40.95034
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_veld_home",
+   "structure_file": "veld_home.glb",
+   "relative_to_structure": {
+    "position": [
+     3.25066,
+     0.0,
+     3.14034
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     -0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_peel_a_01",
+   "prop_type": "prop_peel_a",
+   "prop_file": "prop_peel_a.glb",
+   "instance": "bakery_peel_0",
+   "position": [
+    -21.17083,
+    0.01983,
+    18.92636
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_bakery",
+   "structure_file": "bakery.glb",
+   "relative_to_structure": {
+    "position": [
+     1.82917,
+     -0.05017,
+     3.27636
+    ],
+    "rotation_quaternion_xyzw": [
+     0.0,
+     -0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_peel_b_01",
+   "prop_type": "prop_peel_b",
+   "prop_file": "prop_peel_b.glb",
+   "instance": "bakery_peel_1",
+   "position": [
+    -21.00195,
+    0.02022,
+    18.9094
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_bakery",
+   "structure_file": "bakery.glb",
+   "relative_to_structure": {
+    "position": [
+     1.99805,
+     -0.04978,
+     3.2594
+    ],
+    "rotation_quaternion_xyzw": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_peel_c_01",
+   "prop_type": "prop_peel_c",
+   "prop_file": "prop_peel_c.glb",
+   "instance": "bakery_peel_2",
+   "position": [
+    -20.82612,
+    0.01486,
+    18.88611
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_bakery",
+   "structure_file": "bakery.glb",
+   "relative_to_structure": {
+    "position": [
+     2.17388,
+     -0.05514,
+     3.23611
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     0.0,
+     -0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_lantern_post_01",
+   "prop_type": "prop_lantern_post",
+   "prop_file": "prop_lantern_post.glb",
+   "instance": "moat_lantern_post",
+   "position": [
+    28.48235,
+    0.02036,
+    10.59983
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    -0.707107,
+    0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_moat_house",
+   "structure_file": "moat_house.glb",
+   "relative_to_structure": {
+    "position": [
+     1.50235,
+     -0.27964,
+     9.59983
+    ],
+    "rotation_quaternion_xyzw": [
+     0.0,
+     -0.707107,
+     0.0,
+     0.707107
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_cauldron_01",
+   "prop_type": "prop_cauldron",
+   "prop_file": "prop_cauldron.glb",
+   "instance": "wizard_cauldron",
+   "position": [
+    -29.62822,
+    1.20172,
+    -27.61727
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_wizard_tower",
+   "structure_file": "wizard_tower.glb",
+   "relative_to_structure": {
+    "position": [
+     -3.60022,
+     0.00172,
+     4.19973
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_bucket_01",
+   "prop_type": "prop_bucket",
+   "prop_file": "prop_bucket.glb",
+   "instance": "narrow_bucket",
+   "position": [
+    1.69733,
+    0.0,
+    0.94152
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_narrow_house",
+   "structure_file": "narrow_house.glb",
+   "relative_to_structure": {
+    "position": [
+     -1.30267,
+     0.0,
+     2.94152
+    ],
+    "rotation_quaternion_xyzw": [
+     -0.0,
+     -0.0,
+     -0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  },
+  {
+   "marker": "PROP_noticeboard_01",
+   "prop_type": "prop_noticeboard",
+   "prop_file": "prop_noticeboard.glb",
+   "instance": "noticeboard",
+   "position": [
+    -5.49918,
+    -0.08,
+    -0.49953
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": null
+  },
+  {
+   "marker": "PROP_signpost_01",
+   "prop_type": "prop_signpost",
+   "prop_file": "prop_signpost.glb",
+   "instance": "school_signpost",
+   "position": [
+    -5.50861,
+    0.00632,
+    -26.91842
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "structure": "STRUCT_school",
+   "structure_file": "school.glb",
+   "relative_to_structure": {
+    "position": [
+     -3.50861,
+     -0.29368,
+     6.08158
+    ],
+    "rotation_quaternion_xyzw": [
+     0.0,
+     -0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  }
+ ],
+ "structure_note": "structure = marker in godot_exports/village/structures/structure_placements.json this prop belongs to (null = free-standing). relative_to_structure = position, rotation_quaternion_xyzw and scale of the prop relative to that structure's root, in the same Godot coordinates."
+}

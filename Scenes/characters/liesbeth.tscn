@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://y1dgjp2ff1tu" path="res://assets/3D/characters/textures/farmer_texture_B.png" id="3_fobh5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pn1dg"]
-radius = 0.2
-height = 0.8
+radius = 0.3
+height = 1.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5ixk"]
 albedo_texture = ExtResource("3_fobh5")
@@ -17,7 +17,7 @@ _characterData = ExtResource("2_fobh5")
 PersistentId = "Liesbeth"
 
 [node name="CollisionShape3D" parent="." index="2" unique_id=293151575]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 shape = SubResource("CapsuleShape3D_pn1dg")
 
 [node name="CharacterAnimator" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
@@ -30,7 +30,7 @@ root_node = NodePath("../../Farmer_B")
 root_node = NodePath("../../Farmer_B")
 
 [node name="Farmer_B" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="2" unique_id=2092872470 instance=ExtResource("2_d5ixk")]
-transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
+transform = Transform3D(0.525, 0, 0, 0, 0.525, 0, 0, 0, 0.525, 0, 0, 0)
 
 [node name="Skeleton3D" parent="VisualRoot/Farmer_B/Rig_Medium" parent_id_path=PackedInt32Array(2092872470, 1494805248) index="0" unique_id=1224484209]
 bones/1/position = Vector3(0, 0.39191508, 0)

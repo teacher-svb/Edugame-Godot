@@ -39,8 +39,8 @@ material = SubResource("StandardMaterial3D_q5fig")
 orientation = 1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7dxc7"]
-radius = 0.12109375
-height = 0.6599045
+radius = 0.1816406
+height = 0.9898567
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dxc7"]
 albedo_texture = ExtResource("7_yx5mg")
@@ -75,11 +75,11 @@ process_material = SubResource("ParticleProcessMaterial_hcta7")
 draw_pass_1 = SubResource("QuadMesh_rvcpu")
 
 [node name="CollisionShape3D" parent="." index="5" unique_id=293151575]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3380165, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5070248, 0)
 shape = SubResource("CapsuleShape3D_7dxc7")
 
 [node name="dialogCamera" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="0" unique_id=534549197]
-transform = Transform3D(1, 0, 0, 0, 0.9961948, 0.08715574, 0, -0.08715574, 0.9961948, -0.013557843, 0.66471577, 0.5822214)
+transform = Transform3D(1, 0, 0, 0, 0.9961948, 0.0871557, 0, -0.0871557, 0.9961948, -0.0203368, 0.9970737, 0.8733321)
 
 [node name="AnimationTree" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
 process_mode = 3
@@ -91,7 +91,7 @@ root_node = NodePath("../../Rogue")
 
 [node name="Rogue" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="2" unique_id=983150367 instance=ExtResource("6_7dxc7")]
 process_mode = 3
-transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
+transform = Transform3D(0.525, 0, 0, 0, 0.525, 0, 0, 0, 0.525, 0, 0, 0)
 
 [node name="Skeleton3D" parent="VisualRoot/Rogue/Rig_Medium" parent_id_path=PackedInt32Array(983150367, 2013194758) index="0" unique_id=45707731]
 bones/1/position = Vector3(0, 0.38449353, 0)

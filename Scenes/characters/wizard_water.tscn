@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dg6cjk7f3fu6o" path="res://assets/3D/characters/textures/mage_texture_alt_C.png" id="3_7p3bs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lli5a"]
-radius = 0.1
-height = 0.7
+radius = 0.15
+height = 1.05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_co3qk"]
 cull_mode = 2
@@ -24,14 +24,14 @@ VisualRoot = NodePath("../../VisualRoot/Mage3")
 root_node = NodePath("../../VisualRoot/Mage3")
 
 [node name="CollisionShape3D" parent="." index="3" unique_id=293151575]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34999996, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5249999, 0)
 shape = SubResource("CapsuleShape3D_lli5a")
 
 [node name="AnimationPlayer" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="1" unique_id=933369381]
 root_node = NodePath("../Mage3")
 
 [node name="Mage3" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="2" unique_id=225768544 instance=ExtResource("2_lli5a")]
-transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0.004745245, 0, 0)
+transform = Transform3D(0.525, 0, 0, 0, 0.525, 0, 0, 0, 0.525, 0.0071179, 0, 0)
 
 [node name="Skeleton3D" parent="VisualRoot/Mage3/Rig_Medium" parent_id_path=PackedInt32Array(225768544, 2021025981) index="0" unique_id=1757248692]
 bones/1/position = Vector3(0, 0.38470823, 0)

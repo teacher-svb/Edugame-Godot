@@ -204,7 +204,7 @@ debug_path_custom_color = Color(1, 0, 1, 1)
 process_mode = 3
 
 [node name="dialogCamera" type="Camera3D" parent="VisualRoot" unique_id=534549197 groups=["dialogCamera"]]
-transform = Transform3D(1, 0, 0, 0, 0.9961948, 0.08715574, 0, -0.08715574, 0.9961948, -0.013557843, 0.66471577, 0.70199466)
+transform = Transform3D(1, 0, 0, 0, 0.9961948, 0.0871557, 0, -0.0871557, 0.9961948, -0.0203368, 0.9970737, 1.052992)
 cull_mask = 524288
 fov = 60.3
 

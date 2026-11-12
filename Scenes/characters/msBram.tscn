@@ -5,15 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://d04qp8t6aykw4" path="res://assets/3D/characters/Mage.glb" id="3_odwu3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_srdbs"]
-radius = 0.2
-height = 0.8
+radius = 0.3
+height = 1.2
 
 [node name="MsBram" unique_id=497783338 instance=ExtResource("1_n8coo")]
 _characterData = ExtResource("2_sl66g")
 PersistentId = "MsBram"
 
 [node name="CollisionShape3D" parent="." index="2" unique_id=293151575]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 shape = SubResource("CapsuleShape3D_srdbs")
 
 [node name="CharacterAnimator" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
@@ -26,7 +26,7 @@ root_node = NodePath("../../Mage4")
 root_node = NodePath("../../Mage4")
 
 [node name="Mage4" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="2" unique_id=1895689160 instance=ExtResource("3_odwu3")]
-transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0.004745245, 0, 0)
+transform = Transform3D(0.525, 0, 0, 0, 0.525, 0, 0, 0, 0.525, 0.0071179, 0, 0)
 
 [node name="Skeleton3D" parent="VisualRoot/Mage4/Rig_Medium" parent_id_path=PackedInt32Array(1895689160, 1709638862) index="0" unique_id=493072791]
 bones/1/position = Vector3(0, 0.39077052, 0)

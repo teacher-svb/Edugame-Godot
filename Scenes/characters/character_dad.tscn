@@ -5,8 +5,8 @@
 [ext_resource type="Resource" uid="uid://cmyotajgoscmu" path="res://GameData/characterData/Character_dad_CharacterData.tres" id="2_hmi31"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a2d18"]
-radius = 0.1274414
-height = 0.6963501
+radius = 0.1911621
+height = 1.0445251
 
 [node name="dad" unique_id=926984674 instance=ExtResource("1_a2d18")]
 _characterData = ExtResource("2_hmi31")
@@ -17,7 +17,7 @@ _speed = 1.0
 _jumpVelocity = 3.0
 
 [node name="CollisionShape3D" parent="." index="2" unique_id=293151575]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34902954, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5235443, 0)
 shape = SubResource("CapsuleShape3D_a2d18")
 
 [node name="NavigationAgent3D" parent="." index="3" unique_id=1876010761]
@@ -28,6 +28,7 @@ root_node = NodePath("../../character-male-g")
 anim_player = NodePath("../../character-male-g/AnimationPlayer")
 
 [node name="character-male-g" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="2" unique_id=2127119757 instance=ExtResource("2_6vton")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
 [node name="Skeleton3D" parent="VisualRoot/character-male-g/character-male-b" parent_id_path=PackedInt32Array(2127119757, 358880191) index="0" unique_id=1686022396]
 bones/0/rotation = Quaternion(-8.557136e-09, 2.4203237e-08, -4.142208e-16, 1)

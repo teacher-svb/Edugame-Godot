@@ -1,0 +1,494 @@
+{
+ "source_file": "beaverford_village_godot_fixes.blend",
+ "source_object": "Terrain",
+ "terrain_hash_sha256_16": "9a0f123e67cec8a9",
+ "image_size": [
+  1024,
+  1024
+ ],
+ "meters_per_pixel": 0.09765625,
+ "supersampling_per_pixel": [
+  8,
+  8
+ ],
+ "pixel_rule": "row 0 = north (+Y Blender, -Z Godot); column 0 = west (-X); each pixel holds the terrain at its centre",
+ "terrain_bounds_blender": {
+  "x": [
+   -50.0,
+   50.0
+  ],
+  "y": [
+   -50.0,
+   50.0
+  ]
+ },
+ "terrain_size_m": [
+  100.0,
+  100.0
+ ],
+ "height_range_m": {
+  "sampled_min": -1.0,
+  "sampled_max": 1.569106511771679,
+  "mesh_vertex_min": -1.0,
+  "mesh_vertex_max": 1.5696020126342773
+ },
+ "height_reference": "metres relative to the base ground level of 0 m (Blender Z = 0, Godot Y = 0)",
+ "png16_mapping": {
+  "black_0_m": -1.0,
+  "white_65535_m": 1.569106511771679
+ },
+ "water_level_height_m": -0.3,
+ "image_corners_outer_edge": {
+  "top_left_NW": {
+   "blender_xy": [
+    -50.0,
+    50.0
+   ],
+   "godot_xz": [
+    -50.0,
+    -50.0
+   ]
+  },
+  "top_right_NE": {
+   "blender_xy": [
+    50.0,
+    50.0
+   ],
+   "godot_xz": [
+    50.0,
+    -50.0
+   ]
+  },
+  "bottom_left_SW": {
+   "blender_xy": [
+    -50.0,
+    -50.0
+   ],
+   "godot_xz": [
+    -50.0,
+    50.0
+   ]
+  },
+  "bottom_right_SE": {
+   "blender_xy": [
+    50.0,
+    -50.0
+   ],
+   "godot_xz": [
+    50.0,
+    50.0
+   ]
+  }
+ },
+ "corner_pixel_centres": {
+  "top_left_NW": {
+   "blender_xy": [
+    -49.951171875,
+    49.951171875
+   ],
+   "godot_xz": [
+    -49.951171875,
+    -49.951171875
+   ]
+  },
+  "top_right_NE": {
+   "blender_xy": [
+    49.951171875,
+    49.951171875
+   ],
+   "godot_xz": [
+    49.951171875,
+    -49.951171875
+   ]
+  },
+  "bottom_left_SW": {
+   "blender_xy": [
+    -49.951171875,
+    -49.951171875
+   ],
+   "godot_xz": [
+    -49.951171875,
+    49.951171875
+   ]
+  },
+  "bottom_right_SE": {
+   "blender_xy": [
+    49.951171875,
+    -49.951171875
+   ],
+   "godot_xz": [
+    49.951171875,
+    49.951171875
+   ]
+  }
+ },
+ "godot_pixel_to_world": {
+  "x": "-50 + (col + 0.5) * meters_per_pixel",
+  "z": "-50 + (row + 0.5) * meters_per_pixel",
+  "y": "height"
+ },
+ "godot_world_to_uv": {
+  "u": "(x + 50) / 100",
+  "v": "(z + 50) / 100"
+ },
+ "filled_well_opening": {
+  "pixel_count": 83,
+  "rows": [
+   568,
+   578
+  ],
+  "cols": [
+   404,
+   414
+  ],
+  "surrounding_ground_m": [
+   -0.000627403060756029,
+   0.0
+  ],
+  "method": "Laplace fill from the ground heights round the opening",
+  "pixels_row_col": [
+   [
+    568,
+    408
+   ],
+   [
+    568,
+    409
+   ],
+   [
+    568,
+    410
+   ],
+   [
+    569,
+    406
+   ],
+   [
+    569,
+    407
+   ],
+   [
+    569,
+    408
+   ],
+   [
+    569,
+    409
+   ],
+   [
+    569,
+    410
+   ],
+   [
+    569,
+    411
+   ],
+   [
+    569,
+    412
+   ],
+   [
+    570,
+    405
+   ],
+   [
+    570,
+    406
+   ],
+   [
+    570,
+    407
+   ],
+   [
+    570,
+    408
+   ],
+   [
+    570,
+    409
+   ],
+   [
+    570,
+    410
+   ],
+   [
+    570,
+    411
+   ],
+   [
+    570,
+    412
+   ],
+   [
+    570,
+    413
+   ],
+   [
+    571,
+    405
+   ],
+   [
+    571,
+    406
+   ],
+   [
+    571,
+    407
+   ],
+   [
+    571,
+    408
+   ],
+   [
+    571,
+    409
+   ],
+   [
+    571,
+    410
+   ],
+   [
+    571,
+    411
+   ],
+   [
+    571,
+    412
+   ],
+   [
+    571,
+    413
+   ],
+   [
+    572,
+    405
+   ],
+   [
+    572,
+    406
+   ],
+   [
+    572,
+    407
+   ],
+   [
+    572,
+    408
+   ],
+   [
+    572,
+    409
+   ],
+   [
+    572,
+    410
+   ],
+   [
+    572,
+    411
+   ],
+   [
+    572,
+    412
+   ],
+   [
+    572,
+    413
+   ],
+   [
+    572,
+    414
+   ],
+   [
+    573,
+    404
+   ],
+   [
+    573,
+    405
+   ],
+   [
+    573,
+    406
+   ],
+   [
+    573,
+    407
+   ],
+   [
+    573,
+    408
+   ],
+   [
+    573,
+    409
+   ],
+   [
+    573,
+    410
+   ],
+   [
+    573,
+    411
+   ],
+   [
+    573,
+    412
+   ],
+   [
+    573,
+    413
+   ],
+   [
+    573,
+    414
+   ],
+   [
+    574,
+    405
+   ],
+   [
+    574,
+    406
+   ],
+   [
+    574,
+    407
+   ],
+   [
+    574,
+    408
+   ],
+   [
+    574,
+    409
+   ],
+   [
+    574,
+    410
+   ],
+   [
+    574,
+    411
+   ],
+   [
+    574,
+    412
+   ],
+   [
+    574,
+    413
+   ],
+   [
+    574,
+    414
+   ],
+   [
+    575,
+    405
+   ],
+   [
+    575,
+    406
+   ],
+   [
+    575,
+    407
+   ],
+   [
+    575,
+    408
+   ],
+   [
+    575,
+    409
+   ],
+   [
+    575,
+    410
+   ],
+   [
+    575,
+    411
+   ],
+   [
+    575,
+    412
+   ],
+   [
+    575,
+    413
+   ],
+   [
+    576,
+    406
+   ],
+   [
+    576,
+    407
+   ],
+   [
+    576,
+    408
+   ],
+   [
+    576,
+    409
+   ],
+   [
+    576,
+    410
+   ],
+   [
+    576,
+    411
+   ],
+   [
+    576,
+    412
+   ],
+   [
+    576,
+    413
+   ],
+   [
+    577,
+    407
+   ],
+   [
+    577,
+    408
+   ],
+   [
+    577,
+    409
+   ],
+   [
+    577,
+    410
+   ],
+   [
+    577,
+    411
+   ],
+   [
+    577,
+    412
+   ],
+   [
+    578,
+    409
+   ]
+  ]
+ },
+ "masks_at_well_opening": "the opening has no terrain surface, so both masks are black there",
+ "riverbed_depth_map": {
+  "file": "terrain_riverbed_mask.png",
+  "black_0": "outside the riverbed, or at the base ground level of 0 m",
+  "white_255_depth_m": 1.0,
+  "depth_m_formula": "value / 255 * 1.0",
+  "reference": "metres below the base ground level of 0 m (Blender Z = 0, Godot Y = 0)",
+  "water_depth_formula": "depth_m - 0.3 (Water_Level is 0.3 m below base ground; negative means above the water)",
+  "antialiasing": "average over 8 x 8 samples; samples off the riverbed count as 0"
+ }
+}
