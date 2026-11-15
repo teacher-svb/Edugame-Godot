@@ -1,12 +1,15 @@
 using Godot;
-using Godot.Collections;
 
-namespace Godoodads.WfcGenerator;
+namespace Godoodads.Wave.Legacy;
 
-/// <summary>Socket rules for the items of a MeshLibrary. The library itself is never modified.</summary>
-[Tool, GlobalClass]
-public partial class WfcTileSet : Resource
+/// <summary>
+/// Keeps files that name this script by its path from before 1.3.3 loading. The class moved to
+/// addons/editor_tools_common/Wfc/Resources and keeps its uid there, so files saved in the editor find it
+/// by uid; files saved by scripts outside the editor have no uid and load this subclass instead.
+/// See docs/briefs/dungeon_generator.md §4.1. Not a global class, so it never shows in Create Resource.
+/// The folder keeps its old name after the rename to godoowave in 1.4.0 and ships in the godoowave zip.
+/// </summary>
+[Tool]
+public partial class WfcTileSet : Godoodads.Common.Wfc.WfcTileSet
 {
-    [Export] public MeshLibrary Library { get; set; }
-    [Export] public Array<WfcTile> Tiles { get; set; } = new();
 }

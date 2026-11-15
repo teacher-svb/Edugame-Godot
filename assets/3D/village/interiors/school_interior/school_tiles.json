@@ -1,0 +1,2272 @@
+{
+ "tile_size_m": 4.0,
+ "axes": "Godot: tile centre at the node origin, floor top at y = 0, north = -Z (top of the screen), south = +Z (towards the camera). Every rotation is its own tile: never rotate a tile.",
+ "sockets": {
+  "room": "floor continues into the next tile (inside a room)",
+  "wall+": "a wall or curb of a room or landing; fits only a chasm side wall-",
+  "gate+": "a gate (2 m opening) of a room or landing; fits only a bridge end gate-",
+  "gate-": "a bridge end; fits only gate+",
+  "flank+": "the side of a bridge; fits only a chasm side flank-",
+  "void": "chasm to chasm, the door side of the door / stairs tiles, and the map boundary"
+ },
+ "socket_rule": "Plain labels fit the same label; x+ fits x- only. So rooms never touch wall to wall, rooms only connect over bridges, and bridges have chasm on both sides; a crossing longer than one cell goes bridge - landing - bridge. WFC fields: N = SocketNegZ, E = SocketPosX, S = SocketPosZ, W = SocketNegX; up and down \"ground\". Map boundary: void.",
+ "room_codes": "room_<NESW> / landing_<NESW>: o = room (open), w = wall (edge), g = gate.",
+ "platforming": {
+  "player": "tuned for jump velocity 3 m/s, speed 3 m/s, default gravity: about 0.46 m high and 1.8 m far",
+  "broken": "gap 1.15 m (west / south half) and 1.25 m (east / north half), deck at 0",
+  "stones": "one stepping stone, top at +0.3 m, 1.0 m from each ledge",
+  "steps": "middle 1.6 m of the deck raised to +0.3 m",
+  "mover": "ledges 0.4 m at both ends, 3.2 m gap; the moving platform (school_moving_platform.glb, 1.4 x 1.4 m, top at 0) travels along the tile axis between the ledges: centre from -0.9 m to +0.9 m from the tile centre",
+  "heights_m": {
+   "step": 0.3,
+   "wall": 1.0,
+   "curb": 0.45,
+   "invisible_barrier": 0.95,
+   "abyss": -6.0
+  }
+ },
+ "moving_platform": {
+  "file": "school_moving_platform.glb",
+  "size_m": [
+   1.4,
+   0.3,
+   1.4
+  ],
+  "tris": {
+   "Collision-colonly": 12,
+   "Mesh": 62
+  }
+ },
+ "tiles": [
+  {
+   "item": 0,
+   "name": "room_oooo_a",
+   "file": "school_room_oooo_a.glb",
+   "kind": "room",
+   "weight": 1.3,
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 12,
+    "Mesh": 70
+   },
+   "feature": "a"
+  },
+  {
+   "item": 1,
+   "name": "room_oooo_b",
+   "file": "school_room_oooo_b.glb",
+   "kind": "room",
+   "weight": 1.3,
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 12,
+    "Mesh": 80
+   },
+   "feature": "b"
+  },
+  {
+   "item": 2,
+   "name": "room_oooo_circle",
+   "file": "school_room_oooo_circle.glb",
+   "kind": "room",
+   "weight": 0.5,
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 12,
+    "Mesh": 164
+   },
+   "feature": "circle"
+  },
+  {
+   "item": 3,
+   "name": "room_oooo_dais",
+   "file": "school_room_oooo_dais.glb",
+   "kind": "room",
+   "weight": 0.35,
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 52,
+    "Mesh": 182
+   },
+   "feature": "dais"
+  },
+  {
+   "item": 4,
+   "name": "room_oooo_pit",
+   "file": "school_room_oooo_pit.glb",
+   "kind": "room",
+   "weight": 0.3,
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 48,
+    "Mesh": 148
+   },
+   "feature": "pit"
+  },
+  {
+   "item": 5,
+   "name": "room_oooo_pillar",
+   "file": "school_room_oooo_pillar.glb",
+   "kind": "room",
+   "weight": 0.45,
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 24,
+    "Mesh": 198
+   },
+   "feature": "pillar"
+  },
+  {
+   "item": 6,
+   "name": "room_oooo_tiers",
+   "file": "school_room_oooo_tiers.glb",
+   "kind": "room",
+   "weight": 0.3,
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 48,
+    "Mesh": 144
+   },
+   "feature": "tiers"
+  },
+  {
+   "item": 7,
+   "name": "room_ooow",
+   "file": "school_room_ooow.glb",
+   "kind": "room",
+   "weight": 1.0499999999999998,
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 24,
+    "Mesh": 152
+   }
+  },
+  {
+   "item": 8,
+   "name": "room_ooog",
+   "file": "school_room_ooog.glb",
+   "kind": "room",
+   "weight": 0.5249999999999999,
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "gate+"
+   },
+   "tris": {
+    "Collision-colonly": 60,
+    "Mesh": 306
+   }
+  },
+  {
+   "item": 9,
+   "name": "room_oowo",
+   "file": "school_room_oowo.glb",
+   "kind": "room",
+   "weight": 1.0499999999999998,
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "wall+",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 24,
+    "Mesh": 104
+   }
+  },
+  {
+   "item": 10,
+   "name": "room_ooww",
+   "file": "school_room_ooww.glb",
+   "kind": "room",
+   "weight": 0.675,
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "wall+",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 36,
+    "Mesh": 184
+   }
+  },
+  {
+   "item": 11,
+   "name": "room_oowg",
+   "file": "school_room_oowg.glb",
+   "kind": "room",
+   "weight": 0.3375,
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "wall+",
+    "west": "gate+"
+   },
+   "tris": {
+    "Collision-colonly": 72,
+    "Mesh": 342
+   }
+  },
+  {
+   "item": 12,
+   "name": "room_oogo",
+   "file": "school_room_oogo.glb",
+   "kind": "room",
+   "weight": 0.5249999999999999,
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "gate+",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 60,
+    "Mesh": 214
+   }
+  },
+  {
+   "item": 13,
+   "name": "room_oogw",
+   "file": "school_room_oogw.glb",
+   "kind": "room",
+   "weight": 0.3375,
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "gate+",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 72,
+    "Mesh": 344
+   }
+  },
+  {
+   "item": 14,
+   "name": "room_owoo",
+   "file": "school_room_owoo.glb",
+   "kind": "room",
+   "weight": 1.0499999999999998,
+   "sockets": {
+    "north": "room",
+    "east": "wall+",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 24,
+    "Mesh": 156
+   }
+  },
+  {
+   "item": 15,
+   "name": "room_owwo",
+   "file": "school_room_owwo.glb",
+   "kind": "room",
+   "weight": 0.675,
+   "sockets": {
+    "north": "room",
+    "east": "wall+",
+    "south": "wall+",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 36,
+    "Mesh": 232
+   }
+  },
+  {
+   "item": 16,
+   "name": "room_owww",
+   "file": "school_room_owww.glb",
+   "kind": "room",
+   "weight": 0.045,
+   "sockets": {
+    "north": "room",
+    "east": "wall+",
+    "south": "wall+",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 48,
+    "Mesh": 318
+   }
+  },
+  {
+   "item": 17,
+   "name": "room_owwg",
+   "file": "school_room_owwg.glb",
+   "kind": "room",
+   "weight": 0.0225,
+   "sockets": {
+    "north": "room",
+    "east": "wall+",
+    "south": "wall+",
+    "west": "gate+"
+   },
+   "tris": {
+    "Collision-colonly": 84,
+    "Mesh": 420
+   }
+  },
+  {
+   "item": 18,
+   "name": "room_owgo",
+   "file": "school_room_owgo.glb",
+   "kind": "room",
+   "weight": 0.3375,
+   "sockets": {
+    "north": "room",
+    "east": "wall+",
+    "south": "gate+",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 72,
+    "Mesh": 344
+   }
+  },
+  {
+   "item": 19,
+   "name": "room_owgw",
+   "file": "school_room_owgw.glb",
+   "kind": "room",
+   "weight": 0.0225,
+   "sockets": {
+    "north": "room",
+    "east": "wall+",
+    "south": "gate+",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 84,
+    "Mesh": 422
+   }
+  },
+  {
+   "item": 20,
+   "name": "room_ogoo",
+   "file": "school_room_ogoo.glb",
+   "kind": "room",
+   "weight": 0.5249999999999999,
+   "sockets": {
+    "north": "room",
+    "east": "gate+",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 60,
+    "Mesh": 308
+   }
+  },
+  {
+   "item": 21,
+   "name": "room_ogwo",
+   "file": "school_room_ogwo.glb",
+   "kind": "room",
+   "weight": 0.3375,
+   "sockets": {
+    "north": "room",
+    "east": "gate+",
+    "south": "wall+",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 72,
+    "Mesh": 342
+   }
+  },
+  {
+   "item": 22,
+   "name": "room_ogww",
+   "file": "school_room_ogww.glb",
+   "kind": "room",
+   "weight": 0.0225,
+   "sockets": {
+    "north": "room",
+    "east": "gate+",
+    "south": "wall+",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 84,
+    "Mesh": 422
+   }
+  },
+  {
+   "item": 23,
+   "name": "room_wooo",
+   "file": "school_room_wooo.glb",
+   "kind": "room",
+   "weight": 1.0499999999999998,
+   "sockets": {
+    "north": "wall+",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 24,
+    "Mesh": 152
+   }
+  },
+  {
+   "item": 24,
+   "name": "room_woow",
+   "file": "school_room_woow.glb",
+   "kind": "room",
+   "weight": 0.675,
+   "sockets": {
+    "north": "wall+",
+    "east": "room",
+    "south": "room",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 36,
+    "Mesh": 285
+   }
+  },
+  {
+   "item": 25,
+   "name": "room_woog",
+   "file": "school_room_woog.glb",
+   "kind": "room",
+   "weight": 0.3375,
+   "sockets": {
+    "north": "wall+",
+    "east": "room",
+    "south": "room",
+    "west": "gate+"
+   },
+   "tris": {
+    "Collision-colonly": 72,
+    "Mesh": 415
+   }
+  },
+  {
+   "item": 26,
+   "name": "room_woww",
+   "file": "school_room_woww.glb",
+   "kind": "room",
+   "weight": 0.045,
+   "sockets": {
+    "north": "wall+",
+    "east": "room",
+    "south": "wall+",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 48,
+    "Mesh": 319
+   }
+  },
+  {
+   "item": 27,
+   "name": "room_wowg",
+   "file": "school_room_wowg.glb",
+   "kind": "room",
+   "weight": 0.0225,
+   "sockets": {
+    "north": "wall+",
+    "east": "room",
+    "south": "wall+",
+    "west": "gate+"
+   },
+   "tris": {
+    "Collision-colonly": 84,
+    "Mesh": 422
+   }
+  },
+  {
+   "item": 28,
+   "name": "room_wogw",
+   "file": "school_room_wogw.glb",
+   "kind": "room",
+   "weight": 0.0225,
+   "sockets": {
+    "north": "wall+",
+    "east": "room",
+    "south": "gate+",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 84,
+    "Mesh": 389
+   }
+  },
+  {
+   "item": 29,
+   "name": "room_wwoo",
+   "file": "school_room_wwoo.glb",
+   "kind": "room",
+   "weight": 0.675,
+   "sockets": {
+    "north": "wall+",
+    "east": "wall+",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 36,
+    "Mesh": 224
+   }
+  },
+  {
+   "item": 30,
+   "name": "room_wwow",
+   "file": "school_room_wwow.glb",
+   "kind": "room",
+   "weight": 0.045,
+   "sockets": {
+    "north": "wall+",
+    "east": "wall+",
+    "south": "room",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 48,
+    "Mesh": 298
+   }
+  },
+  {
+   "item": 31,
+   "name": "room_wwog",
+   "file": "school_room_wwog.glb",
+   "kind": "room",
+   "weight": 0.0225,
+   "sockets": {
+    "north": "wall+",
+    "east": "wall+",
+    "south": "room",
+    "west": "gate+"
+   },
+   "tris": {
+    "Collision-colonly": 84,
+    "Mesh": 523
+   }
+  },
+  {
+   "item": 32,
+   "name": "room_wwwo",
+   "file": "school_room_wwwo.glb",
+   "kind": "room",
+   "weight": 0.045,
+   "sockets": {
+    "north": "wall+",
+    "east": "wall+",
+    "south": "wall+",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 48,
+    "Mesh": 298
+   }
+  },
+  {
+   "item": 33,
+   "name": "room_wwgo",
+   "file": "school_room_wwgo.glb",
+   "kind": "room",
+   "weight": 0.0225,
+   "sockets": {
+    "north": "wall+",
+    "east": "wall+",
+    "south": "gate+",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 84,
+    "Mesh": 370
+   }
+  },
+  {
+   "item": 34,
+   "name": "room_wgoo",
+   "file": "school_room_wgoo.glb",
+   "kind": "room",
+   "weight": 0.3375,
+   "sockets": {
+    "north": "wall+",
+    "east": "gate+",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 72,
+    "Mesh": 407
+   }
+  },
+  {
+   "item": 35,
+   "name": "room_wgow",
+   "file": "school_room_wgow.glb",
+   "kind": "room",
+   "weight": 0.0225,
+   "sockets": {
+    "north": "wall+",
+    "east": "gate+",
+    "south": "room",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 84,
+    "Mesh": 515
+   }
+  },
+  {
+   "item": 36,
+   "name": "room_wgwo",
+   "file": "school_room_wgwo.glb",
+   "kind": "room",
+   "weight": 0.0225,
+   "sockets": {
+    "north": "wall+",
+    "east": "gate+",
+    "south": "wall+",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 84,
+    "Mesh": 441
+   }
+  },
+  {
+   "item": 37,
+   "name": "room_gooo",
+   "file": "school_room_gooo.glb",
+   "kind": "room",
+   "weight": 0.5249999999999999,
+   "sockets": {
+    "north": "gate+",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 60,
+    "Mesh": 308
+   }
+  },
+  {
+   "item": 38,
+   "name": "room_goow",
+   "file": "school_room_goow.glb",
+   "kind": "room",
+   "weight": 0.3375,
+   "sockets": {
+    "north": "gate+",
+    "east": "room",
+    "south": "room",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 72,
+    "Mesh": 380
+   }
+  },
+  {
+   "item": 39,
+   "name": "room_goww",
+   "file": "school_room_goww.glb",
+   "kind": "room",
+   "weight": 0.0225,
+   "sockets": {
+    "north": "gate+",
+    "east": "room",
+    "south": "wall+",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 84,
+    "Mesh": 414
+   }
+  },
+  {
+   "item": 40,
+   "name": "room_gwoo",
+   "file": "school_room_gwoo.glb",
+   "kind": "room",
+   "weight": 0.3375,
+   "sockets": {
+    "north": "gate+",
+    "east": "wall+",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 72,
+    "Mesh": 420
+   }
+  },
+  {
+   "item": 41,
+   "name": "room_gwow",
+   "file": "school_room_gwow.glb",
+   "kind": "room",
+   "weight": 0.0225,
+   "sockets": {
+    "north": "gate+",
+    "east": "wall+",
+    "south": "room",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 84,
+    "Mesh": 446
+   }
+  },
+  {
+   "item": 42,
+   "name": "room_gwwo",
+   "file": "school_room_gwwo.glb",
+   "kind": "room",
+   "weight": 0.0225,
+   "sockets": {
+    "north": "gate+",
+    "east": "wall+",
+    "south": "wall+",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 84,
+    "Mesh": 408
+   }
+  },
+  {
+   "item": 43,
+   "name": "landing_wwwg",
+   "file": "school_landing_wwwg.glb",
+   "kind": "landing",
+   "weight": 0.04,
+   "sockets": {
+    "north": "wall+",
+    "east": "wall+",
+    "south": "wall+",
+    "west": "gate+"
+   },
+   "tris": {
+    "Collision-colonly": 156,
+    "Mesh": 458
+   }
+  },
+  {
+   "item": 44,
+   "name": "landing_wwgw",
+   "file": "school_landing_wwgw.glb",
+   "kind": "landing",
+   "weight": 0.04,
+   "sockets": {
+    "north": "wall+",
+    "east": "wall+",
+    "south": "gate+",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 156,
+    "Mesh": 460
+   }
+  },
+  {
+   "item": 45,
+   "name": "landing_wwgg",
+   "file": "school_landing_wwgg.glb",
+   "kind": "landing",
+   "weight": 0.25,
+   "sockets": {
+    "north": "wall+",
+    "east": "wall+",
+    "south": "gate+",
+    "west": "gate+"
+   },
+   "tris": {
+    "Collision-colonly": 204,
+    "Mesh": 554
+   }
+  },
+  {
+   "item": 46,
+   "name": "landing_wgww",
+   "file": "school_landing_wgww.glb",
+   "kind": "landing",
+   "weight": 0.04,
+   "sockets": {
+    "north": "wall+",
+    "east": "gate+",
+    "south": "wall+",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 156,
+    "Mesh": 458
+   }
+  },
+  {
+   "item": 47,
+   "name": "landing_wgwg",
+   "file": "school_landing_wgwg.glb",
+   "kind": "landing",
+   "weight": 0.35,
+   "sockets": {
+    "north": "wall+",
+    "east": "gate+",
+    "south": "wall+",
+    "west": "gate+"
+   },
+   "tris": {
+    "Collision-colonly": 204,
+    "Mesh": 548
+   }
+  },
+  {
+   "item": 48,
+   "name": "landing_wggw",
+   "file": "school_landing_wggw.glb",
+   "kind": "landing",
+   "weight": 0.25,
+   "sockets": {
+    "north": "wall+",
+    "east": "gate+",
+    "south": "gate+",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 204,
+    "Mesh": 554
+   }
+  },
+  {
+   "item": 49,
+   "name": "landing_wggg",
+   "file": "school_landing_wggg.glb",
+   "kind": "landing",
+   "weight": 0.12,
+   "sockets": {
+    "north": "wall+",
+    "east": "gate+",
+    "south": "gate+",
+    "west": "gate+"
+   },
+   "tris": {
+    "Collision-colonly": 252,
+    "Mesh": 644
+   }
+  },
+  {
+   "item": 50,
+   "name": "landing_gwww",
+   "file": "school_landing_gwww.glb",
+   "kind": "landing",
+   "weight": 0.04,
+   "sockets": {
+    "north": "gate+",
+    "east": "wall+",
+    "south": "wall+",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 156,
+    "Mesh": 458
+   }
+  },
+  {
+   "item": 51,
+   "name": "landing_gwwg",
+   "file": "school_landing_gwwg.glb",
+   "kind": "landing",
+   "weight": 0.25,
+   "sockets": {
+    "north": "gate+",
+    "east": "wall+",
+    "south": "wall+",
+    "west": "gate+"
+   },
+   "tris": {
+    "Collision-colonly": 204,
+    "Mesh": 554
+   }
+  },
+  {
+   "item": 52,
+   "name": "landing_gwgw",
+   "file": "school_landing_gwgw.glb",
+   "kind": "landing",
+   "weight": 0.35,
+   "sockets": {
+    "north": "gate+",
+    "east": "wall+",
+    "south": "gate+",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 204,
+    "Mesh": 556
+   }
+  },
+  {
+   "item": 53,
+   "name": "landing_gwgg",
+   "file": "school_landing_gwgg.glb",
+   "kind": "landing",
+   "weight": 0.12,
+   "sockets": {
+    "north": "gate+",
+    "east": "wall+",
+    "south": "gate+",
+    "west": "gate+"
+   },
+   "tris": {
+    "Collision-colonly": 252,
+    "Mesh": 644
+   }
+  },
+  {
+   "item": 54,
+   "name": "landing_ggww",
+   "file": "school_landing_ggww.glb",
+   "kind": "landing",
+   "weight": 0.25,
+   "sockets": {
+    "north": "gate+",
+    "east": "gate+",
+    "south": "wall+",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 204,
+    "Mesh": 550
+   }
+  },
+  {
+   "item": 55,
+   "name": "landing_ggwg",
+   "file": "school_landing_ggwg.glb",
+   "kind": "landing",
+   "weight": 0.12,
+   "sockets": {
+    "north": "gate+",
+    "east": "gate+",
+    "south": "wall+",
+    "west": "gate+"
+   },
+   "tris": {
+    "Collision-colonly": 252,
+    "Mesh": 646
+   }
+  },
+  {
+   "item": 56,
+   "name": "landing_gggw",
+   "file": "school_landing_gggw.glb",
+   "kind": "landing",
+   "weight": 0.12,
+   "sockets": {
+    "north": "gate+",
+    "east": "gate+",
+    "south": "gate+",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 252,
+    "Mesh": 644
+   }
+  },
+  {
+   "item": 57,
+   "name": "landing_gggg",
+   "file": "school_landing_gggg.glb",
+   "kind": "landing",
+   "weight": 0.08,
+   "sockets": {
+    "north": "gate+",
+    "east": "gate+",
+    "south": "gate+",
+    "west": "gate+"
+   },
+   "tris": {
+    "Collision-colonly": 300,
+    "Mesh": 738
+   }
+  },
+  {
+   "item": 58,
+   "name": "bridge_NS",
+   "file": "school_bridge_NS.glb",
+   "kind": "bridge",
+   "weight": 1.5,
+   "sockets": {
+    "north": "gate-",
+    "east": "flank+",
+    "south": "gate-",
+    "west": "flank+"
+   },
+   "tris": {
+    "Collision-colonly": 36,
+    "Mesh": 110
+   },
+   "axis": "NS"
+  },
+  {
+   "item": 59,
+   "name": "broken_NS",
+   "file": "school_broken_NS.glb",
+   "kind": "broken",
+   "weight": 0.35,
+   "sockets": {
+    "north": "gate-",
+    "east": "flank+",
+    "south": "gate-",
+    "west": "flank+"
+   },
+   "tris": {
+    "Collision-colonly": 96,
+    "Mesh": 340
+   },
+   "axis": "NS"
+  },
+  {
+   "item": 60,
+   "name": "stones_NS",
+   "file": "school_stones_NS.glb",
+   "kind": "stones",
+   "weight": 0.3,
+   "sockets": {
+    "north": "gate-",
+    "east": "flank+",
+    "south": "gate-",
+    "west": "flank+"
+   },
+   "tris": {
+    "Collision-colonly": 100,
+    "Mesh": 226
+   },
+   "axis": "NS"
+  },
+  {
+   "item": 61,
+   "name": "steps_NS",
+   "file": "school_steps_NS.glb",
+   "kind": "steps",
+   "weight": 0.3,
+   "sockets": {
+    "north": "gate-",
+    "east": "flank+",
+    "south": "gate-",
+    "west": "flank+"
+   },
+   "tris": {
+    "Collision-colonly": 72,
+    "Mesh": 190
+   },
+   "axis": "NS"
+  },
+  {
+   "item": 62,
+   "name": "mover_NS",
+   "file": "school_mover_NS.glb",
+   "kind": "mover",
+   "weight": 0.2,
+   "sockets": {
+    "north": "gate-",
+    "east": "flank+",
+    "south": "gate-",
+    "west": "flank+"
+   },
+   "tris": {
+    "Collision-colonly": 120,
+    "Mesh": 270
+   },
+   "axis": "NS"
+  },
+  {
+   "item": 63,
+   "name": "bridge_EW",
+   "file": "school_bridge_EW.glb",
+   "kind": "bridge",
+   "weight": 1.5,
+   "sockets": {
+    "north": "flank+",
+    "east": "gate-",
+    "south": "flank+",
+    "west": "gate-"
+   },
+   "tris": {
+    "Collision-colonly": 36,
+    "Mesh": 116
+   },
+   "axis": "EW"
+  },
+  {
+   "item": 64,
+   "name": "broken_EW",
+   "file": "school_broken_EW.glb",
+   "kind": "broken",
+   "weight": 0.35,
+   "sockets": {
+    "north": "flank+",
+    "east": "gate-",
+    "south": "flank+",
+    "west": "gate-"
+   },
+   "tris": {
+    "Collision-colonly": 96,
+    "Mesh": 344
+   },
+   "axis": "EW"
+  },
+  {
+   "item": 65,
+   "name": "stones_EW",
+   "file": "school_stones_EW.glb",
+   "kind": "stones",
+   "weight": 0.3,
+   "sockets": {
+    "north": "flank+",
+    "east": "gate-",
+    "south": "flank+",
+    "west": "gate-"
+   },
+   "tris": {
+    "Collision-colonly": 100,
+    "Mesh": 226
+   },
+   "axis": "EW"
+  },
+  {
+   "item": 66,
+   "name": "steps_EW",
+   "file": "school_steps_EW.glb",
+   "kind": "steps",
+   "weight": 0.3,
+   "sockets": {
+    "north": "flank+",
+    "east": "gate-",
+    "south": "flank+",
+    "west": "gate-"
+   },
+   "tris": {
+    "Collision-colonly": 72,
+    "Mesh": 188
+   },
+   "axis": "EW"
+  },
+  {
+   "item": 67,
+   "name": "mover_EW",
+   "file": "school_mover_EW.glb",
+   "kind": "mover",
+   "weight": 0.2,
+   "sockets": {
+    "north": "flank+",
+    "east": "gate-",
+    "south": "flank+",
+    "west": "gate-"
+   },
+   "tris": {
+    "Collision-colonly": 120,
+    "Mesh": 270
+   },
+   "axis": "EW"
+  },
+  {
+   "item": 68,
+   "name": "bridge_NE",
+   "file": "school_bridge_NE.glb",
+   "kind": "corner",
+   "weight": 0.35,
+   "sockets": {
+    "north": "gate-",
+    "east": "gate-",
+    "south": "flank+",
+    "west": "flank+"
+   },
+   "tris": {
+    "Collision-colonly": 72,
+    "Mesh": 168
+   },
+   "axis": "NE"
+  },
+  {
+   "item": 69,
+   "name": "bridge_ES",
+   "file": "school_bridge_ES.glb",
+   "kind": "corner",
+   "weight": 0.35,
+   "sockets": {
+    "north": "flank+",
+    "east": "gate-",
+    "south": "gate-",
+    "west": "flank+"
+   },
+   "tris": {
+    "Collision-colonly": 72,
+    "Mesh": 170
+   },
+   "axis": "ES"
+  },
+  {
+   "item": 70,
+   "name": "bridge_SW",
+   "file": "school_bridge_SW.glb",
+   "kind": "corner",
+   "weight": 0.35,
+   "sockets": {
+    "north": "flank+",
+    "east": "flank+",
+    "south": "gate-",
+    "west": "gate-"
+   },
+   "tris": {
+    "Collision-colonly": 72,
+    "Mesh": 170
+   },
+   "axis": "SW"
+  },
+  {
+   "item": 71,
+   "name": "bridge_WN",
+   "file": "school_bridge_WN.glb",
+   "kind": "corner",
+   "weight": 0.35,
+   "sockets": {
+    "north": "gate-",
+    "east": "flank+",
+    "south": "flank+",
+    "west": "gate-"
+   },
+   "tris": {
+    "Collision-colonly": 72,
+    "Mesh": 174
+   },
+   "axis": "WN"
+  },
+  {
+   "item": 72,
+   "name": "chasm_a",
+   "file": "school_chasm_a.glb",
+   "kind": "chasm",
+   "weight": 0.4,
+   "sockets": {
+    "north": "void",
+    "east": "void",
+    "south": "void",
+    "west": "void"
+   },
+   "tris": {
+    "Mesh": 2
+   }
+  },
+  {
+   "item": 73,
+   "name": "chasm_b",
+   "file": "school_chasm_b.glb",
+   "kind": "chasm",
+   "weight": 0.1,
+   "sockets": {
+    "north": "void",
+    "east": "void",
+    "south": "void",
+    "west": "void"
+   },
+   "tris": {
+    "Mesh": 72
+   }
+  },
+  {
+   "item": 74,
+   "name": "door_N",
+   "file": "school_door_N.glb",
+   "kind": "door",
+   "weight": 0.0,
+   "sockets": {
+    "north": "void",
+    "east": "wall+",
+    "south": "room",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 60,
+    "Mesh": 518
+   },
+   "door": "N"
+  },
+  {
+   "item": 75,
+   "name": "door_E",
+   "file": "school_door_E.glb",
+   "kind": "door",
+   "weight": 0.0,
+   "sockets": {
+    "north": "wall+",
+    "east": "void",
+    "south": "wall+",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 60,
+    "Mesh": 408
+   },
+   "door": "E"
+  },
+  {
+   "item": 76,
+   "name": "stairs_S",
+   "file": "school_stairs_S.glb",
+   "kind": "door",
+   "weight": 0.0,
+   "sockets": {
+    "north": "room",
+    "east": "wall+",
+    "south": "void",
+    "west": "wall+"
+   },
+   "tris": {
+    "Collision-colonly": 134,
+    "Mesh": 502
+   },
+   "door": "S"
+  },
+  {
+   "item": 77,
+   "name": "door_W",
+   "file": "school_door_W.glb",
+   "kind": "door",
+   "weight": 0.0,
+   "sockets": {
+    "north": "wall+",
+    "east": "room",
+    "south": "wall+",
+    "west": "void"
+   },
+   "tris": {
+    "Collision-colonly": 60,
+    "Mesh": 425
+   },
+   "door": "W"
+  }
+ ],
+ "chasm_variants_note": "Socket variants of the chasm: each is its own MeshLibrary item (the WFC generator needs one item per tile) with the mesh of school_chasm_a.glb; no file of their own.",
+ "chasm_variants": [
+  {
+   "name": "chasm_vvvw",
+   "item": 78,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "void",
+    "east": "void",
+    "south": "void",
+    "west": "wall-"
+   }
+  },
+  {
+   "name": "chasm_fvvv",
+   "item": 79,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "void",
+    "south": "void",
+    "west": "void"
+   }
+  },
+  {
+   "name": "chasm_vvww",
+   "item": 80,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "void",
+    "east": "void",
+    "south": "wall-",
+    "west": "wall-"
+   }
+  },
+  {
+   "name": "chasm_fvvw",
+   "item": 81,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "void",
+    "south": "void",
+    "west": "wall-"
+   }
+  },
+  {
+   "name": "chasm_fwvv",
+   "item": 82,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "wall-",
+    "south": "void",
+    "west": "void"
+   }
+  },
+  {
+   "name": "chasm_ffvv",
+   "item": 83,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "flank-",
+    "south": "void",
+    "west": "void"
+   }
+  },
+  {
+   "name": "chasm_vwvw",
+   "item": 84,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 1.0,
+   "sockets": {
+    "north": "void",
+    "east": "wall-",
+    "south": "void",
+    "west": "wall-"
+   }
+  },
+  {
+   "name": "chasm_fvwv",
+   "item": 85,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "void",
+    "south": "wall-",
+    "west": "void"
+   }
+  },
+  {
+   "name": "chasm_vwww",
+   "item": 86,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "void",
+    "east": "wall-",
+    "south": "wall-",
+    "west": "wall-"
+   }
+  },
+  {
+   "name": "chasm_fvww",
+   "item": 87,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "void",
+    "south": "wall-",
+    "west": "wall-"
+   }
+  },
+  {
+   "name": "chasm_fwvw",
+   "item": 88,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "wall-",
+    "south": "void",
+    "west": "wall-"
+   }
+  },
+  {
+   "name": "chasm_ffvw",
+   "item": 89,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "flank-",
+    "south": "void",
+    "west": "wall-"
+   }
+  },
+  {
+   "name": "chasm_fvfv",
+   "item": 90,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 1.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "void",
+    "south": "flank-",
+    "west": "void"
+   }
+  },
+  {
+   "name": "chasm_fwwv",
+   "item": 91,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "wall-",
+    "south": "wall-",
+    "west": "void"
+   }
+  },
+  {
+   "name": "chasm_fvfw",
+   "item": 92,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "void",
+    "south": "flank-",
+    "west": "wall-"
+   }
+  },
+  {
+   "name": "chasm_ffwv",
+   "item": 93,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "flank-",
+    "south": "wall-",
+    "west": "void"
+   }
+  },
+  {
+   "name": "chasm_fffv",
+   "item": 94,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "flank-",
+    "south": "flank-",
+    "west": "void"
+   }
+  },
+  {
+   "name": "chasm_wwww",
+   "item": 95,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 0.5,
+   "sockets": {
+    "north": "wall-",
+    "east": "wall-",
+    "south": "wall-",
+    "west": "wall-"
+   }
+  },
+  {
+   "name": "chasm_fwww",
+   "item": 96,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "wall-",
+    "south": "wall-",
+    "west": "wall-"
+   }
+  },
+  {
+   "name": "chasm_ffww",
+   "item": 97,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "flank-",
+    "south": "wall-",
+    "west": "wall-"
+   }
+  },
+  {
+   "name": "chasm_fwfw",
+   "item": 98,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 1.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "wall-",
+    "south": "flank-",
+    "west": "wall-"
+   }
+  },
+  {
+   "name": "chasm_fffw",
+   "item": 99,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 2.0,
+   "sockets": {
+    "north": "flank-",
+    "east": "flank-",
+    "south": "flank-",
+    "west": "wall-"
+   }
+  },
+  {
+   "name": "chasm_ffff",
+   "item": 100,
+   "mesh_file": "school_chasm_a.glb",
+   "rotation": "FourWay (quarter turns)",
+   "weight": 0.5,
+   "sockets": {
+    "north": "flank-",
+    "east": "flank-",
+    "south": "flank-",
+    "west": "flank-"
+   }
+  }
+ ],
+ "dungeon": {
+  "note": "Tile sets for godoodungeon (rooms + corridors). Rooms: walls face out with outside+, the room bounds supply outside- (Room Edge Socket \"outside\"); the Door Tile is dungeon_door, one tile with four rotations whose only outside+ face is its outside. Corridors (Path Socket \"path\"): the bridges and bridge pads, open faces path, closed x; the chasm is the empty tile.",
+  "room_edge_socket": "outside",
+  "path_socket": "path",
+  "extra_tiles": [
+   {
+    "name": "dungeon_door",
+    "item": 101,
+    "file": "school_dungeon_door.glb",
+    "tris": {
+     "Collision-colonly": 36,
+     "Mesh": 354
+    }
+   }
+  ],
+  "room_tiles": [
+   {
+    "name": "room_oooo_a",
+    "item": 0,
+    "rotation": "None",
+    "weight": 1.3,
+    "door": false,
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    }
+   },
+   {
+    "name": "room_oooo_b",
+    "item": 1,
+    "rotation": "None",
+    "weight": 1.3,
+    "door": false,
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    }
+   },
+   {
+    "name": "room_oooo_circle",
+    "item": 2,
+    "rotation": "None",
+    "weight": 0.5,
+    "door": false,
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    }
+   },
+   {
+    "name": "room_oooo_dais",
+    "item": 3,
+    "rotation": "None",
+    "weight": 0.35,
+    "door": false,
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    }
+   },
+   {
+    "name": "room_oooo_pit",
+    "item": 4,
+    "rotation": "None",
+    "weight": 0.3,
+    "door": false,
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    }
+   },
+   {
+    "name": "room_oooo_pillar",
+    "item": 5,
+    "rotation": "None",
+    "weight": 0.45,
+    "door": false,
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    }
+   },
+   {
+    "name": "room_oooo_tiers",
+    "item": 6,
+    "rotation": "None",
+    "weight": 0.3,
+    "door": false,
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    }
+   },
+   {
+    "name": "room_ooow",
+    "item": 7,
+    "rotation": "None",
+    "weight": 1.0499999999999998,
+    "door": false,
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "room",
+     "west": "outside+"
+    }
+   },
+   {
+    "name": "room_oowo",
+    "item": 9,
+    "rotation": "None",
+    "weight": 1.0499999999999998,
+    "door": false,
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "outside+",
+     "west": "room"
+    }
+   },
+   {
+    "name": "room_ooww",
+    "item": 10,
+    "rotation": "None",
+    "weight": 0.675,
+    "door": false,
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "outside+",
+     "west": "outside+"
+    }
+   },
+   {
+    "name": "room_owoo",
+    "item": 14,
+    "rotation": "None",
+    "weight": 1.0499999999999998,
+    "door": false,
+    "sockets": {
+     "north": "room",
+     "east": "outside+",
+     "south": "room",
+     "west": "room"
+    }
+   },
+   {
+    "name": "room_owwo",
+    "item": 15,
+    "rotation": "None",
+    "weight": 0.675,
+    "door": false,
+    "sockets": {
+     "north": "room",
+     "east": "outside+",
+     "south": "outside+",
+     "west": "room"
+    }
+   },
+   {
+    "name": "room_wooo",
+    "item": 23,
+    "rotation": "None",
+    "weight": 1.0499999999999998,
+    "door": false,
+    "sockets": {
+     "north": "outside+",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    }
+   },
+   {
+    "name": "room_woow",
+    "item": 24,
+    "rotation": "None",
+    "weight": 0.675,
+    "door": false,
+    "sockets": {
+     "north": "outside+",
+     "east": "room",
+     "south": "room",
+     "west": "outside+"
+    }
+   },
+   {
+    "name": "room_wwoo",
+    "item": 29,
+    "rotation": "None",
+    "weight": 0.675,
+    "door": false,
+    "sockets": {
+     "north": "outside+",
+     "east": "outside+",
+     "south": "room",
+     "west": "room"
+    }
+   },
+   {
+    "name": "dungeon_door",
+    "item": 101,
+    "rotation": "FourWay",
+    "weight": 0.0,
+    "door": true,
+    "sockets": {
+     "north": "outside+",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    }
+   }
+  ],
+  "corridor_tiles": [
+   {
+    "name": "landing_wwgg",
+    "item": 45,
+    "rotation": "None",
+    "weight": 0.25,
+    "marker": null,
+    "sockets": {
+     "north": "x",
+     "east": "x",
+     "south": "path",
+     "west": "path"
+    }
+   },
+   {
+    "name": "landing_wgwg",
+    "item": 47,
+    "rotation": "None",
+    "weight": 0.35,
+    "marker": null,
+    "sockets": {
+     "north": "x",
+     "east": "path",
+     "south": "x",
+     "west": "path"
+    }
+   },
+   {
+    "name": "landing_wggw",
+    "item": 48,
+    "rotation": "None",
+    "weight": 0.25,
+    "marker": null,
+    "sockets": {
+     "north": "x",
+     "east": "path",
+     "south": "path",
+     "west": "x"
+    }
+   },
+   {
+    "name": "landing_wggg",
+    "item": 49,
+    "rotation": "None",
+    "weight": 0.12,
+    "marker": null,
+    "sockets": {
+     "north": "x",
+     "east": "path",
+     "south": "path",
+     "west": "path"
+    }
+   },
+   {
+    "name": "landing_gwwg",
+    "item": 51,
+    "rotation": "None",
+    "weight": 0.25,
+    "marker": null,
+    "sockets": {
+     "north": "path",
+     "east": "x",
+     "south": "x",
+     "west": "path"
+    }
+   },
+   {
+    "name": "landing_gwgw",
+    "item": 52,
+    "rotation": "None",
+    "weight": 0.35,
+    "marker": null,
+    "sockets": {
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
+    }
+   },
+   {
+    "name": "landing_gwgg",
+    "item": 53,
+    "rotation": "None",
+    "weight": 0.12,
+    "marker": null,
+    "sockets": {
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "path"
+    }
+   },
+   {
+    "name": "landing_ggww",
+    "item": 54,
+    "rotation": "None",
+    "weight": 0.25,
+    "marker": null,
+    "sockets": {
+     "north": "path",
+     "east": "path",
+     "south": "x",
+     "west": "x"
+    }
+   },
+   {
+    "name": "landing_ggwg",
+    "item": 55,
+    "rotation": "None",
+    "weight": 0.12,
+    "marker": null,
+    "sockets": {
+     "north": "path",
+     "east": "path",
+     "south": "x",
+     "west": "path"
+    }
+   },
+   {
+    "name": "landing_gggw",
+    "item": 56,
+    "rotation": "None",
+    "weight": 0.12,
+    "marker": null,
+    "sockets": {
+     "north": "path",
+     "east": "path",
+     "south": "path",
+     "west": "x"
+    }
+   },
+   {
+    "name": "landing_gggg",
+    "item": 57,
+    "rotation": "None",
+    "weight": 0.08,
+    "marker": null,
+    "sockets": {
+     "north": "path",
+     "east": "path",
+     "south": "path",
+     "west": "path"
+    }
+   },
+   {
+    "name": "bridge_NS",
+    "item": 58,
+    "rotation": "None",
+    "weight": 1.5,
+    "marker": null,
+    "sockets": {
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
+    }
+   },
+   {
+    "name": "broken_NS",
+    "item": 59,
+    "rotation": "None",
+    "weight": 0.35,
+    "marker": null,
+    "sockets": {
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
+    }
+   },
+   {
+    "name": "stones_NS",
+    "item": 60,
+    "rotation": "None",
+    "weight": 0.3,
+    "marker": null,
+    "sockets": {
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
+    }
+   },
+   {
+    "name": "steps_NS",
+    "item": 61,
+    "rotation": "None",
+    "weight": 0.3,
+    "marker": null,
+    "sockets": {
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
+    }
+   },
+   {
+    "name": "mover_NS",
+    "item": 62,
+    "rotation": "None",
+    "weight": 0.2,
+    "marker": "mover_NS",
+    "sockets": {
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
+    }
+   },
+   {
+    "name": "bridge_EW",
+    "item": 63,
+    "rotation": "None",
+    "weight": 1.5,
+    "marker": null,
+    "sockets": {
+     "north": "x",
+     "east": "path",
+     "south": "x",
+     "west": "path"
+    }
+   },
+   {
+    "name": "broken_EW",
+    "item": 64,
+    "rotation": "None",
+    "weight": 0.35,
+    "marker": null,
+    "sockets": {
+     "north": "x",
+     "east": "path",
+     "south": "x",
+     "west": "path"
+    }
+   },
+   {
+    "name": "stones_EW",
+    "item": 65,
+    "rotation": "None",
+    "weight": 0.3,
+    "marker": null,
+    "sockets": {
+     "north": "x",
+     "east": "path",
+     "south": "x",
+     "west": "path"
+    }
+   },
+   {
+    "name": "steps_EW",
+    "item": 66,
+    "rotation": "None",
+    "weight": 0.3,
+    "marker": null,
+    "sockets": {
+     "north": "x",
+     "east": "path",
+     "south": "x",
+     "west": "path"
+    }
+   },
+   {
+    "name": "mover_EW",
+    "item": 67,
+    "rotation": "None",
+    "weight": 0.2,
+    "marker": "mover_EW",
+    "sockets": {
+     "north": "x",
+     "east": "path",
+     "south": "x",
+     "west": "path"
+    }
+   },
+   {
+    "name": "bridge_NE",
+    "item": 68,
+    "rotation": "None",
+    "weight": 0.35,
+    "marker": null,
+    "sockets": {
+     "north": "path",
+     "east": "path",
+     "south": "x",
+     "west": "x"
+    }
+   },
+   {
+    "name": "bridge_ES",
+    "item": 69,
+    "rotation": "None",
+    "weight": 0.35,
+    "marker": null,
+    "sockets": {
+     "north": "x",
+     "east": "path",
+     "south": "path",
+     "west": "x"
+    }
+   },
+   {
+    "name": "bridge_SW",
+    "item": 70,
+    "rotation": "None",
+    "weight": 0.35,
+    "marker": null,
+    "sockets": {
+     "north": "x",
+     "east": "x",
+     "south": "path",
+     "west": "path"
+    }
+   },
+   {
+    "name": "bridge_WN",
+    "item": 71,
+    "rotation": "None",
+    "weight": 0.35,
+    "marker": null,
+    "sockets": {
+     "north": "path",
+     "east": "x",
+     "south": "x",
+     "west": "path"
+    }
+   },
+   {
+    "name": "chasm_a",
+    "item": 72,
+    "rotation": "None",
+    "weight": 0.4,
+    "marker": null,
+    "sockets": {
+     "north": "x",
+     "east": "x",
+     "south": "x",
+     "west": "x"
+    }
+   },
+   {
+    "name": "chasm_b",
+    "item": 73,
+    "rotation": "None",
+    "weight": 0.1,
+    "marker": null,
+    "sockets": {
+     "north": "x",
+     "east": "x",
+     "south": "x",
+     "west": "x"
+    }
+   }
+  ]
+ }
+}

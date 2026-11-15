@@ -1,0 +1,341 @@
+{
+ "units": "metres; Godot +Y up; origin at the bottom centre of each prop; front faces Godot +Z",
+ "material": "one surface per mesh, palette texture textures/T_NatureColorMap.png (nearest filter, no mipmaps); double_sided = the material has backface culling off (grass, flowers, fern)",
+ "counts": {
+  "tree": 8,
+  "rock": 4,
+  "bush": 8,
+  "flower": 4,
+  "grass": 8
+ },
+ "props": [
+  {
+   "name": "tree_oak",
+   "file": "nature_tree_oak.glb",
+   "category": "tree",
+   "double_sided": false,
+   "height_m": 5.816,
+   "radius_m": 2.342,
+   "tris": 558,
+   "kb": 54.7,
+   "trunk_radius_m": 0.24
+  },
+  {
+   "name": "tree_oak_wide",
+   "file": "nature_tree_oak_wide.glb",
+   "category": "tree",
+   "double_sided": false,
+   "height_m": 5.218,
+   "radius_m": 2.696,
+   "tris": 651,
+   "kb": 63.5,
+   "trunk_radius_m": 0.29
+  },
+  {
+   "name": "tree_round",
+   "file": "nature_tree_round.glb",
+   "category": "tree",
+   "double_sided": false,
+   "height_m": 5.185,
+   "radius_m": 1.733,
+   "tris": 372,
+   "kb": 37.0,
+   "trunk_radius_m": 0.17
+  },
+  {
+   "name": "tree_round_tall",
+   "file": "nature_tree_round_tall.glb",
+   "category": "tree",
+   "double_sided": false,
+   "height_m": 6.294,
+   "radius_m": 1.452,
+   "tris": 452,
+   "kb": 45.0,
+   "trunk_radius_m": 0.19
+  },
+  {
+   "name": "tree_birch",
+   "file": "nature_tree_birch.glb",
+   "category": "tree",
+   "double_sided": false,
+   "height_m": 6.145,
+   "radius_m": 1.295,
+   "tris": 465,
+   "kb": 45.8,
+   "trunk_radius_m": 0.12
+  },
+  {
+   "name": "tree_pine",
+   "file": "nature_tree_pine.glb",
+   "category": "tree",
+   "double_sided": false,
+   "height_m": 7.45,
+   "radius_m": 1.788,
+   "tris": 150,
+   "kb": 12.5,
+   "trunk_radius_m": 0.19
+  },
+  {
+   "name": "tree_pine_small",
+   "file": "nature_tree_pine_small.glb",
+   "category": "tree",
+   "double_sided": false,
+   "height_m": 4.2,
+   "radius_m": 1.122,
+   "tris": 128,
+   "kb": 10.9,
+   "trunk_radius_m": 0.12
+  },
+  {
+   "name": "tree_poplar",
+   "file": "nature_tree_poplar.glb",
+   "category": "tree",
+   "double_sided": false,
+   "height_m": 6.751,
+   "radius_m": 0.906,
+   "tris": 532,
+   "kb": 53.0,
+   "trunk_radius_m": 0.16
+  },
+  {
+   "name": "rock_boulder",
+   "file": "nature_rock_boulder.glb",
+   "category": "rock",
+   "double_sided": false,
+   "height_m": 0.768,
+   "radius_m": 0.642,
+   "tris": 80,
+   "kb": 9.5
+  },
+  {
+   "name": "rock_flat",
+   "file": "nature_rock_flat.glb",
+   "category": "rock",
+   "double_sided": false,
+   "height_m": 0.242,
+   "radius_m": 0.659,
+   "tris": 80,
+   "kb": 9.0
+  },
+  {
+   "name": "rock_cluster",
+   "file": "nature_rock_cluster.glb",
+   "category": "rock",
+   "double_sided": false,
+   "height_m": 0.468,
+   "radius_m": 0.689,
+   "tris": 240,
+   "kb": 24.2
+  },
+  {
+   "name": "rock_mossy",
+   "file": "nature_rock_mossy.glb",
+   "category": "rock",
+   "double_sided": false,
+   "height_m": 0.793,
+   "radius_m": 0.754,
+   "tris": 160,
+   "kb": 16.8
+  },
+  {
+   "name": "bush_round",
+   "file": "nature_bush_round.glb",
+   "category": "bush",
+   "double_sided": false,
+   "height_m": 0.903,
+   "radius_m": 0.79,
+   "tris": 240,
+   "kb": 25.6
+  },
+  {
+   "name": "bush_wide",
+   "file": "nature_bush_wide.glb",
+   "category": "bush",
+   "double_sided": false,
+   "height_m": 0.826,
+   "radius_m": 1.085,
+   "tris": 400,
+   "kb": 41.4
+  },
+  {
+   "name": "bush_tall",
+   "file": "nature_bush_tall.glb",
+   "category": "bush",
+   "double_sided": false,
+   "height_m": 1.419,
+   "radius_m": 0.756,
+   "tris": 400,
+   "kb": 41.5
+  },
+  {
+   "name": "bush_small",
+   "file": "nature_bush_small.glb",
+   "category": "bush",
+   "double_sided": false,
+   "height_m": 0.536,
+   "radius_m": 0.481,
+   "tris": 160,
+   "kb": 17.6
+  },
+  {
+   "name": "bush_dark",
+   "file": "nature_bush_dark.glb",
+   "category": "bush",
+   "double_sided": false,
+   "height_m": 1.036,
+   "radius_m": 0.943,
+   "tris": 320,
+   "kb": 33.5
+  },
+  {
+   "name": "bush_fern",
+   "file": "nature_bush_fern.glb",
+   "category": "bush",
+   "double_sided": true,
+   "height_m": 0.603,
+   "radius_m": 0.856,
+   "tris": 77,
+   "kb": 7.3
+  },
+  {
+   "name": "bush_flowering",
+   "file": "nature_bush_flowering.glb",
+   "category": "bush",
+   "double_sided": false,
+   "height_m": 0.965,
+   "radius_m": 0.897,
+   "tris": 864,
+   "kb": 66.7
+  },
+  {
+   "name": "bush_berry",
+   "file": "nature_bush_berry.glb",
+   "category": "bush",
+   "double_sided": false,
+   "height_m": 0.83,
+   "radius_m": 0.833,
+   "tris": 528,
+   "kb": 54.1
+  },
+  {
+   "name": "flower_daisy",
+   "file": "nature_flower_daisy.glb",
+   "category": "flower",
+   "double_sided": true,
+   "height_m": 0.319,
+   "radius_m": 0.21,
+   "tris": 216,
+   "kb": 16.4
+  },
+  {
+   "name": "flower_buttercup",
+   "file": "nature_flower_buttercup.glb",
+   "category": "flower",
+   "double_sided": true,
+   "height_m": 0.289,
+   "radius_m": 0.157,
+   "tris": 253,
+   "kb": 18.9
+  },
+  {
+   "name": "flower_bluebell",
+   "file": "nature_flower_bluebell.glb",
+   "category": "flower",
+   "double_sided": true,
+   "height_m": 0.276,
+   "radius_m": 0.285,
+   "tris": 198,
+   "kb": 15.5
+  },
+  {
+   "name": "flower_foxglove",
+   "file": "nature_flower_foxglove.glb",
+   "category": "flower",
+   "double_sided": true,
+   "height_m": 0.569,
+   "radius_m": 0.247,
+   "tris": 246,
+   "kb": 18.8
+  },
+  {
+   "name": "grass_short",
+   "file": "nature_grass_short.glb",
+   "category": "grass",
+   "double_sided": true,
+   "height_m": 0.203,
+   "radius_m": 0.209,
+   "tris": 48,
+   "kb": 5.4
+  },
+  {
+   "name": "grass_tall",
+   "file": "nature_grass_tall.glb",
+   "category": "grass",
+   "double_sided": true,
+   "height_m": 0.541,
+   "radius_m": 0.383,
+   "tris": 65,
+   "kb": 6.5
+  },
+  {
+   "name": "grass_wide",
+   "file": "nature_grass_wide.glb",
+   "category": "grass",
+   "double_sided": true,
+   "height_m": 0.322,
+   "radius_m": 0.241,
+   "tris": 27,
+   "kb": 3.8
+  },
+  {
+   "name": "grass_thin",
+   "file": "nature_grass_thin.glb",
+   "category": "grass",
+   "double_sided": true,
+   "height_m": 0.34,
+   "radius_m": 0.281,
+   "tris": 120,
+   "kb": 10.6
+  },
+  {
+   "name": "grass_seedheads",
+   "file": "nature_grass_seedheads.glb",
+   "category": "grass",
+   "double_sided": true,
+   "height_m": 0.604,
+   "radius_m": 0.287,
+   "tris": 88,
+   "kb": 9.2
+  },
+  {
+   "name": "grass_dark",
+   "file": "nature_grass_dark.glb",
+   "category": "grass",
+   "double_sided": true,
+   "height_m": 0.378,
+   "radius_m": 0.336,
+   "tris": 70,
+   "kb": 6.9
+  },
+  {
+   "name": "grass_fresh",
+   "file": "nature_grass_fresh.glb",
+   "category": "grass",
+   "double_sided": true,
+   "height_m": 0.267,
+   "radius_m": 0.242,
+   "tris": 42,
+   "kb": 5.0
+  },
+  {
+   "name": "grass_curly",
+   "file": "nature_grass_curly.glb",
+   "category": "grass",
+   "double_sided": true,
+   "height_m": 0.243,
+   "radius_m": 0.459,
+   "tris": 70,
+   "kb": 6.9
+  }
+ ]
+}
