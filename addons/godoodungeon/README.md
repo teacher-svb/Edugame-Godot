@@ -25,9 +25,9 @@ Generate dungeons on a `GridMap`, straight from the Godot editor. godoodungeon l
 
 To try it straight away, the demo scenes are in this repository under `demo/godoodungeon/` (see [Demo](#demo)). The zip contains only the addon.
 
-### With WFC Generator
+### With godoowave
 
-godoodungeon uses the same solver and tile set resources as [WFC Generator](../wfc_generator/README.md), from `addons/editor_tools_common/Wfc/`. You do not need WFC Generator, but both can be enabled at once: their items share the **GridMap** menu, and a tile set shows one preview. If WFC Generator is installed too, it must be **1.3.3 or later**. Older versions keep their own copy of the tile set classes, so tile sets would load as types godoodungeon cannot use. godoodungeon warns when it finds an older version.
+godoodungeon uses the same solver and tile set resources as [godoowave](../godoowave/README.md) (called WFC Generator up to 1.3.4), from `addons/editor_tools_common/Wfc/`. You do not need godoowave, but both can be enabled at once: their items share the **GridMap** menu, and a tile set shows one preview. If the older WFC Generator is installed instead, it must be **1.3.3 or later**. Older versions keep their own copy of the tile set classes, so tile sets would load as types godoodungeon cannot use. godoodungeon warns when it finds an older version.
 
 ### Updating
 
@@ -39,7 +39,7 @@ Close Godot, delete `addons/godoodungeon/`, then extract the new zip as above, a
 |---|---|
 | godoodungeon is not in the plugin list | The files are one level too deep. The plugin must be at `addons/godoodungeon/plugin.cfg`, not `addons/addons/…` or `godoodungeon-1.0.0/addons/…`. |
 | "Unable to load addon script" when enabling it | The C# project has not been built yet, or the build failed. Build (step 4), read the errors in the MSBuild panel at the bottom of the editor, then enable the plugin again. |
-| Build errors about types defined twice, or "UID duplicate detected" warnings | An older WFC Generator (1.3.2 or earlier) is installed next to it. Update WFC Generator to 1.3.3 or later, deleting its folder first. |
+| Build errors about types defined twice, or "UID duplicate detected" warnings | An older WFC Generator (1.3.2 or earlier) is installed next to it. Replace it with godoowave, deleting `addons/wfc_generator/` first. |
 | No GridMap menu in the toolbar | Select a `GridMap` node; the menu only appears for GridMaps. |
 | After a rebuild, the editor still runs the old code | Godot reloads C# when its window gets focus. Click into the editor window, then disable and enable the plugin. |
 | The first Generate after a rebuild takes about a second | .NET compiles the code on first use after a rebuild. Later runs are fast. |
@@ -49,7 +49,7 @@ Close Godot, delete `addons/godoodungeon/`, then extract the new zip as above, a
 1. Make a **room tile set** and a **corridor tile set**: two `WfcTileSet` resources that use the GridMap's `MeshLibrary` (see [Tile sets](#tile-sets)). The demo tile sets in `demo/godoodungeon/assets/` are a good start.
 2. Select the `GridMap`.
 3. In the 3D viewport toolbar, open **GridMap → Generate Dungeon (GDDS)**. GDDS is short for Godoodads, the suite this addon belongs to.
-4. Choose the **Room Tile Set**, the **Corridor Tile Set** and the **Door Tile**, and set the **Bounds**, which are drawn in violet in the viewport. Drag the handles on its faces to resize it.
+4. Choose the **Room Tile Set**, the **Corridor Tile Set** and the **Door**, and set the **Bounds**, which are drawn in violet in the viewport. Drag the handles on its faces to resize it.
 5. Tick **Preview Layout** to see the rooms (cyan), doors (yellow) and corridors (green) that Generate will make, and tune the numbers or the seed until you like the layout.
 6. Press **Generate**.
 
@@ -71,7 +71,7 @@ Occupied cells inside the bounds that the last dungeon did not write are yours. 
 
 ### Markers
 
-A tile can carry a **Marker** scene (a light, a spawn point), as in WFC Generator. After Generate, it is placed at every cell where that tile was generated, in a `DungeonMarkers` node under the GridMap. The next Generate or Clear Dungeon replaces the markers on the cells it changes. Move a marker out of `DungeonMarkers` to keep it.
+A tile can carry a **Marker** scene (a light, a spawn point), as in godoowave. After Generate, it is placed at every cell where that tile was generated, in a `DungeonMarkers` node under the GridMap. The next Generate or Clear Dungeon replaces the markers on the cells it changes. Move a marker out of `DungeonMarkers` to keep it.
 
 ## Options
 
@@ -85,7 +85,7 @@ A tile can carry a **Marker** scene (a light, a spawn point), as in WFC Generato
 | Room Tile Set | | Floors, walls, corners, doors and props. |
 | Corridor Tile Set | | Corridor pieces and an empty tile. |
 | Room Edge Socket | `outside` | The socket name of faces that point out of a room. Tiles use `outside+`; the room bounds supply `outside-`. |
-| Door Tile | | The room tile placed at every door. |
+| Door | | The room tile placed at every door. It is stored by its MeshLibrary item, so it stays the same tile when you add, remove or reorder tiles. |
 | Path Socket | `path` | The socket of the corridor tiles' open faces. |
 | Path Wander | 0.3 | 0 gives the most direct corridors, 1 the most meandering. |
 | **Bounds** | | |
@@ -103,11 +103,11 @@ A tile can carry a **Marker** scene (a light, a spawn point), as in WFC Generato
 | **Limits** | | |
 | Layout Attempts | 4 | Whole layouts tried, each from a seed derived from yours, before Generate gives up. |
 | Attempts Per Room | 50 | Positions tried per room before it is left out. |
-| Max Backtracks, Max Restarts | 2000, 20 | Limits of each room and corridor solve, as in WFC Generator. |
+| Max Backtracks, Max Restarts | 2000, 20 | Limits of each room and corridor solve, as in godoowave. |
 
 ## Tile sets
 
-Both tile sets are ordinary `WfcTileSet` resources ([WFC Generator](../wfc_generator/README.md#tile-sets) explains tiles, sockets, rotations and weights). They must use the same `MeshLibrary` as the GridMap. Build walls **inside** the cell, on its outer edge: a corridor that passes next to a room then shows its own wall beside the room's, not inside it.
+Both tile sets are ordinary `WfcTileSet` resources ([godoowave](../godoowave/README.md#tile-sets) explains tiles, sockets, rotations and weights). They must use the same `MeshLibrary` as the GridMap. Build walls **inside** the cell, on its outer edge: a corridor that passes next to a room then shows its own wall beside the room's, not inside it.
 
 ### Room tile set
 
@@ -119,7 +119,7 @@ Both tile sets are ordinary `WfcTileSet` resources ([WFC Generator](../wfc_gener
 
 - The room edge socket must be **one-sided**: tiles use `outside+`, and the room bounds supply `outside-`. A plain `outside` would let two walls meet inside a room.
 - Add `outside-` to the room tile set's **External Sockets**. The room bounds supply it, so the tile set check and the preview then count it as a partner instead of marking every wall face red.
-- The **Door Tile** has exactly one `outside+` face, its outside. Give it weight 0, so only the layout places doors.
+- The **Door** tile has exactly one `outside+` face, its outside. Give it weight 0, so only the layout places doors.
 - Walls, corners and doors need four rotations.
 
 ### Corridor tile set

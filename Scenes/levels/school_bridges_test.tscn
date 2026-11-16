@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://ceb87c8wof86s"]
 
 [ext_resource type="MeshLibrary" uid="uid://bae3hv0eh55ir" path="res://assets/3D/village/interiors/school_interior/school_tiles.meshlib" id="1_lib"]
-[ext_resource type="Script" uid="uid://xrobwlr825xt" path="res://addons/wfc_generator/Resources/WfcSettings.cs" id="2_settings"]
+[ext_resource type="Script" uid="uid://xrobwlr825xt" path="res://addons/editor_tools_common/Wfc/Resources/WfcSettings.cs" id="2_settings"]
 [ext_resource type="Resource" uid="uid://xiuy1cp6ly7e" path="res://GameData/wfc/school_bridges_tileset.tres" id="3_tileset"]
 [ext_resource type="PackedScene" uid="uid://d3etbg41ctd3j" path="res://assets/3D/village/interiors/school_interior/school_moving_platform_EW.tscn" id="4_jqvep"]
 [ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="4_player"]

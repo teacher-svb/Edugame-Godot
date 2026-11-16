@@ -2,11 +2,11 @@
 
 [ext_resource type="Environment" uid="uid://detuifcyaequt" path="res://GameData/environments/beaverford_morning.tres" id="1_env"]
 [ext_resource type="MeshLibrary" uid="uid://dxd3gs157s3wc" path="res://assets/3D/forest_tiles/forest_tiles.meshlib" id="2_lib"]
-[ext_resource type="Script" uid="uid://xrobwlr825xt" path="res://addons/wfc_generator/Resources/WfcSettings.cs" id="3_settings"]
+[ext_resource type="Script" uid="uid://xrobwlr825xt" path="res://addons/editor_tools_common/Wfc/Resources/WfcSettings.cs" id="3_settings"]
 [ext_resource type="Resource" uid="uid://dwft27weivo10" path="res://GameData/wfc/forest_tileset.tres" id="4_tileset"]
 [ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="5_player"]
 [ext_resource type="ArrayMesh" uid="uid://b5p4dciq0jex0" path="res://assets/3D/nature/meshes/nature_tree_oak.res" id="6_oak"]
-[ext_resource type="Script" uid="uid://ch36n85vf88pf" path="res://addons/multimesh_scatter/Resources/ScatterSettings.cs" id="7_scatter"]
+[ext_resource type="Script" uid="uid://ch36n85vf88pf" path="res://addons/godooscatter/Resources/ScatterSettings.cs" id="7_scatter"]
 [ext_resource type="ArrayMesh" uid="uid://6475rfv566q7" path="res://assets/3D/nature/meshes/nature_tree_poplar.res" id="8_7lvh5"]
 
 [sub_resource type="Resource" id="Resource_7lvh5"]

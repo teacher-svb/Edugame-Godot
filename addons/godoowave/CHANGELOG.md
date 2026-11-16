@@ -2,6 +2,18 @@
 
 All notable changes to godoowave (called WFC Generator up to 1.3.4) are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses [Semantic Versioning](https://semver.org/).
 
+## [1.4.2] - 2026-11-16
+
+### Fixed
+- **Height curves apply to one-layer bounds.** With Bounds Size Y = 1, and in the tile set preview's Measure with Sample Y = 1, the solver ignored the tiles' height curves and used their plain weights, while the bottom-layer check and path routing applied the curves. It now uses each curve at its bottom (height 0), as the bottom layer of taller bounds already did. Tile sets without height curves give the same cells as in 1.4.1 for the same settings and seed; with curves, one-layer bounds can change.
+- **The tile set preview updates when External Sockets change.** Faces that only meet an External Socket just added stayed red and listed as having no partner until a tile was edited or the tile set was selected again.
+
+## [1.4.1] - 2026-11-16
+
+### Fixed
+- **The GridMap stores the settings a generation started with.** The dialog stays editable while a solve runs, and a Seed typed or a box handle dragged during the animation ended up in the stored settings, so reopening the dialog no longer reproduced the result. Changes made during a solve now only apply to the next Generate. While a solve runs, the box outlines show the bounds being solved and the handles are hidden.
+- **Undoing a box resize changes the settings that were resized.** After dragging the bounds or pin box of one GridMap and opening the dialog for another, Ctrl+Z moved the second GridMap's box to the first one's old position.
+
 ## [1.4.0] - 2026-11-15
 
 ### Changed
