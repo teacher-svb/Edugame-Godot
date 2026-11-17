@@ -38,7 +38,6 @@
 [ext_resource type="Script" uid="uid://bq8nb421y1t1p" path="res://scripts/Game/UI/MVC_Inventory/InventoryModel.cs" id="30_j8mgp"]
 [ext_resource type="Resource" uid="uid://bytjn381x70ha" path="res://GameData/EventChannels/RemoveItemEventChannel.tres" id="31_hwrcp"]
 [ext_resource type="PackedScene" uid="uid://csd5kk66e1bep" path="res://Scenes/UI/Inventory.tscn" id="32_j8mgp"]
-[ext_resource type="AudioStream" uid="uid://p6yptdrwk41y" path="res://assets/music/Dawn_at_the_Eastern_Gate.mp3" id="34_5t4y7"]
 [ext_resource type="Script" uid="uid://cp5bj565jyei0" path="res://scripts/Game/UI/MVC_PauseMenu/PauseMenuController.cs" id="37_wdqj0"]
 [ext_resource type="Script" uid="uid://bj01trh2jwtl1" path="res://scripts/Game/UI/MVC_PauseMenu/PauseMenuModel.cs" id="38_8mpub"]
 [ext_resource type="PackedScene" uid="uid://c3qhgndpkvx23" path="res://Scenes/UI/PauseMenuUI.tscn" id="39_8mpub"]
@@ -48,6 +47,7 @@
 [ext_resource type="Script" uid="uid://cvgoslwqcj457" path="res://scripts/Game/UI/MVC_Fade/FadeModel.cs" id="42_56cnb"]
 [ext_resource type="PackedScene" uid="uid://ddarmu38cbcs" path="res://Scenes/UI/SettingsUI.tscn" id="42_n2kwl"]
 [ext_resource type="Script" uid="uid://7u5mhmxl340a" path="res://scripts/Game/UI/MVC_Fade/FadeView.cs" id="43_wgk6c"]
+[ext_resource type="AudioStream" uid="uid://cl2c2gswseww8" path="res://assets/music/route7-ramble-menu-140bpm.wav" id="48_8gr31"]
 
 [sub_resource type="Resource" id="Resource_hwrcp"]
 script = ExtResource("16_ut70p")
@@ -309,6 +309,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=358640137]
-stream = ExtResource("34_5t4y7")
+stream = ExtResource("48_8gr31")
 volume_db = -20.678
 autoplay = true

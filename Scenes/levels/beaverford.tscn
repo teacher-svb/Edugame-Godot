@@ -68,7 +68,7 @@ navigation_mesh = SubResource("NavigationMesh_igo7b")
 [node name="beaverford_village" parent="NavigationRegion3D" unique_id=1974315017 instance=ExtResource("4_p0tss")]
 
 [node name="bakery" parent="NavigationRegion3D" unique_id=1609753939 instance=ExtResource("5_hj8ux")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0.1, 16)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.002977, 0.1, 15.5929985)
 
 [node name="brick_house" parent="NavigationRegion3D" unique_id=1295619467 instance=ExtResource("6_bykos")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 19)
@@ -109,16 +109,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 1.5, 40.100002)
 [node name="wizard_tower" parent="NavigationRegion3D" unique_id=1795995315 instance=ExtResource("18_4fuop")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 1.3, -31.7)
 
-[node name="WizardTower_Level_2" parent="NavigationRegion3D/wizard_tower/WizardTower" parent_id_path=PackedInt32Array(1795995315, 1125021957) index="7" unique_id=1365081749]
+[node name="WizardTower_Level_2" parent="NavigationRegion3D/wizard_tower/WizardTower" parent_id_path=PackedInt32Array(1795995315, 1017721379) index="7" unique_id=438446324]
 transform = Transform3D(0.9876883, -0.15605338, -0.010912316, 0.15643446, 0.9852823, 0.068897665, -2.7939677e-09, -0.06975648, 0.997564, 0.20319988, 8.9152, -0.35030055)
 
-[node name="WizardTower_Level_3" parent="NavigationRegion3D/wizard_tower/WizardTower" parent_id_path=PackedInt32Array(1795995315, 1125021957) index="8" unique_id=1170833303]
+[node name="WizardTower_Level_3" parent="NavigationRegion3D/wizard_tower/WizardTower" parent_id_path=PackedInt32Array(1795995315, 1017721379) index="8" unique_id=1139049995]
 transform = Transform3D(0.9975648, 0.069744915, 4.3389853e-05, -0.069060005, 0.9878553, -0.13918564, -0.009750352, 0.1388437, 0.9902663, 0.08189988, 13.0174, -0.23860057)
 
-[node name="WizardTower_Level_4" parent="NavigationRegion3D/wizard_tower/WizardTower" parent_id_path=PackedInt32Array(1795995315, 1125021957) index="9" unique_id=153436165]
+[node name="WizardTower_Level_4" parent="NavigationRegion3D/wizard_tower/WizardTower" parent_id_path=PackedInt32Array(1795995315, 1017721379) index="9" unique_id=177130504]
 transform = Transform3D(0.99756396, -0.06975782, 2.6701018e-05, 0.069234155, 0.990122, 0.12192254, -0.008531488, -0.12162368, 0.99253964, 0.21439987, 14.8944, 0.025199428)
 
-[node name="AnimationPlayer" parent="NavigationRegion3D/wizard_tower" index="1" unique_id=1362533669]
+[node name="AnimationPlayer" parent="NavigationRegion3D/wizard_tower" index="1" unique_id=1826448474]
 autoplay = &"WizardTower_Turn"
 
 [editable path="NavigationRegion3D/wizard_tower"]

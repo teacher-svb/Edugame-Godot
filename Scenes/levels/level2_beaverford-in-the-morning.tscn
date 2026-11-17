@@ -486,16 +486,16 @@ autoplay = &"RESET"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -36)
 
 [node name="Hendrik" parent="." unique_id=497783338 instance=ExtResource("8_c8hg8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.337013, -9.536743e-07, -18.067596)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.234116, 1.578182, 44.51187)
 
 [node name="Liesbeth" parent="." unique_id=2040317346 instance=ExtResource("9_0audd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.61164, -9.536743e-07, 0.4628191)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.835913, -0.0056301355, 20.052374)
 
 [node name="MsBram" parent="." unique_id=1516356363 instance=ExtResource("10_ay62w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6740956, 0.0007059972, -26.58886)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3514943, 0.3983796, -27.580536)
 
 [node name="Cornelis" parent="." unique_id=1044258308 instance=ExtResource("11_xfoxv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1340637, 1.0991005, 6.9955792)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.09407, 0.2078203, 14.443476)
 
 [node name="Quests" type="Node" parent="." unique_id=1154009112]
 
