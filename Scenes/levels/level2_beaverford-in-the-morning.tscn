@@ -36,6 +36,8 @@
 [ext_resource type="Texture2D" uid="uid://dkonxtbg1hgms" path="res://project/images/bakehouse-diagram.png" id="qs_tex_bakery"]
 [ext_resource type="Texture2D" uid="uid://kg55grkl3acm" path="res://project/images/schoolbell.png" id="qs_tex_bell"]
 [ext_resource type="Texture2D" uid="uid://bwbnh2ruyuhhd" path="res://project/images/mill-diagram.png" id="qs_tex_mill"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/Audio/SceneMusic.cs" id="music_scene"]
+[ext_resource type="Resource" path="res://GameData/music/route7-ramble-140.tres" id="music_track"]
 
 [sub_resource type="Curve3D" id="Curve3D_hq36d"]
 _data = {
@@ -403,17 +405,29 @@ Hoeveel minuten na 8 uur moet de bel gaan?"
 HintText = "Tel de lengte van de les op bij het begin van de les."
 metadata/_custom_type_script = "uid://sup7lp6karaf"
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_igo7b"]
-size = Vector3(2.4, 1, 1.8000001)
+[sub_resource type="BoxShape3D" id="BoxShape3D_kjadr"]
+size = Vector3(2.4, 1, 2.7412963)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_bivhb"]
-size = Vector3(1.2, 1, 1.4)
+[sub_resource type="BoxShape3D" id="BoxShape3D_t3qpp"]
+size = Vector3(1.2714355, 1, 1.4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_npc_approach"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_kd8u4"]
+size = Vector3(2.5681982, 1.4074707, 1.9961815)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ne1q5"]
+size = Vector3(0.5019531, 1.4165039, 0.6586914)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v572t"]
 size = Vector3(6, 2, 6)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_npc_close"]
-size = Vector3(2, 2, 2)
+[sub_resource type="BoxShape3D" id="BoxShape3D_gnjj1"]
+size = Vector3(0.670166, 2, 0.5877075)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uw05l"]
+size = Vector3(6, 2, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c6cs2"]
+size = Vector3(0.7693176, 1.3491211, 0.6875)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_village_edge"]
 size = Vector3(1, 2, 1)
@@ -492,7 +506,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.234116, 1.578182, 44.5118
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.835913, -0.0056301355, 20.052374)
 
 [node name="MsBram" parent="." unique_id=1516356363 instance=ExtResource("10_ay62w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3514943, 0.3983796, -27.580536)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.942002, 0.68019676, -28.206722)
 
 [node name="Cornelis" parent="." unique_id=1044258308 instance=ExtResource("11_xfoxv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.09407, 0.2078203, 14.443476)
@@ -668,56 +682,60 @@ _quests = Array[ExtResource("qs_quest_script")]([ExtResource("14_dlsi4"), ExtRes
 eventChannel = ExtResource("15_jttql")
 
 [node name="CornelisDrawbridgeArea" type="Area3D" parent="." unique_id=475543381]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.325844, 0, 20.187727)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CornelisDrawbridgeArea" unique_id=1605957359]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1920929e-07, 0, 0.75)
-shape = SubResource("BoxShape3D_igo7b")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6121042, 0.22172356)
+shape = SubResource("BoxShape3D_kjadr")
 
 [node name="CornelisDrawbridgeCloseArea" type="Area3D" parent="." unique_id=1958182607]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.642159, 9.536743e-07, 19.391285)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CornelisDrawbridgeCloseArea" unique_id=1394947006]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.19999981)
-shape = SubResource("BoxShape3D_bivhb")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5005131, 0, 0.20000076)
+shape = SubResource("BoxShape3D_t3qpp")
 
 [node name="HendrikMillArea" type="Area3D" parent="." unique_id=1470465706]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.337013, 0, -18.067596)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.03404, 1.5179372, 45.172806)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HendrikMillArea" unique_id=1481059729]
-shape = SubResource("BoxShape3D_npc_approach")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43288422, 0.29626465, 0.24312592)
+shape = SubResource("BoxShape3D_kd8u4")
 
 [node name="HendrikMillCloseArea" type="Area3D" parent="." unique_id=600818871]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.337013, 0, -18.067596)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.19019, 1.7251449, 44.877617)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HendrikMillCloseArea" unique_id=1134775141]
-shape = SubResource("BoxShape3D_npc_close")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12207031, 0.29174805, 0.30200195)
+shape = SubResource("BoxShape3D_ne1q5")
 
 [node name="LiesbethScalesArea" type="Area3D" parent="." unique_id=215740431]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.61164, 0, 0.4628191)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.98235, -1.9073486e-06, 20.426228)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LiesbethScalesArea" unique_id=1563036971]
-shape = SubResource("BoxShape3D_npc_approach")
+shape = SubResource("BoxShape3D_v572t")
 
 [node name="LiesbethScalesCloseArea" type="Area3D" parent="." unique_id=1441486578]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.61164, 0, 0.4628191)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.98235, -1.9073486e-06, 20.426228)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LiesbethScalesCloseArea" unique_id=1359724527]
-shape = SubResource("BoxShape3D_npc_close")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.044555664, 0, 0.36642456)
+shape = SubResource("BoxShape3D_gnjj1")
 
 [node name="MsBramBellArea" type="Area3D" parent="." unique_id=334275673]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6740956, 0, -26.58886)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2056062, 0.34179962, -27.294489)
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MsBramBellArea" unique_id=761672957]
-shape = SubResource("BoxShape3D_npc_approach")
+shape = SubResource("BoxShape3D_uw05l")
 
 [node name="MsBramBellCloseArea" type="Area3D" parent="." unique_id=1716861232]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6740956, 0, -26.58886)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.390248, 0.34179962, -27.367657)
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MsBramBellCloseArea" unique_id=1921053802]
-shape = SubResource("BoxShape3D_npc_close")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.47773743, 0.32543945, 0.65625)
+shape = SubResource("BoxShape3D_c6cs2")
 
 [node name="LeaveHomeArea" type="Area3D" parent="." unique_id=590053377]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 10)
@@ -736,6 +754,10 @@ shape = SubResource("BoxShape3D_village_edge")
 
 [node name="Marker3D" type="Marker3D" parent="." unique_id=1993607327]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0.4, 42)
+
+[node name="SceneMusic" type="Node" parent="." unique_id=1730452011]
+script = ExtResource("music_scene")
+Track = ExtResource("music_track")
 
 [connection signal="ChallengeCompleted" from="Quests/I_2-the Ambition/Cornelis/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis" method="CompleteObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa02"]]
 [connection signal="ChallengeFailed" from="Quests/I_2-the Ambition/Cornelis/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis" method="FailObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa02"]]

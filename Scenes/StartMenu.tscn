@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://bmfobuh16qn1h" path="res://scripts/Game/UI/MVC_StartMenu/View/StartMenuView.cs" id="3_view"]
 [ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="4_theme"]
 [ext_resource type="Script" uid="uid://bpr1xsrq6lokd" path="res://scripts/Lib/UIAnimation/AnimatedButton.cs" id="5_ujd4t"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/Audio/SceneMusic.cs" id="music_scene"]
+[ext_resource type="Resource" path="res://GameData/music/route7-ramble-menu.tres" id="music_track"]
 
 [node name="Node" type="Node" unique_id=1133384526]
 
@@ -67,3 +69,7 @@ theme = ExtResource("4_theme")
 text = "Afsluiten"
 script = ExtResource("5_ujd4t")
 metadata/_custom_type_script = "uid://bpr1xsrq6lokd"
+
+[node name="SceneMusic" type="Node" parent="." unique_id=1730452011]
+script = ExtResource("music_scene")
+Track = ExtResource("music_track")

@@ -1,11 +1,11 @@
 [gd_scene format=4 uid="uid://q0oiil2shiq0"]
 
-[ext_resource type="MeshLibrary" uid="uid://bae3hv0eh55ir" path="res://assets/3D/village/interiors/school_interior/school_tiles.meshlib" id="1_lib"]
-[ext_resource type="Script" uid="uid://cgraummx7cyo2" path="res://addons/godoodungeon/Resources/DungeonSettings.cs" id="2_settings"]
-[ext_resource type="Resource" uid="uid://clrjh7175k2cv" path="res://GameData/wfc/school_dungeon_rooms.tres" id="3_rooms"]
-[ext_resource type="Resource" uid="uid://dqiwp0ado5r6j" path="res://GameData/wfc/school_dungeon_corridors.tres" id="4_corridors"]
-[ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="5_player"]
-[ext_resource type="PackedScene" uid="uid://b46bwsxmk2pp7" path="res://assets/3D/village/interiors/school_interior/school_moving_platform_NS.tscn" id="5_ui3bk"]
+[ext_resource type="MeshLibrary" uid="uid://bae3hv0eh55ir" path="res://assets/3D/village/interiors/school_interior/school_tiles.meshlib" id="1_m8fme"]
+[ext_resource type="Resource" uid="uid://dqiwp0ado5r6j" path="res://GameData/wfc/school_dungeon_corridors.tres" id="2_uv0ch"]
+[ext_resource type="Resource" uid="uid://clrjh7175k2cv" path="res://GameData/wfc/school_dungeon_rooms.tres" id="3_6x4xy"]
+[ext_resource type="Script" uid="uid://cgraummx7cyo2" path="res://addons/godoodungeon/Resources/DungeonSettings.cs" id="4_ftes3"]
+[ext_resource type="PackedScene" uid="uid://b46bwsxmk2pp7" path="res://assets/3D/village/interiors/school_interior/school_moving_platform_NS.tscn" id="5_j0lmv"]
+[ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="6_qblbw"]
 
 [sub_resource type="Environment" id="Environment_school"]
 background_mode = 1
@@ -24,11 +24,11 @@ fog_height = -1.0
 fog_height_density = 0.35
 
 [sub_resource type="Resource" id="Resource_dhhig"]
-script = ExtResource("2_settings")
+script = ExtResource("4_ftes3")
 RandomiseSeed = true
 Seed = 2638766450
-RoomTileSet = ExtResource("3_rooms")
-CorridorTileSet = ExtResource("4_corridors")
+RoomTileSet = ExtResource("3_6x4xy")
+CorridorTileSet = ExtResource("2_uv0ch")
 Door = 101
 BoundsSize = Vector3i(22, 1, 22)
 RoomCount = 5
@@ -50,7 +50,7 @@ shadow_enabled = true
 directional_shadow_max_distance = 60.0
 
 [node name="School" type="GridMap" parent="." unique_id=2060859884]
-mesh_library = ExtResource("1_lib")
+mesh_library = ExtResource("1_m8fme")
 cell_size = Vector3(4, 1, 4)
 cell_center_y = false
 data = {
@@ -61,14 +61,14 @@ metadata/godoodads_dungeon_generated = PackedByteArray("Ae2U3U7DMAyFv3Zj3Tr2v7Hd
 
 [node name="DungeonMarkers" type="Node3D" parent="School" unique_id=881309264]
 
-[node name="MovingPlatformNS" type="Node3D" parent="School/DungeonMarkers" unique_id=722759320 instance=ExtResource("5_ui3bk")]
+[node name="MovingPlatformNS" parent="School/DungeonMarkers" unique_id=722759320 instance=ExtResource("5_j0lmv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 22)
 metadata/godoodads_dungeon_marker = true
 
-[node name="MovingPlatformNS2" type="Node3D" parent="School/DungeonMarkers" unique_id=59385664 instance=ExtResource("5_ui3bk")]
+[node name="MovingPlatformNS2" parent="School/DungeonMarkers" unique_id=59385664 instance=ExtResource("5_j0lmv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 0, 50)
 metadata/godoodads_dungeon_marker = true
 
-[node name="Player" parent="." unique_id=2069731022 instance=ExtResource("5_player")]
+[node name="Player" parent="." unique_id=2069731022 instance=ExtResource("6_qblbw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.1, 67)
 PersistentId = "Player"

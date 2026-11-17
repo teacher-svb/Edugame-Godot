@@ -48,6 +48,8 @@
 [ext_resource type="Script" uid="uid://bon4b1kkdldu8" path="res://scripts/Game/Systems/QuestSystem/Steps/PopStateStep.cs" id="qs_pop"]
 [ext_resource type="Script" uid="uid://bksw1ls1mwcv0" path="res://scripts/Game/Systems/QuestSystem/QuestNode.cs" id="qs_questnode"]
 [ext_resource type="Resource" uid="uid://bcgox3enbg4ph" path="res://GameData/quests/I.1-MorningInBeaverford.tres" id="qs_quest_i1"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/Audio/SceneMusic.cs" id="music_scene"]
+[ext_resource type="Resource" path="res://GameData/music/route7-ramble-110.tres" id="music_track"]
 
 [sub_resource type="Gradient" id="Gradient_upsym"]
 offsets = PackedFloat32Array(0.117647, 1)
@@ -600,6 +602,10 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.70000005, 0.5)
 shape = SubResource("BoxShape3D_tile")
 debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="SceneMusic" type="Node" parent="." unique_id=1730452011]
+script = ExtResource("music_scene")
+Track = ExtResource("music_track")
 
 [connection signal="body_entered" from="transporters/transporter_bedroom-livingroom" to="transporters/transporter_bedroom-livingroom" method="_OnBodyEntered"]
 [connection signal="body_entered" from="transporters/transporter_livingroom-bedroom" to="transporters/transporter_livingroom-bedroom" method="_OnBodyEntered"]

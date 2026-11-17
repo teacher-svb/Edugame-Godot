@@ -47,7 +47,7 @@
 [ext_resource type="Script" uid="uid://cvgoslwqcj457" path="res://scripts/Game/UI/MVC_Fade/FadeModel.cs" id="42_56cnb"]
 [ext_resource type="PackedScene" uid="uid://ddarmu38cbcs" path="res://Scenes/UI/SettingsUI.tscn" id="42_n2kwl"]
 [ext_resource type="Script" uid="uid://7u5mhmxl340a" path="res://scripts/Game/UI/MVC_Fade/FadeView.cs" id="43_wgk6c"]
-[ext_resource type="AudioStream" uid="uid://cl2c2gswseww8" path="res://assets/music/route7-ramble-menu-140bpm.wav" id="48_8gr31"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/Audio/MusicManager.cs" id="48_music"]
 
 [sub_resource type="Resource" id="Resource_hwrcp"]
 script = ExtResource("16_ut70p")
@@ -308,7 +308,5 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=358640137]
-stream = ExtResource("48_8gr31")
-volume_db = -20.678
-autoplay = true
+[node name="MusicManager" type="Node" parent="." unique_id=358640137]
+script = ExtResource("48_music")
