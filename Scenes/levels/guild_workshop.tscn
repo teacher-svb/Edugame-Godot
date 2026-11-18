@@ -1,0 +1,243 @@
+[gd_scene format=3 uid="uid://ceh42a3q61qgq"]
+
+[ext_resource type="Script" uid="uid://coeco3nsaywj6" path="res://scripts/Lib/OcclusionFader/OcclusionFader.cs" id="1_fader"]
+[ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://scripts/Lib/OcclusionFader/occlusionFader.gdshader" id="2_fadershader"]
+[ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="3_player"]
+[ext_resource type="Script" uid="uid://bhsdjlrhck4qd" path="res://scripts/test/Transporter.cs" id="4_transporter"]
+[ext_resource type="PackedScene" uid="uid://ckvwdeosf0ql5" path="res://assets/3D/guild_workshop/level/guild_workshop.glb" id="5_level"]
+[ext_resource type="PackedScene" uid="uid://6o5lytmlmkf4" path="res://assets/3D/guild_workshop/props/prop_assembly_table.glb" id="p_assembly_table"]
+[ext_resource type="PackedScene" uid="uid://ci835dy2dti3" path="res://assets/3D/village/props/prop_barrel_a.glb" id="p_barrel_a"]
+[ext_resource type="PackedScene" uid="uid://c5lr8ap7vxfno" path="res://assets/3D/village/props/prop_barrel_b.glb" id="p_barrel_b"]
+[ext_resource type="PackedScene" uid="uid://dovlv2hwsw2ju" path="res://assets/3D/guild_workshop/props/prop_bellows.glb" id="p_bellows"]
+[ext_resource type="PackedScene" uid="uid://cxlssg8x2as7e" path="res://assets/3D/guild_workshop/props/prop_blueprint_shelf.glb" id="p_blueprint_shelf"]
+[ext_resource type="PackedScene" uid="uid://b2roh3b7r7td3" path="res://assets/3D/guild_workshop/props/prop_chalkboard.glb" id="p_chalkboard"]
+[ext_resource type="PackedScene" uid="uid://nc5kcjwdefbb" path="res://assets/3D/guild_workshop/props/prop_coat_hooks.glb" id="p_coat_hooks"]
+[ext_resource type="PackedScene" uid="uid://cguph5sgupie3" path="res://assets/3D/guild_workshop/props/prop_crate.glb" id="p_crate"]
+[ext_resource type="PackedScene" uid="uid://mb10oohifunp" path="res://assets/3D/guild_workshop/props/prop_crate_small.glb" id="p_crate_small"]
+[ext_resource type="PackedScene" uid="uid://xdh5bnpqeged" path="res://assets/3D/guild_workshop/props/prop_drafting_table.glb" id="p_drafting_table"]
+[ext_resource type="PackedScene" uid="uid://c0gyk5dcol54b" path="res://assets/3D/guild_workshop/props/prop_drill_press.glb" id="p_drill_press"]
+[ext_resource type="PackedScene" uid="uid://b8ef2jd4apjcv" path="res://assets/3D/guild_workshop/props/prop_firewood_stack.glb" id="p_firewood_stack"]
+[ext_resource type="PackedScene" uid="uid://ceaaoi2m2j61p" path="res://assets/3D/guild_workshop/props/prop_jar_shelf.glb" id="p_jar_shelf"]
+[ext_resource type="PackedScene" uid="uid://b2lldj7hxnh4w" path="res://assets/3D/guild_workshop/props/prop_lamp_test_bench.glb" id="p_lamp_test_bench"]
+[ext_resource type="PackedScene" uid="uid://bapxe3sxisbcl" path="res://assets/3D/guild_workshop/props/prop_lantern_station.glb" id="p_lantern_station"]
+[ext_resource type="PackedScene" uid="uid://dg7rrnsrdmxlo" path="res://assets/3D/guild_workshop/props/prop_oil_stain.glb" id="p_oil_stain"]
+[ext_resource type="PackedScene" uid="uid://dfxwqpeucgfa2" path="res://assets/3D/guild_workshop/props/prop_parts_shelf.glb" id="p_parts_shelf"]
+[ext_resource type="PackedScene" uid="uid://ceepcrnqpk1ai" path="res://assets/3D/guild_workshop/props/prop_plan_basket.glb" id="p_plan_basket"]
+[ext_resource type="PackedScene" uid="uid://bycqg1heq25dv" path="res://assets/3D/guild_workshop/props/prop_plan_chest.glb" id="p_plan_chest"]
+[ext_resource type="PackedScene" uid="uid://v78ats6wdgle" path="res://assets/3D/guild_workshop/props/prop_rug_gamma.glb" id="p_rug_gamma"]
+[ext_resource type="PackedScene" uid="uid://nm8l6tqe8al5" path="res://assets/3D/guild_workshop/props/prop_timber_rack.glb" id="p_timber_rack"]
+[ext_resource type="PackedScene" uid="uid://2yolecay4gxg" path="res://assets/3D/guild_workshop/props/prop_treadle_lathe.glb" id="p_treadle_lathe"]
+[ext_resource type="PackedScene" uid="uid://cv0sm8cucele6" path="res://assets/3D/guild_workshop/props/prop_wind_test_rig.glb" id="p_wind_test_rig"]
+[ext_resource type="PackedScene" uid="uid://cdufps51t0u1x" path="res://assets/3D/guild_workshop/props/prop_workbench.glb" id="p_workbench"]
+
+[sub_resource type="Environment" id="Environment_guild"]
+background_mode = 1
+background_color = Color(0.02, 0.018, 0.016, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.62, 0.5, 0.38, 1)
+ambient_light_energy = 0.35
+tonemap_mode = 3
+ssao_enabled = true
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_guild"]
+geometry_parsed_geometry_type = 1
+cell_size = 0.1
+agent_radius = 0.1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_exit"]
+size = Vector3(0.6, 1.2, 1.8)
+
+[node name="GuildWorkshop" type="Node3D" unique_id=652464116]
+script = ExtResource("1_fader")
+OcclusionShader = ExtResource("2_fadershader")
+MaxRadius = 1.0
+
+[node name="Environment" type="Node3D" parent="." unique_id=1102970666]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=1646179843]
+environment = SubResource("Environment_guild")
+
+[node name="Lights" type="Node3D" parent="Environment" unique_id=878133554]
+editor_description = "One OmniLight3D per LIGHT_* marker in guild_workshop.glb (oil lamps, the hanging lamp over the lantern station, forge, boiler fire door, drafting lamp, lamp test bench)."
+
+[node name="Light_boiler_fire" type="OmniLight3D" parent="Environment/Lights" unique_id=915208492]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0.7, -12.15)
+light_color = Color(1, 0.5, 0.2, 1)
+omni_range = 3.0
+
+[node name="Light_drafting_lamp" type="OmniLight3D" parent="Environment/Lights" unique_id=1672675941]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.28, 1.38, -10.9)
+light_color = Color(1, 0.72, 0.44, 1)
+light_energy = 0.6
+omni_range = 2.5
+
+[node name="Light_forge" type="OmniLight3D" parent="Environment/Lights" unique_id=2009839281]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 1.1, -4)
+light_color = Color(1, 0.5, 0.2, 1)
+light_energy = 2.0
+shadow_enabled = true
+omni_range = 4.5
+
+[node name="Light_lamp_back_gamma" type="OmniLight3D" parent="Environment/Lights" unique_id=851032132]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 2.64, -13.7)
+light_color = Color(1, 0.72, 0.44, 1)
+
+[node name="Light_lamp_back_left" type="OmniLight3D" parent="Environment/Lights" unique_id=1628007210]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.64, -13.7)
+light_color = Color(1, 0.72, 0.44, 1)
+
+[node name="Light_lamp_back_right" type="OmniLight3D" parent="Environment/Lights" unique_id=387704612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.6, 2.64, -13.7)
+light_color = Color(1, 0.72, 0.44, 1)
+
+[node name="Light_lamp_left" type="OmniLight3D" parent="Environment/Lights" unique_id=1638038462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 2.64, -7.9)
+light_color = Color(1, 0.72, 0.44, 1)
+
+[node name="Light_lamp_pillar_bl" type="OmniLight3D" parent="Environment/Lights" unique_id=2115632535]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 2.34, -8.9)
+light_color = Color(1, 0.72, 0.44, 1)
+
+[node name="Light_lamp_pillar_br" type="OmniLight3D" parent="Environment/Lights" unique_id=1994472841]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 2.34, -8.9)
+light_color = Color(1, 0.72, 0.44, 1)
+
+[node name="Light_lamp_pillar_fl" type="OmniLight3D" parent="Environment/Lights" unique_id=1511972662]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 2.34, -3.9)
+light_color = Color(1, 0.72, 0.44, 1)
+
+[node name="Light_lamp_pillar_fr" type="OmniLight3D" parent="Environment/Lights" unique_id=518317924]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 2.34, -3.9)
+light_color = Color(1, 0.72, 0.44, 1)
+
+[node name="Light_lamp_right_forge" type="OmniLight3D" parent="Environment/Lights" unique_id=290106624]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7, 2.64, -5.5)
+light_color = Color(1, 0.72, 0.44, 1)
+
+[node name="Light_lamp_right_jars" type="OmniLight3D" parent="Environment/Lights" unique_id=1897338518]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7, 2.64, -8)
+light_color = Color(1, 0.72, 0.44, 1)
+
+[node name="Light_lamp_test_bench" type="OmniLight3D" parent="Environment/Lights" unique_id=828860745]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4, 1.07, -4.55)
+light_color = Color(1, 0.72, 0.44, 1)
+light_energy = 0.6
+omni_range = 2.5
+
+[node name="Light_station_lamp" type="OmniLight3D" parent="Environment/Lights" unique_id=91064166]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 2.17, -7)
+light_color = Color(1, 0.72, 0.44, 1)
+light_energy = 1.6
+shadow_enabled = true
+omni_range = 6.0
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1768651979]
+editor_description = "Navigation mesh not baked yet: select this node and press Bake NavigationMesh."
+navigation_mesh = SubResource("NavigationMesh_guild")
+
+[node name="guild_workshop" parent="NavigationRegion3D" unique_id=2135889962 instance=ExtResource("5_level")]
+
+[node name="Props" type="Node3D" parent="NavigationRegion3D" unique_id=1889400928]
+editor_description = "From assets/3D/guild_workshop/props/prop_placements.json: each prop sits on its PROP_<type>_<nn> marker in guild_workshop.glb."
+
+[node name="assembly_table_01" parent="NavigationRegion3D/Props" unique_id=1829955498 instance=ExtResource("p_assembly_table")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3.5)
+
+[node name="barrel_a_01" parent="NavigationRegion3D/Props" unique_id=1605671237 instance=ExtResource("p_barrel_a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, -0.5)
+
+[node name="barrel_b_01" parent="NavigationRegion3D/Props" unique_id=1420234211 instance=ExtResource("p_barrel_b")]
+transform = Transform3D(0.86602545, 0, 0.49999985, 0, 1, 0, -0.49999985, 0, 0.86602545, 19.5, 0, -0.5)
+
+[node name="bellows_01" parent="NavigationRegion3D/Props" unique_id=1292324297 instance=ExtResource("p_bellows")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.55, 0, -5.6)
+
+[node name="blueprint_shelf_01" parent="NavigationRegion3D/Props" unique_id=1197701577 instance=ExtResource("p_blueprint_shelf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -13.75)
+
+[node name="blueprint_shelf_02" parent="NavigationRegion3D/Props" unique_id=1379162550 instance=ExtResource("p_blueprint_shelf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, -13.75)
+
+[node name="chalkboard_01" parent="NavigationRegion3D/Props" unique_id=1895000726 instance=ExtResource("p_chalkboard")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 19.7, 0, -12.5)
+
+[node name="coat_hooks_01" parent="NavigationRegion3D/Props" unique_id=202338481 instance=ExtResource("p_coat_hooks")]
+transform = Transform3D(0.9396928, 0, 0.3420197, 0, 1, 0, -0.3420197, 0, 0.9396928, 0.5, 0, -0.5)
+
+[node name="crate_01" parent="NavigationRegion3D/Props" unique_id=1557785779 instance=ExtResource("p_crate")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -13.55)
+
+[node name="crate_02" parent="NavigationRegion3D/Props" unique_id=1054981508 instance=ExtResource("p_crate")]
+transform = Transform3D(0.9961948, 0, 0.08715499, 0, 1, 0, -0.08715499, 0, 0.9961948, 11.5, 0, -13.55)
+
+[node name="crate_03" parent="NavigationRegion3D/Props" unique_id=2023546647 instance=ExtResource("p_crate")]
+transform = Transform3D(0.99756396, 0, -0.06975747, 0, 1, 0, 0.06975747, 0, 0.99756396, 12.48, 0, -13.5)
+
+[node name="crate_small_01" parent="NavigationRegion3D/Props" unique_id=407267987 instance=ExtResource("p_crate_small")]
+transform = Transform3D(0.9781478, 0, 0.20791079, 0, 1, 0, -0.20791079, 0, 0.9781478, 12.4, 0.8, -13.5)
+
+[node name="drafting_table_01" parent="NavigationRegion3D/Props" unique_id=1677438601 instance=ExtResource("p_drafting_table")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -10.5)
+
+[node name="drill_press_01" parent="NavigationRegion3D/Props" unique_id=1834468259 instance=ExtResource("p_drill_press")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 5.5, 0, -0.4)
+
+[node name="firewood_stack_01" parent="NavigationRegion3D/Props" unique_id=1263857298 instance=ExtResource("p_firewood_stack")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 19.62, 0, -2)
+
+[node name="jar_shelf_01" parent="NavigationRegion3D/Props" unique_id=2116978084 instance=ExtResource("p_jar_shelf")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 19.75, 0, -7)
+
+[node name="lamp_test_bench_01" parent="NavigationRegion3D/Props" unique_id=2082784550 instance=ExtResource("p_lamp_test_bench")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -4.5)
+
+[node name="lantern_station_01" parent="NavigationRegion3D/Props" unique_id=1505639347 instance=ExtResource("p_lantern_station")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -7)
+
+[node name="oil_stain_01" parent="NavigationRegion3D/Props" unique_id=1271342521 instance=ExtResource("p_oil_stain")]
+transform = Transform3D(0.9396928, 0, 0.3420197, 0, 1, 0, -0.3420197, 0, 0.9396928, 17.5, 0, -2.5)
+
+[node name="parts_shelf_01" parent="NavigationRegion3D/Props" unique_id=883173070 instance=ExtResource("p_parts_shelf")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.27, 0, -7)
+
+[node name="plan_basket_01" parent="NavigationRegion3D/Props" unique_id=810440995 instance=ExtResource("p_plan_basket")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, -13.5)
+
+[node name="plan_chest_01" parent="NavigationRegion3D/Props" unique_id=128027471 instance=ExtResource("p_plan_chest")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 19.53, 0, -10)
+
+[node name="rug_gamma_01" parent="NavigationRegion3D/Props" unique_id=2097951010 instance=ExtResource("p_rug_gamma")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -12)
+
+[node name="timber_rack_01" parent="NavigationRegion3D/Props" unique_id=407489625 instance=ExtResource("p_timber_rack")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.32, 0, -12.5)
+
+[node name="treadle_lathe_01" parent="NavigationRegion3D/Props" unique_id=1789773646 instance=ExtResource("p_treadle_lathe")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 3, 0, -0.4)
+
+[node name="wind_test_rig_01" parent="NavigationRegion3D/Props" unique_id=705723478 instance=ExtResource("p_wind_test_rig")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -1.5)
+
+[node name="workbench_01" parent="NavigationRegion3D/Props" unique_id=80045184 instance=ExtResource("p_workbench")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.42, 0, -3)
+
+[node name="workbench_02" parent="NavigationRegion3D/Props" unique_id=456572241 instance=ExtResource("p_workbench")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.42, 0, -5)
+
+[node name="Player" parent="." unique_id=1303425277 instance=ExtResource("3_player")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0.5, 1.8, -9.5)
+PersistentId = "Player"
+
+[node name="transporters" type="Node" parent="." unique_id=1937356309]
+
+[node name="transporter_exit_village" type="Area3D" parent="transporters" unique_id=1743152404]
+editor_description = "Leave the hideout up the tunnel, back out at the tavern's cellar hatch. Set _sceneToLoadPath to the village scene, and move this node to the arrival point in that scene (the collision shape is offset back to EXIT_entrance)."
+script = ExtResource("4_transporter")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="transporters/transporter_exit_village" unique_id=1295794005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 2.6, -10)
+shape = SubResource("BoxShape3D_exit")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[connection signal="body_entered" from="transporters/transporter_exit_village" to="transporters/transporter_exit_village" method="_OnBodyEntered"]

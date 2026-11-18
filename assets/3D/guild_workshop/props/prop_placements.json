@@ -1,0 +1,622 @@
+{
+ "coordinate_system": "Godot, relative to the level root (guild_workshop.glb placed at the origin): position = (x, height, z); rotation is a quaternion [x, y, z, w]. The same transforms are the PROP_<type>_<nn> nodes in guild_workshop.glb.",
+ "count": 28,
+ "placements": [
+  {
+   "marker": "PROP_assembly_table_01",
+   "prop_type": "prop_assembly_table",
+   "prop_file": "godot_exports/guild_workshop/props/prop_assembly_table.glb",
+   "from_village": false,
+   "position": [
+    3.0,
+    0.0,
+    -3.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_barrel_a_01",
+   "prop_type": "prop_barrel_a",
+   "prop_file": "godot_exports/village/props/prop_barrel_a.glb",
+   "from_village": true,
+   "position": [
+    18.5,
+    0.0,
+    -0.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_barrel_b_01",
+   "prop_type": "prop_barrel_b",
+   "prop_file": "godot_exports/village/props/prop_barrel_b.glb",
+   "from_village": true,
+   "position": [
+    19.5,
+    0.0,
+    -0.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.258819,
+    -0.0,
+    0.965926
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_bellows_01",
+   "prop_type": "prop_bellows",
+   "prop_file": "godot_exports/guild_workshop/props/prop_bellows.glb",
+   "from_village": false,
+   "position": [
+    19.55,
+    0.0,
+    -5.6
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_blueprint_shelf_01",
+   "prop_type": "prop_blueprint_shelf",
+   "prop_file": "godot_exports/guild_workshop/props/prop_blueprint_shelf.glb",
+   "from_village": false,
+   "position": [
+    15.0,
+    0.0,
+    -13.75
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_blueprint_shelf_02",
+   "prop_type": "prop_blueprint_shelf",
+   "prop_file": "godot_exports/guild_workshop/props/prop_blueprint_shelf.glb",
+   "from_village": false,
+   "position": [
+    17.0,
+    0.0,
+    -13.75
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_chalkboard_01",
+   "prop_type": "prop_chalkboard",
+   "prop_file": "godot_exports/guild_workshop/props/prop_chalkboard.glb",
+   "from_village": false,
+   "position": [
+    19.7,
+    0.0,
+    -12.5
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    -0.707107,
+    0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_coat_hooks_01",
+   "prop_type": "prop_coat_hooks",
+   "prop_file": "godot_exports/guild_workshop/props/prop_coat_hooks.glb",
+   "from_village": false,
+   "position": [
+    0.5,
+    0.0,
+    -0.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.173648,
+    -0.0,
+    0.984808
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_crate_01",
+   "prop_type": "prop_crate",
+   "prop_file": "godot_exports/guild_workshop/props/prop_crate.glb",
+   "from_village": false,
+   "position": [
+    4.5,
+    0.0,
+    -13.55
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_crate_02",
+   "prop_type": "prop_crate",
+   "prop_file": "godot_exports/guild_workshop/props/prop_crate.glb",
+   "from_village": false,
+   "position": [
+    11.5,
+    0.0,
+    -13.55
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.043619,
+    -0.0,
+    0.999048
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_crate_03",
+   "prop_type": "prop_crate",
+   "prop_file": "godot_exports/guild_workshop/props/prop_crate.glb",
+   "from_village": false,
+   "position": [
+    12.48,
+    0.0,
+    -13.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    -0.0349,
+    -0.0,
+    0.999391
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_crate_small_01",
+   "prop_type": "prop_crate_small",
+   "prop_file": "godot_exports/guild_workshop/props/prop_crate_small.glb",
+   "from_village": false,
+   "position": [
+    12.4,
+    0.8,
+    -13.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.104528,
+    -0.0,
+    0.994522
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_drafting_table_01",
+   "prop_type": "prop_drafting_table",
+   "prop_file": "godot_exports/guild_workshop/props/prop_drafting_table.glb",
+   "from_village": false,
+   "position": [
+    16.0,
+    0.0,
+    -10.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_drill_press_01",
+   "prop_type": "prop_drill_press",
+   "prop_file": "godot_exports/guild_workshop/props/prop_drill_press.glb",
+   "from_village": false,
+   "position": [
+    5.5,
+    0.0,
+    -0.4
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_firewood_stack_01",
+   "prop_type": "prop_firewood_stack",
+   "prop_file": "godot_exports/guild_workshop/props/prop_firewood_stack.glb",
+   "from_village": false,
+   "position": [
+    19.62,
+    0.0,
+    -2.0
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    -0.707107,
+    0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_jar_shelf_01",
+   "prop_type": "prop_jar_shelf",
+   "prop_file": "godot_exports/guild_workshop/props/prop_jar_shelf.glb",
+   "from_village": false,
+   "position": [
+    19.75,
+    0.0,
+    -7.0
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    -0.707107,
+    0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_lamp_test_bench_01",
+   "prop_type": "prop_lamp_test_bench",
+   "prop_file": "godot_exports/guild_workshop/props/prop_lamp_test_bench.glb",
+   "from_village": false,
+   "position": [
+    16.0,
+    0.0,
+    -4.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_lantern_station_01",
+   "prop_type": "prop_lantern_station",
+   "prop_file": "godot_exports/guild_workshop/props/prop_lantern_station.glb",
+   "from_village": false,
+   "position": [
+    10.0,
+    0.0,
+    -7.0
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_oil_stain_01",
+   "prop_type": "prop_oil_stain",
+   "prop_file": "godot_exports/guild_workshop/props/prop_oil_stain.glb",
+   "from_village": false,
+   "position": [
+    17.5,
+    0.0,
+    -2.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.173648,
+    -0.0,
+    0.984808
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_parts_shelf_01",
+   "prop_type": "prop_parts_shelf",
+   "prop_file": "godot_exports/guild_workshop/props/prop_parts_shelf.glb",
+   "from_village": false,
+   "position": [
+    0.27,
+    0.0,
+    -7.0
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.707107,
+    -0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_plan_basket_01",
+   "prop_type": "prop_plan_basket",
+   "prop_file": "godot_exports/guild_workshop/props/prop_plan_basket.glb",
+   "from_village": false,
+   "position": [
+    19.5,
+    0.0,
+    -13.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_plan_chest_01",
+   "prop_type": "prop_plan_chest",
+   "prop_file": "godot_exports/guild_workshop/props/prop_plan_chest.glb",
+   "from_village": false,
+   "position": [
+    19.53,
+    0.0,
+    -10.0
+   ],
+   "rotation_quaternion_xyzw": [
+    -0.0,
+    -0.707107,
+    0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_rug_gamma_01",
+   "prop_type": "prop_rug_gamma",
+   "prop_file": "godot_exports/guild_workshop/props/prop_rug_gamma.glb",
+   "from_village": false,
+   "position": [
+    16.0,
+    0.0,
+    -12.0
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_timber_rack_01",
+   "prop_type": "prop_timber_rack",
+   "prop_file": "godot_exports/guild_workshop/props/prop_timber_rack.glb",
+   "from_village": false,
+   "position": [
+    0.32,
+    0.0,
+    -12.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.707107,
+    -0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_treadle_lathe_01",
+   "prop_type": "prop_treadle_lathe",
+   "prop_file": "godot_exports/guild_workshop/props/prop_treadle_lathe.glb",
+   "from_village": false,
+   "position": [
+    3.0,
+    0.0,
+    -0.4
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_wind_test_rig_01",
+   "prop_type": "prop_wind_test_rig",
+   "prop_file": "godot_exports/guild_workshop/props/prop_wind_test_rig.glb",
+   "from_village": false,
+   "position": [
+    16.0,
+    0.0,
+    -1.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_workbench_01",
+   "prop_type": "prop_workbench",
+   "prop_file": "godot_exports/guild_workshop/props/prop_workbench.glb",
+   "from_village": false,
+   "position": [
+    0.42,
+    0.0,
+    -3.0
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.707107,
+    -0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "marker": "PROP_workbench_02",
+   "prop_type": "prop_workbench",
+   "prop_file": "godot_exports/guild_workshop/props/prop_workbench.glb",
+   "from_village": false,
+   "position": [
+    0.42,
+    0.0,
+    -5.0
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.707107,
+    -0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

@@ -112,6 +112,30 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 region_rect = Rect2(0, 0, 100, 100)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e0qxm"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8s6lq"]
+load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kb3a"]
+atlas = SubResource("CompressedTexture2D_8s6lq")
+region = Rect2(132, 260, 56, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dropdown_hover"]
+texture = SubResource("AtlasTexture_1kb3a")
+texture_margin_left = 22.0
+texture_margin_top = 10.0
+texture_margin_right = 22.0
+texture_margin_bottom = 10.0
+modulate_color = Color(0.85, 0.85, 0.85, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6ybpo"]
+texture = SubResource("AtlasTexture_1kb3a")
+texture_margin_left = 22.0
+texture_margin_top = 10.0
+texture_margin_right = 22.0
+texture_margin_bottom = 10.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_oclf0"]
 atlas = ExtResource("1_jafkh")
 region = Rect2(190, 100, 100, 100)
@@ -260,22 +284,6 @@ modulate_color = Color(0.67953765, 0.67953765, 0.67953765, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ybpo"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e0qxm"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8s6lq"]
-load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1kb3a"]
-atlas = SubResource("CompressedTexture2D_8s6lq")
-region = Rect2(132, 260, 56, 56)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6ybpo"]
-texture = SubResource("AtlasTexture_1kb3a")
-texture_margin_left = 22.0
-texture_margin_top = 10.0
-texture_margin_right = 22.0
-texture_margin_bottom = 10.0
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nh5aa"]
 load_path = "res://.godot/imported/tilemap_packed.png-46905a9f846ae0f0b1c67be4e4765806.ctex"
 
@@ -332,14 +340,6 @@ modulate_color = Color(0.735357, 0.735357, 0.735357, 1)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_afi11"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iu03x"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dropdown_hover"]
-texture = SubResource("AtlasTexture_1kb3a")
-texture_margin_left = 22.0
-texture_margin_top = 10.0
-texture_margin_right = 22.0
-texture_margin_bottom = 10.0
-modulate_color = Color(0.85, 0.85, 0.85, 1)
 
 [resource]
 default_font = ExtResource("2_jafkh")

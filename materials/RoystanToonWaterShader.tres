@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://d34k3ljvagp8q"]
 
-[ext_resource type="Shader" path="res://scripts/shaders/water.gdshader" id="1_srdbs"]
+[ext_resource type="Shader" uid="uid://ncgi0kci5c4x" path="res://scripts/shaders/water.gdshader" id="1_srdbs"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_srdbs"]
 generate_mipmaps = false

@@ -22,7 +22,10 @@
 [ext_resource type="Texture2D" uid="uid://c72t1e36d3fgo" path="res://project/images/drawbridge-diagram.png" id="20_gom7j"]
 [ext_resource type="Script" uid="uid://sup7lp6karaf" path="res://scripts/Game/Systems/Challenges/MathChallenge.cs" id="20_kjadr"]
 [ext_resource type="Script" uid="uid://bduu2nqauu8sw" path="res://scripts/Game/Systems/Challenges/Visualizations/ImageVisualization.cs" id="21_bqjii"]
+[ext_resource type="PackedScene" uid="uid://cyuqaejlyounm" path="res://assets/3D/village/props/prop_cellar_hatch.glb" id="39_kjadr"]
 [ext_resource type="Environment" uid="uid://detuifcyaequt" path="res://GameData/environments/beaverford_morning.tres" id="env_morning"]
+[ext_resource type="Script" uid="uid://b6r73solgkl3m" path="res://scripts/Game/Systems/Audio/SceneMusic.cs" id="music_scene"]
+[ext_resource type="Resource" path="res://GameData/music/route7-ramble-140.tres" id="music_track"]
 [ext_resource type="Script" uid="uid://d0ntv21juq2kk" path="res://scripts/Game/Systems/QuestSystem/Steps/ChallengeStep.cs" id="qs_challenge"]
 [ext_resource type="Script" uid="uid://flglunvracvv" path="res://scripts/Game/Systems/Challenges/Inputs/CogwheelInput.cs" id="qs_cogwheel"]
 [ext_resource type="Script" uid="uid://4oiioqw1bbcc" path="res://scripts/Game/Systems/Challenges/Inputs/DropdownInput.cs" id="qs_dropdown"]
@@ -33,11 +36,9 @@
 [ext_resource type="Resource" uid="uid://b4r7x8oy4xdtc" path="res://GameData/quests/I.2-theAmbition-Liesbeth.tres" id="qs_quest_liesbeth"]
 [ext_resource type="Resource" uid="uid://bx6bq5o64me5r" path="res://GameData/quests/I.2-theAmbition-MsBram.tres" id="qs_quest_msbram"]
 [ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="qs_quest_script"]
-[ext_resource type="Texture2D" uid="uid://dkonxtbg1hgms" path="res://project/images/bakehouse-diagram.png" id="qs_tex_bakery"]
 [ext_resource type="Texture2D" uid="uid://kg55grkl3acm" path="res://project/images/schoolbell.png" id="qs_tex_bell"]
 [ext_resource type="Texture2D" uid="uid://bwbnh2ruyuhhd" path="res://project/images/mill-diagram.png" id="qs_tex_mill"]
-[ext_resource type="Script" path="res://scripts/Game/Systems/Audio/SceneMusic.cs" id="music_scene"]
-[ext_resource type="Resource" path="res://GameData/music/route7-ramble-140.tres" id="music_track"]
+[ext_resource type="Texture2D" uid="uid://cva3nbii7dftk" path="res://project/images/scales-diagram.png" id="qs_tex_scales"]
 
 [sub_resource type="Curve3D" id="Curve3D_hq36d"]
 _data = {
@@ -46,7 +47,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v572t"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t3qpp"]
 shader = ExtResource("3_gom7j")
 
 [sub_resource type="Gradient" id="Gradient_kd8u4"]
@@ -64,15 +65,15 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_wfhh5"]
 curve = SubResource("Curve_ne1q5")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gnjj1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kd8u4"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_wwkp4")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_tuys8")
 shader_parameter/width_curve = SubResource("CurveTexture_wfhh5")
 
-[sub_resource type="QuadMesh" id="QuadMesh_uw05l"]
-material = SubResource("ShaderMaterial_gnjj1")
+[sub_resource type="QuadMesh" id="QuadMesh_ne1q5"]
+material = SubResource("ShaderMaterial_kd8u4")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8ah0f"]
 emission_shape = 3
@@ -258,9 +259,28 @@ Name = "t"
 Pool = PackedInt32Array(40, 45, 50, 55, 60, 65, 70, 75, 80)
 metadata/_custom_type_script = "uid://cnfmeuouim0nn"
 
+[sub_resource type="Resource" id="Resource_hendrik_now"]
+script = ExtResource("19_gom7j")
+Text = "{c} t/min"
+Position = Vector2(0.55, 0.57)
+metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
+
+[sub_resource type="Resource" id="Resource_hendrik_target"]
+script = ExtResource("19_gom7j")
+Text = "= {t} t/min"
+Position = Vector2(0.55, 0.77)
+metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
+
+[sub_resource type="Resource" id="Resource_hendrik_adjust"]
+script = ExtResource("19_gom7j")
+Text = "+ {answer} t/min"
+Position = Vector2(0.55, 0.67)
+metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
+
 [sub_resource type="Resource" id="Resource_hendrik_vis"]
 script = ExtResource("21_bqjii")
 Image = ExtResource("qs_tex_mill")
+Annotations = Array[ExtResource("19_gom7j")]([SubResource("Resource_hendrik_now"), SubResource("Resource_hendrik_target"), SubResource("Resource_hendrik_adjust")])
 metadata/_custom_type_script = "uid://bduu2nqauu8sw"
 
 [sub_resource type="Resource" id="Resource_hendrik_challenge"]
@@ -300,24 +320,24 @@ metadata/_custom_type_script = "uid://cnfmeuouim0nn"
 [sub_resource type="Resource" id="Resource_liesbeth_x_label"]
 script = ExtResource("19_gom7j")
 Text = "{x} g"
-Position = Vector2(0.2, 0.35)
+Position = Vector2(-0.04, 0.54)
 metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
 
 [sub_resource type="Resource" id="Resource_liesbeth_y_label"]
 script = ExtResource("19_gom7j")
 Text = "{y} g"
-Position = Vector2(0.2, 0.5)
+Position = Vector2(-0.04, 0.69)
 metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
 
 [sub_resource type="Resource" id="Resource_liesbeth_z_label"]
 script = ExtResource("19_gom7j")
 Text = "{z} g"
-Position = Vector2(0.2, 0.65)
+Position = Vector2(-0.04, 0.84)
 metadata/_custom_type_script = "uid://cecfqkgbbnr2u"
 
 [sub_resource type="Resource" id="Resource_liesbeth_vis"]
 script = ExtResource("21_bqjii")
-Image = ExtResource("qs_tex_bakery")
+Image = ExtResource("qs_tex_scales")
 Annotations = Array[ExtResource("19_gom7j")]([SubResource("Resource_liesbeth_x_label"), SubResource("Resource_liesbeth_y_label"), SubResource("Resource_liesbeth_z_label")])
 metadata/_custom_type_script = "uid://bduu2nqauu8sw"
 
@@ -449,8 +469,8 @@ amount = 60
 lifetime = 60.0
 explosiveness = 1.0
 fixed_fps = 60
-process_material = SubResource("ShaderMaterial_v572t")
-draw_pass_1 = SubResource("QuadMesh_uw05l")
+process_material = SubResource("ShaderMaterial_t3qpp")
+draw_pass_1 = SubResource("QuadMesh_ne1q5")
 script = ExtResource("5_bqjii")
 ColorRamp = SubResource("GradientTexture1D_tuys8")
 WidthCurve = SubResource("CurveTexture_wfhh5")
@@ -739,6 +759,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0.4, 42)
 [node name="SceneMusic" type="Node" parent="." unique_id=1730452011]
 script = ExtResource("music_scene")
 Track = ExtResource("music_track")
+
+[node name="prop_cellar_hatch2" parent="." unique_id=2085503273 instance=ExtResource("39_kjadr")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -46, 0.5, 4.2)
 
 [connection signal="ChallengeCompleted" from="Quests/I_2-the Ambition/Cornelis/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis" method="CompleteObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa02"]]
 [connection signal="ChallengeFailed" from="Quests/I_2-the Ambition/Cornelis/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis" method="FailObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa02"]]
