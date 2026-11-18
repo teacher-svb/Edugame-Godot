@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="MusicTrack" format=3]
+[gd_resource type="Resource" script_class="MusicTrack" format=3 uid="uid://bvfj5l0hdtk87"]
 
-[ext_resource type="Script" path="res://scripts/Game/Systems/Audio/MusicTrack.cs" id="1_track"]
+[ext_resource type="Script" uid="uid://2xjx2jp4pgyr" path="res://scripts/Game/Systems/Audio/MusicTrack.cs" id="1_track"]
 [ext_resource type="AudioStream" uid="uid://b5lmoaex76vdd" path="res://assets/music/route7-ramble-110bpm.wav" id="2_stream"]
 
 [resource]

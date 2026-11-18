@@ -35,5 +35,5 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 script = ExtResource("3_1cevw")
 _id = "3cd9cc64-f69b-4d80-beb6-1290468dfd00"
 _name = "the Ambition: Liesbeth"
-_objectives = Array[ExtResource("1_d8sls")]([SubResource("Resource_t6hrq"), SubResource("Resource_lb2ob"), SubResource("Resource_lb3fn")])
+_objectives = [SubResource("Resource_t6hrq"), SubResource("Resource_lb2ob"), SubResource("Resource_lb3fn")]
 metadata/_custom_type_script = "uid://k32terbd7gqc"

@@ -33,9 +33,9 @@ public partial class CharacterController3D : Node, ICharacterController
 
     /// <summary>
     /// Emitted whenever the character's movement state changes.
-    /// Possible state values are <c>"idle"</c>, <c>"moving"</c>,
-    /// <c>"jumped"</c>, <c>"landed"</c>, <c>"airborne_rising"</c>, and <c>"airborne_falling"</c>.
-    /// <c>"jumped"</c> and <c>"landed"</c> fire for exactly one physics frame.
+    /// Possible state values are <c>"idle"</c>, <c>"run"</c>, <c>"jump"</c>,
+    /// <c>"fall"</c> and <c>"land"</c>. Repeats are suppressed, so <c>"jump"</c>
+    /// fires once per jump and <c>"land"</c> once per touchdown.
     /// </summary>
     [Signal] public delegate void MovementStateChangedEventHandler(string state);
 

@@ -37,11 +37,10 @@ public partial class CharacterAnimator : Node, IMovementAnimator
         {
             case "idle":
             case "walk":
-            case "jump":
             case "run":
             case "fall": _stateMachine.Travel(movementState); break;
-            case "jumped": _stateMachine.Travel(movementState); DoStretch(); break;
-            case "landed": _stateMachine.Travel(movementState); DoSquash(); break;
+            case "jump": _stateMachine.Travel(movementState); DoStretch(); break;
+            case "land": _stateMachine.Travel(movementState); DoSquash(); break;
         }
     }
 
