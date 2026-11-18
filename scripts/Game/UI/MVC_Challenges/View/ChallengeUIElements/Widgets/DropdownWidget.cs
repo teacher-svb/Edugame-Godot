@@ -18,6 +18,9 @@ namespace TnT.Systems.UI
 
                 var options = Round.OptionsFor(paramName);
                 var dropdown = fields.CreateChild<OptionButton>();
+                // the theme's Button style is a big 9-slice panel; this variation uses the
+                // text input's field style so both inputs have the same height
+                dropdown.ThemeTypeVariation = "DropdownButton";
                 dropdown.CustomMinimumSize = new Vector2(100, 0);
                 foreach (var option in options)
                     dropdown.AddItem(option.ToString());

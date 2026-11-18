@@ -1,16 +1,18 @@
 ---
 id: "level-wizard-school-2026-06-28"
-status: "todo"
+status: "in-progress"
 priority: "high"
 assignee: null
 epic: "world"
 dueDate: "2026-11-06"
 created: "2026-06-28T12:00:00.000Z"
-modified: "2026-10-19T12:00:00.000Z"
+modified: "2026-11-18T12:00:00.000Z"
 completedAt: null
 labels: ["level", "act-1", "world"]
 order: "lvl-9"
 ---
+> Checked 2026-11-18: one chamber exists in `Scenes/levels/level3_wizard_1.tscn` (WFC dungeon GridMap from `GameData/wfc/school_dungeon_*.tres` + `school_tiles.meshlib`, 2 moving platforms, player). Still to do: colour variations of the chamber for Fire / Water / Earth, the hazards per chamber (flame jets, falling rocks), the Spark Test platforms, placing the elemental wizard NPCs, the entry hall, and the exit from Beaverford to the school.
+
 # Level: Wizard School (trial chambers)
 
 **Used by:** I.3, V.3 | **Acts:** I, V

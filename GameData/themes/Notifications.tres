@@ -333,6 +333,14 @@ modulate_color = Color(0.735357, 0.735357, 0.735357, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iu03x"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dropdown_hover"]
+texture = SubResource("AtlasTexture_1kb3a")
+texture_margin_left = 22.0
+texture_margin_top = 10.0
+texture_margin_right = 22.0
+texture_margin_bottom = 10.0
+modulate_color = Color(0.85, 0.85, 0.85, 1)
+
 [resource]
 default_font = ExtResource("2_jafkh")
 default_font_size = 24
@@ -345,6 +353,13 @@ Button/styles/normal = SubResource("StyleBoxTexture_aj1bb")
 Button/styles/pressed = SubResource("StyleBoxTexture_0i35j")
 DarkPanel/base_type = &"Panel"
 DarkPanel/styles/panel = SubResource("StyleBoxTexture_r150k")
+DropdownButton/base_type = &"OptionButton"
+DropdownButton/font_sizes/font_size = 32
+DropdownButton/styles/focus = SubResource("StyleBoxEmpty_e0qxm")
+DropdownButton/styles/hover = SubResource("StyleBoxTexture_dropdown_hover")
+DropdownButton/styles/hover_pressed = SubResource("StyleBoxTexture_dropdown_hover")
+DropdownButton/styles/normal = SubResource("StyleBoxTexture_6ybpo")
+DropdownButton/styles/pressed = SubResource("StyleBoxTexture_dropdown_hover")
 LightPanel/base_type = &"Panel"
 LightPanel/styles/panel = SubResource("StyleBoxTexture_7fkjd")
 MarginContainer/constants/margin_bottom = 16
