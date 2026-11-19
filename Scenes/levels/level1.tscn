@@ -423,6 +423,7 @@ transform = Transform3D(0.618024, 0, 0.786159, 0, 1, 0, -0.786159, 0, 0.618024, 
 
 [node name="transporter_bedroom-livingroom" type="Area3D" parent="transporters" unique_id=1189788667 node_paths=PackedStringArray("_destination")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0.05, -9.5)
+collision_mask = 3
 script = ExtResource("22_182vs")
 _destination = NodePath("../transporter_livingroom-bedroom")
 
@@ -433,6 +434,7 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 
 [node name="transporter_livingroom-bedroom" type="Area3D" parent="transporters" unique_id=415332278 node_paths=PackedStringArray("_destination")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3, 0.05, -12.1)
+collision_mask = 3
 script = ExtResource("22_182vs")
 _destination = NodePath("../transporter_bedroom-livingroom")
 
@@ -443,6 +445,7 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 
 [node name="transporter_livingroom_level2" type="Area3D" parent="transporters" unique_id=1664634794]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0.4, 42)
+collision_mask = 3
 script = ExtResource("22_182vs")
 _sceneToLoadPath = "uid://selmqjc4dpgf"
 
@@ -567,6 +570,7 @@ metadata/_custom_type_script = "uid://cewycpjka78f3"
 
 [node name="start-rondleiding" type="Area3D" parent="." unique_id=1276844033]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -10.5)
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="start-rondleiding" unique_id=466259469]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.6, 0.2)
@@ -575,6 +579,7 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 
 [node name="start-looking-for-avocado" type="Area3D" parent="." unique_id=498376562]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0, -9.9)
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="start-looking-for-avocado" unique_id=753867143]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
@@ -583,6 +588,7 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 
 [node name="avocado-niet-in-bed" type="Area3D" parent="." unique_id=1526269303]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -8.9)
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="avocado-niet-in-bed" unique_id=1667617485]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.6, -0.4)

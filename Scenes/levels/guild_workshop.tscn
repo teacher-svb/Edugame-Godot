@@ -241,6 +241,7 @@ PersistentId = "Player"
 [node name="transporters" type="Node" parent="." unique_id=1937356309]
 
 [node name="transporter_exit_village" type="Area3D" parent="transporters" unique_id=1743152404]
+collision_mask = 3
 editor_description = "Leave the hideout up the tunnel, back out at the tavern's cellar hatch. Set _sceneToLoadPath to the village scene, and move this node to the arrival point in that scene (the collision shape is offset back to EXIT_entrance)."
 script = ExtResource("4_transporter")
 

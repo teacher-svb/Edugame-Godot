@@ -37,6 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
 shape = SubResource("BoxShape3D_sdoc0")
 
 [node name="Sensor" type="Area3D" parent="Block0" unique_id=964416556]
+collision_mask = 3
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Block0/Sensor" unique_id=219742248]
@@ -56,6 +57,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
 shape = SubResource("BoxShape3D_m3534")
 
 [node name="Sensor" type="Area3D" parent="Block1" unique_id=1983412575]
+collision_mask = 3
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Block1/Sensor" unique_id=1066443511]
@@ -76,6 +78,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
 shape = SubResource("BoxShape3D_gg5iu")
 
 [node name="Sensor" type="Area3D" parent="Block2" unique_id=857836682]
+collision_mask = 3
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Block2/Sensor" unique_id=604548349]

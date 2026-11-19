@@ -38,6 +38,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0
 mesh = ExtResource("1_wjr6s")
 
 [node name="Hazard" type="Area3D" parent="Turn/Pivot" unique_id=163218884]
+collision_mask = 3
 script = ExtResource("2_gavcf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Turn/Pivot/Hazard" unique_id=196232886]

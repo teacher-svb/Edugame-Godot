@@ -162,6 +162,7 @@ _data = {
 }
 
 [node name="Character" type="CharacterBody3D" unique_id=497783338 node_paths=PackedStringArray("_closeupCamera")]
+collision_layer = 2
 script = ExtResource("1_u1x07")
 _closeupCamera = NodePath("VisualRoot/dialogCamera")
 metadata/_custom_type_script = "uid://c861mplcf03p7"

@@ -17,9 +17,15 @@ public partial class CharacterAnimator : Node, IMovementAnimator
 
     private AnimationNodeStateMachinePlayback _stateMachine;
     private Tween _squashStretchTween;
+    // Scale the visual root rests at. Squash/stretch is relative to it, because several
+    // characters point VisualRoot at a model imported at a non-unit scale (e.g. 0.525).
+    private Vector3 _restScale = Vector3.One;
 
     public override void _Ready()
     {
+        if (VisualRoot != null)
+            _restScale = VisualRoot.Scale;
+
         CharacterController3D cc = this.FindAncestorOfType<Character3D>()?.FindAnyObjectByType<CharacterController3D>();
         if (cc == null) return;
         cc.MovementStateChanged += OnMovementStateChanged;
@@ -52,11 +58,11 @@ public partial class CharacterAnimator : Node, IMovementAnimator
         _squashStretchTween = CreateTween();
 
         _squashStretchTween
-            .TweenProperty(VisualRoot, "scale", new Vector3(0.8f, 1.3f, 0.8f), 0.1f)
+            .TweenProperty(VisualRoot, "scale", _restScale * new Vector3(0.8f, 1.3f, 0.8f), 0.1f)
             .SetTrans(Tween.TransitionType.Sine)
             .SetEase(Tween.EaseType.In);
         _squashStretchTween
-            .TweenProperty(VisualRoot, "scale", Vector3.One, 0.22f)
+            .TweenProperty(VisualRoot, "scale", _restScale, 0.22f)
             .SetTrans(Tween.TransitionType.Sine)
             .SetEase(Tween.EaseType.Out);
     }
@@ -68,12 +74,12 @@ public partial class CharacterAnimator : Node, IMovementAnimator
             LandingParticles.Emitting = true;
             
         if (VisualRoot == null) return;
-        VisualRoot.Scale = new Vector3(1.3f, .5f, 1.3f);
+        VisualRoot.Scale = _restScale * new Vector3(1.3f, .5f, 1.3f);
         _squashStretchTween?.Kill();
         _squashStretchTween = CreateTween();
 
         _squashStretchTween
-            .TweenProperty(VisualRoot, "scale", Vector3.One, 0.22f)
+            .TweenProperty(VisualRoot, "scale", _restScale, 0.22f)
             .SetTrans(Tween.TransitionType.Sine)
             .SetEase(Tween.EaseType.Out);
     }

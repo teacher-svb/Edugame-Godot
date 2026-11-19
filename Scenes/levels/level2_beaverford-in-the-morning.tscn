@@ -684,6 +684,7 @@ eventChannel = ExtResource("15_jttql")
 
 [node name="CornelisDrawbridgeArea" type="Area3D" parent="." unique_id=475543381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.325844, 0, 20.187727)
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CornelisDrawbridgeArea" unique_id=1605957359]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6121042, 0.22172356)
@@ -691,6 +692,7 @@ shape = SubResource("BoxShape3D_kjadr")
 
 [node name="CornelisDrawbridgeCloseArea" type="Area3D" parent="." unique_id=1958182607]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.642159, 9.536743e-07, 19.391285)
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CornelisDrawbridgeCloseArea" unique_id=1394947006]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5005131, 0, 0.20000076)
@@ -698,6 +700,7 @@ shape = SubResource("BoxShape3D_t3qpp")
 
 [node name="HendrikMillArea" type="Area3D" parent="." unique_id=1470465706]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.03404, 1.5179372, 45.172806)
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HendrikMillArea" unique_id=1481059729]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43288422, 0.29626465, 0.24312592)
@@ -705,6 +708,7 @@ shape = SubResource("BoxShape3D_kd8u4")
 
 [node name="HendrikMillCloseArea" type="Area3D" parent="." unique_id=600818871]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.19019, 1.7251449, 44.877617)
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HendrikMillCloseArea" unique_id=1134775141]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12207031, 0.29174805, 0.30200195)
@@ -712,12 +716,14 @@ shape = SubResource("BoxShape3D_ne1q5")
 
 [node name="LiesbethScalesArea" type="Area3D" parent="." unique_id=215740431]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.98235, -1.9073486e-06, 20.426228)
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LiesbethScalesArea" unique_id=1563036971]
 shape = SubResource("BoxShape3D_v572t")
 
 [node name="LiesbethScalesCloseArea" type="Area3D" parent="." unique_id=1441486578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.98235, -1.9073486e-06, 20.426228)
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LiesbethScalesCloseArea" unique_id=1359724527]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.044555664, 0, 0.36642456)
@@ -725,6 +731,7 @@ shape = SubResource("BoxShape3D_gnjj1")
 
 [node name="MsBramBellArea" type="Area3D" parent="." unique_id=334275673]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2056062, 0.34179962, -27.294489)
+collision_mask = 3
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MsBramBellArea" unique_id=761672957]
@@ -732,6 +739,7 @@ shape = SubResource("BoxShape3D_uw05l")
 
 [node name="MsBramBellCloseArea" type="Area3D" parent="." unique_id=1716861232]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.390248, 0.34179962, -27.367657)
+collision_mask = 3
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MsBramBellCloseArea" unique_id=1921053802]
@@ -740,6 +748,7 @@ shape = SubResource("BoxShape3D_c6cs2")
 
 [node name="LeaveHomeArea" type="Area3D" parent="." unique_id=590053377]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 10)
+collision_mask = 3
 
 [node name="South" type="CollisionShape3D" parent="LeaveHomeArea" unique_id=2042628023]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)

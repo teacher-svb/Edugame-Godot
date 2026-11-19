@@ -49,6 +49,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1, 0)
 mesh = ExtResource("1_tt65s")
 
 [node name="Push" type="Area3D" parent="." unique_id=373133406]
+collision_mask = 3
 script = ExtResource("2_bf6eb")
 Active = false
 

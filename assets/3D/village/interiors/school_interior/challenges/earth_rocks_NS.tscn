@@ -226,6 +226,7 @@ visible = false
 mesh = ExtResource("1_gtghm")
 
 [node name="Hazard" type="Area3D" parent="Drop0" unique_id=519567305]
+collision_mask = 3
 script = ExtResource("2_yifa5")
 Active = false
 
@@ -247,6 +248,7 @@ visible = false
 mesh = ExtResource("1_gtghm")
 
 [node name="Hazard" type="Area3D" parent="Drop1" unique_id=1607068432]
+collision_mask = 3
 script = ExtResource("2_yifa5")
 Active = false
 
@@ -268,6 +270,7 @@ visible = false
 mesh = ExtResource("1_gtghm")
 
 [node name="Hazard" type="Area3D" parent="Drop2" unique_id=47874851]
+collision_mask = 3
 script = ExtResource("2_yifa5")
 Active = false
 

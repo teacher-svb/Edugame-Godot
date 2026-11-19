@@ -106,6 +106,7 @@ transform = Transform3D(1, 0, 0, 0, 0.02, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("1_uoano")
 
 [node name="Hazard" type="Area3D" parent="Turn/Row0" unique_id=312012647]
+collision_mask = 3
 script = ExtResource("2_lonhm")
 Active = false
 
@@ -120,6 +121,7 @@ transform = Transform3D(1, 0, 0, 0, 0.02, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("1_uoano")
 
 [node name="Hazard" type="Area3D" parent="Turn/Row1" unique_id=1898910830]
+collision_mask = 3
 script = ExtResource("2_lonhm")
 Active = false
 
@@ -135,6 +137,7 @@ transform = Transform3D(1, 0, 0, 0, 0.02, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("1_uoano")
 
 [node name="Hazard" type="Area3D" parent="Turn/Row2" unique_id=94085812]
+collision_mask = 3
 script = ExtResource("2_lonhm")
 Active = false
 
