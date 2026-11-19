@@ -1,4 +1,9 @@
 {
+ "element_palettes": {
+  "fire": "textures/T_SchoolFireColorMap.png",
+  "water": "textures/T_SchoolWaterColorMap.png",
+  "earth": "textures/T_SchoolEarthColorMap.png"
+ },
  "tile_size_m": 4.0,
  "axes": "Godot: tile centre at the node origin, floor top at y = 0, north = -Z (top of the screen), south = +Z (towards the camera). Every rotation is its own tile: never rotate a tile.",
  "sockets": {
@@ -1690,6 +1695,363 @@
    }
   }
  ],
+ "challenges": {
+  "note": "Element challenge bridges for the I.3 trial chambers: bridge tiles (sockets as bridge_NS / _EW) whose moving or dangerous parts are marker scenes in the game. Items after the dungeon door. Each element corridor tile set uses only its own challenges.",
+  "tiles": [
+   {
+    "name": "fire_jets_NS",
+    "item": 102,
+    "file": "school_fire_jets_NS.glb",
+    "element": "fire",
+    "challenge": "jets",
+    "axis": "NS",
+    "weight": 0.35,
+    "sockets": {
+     "north": "gate-",
+     "east": "flank+",
+     "south": "gate-",
+     "west": "flank+"
+    },
+    "tris": {
+     "Collision-colonly": 36,
+     "Mesh": 214
+    }
+   },
+   {
+    "name": "fire_jets_EW",
+    "item": 103,
+    "file": "school_fire_jets_EW.glb",
+    "element": "fire",
+    "challenge": "jets",
+    "axis": "EW",
+    "weight": 0.35,
+    "sockets": {
+     "north": "flank+",
+     "east": "gate-",
+     "south": "flank+",
+     "west": "gate-"
+    },
+    "tris": {
+     "Collision-colonly": 36,
+     "Mesh": 212
+    }
+   },
+   {
+    "name": "fire_sinking_NS",
+    "item": 104,
+    "file": "school_fire_sinking_NS.glb",
+    "element": "fire",
+    "challenge": "sinking",
+    "axis": "NS",
+    "weight": 0.35,
+    "sockets": {
+     "north": "gate-",
+     "east": "flank+",
+     "south": "gate-",
+     "west": "flank+"
+    },
+    "tris": {
+     "Collision-colonly": 120,
+     "Mesh": 358
+    }
+   },
+   {
+    "name": "fire_sinking_EW",
+    "item": 105,
+    "file": "school_fire_sinking_EW.glb",
+    "element": "fire",
+    "challenge": "sinking",
+    "axis": "EW",
+    "weight": 0.35,
+    "sockets": {
+     "north": "flank+",
+     "east": "gate-",
+     "south": "flank+",
+     "west": "gate-"
+    },
+    "tris": {
+     "Collision-colonly": 120,
+     "Mesh": 358
+    }
+   },
+   {
+    "name": "fire_flamebar_NS",
+    "item": 106,
+    "file": "school_fire_flamebar_NS.glb",
+    "element": "fire",
+    "challenge": "flamebar",
+    "axis": "NS",
+    "weight": 0.35,
+    "sockets": {
+     "north": "gate-",
+     "east": "flank+",
+     "south": "gate-",
+     "west": "flank+"
+    },
+    "tris": {
+     "Collision-colonly": 224,
+     "Mesh": 446
+    }
+   },
+   {
+    "name": "fire_flamebar_EW",
+    "item": 107,
+    "file": "school_fire_flamebar_EW.glb",
+    "element": "fire",
+    "challenge": "flamebar",
+    "axis": "EW",
+    "weight": 0.35,
+    "sockets": {
+     "north": "flank+",
+     "east": "gate-",
+     "south": "flank+",
+     "west": "gate-"
+    },
+    "tris": {
+     "Collision-colonly": 224,
+     "Mesh": 448
+    }
+   },
+   {
+    "name": "water_waterfall_NS",
+    "item": 108,
+    "file": "school_water_waterfall_NS.glb",
+    "element": "water",
+    "challenge": "waterfall",
+    "axis": "NS",
+    "weight": 0.35,
+    "sockets": {
+     "north": "gate-",
+     "east": "flank+",
+     "south": "gate-",
+     "west": "flank+"
+    },
+    "tris": {
+     "Collision-colonly": 72,
+     "Mesh": 206
+    }
+   },
+   {
+    "name": "water_waterfall_EW",
+    "item": 109,
+    "file": "school_water_waterfall_EW.glb",
+    "element": "water",
+    "challenge": "waterfall",
+    "axis": "EW",
+    "weight": 0.35,
+    "sockets": {
+     "north": "flank+",
+     "east": "gate-",
+     "south": "flank+",
+     "west": "gate-"
+    },
+    "tris": {
+     "Collision-colonly": 72,
+     "Mesh": 200
+    }
+   },
+   {
+    "name": "water_raft_NS",
+    "item": 110,
+    "file": "school_water_raft_NS.glb",
+    "element": "water",
+    "challenge": "raft",
+    "axis": "NS",
+    "weight": 0.35,
+    "sockets": {
+     "north": "gate-",
+     "east": "flank+",
+     "south": "gate-",
+     "west": "flank+"
+    },
+    "tris": {
+     "Collision-colonly": 120,
+     "Mesh": 350
+    }
+   },
+   {
+    "name": "water_raft_EW",
+    "item": 111,
+    "file": "school_water_raft_EW.glb",
+    "element": "water",
+    "challenge": "raft",
+    "axis": "EW",
+    "weight": 0.35,
+    "sockets": {
+     "north": "flank+",
+     "east": "gate-",
+     "south": "flank+",
+     "west": "gate-"
+    },
+    "tris": {
+     "Collision-colonly": 120,
+     "Mesh": 350
+    }
+   },
+   {
+    "name": "earth_crumble_NS",
+    "item": 112,
+    "file": "school_earth_crumble_NS.glb",
+    "element": "earth",
+    "challenge": "crumble",
+    "axis": "NS",
+    "weight": 0.35,
+    "sockets": {
+     "north": "gate-",
+     "east": "flank+",
+     "south": "gate-",
+     "west": "flank+"
+    },
+    "tris": {
+     "Collision-colonly": 120,
+     "Mesh": 534
+    }
+   },
+   {
+    "name": "earth_crumble_EW",
+    "item": 113,
+    "file": "school_earth_crumble_EW.glb",
+    "element": "earth",
+    "challenge": "crumble",
+    "axis": "EW",
+    "weight": 0.35,
+    "sockets": {
+     "north": "flank+",
+     "east": "gate-",
+     "south": "flank+",
+     "west": "gate-"
+    },
+    "tris": {
+     "Collision-colonly": 120,
+     "Mesh": 534
+    }
+   },
+   {
+    "name": "earth_rocks_NS",
+    "item": 114,
+    "file": "school_earth_rocks_NS.glb",
+    "element": "earth",
+    "challenge": "rocks",
+    "axis": "NS",
+    "weight": 0.35,
+    "sockets": {
+     "north": "gate-",
+     "east": "flank+",
+     "south": "gate-",
+     "west": "flank+"
+    },
+    "tris": {
+     "Collision-colonly": 36,
+     "Mesh": 224
+    }
+   },
+   {
+    "name": "earth_rocks_EW",
+    "item": 115,
+    "file": "school_earth_rocks_EW.glb",
+    "element": "earth",
+    "challenge": "rocks",
+    "axis": "EW",
+    "weight": 0.35,
+    "sockets": {
+     "north": "flank+",
+     "east": "gate-",
+     "south": "flank+",
+     "west": "gate-"
+    },
+    "tris": {
+     "Collision-colonly": 36,
+     "Mesh": 224
+    }
+   }
+  ],
+  "props": {
+   "crumble_block": {
+    "file": "school_crumble_block.glb",
+    "tris": {
+     "Collision-colonly": 12,
+     "Mesh": 80
+    }
+   },
+   "falling_rock": {
+    "file": "school_falling_rock.glb",
+    "tris": {
+     "Mesh": 20
+    }
+   },
+   "flame_bar": {
+    "file": "school_flame_bar.glb",
+    "tris": {
+     "Mesh": 72
+    }
+   },
+   "flame_jet": {
+    "file": "school_flame_jet.glb",
+    "tris": {
+     "Mesh": 60
+    }
+   },
+   "raft": {
+    "file": "school_raft.glb",
+    "tris": {
+     "Collision-colonly": 12,
+     "Mesh": 204
+    }
+   },
+   "sinking_stone": {
+    "file": "school_sinking_stone.glb",
+    "tris": {
+     "Collision-colonly": 56,
+     "Mesh": 72
+    }
+   },
+   "water_curtain": {
+    "file": "school_water_curtain.glb",
+    "tris": {
+     "Mesh": 196
+    }
+   }
+  },
+  "layout_m": {
+   "sink_stones_y": [
+    -0.62,
+    0.62
+   ],
+   "sink_r": 0.45,
+   "raft_size": [
+    1.4,
+    3.1
+   ],
+   "raft_out": 2.7,
+   "crumble_y": [
+    -1.1,
+    0.0,
+    1.1
+   ],
+   "crumble_size": 0.55,
+   "flamebar_pad_r": 1.35,
+   "jet_rows_y": [
+    -1.0,
+    0.0,
+    1.0
+   ],
+   "rock_spots_xy": [
+    [
+     -0.45,
+     -1.0
+    ],
+    [
+     0.45,
+     0.0
+    ],
+    [
+     -0.3,
+     1.0
+    ]
+   ],
+   "note": "NS build, Blender coords: y north = Godot -Z. EW tiles are the NS build turned 90 degrees clockwise seen from above."
+  }
+ },
  "dungeon": {
   "note": "Tile sets for godoodungeon (rooms + corridors). Rooms: walls face out with outside+, the room bounds supply outside- (Room Edge Socket \"outside\"); the Door Tile is dungeon_door, one tile with four rotations whose only outside+ face is its outside. Corridors (Path Socket \"path\"): the bridges and bridge pads, open faces path, closed x; the chasm is the empty tile.",
   "room_edge_socket": "outside",

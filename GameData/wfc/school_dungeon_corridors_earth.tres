@@ -1,0 +1,395 @@
+[gd_resource type="Resource" script_class="WfcTileSet" format=3 uid="uid://nhv77n1jw8ks"]
+
+[ext_resource type="Script" uid="uid://bp15dtwmw2ped" path="res://addons/editor_tools_common/Wfc/Resources/WfcTileSet.cs" id="1_set"]
+[ext_resource type="Script" uid="uid://rb5vled2paii" path="res://addons/editor_tools_common/Wfc/Resources/WfcTile.cs" id="2_tile"]
+[ext_resource type="MeshLibrary" uid="uid://cypnx7ea42aub" path="res://assets/3D/village/interiors/school_interior/school_tiles_earth.meshlib" id="3_lib"]
+[ext_resource type="PackedScene" uid="uid://b46bwsxmk2pp7" path="res://assets/3D/village/interiors/school_interior/school_moving_platform_NS.tscn" id="4_mover_ns"]
+[ext_resource type="PackedScene" uid="uid://d3etbg41ctd3j" path="res://assets/3D/village/interiors/school_interior/school_moving_platform_EW.tscn" id="5_mover_ew"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/earth_crumble_EW.tscn" id="m_earth_crumble_EW"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/earth_crumble_NS.tscn" id="m_earth_crumble_NS"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/earth_rocks_EW.tscn" id="m_earth_rocks_EW"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/earth_rocks_NS.tscn" id="m_earth_rocks_NS"]
+
+[sub_resource type="Resource" id="Tile_landing_wwgg"]
+script = ExtResource("2_tile")
+Item = 45
+Weight = 0.25
+SocketPosX = "x"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_landing_wgwg"]
+script = ExtResource("2_tile")
+Item = 47
+Weight = 0.35
+SocketPosX = "path"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_landing_wggw"]
+script = ExtResource("2_tile")
+Item = 48
+Weight = 0.25
+SocketPosX = "path"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_landing_wggg"]
+script = ExtResource("2_tile")
+Item = 49
+Weight = 0.12
+SocketPosX = "path"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_landing_gwwg"]
+script = ExtResource("2_tile")
+Item = 51
+Weight = 0.25
+SocketPosX = "x"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_landing_gwgw"]
+script = ExtResource("2_tile")
+Item = 52
+Weight = 0.35
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_landing_gwgg"]
+script = ExtResource("2_tile")
+Item = 53
+Weight = 0.12
+SocketPosX = "x"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_landing_ggww"]
+script = ExtResource("2_tile")
+Item = 54
+Weight = 0.25
+SocketPosX = "path"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_landing_ggwg"]
+script = ExtResource("2_tile")
+Item = 55
+Weight = 0.12
+SocketPosX = "path"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_landing_gggw"]
+script = ExtResource("2_tile")
+Item = 56
+Weight = 0.12
+SocketPosX = "path"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_landing_gggg"]
+script = ExtResource("2_tile")
+Item = 57
+Weight = 0.08
+SocketPosX = "path"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_bridge_NS"]
+script = ExtResource("2_tile")
+Item = 58
+Weight = 1.5
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_broken_NS"]
+script = ExtResource("2_tile")
+Item = 59
+Weight = 0.35
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_stones_NS"]
+script = ExtResource("2_tile")
+Item = 60
+Weight = 0.3
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_steps_NS"]
+script = ExtResource("2_tile")
+Item = 61
+Weight = 0.3
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_mover_NS"]
+script = ExtResource("2_tile")
+Item = 62
+Weight = 0.2
+Marker = ExtResource("4_mover_ns")
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_bridge_EW"]
+script = ExtResource("2_tile")
+Item = 63
+Weight = 1.5
+SocketPosX = "path"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_broken_EW"]
+script = ExtResource("2_tile")
+Item = 64
+Weight = 0.35
+SocketPosX = "path"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_stones_EW"]
+script = ExtResource("2_tile")
+Item = 65
+Weight = 0.3
+SocketPosX = "path"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_steps_EW"]
+script = ExtResource("2_tile")
+Item = 66
+Weight = 0.3
+SocketPosX = "path"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_mover_EW"]
+script = ExtResource("2_tile")
+Item = 67
+Weight = 0.2
+Marker = ExtResource("5_mover_ew")
+SocketPosX = "path"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_bridge_NE"]
+script = ExtResource("2_tile")
+Item = 68
+Weight = 0.35
+SocketPosX = "path"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_bridge_ES"]
+script = ExtResource("2_tile")
+Item = 69
+Weight = 0.35
+SocketPosX = "path"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_bridge_SW"]
+script = ExtResource("2_tile")
+Item = 70
+Weight = 0.35
+SocketPosX = "x"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_bridge_WN"]
+script = ExtResource("2_tile")
+Item = 71
+Weight = 0.35
+SocketPosX = "x"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_chasm_a"]
+script = ExtResource("2_tile")
+Item = 72
+Weight = 0.4
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_chasm_b"]
+script = ExtResource("2_tile")
+Item = 73
+Weight = 0.1
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_earth_crumble_NS"]
+script = ExtResource("2_tile")
+Item = 112
+Weight = 0.35
+Marker = ExtResource("m_earth_crumble_NS")
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_earth_crumble_EW"]
+script = ExtResource("2_tile")
+Item = 113
+Weight = 0.35
+Marker = ExtResource("m_earth_crumble_EW")
+SocketPosX = "path"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_earth_rocks_NS"]
+script = ExtResource("2_tile")
+Item = 114
+Weight = 0.35
+Marker = ExtResource("m_earth_rocks_NS")
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_earth_rocks_EW"]
+script = ExtResource("2_tile")
+Item = 115
+Weight = 0.35
+Marker = ExtResource("m_earth_rocks_EW")
+SocketPosX = "path"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[resource]
+script = ExtResource("1_set")
+Library = ExtResource("3_lib")
+Tiles = Array[ExtResource("2_tile")]([SubResource("Tile_landing_wwgg"), SubResource("Tile_landing_wgwg"), SubResource("Tile_landing_wggw"), SubResource("Tile_landing_wggg"), SubResource("Tile_landing_gwwg"), SubResource("Tile_landing_gwgw"), SubResource("Tile_landing_gwgg"), SubResource("Tile_landing_ggww"), SubResource("Tile_landing_ggwg"), SubResource("Tile_landing_gggw"), SubResource("Tile_landing_gggg"), SubResource("Tile_bridge_NS"), SubResource("Tile_broken_NS"), SubResource("Tile_stones_NS"), SubResource("Tile_steps_NS"), SubResource("Tile_mover_NS"), SubResource("Tile_bridge_EW"), SubResource("Tile_broken_EW"), SubResource("Tile_stones_EW"), SubResource("Tile_steps_EW"), SubResource("Tile_mover_EW"), SubResource("Tile_bridge_NE"), SubResource("Tile_bridge_ES"), SubResource("Tile_bridge_SW"), SubResource("Tile_bridge_WN"), SubResource("Tile_chasm_a"), SubResource("Tile_chasm_b"), SubResource("Tile_earth_crumble_NS"), SubResource("Tile_earth_crumble_EW"), SubResource("Tile_earth_rocks_NS"), SubResource("Tile_earth_rocks_EW")])
+metadata/_custom_type_script = "uid://bp15dtwmw2ped"

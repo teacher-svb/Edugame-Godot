@@ -8,6 +8,7 @@
 | `school_moving_platform.glb` | The platform for the `mover_*` tiles (1.4 × 1.4 m, top at y = 0), moved by your game scene. |
 | `school_tiles.json` | Per tile: item number, file, kind, sockets, weight, triangle counts; platforming sizes. |
 | `textures/T_SchoolColorMap.png` | The palette (32 × 32 px, 31 colours, nearest filter) with its lossless `.import` file. Keep it next to the GLBs. |
+| `textures/T_School<Fire\|Water\|Earth>ColorMap.png` | Element palettes for the trial chambers (see below), same layout. |
 
 GLB, +Y up, 1 unit = 1 m, no vertex colours, no import script. Nodes per file: `Tile_<name>` → `<name>_Mesh` (surface `M_SchoolColors`, plus `M_SchoolGlow` for runes, flames and crystals: the same palette as emission) and `<name>_Collision` (StaticBody3D + ConcavePolygonShape3D; the chasm tiles have none).
 
@@ -84,3 +85,25 @@ The same tiles also work with **godoodungeon**. It lays out rectangular rooms, s
 - **Room size:** walls included, so a room is at least 3 × 3 cells. 3–5 cells (12–20 m) suits the camera.
 - **Settings:** Room Edge Socket `outside`, Path Socket `path`, Gap 3, Wall Clearance 1. Corridors keep a cell of chasm from the room walls, except at the doors.
 - **Not used by godoodungeon:** the gated room tiles, the 3-wall pieces, the 1-gate pads, the chasm socket variants and `door_*` / `stairs_S`. Those belong to the plain WFC tile set.
+
+## Element palettes (Fire, Water, Earth)
+
+`textures/T_SchoolFireColorMap.png`, `T_SchoolWaterColorMap.png` and `T_SchoolEarthColorMap.png` are the palette for the three trial chambers (I.3): the same layout as `T_SchoolColorMap.png`, with other colours only for the banners and carpets and for the crystals (rune orbs on posts and above gates, wall sconce spikes, the rune circle, the crystals floating over the chasm). Stone and chasm stay the same; give each chamber its mood with lighting.
+
+There are no element GLBs: the meshes are identical. In Godot, make one MeshLibrary per element from the base MeshLibrary, with the two palette materials (`M_SchoolColors`, `M_SchoolGlow`) pointing at the element palette instead (albedo, and emission for the glow material). The item numbers stay the same, so a chamber changes element by swapping its GridMap's MeshLibrary. `school_tiles.json` lists the palettes under `element_palettes`.
+
+## Element challenges (I.3 trial chambers)
+
+`school_<element>_<challenge>_<NS|EW>.glb`: 14 extra bridge tiles, items 102–115 after the dungeon door, with the sockets of `bridge_NS` / `bridge_EW`. Each holds the static part of an element-specific platforming challenge; the moving or dangerous parts are props, moved by marker scenes in the game. Each element chamber's corridor tile set uses only its own challenges. `school_tiles.json` → `challenges` lists the tiles, props and layout numbers.
+
+| Element | Challenge | Tile | Prop(s) |
+|---|---|---|---|
+| Fire | **Flame jets**: three vent rows across the deck burst fire in turns; wait between rows | full deck, vents, nozzles | `school_flame_jet.glb` |
+| Fire | **Sinking stones**: two stepping stones between end ledges sink and rise in turns | ledges, shafts below | `school_sinking_stone.glb` |
+| Fire | **Flame bar**: a bar of fire sweeps around a pivot post on a round pad; jump over it | pad with curb, post | `school_flame_bar.glb` |
+| Water | **Waterfall**: a curtain of water falls from an arch on a timer and pushes the player back | deck, arch, drain | `school_water_curtain.glb` |
+| Water | **Drifting raft**: a raft drifts in from the side, lines up with the bridge, then drifts away | ledges, bollards | `school_raft.glb` |
+| Earth | **Crumbling ledge**: three small blocks between end ledges fall after you land, then come back | ledges, broken piers | `school_crumble_block.glb` |
+| Earth | **Falling rocks**: rocks drop on three spots after a growing shadow | cracked deck | `school_falling_rock.glb` |
+
+Props are centred at their own origin with the walking surface at y = 0 (the flame and curtain props stand on y = 0). EW tiles are the NS build turned 90° clockwise seen from above.

@@ -1,0 +1,47 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://assets/3D/village/interiors/school_interior/meshes/school_raft.res" id="1_ej5ua"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5be2n"]
+size = Vector3(1.4, 0.3, 3.1)
+
+[sub_resource type="Animation" id="Animation_o8pii"]
+length = 6.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Raft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.6, 3.8, 5.4, 6.6),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [Vector3(-2.7, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-2.7, 0, 0), Vector3(-2.7, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jo7hs"]
+_data = {
+&"loop": SubResource("Animation_o8pii")
+}
+
+[node name="WaterRaftEw" type="Node3D" unique_id=152477079]
+
+[node name="Turn" type="Node3D" parent="." unique_id=527308364]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Raft" type="AnimatableBody3D" parent="Turn" unique_id=264205128]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7, 0, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Turn/Raft" unique_id=1745323452]
+mesh = ExtResource("1_ej5ua")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Turn/Raft" unique_id=1046598148]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
+shape = SubResource("BoxShape3D_5be2n")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Turn" unique_id=1987942479]
+callback_mode_process = 0
+libraries/ = SubResource("AnimationLibrary_jo7hs")
+autoplay = &"loop"

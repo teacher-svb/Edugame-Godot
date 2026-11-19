@@ -1,0 +1,83 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/Game/Systems/Platforming/CrumblingPlatform.cs" id="1_c7nd6"]
+[ext_resource type="ArrayMesh" path="res://assets/3D/village/interiors/school_interior/meshes/school_crumble_block.res" id="2_a7a1b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sdoc0"]
+size = Vector3(0.55, 0.3, 0.55)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aq6j8"]
+size = Vector3(0.5, 0.25, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m3534"]
+size = Vector3(0.55, 0.3, 0.55)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7fwis"]
+size = Vector3(0.5, 0.25, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gg5iu"]
+size = Vector3(0.55, 0.3, 0.55)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j0gu0"]
+size = Vector3(0.5, 0.25, 0.5)
+
+[node name="EarthCrumbleNs" type="Node3D" unique_id=1507043189]
+
+[node name="Block0" type="AnimatableBody3D" parent="." unique_id=541515368 node_paths=PackedStringArray("Visual", "Sensor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.1)
+script = ExtResource("1_c7nd6")
+Visual = NodePath("Mesh")
+Sensor = NodePath("Sensor")
+
+[node name="Mesh" type="MeshInstance3D" parent="Block0" unique_id=1747056014]
+mesh = ExtResource("2_a7a1b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block0" unique_id=725203009]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
+shape = SubResource("BoxShape3D_sdoc0")
+
+[node name="Sensor" type="Area3D" parent="Block0" unique_id=964416556]
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block0/Sensor" unique_id=219742248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0)
+shape = SubResource("BoxShape3D_aq6j8")
+
+[node name="Block1" type="AnimatableBody3D" parent="." unique_id=1891015638 node_paths=PackedStringArray("Visual", "Sensor")]
+script = ExtResource("1_c7nd6")
+Visual = NodePath("Mesh")
+Sensor = NodePath("Sensor")
+
+[node name="Mesh" type="MeshInstance3D" parent="Block1" unique_id=330608989]
+mesh = ExtResource("2_a7a1b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block1" unique_id=1749566918]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
+shape = SubResource("BoxShape3D_m3534")
+
+[node name="Sensor" type="Area3D" parent="Block1" unique_id=1983412575]
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block1/Sensor" unique_id=1066443511]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0)
+shape = SubResource("BoxShape3D_7fwis")
+
+[node name="Block2" type="AnimatableBody3D" parent="." unique_id=1315162940 node_paths=PackedStringArray("Visual", "Sensor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1)
+script = ExtResource("1_c7nd6")
+Visual = NodePath("Mesh")
+Sensor = NodePath("Sensor")
+
+[node name="Mesh" type="MeshInstance3D" parent="Block2" unique_id=154373794]
+mesh = ExtResource("2_a7a1b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block2" unique_id=111344320]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
+shape = SubResource("BoxShape3D_gg5iu")
+
+[node name="Sensor" type="Area3D" parent="Block2" unique_id=857836682]
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block2/Sensor" unique_id=604548349]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0)
+shape = SubResource("BoxShape3D_j0gu0")

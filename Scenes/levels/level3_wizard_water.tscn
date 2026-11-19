@@ -1,0 +1,75 @@
+[gd_scene format=4]
+
+[ext_resource type="Environment" path="res://GameData/environments/school_water.tres" id="1_a5ct6"]
+[ext_resource type="MeshLibrary" path="res://assets/3D/village/interiors/school_interior/school_tiles_water.meshlib" id="2_auk4i"]
+[ext_resource type="Resource" path="res://GameData/wfc/school_dungeon_corridors_water.tres" id="3_2vwka"]
+[ext_resource type="Resource" path="res://GameData/wfc/school_dungeon_rooms_water.tres" id="4_6mt53"]
+[ext_resource type="Script" path="res://addons/godoodungeon/Resources/DungeonSettings.cs" id="5_t7bd3"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/school_moving_platform_NS.tscn" id="6_us0e6"]
+[ext_resource type="PackedScene" path="res://Scenes/characters/Player_3D.tscn" id="7_7ey8e"]
+[ext_resource type="Script" path="res://scripts/Game/Character/Character3D.cs" id="8_6mt53"]
+[ext_resource type="Resource" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="9_t7bd3"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/Platforming/ChamberSafety.cs" id="10_us0e6"]
+
+[sub_resource type="Resource" id="Resource_dhhig"]
+script = ExtResource("5_t7bd3")
+RandomiseSeed = true
+Seed = 2638766450
+RoomTileSet = ExtResource("4_6mt53")
+CorridorTileSet = ExtResource("3_2vwka")
+Door = 101
+BoundsSize = Vector3i(22, 1, 22)
+RoomCount = 5
+MinRoomSize = Vector2i(3, 3)
+MaxRoomSize = Vector2i(5, 5)
+MaxDoorsPerRoom = 3
+metadata/_custom_type_script = "uid://cgraummx7cyo2"
+
+[node name="SchoolWaterChamber" type="Node3D" unique_id=1375172682]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1733842760]
+environment = ExtResource("1_a5ct6")
+
+[node name="Moonlight" type="DirectionalLight3D" parent="." unique_id=768939146]
+transform = Transform3D(0.8660254, -0.35355338, 0.35355338, 0, 0.70710677, 0.70710677, -0.5, -0.6123724, 0.6123724, 0, 10, 0)
+light_color = Color(0.66, 0.88, 1, 1)
+light_energy = 0.75
+shadow_enabled = true
+directional_shadow_max_distance = 60.0
+
+[node name="School" type="GridMap" parent="." unique_id=2060859884]
+mesh_library = ExtResource("2_auk4i")
+cell_size = Vector3(4, 1, 4)
+cell_center_y = false
+data = {
+"cells": PackedInt32Array(0, 0, 72, 1, 0, 72, 2, 0, 72, 3, 0, 72, 4, 0, 72, 5, 0, 72, 6, 0, 72, 7, 0, 73, 8, 0, 73, 9, 0, 72, 10, 0, 73, 11, 0, 73, 12, 0, 72, 13, 0, 72, 14, 0, 72, 15, 0, 72, 16, 0, 73, 17, 0, 72, 18, 0, 73, 19, 0, 73, 20, 0, 72, 21, 0, 72, 0, 1, 73, 1, 1, 72, 2, 1, 24, 3, 1, 23, 4, 1, 29, 5, 1, 72, 6, 1, 72, 7, 1, 72, 8, 1, 72, 9, 1, 72, 10, 1, 73, 11, 1, 72, 12, 1, 72, 13, 1, 72, 14, 1, 72, 15, 1, 72, 16, 1, 72, 17, 1, 72, 18, 1, 72, 19, 1, 72, 20, 1, 73, 21, 1, 72, 0, 2, 72, 1, 2, 72, 2, 2, 7, 3, 2, 6, 4, 2, 14, 5, 2, 72, 6, 2, 72, 7, 2, 72, 8, 2, 72, 9, 2, 72, 10, 2, 72, 11, 2, 72, 12, 2, 73, 13, 2, 72, 14, 2, 73, 15, 2, 72, 16, 2, 72, 17, 2, 72, 18, 2, 73, 19, 2, 72, 20, 2, 72, 21, 2, 72, 0, 3, 72, 1, 3, 72, 2, 3, 7, 3, 3, 6, 4, 3, 1441893, 5, 3, 65, 6, 3, 45, 7, 3, 72, 8, 3, 72, 9, 3, 72, 10, 3, 72, 11, 3, 73, 12, 3, 72, 13, 3, 72, 14, 3, 72, 15, 3, 73, 16, 3, 73, 17, 3, 72, 18, 3, 72, 19, 3, 72, 20, 3, 72, 21, 3, 72, 0, 4, 72, 1, 4, 73, 2, 4, 10, 3, 4, 9, 4, 4, 15, 5, 4, 72, 6, 4, 58, 7, 4, 72, 8, 4, 72, 9, 4, 72, 10, 4, 72, 11, 4, 72, 12, 4, 72, 13, 4, 72, 14, 4, 72, 15, 4, 72, 16, 4, 72, 17, 4, 72, 18, 4, 72, 19, 4, 73, 20, 4, 72, 21, 4, 72, 0, 5, 72, 1, 5, 72, 2, 5, 73, 3, 5, 72, 4, 5, 72, 5, 5, 72, 6, 5, 62, 7, 5, 72, 8, 5, 24, 9, 5, 23, 10, 5, 23, 11, 5, 29, 12, 5, 73, 13, 5, 72, 14, 5, 73, 15, 5, 73, 16, 5, 72, 17, 5, 72, 18, 5, 72, 19, 5, 72, 20, 5, 72, 21, 5, 72, 0, 6, 72, 1, 6, 72, 2, 6, 72, 3, 6, 72, 4, 6, 72, 5, 6, 72, 6, 6, 56, 7, 6, 63, 8, 6, 1048677, 9, 6, 1, 10, 6, 2, 11, 6, 14, 12, 6, 72, 13, 6, 72, 14, 6, 72, 15, 6, 73, 16, 6, 72, 17, 6, 73, 18, 6, 72, 19, 6, 72, 20, 6, 72, 21, 6, 72, 0, 7, 72, 1, 7, 72, 2, 7, 72, 3, 7, 72, 4, 7, 72, 5, 7, 72, 6, 7, 58, 7, 7, 72, 8, 7, 7, 9, 7, 1, 10, 7, 1, 11, 7, 1441893, 12, 7, 63, 13, 7, 63, 14, 7, 70, 15, 7, 72, 16, 7, 24, 17, 7, 23, 18, 7, 29, 19, 7, 72, 20, 7, 73, 21, 7, 72, 0, 8, 72, 1, 8, 72, 2, 8, 72, 3, 8, 72, 4, 8, 72, 5, 8, 73, 6, 8, 60, 7, 8, 72, 8, 8, 10, 9, 8, 9, 10, 8, 9, 11, 8, 15, 12, 8, 72, 13, 8, 73, 14, 8, 68, 15, 8, 47, 16, 8, 1048677, 17, 8, 1, 18, 8, 14, 19, 8, 73, 20, 8, 72, 21, 8, 73, 0, 9, 72, 1, 9, 72, 2, 9, 72, 3, 9, 72, 4, 9, 72, 5, 9, 72, 6, 9, 61, 7, 9, 73, 8, 9, 72, 9, 9, 72, 10, 9, 72, 11, 9, 72, 12, 9, 72, 13, 9, 72, 14, 9, 72, 15, 9, 73, 16, 9, 10, 17, 9, 655461, 18, 9, 15, 19, 9, 72, 20, 9, 72, 21, 9, 72, 0, 10, 73, 1, 10, 72, 2, 10, 73, 3, 10, 72, 4, 10, 73, 5, 10, 72, 6, 10, 54, 7, 10, 45, 8, 10, 72, 9, 10, 72, 10, 10, 73, 11, 10, 73, 12, 10, 72, 13, 10, 72, 14, 10, 72, 15, 10, 73, 16, 10, 72, 17, 10, 59, 18, 10, 73, 19, 10, 72, 20, 10, 72, 21, 10, 72, 0, 11, 72, 1, 11, 73, 2, 11, 73, 3, 11, 72, 4, 11, 72, 5, 11, 72, 6, 11, 72, 7, 11, 59, 8, 11, 72, 9, 11, 72, 10, 11, 73, 11, 11, 72, 12, 11, 72, 13, 11, 72, 14, 11, 72, 15, 11, 73, 16, 11, 72, 17, 11, 58, 18, 11, 72, 19, 11, 72, 20, 11, 72, 21, 11, 72, 0, 12, 72, 1, 12, 72, 2, 12, 73, 3, 12, 72, 4, 12, 72, 5, 12, 24, 6, 12, 23, 7, 12, 101, 8, 12, 29, 9, 12, 73, 10, 12, 72, 11, 12, 72, 12, 12, 72, 13, 12, 72, 14, 12, 72, 15, 12, 72, 16, 12, 73, 17, 12, 62, 18, 12, 72, 19, 12, 72, 20, 12, 72, 21, 12, 72, 0, 13, 72, 1, 13, 72, 2, 13, 72, 3, 13, 72, 4, 13, 72, 5, 13, 7, 6, 13, 6, 7, 13, 0, 8, 13, 14, 9, 13, 72, 10, 13, 72, 11, 13, 72, 12, 13, 73, 13, 13, 48, 14, 13, 63, 15, 13, 63, 16, 13, 63, 17, 13, 53, 18, 13, 72, 19, 13, 72, 20, 13, 72, 21, 13, 72, 0, 14, 72, 1, 14, 72, 2, 14, 72, 3, 14, 72, 4, 14, 72, 5, 14, 7, 6, 14, 2, 7, 14, 0, 8, 14, 14, 9, 14, 73, 10, 14, 72, 11, 14, 73, 12, 14, 73, 13, 14, 58, 14, 14, 72, 15, 14, 72, 16, 14, 73, 17, 14, 52, 18, 14, 72, 19, 14, 73, 20, 14, 72, 21, 14, 72, 0, 15, 72, 1, 15, 72, 2, 15, 72, 3, 15, 72, 4, 15, 72, 5, 15, 7, 6, 15, 0, 7, 15, 2, 8, 15, 1441893, 9, 15, 64, 10, 15, 47, 11, 15, 63, 12, 15, 47, 13, 15, 71, 14, 15, 72, 15, 15, 72, 16, 15, 24, 17, 15, 101, 18, 15, 29, 19, 15, 72, 20, 15, 72, 21, 15, 73, 0, 16, 73, 1, 16, 72, 2, 16, 72, 3, 16, 72, 4, 16, 72, 5, 16, 10, 6, 16, 9, 7, 16, 9, 8, 16, 15, 9, 16, 72, 10, 16, 72, 11, 16, 72, 12, 16, 72, 13, 16, 72, 14, 16, 72, 15, 16, 72, 16, 16, 7, 17, 16, 1, 18, 16, 14, 19, 16, 72, 20, 16, 72, 21, 16, 72, 0, 17, 72, 1, 17, 72, 2, 17, 72, 3, 17, 72, 4, 17, 72, 5, 17, 72, 6, 17, 72, 7, 17, 72, 8, 17, 72, 9, 17, 72, 10, 17, 72, 11, 17, 72, 12, 17, 72, 13, 17, 72, 14, 17, 72, 15, 17, 72, 16, 17, 7, 17, 17, 0, 18, 17, 14, 19, 17, 72, 20, 17, 73, 21, 17, 72, 0, 18, 72, 1, 18, 73, 2, 18, 73, 3, 18, 72, 4, 18, 72, 5, 18, 72, 6, 18, 72, 7, 18, 72, 8, 18, 72, 9, 18, 73, 10, 18, 73, 11, 18, 72, 12, 18, 72, 13, 18, 72, 14, 18, 72, 15, 18, 72, 16, 18, 7, 17, 18, 1, 18, 18, 14, 19, 18, 73, 20, 18, 72, 21, 18, 72, 0, 19, 72, 1, 19, 72, 2, 19, 72, 3, 19, 72, 4, 19, 72, 5, 19, 72, 6, 19, 72, 7, 19, 72, 8, 19, 72, 9, 19, 72, 10, 19, 72, 11, 19, 73, 12, 19, 73, 13, 19, 72, 14, 19, 72, 15, 19, 72, 16, 19, 10, 17, 19, 9, 18, 19, 15, 19, 19, 73, 20, 19, 72, 21, 19, 72, 0, 20, 72, 1, 20, 72, 2, 20, 72, 3, 20, 72, 4, 20, 72, 5, 20, 73, 6, 20, 72, 7, 20, 72, 8, 20, 72, 9, 20, 73, 10, 20, 72, 11, 20, 72, 12, 20, 72, 13, 20, 73, 14, 20, 72, 15, 20, 72, 16, 20, 72, 17, 20, 72, 18, 20, 72, 19, 20, 73, 20, 20, 72, 21, 20, 72, 0, 21, 72, 1, 21, 72, 2, 21, 72, 3, 21, 72, 4, 21, 72, 5, 21, 72, 6, 21, 72, 7, 21, 72, 8, 21, 72, 9, 21, 73, 10, 21, 72, 11, 21, 72, 12, 21, 72, 13, 21, 72, 14, 21, 73, 15, 21, 72, 16, 21, 72, 17, 21, 72, 18, 21, 72, 19, 21, 72, 20, 21, 72, 21, 21, 72)
+}
+metadata/godoodads_dungeon_settings = SubResource("Resource_dhhig")
+metadata/godoodads_dungeon_generated = PackedByteArray("Ae2U3U7DMAyFv3Zj3Tr2v7Hd8AgILgChDTaQEMQPsjfnQRDIF1VoV3uaBBL1kZUmTWzn5CQfCUBCSos2Z3TI6NIjp885A4aMGDNhyow5i2YuDQ+NHv7qvWisscb+kyUOpA60HGg7cOZAx4HMga4DPQdyB/oOnDswcGDowMiBsQMTB6YOzByYO7BwIECli3qIvkM0J5T8F21XwBK4PJAjGFyifgZ0gKFxnRjzZhp3D7wAV4ZapGYfAuRADxjp2Nq471BTs0T9bcT7UrkXY62hwh+AnfKSAGkJ9+I801DgIdO4iebYqb9V6EhqeHrU71x57xW4F+AVuC7sZ2is/8mwP9G8+0LOUMGRaHsfaU0OaHZzQAtSMr4xamht1N5Kz2IfaStUrNsatZDp3aNCWzcFXeyAO0fc9DsqP85Zon0LcGvUcaYxU+XiWTW10/Y94mwfvYNSkSMv0Ww4UENieAeD07MCX6HkbZeaMxdDvXJkbVKytvi+Wu6np183bs1jiXEauzhJlPER4SvWfB3PL9lpuDilfQI=")
+
+[node name="DungeonMarkers" type="Node3D" parent="School" unique_id=881309264]
+
+[node name="MovingPlatformNS" type="Node3D" parent="School/DungeonMarkers" unique_id=722759320 instance=ExtResource("6_us0e6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 22)
+metadata/godoodads_dungeon_marker = true
+
+[node name="MovingPlatformNS2" type="Node3D" parent="School/DungeonMarkers" unique_id=59385664 instance=ExtResource("6_us0e6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 0, 50)
+metadata/godoodads_dungeon_marker = true
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=2069731022 node_paths=PackedStringArray("_closeupCamera") instance=ExtResource("7_7ey8e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.1, 67)
+script = ExtResource("8_6mt53")
+_characterData = ExtResource("9_t7bd3")
+_closeupCamera = NodePath("VisualRoot/dialogCamera")
+PersistentId = "Player"
+metadata/_custom_type_script = "uid://c861mplcf03p7"
+
+[node name="ChasmGlow" type="DirectionalLight3D" parent="." unique_id=1328796195]
+transform = Transform3D(0.8660254, 0.4698463, 0.17101008, 0, 0.34202015, -0.9396926, -0.5, 0.81379765, 0.29619813, 0, 0, 0)
+light_color = Color(0.2, 0.7, 0.8, 1)
+light_energy = 0.45
+
+[node name="ChamberSafety" type="Node" parent="." unique_id=1154217236 node_paths=PackedStringArray("Grid")]
+script = ExtResource("10_us0e6")
+Grid = NodePath("../School")

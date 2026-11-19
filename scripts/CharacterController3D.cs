@@ -47,6 +47,8 @@ public partial class CharacterController3D : Node, ICharacterController
 
     bool _jump = false;
 
+    Vector3 _push;
+
     public override void _Ready()
     {
         _character = this.FindAncestorOfType<Character3D>();
@@ -84,6 +86,11 @@ public partial class CharacterController3D : Node, ICharacterController
             velocity.X = Mathf.MoveToward(_character.Velocity.X, 0, _speed);
             velocity.Z = Mathf.MoveToward(_character.Velocity.Z, 0, _speed);
         }
+
+        // external push (e.g. a waterfall), added on top of the player's own movement; sources add it every frame
+        velocity.X += _push.X;
+        velocity.Z += _push.Z;
+        _push = Vector3.Zero;
 
         _character.Velocity = velocity;
         _character.MoveAndSlide();
@@ -125,6 +132,16 @@ public partial class CharacterController3D : Node, ICharacterController
         if (state == _currentState) return;
         _currentState = state;
         EmitSignal(SignalName.MovementStateChanged, state);
+    }
+
+    /// <summary>
+    /// Pushes the character horizontally during the next physics frame, on top of its own movement.
+    /// Call it every physics frame while the push lasts (pushes from several sources add up).
+    /// </summary>
+    /// <param name="velocity">Push velocity in world space (m/s); the Y component is ignored.</param>
+    public void AddPush(Vector3 velocity)
+    {
+        _push += velocity;
     }
 
     public void Jump()
