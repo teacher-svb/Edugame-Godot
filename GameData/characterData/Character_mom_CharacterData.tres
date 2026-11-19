@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://dwt2hhj2jix5o"]
+
+[ext_resource type="Script" uid="uid://bqblbalohjolq" path="res://scripts/Game/Character/CharacterData.cs" id="2_rlm0v"]
+
+[resource]
+script = ExtResource("2_rlm0v")
+_name = "mama"
+CharacterScenePath = "res://Scenes/characters/mom.tscn"
+CharacterAbilities = Dictionary[Object, Object]({})
+metadata/_custom_type_script = "uid://bqblbalohjolq"

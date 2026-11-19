@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("2_rlm0v")
 _name = "papa"
-CharacterScenePath = "res://Scenes/characters/character_dad.tscn"
+CharacterScenePath = "res://Scenes/characters/dad.tscn"
 CharacterAbilities = Dictionary[Object, Object]({})
 metadata/_custom_type_script = "uid://bqblbalohjolq"

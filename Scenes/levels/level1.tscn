@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://r0pfr1dce2fx" path="res://scripts/Game/Door.cs" id="20_7vwr8"]
 [ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="21_ycjjd"]
 [ext_resource type="Script" uid="uid://bhsdjlrhck4qd" path="res://scripts/test/Transporter.cs" id="22_182vs"]
-[ext_resource type="PackedScene" uid="uid://d11od8uonxhra" path="res://Scenes/characters/character_dad.tscn" id="25_14bvk"]
+[ext_resource type="PackedScene" uid="uid://d4keiam33cb1i" path="res://Scenes/characters/dad.tscn" id="25_14bvk"]
 [ext_resource type="Script" uid="uid://dwo8a5sv4sh5o" path="res://scripts/Game/PlayerTutorial.cs" id="25_lhsq1"]
 [ext_resource type="PackedScene" uid="uid://dv3mlsoycb230" path="res://Scenes/characters/character_avocado.tscn" id="25_mglpj"]
 [ext_resource type="Texture2D" uid="uid://b1tl6shsicrs" path="res://assets/tutorial-arrow.png" id="25_sppe2"]

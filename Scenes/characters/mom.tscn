@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://blkixyfshmhw5"]
+
+[ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_base.tscn" id="1_h71mi"]
+[ext_resource type="Resource" uid="uid://dwt2hhj2jix5o" path="res://GameData/characterData/Character_mom_CharacterData.tres" id="2_lv4u2"]
+[ext_resource type="PackedScene" uid="uid://bqx6fj2snhw4p" path="res://assets/3D/characters/Farmer_B.glb" id="3_h71mi"]
+[ext_resource type="Texture2D" uid="uid://d01oameoagbyc" path="res://assets/3D/characters/textures/farmer_texture_alt_A.png" id="4_farmer_alt_A"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_farmer_alt_A"]
+albedo_texture = ExtResource("4_farmer_alt_A")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yni83"]
+radius = 0.3
+height = 1.2
+
+[node name="mom" unique_id=497783338 instance=ExtResource("1_h71mi")]
+_characterData = ExtResource("2_lv4u2")
+PersistentId = "mom"
+
+[node name="CollisionShape3D" parent="." index="2" unique_id=293151575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("CapsuleShape3D_yni83")
+
+[node name="CharacterAnimator" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
+VisualRoot = NodePath("../../../Farmer_B")
+
+[node name="AnimationTree" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
+root_node = NodePath("../../../Farmer_B")
+
+[node name="AnimationPlayer" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="2" unique_id=933369381]
+root_node = NodePath("../../../Farmer_B")
+
+[node name="Farmer_B" parent="." index="5" unique_id=1612237503 instance=ExtResource("3_h71mi")]
+transform = Transform3D(0.525, 0, 0, 0, 0.525, 0, 0, 0, 0.525, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Farmer_B/Rig_Medium" parent_id_path=PackedInt32Array(1612237503, 1435051955) index="0" unique_id=554156878]
+bones/1/position = Vector3(0, 0.3839962, 0)
+bones/1/rotation = Quaternion(0.0046559577, 0.043157276, 0.00020113171, 0.9990574)
+bones/1/scale = Vector3(0.99999994, 1, 0.99999994)
+bones/2/position = Vector3(-0.17094508, 0.11358732, 1.557549e-08)
+bones/2/rotation = Quaternion(0.9950432, -0.031156572, 0.030976465, 0.089212514)
+bones/2/scale = Vector3(0.9999999, 0.99999976, 1.0000008)
+bones/3/rotation = Quaternion(0.34363288, -6.15742e-08, 2.3933728e-07, 0.93910414)
+bones/3/scale = Vector3(0.99999994, 0.99999976, 0.99999994)
+bones/4/rotation = Quaternion(-0.5973184, 0.11390212, -0.014702985, 0.7937386)
+bones/4/scale = Vector3(0.99999976, 1.0000006, 0.9999992)
+bones/5/rotation = Quaternion(-8.934892e-05, 0.9202217, -0.3913977, 2.0290998e-05)
+bones/5/scale = Vector3(1.0000002, 0.9999979, 1.0000024)
+bones/6/rotation = Quaternion(0.012359724, 2.2558506e-09, 0.0010698301, 0.99992305)
+bones/6/scale = Vector3(1.0000001, 1, 1.0000001)
+bones/7/rotation = Quaternion(-0.005930571, 4.168816e-09, -0.00051333674, 0.99998236)
+bones/7/scale = Vector3(1, 0.9999999, 1)
+bones/8/position = Vector3(0.21200737, 0.13413215, 8.216504e-08)
+bones/8/rotation = Quaternion(-0.53967214, -0.1019056, -0.7626979, 0.3415572)
+bones/8/scale = Vector3(0.9999993, 0.99999905, 0.9999998)
+bones/9/rotation = Quaternion(3.2198082e-09, -6.3316634e-08, -0.3787232, 0.92551005)
+bones/9/scale = Vector3(1.0000004, 0.9999998, 1)
+bones/10/rotation = Quaternion(1.514567e-08, -7.3584383e-09, 0.0266581, 0.99964464)
+bones/10/scale = Vector3(1.0000001, 1, 1)
+bones/11/rotation = Quaternion(-0.22022556, -0.3431773, 0.1779648, 0.8955773)
+bones/11/scale = Vector3(0.99999976, 1.0000001, 1.0000004)
+bones/12/position = Vector3(5.138494e-10, 0.096125126, -0.057500005)
+bones/12/rotation = Quaternion(0.0024425457, 0.0024425471, -0.6980805, 0.716011)
+bones/12/scale = Vector3(1, 1, 1)
+bones/13/rotation = Quaternion(-0.014601642, -0.03133839, -0.0008038401, 0.9994019)
+bones/13/scale = Vector3(0.99999994, 1, 1)
+bones/14/position = Vector3(-0.21200736, 0.13413227, 8.62731e-08)
+bones/14/rotation = Quaternion(-0.5659212, 0.0325337, 0.7275701, 0.386415)
+bones/14/scale = Vector3(0.9999992, 0.9999988, 0.9999998)
+bones/15/rotation = Quaternion(2.808305e-08, 3.611194e-08, 0.39166784, 0.9201067)
+bones/15/scale = Vector3(1.0000004, 0.99999976, 1.0000001)
+bones/16/rotation = Quaternion(2.2497532e-10, 6.8246844e-09, -0.026658092, 0.99964464)
+bones/16/scale = Vector3(0.99999994, 0.99999994, 1)
+bones/17/rotation = Quaternion(-0.21071325, 0.37962082, -0.13154449, 0.89117014)
+bones/17/scale = Vector3(0.9999995, 0.99999994, 1.0000005)
+bones/18/position = Vector3(-1.5415026e-08, 0.096125185, -0.057500005)
+bones/18/rotation = Quaternion(0.0024425446, -0.0024425485, 0.6980805, 0.716011)
+bones/18/scale = Vector3(1, 1.0000001, 1.0000001)
+bones/19/position = Vector3(0.17094508, 0.1135872, 1.5994095e-08)
+bones/19/rotation = Quaternion(0.98924106, 0.057608094, 0.07142885, 0.113936655)
+bones/19/scale = Vector3(0.9999999, 0.9999997, 1.0000008)
+bones/20/rotation = Quaternion(0.33313838, 6.048293e-08, -2.3089432e-07, 0.94287795)
+bones/20/scale = Vector3(1.0000004, 0.99999994, 1.0000001)
+bones/21/rotation = Quaternion(-0.5688768, -0.1121491, 0.04855078, 0.81329256)
+bones/21/scale = Vector3(1.0000004, 1.0000007, 0.9999993)
+bones/22/rotation = Quaternion(-9.895962e-07, 0.9202346, -0.39136732, 2.787472e-07)
+bones/22/scale = Vector3(1.0000001, 0.9999975, 1.0000027)
+
+[node name="Farmer_B_Hat" parent="Farmer_B/Rig_Medium/Skeleton3D" index="2" unique_id=1767203609]
+visible = false
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_A")
+
+[node name="Farmer_ArmLeft" parent="Farmer_B/Rig_Medium/Skeleton3D" index="0"]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_A")
+
+[node name="Farmer_ArmRight" parent="Farmer_B/Rig_Medium/Skeleton3D" index="1"]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_A")
+
+[node name="Farmer_B_Head" parent="Farmer_B/Rig_Medium/Skeleton3D" index="3"]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_A")
+
+[node name="Farmer_Body" parent="Farmer_B/Rig_Medium/Skeleton3D" index="4"]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_A")
+
+[node name="Farmer_LegLeft" parent="Farmer_B/Rig_Medium/Skeleton3D" index="5"]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_A")
+
+[node name="Farmer_LegRight" parent="Farmer_B/Rig_Medium/Skeleton3D" index="6"]
+layers = 524289
+surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_A")
+
+[editable path="Farmer_B"]
