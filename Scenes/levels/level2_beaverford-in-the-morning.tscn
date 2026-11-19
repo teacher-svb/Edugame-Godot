@@ -47,7 +47,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t3qpp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kjadr"]
 shader = ExtResource("3_gom7j")
 
 [sub_resource type="Gradient" id="Gradient_kd8u4"]
@@ -65,15 +65,15 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_wfhh5"]
 curve = SubResource("Curve_ne1q5")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kd8u4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t3qpp"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_wwkp4")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_tuys8")
 shader_parameter/width_curve = SubResource("CurveTexture_wfhh5")
 
-[sub_resource type="QuadMesh" id="QuadMesh_ne1q5"]
-material = SubResource("ShaderMaterial_kd8u4")
+[sub_resource type="QuadMesh" id="QuadMesh_kd8u4"]
+material = SubResource("ShaderMaterial_t3qpp")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8ah0f"]
 emission_shape = 3
@@ -469,8 +469,8 @@ amount = 60
 lifetime = 60.0
 explosiveness = 1.0
 fixed_fps = 60
-process_material = SubResource("ShaderMaterial_t3qpp")
-draw_pass_1 = SubResource("QuadMesh_ne1q5")
+process_material = SubResource("ShaderMaterial_kjadr")
+draw_pass_1 = SubResource("QuadMesh_kd8u4")
 script = ExtResource("5_bqjii")
 ColorRamp = SubResource("GradientTexture1D_tuys8")
 WidthCurve = SubResource("CurveTexture_wfhh5")
@@ -510,7 +510,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.835913, -0.0056301355, 20
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.942002, 0.68019676, -28.206722)
 
 [node name="Cornelis" parent="." unique_id=1044258308 instance=ExtResource("11_xfoxv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.09407, 0.2078203, 14.443476)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.09407, 0.107820295, 15.043475)
 
 [node name="Quests" type="Node" parent="." unique_id=1154009112]
 

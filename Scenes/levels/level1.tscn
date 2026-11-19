@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://bmvlqd67abgxf" path="res://assets/3D/village/interiors/mabel_interior/mabel_home_interior_ground.glb" id="30_10buh"]
 [ext_resource type="Script" uid="uid://cewycpjka78f3" path="res://scripts/Game/Systems/InventorySystem/ItemEventListener.cs" id="33_sppe2"]
 [ext_resource type="Resource" uid="uid://clf3iqsa6rjxf" path="res://GameData/EventChannels/PickupItemEventChannel.tres" id="34_lhsq1"]
+[ext_resource type="Script" uid="uid://b6r73solgkl3m" path="res://scripts/Game/Systems/Audio/SceneMusic.cs" id="music_scene"]
+[ext_resource type="Resource" uid="uid://bvfj5l0hdtk87" path="res://GameData/music/route7-ramble-110.tres" id="music_track"]
 [ext_resource type="PackedScene" uid="uid://cq03c623813r3" path="res://assets/3D/village/props/prop_armchair.glb" id="p_armchair"]
 [ext_resource type="PackedScene" uid="uid://c5lr8ap7vxfno" path="res://assets/3D/village/props/prop_barrel_b.glb" id="p_barrel_b"]
 [ext_resource type="PackedScene" uid="uid://dvdykppw2iq8h" path="res://assets/3D/village/props/prop_bed.glb" id="p_bed"]
@@ -48,8 +50,6 @@
 [ext_resource type="Script" uid="uid://bon4b1kkdldu8" path="res://scripts/Game/Systems/QuestSystem/Steps/PopStateStep.cs" id="qs_pop"]
 [ext_resource type="Script" uid="uid://bksw1ls1mwcv0" path="res://scripts/Game/Systems/QuestSystem/QuestNode.cs" id="qs_questnode"]
 [ext_resource type="Resource" uid="uid://bcgox3enbg4ph" path="res://GameData/quests/I.1-MorningInBeaverford.tres" id="qs_quest_i1"]
-[ext_resource type="Script" path="res://scripts/Game/Systems/Audio/SceneMusic.cs" id="music_scene"]
-[ext_resource type="Resource" path="res://GameData/music/route7-ramble-110.tres" id="music_track"]
 
 [sub_resource type="Gradient" id="Gradient_upsym"]
 offsets = PackedFloat32Array(0.117647, 1)
@@ -243,6 +243,7 @@ visible = false
 
 [node name="armchair_01" parent="NavigationRegion3D/Livingroom/Props" unique_id=1014042204 instance=ExtResource("p_armchair")]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 9.5, 0, -3.5)
+visible = false
 
 [node name="barrel_b_01" parent="NavigationRegion3D/Livingroom/Props" unique_id=1865855324 instance=ExtResource("p_barrel_b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.0291, -1.5)
@@ -383,7 +384,7 @@ libraries/ = SubResource("AnimationLibrary_bedroomDoor")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.8, 0, -7.8)
 
 [node name="Marker3D2" type="Marker3D" parent="Waypoints" unique_id=2145844556]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -5.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -5.9)
 
 [node name="Marker3D3" type="Marker3D" parent="Waypoints" unique_id=59002883]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9, 0, -7)

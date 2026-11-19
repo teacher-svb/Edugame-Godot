@@ -5,19 +5,19 @@
 [ext_resource type="PackedScene" uid="uid://dokmc5a2yeulo" path="res://assets/3D/characters/Farmer_A.glb" id="3_pynfb"]
 [ext_resource type="Texture2D" uid="uid://cpgjkhlb27rq5" path="res://assets/3D/characters/textures/farmer_texture_alt_D.png" id="4_farmer_alt_D"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_farmer_alt_D"]
-albedo_texture = ExtResource("4_farmer_alt_D")
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yni83"]
 radius = 0.3
 height = 1.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_farmer_alt_D"]
+albedo_texture = ExtResource("4_farmer_alt_D")
 
 [node name="dad" unique_id=497783338 instance=ExtResource("1_scluf")]
 _characterData = ExtResource("2_rru04")
 PersistentId = "dad"
 
 [node name="CharacterController3D" parent="." index="0" unique_id=631752590]
-_speed = 1.0
+_speed = 2.0
 _jumpVelocity = 3.0
 
 [node name="CollisionShape3D" parent="." index="2" unique_id=293151575]
@@ -39,85 +39,85 @@ root_node = NodePath("../../../Farmer_A")
 [node name="Farmer_A" parent="." index="5" unique_id=1854764491 instance=ExtResource("3_pynfb")]
 transform = Transform3D(0.525, 0, 0, 0, 0.525, 0, 0, 0, 0.525, 0, 0, 0)
 
-[node name="Skeleton3D" parent="Farmer_A/Rig_Medium" parent_id_path=PackedInt32Array(1854764491, 1899727249) index="0" unique_id=1657623616]
-bones/1/position = Vector3(0, 0.39203596, 0)
-bones/1/rotation = Quaternion(1.915145e-05, 0.043157753, 8.2988606e-07, 0.9990683)
+[node name="Skeleton3D" parent="Farmer_A/Rig_Medium" parent_id_path=PackedInt32Array(1854764491, 1468960249) index="0" unique_id=977507319]
+bones/1/position = Vector3(0, 0.38695195, 0)
+bones/1/rotation = Quaternion(0.00294364, 0.043157563, 0.00012716264, 0.999064)
 bones/1/scale = Vector3(0.99999994, 1, 0.99999994)
-bones/2/rotation = Quaternion(3.5308243e-05, 1.072963e-10, 3.056201e-06, 1)
+bones/2/rotation = Quaternion(0.008225882, 1.8418556e-09, 0.00071201386, 0.99996597)
 bones/2/scale = Vector3(1.0000001, 1, 1.0000001)
-bones/3/rotation = Quaternion(0.0049784128, 7.3841133e-09, 0.00043092028, 0.9999876)
+bones/3/rotation = Quaternion(-0.0022833704, 1.7065158e-09, -0.00019764347, 0.9999974)
 bones/3/scale = Vector3(1, 0.9999999, 1)
 bones/4/position = Vector3(0.21200737, 0.13413215, 8.216504e-08)
-bones/4/rotation = Quaternion(-0.5336269, -0.116746135, -0.771725, 0.3256583)
+bones/4/rotation = Quaternion(-0.537502, -0.10737751, -0.7660601, 0.33572862)
 bones/4/scale = Vector3(0.9999993, 0.99999905, 0.9999998)
-bones/5/rotation = Quaternion(1.2022677e-08, -6.440505e-08, -0.3586364, 0.9334774)
+bones/5/rotation = Quaternion(2.1263878e-08, -5.9980586e-08, -0.37187335, 0.9282835)
 bones/5/scale = Vector3(1.0000004, 0.9999998, 1)
 bones/6/rotation = Quaternion(1.514567e-08, -7.3584383e-09, 0.0266581, 0.99964464)
 bones/6/scale = Vector3(1.0000001, 1, 1)
-bones/7/rotation = Quaternion(-0.22214171, -0.34582037, 0.18461186, 0.8927373)
+bones/7/rotation = Quaternion(-0.220857, -0.34416443, 0.18054096, 0.8945267)
 bones/7/scale = Vector3(0.99999976, 1.0000001, 1.0000004)
 bones/8/position = Vector3(5.138494e-10, 0.096125126, -0.057500005)
-bones/8/rotation = Quaternion(6.969109e-06, 6.9895723e-06, -0.7070812, 0.70713234)
+bones/8/rotation = Quaternion(0.0016259394, 0.0016259579, -0.7011118, 0.7130476)
 bones/8/scale = Vector3(1, 1, 1)
-bones/9/rotation = Quaternion(-0.0035934267, -0.031341564, -0.00019782425, 0.99950236)
+bones/9/rotation = Quaternion(-0.016120093, -0.031337652, -0.00088743283, 0.9993785)
 bones/9/scale = Vector3(0.99999994, 1, 1)
 bones/10/position = Vector3(-0.21200736, 0.13413227, 8.62731e-08)
-bones/10/rotation = Quaternion(-0.5606385, 0.04680468, 0.7369126, 0.37477142)
+bones/10/rotation = Quaternion(-0.5641273, 0.037529893, 0.73085696, 0.38236126)
 bones/10/scale = Vector3(0.9999992, 0.9999988, 0.9999998)
-bones/11/rotation = Quaternion(6.758802e-09, 4.616402e-08, 0.37641668, 0.9264505)
+bones/11/rotation = Quaternion(-4.2255968e-09, 6.370061e-08, 0.3862044, 0.92241323)
 bones/11/scale = Vector3(1.0000004, 0.99999976, 1.0000001)
 bones/12/rotation = Quaternion(2.2497532e-10, 6.8246844e-09, -0.026658092, 0.99964464)
 bones/12/scale = Vector3(0.99999994, 0.99999994, 1)
-bones/13/rotation = Quaternion(-0.21243168, 0.3841049, -0.14023365, 0.8875081)
+bones/13/rotation = Quaternion(-0.21122698, 0.3811217, -0.13454868, 0.8899585)
 bones/13/scale = Vector3(0.9999995, 0.99999994, 1.0000005)
 bones/14/position = Vector3(-1.5415026e-08, 0.096125185, -0.057500005)
-bones/14/rotation = Quaternion(6.969109e-06, -6.9895723e-06, 0.7070812, 0.70713234)
+bones/14/rotation = Quaternion(0.001625946, -0.0016259509, 0.7011118, 0.7130476)
 bones/14/scale = Vector3(1, 1.0000001, 1.0000001)
 bones/15/position = Vector3(0.17094508, 0.1135872, 1.5994095e-08)
-bones/15/rotation = Quaternion(0.99235, 0.058146708, 0.07043236, 0.08306475)
+bones/15/rotation = Quaternion(0.9904256, 0.05774554, 0.07110558, 0.1032795)
 bones/15/scale = Vector3(0.9999999, 0.9999997, 1.0000008)
-bones/16/rotation = Quaternion(0.2629994, 6.496636e-08, -1.7403556e-07, 0.96479607)
+bones/16/rotation = Quaternion(0.30903333, 6.622158e-08, -2.1308786e-07, 0.9510513)
 bones/16/scale = Vector3(1.0000004, 0.99999994, 1.0000001)
-bones/17/rotation = Quaternion(-0.53019786, -0.114371456, 0.04181268, 0.8390835)
+bones/17/rotation = Quaternion(-0.5555374, -0.11297052, 0.04617292, 0.8224865)
 bones/17/scale = Vector3(1.0000004, 1.0000007, 0.9999993)
-bones/18/rotation = Quaternion(1.519767e-05, 0.92026, -0.39130762, -3.3823571e-06)
+bones/18/rotation = Quaternion(-1.0065879e-06, 0.9202346, -0.39136732, 2.71802e-07)
 bones/18/scale = Vector3(1.0000001, 0.9999975, 1.0000027)
 bones/19/position = Vector3(-0.17094508, 0.11358732, 1.557549e-08)
-bones/19/rotation = Quaternion(0.99732023, -0.029459145, 0.03152864, 0.05908175)
+bones/19/rotation = Quaternion(0.9959348, -0.030547969, 0.031164486, 0.07880123)
 bones/19/scale = Vector3(0.9999999, 0.99999976, 1.0000008)
-bones/20/rotation = Quaternion(0.2740859, -6.419658e-08, 1.9305382e-07, 0.96170527)
+bones/20/rotation = Quaternion(0.31966212, -6.256409e-08, 2.2185628e-07, 0.94753164)
 bones/20/scale = Vector3(0.99999994, 0.99999976, 0.99999994)
-bones/21/rotation = Quaternion(-0.5590819, 0.11451228, -0.008634193, 0.82112116)
+bones/21/rotation = Quaternion(-0.5840857, 0.1141539, -0.012564343, 0.8035266)
 bones/21/scale = Vector3(0.99999976, 1.0000006, 0.9999992)
 bones/22/rotation = Quaternion(-8.934892e-05, 0.9202217, -0.3913977, 2.0290998e-05)
 bones/22/scale = Vector3(1.0000002, 0.9999979, 1.0000024)
 
-[node name="Farmer_A_Hat" parent="Farmer_A/Rig_Medium/Skeleton3D" index="0" unique_id=1602489980]
+[node name="Farmer_A_Hat" parent="Farmer_A/Rig_Medium/Skeleton3D" index="0" unique_id=1877762429]
 visible = false
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_D")
 
-[node name="Farmer_A_Head" parent="Farmer_A/Rig_Medium/Skeleton3D" index="1" unique_id=1128263882]
+[node name="Farmer_A_Head" parent="Farmer_A/Rig_Medium/Skeleton3D" index="1" unique_id=2024658321]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_D")
 
-[node name="Farmer_ArmLeft" parent="Farmer_A/Rig_Medium/Skeleton3D" index="2" unique_id=1202031698]
+[node name="Farmer_ArmLeft" parent="Farmer_A/Rig_Medium/Skeleton3D" index="2" unique_id=1262427658]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_D")
 
-[node name="Farmer_ArmRight" parent="Farmer_A/Rig_Medium/Skeleton3D" index="3" unique_id=2029215098]
+[node name="Farmer_ArmRight" parent="Farmer_A/Rig_Medium/Skeleton3D" index="3" unique_id=994923848]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_D")
 
-[node name="Farmer_Body" parent="Farmer_A/Rig_Medium/Skeleton3D" index="4" unique_id=840303407]
+[node name="Farmer_Body" parent="Farmer_A/Rig_Medium/Skeleton3D" index="4" unique_id=1022261412]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_D")
 
-[node name="Farmer_LegLeft" parent="Farmer_A/Rig_Medium/Skeleton3D" index="5" unique_id=689841053]
+[node name="Farmer_LegLeft" parent="Farmer_A/Rig_Medium/Skeleton3D" index="5" unique_id=1577888208]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_D")
 
-[node name="Farmer_LegRight" parent="Farmer_A/Rig_Medium/Skeleton3D" index="6" unique_id=1323713012]
+[node name="Farmer_LegRight" parent="Farmer_A/Rig_Medium/Skeleton3D" index="6" unique_id=902724092]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_D")
 
