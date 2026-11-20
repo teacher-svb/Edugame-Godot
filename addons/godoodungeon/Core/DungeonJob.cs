@@ -31,6 +31,9 @@ public sealed record DungeonRequest
 
     /// <summary>GridMap cells holding hand-placed items. Rooms and corridors avoid them (brief §4.7).</summary>
     public IReadOnlySet<Vector3I> HandPlaced { get; init; } = new HashSet<Vector3I>();
+
+    /// <summary>The enabled room boxes in child order (brief §13); they become the first rooms. Built boxes are not solved.</summary>
+    public IReadOnlyList<RoomBoxSpec> RoomBoxes { get; init; } = Array.Empty<RoomBoxSpec>();
 }
 
 public enum DungeonStatus
@@ -86,6 +89,9 @@ public sealed record DungeonResult
 
     /// <summary>Milliseconds per stage over all layout attempts: layout, rooms, routing, corridors (solve), check.</summary>
     public StageTimes Times { get; init; } = new();
+
+    /// <summary>The dungeon graph (brief §12): rooms, and the corridor routed for each room graph edge. Set with every solved layout.</summary>
+    public DungeonGraphData Graph { get; init; }
 
     /// <summary>The rooms the connectivity check could not reach, with <see cref="DungeonStatus.InternalError"/>.</summary>
     public IReadOnlyList<int> UnreachableRooms { get; init; } = Array.Empty<int>();
@@ -173,13 +179,17 @@ public sealed class DungeonJob
     {
         var request = _request;
         var settings = request.Layout;
-        var errors = LayoutValidator.Validate(settings);
+        var errors = LayoutValidator.Validate(settings, request.RoomBoxes.Count);
         if (request.RoomTiles == null || request.CorridorTiles == null)
             errors.Add("Both tile sets are needed.");
         if (errors.Count > 0)
             return new DungeonResult { Status = DungeonStatus.Invalid, Errors = errors };
 
         var occupied = OccupiedGrid(request);
+        // Room box checks do not depend on the seed, so they fail once instead of every attempt (§13.2).
+        errors.AddRange(RoomBoxes.Validate(settings, request.RoomBoxes, occupied));
+        if (errors.Count > 0)
+            return new DungeonResult { Status = DungeonStatus.Invalid, Errors = errors };
         var times = new StageTimes();
         var clock = System.Diagnostics.Stopwatch.StartNew();
         double Lap()
@@ -196,7 +206,7 @@ public sealed class DungeonJob
                 return Cancelled(layout, failures);
             Volatile.Write(ref _stage, $"Layout {attempt + 1}: placing rooms");
             clock.Restart();
-            layout = LayoutGenerator.Generate(settings, request.Seed, attempt, request.Origin, occupied);
+            layout = LayoutGenerator.Generate(settings, request.Seed, attempt, request.Origin, occupied, request.RoomBoxes);
             times.Layout += Lap();
             if (!layout.IsValid)
             {
@@ -211,8 +221,10 @@ public sealed class DungeonJob
             Vector3I? failedCell = null;
             for (int room = 0; room < layout.Rooms.Count && failed == null; room++)
             {
+                if (layout.IsBuilt(room))
+                    continue;   // its cells are yours: not solved, not written (§13.3)
                 Volatile.Write(ref _stage, $"Layout {attempt + 1}: room {room + 1} of {layout.Rooms.Count}");
-                var input = SolveInputs.Room(layout, room, settings.RoomHeight, request.RoomTiles, request.DoorTile, request.EdgeSocket);
+                var input = SolveInputs.Room(layout, room, layout.Height(room), request.RoomTiles, request.DoorTile, request.EdgeSocket);
                 if (!input.IsValid)
                     return new DungeonResult { Status = DungeonStatus.Invalid, Layout = layout, Errors = new[] { input.Error } };
                 var job = Solve(input, request.RoomTiles, LayoutSeeds.Room(request.Seed, attempt, room), request);
@@ -224,7 +236,7 @@ public sealed class DungeonJob
                     solves.Add(new DungeonSolve(input, job.Result.Cells, false));
                 else
                 {
-                    failed = $"Room {room + 1} at {layout.GridCell(layout.Rooms[room].Position)} could not be solved ({Describe(job)}).";
+                    failed = $"{char.ToUpperInvariant(layout.Describe(room)[0])}{layout.Describe(room)[1..]} at {layout.GridCell(layout.Rooms[room].Position)} could not be solved ({Describe(job)}).";
                     failedCell = job.Result?.Failure is { } report ? input.Origin + report.Cell : null;
                 }
             }
@@ -275,6 +287,7 @@ public sealed class DungeonJob
                 Layout = layout, Solves = solves, Attempts = failures, LayoutAttempt = attempt,
                 Backtracks = backtracks, Restarts = restarts,
                 RouteCount = plan.RouteCount, RouteCells = plan.RouteCells, CorridorFaces = plan.Faces, Times = times,
+                Graph = DungeonGraphData.Build(layout, plan, settings.RoomHeight),
             };
         }
         return new DungeonResult { Status = DungeonStatus.Failed, Layout = layout, Attempts = failures };

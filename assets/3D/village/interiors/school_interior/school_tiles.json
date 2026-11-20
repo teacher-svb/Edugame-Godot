@@ -5,7 +5,730 @@
   "earth": "textures/T_SchoolEarthColorMap.png"
  },
  "tile_size_m": 4.0,
- "axes": "Godot: tile centre at the node origin, floor top at y = 0, north = -Z (top of the screen), south = +Z (towards the camera). Every rotation is its own tile: never rotate a tile.",
+ "axes": "Godot: tile centre at the node origin, floor top at y = 0, north = -Z (top of the screen), south = +Z (towards the camera). One MeshLibrary item per shape, built in its base orientation (the sockets below) and turned in the GridMap: every tile is Rotation FourWay. Rotate cells around Y only, never mirror. Each shape is built with its south side open, so a wall or gate turned to the south has the full wall, merlons and arch (the old low south curb is gone; stairs_S keeps its own).",
+ "gridmap_turns": {
+  "note": "Quarter turns around +Y as godoowave counts them (counter-clockwise seen from above): the base north side ends up facing the side named here. GridMap cell orientation index per turn.",
+  "north": {
+   "turns": 0,
+   "orientation": 0
+  },
+  "west": {
+   "turns": 1,
+   "orientation": 16
+  },
+  "south": {
+   "turns": 2,
+   "orientation": 10
+  },
+  "east": {
+   "turns": 3,
+   "orientation": 22
+  }
+ },
+ "replaces": "Per tile: the tiles of the old one-tile-per-rotation set it replaces, with the GridMap orientation index that gives the same tile (e.g. room_owoo = room_wooo at orientation 22). A wall that was a low curb on the south side is now a full wall.",
+ "remap_old_items": {
+  "note": "Old MeshLibrary item -> [new item, GridMap orientation, keep]. keep = true: the old tile was already turned in the GridMap (chasm socket variants, dungeon door): keep the cell's orientation.",
+  "items": {
+   "0": [
+    0,
+    0,
+    false
+   ],
+   "1": [
+    1,
+    0,
+    false
+   ],
+   "2": [
+    2,
+    0,
+    false
+   ],
+   "3": [
+    3,
+    0,
+    false
+   ],
+   "4": [
+    4,
+    0,
+    false
+   ],
+   "5": [
+    5,
+    0,
+    false
+   ],
+   "6": [
+    6,
+    0,
+    false
+   ],
+   "7": [
+    7,
+    16,
+    false
+   ],
+   "8": [
+    8,
+    16,
+    false
+   ],
+   "9": [
+    7,
+    10,
+    false
+   ],
+   "10": [
+    9,
+    16,
+    false
+   ],
+   "11": [
+    10,
+    16,
+    false
+   ],
+   "12": [
+    8,
+    10,
+    false
+   ],
+   "13": [
+    11,
+    10,
+    false
+   ],
+   "14": [
+    7,
+    22,
+    false
+   ],
+   "15": [
+    9,
+    10,
+    false
+   ],
+   "16": [
+    12,
+    10,
+    false
+   ],
+   "17": [
+    13,
+    10,
+    false
+   ],
+   "18": [
+    10,
+    10,
+    false
+   ],
+   "19": [
+    14,
+    10,
+    false
+   ],
+   "20": [
+    8,
+    22,
+    false
+   ],
+   "21": [
+    11,
+    22,
+    false
+   ],
+   "22": [
+    15,
+    10,
+    false
+   ],
+   "23": [
+    7,
+    0,
+    false
+   ],
+   "24": [
+    9,
+    0,
+    false
+   ],
+   "25": [
+    11,
+    16,
+    false
+   ],
+   "26": [
+    12,
+    16,
+    false
+   ],
+   "27": [
+    14,
+    16,
+    false
+   ],
+   "28": [
+    15,
+    16,
+    false
+   ],
+   "29": [
+    9,
+    22,
+    false
+   ],
+   "30": [
+    12,
+    0,
+    false
+   ],
+   "31": [
+    15,
+    0,
+    false
+   ],
+   "32": [
+    12,
+    22,
+    false
+   ],
+   "33": [
+    13,
+    22,
+    false
+   ],
+   "34": [
+    10,
+    22,
+    false
+   ],
+   "35": [
+    13,
+    0,
+    false
+   ],
+   "36": [
+    14,
+    22,
+    false
+   ],
+   "37": [
+    8,
+    0,
+    false
+   ],
+   "38": [
+    10,
+    0,
+    false
+   ],
+   "39": [
+    13,
+    16,
+    false
+   ],
+   "40": [
+    11,
+    0,
+    false
+   ],
+   "41": [
+    14,
+    0,
+    false
+   ],
+   "42": [
+    15,
+    22,
+    false
+   ],
+   "43": [
+    16,
+    16,
+    false
+   ],
+   "44": [
+    16,
+    10,
+    false
+   ],
+   "45": [
+    17,
+    16,
+    false
+   ],
+   "46": [
+    16,
+    22,
+    false
+   ],
+   "47": [
+    18,
+    22,
+    false
+   ],
+   "48": [
+    17,
+    10,
+    false
+   ],
+   "49": [
+    19,
+    16,
+    false
+   ],
+   "50": [
+    16,
+    0,
+    false
+   ],
+   "51": [
+    17,
+    0,
+    false
+   ],
+   "52": [
+    18,
+    0,
+    false
+   ],
+   "53": [
+    19,
+    0,
+    false
+   ],
+   "54": [
+    17,
+    22,
+    false
+   ],
+   "55": [
+    19,
+    22,
+    false
+   ],
+   "56": [
+    19,
+    10,
+    false
+   ],
+   "57": [
+    20,
+    0,
+    false
+   ],
+   "58": [
+    21,
+    0,
+    false
+   ],
+   "59": [
+    22,
+    0,
+    false
+   ],
+   "60": [
+    23,
+    0,
+    false
+   ],
+   "61": [
+    24,
+    0,
+    false
+   ],
+   "62": [
+    25,
+    0,
+    false
+   ],
+   "63": [
+    21,
+    22,
+    false
+   ],
+   "64": [
+    22,
+    22,
+    false
+   ],
+   "65": [
+    23,
+    22,
+    false
+   ],
+   "66": [
+    24,
+    22,
+    false
+   ],
+   "67": [
+    25,
+    22,
+    false
+   ],
+   "68": [
+    26,
+    0,
+    false
+   ],
+   "69": [
+    26,
+    22,
+    false
+   ],
+   "70": [
+    26,
+    10,
+    false
+   ],
+   "71": [
+    26,
+    16,
+    false
+   ],
+   "72": [
+    27,
+    0,
+    false
+   ],
+   "73": [
+    28,
+    0,
+    false
+   ],
+   "74": [
+    29,
+    0,
+    false
+   ],
+   "75": [
+    29,
+    22,
+    false
+   ],
+   "76": [
+    30,
+    0,
+    false
+   ],
+   "77": [
+    29,
+    16,
+    false
+   ],
+   "78": [
+    31,
+    0,
+    true
+   ],
+   "79": [
+    32,
+    0,
+    true
+   ],
+   "80": [
+    33,
+    0,
+    true
+   ],
+   "81": [
+    34,
+    0,
+    true
+   ],
+   "82": [
+    35,
+    0,
+    true
+   ],
+   "83": [
+    36,
+    0,
+    true
+   ],
+   "84": [
+    37,
+    0,
+    true
+   ],
+   "85": [
+    38,
+    0,
+    true
+   ],
+   "86": [
+    39,
+    0,
+    true
+   ],
+   "87": [
+    40,
+    0,
+    true
+   ],
+   "88": [
+    41,
+    0,
+    true
+   ],
+   "89": [
+    42,
+    0,
+    true
+   ],
+   "90": [
+    43,
+    0,
+    true
+   ],
+   "91": [
+    44,
+    0,
+    true
+   ],
+   "92": [
+    45,
+    0,
+    true
+   ],
+   "93": [
+    46,
+    0,
+    true
+   ],
+   "94": [
+    47,
+    0,
+    true
+   ],
+   "95": [
+    48,
+    0,
+    true
+   ],
+   "96": [
+    49,
+    0,
+    true
+   ],
+   "97": [
+    50,
+    0,
+    true
+   ],
+   "98": [
+    51,
+    0,
+    true
+   ],
+   "99": [
+    52,
+    0,
+    true
+   ],
+   "100": [
+    53,
+    0,
+    true
+   ],
+   "101": [
+    54,
+    0,
+    true
+   ],
+   "102": [
+    55,
+    0,
+    false
+   ],
+   "103": [
+    55,
+    22,
+    false
+   ],
+   "104": [
+    56,
+    0,
+    false
+   ],
+   "105": [
+    56,
+    22,
+    false
+   ],
+   "106": [
+    57,
+    0,
+    false
+   ],
+   "107": [
+    57,
+    22,
+    false
+   ],
+   "108": [
+    58,
+    0,
+    false
+   ],
+   "109": [
+    58,
+    22,
+    false
+   ],
+   "110": [
+    59,
+    0,
+    false
+   ],
+   "111": [
+    59,
+    22,
+    false
+   ],
+   "112": [
+    60,
+    0,
+    false
+   ],
+   "113": [
+    60,
+    22,
+    false
+   ],
+   "114": [
+    61,
+    0,
+    false
+   ],
+   "115": [
+    61,
+    22,
+    false
+   ]
+  },
+  "names": {
+   "0": "room_oooo_a",
+   "1": "room_oooo_b",
+   "2": "room_oooo_circle",
+   "3": "room_oooo_dais",
+   "4": "room_oooo_pit",
+   "5": "room_oooo_pillar",
+   "6": "room_oooo_tiers",
+   "7": "room_ooow",
+   "8": "room_ooog",
+   "9": "room_oowo",
+   "10": "room_ooww",
+   "11": "room_oowg",
+   "12": "room_oogo",
+   "13": "room_oogw",
+   "14": "room_owoo",
+   "15": "room_owwo",
+   "16": "room_owww",
+   "17": "room_owwg",
+   "18": "room_owgo",
+   "19": "room_owgw",
+   "20": "room_ogoo",
+   "21": "room_ogwo",
+   "22": "room_ogww",
+   "23": "room_wooo",
+   "24": "room_woow",
+   "25": "room_woog",
+   "26": "room_woww",
+   "27": "room_wowg",
+   "28": "room_wogw",
+   "29": "room_wwoo",
+   "30": "room_wwow",
+   "31": "room_wwog",
+   "32": "room_wwwo",
+   "33": "room_wwgo",
+   "34": "room_wgoo",
+   "35": "room_wgow",
+   "36": "room_wgwo",
+   "37": "room_gooo",
+   "38": "room_goow",
+   "39": "room_goww",
+   "40": "room_gwoo",
+   "41": "room_gwow",
+   "42": "room_gwwo",
+   "43": "landing_wwwg",
+   "44": "landing_wwgw",
+   "45": "landing_wwgg",
+   "46": "landing_wgww",
+   "47": "landing_wgwg",
+   "48": "landing_wggw",
+   "49": "landing_wggg",
+   "50": "landing_gwww",
+   "51": "landing_gwwg",
+   "52": "landing_gwgw",
+   "53": "landing_gwgg",
+   "54": "landing_ggww",
+   "55": "landing_ggwg",
+   "56": "landing_gggw",
+   "57": "landing_gggg",
+   "58": "bridge_NS",
+   "59": "broken_NS",
+   "60": "stones_NS",
+   "61": "steps_NS",
+   "62": "mover_NS",
+   "63": "bridge_EW",
+   "64": "broken_EW",
+   "65": "stones_EW",
+   "66": "steps_EW",
+   "67": "mover_EW",
+   "68": "bridge_NE",
+   "69": "bridge_ES",
+   "70": "bridge_SW",
+   "71": "bridge_WN",
+   "72": "chasm_a",
+   "73": "chasm_b",
+   "74": "door_N",
+   "75": "door_E",
+   "76": "stairs_S",
+   "77": "door_W",
+   "78": "chasm_vvvw",
+   "79": "chasm_fvvv",
+   "80": "chasm_vvww",
+   "81": "chasm_fvvw",
+   "82": "chasm_fwvv",
+   "83": "chasm_ffvv",
+   "84": "chasm_vwvw",
+   "85": "chasm_fvwv",
+   "86": "chasm_vwww",
+   "87": "chasm_fvww",
+   "88": "chasm_fwvw",
+   "89": "chasm_ffvw",
+   "90": "chasm_fvfv",
+   "91": "chasm_fwwv",
+   "92": "chasm_fvfw",
+   "93": "chasm_ffwv",
+   "94": "chasm_fffv",
+   "95": "chasm_wwww",
+   "96": "chasm_fwww",
+   "97": "chasm_ffww",
+   "98": "chasm_fwfw",
+   "99": "chasm_fffw",
+   "100": "chasm_ffff",
+   "101": "dungeon_door",
+   "102": "fire_jets_NS",
+   "103": "fire_jets_EW",
+   "104": "fire_sinking_NS",
+   "105": "fire_sinking_EW",
+   "106": "fire_flamebar_NS",
+   "107": "fire_flamebar_EW",
+   "108": "water_waterfall_NS",
+   "109": "water_waterfall_EW",
+   "110": "water_raft_NS",
+   "111": "water_raft_EW",
+   "112": "earth_crumble_NS",
+   "113": "earth_crumble_EW",
+   "114": "earth_rocks_NS",
+   "115": "earth_rocks_EW"
+  }
+ },
  "sockets": {
   "room": "floor continues into the next tile (inside a room)",
   "wall+": "a wall or curb of a room or landing; fits only a chasm side wall-",
@@ -18,7 +741,7 @@
  "room_codes": "room_<NESW> / landing_<NESW>: o = room (open), w = wall (edge), g = gate.",
  "platforming": {
   "player": "tuned for jump velocity 3 m/s, speed 3 m/s, default gravity: about 0.46 m high and 1.8 m far",
-  "broken": "gap 1.15 m (west / south half) and 1.25 m (east / north half), deck at 0",
+  "broken": "gap 1.15 m (west half) and 1.25 m (east half) of the N-S build, deck at 0",
   "stones": "one stepping stone, top at +0.3 m, 1.0 m from each ledge",
   "steps": "middle 1.6 m of the deck raised to +0.3 m",
   "mover": "ledges 0.4 m at both ends, 3.2 m gap; the moving platform (school_moving_platform.glb, 1.4 x 1.4 m, top at 0) travels along the tile axis between the ledges: centre from -0.9 m to +0.9 m from the tile centre",
@@ -48,12 +771,17 @@
    "name": "room_oooo_a",
    "file": "school_room_oooo_a.glb",
    "kind": "room",
+   "rotation": "FourWay",
    "weight": 1.3,
+   "weight_per_rotation": 1.3,
    "sockets": {
     "north": "room",
     "east": "room",
     "south": "room",
     "west": "room"
+   },
+   "replaces": {
+    "room_oooo_a": 0
    },
    "tris": {
     "Collision-colonly": 12,
@@ -66,12 +794,17 @@
    "name": "room_oooo_b",
    "file": "school_room_oooo_b.glb",
    "kind": "room",
+   "rotation": "FourWay",
    "weight": 1.3,
+   "weight_per_rotation": 1.3,
    "sockets": {
     "north": "room",
     "east": "room",
     "south": "room",
     "west": "room"
+   },
+   "replaces": {
+    "room_oooo_b": 0
    },
    "tris": {
     "Collision-colonly": 12,
@@ -84,12 +817,17 @@
    "name": "room_oooo_circle",
    "file": "school_room_oooo_circle.glb",
    "kind": "room",
+   "rotation": "FourWay",
    "weight": 0.5,
+   "weight_per_rotation": 0.5,
    "sockets": {
     "north": "room",
     "east": "room",
     "south": "room",
     "west": "room"
+   },
+   "replaces": {
+    "room_oooo_circle": 0
    },
    "tris": {
     "Collision-colonly": 12,
@@ -102,12 +840,17 @@
    "name": "room_oooo_dais",
    "file": "school_room_oooo_dais.glb",
    "kind": "room",
+   "rotation": "FourWay",
    "weight": 0.35,
+   "weight_per_rotation": 0.35,
    "sockets": {
     "north": "room",
     "east": "room",
     "south": "room",
     "west": "room"
+   },
+   "replaces": {
+    "room_oooo_dais": 0
    },
    "tris": {
     "Collision-colonly": 52,
@@ -120,12 +863,17 @@
    "name": "room_oooo_pit",
    "file": "school_room_oooo_pit.glb",
    "kind": "room",
+   "rotation": "FourWay",
    "weight": 0.3,
+   "weight_per_rotation": 0.3,
    "sockets": {
     "north": "room",
     "east": "room",
     "south": "room",
     "west": "room"
+   },
+   "replaces": {
+    "room_oooo_pit": 0
    },
    "tris": {
     "Collision-colonly": 48,
@@ -138,12 +886,17 @@
    "name": "room_oooo_pillar",
    "file": "school_room_oooo_pillar.glb",
    "kind": "room",
+   "rotation": "FourWay",
    "weight": 0.45,
+   "weight_per_rotation": 0.45,
    "sockets": {
     "north": "room",
     "east": "room",
     "south": "room",
     "west": "room"
+   },
+   "replaces": {
+    "room_oooo_pillar": 0
    },
    "tris": {
     "Collision-colonly": 24,
@@ -156,12 +909,17 @@
    "name": "room_oooo_tiers",
    "file": "school_room_oooo_tiers.glb",
    "kind": "room",
+   "rotation": "FourWay",
    "weight": 0.3,
+   "weight_per_rotation": 0.3,
    "sockets": {
     "north": "room",
     "east": "room",
     "south": "room",
     "west": "room"
+   },
+   "replaces": {
+    "room_oooo_tiers": 0
    },
    "tris": {
     "Collision-colonly": 48,
@@ -171,15 +929,23 @@
   },
   {
    "item": 7,
-   "name": "room_ooow",
-   "file": "school_room_ooow.glb",
+   "name": "room_wooo",
+   "file": "school_room_wooo.glb",
    "kind": "room",
-   "weight": 1.0499999999999998,
+   "rotation": "FourWay",
+   "weight": 4.2,
+   "weight_per_rotation": 1.0499999999999998,
    "sockets": {
-    "north": "room",
+    "north": "wall+",
     "east": "room",
     "south": "room",
-    "west": "wall+"
+    "west": "room"
+   },
+   "replaces": {
+    "room_ooow": 16,
+    "room_oowo": 10,
+    "room_owoo": 22,
+    "room_wooo": 0
    },
    "tris": {
     "Collision-colonly": 24,
@@ -188,219 +954,23 @@
   },
   {
    "item": 8,
-   "name": "room_ooog",
-   "file": "school_room_ooog.glb",
+   "name": "room_gooo",
+   "file": "school_room_gooo.glb",
    "kind": "room",
-   "weight": 0.5249999999999999,
+   "rotation": "FourWay",
+   "weight": 2.1,
+   "weight_per_rotation": 0.5249999999999999,
    "sockets": {
-    "north": "room",
+    "north": "gate+",
     "east": "room",
     "south": "room",
-    "west": "gate+"
-   },
-   "tris": {
-    "Collision-colonly": 60,
-    "Mesh": 306
-   }
-  },
-  {
-   "item": 9,
-   "name": "room_oowo",
-   "file": "school_room_oowo.glb",
-   "kind": "room",
-   "weight": 1.0499999999999998,
-   "sockets": {
-    "north": "room",
-    "east": "room",
-    "south": "wall+",
     "west": "room"
    },
-   "tris": {
-    "Collision-colonly": 24,
-    "Mesh": 104
-   }
-  },
-  {
-   "item": 10,
-   "name": "room_ooww",
-   "file": "school_room_ooww.glb",
-   "kind": "room",
-   "weight": 0.675,
-   "sockets": {
-    "north": "room",
-    "east": "room",
-    "south": "wall+",
-    "west": "wall+"
-   },
-   "tris": {
-    "Collision-colonly": 36,
-    "Mesh": 184
-   }
-  },
-  {
-   "item": 11,
-   "name": "room_oowg",
-   "file": "school_room_oowg.glb",
-   "kind": "room",
-   "weight": 0.3375,
-   "sockets": {
-    "north": "room",
-    "east": "room",
-    "south": "wall+",
-    "west": "gate+"
-   },
-   "tris": {
-    "Collision-colonly": 72,
-    "Mesh": 342
-   }
-  },
-  {
-   "item": 12,
-   "name": "room_oogo",
-   "file": "school_room_oogo.glb",
-   "kind": "room",
-   "weight": 0.5249999999999999,
-   "sockets": {
-    "north": "room",
-    "east": "room",
-    "south": "gate+",
-    "west": "room"
-   },
-   "tris": {
-    "Collision-colonly": 60,
-    "Mesh": 214
-   }
-  },
-  {
-   "item": 13,
-   "name": "room_oogw",
-   "file": "school_room_oogw.glb",
-   "kind": "room",
-   "weight": 0.3375,
-   "sockets": {
-    "north": "room",
-    "east": "room",
-    "south": "gate+",
-    "west": "wall+"
-   },
-   "tris": {
-    "Collision-colonly": 72,
-    "Mesh": 344
-   }
-  },
-  {
-   "item": 14,
-   "name": "room_owoo",
-   "file": "school_room_owoo.glb",
-   "kind": "room",
-   "weight": 1.0499999999999998,
-   "sockets": {
-    "north": "room",
-    "east": "wall+",
-    "south": "room",
-    "west": "room"
-   },
-   "tris": {
-    "Collision-colonly": 24,
-    "Mesh": 156
-   }
-  },
-  {
-   "item": 15,
-   "name": "room_owwo",
-   "file": "school_room_owwo.glb",
-   "kind": "room",
-   "weight": 0.675,
-   "sockets": {
-    "north": "room",
-    "east": "wall+",
-    "south": "wall+",
-    "west": "room"
-   },
-   "tris": {
-    "Collision-colonly": 36,
-    "Mesh": 232
-   }
-  },
-  {
-   "item": 16,
-   "name": "room_owww",
-   "file": "school_room_owww.glb",
-   "kind": "room",
-   "weight": 0.045,
-   "sockets": {
-    "north": "room",
-    "east": "wall+",
-    "south": "wall+",
-    "west": "wall+"
-   },
-   "tris": {
-    "Collision-colonly": 48,
-    "Mesh": 318
-   }
-  },
-  {
-   "item": 17,
-   "name": "room_owwg",
-   "file": "school_room_owwg.glb",
-   "kind": "room",
-   "weight": 0.0225,
-   "sockets": {
-    "north": "room",
-    "east": "wall+",
-    "south": "wall+",
-    "west": "gate+"
-   },
-   "tris": {
-    "Collision-colonly": 84,
-    "Mesh": 420
-   }
-  },
-  {
-   "item": 18,
-   "name": "room_owgo",
-   "file": "school_room_owgo.glb",
-   "kind": "room",
-   "weight": 0.3375,
-   "sockets": {
-    "north": "room",
-    "east": "wall+",
-    "south": "gate+",
-    "west": "room"
-   },
-   "tris": {
-    "Collision-colonly": 72,
-    "Mesh": 344
-   }
-  },
-  {
-   "item": 19,
-   "name": "room_owgw",
-   "file": "school_room_owgw.glb",
-   "kind": "room",
-   "weight": 0.0225,
-   "sockets": {
-    "north": "room",
-    "east": "wall+",
-    "south": "gate+",
-    "west": "wall+"
-   },
-   "tris": {
-    "Collision-colonly": 84,
-    "Mesh": 422
-   }
-  },
-  {
-   "item": 20,
-   "name": "room_ogoo",
-   "file": "school_room_ogoo.glb",
-   "kind": "room",
-   "weight": 0.5249999999999999,
-   "sockets": {
-    "north": "room",
-    "east": "gate+",
-    "south": "room",
-    "west": "room"
+   "replaces": {
+    "room_ooog": 16,
+    "room_oogo": 10,
+    "room_ogoo": 22,
+    "room_gooo": 0
    },
    "tris": {
     "Collision-colonly": 60,
@@ -408,67 +978,24 @@
    }
   },
   {
-   "item": 21,
-   "name": "room_ogwo",
-   "file": "school_room_ogwo.glb",
-   "kind": "room",
-   "weight": 0.3375,
-   "sockets": {
-    "north": "room",
-    "east": "gate+",
-    "south": "wall+",
-    "west": "room"
-   },
-   "tris": {
-    "Collision-colonly": 72,
-    "Mesh": 342
-   }
-  },
-  {
-   "item": 22,
-   "name": "room_ogww",
-   "file": "school_room_ogww.glb",
-   "kind": "room",
-   "weight": 0.0225,
-   "sockets": {
-    "north": "room",
-    "east": "gate+",
-    "south": "wall+",
-    "west": "wall+"
-   },
-   "tris": {
-    "Collision-colonly": 84,
-    "Mesh": 422
-   }
-  },
-  {
-   "item": 23,
-   "name": "room_wooo",
-   "file": "school_room_wooo.glb",
-   "kind": "room",
-   "weight": 1.0499999999999998,
-   "sockets": {
-    "north": "wall+",
-    "east": "room",
-    "south": "room",
-    "west": "room"
-   },
-   "tris": {
-    "Collision-colonly": 24,
-    "Mesh": 152
-   }
-  },
-  {
-   "item": 24,
+   "item": 9,
    "name": "room_woow",
    "file": "school_room_woow.glb",
    "kind": "room",
-   "weight": 0.675,
+   "rotation": "FourWay",
+   "weight": 2.7,
+   "weight_per_rotation": 0.675,
    "sockets": {
     "north": "wall+",
     "east": "room",
     "south": "room",
     "west": "wall+"
+   },
+   "replaces": {
+    "room_ooww": 16,
+    "room_owwo": 10,
+    "room_woow": 0,
+    "room_wwoo": 22
    },
    "tris": {
     "Collision-colonly": 36,
@@ -476,237 +1003,24 @@
    }
   },
   {
-   "item": 25,
-   "name": "room_woog",
-   "file": "school_room_woog.glb",
-   "kind": "room",
-   "weight": 0.3375,
-   "sockets": {
-    "north": "wall+",
-    "east": "room",
-    "south": "room",
-    "west": "gate+"
-   },
-   "tris": {
-    "Collision-colonly": 72,
-    "Mesh": 415
-   }
-  },
-  {
-   "item": 26,
-   "name": "room_woww",
-   "file": "school_room_woww.glb",
-   "kind": "room",
-   "weight": 0.045,
-   "sockets": {
-    "north": "wall+",
-    "east": "room",
-    "south": "wall+",
-    "west": "wall+"
-   },
-   "tris": {
-    "Collision-colonly": 48,
-    "Mesh": 319
-   }
-  },
-  {
-   "item": 27,
-   "name": "room_wowg",
-   "file": "school_room_wowg.glb",
-   "kind": "room",
-   "weight": 0.0225,
-   "sockets": {
-    "north": "wall+",
-    "east": "room",
-    "south": "wall+",
-    "west": "gate+"
-   },
-   "tris": {
-    "Collision-colonly": 84,
-    "Mesh": 422
-   }
-  },
-  {
-   "item": 28,
-   "name": "room_wogw",
-   "file": "school_room_wogw.glb",
-   "kind": "room",
-   "weight": 0.0225,
-   "sockets": {
-    "north": "wall+",
-    "east": "room",
-    "south": "gate+",
-    "west": "wall+"
-   },
-   "tris": {
-    "Collision-colonly": 84,
-    "Mesh": 389
-   }
-  },
-  {
-   "item": 29,
-   "name": "room_wwoo",
-   "file": "school_room_wwoo.glb",
-   "kind": "room",
-   "weight": 0.675,
-   "sockets": {
-    "north": "wall+",
-    "east": "wall+",
-    "south": "room",
-    "west": "room"
-   },
-   "tris": {
-    "Collision-colonly": 36,
-    "Mesh": 224
-   }
-  },
-  {
-   "item": 30,
-   "name": "room_wwow",
-   "file": "school_room_wwow.glb",
-   "kind": "room",
-   "weight": 0.045,
-   "sockets": {
-    "north": "wall+",
-    "east": "wall+",
-    "south": "room",
-    "west": "wall+"
-   },
-   "tris": {
-    "Collision-colonly": 48,
-    "Mesh": 298
-   }
-  },
-  {
-   "item": 31,
-   "name": "room_wwog",
-   "file": "school_room_wwog.glb",
-   "kind": "room",
-   "weight": 0.0225,
-   "sockets": {
-    "north": "wall+",
-    "east": "wall+",
-    "south": "room",
-    "west": "gate+"
-   },
-   "tris": {
-    "Collision-colonly": 84,
-    "Mesh": 523
-   }
-  },
-  {
-   "item": 32,
-   "name": "room_wwwo",
-   "file": "school_room_wwwo.glb",
-   "kind": "room",
-   "weight": 0.045,
-   "sockets": {
-    "north": "wall+",
-    "east": "wall+",
-    "south": "wall+",
-    "west": "room"
-   },
-   "tris": {
-    "Collision-colonly": 48,
-    "Mesh": 298
-   }
-  },
-  {
-   "item": 33,
-   "name": "room_wwgo",
-   "file": "school_room_wwgo.glb",
-   "kind": "room",
-   "weight": 0.0225,
-   "sockets": {
-    "north": "wall+",
-    "east": "wall+",
-    "south": "gate+",
-    "west": "room"
-   },
-   "tris": {
-    "Collision-colonly": 84,
-    "Mesh": 370
-   }
-  },
-  {
-   "item": 34,
-   "name": "room_wgoo",
-   "file": "school_room_wgoo.glb",
-   "kind": "room",
-   "weight": 0.3375,
-   "sockets": {
-    "north": "wall+",
-    "east": "gate+",
-    "south": "room",
-    "west": "room"
-   },
-   "tris": {
-    "Collision-colonly": 72,
-    "Mesh": 407
-   }
-  },
-  {
-   "item": 35,
-   "name": "room_wgow",
-   "file": "school_room_wgow.glb",
-   "kind": "room",
-   "weight": 0.0225,
-   "sockets": {
-    "north": "wall+",
-    "east": "gate+",
-    "south": "room",
-    "west": "wall+"
-   },
-   "tris": {
-    "Collision-colonly": 84,
-    "Mesh": 515
-   }
-  },
-  {
-   "item": 36,
-   "name": "room_wgwo",
-   "file": "school_room_wgwo.glb",
-   "kind": "room",
-   "weight": 0.0225,
-   "sockets": {
-    "north": "wall+",
-    "east": "gate+",
-    "south": "wall+",
-    "west": "room"
-   },
-   "tris": {
-    "Collision-colonly": 84,
-    "Mesh": 441
-   }
-  },
-  {
-   "item": 37,
-   "name": "room_gooo",
-   "file": "school_room_gooo.glb",
-   "kind": "room",
-   "weight": 0.5249999999999999,
-   "sockets": {
-    "north": "gate+",
-    "east": "room",
-    "south": "room",
-    "west": "room"
-   },
-   "tris": {
-    "Collision-colonly": 60,
-    "Mesh": 308
-   }
-  },
-  {
-   "item": 38,
+   "item": 10,
    "name": "room_goow",
    "file": "school_room_goow.glb",
    "kind": "room",
-   "weight": 0.3375,
+   "rotation": "FourWay",
+   "weight": 1.35,
+   "weight_per_rotation": 0.3375,
    "sockets": {
     "north": "gate+",
     "east": "room",
     "south": "room",
     "west": "wall+"
+   },
+   "replaces": {
+    "room_oowg": 16,
+    "room_owgo": 10,
+    "room_wgoo": 22,
+    "room_goow": 0
    },
    "tris": {
     "Collision-colonly": 72,
@@ -714,33 +1028,24 @@
    }
   },
   {
-   "item": 39,
-   "name": "room_goww",
-   "file": "school_room_goww.glb",
-   "kind": "room",
-   "weight": 0.0225,
-   "sockets": {
-    "north": "gate+",
-    "east": "room",
-    "south": "wall+",
-    "west": "wall+"
-   },
-   "tris": {
-    "Collision-colonly": 84,
-    "Mesh": 414
-   }
-  },
-  {
-   "item": 40,
+   "item": 11,
    "name": "room_gwoo",
    "file": "school_room_gwoo.glb",
    "kind": "room",
-   "weight": 0.3375,
+   "rotation": "FourWay",
+   "weight": 1.35,
+   "weight_per_rotation": 0.3375,
    "sockets": {
     "north": "gate+",
     "east": "wall+",
     "south": "room",
     "west": "room"
+   },
+   "replaces": {
+    "room_oogw": 10,
+    "room_ogwo": 22,
+    "room_woog": 16,
+    "room_gwoo": 0
    },
    "tris": {
     "Collision-colonly": 72,
@@ -748,16 +1053,74 @@
    }
   },
   {
-   "item": 41,
+   "item": 12,
+   "name": "room_wwow",
+   "file": "school_room_wwow.glb",
+   "kind": "room",
+   "rotation": "FourWay",
+   "weight": 0.18,
+   "weight_per_rotation": 0.045,
+   "sockets": {
+    "north": "wall+",
+    "east": "wall+",
+    "south": "room",
+    "west": "wall+"
+   },
+   "replaces": {
+    "room_owww": 10,
+    "room_woww": 16,
+    "room_wwow": 0,
+    "room_wwwo": 22
+   },
+   "tris": {
+    "Collision-colonly": 48,
+    "Mesh": 298
+   }
+  },
+  {
+   "item": 13,
+   "name": "room_wgow",
+   "file": "school_room_wgow.glb",
+   "kind": "room",
+   "rotation": "FourWay",
+   "weight": 0.09,
+   "weight_per_rotation": 0.0225,
+   "sockets": {
+    "north": "wall+",
+    "east": "gate+",
+    "south": "room",
+    "west": "wall+"
+   },
+   "replaces": {
+    "room_owwg": 10,
+    "room_wwgo": 22,
+    "room_wgow": 0,
+    "room_goww": 16
+   },
+   "tris": {
+    "Collision-colonly": 84,
+    "Mesh": 515
+   }
+  },
+  {
+   "item": 14,
    "name": "room_gwow",
    "file": "school_room_gwow.glb",
    "kind": "room",
-   "weight": 0.0225,
+   "rotation": "FourWay",
+   "weight": 0.09,
+   "weight_per_rotation": 0.0225,
    "sockets": {
     "north": "gate+",
     "east": "wall+",
     "south": "room",
     "west": "wall+"
+   },
+   "replaces": {
+    "room_owgw": 10,
+    "room_wowg": 16,
+    "room_wgwo": 22,
+    "room_gwow": 0
    },
    "tris": {
     "Collision-colonly": 84,
@@ -765,152 +1128,49 @@
    }
   },
   {
-   "item": 42,
-   "name": "room_gwwo",
-   "file": "school_room_gwwo.glb",
+   "item": 15,
+   "name": "room_wwog",
+   "file": "school_room_wwog.glb",
    "kind": "room",
-   "weight": 0.0225,
+   "rotation": "FourWay",
+   "weight": 0.09,
+   "weight_per_rotation": 0.0225,
    "sockets": {
-    "north": "gate+",
+    "north": "wall+",
     "east": "wall+",
-    "south": "wall+",
-    "west": "room"
+    "south": "room",
+    "west": "gate+"
+   },
+   "replaces": {
+    "room_ogww": 10,
+    "room_wogw": 16,
+    "room_wwog": 0,
+    "room_gwwo": 22
    },
    "tris": {
     "Collision-colonly": 84,
-    "Mesh": 408
+    "Mesh": 523
    }
   },
   {
-   "item": 43,
-   "name": "landing_wwwg",
-   "file": "school_landing_wwwg.glb",
-   "kind": "landing",
-   "weight": 0.04,
-   "sockets": {
-    "north": "wall+",
-    "east": "wall+",
-    "south": "wall+",
-    "west": "gate+"
-   },
-   "tris": {
-    "Collision-colonly": 156,
-    "Mesh": 458
-   }
-  },
-  {
-   "item": 44,
-   "name": "landing_wwgw",
-   "file": "school_landing_wwgw.glb",
-   "kind": "landing",
-   "weight": 0.04,
-   "sockets": {
-    "north": "wall+",
-    "east": "wall+",
-    "south": "gate+",
-    "west": "wall+"
-   },
-   "tris": {
-    "Collision-colonly": 156,
-    "Mesh": 460
-   }
-  },
-  {
-   "item": 45,
-   "name": "landing_wwgg",
-   "file": "school_landing_wwgg.glb",
-   "kind": "landing",
-   "weight": 0.25,
-   "sockets": {
-    "north": "wall+",
-    "east": "wall+",
-    "south": "gate+",
-    "west": "gate+"
-   },
-   "tris": {
-    "Collision-colonly": 204,
-    "Mesh": 554
-   }
-  },
-  {
-   "item": 46,
-   "name": "landing_wgww",
-   "file": "school_landing_wgww.glb",
-   "kind": "landing",
-   "weight": 0.04,
-   "sockets": {
-    "north": "wall+",
-    "east": "gate+",
-    "south": "wall+",
-    "west": "wall+"
-   },
-   "tris": {
-    "Collision-colonly": 156,
-    "Mesh": 458
-   }
-  },
-  {
-   "item": 47,
-   "name": "landing_wgwg",
-   "file": "school_landing_wgwg.glb",
-   "kind": "landing",
-   "weight": 0.35,
-   "sockets": {
-    "north": "wall+",
-    "east": "gate+",
-    "south": "wall+",
-    "west": "gate+"
-   },
-   "tris": {
-    "Collision-colonly": 204,
-    "Mesh": 548
-   }
-  },
-  {
-   "item": 48,
-   "name": "landing_wggw",
-   "file": "school_landing_wggw.glb",
-   "kind": "landing",
-   "weight": 0.25,
-   "sockets": {
-    "north": "wall+",
-    "east": "gate+",
-    "south": "gate+",
-    "west": "wall+"
-   },
-   "tris": {
-    "Collision-colonly": 204,
-    "Mesh": 554
-   }
-  },
-  {
-   "item": 49,
-   "name": "landing_wggg",
-   "file": "school_landing_wggg.glb",
-   "kind": "landing",
-   "weight": 0.12,
-   "sockets": {
-    "north": "wall+",
-    "east": "gate+",
-    "south": "gate+",
-    "west": "gate+"
-   },
-   "tris": {
-    "Collision-colonly": 252,
-    "Mesh": 644
-   }
-  },
-  {
-   "item": 50,
+   "item": 16,
    "name": "landing_gwww",
    "file": "school_landing_gwww.glb",
    "kind": "landing",
-   "weight": 0.04,
+   "rotation": "FourWay",
+   "weight": 0.16,
+   "weight_per_rotation": 0.04,
    "sockets": {
     "north": "gate+",
     "east": "wall+",
     "south": "wall+",
     "west": "wall+"
+   },
+   "replaces": {
+    "landing_wwwg": 16,
+    "landing_wwgw": 10,
+    "landing_wgww": 22,
+    "landing_gwww": 0
    },
    "tris": {
     "Collision-colonly": 156,
@@ -918,16 +1178,24 @@
    }
   },
   {
-   "item": 51,
+   "item": 17,
    "name": "landing_gwwg",
    "file": "school_landing_gwwg.glb",
    "kind": "landing",
-   "weight": 0.25,
+   "rotation": "FourWay",
+   "weight": 1.0,
+   "weight_per_rotation": 0.25,
    "sockets": {
     "north": "gate+",
     "east": "wall+",
     "south": "wall+",
     "west": "gate+"
+   },
+   "replaces": {
+    "landing_wwgg": 16,
+    "landing_wggw": 10,
+    "landing_gwwg": 0,
+    "landing_ggww": 22
    },
    "tris": {
     "Collision-colonly": 204,
@@ -935,16 +1203,22 @@
    }
   },
   {
-   "item": 52,
+   "item": 18,
    "name": "landing_gwgw",
    "file": "school_landing_gwgw.glb",
    "kind": "landing",
-   "weight": 0.35,
+   "rotation": "FourWay",
+   "weight": 0.7,
+   "weight_per_rotation": 0.35,
    "sockets": {
     "north": "gate+",
     "east": "wall+",
     "south": "gate+",
     "west": "wall+"
+   },
+   "replaces": {
+    "landing_wgwg": 22,
+    "landing_gwgw": 0
    },
    "tris": {
     "Collision-colonly": 204,
@@ -952,67 +1226,24 @@
    }
   },
   {
-   "item": 53,
+   "item": 19,
    "name": "landing_gwgg",
    "file": "school_landing_gwgg.glb",
    "kind": "landing",
-   "weight": 0.12,
+   "rotation": "FourWay",
+   "weight": 0.48,
+   "weight_per_rotation": 0.12,
    "sockets": {
     "north": "gate+",
     "east": "wall+",
     "south": "gate+",
     "west": "gate+"
    },
-   "tris": {
-    "Collision-colonly": 252,
-    "Mesh": 644
-   }
-  },
-  {
-   "item": 54,
-   "name": "landing_ggww",
-   "file": "school_landing_ggww.glb",
-   "kind": "landing",
-   "weight": 0.25,
-   "sockets": {
-    "north": "gate+",
-    "east": "gate+",
-    "south": "wall+",
-    "west": "wall+"
-   },
-   "tris": {
-    "Collision-colonly": 204,
-    "Mesh": 550
-   }
-  },
-  {
-   "item": 55,
-   "name": "landing_ggwg",
-   "file": "school_landing_ggwg.glb",
-   "kind": "landing",
-   "weight": 0.12,
-   "sockets": {
-    "north": "gate+",
-    "east": "gate+",
-    "south": "wall+",
-    "west": "gate+"
-   },
-   "tris": {
-    "Collision-colonly": 252,
-    "Mesh": 646
-   }
-  },
-  {
-   "item": 56,
-   "name": "landing_gggw",
-   "file": "school_landing_gggw.glb",
-   "kind": "landing",
-   "weight": 0.12,
-   "sockets": {
-    "north": "gate+",
-    "east": "gate+",
-    "south": "gate+",
-    "west": "wall+"
+   "replaces": {
+    "landing_wggg": 16,
+    "landing_gwgg": 0,
+    "landing_ggwg": 22,
+    "landing_gggw": 10
    },
    "tris": {
     "Collision-colonly": 252,
@@ -1020,16 +1251,21 @@
    }
   },
   {
-   "item": 57,
+   "item": 20,
    "name": "landing_gggg",
    "file": "school_landing_gggg.glb",
    "kind": "landing",
+   "rotation": "FourWay",
    "weight": 0.08,
+   "weight_per_rotation": 0.08,
    "sockets": {
     "north": "gate+",
     "east": "gate+",
     "south": "gate+",
     "west": "gate+"
+   },
+   "replaces": {
+    "landing_gggg": 0
    },
    "tris": {
     "Collision-colonly": 300,
@@ -1037,16 +1273,22 @@
    }
   },
   {
-   "item": 58,
+   "item": 21,
    "name": "bridge_NS",
    "file": "school_bridge_NS.glb",
    "kind": "bridge",
-   "weight": 1.5,
+   "rotation": "FourWay",
+   "weight": 3.0,
+   "weight_per_rotation": 1.5,
    "sockets": {
     "north": "gate-",
     "east": "flank+",
     "south": "gate-",
     "west": "flank+"
+   },
+   "replaces": {
+    "bridge_NS": 0,
+    "bridge_EW": 22
    },
    "tris": {
     "Collision-colonly": 36,
@@ -1055,16 +1297,22 @@
    "axis": "NS"
   },
   {
-   "item": 59,
+   "item": 22,
    "name": "broken_NS",
    "file": "school_broken_NS.glb",
    "kind": "broken",
-   "weight": 0.35,
+   "rotation": "FourWay",
+   "weight": 0.7,
+   "weight_per_rotation": 0.35,
    "sockets": {
     "north": "gate-",
     "east": "flank+",
     "south": "gate-",
     "west": "flank+"
+   },
+   "replaces": {
+    "broken_NS": 0,
+    "broken_EW": 22
    },
    "tris": {
     "Collision-colonly": 96,
@@ -1073,16 +1321,22 @@
    "axis": "NS"
   },
   {
-   "item": 60,
+   "item": 23,
    "name": "stones_NS",
    "file": "school_stones_NS.glb",
    "kind": "stones",
-   "weight": 0.3,
+   "rotation": "FourWay",
+   "weight": 0.6,
+   "weight_per_rotation": 0.3,
    "sockets": {
     "north": "gate-",
     "east": "flank+",
     "south": "gate-",
     "west": "flank+"
+   },
+   "replaces": {
+    "stones_NS": 0,
+    "stones_EW": 22
    },
    "tris": {
     "Collision-colonly": 100,
@@ -1091,16 +1345,22 @@
    "axis": "NS"
   },
   {
-   "item": 61,
+   "item": 24,
    "name": "steps_NS",
    "file": "school_steps_NS.glb",
    "kind": "steps",
-   "weight": 0.3,
+   "rotation": "FourWay",
+   "weight": 0.6,
+   "weight_per_rotation": 0.3,
    "sockets": {
     "north": "gate-",
     "east": "flank+",
     "south": "gate-",
     "west": "flank+"
+   },
+   "replaces": {
+    "steps_NS": 0,
+    "steps_EW": 22
    },
    "tris": {
     "Collision-colonly": 72,
@@ -1109,16 +1369,22 @@
    "axis": "NS"
   },
   {
-   "item": 62,
+   "item": 25,
    "name": "mover_NS",
    "file": "school_mover_NS.glb",
    "kind": "mover",
-   "weight": 0.2,
+   "rotation": "FourWay",
+   "weight": 0.4,
+   "weight_per_rotation": 0.2,
    "sockets": {
     "north": "gate-",
     "east": "flank+",
     "south": "gate-",
     "west": "flank+"
+   },
+   "replaces": {
+    "mover_NS": 0,
+    "mover_EW": 22
    },
    "tris": {
     "Collision-colonly": 120,
@@ -1127,106 +1393,24 @@
    "axis": "NS"
   },
   {
-   "item": 63,
-   "name": "bridge_EW",
-   "file": "school_bridge_EW.glb",
-   "kind": "bridge",
-   "weight": 1.5,
-   "sockets": {
-    "north": "flank+",
-    "east": "gate-",
-    "south": "flank+",
-    "west": "gate-"
-   },
-   "tris": {
-    "Collision-colonly": 36,
-    "Mesh": 116
-   },
-   "axis": "EW"
-  },
-  {
-   "item": 64,
-   "name": "broken_EW",
-   "file": "school_broken_EW.glb",
-   "kind": "broken",
-   "weight": 0.35,
-   "sockets": {
-    "north": "flank+",
-    "east": "gate-",
-    "south": "flank+",
-    "west": "gate-"
-   },
-   "tris": {
-    "Collision-colonly": 96,
-    "Mesh": 344
-   },
-   "axis": "EW"
-  },
-  {
-   "item": 65,
-   "name": "stones_EW",
-   "file": "school_stones_EW.glb",
-   "kind": "stones",
-   "weight": 0.3,
-   "sockets": {
-    "north": "flank+",
-    "east": "gate-",
-    "south": "flank+",
-    "west": "gate-"
-   },
-   "tris": {
-    "Collision-colonly": 100,
-    "Mesh": 226
-   },
-   "axis": "EW"
-  },
-  {
-   "item": 66,
-   "name": "steps_EW",
-   "file": "school_steps_EW.glb",
-   "kind": "steps",
-   "weight": 0.3,
-   "sockets": {
-    "north": "flank+",
-    "east": "gate-",
-    "south": "flank+",
-    "west": "gate-"
-   },
-   "tris": {
-    "Collision-colonly": 72,
-    "Mesh": 188
-   },
-   "axis": "EW"
-  },
-  {
-   "item": 67,
-   "name": "mover_EW",
-   "file": "school_mover_EW.glb",
-   "kind": "mover",
-   "weight": 0.2,
-   "sockets": {
-    "north": "flank+",
-    "east": "gate-",
-    "south": "flank+",
-    "west": "gate-"
-   },
-   "tris": {
-    "Collision-colonly": 120,
-    "Mesh": 270
-   },
-   "axis": "EW"
-  },
-  {
-   "item": 68,
+   "item": 26,
    "name": "bridge_NE",
    "file": "school_bridge_NE.glb",
    "kind": "corner",
-   "weight": 0.35,
+   "rotation": "FourWay",
+   "weight": 1.4,
+   "weight_per_rotation": 0.35,
    "sockets": {
     "north": "gate-",
     "east": "gate-",
     "south": "flank+",
     "west": "flank+"
+   },
+   "replaces": {
+    "bridge_NE": 0,
+    "bridge_ES": 22,
+    "bridge_SW": 10,
+    "bridge_WN": 16
    },
    "tris": {
     "Collision-colonly": 72,
@@ -1235,102 +1419,65 @@
    "axis": "NE"
   },
   {
-   "item": 69,
-   "name": "bridge_ES",
-   "file": "school_bridge_ES.glb",
-   "kind": "corner",
-   "weight": 0.35,
-   "sockets": {
-    "north": "flank+",
-    "east": "gate-",
-    "south": "gate-",
-    "west": "flank+"
-   },
-   "tris": {
-    "Collision-colonly": 72,
-    "Mesh": 170
-   },
-   "axis": "ES"
-  },
-  {
-   "item": 70,
-   "name": "bridge_SW",
-   "file": "school_bridge_SW.glb",
-   "kind": "corner",
-   "weight": 0.35,
-   "sockets": {
-    "north": "flank+",
-    "east": "flank+",
-    "south": "gate-",
-    "west": "gate-"
-   },
-   "tris": {
-    "Collision-colonly": 72,
-    "Mesh": 170
-   },
-   "axis": "SW"
-  },
-  {
-   "item": 71,
-   "name": "bridge_WN",
-   "file": "school_bridge_WN.glb",
-   "kind": "corner",
-   "weight": 0.35,
-   "sockets": {
-    "north": "gate-",
-    "east": "flank+",
-    "south": "flank+",
-    "west": "gate-"
-   },
-   "tris": {
-    "Collision-colonly": 72,
-    "Mesh": 174
-   },
-   "axis": "WN"
-  },
-  {
-   "item": 72,
+   "item": 27,
    "name": "chasm_a",
    "file": "school_chasm_a.glb",
    "kind": "chasm",
+   "rotation": "FourWay",
    "weight": 0.4,
+   "weight_per_rotation": 0.4,
    "sockets": {
     "north": "void",
     "east": "void",
     "south": "void",
     "west": "void"
+   },
+   "replaces": {
+    "chasm_a": 0
    },
    "tris": {
     "Mesh": 2
    }
   },
   {
-   "item": 73,
+   "item": 28,
    "name": "chasm_b",
    "file": "school_chasm_b.glb",
    "kind": "chasm",
+   "rotation": "FourWay",
    "weight": 0.1,
+   "weight_per_rotation": 0.1,
    "sockets": {
     "north": "void",
     "east": "void",
     "south": "void",
     "west": "void"
    },
+   "replaces": {
+    "chasm_b": 0
+   },
    "tris": {
     "Mesh": 72
    }
   },
   {
-   "item": 74,
+   "item": 29,
    "name": "door_N",
    "file": "school_door_N.glb",
    "kind": "door",
+   "rotation": "FourWay",
    "weight": 0.0,
+   "weight_per_rotation": 0.0,
    "sockets": {
     "north": "void",
     "east": "wall+",
     "south": "room",
     "west": "wall+"
+   },
+   "replaces": {
+    "door_N": 0,
+    "door_E": 22,
+    "door_W": 16
    },
    "tris": {
     "Collision-colonly": 60,
@@ -1339,65 +1486,34 @@
    "door": "N"
   },
   {
-   "item": 75,
-   "name": "door_E",
-   "file": "school_door_E.glb",
-   "kind": "door",
-   "weight": 0.0,
-   "sockets": {
-    "north": "wall+",
-    "east": "void",
-    "south": "wall+",
-    "west": "room"
-   },
-   "tris": {
-    "Collision-colonly": 60,
-    "Mesh": 408
-   },
-   "door": "E"
-  },
-  {
-   "item": 76,
+   "item": 30,
    "name": "stairs_S",
    "file": "school_stairs_S.glb",
    "kind": "door",
+   "rotation": "FourWay",
    "weight": 0.0,
+   "weight_per_rotation": 0.0,
    "sockets": {
     "north": "room",
     "east": "wall+",
     "south": "void",
     "west": "wall+"
    },
+   "replaces": {
+    "stairs_S": 0
+   },
    "tris": {
     "Collision-colonly": 134,
     "Mesh": 502
    },
    "door": "S"
-  },
-  {
-   "item": 77,
-   "name": "door_W",
-   "file": "school_door_W.glb",
-   "kind": "door",
-   "weight": 0.0,
-   "sockets": {
-    "north": "wall+",
-    "east": "room",
-    "south": "wall+",
-    "west": "void"
-   },
-   "tris": {
-    "Collision-colonly": 60,
-    "Mesh": 425
-   },
-   "door": "W"
   }
  ],
  "chasm_variants_note": "Socket variants of the chasm: each is its own MeshLibrary item (the WFC generator needs one item per tile) with the mesh of school_chasm_a.glb; no file of their own.",
  "chasm_variants": [
   {
    "name": "chasm_vvvw",
-   "item": 78,
+   "item": 31,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1410,7 +1526,7 @@
   },
   {
    "name": "chasm_fvvv",
-   "item": 79,
+   "item": 32,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1423,7 +1539,7 @@
   },
   {
    "name": "chasm_vvww",
-   "item": 80,
+   "item": 33,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1436,7 +1552,7 @@
   },
   {
    "name": "chasm_fvvw",
-   "item": 81,
+   "item": 34,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1449,7 +1565,7 @@
   },
   {
    "name": "chasm_fwvv",
-   "item": 82,
+   "item": 35,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1462,7 +1578,7 @@
   },
   {
    "name": "chasm_ffvv",
-   "item": 83,
+   "item": 36,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1475,7 +1591,7 @@
   },
   {
    "name": "chasm_vwvw",
-   "item": 84,
+   "item": 37,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 1.0,
@@ -1488,7 +1604,7 @@
   },
   {
    "name": "chasm_fvwv",
-   "item": 85,
+   "item": 38,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1501,7 +1617,7 @@
   },
   {
    "name": "chasm_vwww",
-   "item": 86,
+   "item": 39,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1514,7 +1630,7 @@
   },
   {
    "name": "chasm_fvww",
-   "item": 87,
+   "item": 40,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1527,7 +1643,7 @@
   },
   {
    "name": "chasm_fwvw",
-   "item": 88,
+   "item": 41,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1540,7 +1656,7 @@
   },
   {
    "name": "chasm_ffvw",
-   "item": 89,
+   "item": 42,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1553,7 +1669,7 @@
   },
   {
    "name": "chasm_fvfv",
-   "item": 90,
+   "item": 43,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 1.0,
@@ -1566,7 +1682,7 @@
   },
   {
    "name": "chasm_fwwv",
-   "item": 91,
+   "item": 44,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1579,7 +1695,7 @@
   },
   {
    "name": "chasm_fvfw",
-   "item": 92,
+   "item": 45,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1592,7 +1708,7 @@
   },
   {
    "name": "chasm_ffwv",
-   "item": 93,
+   "item": 46,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1605,7 +1721,7 @@
   },
   {
    "name": "chasm_fffv",
-   "item": 94,
+   "item": 47,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1618,7 +1734,7 @@
   },
   {
    "name": "chasm_wwww",
-   "item": 95,
+   "item": 48,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 0.5,
@@ -1631,7 +1747,7 @@
   },
   {
    "name": "chasm_fwww",
-   "item": 96,
+   "item": 49,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1644,7 +1760,7 @@
   },
   {
    "name": "chasm_ffww",
-   "item": 97,
+   "item": 50,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1657,7 +1773,7 @@
   },
   {
    "name": "chasm_fwfw",
-   "item": 98,
+   "item": 51,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 1.0,
@@ -1670,7 +1786,7 @@
   },
   {
    "name": "chasm_fffw",
-   "item": 99,
+   "item": 52,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 2.0,
@@ -1683,7 +1799,7 @@
   },
   {
    "name": "chasm_ffff",
-   "item": 100,
+   "item": 53,
    "mesh_file": "school_chasm_a.glb",
    "rotation": "FourWay (quarter turns)",
    "weight": 0.5,
@@ -1696,79 +1812,55 @@
   }
  ],
  "challenges": {
-  "note": "Element challenge bridges for the I.3 trial chambers: bridge tiles (sockets as bridge_NS / _EW) whose moving or dangerous parts are marker scenes in the game. Items after the dungeon door. Each element corridor tile set uses only its own challenges.",
+  "note": "Element challenge bridges for the I.3 trial chambers: bridge tiles (sockets as bridge_NS / _EW) whose moving or dangerous parts are marker scenes in the game (marker = tile name). Items after the dungeon door. Each element corridor tile set uses only its own challenges.",
   "tiles": [
    {
     "name": "fire_jets_NS",
-    "item": 102,
+    "item": 55,
     "file": "school_fire_jets_NS.glb",
     "element": "fire",
     "challenge": "jets",
     "axis": "NS",
-    "weight": 0.35,
+    "rotation": "FourWay",
+    "weight": 0.7,
+    "weight_per_rotation": 0.35,
     "sockets": {
      "north": "gate-",
      "east": "flank+",
      "south": "gate-",
      "west": "flank+"
     },
+    "replaces": {
+     "fire_jets_NS": 0,
+     "fire_jets_EW": 22
+    },
+    "marker": "fire_jets_NS",
     "tris": {
      "Collision-colonly": 36,
      "Mesh": 214
     }
    },
    {
-    "name": "fire_jets_EW",
-    "item": 103,
-    "file": "school_fire_jets_EW.glb",
-    "element": "fire",
-    "challenge": "jets",
-    "axis": "EW",
-    "weight": 0.35,
-    "sockets": {
-     "north": "flank+",
-     "east": "gate-",
-     "south": "flank+",
-     "west": "gate-"
-    },
-    "tris": {
-     "Collision-colonly": 36,
-     "Mesh": 212
-    }
-   },
-   {
     "name": "fire_sinking_NS",
-    "item": 104,
+    "item": 56,
     "file": "school_fire_sinking_NS.glb",
     "element": "fire",
     "challenge": "sinking",
     "axis": "NS",
-    "weight": 0.35,
+    "rotation": "FourWay",
+    "weight": 0.7,
+    "weight_per_rotation": 0.35,
     "sockets": {
      "north": "gate-",
      "east": "flank+",
      "south": "gate-",
      "west": "flank+"
     },
-    "tris": {
-     "Collision-colonly": 120,
-     "Mesh": 358
-    }
-   },
-   {
-    "name": "fire_sinking_EW",
-    "item": 105,
-    "file": "school_fire_sinking_EW.glb",
-    "element": "fire",
-    "challenge": "sinking",
-    "axis": "EW",
-    "weight": 0.35,
-    "sockets": {
-     "north": "flank+",
-     "east": "gate-",
-     "south": "flank+",
-     "west": "gate-"
+    "replaces": {
+     "fire_sinking_NS": 0,
+     "fire_sinking_EW": 22
     },
+    "marker": "fire_sinking_NS",
     "tris": {
      "Collision-colonly": 120,
      "Mesh": 358
@@ -1776,113 +1868,77 @@
    },
    {
     "name": "fire_flamebar_NS",
-    "item": 106,
+    "item": 57,
     "file": "school_fire_flamebar_NS.glb",
     "element": "fire",
     "challenge": "flamebar",
     "axis": "NS",
-    "weight": 0.35,
+    "rotation": "FourWay",
+    "weight": 0.7,
+    "weight_per_rotation": 0.35,
     "sockets": {
      "north": "gate-",
      "east": "flank+",
      "south": "gate-",
      "west": "flank+"
     },
+    "replaces": {
+     "fire_flamebar_NS": 0,
+     "fire_flamebar_EW": 22
+    },
+    "marker": "fire_flamebar_NS",
     "tris": {
      "Collision-colonly": 224,
      "Mesh": 446
     }
    },
    {
-    "name": "fire_flamebar_EW",
-    "item": 107,
-    "file": "school_fire_flamebar_EW.glb",
-    "element": "fire",
-    "challenge": "flamebar",
-    "axis": "EW",
-    "weight": 0.35,
-    "sockets": {
-     "north": "flank+",
-     "east": "gate-",
-     "south": "flank+",
-     "west": "gate-"
-    },
-    "tris": {
-     "Collision-colonly": 224,
-     "Mesh": 448
-    }
-   },
-   {
     "name": "water_waterfall_NS",
-    "item": 108,
+    "item": 58,
     "file": "school_water_waterfall_NS.glb",
     "element": "water",
     "challenge": "waterfall",
     "axis": "NS",
-    "weight": 0.35,
+    "rotation": "FourWay",
+    "weight": 0.7,
+    "weight_per_rotation": 0.35,
     "sockets": {
      "north": "gate-",
      "east": "flank+",
      "south": "gate-",
      "west": "flank+"
     },
+    "replaces": {
+     "water_waterfall_NS": 0,
+     "water_waterfall_EW": 22
+    },
+    "marker": "water_waterfall_NS",
     "tris": {
      "Collision-colonly": 72,
      "Mesh": 206
     }
    },
    {
-    "name": "water_waterfall_EW",
-    "item": 109,
-    "file": "school_water_waterfall_EW.glb",
-    "element": "water",
-    "challenge": "waterfall",
-    "axis": "EW",
-    "weight": 0.35,
-    "sockets": {
-     "north": "flank+",
-     "east": "gate-",
-     "south": "flank+",
-     "west": "gate-"
-    },
-    "tris": {
-     "Collision-colonly": 72,
-     "Mesh": 200
-    }
-   },
-   {
     "name": "water_raft_NS",
-    "item": 110,
+    "item": 59,
     "file": "school_water_raft_NS.glb",
     "element": "water",
     "challenge": "raft",
     "axis": "NS",
-    "weight": 0.35,
+    "rotation": "FourWay",
+    "weight": 0.7,
+    "weight_per_rotation": 0.35,
     "sockets": {
      "north": "gate-",
      "east": "flank+",
      "south": "gate-",
      "west": "flank+"
     },
-    "tris": {
-     "Collision-colonly": 120,
-     "Mesh": 350
-    }
-   },
-   {
-    "name": "water_raft_EW",
-    "item": 111,
-    "file": "school_water_raft_EW.glb",
-    "element": "water",
-    "challenge": "raft",
-    "axis": "EW",
-    "weight": 0.35,
-    "sockets": {
-     "north": "flank+",
-     "east": "gate-",
-     "south": "flank+",
-     "west": "gate-"
+    "replaces": {
+     "water_raft_NS": 0,
+     "water_raft_EW": 22
     },
+    "marker": "water_raft_NS",
     "tris": {
      "Collision-colonly": 120,
      "Mesh": 350
@@ -1890,37 +1946,25 @@
    },
    {
     "name": "earth_crumble_NS",
-    "item": 112,
+    "item": 60,
     "file": "school_earth_crumble_NS.glb",
     "element": "earth",
     "challenge": "crumble",
     "axis": "NS",
-    "weight": 0.35,
+    "rotation": "FourWay",
+    "weight": 0.7,
+    "weight_per_rotation": 0.35,
     "sockets": {
      "north": "gate-",
      "east": "flank+",
      "south": "gate-",
      "west": "flank+"
     },
-    "tris": {
-     "Collision-colonly": 120,
-     "Mesh": 534
-    }
-   },
-   {
-    "name": "earth_crumble_EW",
-    "item": 113,
-    "file": "school_earth_crumble_EW.glb",
-    "element": "earth",
-    "challenge": "crumble",
-    "axis": "EW",
-    "weight": 0.35,
-    "sockets": {
-     "north": "flank+",
-     "east": "gate-",
-     "south": "flank+",
-     "west": "gate-"
+    "replaces": {
+     "earth_crumble_NS": 0,
+     "earth_crumble_EW": 22
     },
+    "marker": "earth_crumble_NS",
     "tris": {
      "Collision-colonly": 120,
      "Mesh": 534
@@ -1928,37 +1972,25 @@
    },
    {
     "name": "earth_rocks_NS",
-    "item": 114,
+    "item": 61,
     "file": "school_earth_rocks_NS.glb",
     "element": "earth",
     "challenge": "rocks",
     "axis": "NS",
-    "weight": 0.35,
+    "rotation": "FourWay",
+    "weight": 0.7,
+    "weight_per_rotation": 0.35,
     "sockets": {
      "north": "gate-",
      "east": "flank+",
      "south": "gate-",
      "west": "flank+"
     },
-    "tris": {
-     "Collision-colonly": 36,
-     "Mesh": 224
-    }
-   },
-   {
-    "name": "earth_rocks_EW",
-    "item": 115,
-    "file": "school_earth_rocks_EW.glb",
-    "element": "earth",
-    "challenge": "rocks",
-    "axis": "EW",
-    "weight": 0.35,
-    "sockets": {
-     "north": "flank+",
-     "east": "gate-",
-     "south": "flank+",
-     "west": "gate-"
+    "replaces": {
+     "earth_rocks_NS": 0,
+     "earth_rocks_EW": 22
     },
+    "marker": "earth_rocks_NS",
     "tris": {
      "Collision-colonly": 36,
      "Mesh": 224
@@ -2049,7 +2081,7 @@
      1.0
     ]
    ],
-   "note": "NS build, Blender coords: y north = Godot -Z. EW tiles are the NS build turned 90 degrees clockwise seen from above."
+   "note": "NS build, Blender coords: y north = Godot -Z. One tile per challenge, built N-S and turned in the GridMap; the marker scene turns with the tile (godoowave places markers rotated with their cell)."
   }
  },
  "dungeon": {
@@ -2059,7 +2091,7 @@
   "extra_tiles": [
    {
     "name": "dungeon_door",
-    "item": 101,
+    "item": 54,
     "file": "school_dungeon_door.glb",
     "tris": {
      "Collision-colonly": 36,
@@ -2071,7 +2103,7 @@
    {
     "name": "room_oooo_a",
     "item": 0,
-    "rotation": "None",
+    "rotation": "FourWay",
     "weight": 1.3,
     "door": false,
     "sockets": {
@@ -2084,7 +2116,7 @@
    {
     "name": "room_oooo_b",
     "item": 1,
-    "rotation": "None",
+    "rotation": "FourWay",
     "weight": 1.3,
     "door": false,
     "sockets": {
@@ -2097,7 +2129,7 @@
    {
     "name": "room_oooo_circle",
     "item": 2,
-    "rotation": "None",
+    "rotation": "FourWay",
     "weight": 0.5,
     "door": false,
     "sockets": {
@@ -2110,7 +2142,7 @@
    {
     "name": "room_oooo_dais",
     "item": 3,
-    "rotation": "None",
+    "rotation": "FourWay",
     "weight": 0.35,
     "door": false,
     "sockets": {
@@ -2123,7 +2155,7 @@
    {
     "name": "room_oooo_pit",
     "item": 4,
-    "rotation": "None",
+    "rotation": "FourWay",
     "weight": 0.3,
     "door": false,
     "sockets": {
@@ -2136,7 +2168,7 @@
    {
     "name": "room_oooo_pillar",
     "item": 5,
-    "rotation": "None",
+    "rotation": "FourWay",
     "weight": 0.45,
     "door": false,
     "sockets": {
@@ -2149,7 +2181,7 @@
    {
     "name": "room_oooo_tiers",
     "item": 6,
-    "rotation": "None",
+    "rotation": "FourWay",
     "weight": 0.3,
     "door": false,
     "sockets": {
@@ -2160,75 +2192,10 @@
     }
    },
    {
-    "name": "room_ooow",
-    "item": 7,
-    "rotation": "None",
-    "weight": 1.0499999999999998,
-    "door": false,
-    "sockets": {
-     "north": "room",
-     "east": "room",
-     "south": "room",
-     "west": "outside+"
-    }
-   },
-   {
-    "name": "room_oowo",
-    "item": 9,
-    "rotation": "None",
-    "weight": 1.0499999999999998,
-    "door": false,
-    "sockets": {
-     "north": "room",
-     "east": "room",
-     "south": "outside+",
-     "west": "room"
-    }
-   },
-   {
-    "name": "room_ooww",
-    "item": 10,
-    "rotation": "None",
-    "weight": 0.675,
-    "door": false,
-    "sockets": {
-     "north": "room",
-     "east": "room",
-     "south": "outside+",
-     "west": "outside+"
-    }
-   },
-   {
-    "name": "room_owoo",
-    "item": 14,
-    "rotation": "None",
-    "weight": 1.0499999999999998,
-    "door": false,
-    "sockets": {
-     "north": "room",
-     "east": "outside+",
-     "south": "room",
-     "west": "room"
-    }
-   },
-   {
-    "name": "room_owwo",
-    "item": 15,
-    "rotation": "None",
-    "weight": 0.675,
-    "door": false,
-    "sockets": {
-     "north": "room",
-     "east": "outside+",
-     "south": "outside+",
-     "west": "room"
-    }
-   },
-   {
     "name": "room_wooo",
-    "item": 23,
-    "rotation": "None",
-    "weight": 1.0499999999999998,
+    "item": 7,
+    "rotation": "FourWay",
+    "weight": 4.2,
     "door": false,
     "sockets": {
      "north": "outside+",
@@ -2239,9 +2206,9 @@
    },
    {
     "name": "room_woow",
-    "item": 24,
-    "rotation": "None",
-    "weight": 0.675,
+    "item": 9,
+    "rotation": "FourWay",
+    "weight": 2.7,
     "door": false,
     "sockets": {
      "north": "outside+",
@@ -2251,21 +2218,8 @@
     }
    },
    {
-    "name": "room_wwoo",
-    "item": 29,
-    "rotation": "None",
-    "weight": 0.675,
-    "door": false,
-    "sockets": {
-     "north": "outside+",
-     "east": "outside+",
-     "south": "room",
-     "west": "room"
-    }
-   },
-   {
     "name": "dungeon_door",
-    "item": 101,
+    "item": 54,
     "rotation": "FourWay",
     "weight": 0.0,
     "door": true,
@@ -2279,62 +2233,10 @@
   ],
   "corridor_tiles": [
    {
-    "name": "landing_wwgg",
-    "item": 45,
-    "rotation": "None",
-    "weight": 0.25,
-    "marker": null,
-    "sockets": {
-     "north": "x",
-     "east": "x",
-     "south": "path",
-     "west": "path"
-    }
-   },
-   {
-    "name": "landing_wgwg",
-    "item": 47,
-    "rotation": "None",
-    "weight": 0.35,
-    "marker": null,
-    "sockets": {
-     "north": "x",
-     "east": "path",
-     "south": "x",
-     "west": "path"
-    }
-   },
-   {
-    "name": "landing_wggw",
-    "item": 48,
-    "rotation": "None",
-    "weight": 0.25,
-    "marker": null,
-    "sockets": {
-     "north": "x",
-     "east": "path",
-     "south": "path",
-     "west": "x"
-    }
-   },
-   {
-    "name": "landing_wggg",
-    "item": 49,
-    "rotation": "None",
-    "weight": 0.12,
-    "marker": null,
-    "sockets": {
-     "north": "x",
-     "east": "path",
-     "south": "path",
-     "west": "path"
-    }
-   },
-   {
     "name": "landing_gwwg",
-    "item": 51,
-    "rotation": "None",
-    "weight": 0.25,
+    "item": 17,
+    "rotation": "FourWay",
+    "weight": 1.0,
     "marker": null,
     "sockets": {
      "north": "path",
@@ -2345,9 +2247,9 @@
    },
    {
     "name": "landing_gwgw",
-    "item": 52,
-    "rotation": "None",
-    "weight": 0.35,
+    "item": 18,
+    "rotation": "FourWay",
+    "weight": 0.7,
     "marker": null,
     "sockets": {
      "north": "path",
@@ -2358,9 +2260,9 @@
    },
    {
     "name": "landing_gwgg",
-    "item": 53,
-    "rotation": "None",
-    "weight": 0.12,
+    "item": 19,
+    "rotation": "FourWay",
+    "weight": 0.48,
     "marker": null,
     "sockets": {
      "north": "path",
@@ -2370,48 +2272,9 @@
     }
    },
    {
-    "name": "landing_ggww",
-    "item": 54,
-    "rotation": "None",
-    "weight": 0.25,
-    "marker": null,
-    "sockets": {
-     "north": "path",
-     "east": "path",
-     "south": "x",
-     "west": "x"
-    }
-   },
-   {
-    "name": "landing_ggwg",
-    "item": 55,
-    "rotation": "None",
-    "weight": 0.12,
-    "marker": null,
-    "sockets": {
-     "north": "path",
-     "east": "path",
-     "south": "x",
-     "west": "path"
-    }
-   },
-   {
-    "name": "landing_gggw",
-    "item": 56,
-    "rotation": "None",
-    "weight": 0.12,
-    "marker": null,
-    "sockets": {
-     "north": "path",
-     "east": "path",
-     "south": "path",
-     "west": "x"
-    }
-   },
-   {
     "name": "landing_gggg",
-    "item": 57,
-    "rotation": "None",
+    "item": 20,
+    "rotation": "FourWay",
     "weight": 0.08,
     "marker": null,
     "sockets": {
@@ -2423,9 +2286,9 @@
    },
    {
     "name": "bridge_NS",
-    "item": 58,
-    "rotation": "None",
-    "weight": 1.5,
+    "item": 21,
+    "rotation": "FourWay",
+    "weight": 3.0,
     "marker": null,
     "sockets": {
      "north": "path",
@@ -2436,9 +2299,9 @@
    },
    {
     "name": "broken_NS",
-    "item": 59,
-    "rotation": "None",
-    "weight": 0.35,
+    "item": 22,
+    "rotation": "FourWay",
+    "weight": 0.7,
     "marker": null,
     "sockets": {
      "north": "path",
@@ -2449,9 +2312,9 @@
    },
    {
     "name": "stones_NS",
-    "item": 60,
-    "rotation": "None",
-    "weight": 0.3,
+    "item": 23,
+    "rotation": "FourWay",
+    "weight": 0.6,
     "marker": null,
     "sockets": {
      "north": "path",
@@ -2462,9 +2325,9 @@
    },
    {
     "name": "steps_NS",
-    "item": 61,
-    "rotation": "None",
-    "weight": 0.3,
+    "item": 24,
+    "rotation": "FourWay",
+    "weight": 0.6,
     "marker": null,
     "sockets": {
      "north": "path",
@@ -2475,9 +2338,9 @@
    },
    {
     "name": "mover_NS",
-    "item": 62,
-    "rotation": "None",
-    "weight": 0.2,
+    "item": 25,
+    "rotation": "FourWay",
+    "weight": 0.4,
     "marker": "mover_NS",
     "sockets": {
      "north": "path",
@@ -2487,126 +2350,22 @@
     }
    },
    {
-    "name": "bridge_EW",
-    "item": 63,
-    "rotation": "None",
-    "weight": 1.5,
-    "marker": null,
-    "sockets": {
-     "north": "x",
-     "east": "path",
-     "south": "x",
-     "west": "path"
-    }
-   },
-   {
-    "name": "broken_EW",
-    "item": 64,
-    "rotation": "None",
-    "weight": 0.35,
-    "marker": null,
-    "sockets": {
-     "north": "x",
-     "east": "path",
-     "south": "x",
-     "west": "path"
-    }
-   },
-   {
-    "name": "stones_EW",
-    "item": 65,
-    "rotation": "None",
-    "weight": 0.3,
-    "marker": null,
-    "sockets": {
-     "north": "x",
-     "east": "path",
-     "south": "x",
-     "west": "path"
-    }
-   },
-   {
-    "name": "steps_EW",
-    "item": 66,
-    "rotation": "None",
-    "weight": 0.3,
-    "marker": null,
-    "sockets": {
-     "north": "x",
-     "east": "path",
-     "south": "x",
-     "west": "path"
-    }
-   },
-   {
-    "name": "mover_EW",
-    "item": 67,
-    "rotation": "None",
-    "weight": 0.2,
-    "marker": "mover_EW",
-    "sockets": {
-     "north": "x",
-     "east": "path",
-     "south": "x",
-     "west": "path"
-    }
-   },
-   {
     "name": "bridge_NE",
-    "item": 68,
-    "rotation": "None",
-    "weight": 0.35,
+    "item": 26,
+    "rotation": "FourWay",
+    "weight": 1.4,
     "marker": null,
     "sockets": {
      "north": "path",
      "east": "path",
      "south": "x",
      "west": "x"
-    }
-   },
-   {
-    "name": "bridge_ES",
-    "item": 69,
-    "rotation": "None",
-    "weight": 0.35,
-    "marker": null,
-    "sockets": {
-     "north": "x",
-     "east": "path",
-     "south": "path",
-     "west": "x"
-    }
-   },
-   {
-    "name": "bridge_SW",
-    "item": 70,
-    "rotation": "None",
-    "weight": 0.35,
-    "marker": null,
-    "sockets": {
-     "north": "x",
-     "east": "x",
-     "south": "path",
-     "west": "path"
-    }
-   },
-   {
-    "name": "bridge_WN",
-    "item": 71,
-    "rotation": "None",
-    "weight": 0.35,
-    "marker": null,
-    "sockets": {
-     "north": "path",
-     "east": "x",
-     "south": "x",
-     "west": "path"
     }
    },
    {
     "name": "chasm_a",
-    "item": 72,
-    "rotation": "None",
+    "item": 27,
+    "rotation": "FourWay",
     "weight": 0.4,
     "marker": null,
     "sockets": {
@@ -2618,8 +2377,8 @@
    },
    {
     "name": "chasm_b",
-    "item": 73,
-    "rotation": "None",
+    "item": 28,
+    "rotation": "FourWay",
     "weight": 0.1,
     "marker": null,
     "sockets": {

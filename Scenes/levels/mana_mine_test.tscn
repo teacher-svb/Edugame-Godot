@@ -1,0 +1,54 @@
+[gd_scene format=4 uid="uid://wnfhyjgtyrv2"]
+
+[ext_resource type="MeshLibrary" uid="uid://dg8qn7se381f0" path="res://assets/3D/mana_mine/mana_mine_tiles.meshlib" id="1_lib"]
+[ext_resource type="Resource" uid="uid://c7fbsi3vt6k3a" path="res://GameData/wfc/mana_mine_corridors.tres" id="2_corr"]
+[ext_resource type="Resource" uid="uid://cjjpoma5vfji6" path="res://GameData/wfc/mana_mine_rooms.tres" id="3_rooms"]
+[ext_resource type="Script" uid="uid://cgraummx7cyo2" path="res://addons/godoodungeon/Resources/DungeonSettings.cs" id="4_settings"]
+[ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="5_player"]
+
+[sub_resource type="Environment" id="Environment_mine"]
+background_mode = 1
+background_color = Color(0.02, 0.02, 0.04, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.45, 0.6, 0.85, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.9
+glow_bloom = 0.15
+
+[sub_resource type="Resource" id="Resource_mine_dungeon"]
+script = ExtResource("4_settings")
+RandomiseSeed = true
+Seed = 1
+RoomTileSet = ExtResource("3_rooms")
+CorridorTileSet = ExtResource("2_corr")
+Door = 12
+BoundsSize = Vector3i(20, 1, 16)
+RoomCount = 4
+MinRoomSize = Vector2i(3, 3)
+MaxRoomSize = Vector2i(6, 6)
+MaxDoorsPerRoom = 3
+metadata/_custom_type_script = "uid://cgraummx7cyo2"
+
+[node name="ManaMineTest" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mine")
+
+[node name="Lamp" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8660254, -0.35355338, 0.35355338, 0, 0.70710677, 0.70710677, -0.5, -0.6123724, 0.6123724, 0, 10, 0)
+light_color = Color(0.75, 0.85, 1, 1)
+light_energy = 0.6
+shadow_enabled = true
+directional_shadow_max_distance = 60.0
+
+[node name="Mine" type="GridMap" parent="."]
+mesh_library = ExtResource("1_lib")
+cell_size = Vector3(4, 1, 4)
+cell_center_y = false
+metadata/godoodads_dungeon_settings = SubResource("Resource_mine_dungeon")
+
+[node name="Player" parent="." instance=ExtResource("5_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.1, 32)
+PersistentId = "Player"

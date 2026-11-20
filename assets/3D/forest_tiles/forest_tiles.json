@@ -1,26 +1,47 @@
 {
  "tile_size_m": 4.0,
- "axes": "Godot: tile centre at the node origin, x east (+X), north = -Z. Place tile (col, row) at (col * 4 + 2, 0, row * 4 + 2) with row 0 in the north; never rotate or mirror a tile: every rotation is its own file.",
+ "axes": "Godot: tile centre at the node origin, x east (+X), north = -Z. Place tile (col, row) at (col * 4 + 2, 0, row * 4 + 2) with row 0 in the north. One MeshLibrary item per shape, built in its base orientation (the sockets and scatter mask below) and turned in the GridMap: every tile is Rotation FourWay. Rotate cells around Y only, never mirror.",
+ "gridmap_turns": {
+  "note": "Quarter turns around +Y as godoowave counts them (counter-clockwise seen from above): the base north side ends up facing the side named here. GridMap cell orientation index per turn.",
+  "north": {
+   "turns": 0,
+   "orientation": 0
+  },
+  "west": {
+   "turns": 1,
+   "orientation": 16
+  },
+  "south": {
+   "turns": 2,
+   "orientation": 10
+  },
+  "east": {
+   "turns": 3,
+   "orientation": 22
+  }
+ },
+ "replaces": "Per tile: the tiles of the old one-file-per-rotation set it replaces, with the GridMap orientation index that gives the same tile (e.g. path_curve_ES = path_curve_NE at orientation 22). Use it to remap GridMaps painted with the old set.",
  "floor_height": "Forest floor at y = 0 on every tile edge (gentle bumps inside a tile), paths 0.08 m lower, border bank 0.5 m higher.",
- "socket_rule": "Two tiles may touch when the touching edges have the same label: my east == neighbour's west, my north == neighbour's south.",
+ "socket_rule": "godoowave: equal symmetric labels fit (FF, FFP, BB, BBP); a one-sided label fits its partner (FB+ against FB-).",
  "socket_labels": {
   "FF": "forest floor along the whole edge",
   "FFP": "forest floor with a 2 m path in the middle of the edge",
-  "BB": "border (bank with bushes) along the whole edge",
+  "BB": "border (raised forest-edge bank) along the whole edge",
   "BBP": "border with a path through it (the way into or out of the level)",
-  "FB": "floor at the west/south end of the edge, border at the east/north end",
-  "BF": "border at the west/south end of the edge, floor at the east/north end"
+  "FB+": "half floor, half border: floor first, reading the edge clockwise around the tile",
+  "FB-": "half floor, half border: border first, reading the edge clockwise around the tile"
  },
- "socket_reading": "Labels are read west -> east on north and south edges, south -> north on east and west edges, so a mixed edge (FB / BF) matches the same label on the neighbour.",
+ "socket_reading": "Edges are read clockwise around the tile seen from above (north edge west -> east, east edge north -> south, south edge east -> west, west edge south -> north). That reading survives any turn of the tile, and two neighbours read their shared edge in opposite directions, so FB+ meets FB-.",
  "map_edge": "Use \"BB\" for cells outside the map to close the level with border; to make a way out, give that outside edge \"BBP\" (only border_exit and border_path tiles have it).",
- "scatter_mask": "16 x 16 cells of 0.25 m per tile, rows north -> south (Godot -Z -> +Z), columns west -> east: 0 = keep clear (path and 0.6 m beside it), 1 = forest floor, 2 = border bank (dense).",
+ "scatter_mask": "16 x 16 cells of 0.25 m per tile in its base orientation, rows north -> south (Godot -Z -> +Z), columns west -> east: 0 = keep clear (path and 0.6 m beside it), 1 = forest floor, 2 = border bank (dense). For a turned cell, turn the lookup point back with the inverse of the cell basis first.",
  "tiles": [
   {
+   "item": 0,
    "name": "floor_a",
    "file": "forest_floor_a.glb",
    "kind": "floor",
    "base": "floor_a",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "FF",
     "east": "FF",
@@ -28,6 +49,7 @@
     "west": "FF"
    },
    "weight": 6.0,
+   "weight_per_rotation": 6.0,
    "corners": {
     "nw": "floor",
     "ne": "floor",
@@ -36,71 +58,8 @@
    },
    "paths": [],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NEW",
-     "path_end_N",
-     "path_end_E",
-     "path_end_W",
-     "border_edge_N",
-     "border_inner_NE",
-     "border_inner_NW"
-    ],
-    "east": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_end_N",
-     "path_end_E",
-     "path_end_S",
-     "border_edge_E",
-     "border_inner_NE",
-     "border_inner_SE"
-    ],
-    "south": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_ESW",
-     "path_end_E",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_S",
-     "border_inner_SE",
-     "border_inner_SW"
-    ],
-    "west": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_NSW",
-     "path_end_N",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_W",
-     "border_inner_SW",
-     "border_inner_NW"
-    ]
+   "replaces": {
+    "floor_a": 0
    },
    "scatter_mask": [
     "1111111111111111",
@@ -126,11 +85,12 @@
    }
   },
   {
+   "item": 1,
    "name": "floor_b",
    "file": "forest_floor_b.glb",
    "kind": "floor",
    "base": "floor_b",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "FF",
     "east": "FF",
@@ -138,6 +98,7 @@
     "west": "FF"
    },
    "weight": 6.0,
+   "weight_per_rotation": 6.0,
    "corners": {
     "nw": "floor",
     "ne": "floor",
@@ -146,71 +107,8 @@
    },
    "paths": [],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NEW",
-     "path_end_N",
-     "path_end_E",
-     "path_end_W",
-     "border_edge_N",
-     "border_inner_NE",
-     "border_inner_NW"
-    ],
-    "east": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_end_N",
-     "path_end_E",
-     "path_end_S",
-     "border_edge_E",
-     "border_inner_NE",
-     "border_inner_SE"
-    ],
-    "south": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_ESW",
-     "path_end_E",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_S",
-     "border_inner_SE",
-     "border_inner_SW"
-    ],
-    "west": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_NSW",
-     "path_end_N",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_W",
-     "border_inner_SW",
-     "border_inner_NW"
-    ]
+   "replaces": {
+    "floor_b": 0
    },
    "scatter_mask": [
     "1111111111111111",
@@ -236,11 +134,12 @@
    }
   },
   {
+   "item": 2,
    "name": "floor_c",
    "file": "forest_floor_c.glb",
    "kind": "floor",
    "base": "floor_c",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "FF",
     "east": "FF",
@@ -248,6 +147,7 @@
     "west": "FF"
    },
    "weight": 6.0,
+   "weight_per_rotation": 6.0,
    "corners": {
     "nw": "floor",
     "ne": "floor",
@@ -256,71 +156,8 @@
    },
    "paths": [],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NEW",
-     "path_end_N",
-     "path_end_E",
-     "path_end_W",
-     "border_edge_N",
-     "border_inner_NE",
-     "border_inner_NW"
-    ],
-    "east": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_end_N",
-     "path_end_E",
-     "path_end_S",
-     "border_edge_E",
-     "border_inner_NE",
-     "border_inner_SE"
-    ],
-    "south": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_ESW",
-     "path_end_E",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_S",
-     "border_inner_SE",
-     "border_inner_SW"
-    ],
-    "west": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_NSW",
-     "path_end_N",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_W",
-     "border_inner_SW",
-     "border_inner_NW"
-    ]
+   "replaces": {
+    "floor_c": 0
    },
    "scatter_mask": [
     "1111111111111111",
@@ -346,11 +183,12 @@
    }
   },
   {
+   "item": 3,
    "name": "floor_d",
    "file": "forest_floor_d.glb",
    "kind": "floor",
    "base": "floor_d",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "FF",
     "east": "FF",
@@ -358,6 +196,7 @@
     "west": "FF"
    },
    "weight": 6.0,
+   "weight_per_rotation": 6.0,
    "corners": {
     "nw": "floor",
     "ne": "floor",
@@ -366,71 +205,8 @@
    },
    "paths": [],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NEW",
-     "path_end_N",
-     "path_end_E",
-     "path_end_W",
-     "border_edge_N",
-     "border_inner_NE",
-     "border_inner_NW"
-    ],
-    "east": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_end_N",
-     "path_end_E",
-     "path_end_S",
-     "border_edge_E",
-     "border_inner_NE",
-     "border_inner_SE"
-    ],
-    "south": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_ESW",
-     "path_end_E",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_S",
-     "border_inner_SE",
-     "border_inner_SW"
-    ],
-    "west": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_NSW",
-     "path_end_N",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_W",
-     "border_inner_SW",
-     "border_inner_NW"
-    ]
+   "replaces": {
+    "floor_d": 0
    },
    "scatter_mask": [
     "1111111111111111",
@@ -456,18 +232,20 @@
    }
   },
   {
+   "item": 4,
    "name": "path_straight_NS",
    "file": "forest_path_straight_NS.glb",
    "kind": "path",
    "base": "path_straight",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "FFP",
     "east": "FF",
     "south": "FFP",
     "west": "FF"
    },
-   "weight": 1.5,
+   "weight": 3.0,
+   "weight_per_rotation": 1.5,
    "corners": {
     "nw": "floor",
     "ne": "floor",
@@ -479,61 +257,9 @@
     "south"
    ],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "path_straight_NS",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_cross",
-     "path_end_S",
-     "border_exit_N"
-    ],
-    "east": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_end_N",
-     "path_end_E",
-     "path_end_S",
-     "border_edge_E",
-     "border_inner_NE",
-     "border_inner_SE"
-    ],
-    "south": [
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NES",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_N",
-     "border_exit_S"
-    ],
-    "west": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_NSW",
-     "path_end_N",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_W",
-     "border_inner_SW",
-     "border_inner_NW"
-    ]
+   "replaces": {
+    "path_straight_NS": 0,
+    "path_straight_EW": 22
    },
    "scatter_mask": [
     "1100000000000011",
@@ -559,121 +285,20 @@
    }
   },
   {
-   "name": "path_straight_EW",
-   "file": "forest_path_straight_EW.glb",
-   "kind": "path",
-   "base": "path_straight",
-   "rotation_of_base_deg": 90,
-   "sockets": {
-    "north": "FF",
-    "east": "FFP",
-    "south": "FF",
-    "west": "FFP"
-   },
-   "weight": 1.5,
-   "corners": {
-    "ne": "floor",
-    "se": "floor",
-    "sw": "floor",
-    "nw": "floor"
-   },
-   "paths": [
-    "east",
-    "west"
-   ],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NEW",
-     "path_end_N",
-     "path_end_E",
-     "path_end_W",
-     "border_edge_N",
-     "border_inner_NE",
-     "border_inner_NW"
-    ],
-    "east": [
-     "path_straight_EW",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_W",
-     "border_exit_E"
-    ],
-    "south": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_ESW",
-     "path_end_E",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_S",
-     "border_inner_SE",
-     "border_inner_SW"
-    ],
-    "west": [
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_E",
-     "border_exit_W"
-    ]
-   },
-   "scatter_mask": [
-    "1111111111111111",
-    "1111000000001111",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "1111000000001111",
-    "1111111111111111"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048
-   }
-  },
-  {
+   "item": 5,
    "name": "path_curve_NE",
    "file": "forest_path_curve_NE.glb",
    "kind": "path",
    "base": "path_curve",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "FFP",
     "east": "FFP",
     "south": "FF",
     "west": "FF"
    },
-   "weight": 0.8,
+   "weight": 3.2,
+   "weight_per_rotation": 0.8,
    "corners": {
     "nw": "floor",
     "ne": "floor",
@@ -685,61 +310,11 @@
     "east"
    ],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "path_straight_NS",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_cross",
-     "path_end_S",
-     "border_exit_N"
-    ],
-    "east": [
-     "path_straight_EW",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_W",
-     "border_exit_E"
-    ],
-    "south": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_ESW",
-     "path_end_E",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_S",
-     "border_inner_SE",
-     "border_inner_SW"
-    ],
-    "west": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_NSW",
-     "path_end_N",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_W",
-     "border_inner_SW",
-     "border_inner_NW"
-    ]
+   "replaces": {
+    "path_curve_NE": 0,
+    "path_curve_ES": 22,
+    "path_curve_SW": 10,
+    "path_curve_NW": 16
    },
    "scatter_mask": [
     "1100000000000011",
@@ -765,327 +340,20 @@
    }
   },
   {
-   "name": "path_curve_ES",
-   "file": "forest_path_curve_ES.glb",
-   "kind": "path",
-   "base": "path_curve",
-   "rotation_of_base_deg": 90,
-   "sockets": {
-    "north": "FF",
-    "east": "FFP",
-    "south": "FFP",
-    "west": "FF"
-   },
-   "weight": 0.8,
-   "corners": {
-    "ne": "floor",
-    "se": "floor",
-    "sw": "floor",
-    "nw": "floor"
-   },
-   "paths": [
-    "east",
-    "south"
-   ],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NEW",
-     "path_end_N",
-     "path_end_E",
-     "path_end_W",
-     "border_edge_N",
-     "border_inner_NE",
-     "border_inner_NW"
-    ],
-    "east": [
-     "path_straight_EW",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_W",
-     "border_exit_E"
-    ],
-    "south": [
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NES",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_N",
-     "border_exit_S"
-    ],
-    "west": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_NSW",
-     "path_end_N",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_W",
-     "border_inner_SW",
-     "border_inner_NW"
-    ]
-   },
-   "scatter_mask": [
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111100000",
-    "1111111110000000",
-    "1111111100000000",
-    "1111110000000000",
-    "1111100000000000",
-    "1111000000000000",
-    "1111000000000000",
-    "1110000000000000",
-    "1110000000000000",
-    "1100000000000000",
-    "1100000000000000",
-    "1100000000000000",
-    "1100000000000001",
-    "1100000000000011"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048
-   }
-  },
-  {
-   "name": "path_curve_SW",
-   "file": "forest_path_curve_SW.glb",
-   "kind": "path",
-   "base": "path_curve",
-   "rotation_of_base_deg": 180,
-   "sockets": {
-    "north": "FF",
-    "east": "FF",
-    "south": "FFP",
-    "west": "FFP"
-   },
-   "weight": 0.8,
-   "corners": {
-    "se": "floor",
-    "sw": "floor",
-    "nw": "floor",
-    "ne": "floor"
-   },
-   "paths": [
-    "south",
-    "west"
-   ],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NEW",
-     "path_end_N",
-     "path_end_E",
-     "path_end_W",
-     "border_edge_N",
-     "border_inner_NE",
-     "border_inner_NW"
-    ],
-    "east": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_end_N",
-     "path_end_E",
-     "path_end_S",
-     "border_edge_E",
-     "border_inner_NE",
-     "border_inner_SE"
-    ],
-    "south": [
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NES",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_N",
-     "border_exit_S"
-    ],
-    "west": [
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_E",
-     "border_exit_W"
-    ]
-   },
-   "scatter_mask": [
-    "1111111111111111",
-    "1111111111111111",
-    "0000011111111111",
-    "0000000111111111",
-    "0000000011111111",
-    "0000000000111111",
-    "0000000000011111",
-    "0000000000011111",
-    "0000000000001111",
-    "0000000000000111",
-    "0000000000000111",
-    "0000000000000011",
-    "0000000000000011",
-    "0000000000000011",
-    "1000000000000011",
-    "1100000000000011"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048
-   }
-  },
-  {
-   "name": "path_curve_NW",
-   "file": "forest_path_curve_NW.glb",
-   "kind": "path",
-   "base": "path_curve",
-   "rotation_of_base_deg": 270,
-   "sockets": {
-    "north": "FFP",
-    "east": "FF",
-    "south": "FF",
-    "west": "FFP"
-   },
-   "weight": 0.8,
-   "corners": {
-    "sw": "floor",
-    "nw": "floor",
-    "ne": "floor",
-    "se": "floor"
-   },
-   "paths": [
-    "north",
-    "west"
-   ],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "path_straight_NS",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_cross",
-     "path_end_S",
-     "border_exit_N"
-    ],
-    "east": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_end_N",
-     "path_end_E",
-     "path_end_S",
-     "border_edge_E",
-     "border_inner_NE",
-     "border_inner_SE"
-    ],
-    "south": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_ESW",
-     "path_end_E",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_S",
-     "border_inner_SE",
-     "border_inner_SW"
-    ],
-    "west": [
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_E",
-     "border_exit_W"
-    ]
-   },
-   "scatter_mask": [
-    "1100000000000011",
-    "1000000000000011",
-    "0000000000000011",
-    "0000000000000011",
-    "0000000000000011",
-    "0000000000000111",
-    "0000000000000111",
-    "0000000000001111",
-    "0000000000001111",
-    "0000000000011111",
-    "0000000000111111",
-    "0000000001111111",
-    "0000000111111111",
-    "0000011111111111",
-    "1111111111111111",
-    "1111111111111111"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048
-   }
-  },
-  {
+   "item": 6,
    "name": "path_t_NES",
    "file": "forest_path_t_NES.glb",
    "kind": "path",
    "base": "path_t",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "FFP",
     "east": "FFP",
     "south": "FFP",
     "west": "FF"
    },
-   "weight": 0.3,
+   "weight": 1.2,
+   "weight_per_rotation": 0.3,
    "corners": {
     "nw": "floor",
     "ne": "floor",
@@ -1098,56 +366,11 @@
     "south"
    ],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "path_straight_NS",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_cross",
-     "path_end_S",
-     "border_exit_N"
-    ],
-    "east": [
-     "path_straight_EW",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_W",
-     "border_exit_E"
-    ],
-    "south": [
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NES",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_N",
-     "border_exit_S"
-    ],
-    "west": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_NSW",
-     "path_end_N",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_W",
-     "border_inner_SW",
-     "border_inner_NW"
-    ]
+   "replaces": {
+    "path_t_NES": 0,
+    "path_t_ESW": 22,
+    "path_t_NSW": 10,
+    "path_t_NEW": 16
    },
    "scatter_mask": [
     "1100000000000001",
@@ -1173,308 +396,12 @@
    }
   },
   {
-   "name": "path_t_ESW",
-   "file": "forest_path_t_ESW.glb",
-   "kind": "path",
-   "base": "path_t",
-   "rotation_of_base_deg": 90,
-   "sockets": {
-    "north": "FF",
-    "east": "FFP",
-    "south": "FFP",
-    "west": "FFP"
-   },
-   "weight": 0.3,
-   "corners": {
-    "ne": "floor",
-    "se": "floor",
-    "sw": "floor",
-    "nw": "floor"
-   },
-   "paths": [
-    "east",
-    "south",
-    "west"
-   ],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NEW",
-     "path_end_N",
-     "path_end_E",
-     "path_end_W",
-     "border_edge_N",
-     "border_inner_NE",
-     "border_inner_NW"
-    ],
-    "east": [
-     "path_straight_EW",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_W",
-     "border_exit_E"
-    ],
-    "south": [
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NES",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_N",
-     "border_exit_S"
-    ],
-    "west": [
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_E",
-     "border_exit_W"
-    ]
-   },
-   "scatter_mask": [
-    "1111111111111111",
-    "1110000000001111",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "1000000000000001"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048
-   }
-  },
-  {
-   "name": "path_t_NSW",
-   "file": "forest_path_t_NSW.glb",
-   "kind": "path",
-   "base": "path_t",
-   "rotation_of_base_deg": 180,
-   "sockets": {
-    "north": "FFP",
-    "east": "FF",
-    "south": "FFP",
-    "west": "FFP"
-   },
-   "weight": 0.3,
-   "corners": {
-    "se": "floor",
-    "sw": "floor",
-    "nw": "floor",
-    "ne": "floor"
-   },
-   "paths": [
-    "north",
-    "south",
-    "west"
-   ],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "path_straight_NS",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_cross",
-     "path_end_S",
-     "border_exit_N"
-    ],
-    "east": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_end_N",
-     "path_end_E",
-     "path_end_S",
-     "border_edge_E",
-     "border_inner_NE",
-     "border_inner_SE"
-    ],
-    "south": [
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NES",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_N",
-     "border_exit_S"
-    ],
-    "west": [
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_E",
-     "border_exit_W"
-    ]
-   },
-   "scatter_mask": [
-    "1000000000000011",
-    "0000000000000011",
-    "0000000000000011",
-    "0000000000000011",
-    "0000000000000001",
-    "0000000000000001",
-    "0000000000000001",
-    "0000000000000001",
-    "0000000000000001",
-    "0000000000000001",
-    "0000000000000001",
-    "0000000000000001",
-    "0000000000000011",
-    "0000000000000011",
-    "0000000000000011",
-    "1000000000000011"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048
-   }
-  },
-  {
-   "name": "path_t_NEW",
-   "file": "forest_path_t_NEW.glb",
-   "kind": "path",
-   "base": "path_t",
-   "rotation_of_base_deg": 270,
-   "sockets": {
-    "north": "FFP",
-    "east": "FFP",
-    "south": "FF",
-    "west": "FFP"
-   },
-   "weight": 0.3,
-   "corners": {
-    "sw": "floor",
-    "nw": "floor",
-    "ne": "floor",
-    "se": "floor"
-   },
-   "paths": [
-    "north",
-    "east",
-    "west"
-   ],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "path_straight_NS",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_cross",
-     "path_end_S",
-     "border_exit_N"
-    ],
-    "east": [
-     "path_straight_EW",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_W",
-     "border_exit_E"
-    ],
-    "south": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_ESW",
-     "path_end_E",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_S",
-     "border_inner_SE",
-     "border_inner_SW"
-    ],
-    "west": [
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_E",
-     "border_exit_W"
-    ]
-   },
-   "scatter_mask": [
-    "1000000000000001",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "1110000000001111",
-    "1111111111111111"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048
-   }
-  },
-  {
+   "item": 7,
    "name": "path_cross",
    "file": "forest_path_cross.glb",
    "kind": "path",
    "base": "path_cross",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "FFP",
     "east": "FFP",
@@ -1482,6 +409,7 @@
     "west": "FFP"
    },
    "weight": 0.15,
+   "weight_per_rotation": 0.15,
    "corners": {
     "nw": "floor",
     "ne": "floor",
@@ -1495,51 +423,8 @@
     "west"
    ],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "path_straight_NS",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_cross",
-     "path_end_S",
-     "border_exit_N"
-    ],
-    "east": [
-     "path_straight_EW",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_W",
-     "border_exit_E"
-    ],
-    "south": [
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NES",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_N",
-     "border_exit_S"
-    ],
-    "west": [
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_E",
-     "border_exit_W"
-    ]
+   "replaces": {
+    "path_cross": 0
    },
    "scatter_mask": [
     "1000000000000001",
@@ -1565,18 +450,20 @@
    }
   },
   {
+   "item": 8,
    "name": "path_end_N",
    "file": "forest_path_end_N.glb",
    "kind": "path",
    "base": "path_end",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "FFP",
     "east": "FF",
     "south": "FF",
     "west": "FF"
    },
-   "weight": 0.2,
+   "weight": 0.8,
+   "weight_per_rotation": 0.2,
    "corners": {
     "nw": "floor",
     "ne": "floor",
@@ -1587,66 +474,11 @@
     "north"
    ],
    "dead_end": true,
-   "neighbours": {
-    "north": [
-     "path_straight_NS",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_cross",
-     "path_end_S",
-     "border_exit_N"
-    ],
-    "east": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_end_N",
-     "path_end_E",
-     "path_end_S",
-     "border_edge_E",
-     "border_inner_NE",
-     "border_inner_SE"
-    ],
-    "south": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_ESW",
-     "path_end_E",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_S",
-     "border_inner_SE",
-     "border_inner_SW"
-    ],
-    "west": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_NSW",
-     "path_end_N",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_W",
-     "border_inner_SW",
-     "border_inner_NW"
-    ]
+   "replaces": {
+    "path_end_N": 0,
+    "path_end_E": 22,
+    "path_end_S": 10,
+    "path_end_W": 16
    },
    "scatter_mask": [
     "1100000000000011",
@@ -1672,332 +504,12 @@
    }
   },
   {
-   "name": "path_end_E",
-   "file": "forest_path_end_E.glb",
-   "kind": "path",
-   "base": "path_end",
-   "rotation_of_base_deg": 90,
-   "sockets": {
-    "north": "FF",
-    "east": "FFP",
-    "south": "FF",
-    "west": "FF"
-   },
-   "weight": 0.2,
-   "corners": {
-    "ne": "floor",
-    "se": "floor",
-    "sw": "floor",
-    "nw": "floor"
-   },
-   "paths": [
-    "east"
-   ],
-   "dead_end": true,
-   "neighbours": {
-    "north": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NEW",
-     "path_end_N",
-     "path_end_E",
-     "path_end_W",
-     "border_edge_N",
-     "border_inner_NE",
-     "border_inner_NW"
-    ],
-    "east": [
-     "path_straight_EW",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_W",
-     "border_exit_E"
-    ],
-    "south": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_ESW",
-     "path_end_E",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_S",
-     "border_inner_SE",
-     "border_inner_SW"
-    ],
-    "west": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_NSW",
-     "path_end_N",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_W",
-     "border_inner_SW",
-     "border_inner_NW"
-    ]
-   },
-   "scatter_mask": [
-    "1111000000001111",
-    "1110000000000001",
-    "1100000000000000",
-    "1000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "1000000000000000",
-    "1100000000000000",
-    "1110000000000001",
-    "1111000000001111"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048
-   }
-  },
-  {
-   "name": "path_end_S",
-   "file": "forest_path_end_S.glb",
-   "kind": "path",
-   "base": "path_end",
-   "rotation_of_base_deg": 180,
-   "sockets": {
-    "north": "FF",
-    "east": "FF",
-    "south": "FFP",
-    "west": "FF"
-   },
-   "weight": 0.2,
-   "corners": {
-    "se": "floor",
-    "sw": "floor",
-    "nw": "floor",
-    "ne": "floor"
-   },
-   "paths": [
-    "south"
-   ],
-   "dead_end": true,
-   "neighbours": {
-    "north": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NEW",
-     "path_end_N",
-     "path_end_E",
-     "path_end_W",
-     "border_edge_N",
-     "border_inner_NE",
-     "border_inner_NW"
-    ],
-    "east": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_end_N",
-     "path_end_E",
-     "path_end_S",
-     "border_edge_E",
-     "border_inner_NE",
-     "border_inner_SE"
-    ],
-    "south": [
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NES",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_N",
-     "border_exit_S"
-    ],
-    "west": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_NSW",
-     "path_end_N",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_W",
-     "border_inner_SW",
-     "border_inner_NW"
-    ]
-   },
-   "scatter_mask": [
-    "1111000000001111",
-    "1110000000000111",
-    "1100000000000011",
-    "1000000000000001",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "1000000000000001",
-    "1000000000000001",
-    "1000000000000001",
-    "1100000000000011"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048
-   }
-  },
-  {
-   "name": "path_end_W",
-   "file": "forest_path_end_W.glb",
-   "kind": "path",
-   "base": "path_end",
-   "rotation_of_base_deg": 270,
-   "sockets": {
-    "north": "FF",
-    "east": "FF",
-    "south": "FF",
-    "west": "FFP"
-   },
-   "weight": 0.2,
-   "corners": {
-    "sw": "floor",
-    "nw": "floor",
-    "ne": "floor",
-    "se": "floor"
-   },
-   "paths": [
-    "west"
-   ],
-   "dead_end": true,
-   "neighbours": {
-    "north": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NEW",
-     "path_end_N",
-     "path_end_E",
-     "path_end_W",
-     "border_edge_N",
-     "border_inner_NE",
-     "border_inner_NW"
-    ],
-    "east": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_end_N",
-     "path_end_E",
-     "path_end_S",
-     "border_edge_E",
-     "border_inner_NE",
-     "border_inner_SE"
-    ],
-    "south": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_ESW",
-     "path_end_E",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_S",
-     "border_inner_SE",
-     "border_inner_SW"
-    ],
-    "west": [
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_E",
-     "border_exit_W"
-    ]
-   },
-   "scatter_mask": [
-    "1111000000001111",
-    "1000000000000111",
-    "0000000000000011",
-    "0000000000000001",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000001",
-    "0000000000000011",
-    "1000000000000111",
-    "1111000000001111"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048
-   }
-  },
-  {
+   "item": 9,
    "name": "border_full",
    "file": "forest_border_full.glb",
    "kind": "border",
    "base": "border_full",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "BB",
     "east": "BB",
@@ -2005,6 +517,7 @@
     "west": "BB"
    },
    "weight": 1.0,
+   "weight_per_rotation": 1.0,
    "corners": {
     "nw": "border",
     "ne": "border",
@@ -2013,47 +526,8 @@
    },
    "paths": [],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_S",
-     "border_outer_ES",
-     "border_outer_SW",
-     "border_path_EW"
-    ],
-    "east": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_W",
-     "border_outer_SW",
-     "border_outer_NW",
-     "border_path_NS"
-    ],
-    "south": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_N",
-     "border_outer_NE",
-     "border_outer_NW",
-     "border_path_EW"
-    ],
-    "west": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_E",
-     "border_outer_NE",
-     "border_outer_ES",
-     "border_path_NS"
-    ]
+   "replaces": {
+    "border_full": 0
    },
    "scatter_mask": [
     "2222222222222222",
@@ -2075,16 +549,16 @@
    ],
    "tris": {
     "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 1440
+    "Ground": 2049
    }
   },
   {
+   "item": 10,
    "name": "border_full_b",
    "file": "forest_border_full_b.glb",
    "kind": "border",
    "base": "border_full_b",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "BB",
     "east": "BB",
@@ -2092,6 +566,7 @@
     "west": "BB"
    },
    "weight": 1.0,
+   "weight_per_rotation": 1.0,
    "corners": {
     "nw": "border",
     "ne": "border",
@@ -2100,47 +575,8 @@
    },
    "paths": [],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_S",
-     "border_outer_ES",
-     "border_outer_SW",
-     "border_path_EW"
-    ],
-    "east": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_W",
-     "border_outer_SW",
-     "border_outer_NW",
-     "border_path_NS"
-    ],
-    "south": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_N",
-     "border_outer_NE",
-     "border_outer_NW",
-     "border_path_EW"
-    ],
-    "west": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_E",
-     "border_outer_NE",
-     "border_outer_ES",
-     "border_path_NS"
-    ]
+   "replaces": {
+    "border_full_b": 0
    },
    "scatter_mask": [
     "2222222222222222",
@@ -2162,16 +598,16 @@
    ],
    "tris": {
     "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 1360
+    "Ground": 2049
    }
   },
   {
+   "item": 11,
    "name": "border_full_c",
    "file": "forest_border_full_c.glb",
    "kind": "border",
    "base": "border_full_c",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "BB",
     "east": "BB",
@@ -2179,6 +615,7 @@
     "west": "BB"
    },
    "weight": 1.0,
+   "weight_per_rotation": 1.0,
    "corners": {
     "nw": "border",
     "ne": "border",
@@ -2187,47 +624,8 @@
    },
    "paths": [],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_S",
-     "border_outer_ES",
-     "border_outer_SW",
-     "border_path_EW"
-    ],
-    "east": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_W",
-     "border_outer_SW",
-     "border_outer_NW",
-     "border_path_NS"
-    ],
-    "south": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_N",
-     "border_outer_NE",
-     "border_outer_NW",
-     "border_path_EW"
-    ],
-    "west": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_E",
-     "border_outer_NE",
-     "border_outer_ES",
-     "border_path_NS"
-    ]
+   "replaces": {
+    "border_full_c": 0
    },
    "scatter_mask": [
     "2222222222222222",
@@ -2249,16 +647,16 @@
    ],
    "tris": {
     "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 1200
+    "Ground": 2049
    }
   },
   {
+   "item": 12,
    "name": "border_full_d",
    "file": "forest_border_full_d.glb",
    "kind": "border",
    "base": "border_full_d",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "BB",
     "east": "BB",
@@ -2266,6 +664,7 @@
     "west": "BB"
    },
    "weight": 1.0,
+   "weight_per_rotation": 1.0,
    "corners": {
     "nw": "border",
     "ne": "border",
@@ -2274,47 +673,8 @@
    },
    "paths": [],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_S",
-     "border_outer_ES",
-     "border_outer_SW",
-     "border_path_EW"
-    ],
-    "east": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_W",
-     "border_outer_SW",
-     "border_outer_NW",
-     "border_path_NS"
-    ],
-    "south": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_N",
-     "border_outer_NE",
-     "border_outer_NW",
-     "border_path_EW"
-    ],
-    "west": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_E",
-     "border_outer_NE",
-     "border_outer_ES",
-     "border_path_NS"
-    ]
+   "replaces": {
+    "border_full_d": 0
    },
    "scatter_mask": [
     "2222222222222222",
@@ -2336,23 +696,24 @@
    ],
    "tris": {
     "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 1360
+    "Ground": 2049
    }
   },
   {
+   "item": 13,
    "name": "border_edge_N",
    "file": "forest_border_edge_N.glb",
    "kind": "border",
    "base": "border_edge",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "BB",
-    "east": "FB",
+    "east": "FB-",
     "south": "FF",
-    "west": "FB"
+    "west": "FB+"
    },
-   "weight": 1.0,
+   "weight": 4.0,
+   "weight_per_rotation": 1.0,
    "corners": {
     "nw": "border",
     "ne": "border",
@@ -2361,45 +722,11 @@
    },
    "paths": [],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_S",
-     "border_outer_ES",
-     "border_outer_SW",
-     "border_path_EW"
-    ],
-    "east": [
-     "border_edge_N",
-     "border_outer_NE",
-     "border_inner_NW",
-     "border_exit_N"
-    ],
-    "south": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_ESW",
-     "path_end_E",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_S",
-     "border_inner_SE",
-     "border_inner_SW"
-    ],
-    "west": [
-     "border_edge_N",
-     "border_outer_NW",
-     "border_inner_NE",
-     "border_exit_N"
-    ]
+   "replaces": {
+    "border_edge_N": 0,
+    "border_edge_E": 22,
+    "border_edge_S": 10,
+    "border_edge_W": 16
    },
    "scatter_mask": [
     "2222222222222222",
@@ -2421,278 +748,24 @@
    ],
    "tris": {
     "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 880
+    "Ground": 2048
    }
   },
   {
-   "name": "border_edge_E",
-   "file": "forest_border_edge_E.glb",
-   "kind": "border",
-   "base": "border_edge",
-   "rotation_of_base_deg": 90,
-   "sockets": {
-    "north": "FB",
-    "east": "BB",
-    "south": "FB",
-    "west": "FF"
-   },
-   "weight": 1.0,
-   "corners": {
-    "ne": "border",
-    "se": "border",
-    "sw": "floor",
-    "nw": "floor"
-   },
-   "paths": [],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_edge_E",
-     "border_outer_NE",
-     "border_inner_SE",
-     "border_exit_E"
-    ],
-    "east": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_W",
-     "border_outer_SW",
-     "border_outer_NW",
-     "border_path_NS"
-    ],
-    "south": [
-     "border_edge_E",
-     "border_outer_ES",
-     "border_inner_NE",
-     "border_exit_E"
-    ],
-    "west": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_NSW",
-     "path_end_N",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_W",
-     "border_inner_SW",
-     "border_inner_NW"
-    ]
-   },
-   "scatter_mask": [
-    "1111111122222222",
-    "1111111122222222",
-    "1111111122222222",
-    "1111111122222222",
-    "1111111112222222",
-    "1111111112222222",
-    "1111111112222222",
-    "1111111112222222",
-    "1111111122222222",
-    "1111111222222222",
-    "1111111222222222",
-    "1111111222222222",
-    "1111111122222222",
-    "1111111122222222",
-    "1111111122222222",
-    "1111111122222222"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 960
-   }
-  },
-  {
-   "name": "border_edge_S",
-   "file": "forest_border_edge_S.glb",
-   "kind": "border",
-   "base": "border_edge",
-   "rotation_of_base_deg": 180,
-   "sockets": {
-    "north": "FF",
-    "east": "BF",
-    "south": "BB",
-    "west": "BF"
-   },
-   "weight": 1.0,
-   "corners": {
-    "se": "border",
-    "sw": "border",
-    "nw": "floor",
-    "ne": "floor"
-   },
-   "paths": [],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NEW",
-     "path_end_N",
-     "path_end_E",
-     "path_end_W",
-     "border_edge_N",
-     "border_inner_NE",
-     "border_inner_NW"
-    ],
-    "east": [
-     "border_edge_S",
-     "border_outer_ES",
-     "border_inner_SW",
-     "border_exit_S"
-    ],
-    "south": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_N",
-     "border_outer_NE",
-     "border_outer_NW",
-     "border_path_EW"
-    ],
-    "west": [
-     "border_edge_S",
-     "border_outer_SW",
-     "border_inner_SE",
-     "border_exit_S"
-    ]
-   },
-   "scatter_mask": [
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "2222111111122222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 880
-   }
-  },
-  {
-   "name": "border_edge_W",
-   "file": "forest_border_edge_W.glb",
-   "kind": "border",
-   "base": "border_edge",
-   "rotation_of_base_deg": 270,
-   "sockets": {
-    "north": "BF",
-    "east": "FF",
-    "south": "BF",
-    "west": "BB"
-   },
-   "weight": 1.0,
-   "corners": {
-    "sw": "border",
-    "nw": "border",
-    "ne": "floor",
-    "se": "floor"
-   },
-   "paths": [],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_edge_W",
-     "border_outer_NW",
-     "border_inner_SW",
-     "border_exit_W"
-    ],
-    "east": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_end_N",
-     "path_end_E",
-     "path_end_S",
-     "border_edge_E",
-     "border_inner_NE",
-     "border_inner_SE"
-    ],
-    "south": [
-     "border_edge_W",
-     "border_outer_SW",
-     "border_inner_NW",
-     "border_exit_W"
-    ],
-    "west": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_E",
-     "border_outer_NE",
-     "border_outer_ES",
-     "border_path_NS"
-    ]
-   },
-   "scatter_mask": [
-    "2222222211111111",
-    "2222222211111111",
-    "2222222211111111",
-    "2222222111111111",
-    "2222222211111111",
-    "2222222211111111",
-    "2222222211111111",
-    "2222222211111111",
-    "2222222211111111",
-    "2222222211111111",
-    "2222222211111111",
-    "2222222211111111",
-    "2222222211111111",
-    "2222222211111111",
-    "2222222211111111",
-    "2222222211111111"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 880
-   }
-  },
-  {
+   "item": 14,
    "name": "border_outer_NE",
    "file": "forest_border_outer_NE.glb",
    "kind": "border",
    "base": "border_outer",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "BB",
     "east": "BB",
-    "south": "FB",
-    "west": "FB"
+    "south": "FB-",
+    "west": "FB+"
    },
-   "weight": 0.5,
+   "weight": 2.0,
+   "weight_per_rotation": 0.5,
    "corners": {
     "nw": "border",
     "ne": "border",
@@ -2701,39 +774,11 @@
    },
    "paths": [],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_S",
-     "border_outer_ES",
-     "border_outer_SW",
-     "border_path_EW"
-    ],
-    "east": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_W",
-     "border_outer_SW",
-     "border_outer_NW",
-     "border_path_NS"
-    ],
-    "south": [
-     "border_edge_E",
-     "border_outer_ES",
-     "border_inner_NE",
-     "border_exit_E"
-    ],
-    "west": [
-     "border_edge_N",
-     "border_outer_NW",
-     "border_inner_NE",
-     "border_exit_N"
-    ]
+   "replaces": {
+    "border_outer_NE": 0,
+    "border_outer_ES": 22,
+    "border_outer_SW": 10,
+    "border_outer_NW": 16
    },
    "scatter_mask": [
     "2222222222222222",
@@ -2755,260 +800,24 @@
    ],
    "tris": {
     "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 1200
+    "Ground": 2048
    }
   },
   {
-   "name": "border_outer_ES",
-   "file": "forest_border_outer_ES.glb",
-   "kind": "border",
-   "base": "border_outer",
-   "rotation_of_base_deg": 90,
-   "sockets": {
-    "north": "FB",
-    "east": "BB",
-    "south": "BB",
-    "west": "BF"
-   },
-   "weight": 0.5,
-   "corners": {
-    "ne": "border",
-    "se": "border",
-    "sw": "border",
-    "nw": "floor"
-   },
-   "paths": [],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_edge_E",
-     "border_outer_NE",
-     "border_inner_SE",
-     "border_exit_E"
-    ],
-    "east": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_W",
-     "border_outer_SW",
-     "border_outer_NW",
-     "border_path_NS"
-    ],
-    "south": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_N",
-     "border_outer_NE",
-     "border_outer_NW",
-     "border_path_EW"
-    ],
-    "west": [
-     "border_edge_S",
-     "border_outer_SW",
-     "border_inner_SE",
-     "border_exit_S"
-    ]
-   },
-   "scatter_mask": [
-    "1111111122222222",
-    "1111111122222222",
-    "1111111122222222",
-    "1111111222222222",
-    "1111111222222222",
-    "1111111222222222",
-    "1111122222222222",
-    "1122222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 1600
-   }
-  },
-  {
-   "name": "border_outer_SW",
-   "file": "forest_border_outer_SW.glb",
-   "kind": "border",
-   "base": "border_outer",
-   "rotation_of_base_deg": 180,
-   "sockets": {
-    "north": "BF",
-    "east": "BF",
-    "south": "BB",
-    "west": "BB"
-   },
-   "weight": 0.5,
-   "corners": {
-    "se": "border",
-    "sw": "border",
-    "nw": "border",
-    "ne": "floor"
-   },
-   "paths": [],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_edge_W",
-     "border_outer_NW",
-     "border_inner_SW",
-     "border_exit_W"
-    ],
-    "east": [
-     "border_edge_S",
-     "border_outer_ES",
-     "border_inner_SW",
-     "border_exit_S"
-    ],
-    "south": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_N",
-     "border_outer_NE",
-     "border_outer_NW",
-     "border_path_EW"
-    ],
-    "west": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_E",
-     "border_outer_NE",
-     "border_outer_ES",
-     "border_path_NS"
-    ]
-   },
-   "scatter_mask": [
-    "2222222211111111",
-    "2222222211111111",
-    "2222222221111111",
-    "2222222221111111",
-    "2222222221111111",
-    "2222222221111111",
-    "2222222222111111",
-    "2222222222222221",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 1200
-   }
-  },
-  {
-   "name": "border_outer_NW",
-   "file": "forest_border_outer_NW.glb",
-   "kind": "border",
-   "base": "border_outer",
-   "rotation_of_base_deg": 270,
-   "sockets": {
-    "north": "BB",
-    "east": "FB",
-    "south": "BF",
-    "west": "BB"
-   },
-   "weight": 0.5,
-   "corners": {
-    "sw": "border",
-    "nw": "border",
-    "ne": "border",
-    "se": "floor"
-   },
-   "paths": [],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_S",
-     "border_outer_ES",
-     "border_outer_SW",
-     "border_path_EW"
-    ],
-    "east": [
-     "border_edge_N",
-     "border_outer_NE",
-     "border_inner_NW",
-     "border_exit_N"
-    ],
-    "south": [
-     "border_edge_W",
-     "border_outer_SW",
-     "border_inner_NW",
-     "border_exit_W"
-    ],
-    "west": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_E",
-     "border_outer_NE",
-     "border_outer_ES",
-     "border_path_NS"
-    ]
-   },
-   "scatter_mask": [
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222222222",
-    "2222222222211111",
-    "2222222222211111",
-    "2222222222211111",
-    "2222222222111111",
-    "2222222221111111",
-    "2222222221111111",
-    "2222222211111111",
-    "2222222211111111"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 1280
-   }
-  },
-  {
+   "item": 15,
    "name": "border_inner_NE",
    "file": "forest_border_inner_NE.glb",
    "kind": "border",
    "base": "border_inner",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
-    "north": "FB",
-    "east": "FB",
+    "north": "FB+",
+    "east": "FB-",
     "south": "FF",
     "west": "FF"
    },
-   "weight": 0.5,
+   "weight": 2.0,
+   "weight_per_rotation": 0.5,
    "corners": {
     "nw": "floor",
     "ne": "border",
@@ -3017,51 +826,11 @@
    },
    "paths": [],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_edge_E",
-     "border_outer_NE",
-     "border_inner_SE",
-     "border_exit_E"
-    ],
-    "east": [
-     "border_edge_N",
-     "border_outer_NE",
-     "border_inner_NW",
-     "border_exit_N"
-    ],
-    "south": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_ESW",
-     "path_end_E",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_S",
-     "border_inner_SE",
-     "border_inner_SW"
-    ],
-    "west": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_NSW",
-     "path_end_N",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_W",
-     "border_inner_SW",
-     "border_inner_NW"
-    ]
+   "replaces": {
+    "border_inner_NE": 0,
+    "border_inner_SE": 22,
+    "border_inner_SW": 10,
+    "border_inner_NW": 16
    },
    "scatter_mask": [
     "1111111122222222",
@@ -3083,296 +852,24 @@
    ],
    "tris": {
     "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 400
+    "Ground": 2048
    }
   },
   {
-   "name": "border_inner_SE",
-   "file": "forest_border_inner_SE.glb",
-   "kind": "border",
-   "base": "border_inner",
-   "rotation_of_base_deg": 90,
-   "sockets": {
-    "north": "FF",
-    "east": "BF",
-    "south": "FB",
-    "west": "FF"
-   },
-   "weight": 0.5,
-   "corners": {
-    "ne": "floor",
-    "se": "border",
-    "sw": "floor",
-    "nw": "floor"
-   },
-   "paths": [],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NEW",
-     "path_end_N",
-     "path_end_E",
-     "path_end_W",
-     "border_edge_N",
-     "border_inner_NE",
-     "border_inner_NW"
-    ],
-    "east": [
-     "border_edge_S",
-     "border_outer_ES",
-     "border_inner_SW",
-     "border_exit_S"
-    ],
-    "south": [
-     "border_edge_E",
-     "border_outer_ES",
-     "border_inner_NE",
-     "border_exit_E"
-    ],
-    "west": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_NSW",
-     "path_end_N",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_W",
-     "border_inner_SW",
-     "border_inner_NW"
-    ]
-   },
-   "scatter_mask": [
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111122",
-    "1111111111111222",
-    "1111111112222222",
-    "1111111122222222",
-    "1111111222222222",
-    "1111111122222222",
-    "1111111122222222",
-    "1111111122222222"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 400
-   }
-  },
-  {
-   "name": "border_inner_SW",
-   "file": "forest_border_inner_SW.glb",
-   "kind": "border",
-   "base": "border_inner",
-   "rotation_of_base_deg": 180,
-   "sockets": {
-    "north": "FF",
-    "east": "FF",
-    "south": "BF",
-    "west": "BF"
-   },
-   "weight": 0.5,
-   "corners": {
-    "se": "floor",
-    "sw": "border",
-    "nw": "floor",
-    "ne": "floor"
-   },
-   "paths": [],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NEW",
-     "path_end_N",
-     "path_end_E",
-     "path_end_W",
-     "border_edge_N",
-     "border_inner_NE",
-     "border_inner_NW"
-    ],
-    "east": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_end_N",
-     "path_end_E",
-     "path_end_S",
-     "border_edge_E",
-     "border_inner_NE",
-     "border_inner_SE"
-    ],
-    "south": [
-     "border_edge_W",
-     "border_outer_SW",
-     "border_inner_NW",
-     "border_exit_W"
-    ],
-    "west": [
-     "border_edge_S",
-     "border_outer_SW",
-     "border_inner_SE",
-     "border_exit_S"
-    ]
-   },
-   "scatter_mask": [
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "2222211111111111",
-    "2222211111111111",
-    "2222221111111111",
-    "2222221111111111",
-    "2222221111111111",
-    "2222222111111111",
-    "2222222211111111",
-    "2222222211111111"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 560
-   }
-  },
-  {
-   "name": "border_inner_NW",
-   "file": "forest_border_inner_NW.glb",
-   "kind": "border",
-   "base": "border_inner",
-   "rotation_of_base_deg": 270,
-   "sockets": {
-    "north": "BF",
-    "east": "FF",
-    "south": "FF",
-    "west": "FB"
-   },
-   "weight": 0.5,
-   "corners": {
-    "sw": "floor",
-    "nw": "border",
-    "ne": "floor",
-    "se": "floor"
-   },
-   "paths": [],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_edge_W",
-     "border_outer_NW",
-     "border_inner_SW",
-     "border_exit_W"
-    ],
-    "east": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_end_N",
-     "path_end_E",
-     "path_end_S",
-     "border_edge_E",
-     "border_inner_NE",
-     "border_inner_SE"
-    ],
-    "south": [
-     "floor_a",
-     "floor_b",
-     "floor_c",
-     "floor_d",
-     "path_straight_EW",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_ESW",
-     "path_end_E",
-     "path_end_S",
-     "path_end_W",
-     "border_edge_S",
-     "border_inner_SE",
-     "border_inner_SW"
-    ],
-    "west": [
-     "border_edge_N",
-     "border_outer_NW",
-     "border_inner_NE",
-     "border_exit_N"
-    ]
-   },
-   "scatter_mask": [
-    "2222222211111111",
-    "2222222211111111",
-    "2222222211111111",
-    "2222222111111111",
-    "2222222111111111",
-    "2222221111111111",
-    "2222211111111111",
-    "2222111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111",
-    "1111111111111111"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 480
-   }
-  },
-  {
+   "item": 16,
    "name": "border_exit_N",
    "file": "forest_border_exit_N.glb",
    "kind": "exit",
    "base": "border_exit",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "BBP",
-    "east": "FB",
+    "east": "FB-",
     "south": "FFP",
-    "west": "FB"
+    "west": "FB+"
    },
-   "weight": 0.02,
+   "weight": 0.08,
+   "weight_per_rotation": 0.02,
    "corners": {
     "nw": "border",
     "ne": "border",
@@ -3384,34 +881,11 @@
     "south"
    ],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_exit_S",
-     "border_path_NS"
-    ],
-    "east": [
-     "border_edge_N",
-     "border_outer_NE",
-     "border_inner_NW",
-     "border_exit_N"
-    ],
-    "south": [
-     "path_straight_NS",
-     "path_curve_NE",
-     "path_curve_NW",
-     "path_t_NES",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_N",
-     "border_exit_S"
-    ],
-    "west": [
-     "border_edge_N",
-     "border_outer_NW",
-     "border_inner_NE",
-     "border_exit_N"
-    ]
+   "replaces": {
+    "border_exit_N": 0,
+    "border_exit_E": 22,
+    "border_exit_S": 10,
+    "border_exit_W": 16
    },
    "scatter_mask": [
     "2200000000000022",
@@ -3433,254 +907,24 @@
    ],
    "tris": {
     "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 320
+    "Ground": 2048
    }
   },
   {
-   "name": "border_exit_E",
-   "file": "forest_border_exit_E.glb",
-   "kind": "exit",
-   "base": "border_exit",
-   "rotation_of_base_deg": 90,
-   "sockets": {
-    "north": "FB",
-    "east": "BBP",
-    "south": "FB",
-    "west": "FFP"
-   },
-   "weight": 0.02,
-   "corners": {
-    "ne": "border",
-    "se": "border",
-    "sw": "floor",
-    "nw": "floor"
-   },
-   "paths": [
-    "east",
-    "west"
-   ],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_edge_E",
-     "border_outer_NE",
-     "border_inner_SE",
-     "border_exit_E"
-    ],
-    "east": [
-     "border_exit_W",
-     "border_path_EW"
-    ],
-    "south": [
-     "border_edge_E",
-     "border_outer_ES",
-     "border_inner_NE",
-     "border_exit_E"
-    ],
-    "west": [
-     "path_straight_EW",
-     "path_curve_NE",
-     "path_curve_ES",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_E",
-     "border_exit_W"
-    ]
-   },
-   "scatter_mask": [
-    "1111111122222222",
-    "1111000000002222",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "1111000000002222",
-    "1111111122222222"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 240
-   }
-  },
-  {
-   "name": "border_exit_S",
-   "file": "forest_border_exit_S.glb",
-   "kind": "exit",
-   "base": "border_exit",
-   "rotation_of_base_deg": 180,
-   "sockets": {
-    "north": "FFP",
-    "east": "BF",
-    "south": "BBP",
-    "west": "BF"
-   },
-   "weight": 0.02,
-   "corners": {
-    "se": "border",
-    "sw": "border",
-    "nw": "floor",
-    "ne": "floor"
-   },
-   "paths": [
-    "north",
-    "south"
-   ],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "path_straight_NS",
-     "path_curve_ES",
-     "path_curve_SW",
-     "path_t_NES",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_cross",
-     "path_end_S",
-     "border_exit_N"
-    ],
-    "east": [
-     "border_edge_S",
-     "border_outer_ES",
-     "border_inner_SW",
-     "border_exit_S"
-    ],
-    "south": [
-     "border_exit_N",
-     "border_path_NS"
-    ],
-    "west": [
-     "border_edge_S",
-     "border_outer_SW",
-     "border_inner_SE",
-     "border_exit_S"
-    ]
-   },
-   "scatter_mask": [
-    "1100000000000011",
-    "1100000000000011",
-    "1100000000000011",
-    "1100000000000011",
-    "1000000000000001",
-    "1000000000000001",
-    "1000000000000001",
-    "1000000000000001",
-    "2000000000000002",
-    "2000000000000002",
-    "2000000000000002",
-    "2000000000000002",
-    "2200000000000022",
-    "2200000000000022",
-    "2200000000000022",
-    "2200000000000022"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 240
-   }
-  },
-  {
-   "name": "border_exit_W",
-   "file": "forest_border_exit_W.glb",
-   "kind": "exit",
-   "base": "border_exit",
-   "rotation_of_base_deg": 270,
-   "sockets": {
-    "north": "BF",
-    "east": "FFP",
-    "south": "BF",
-    "west": "BBP"
-   },
-   "weight": 0.02,
-   "corners": {
-    "sw": "border",
-    "nw": "border",
-    "ne": "floor",
-    "se": "floor"
-   },
-   "paths": [
-    "east",
-    "west"
-   ],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_edge_W",
-     "border_outer_NW",
-     "border_inner_SW",
-     "border_exit_W"
-    ],
-    "east": [
-     "path_straight_EW",
-     "path_curve_SW",
-     "path_curve_NW",
-     "path_t_ESW",
-     "path_t_NSW",
-     "path_t_NEW",
-     "path_cross",
-     "path_end_W",
-     "border_exit_E"
-    ],
-    "south": [
-     "border_edge_W",
-     "border_outer_SW",
-     "border_inner_NW",
-     "border_exit_W"
-    ],
-    "west": [
-     "border_exit_E",
-     "border_path_EW"
-    ]
-   },
-   "scatter_mask": [
-    "2222222211111111",
-    "2222000000001111",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "2222000000001111",
-    "2222222211111111"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 320
-   }
-  },
-  {
+   "item": 17,
    "name": "border_path_NS",
    "file": "forest_border_path_NS.glb",
    "kind": "exit",
    "base": "border_path",
-   "rotation_of_base_deg": 0,
+   "rotation": "FourWay",
    "sockets": {
     "north": "BBP",
     "east": "BB",
     "south": "BBP",
     "west": "BB"
    },
-   "weight": 0.02,
+   "weight": 0.04,
+   "weight_per_rotation": 0.02,
    "corners": {
     "nw": "border",
     "ne": "border",
@@ -3692,35 +936,9 @@
     "south"
    ],
    "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_exit_S",
-     "border_path_NS"
-    ],
-    "east": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_W",
-     "border_outer_SW",
-     "border_outer_NW",
-     "border_path_NS"
-    ],
-    "south": [
-     "border_exit_N",
-     "border_path_NS"
-    ],
-    "west": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_E",
-     "border_outer_NE",
-     "border_outer_ES",
-     "border_path_NS"
-    ]
+   "replaces": {
+    "border_path_NS": 0,
+    "border_path_EW": 22
    },
    "scatter_mask": [
     "2200000000000022",
@@ -3742,86 +960,7 @@
    ],
    "tris": {
     "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 640
-   }
-  },
-  {
-   "name": "border_path_EW",
-   "file": "forest_border_path_EW.glb",
-   "kind": "exit",
-   "base": "border_path",
-   "rotation_of_base_deg": 90,
-   "sockets": {
-    "north": "BB",
-    "east": "BBP",
-    "south": "BB",
-    "west": "BBP"
-   },
-   "weight": 0.02,
-   "corners": {
-    "ne": "border",
-    "se": "border",
-    "sw": "border",
-    "nw": "border"
-   },
-   "paths": [
-    "east",
-    "west"
-   ],
-   "dead_end": false,
-   "neighbours": {
-    "north": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_S",
-     "border_outer_ES",
-     "border_outer_SW",
-     "border_path_EW"
-    ],
-    "east": [
-     "border_exit_W",
-     "border_path_EW"
-    ],
-    "south": [
-     "border_full",
-     "border_full_b",
-     "border_full_c",
-     "border_full_d",
-     "border_edge_N",
-     "border_outer_NE",
-     "border_outer_NW",
-     "border_path_EW"
-    ],
-    "west": [
-     "border_exit_E",
-     "border_path_EW"
-    ]
-   },
-   "scatter_mask": [
-    "2222222222222222",
-    "2222000000002222",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "0000000000000000",
-    "2222000000002222",
-    "2222222222222222"
-   ],
-   "tris": {
-    "Collision-colonly": 512,
-    "Ground": 2048,
-    "Undergrowth": 560
+    "Ground": 2049
    }
   }
  ]

@@ -7,6 +7,7 @@
 [sub_resource type="Resource" id="Tile_floor_a"]
 script = ExtResource("2_tile")
 Item = 0
+Rotation = 2
 Weight = 6.0
 SocketPosX = "FF"
 SocketNegX = "FF"
@@ -19,6 +20,7 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 [sub_resource type="Resource" id="Tile_floor_b"]
 script = ExtResource("2_tile")
 Item = 1
+Rotation = 2
 Weight = 6.0
 SocketPosX = "FF"
 SocketNegX = "FF"
@@ -31,6 +33,7 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 [sub_resource type="Resource" id="Tile_floor_c"]
 script = ExtResource("2_tile")
 Item = 2
+Rotation = 2
 Weight = 6.0
 SocketPosX = "FF"
 SocketNegX = "FF"
@@ -43,6 +46,7 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 [sub_resource type="Resource" id="Tile_floor_d"]
 script = ExtResource("2_tile")
 Item = 3
+Rotation = 2
 Weight = 6.0
 SocketPosX = "FF"
 SocketNegX = "FF"
@@ -55,69 +59,23 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 [sub_resource type="Resource" id="Tile_path_straight_NS"]
 script = ExtResource("2_tile")
 Item = 4
-Weight = 1.5
+Rotation = 2
+Weight = 3.0
 SocketPosX = "FF"
 SocketNegX = "FF"
 SocketPosY = "ground"
 SocketNegY = "ground"
 SocketPosZ = "FFP"
 SocketNegZ = "FFP"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_path_straight_EW"]
-script = ExtResource("2_tile")
-Item = 5
-Weight = 1.5
-SocketPosX = "FFP"
-SocketNegX = "FFP"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "FF"
-SocketNegZ = "FF"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_path_curve_NE"]
 script = ExtResource("2_tile")
-Item = 6
-Weight = 0.8
+Item = 5
+Rotation = 2
+Weight = 3.2
 SocketPosX = "FFP"
 SocketNegX = "FF"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "FF"
-SocketNegZ = "FFP"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_path_curve_ES"]
-script = ExtResource("2_tile")
-Item = 7
-Weight = 0.8
-SocketPosX = "FFP"
-SocketNegX = "FF"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "FFP"
-SocketNegZ = "FF"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_path_curve_SW"]
-script = ExtResource("2_tile")
-Item = 8
-Weight = 0.8
-SocketPosX = "FF"
-SocketNegX = "FFP"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "FFP"
-SocketNegZ = "FF"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_path_curve_NW"]
-script = ExtResource("2_tile")
-Item = 9
-Weight = 0.8
-SocketPosX = "FF"
-SocketNegX = "FFP"
 SocketPosY = "ground"
 SocketNegY = "ground"
 SocketPosZ = "FF"
@@ -126,8 +84,9 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_path_t_NES"]
 script = ExtResource("2_tile")
-Item = 10
-Weight = 0.3
+Item = 6
+Rotation = 2
+Weight = 1.2
 SocketPosX = "FFP"
 SocketNegX = "FF"
 SocketPosY = "ground"
@@ -136,45 +95,10 @@ SocketPosZ = "FFP"
 SocketNegZ = "FFP"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
-[sub_resource type="Resource" id="Tile_path_t_ESW"]
-script = ExtResource("2_tile")
-Item = 11
-Weight = 0.3
-SocketPosX = "FFP"
-SocketNegX = "FFP"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "FFP"
-SocketNegZ = "FF"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_path_t_NSW"]
-script = ExtResource("2_tile")
-Item = 12
-Weight = 0.3
-SocketPosX = "FF"
-SocketNegX = "FFP"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "FFP"
-SocketNegZ = "FFP"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_path_t_NEW"]
-script = ExtResource("2_tile")
-Item = 13
-Weight = 0.3
-SocketPosX = "FFP"
-SocketNegX = "FFP"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "FF"
-SocketNegZ = "FFP"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
 [sub_resource type="Resource" id="Tile_path_cross"]
 script = ExtResource("2_tile")
-Item = 14
+Item = 7
+Rotation = 2
 Weight = 0.15
 SocketPosX = "FFP"
 SocketNegX = "FFP"
@@ -186,8 +110,9 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_path_end_N"]
 script = ExtResource("2_tile")
-Item = 15
-Weight = 0.2
+Item = 8
+Rotation = 2
+Weight = 0.8
 SocketPosX = "FF"
 SocketNegX = "FF"
 SocketPosY = "ground"
@@ -196,46 +121,11 @@ SocketPosZ = "FF"
 SocketNegZ = "FFP"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
-[sub_resource type="Resource" id="Tile_path_end_E"]
-script = ExtResource("2_tile")
-Item = 16
-Weight = 0.2
-SocketPosX = "FFP"
-SocketNegX = "FF"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "FF"
-SocketNegZ = "FF"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_path_end_S"]
-script = ExtResource("2_tile")
-Item = 17
-Weight = 0.2
-SocketPosX = "FF"
-SocketNegX = "FF"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "FFP"
-SocketNegZ = "FF"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_path_end_W"]
-script = ExtResource("2_tile")
-Item = 18
-Weight = 0.2
-SocketPosX = "FF"
-SocketNegX = "FFP"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "FF"
-SocketNegZ = "FF"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
 [sub_resource type="Resource" id="Tile_border_full"]
 script = ExtResource("2_tile")
-Item = 19
-Weight = 2.5
+Item = 9
+Rotation = 2
+Weight = 1.0
 SocketPosX = "BB"
 SocketNegX = "BB"
 SocketPosY = "ground"
@@ -246,8 +136,9 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_border_full_b"]
 script = ExtResource("2_tile")
-Item = 20
-Weight = 2.5
+Item = 10
+Rotation = 2
+Weight = 1.0
 SocketPosX = "BB"
 SocketNegX = "BB"
 SocketPosY = "ground"
@@ -258,8 +149,9 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_border_full_c"]
 script = ExtResource("2_tile")
-Item = 21
-Weight = 2.5
+Item = 11
+Rotation = 2
+Weight = 1.0
 SocketPosX = "BB"
 SocketNegX = "BB"
 SocketPosY = "ground"
@@ -270,8 +162,9 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_border_full_d"]
 script = ExtResource("2_tile")
-Item = 22
-Weight = 2.5
+Item = 12
+Rotation = 2
+Weight = 1.0
 SocketPosX = "BB"
 SocketNegX = "BB"
 SocketPosY = "ground"
@@ -282,192 +175,61 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_border_edge_N"]
 script = ExtResource("2_tile")
-Item = 23
-Weight = 2.0
-SocketPosX = "FB"
-SocketNegX = "FB"
+Item = 13
+Rotation = 2
+Weight = 4.0
+SocketPosX = "FB-"
+SocketNegX = "FB+"
 SocketPosY = "ground"
 SocketNegY = "ground"
 SocketPosZ = "FF"
 SocketNegZ = "BB"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
-[sub_resource type="Resource" id="Tile_border_edge_E"]
-script = ExtResource("2_tile")
-Item = 24
-Weight = 2.0
-SocketPosX = "BB"
-SocketNegX = "FF"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "FB"
-SocketNegZ = "FB"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_border_edge_S"]
-script = ExtResource("2_tile")
-Item = 25
-Weight = 2.0
-SocketPosX = "BF"
-SocketNegX = "BF"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "BB"
-SocketNegZ = "FF"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_border_edge_W"]
-script = ExtResource("2_tile")
-Item = 26
-Weight = 2.0
-SocketPosX = "FF"
-SocketNegX = "BB"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "BF"
-SocketNegZ = "BF"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
 [sub_resource type="Resource" id="Tile_border_outer_NE"]
 script = ExtResource("2_tile")
-Item = 27
+Item = 14
+Rotation = 2
+Weight = 2.0
 SocketPosX = "BB"
-SocketNegX = "FB"
+SocketNegX = "FB+"
 SocketPosY = "ground"
 SocketNegY = "ground"
-SocketPosZ = "FB"
-SocketNegZ = "BB"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_border_outer_ES"]
-script = ExtResource("2_tile")
-Item = 28
-SocketPosX = "BB"
-SocketNegX = "BF"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "BB"
-SocketNegZ = "FB"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_border_outer_SW"]
-script = ExtResource("2_tile")
-Item = 29
-SocketPosX = "BF"
-SocketNegX = "BB"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "BB"
-SocketNegZ = "BF"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_border_outer_NW"]
-script = ExtResource("2_tile")
-Item = 30
-SocketPosX = "FB"
-SocketNegX = "BB"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "BF"
+SocketPosZ = "FB-"
 SocketNegZ = "BB"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_border_inner_NE"]
 script = ExtResource("2_tile")
-Item = 31
-SocketPosX = "FB"
+Item = 15
+Rotation = 2
+Weight = 2.0
+SocketPosX = "FB-"
 SocketNegX = "FF"
 SocketPosY = "ground"
 SocketNegY = "ground"
 SocketPosZ = "FF"
-SocketNegZ = "FB"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_border_inner_SE"]
-script = ExtResource("2_tile")
-Item = 32
-SocketPosX = "BF"
-SocketNegX = "FF"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "FB"
-SocketNegZ = "FF"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_border_inner_SW"]
-script = ExtResource("2_tile")
-Item = 33
-SocketPosX = "FF"
-SocketNegX = "BF"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "BF"
-SocketNegZ = "FF"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_border_inner_NW"]
-script = ExtResource("2_tile")
-Item = 34
-SocketPosX = "FF"
-SocketNegX = "FB"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "FF"
-SocketNegZ = "BF"
+SocketNegZ = "FB+"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_border_exit_N"]
 script = ExtResource("2_tile")
-Item = 35
-Weight = 0.02
-SocketPosX = "FB"
-SocketNegX = "FB"
+Item = 16
+Rotation = 2
+Weight = 0.08
+SocketPosX = "FB-"
+SocketNegX = "FB+"
 SocketPosY = "ground"
 SocketNegY = "ground"
 SocketPosZ = "FFP"
 SocketNegZ = "BBP"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
-[sub_resource type="Resource" id="Tile_border_exit_E"]
-script = ExtResource("2_tile")
-Item = 36
-Weight = 0.02
-SocketPosX = "BBP"
-SocketNegX = "FFP"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "FB"
-SocketNegZ = "FB"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_border_exit_S"]
-script = ExtResource("2_tile")
-Item = 37
-Weight = 0.02
-SocketPosX = "BF"
-SocketNegX = "BF"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "BBP"
-SocketNegZ = "FFP"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
-[sub_resource type="Resource" id="Tile_border_exit_W"]
-script = ExtResource("2_tile")
-Item = 38
-Weight = 0.02
-SocketPosX = "FFP"
-SocketNegX = "BBP"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "BF"
-SocketNegZ = "BF"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
 [sub_resource type="Resource" id="Tile_border_path_NS"]
 script = ExtResource("2_tile")
-Item = 39
-Weight = 0.02
+Item = 17
+Rotation = 2
+Weight = 0.04
 SocketPosX = "BB"
 SocketNegX = "BB"
 SocketPosY = "ground"
@@ -476,21 +238,9 @@ SocketPosZ = "BBP"
 SocketNegZ = "BBP"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
-[sub_resource type="Resource" id="Tile_border_path_EW"]
-script = ExtResource("2_tile")
-Item = 40
-Weight = 0.02
-SocketPosX = "BBP"
-SocketNegX = "BBP"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "BB"
-SocketNegZ = "BB"
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
 [sub_resource type="Resource" id="Tile_mine_NW"]
 script = ExtResource("2_tile")
-Item = 41
+Item = 18
 Weight = 0.0
 SocketPosX = "MINE_NW_N"
 SocketNegX = "BB"
@@ -502,7 +252,7 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_mine_N"]
 script = ExtResource("2_tile")
-Item = 42
+Item = 19
 Weight = 0.0
 SocketPosX = "MINE_N_NE"
 SocketNegX = "MINE_NW_N"
@@ -514,7 +264,7 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_mine_NE"]
 script = ExtResource("2_tile")
-Item = 43
+Item = 20
 Weight = 0.0
 SocketPosX = "BB"
 SocketNegX = "MINE_N_NE"
@@ -526,7 +276,7 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_mine_W"]
 script = ExtResource("2_tile")
-Item = 44
+Item = 21
 Weight = 0.0
 SocketPosX = "MINE_W_C"
 SocketNegX = "BB"
@@ -538,7 +288,7 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_mine_C"]
 script = ExtResource("2_tile")
-Item = 45
+Item = 22
 Weight = 0.0
 SocketPosX = "MINE_C_E"
 SocketNegX = "MINE_W_C"
@@ -550,7 +300,7 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_mine_E"]
 script = ExtResource("2_tile")
-Item = 46
+Item = 23
 Weight = 0.0
 SocketPosX = "BB"
 SocketNegX = "MINE_C_E"
@@ -562,7 +312,7 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_mine_SW"]
 script = ExtResource("2_tile")
-Item = 47
+Item = 24
 Weight = 0.0
 SocketPosX = "MINE_SW_S"
 SocketNegX = "BB"
@@ -574,7 +324,7 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_mine_S"]
 script = ExtResource("2_tile")
-Item = 48
+Item = 25
 Weight = 0.0
 SocketPosX = "MINE_S_SE"
 SocketNegX = "MINE_SW_S"
@@ -586,7 +336,7 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_mine_SE"]
 script = ExtResource("2_tile")
-Item = 49
+Item = 26
 Weight = 0.0
 SocketPosX = "BB"
 SocketNegX = "MINE_S_SE"
@@ -599,5 +349,5 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 [resource]
 script = ExtResource("1_set")
 Library = ExtResource("3_lib")
-Tiles = Array[ExtResource("2_tile")]([SubResource("Tile_floor_a"), SubResource("Tile_floor_b"), SubResource("Tile_floor_c"), SubResource("Tile_floor_d"), SubResource("Tile_path_straight_NS"), SubResource("Tile_path_straight_EW"), SubResource("Tile_path_curve_NE"), SubResource("Tile_path_curve_ES"), SubResource("Tile_path_curve_SW"), SubResource("Tile_path_curve_NW"), SubResource("Tile_path_t_NES"), SubResource("Tile_path_t_ESW"), SubResource("Tile_path_t_NSW"), SubResource("Tile_path_t_NEW"), SubResource("Tile_path_cross"), SubResource("Tile_path_end_N"), SubResource("Tile_path_end_E"), SubResource("Tile_path_end_S"), SubResource("Tile_path_end_W"), SubResource("Tile_border_full"), SubResource("Tile_border_full_b"), SubResource("Tile_border_full_c"), SubResource("Tile_border_full_d"), SubResource("Tile_border_edge_N"), SubResource("Tile_border_edge_E"), SubResource("Tile_border_edge_S"), SubResource("Tile_border_edge_W"), SubResource("Tile_border_outer_NE"), SubResource("Tile_border_outer_ES"), SubResource("Tile_border_outer_SW"), SubResource("Tile_border_outer_NW"), SubResource("Tile_border_inner_NE"), SubResource("Tile_border_inner_SE"), SubResource("Tile_border_inner_SW"), SubResource("Tile_border_inner_NW"), SubResource("Tile_border_exit_N"), SubResource("Tile_border_exit_E"), SubResource("Tile_border_exit_S"), SubResource("Tile_border_exit_W"), SubResource("Tile_border_path_NS"), SubResource("Tile_border_path_EW"), SubResource("Tile_mine_NW"), SubResource("Tile_mine_N"), SubResource("Tile_mine_NE"), SubResource("Tile_mine_W"), SubResource("Tile_mine_C"), SubResource("Tile_mine_E"), SubResource("Tile_mine_SW"), SubResource("Tile_mine_S"), SubResource("Tile_mine_SE")])
+Tiles = Array[ExtResource("2_tile")]([SubResource("Tile_floor_a"), SubResource("Tile_floor_b"), SubResource("Tile_floor_c"), SubResource("Tile_floor_d"), SubResource("Tile_path_straight_NS"), SubResource("Tile_path_curve_NE"), SubResource("Tile_path_t_NES"), SubResource("Tile_path_cross"), SubResource("Tile_path_end_N"), SubResource("Tile_border_full"), SubResource("Tile_border_full_b"), SubResource("Tile_border_full_c"), SubResource("Tile_border_full_d"), SubResource("Tile_border_edge_N"), SubResource("Tile_border_outer_NE"), SubResource("Tile_border_inner_NE"), SubResource("Tile_border_exit_N"), SubResource("Tile_border_path_NS"), SubResource("Tile_mine_NW"), SubResource("Tile_mine_N"), SubResource("Tile_mine_NE"), SubResource("Tile_mine_W"), SubResource("Tile_mine_C"), SubResource("Tile_mine_E"), SubResource("Tile_mine_SW"), SubResource("Tile_mine_S"), SubResource("Tile_mine_SE")])
 metadata/_custom_type_script = "uid://bp15dtwmw2ped"

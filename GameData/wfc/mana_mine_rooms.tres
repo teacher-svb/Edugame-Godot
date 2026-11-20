@@ -1,0 +1,181 @@
+[gd_resource type="Resource" script_class="WfcTileSet" format=3 uid="uid://cjjpoma5vfji6"]
+
+[ext_resource type="Script" uid="uid://bp15dtwmw2ped" path="res://addons/editor_tools_common/Wfc/Resources/WfcTileSet.cs" id="1_set"]
+[ext_resource type="Script" uid="uid://rb5vled2paii" path="res://addons/editor_tools_common/Wfc/Resources/WfcTile.cs" id="2_tile"]
+[ext_resource type="MeshLibrary" uid="uid://dg8qn7se381f0" path="res://assets/3D/mana_mine/mana_mine_tiles.meshlib" id="3_lib"]
+
+[sub_resource type="Resource" id="Tile_room_floor"]
+script = ExtResource("2_tile")
+Item = 0
+Rotation = 2
+Weight = 1.0
+SocketPosX = "room"
+SocketNegX = "room"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "room"
+SocketNegZ = "room"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_room_rubble"]
+script = ExtResource("2_tile")
+Item = 1
+Rotation = 2
+Weight = 0.7
+SocketPosX = "room"
+SocketNegX = "room"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "room"
+SocketNegZ = "room"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_room_crates"]
+script = ExtResource("2_tile")
+Item = 2
+Rotation = 2
+Weight = 0.45
+SocketPosX = "room"
+SocketNegX = "room"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "room"
+SocketNegZ = "room"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_room_support"]
+script = ExtResource("2_tile")
+Item = 3
+Rotation = 2
+Weight = 0.45
+SocketPosX = "room"
+SocketNegX = "room"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "room"
+SocketNegZ = "room"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_room_pillar"]
+script = ExtResource("2_tile")
+Item = 4
+Rotation = 2
+Weight = 0.45
+SocketPosX = "room"
+SocketNegX = "room"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "room"
+SocketNegZ = "room"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_room_crystal"]
+script = ExtResource("2_tile")
+Item = 5
+Rotation = 2
+Weight = 0.4
+SocketPosX = "room"
+SocketNegX = "room"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "room"
+SocketNegZ = "room"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_room_cart"]
+script = ExtResource("2_tile")
+Item = 6
+Rotation = 2
+Weight = 0.25
+SocketPosX = "room"
+SocketNegX = "room"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "room"
+SocketNegZ = "room"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_room_pool"]
+script = ExtResource("2_tile")
+Item = 7
+Rotation = 2
+Weight = 0.25
+SocketPosX = "room"
+SocketNegX = "room"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "room"
+SocketNegZ = "room"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_room_wall"]
+script = ExtResource("2_tile")
+Item = 8
+Rotation = 2
+Weight = 2.0
+SocketPosX = "room"
+SocketNegX = "room"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "room"
+SocketNegZ = "outside+"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_room_wall_b"]
+script = ExtResource("2_tile")
+Item = 9
+Rotation = 2
+Weight = 2.0
+SocketPosX = "room"
+SocketNegX = "room"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "room"
+SocketNegZ = "outside+"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_room_wall_vein"]
+script = ExtResource("2_tile")
+Item = 10
+Rotation = 2
+Weight = 1.4
+SocketPosX = "room"
+SocketNegX = "room"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "room"
+SocketNegZ = "outside+"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_room_corner"]
+script = ExtResource("2_tile")
+Item = 11
+Rotation = 2
+Weight = 4.0
+SocketPosX = "room"
+SocketNegX = "outside+"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "room"
+SocketNegZ = "outside+"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_mine_door"]
+script = ExtResource("2_tile")
+Item = 12
+Rotation = 2
+Weight = 0.0
+SocketPosX = "room"
+SocketNegX = "room"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "room"
+SocketNegZ = "outside+"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[resource]
+script = ExtResource("1_set")
+Library = ExtResource("3_lib")
+Tiles = Array[ExtResource("2_tile")]([SubResource("Tile_room_floor"), SubResource("Tile_room_rubble"), SubResource("Tile_room_crates"), SubResource("Tile_room_support"), SubResource("Tile_room_pillar"), SubResource("Tile_room_crystal"), SubResource("Tile_room_cart"), SubResource("Tile_room_pool"), SubResource("Tile_room_wall"), SubResource("Tile_room_wall_b"), SubResource("Tile_room_wall_vein"), SubResource("Tile_room_corner"), SubResource("Tile_mine_door")])
+ExternalSockets = Array[String](["outside-"])
+metadata/_custom_type_script = "uid://bp15dtwmw2ped"

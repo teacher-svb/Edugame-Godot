@@ -1,0 +1,141 @@
+[gd_resource type="Resource" script_class="WfcTileSet" format=3 uid="uid://c7fbsi3vt6k3a"]
+
+[ext_resource type="Script" uid="uid://bp15dtwmw2ped" path="res://addons/editor_tools_common/Wfc/Resources/WfcTileSet.cs" id="1_set"]
+[ext_resource type="Script" uid="uid://rb5vled2paii" path="res://addons/editor_tools_common/Wfc/Resources/WfcTile.cs" id="2_tile"]
+[ext_resource type="MeshLibrary" uid="uid://dg8qn7se381f0" path="res://assets/3D/mana_mine/mana_mine_tiles.meshlib" id="3_lib"]
+
+[sub_resource type="Resource" id="Tile_corr_straight_frame"]
+script = ExtResource("2_tile")
+Item = 13
+Rotation = 2
+Weight = 2.0
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_corr_straight_plain"]
+script = ExtResource("2_tile")
+Item = 14
+Rotation = 2
+Weight = 1.2
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_corr_straight_crystal"]
+script = ExtResource("2_tile")
+Item = 15
+Rotation = 2
+Weight = 0.7
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_corr_straight_lamp"]
+script = ExtResource("2_tile")
+Item = 16
+Rotation = 2
+Weight = 0.6
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_corr_bend"]
+script = ExtResource("2_tile")
+Item = 17
+Rotation = 2
+Weight = 4.0
+SocketPosX = "path"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_corr_t"]
+script = ExtResource("2_tile")
+Item = 18
+Rotation = 2
+Weight = 4.0
+SocketPosX = "path"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_corr_cross"]
+script = ExtResource("2_tile")
+Item = 19
+Rotation = 2
+Weight = 1.0
+SocketPosX = "path"
+SocketNegX = "path"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "path"
+SocketNegZ = "path"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_rock_a"]
+script = ExtResource("2_tile")
+Item = 20
+Rotation = 2
+Weight = 3.0
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_rock_b"]
+script = ExtResource("2_tile")
+Item = 21
+Rotation = 2
+Weight = 0.35
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[sub_resource type="Resource" id="Tile_rock_c"]
+script = ExtResource("2_tile")
+Item = 22
+Rotation = 2
+Weight = 0.2
+SocketPosX = "x"
+SocketNegX = "x"
+SocketPosY = "ground"
+SocketNegY = "ground"
+SocketPosZ = "x"
+SocketNegZ = "x"
+metadata/_custom_type_script = "uid://rb5vled2paii"
+
+[resource]
+script = ExtResource("1_set")
+Library = ExtResource("3_lib")
+Tiles = Array[ExtResource("2_tile")]([SubResource("Tile_corr_straight_frame"), SubResource("Tile_corr_straight_plain"), SubResource("Tile_corr_straight_crystal"), SubResource("Tile_corr_straight_lamp"), SubResource("Tile_corr_bend"), SubResource("Tile_corr_t"), SubResource("Tile_corr_cross"), SubResource("Tile_rock_a"), SubResource("Tile_rock_b"), SubResource("Tile_rock_c")])
+metadata/_custom_type_script = "uid://bp15dtwmw2ped"

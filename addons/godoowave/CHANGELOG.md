@@ -2,6 +2,26 @@
 
 All notable changes to godoowave (called WFC Generator up to 1.3.4) are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses [Semantic Versioning](https://semver.org/).
 
+## [1.5.0] - 2026-11-20
+
+### Added
+- **Pin boxes** (`WfcPinBox`): child nodes of the GridMap, as many as you like, whose cells Generate and Clear never change. Occupied cells inside stay and constrain their neighbours, and empty cells stay empty. Add one with **Pin Boxes → Add Pin Box** in the dialog or with *Add Child Node*; resize it with the dots on its faces, with the GridMap or the box selected, and move it with the move tool (it snaps to cells). Untick Enabled or delete a box to let Generate replace its cells. The status reports the cells the pin boxes kept.
+- A demo scene with pin boxes: `demo/godoowave/hillside_pins.tscn`.
+
+### Removed
+- **The Pin Box group** in the dialog (Origin, Size, Place Around Bounds, Pin Generated Cells, Unpin) and the pinned flag of generated cells. Pin boxes replace them.
+
+### Updating
+- **Cells pinned with 1.2–1.4 are no longer kept.** They are ordinary generated cells again, so the next Generate replaces them. Add a pin box over them before you generate. Scenes and settings from 1.4 load without errors; the old pin box settings are ignored.
+
+## [1.4.3] - 2026-11-16
+
+### Removed
+- **The legacy classes in `addons/wfc_generator/Resources/`**, and the folder from the zip. They kept files that name the scripts by their paths before 1.3.3 (or before the rename in 1.4.0) and carry no uid loading: tile sets from 1.3.2 or older, and files your own scripts saved with `ResourceSaver.Save`. Files saved in the editor carry a uid and are not affected.
+
+### Updating
+- Delete `addons/wfc_generator/` if it is still there. If a tile set, settings or scene no longer loads, open it in a text editor and replace `res://addons/wfc_generator/Resources/` with `res://addons/editor_tools_common/Wfc/Resources/`.
+
 ## [1.4.2] - 2026-11-16
 
 ### Fixed

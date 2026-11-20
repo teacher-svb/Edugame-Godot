@@ -1,0 +1,1020 @@
+{
+ "tile_size_m": 4.0,
+ "axes": "Godot: tile centre at the node origin, floor top at y = 0, north = -Z (top of the screen), south = +Z (towards the camera). One MeshLibrary item per shape, built in its base orientation (sockets below) and turned in the GridMap: every tile is Rotation FourWay. Rotate cells around Y only.",
+ "gridmap_turns": {
+  "note": "Quarter turns around +Y as godoowave counts them (counter-clockwise seen from above): the base north side ends up facing the side named here. GridMap cell orientation index per turn.",
+  "north": {
+   "turns": 0,
+   "orientation": 0
+  },
+  "west": {
+   "turns": 1,
+   "orientation": 16
+  },
+  "south": {
+   "turns": 2,
+   "orientation": 10
+  },
+  "east": {
+   "turns": 3,
+   "orientation": 22
+  }
+ },
+ "look": "Cut-away mine: every closed tile edge is solid rock with its top at rock_height_m; open edges share one cross-section (2 m floor in the middle). Glowing parts (crystals, lantern glass, mana pool, veins) use the second material, emissive from the palette.",
+ "sizes_m": {
+  "rock_height": 1.0,
+  "rock_face_run": 0.35,
+  "room_wall_band": 0.5,
+  "corridor_width": 2.0,
+  "rail_gauge": 0.6,
+  "corridor_frame_beam": 2.1,
+  "door_lintel": 2.35
+ },
+ "palette": "textures/T_ManaMineColorMap.png",
+ "materials": {
+  "M_ManaMineColors": "palette, roughness 0.92",
+  "M_ManaMineGlow": "palette, emission strength 2.0"
+ },
+ "socket_fields": {
+  "north": "SocketNegZ",
+  "east": "SocketPosX",
+  "south": "SocketPosZ",
+  "west": "SocketNegX"
+ },
+ "godoodungeon": {
+  "room_edge_socket": "outside",
+  "path_socket": "path",
+  "door_tile": "mine_door",
+  "room_external_sockets": [
+   "outside-"
+  ],
+  "rules": "Room tile set: walls face out with outside+ (the room bounds supply outside-; add outside- to the room set's External Sockets), inner faces room. Corridor tile set: open faces path, closed faces x; rock_a / rock_b / rock_c are the empty tiles. Both tile sets use the same MeshLibrary as the GridMap (item = MeshLibrary item). Up / down sockets: leave as the tile set default. Every tile Rotation FourWay (also the symmetric ones: their rotations merge, and a cell you turned by hand is still read as that tile). weight is the tile total; godoowave splits it over the distinct rotations, which gives weight_per_rotation.",
+  "suggested_settings": {
+   "min_room_size": [
+    3,
+    3
+   ],
+   "max_room_size": [
+    7,
+    7
+   ],
+   "gap": 3,
+   "margin": 1,
+   "wall_clearance": 1,
+   "max_doors_per_room": 3,
+   "note": "Rooms are at least 3 x 3 (walls on every side, one interior row). Corridors may also run along room walls (Wall Clearance 0): the closed sides are rock either way."
+  },
+  "room_tiles": [
+   {
+    "item": 0,
+    "name": "room_floor",
+    "file": "mine_room_floor.glb",
+    "kind": "room",
+    "weight": 1.0,
+    "weight_per_rotation": 1.0,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    },
+    "tris": {
+     "Collision-colonly": 800,
+     "Mesh": 880
+    },
+    "code": "oooo",
+    "feature": "floor"
+   },
+   {
+    "item": 1,
+    "name": "room_rubble",
+    "file": "mine_room_rubble.glb",
+    "kind": "room",
+    "weight": 0.7,
+    "weight_per_rotation": 0.7,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    },
+    "tris": {
+     "Collision-colonly": 820,
+     "Mesh": 1012
+    },
+    "code": "oooo",
+    "feature": "rubble"
+   },
+   {
+    "item": 2,
+    "name": "room_crates",
+    "file": "mine_room_crates.glb",
+    "kind": "room",
+    "weight": 0.45,
+    "weight_per_rotation": 0.45,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    },
+    "tris": {
+     "Collision-colonly": 872,
+     "Mesh": 1136
+    },
+    "code": "oooo",
+    "feature": "crates"
+   },
+   {
+    "item": 3,
+    "name": "room_support",
+    "file": "mine_room_support.glb",
+    "kind": "room",
+    "weight": 0.45,
+    "weight_per_rotation": 0.45,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    },
+    "tris": {
+     "Collision-colonly": 812,
+     "Mesh": 1020
+    },
+    "code": "oooo",
+    "feature": "support"
+   },
+   {
+    "item": 4,
+    "name": "room_pillar",
+    "file": "mine_room_pillar.glb",
+    "kind": "room",
+    "weight": 0.45,
+    "weight_per_rotation": 0.45,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    },
+    "tris": {
+     "Collision-colonly": 828,
+     "Mesh": 995
+    },
+    "code": "oooo",
+    "feature": "pillar"
+   },
+   {
+    "item": 5,
+    "name": "room_crystal",
+    "file": "mine_room_crystal.glb",
+    "kind": "room",
+    "weight": 0.4,
+    "weight_per_rotation": 0.4,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    },
+    "tris": {
+     "Collision-colonly": 828,
+     "Mesh": 1102
+    },
+    "code": "oooo",
+    "feature": "crystal"
+   },
+   {
+    "item": 6,
+    "name": "room_cart",
+    "file": "mine_room_cart.glb",
+    "kind": "room",
+    "weight": 0.25,
+    "weight_per_rotation": 0.25,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    },
+    "tris": {
+     "Collision-colonly": 812,
+     "Mesh": 1246
+    },
+    "code": "oooo",
+    "feature": "cart"
+   },
+   {
+    "item": 7,
+    "name": "room_pool",
+    "file": "mine_room_pool.glb",
+    "kind": "room",
+    "weight": 0.25,
+    "weight_per_rotation": 0.25,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "room",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    },
+    "tris": {
+     "Collision-colonly": 836,
+     "Mesh": 1158
+    },
+    "code": "oooo",
+    "feature": "pool"
+   },
+   {
+    "item": 8,
+    "name": "room_wall",
+    "file": "mine_room_wall.glb",
+    "kind": "room",
+    "weight": 2.0,
+    "weight_per_rotation": 0.5,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "outside+",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    },
+    "tris": {
+     "Collision-colonly": 876,
+     "Mesh": 1172
+    },
+    "code": "wooo"
+   },
+   {
+    "item": 9,
+    "name": "room_wall_b",
+    "file": "mine_room_wall_b.glb",
+    "kind": "room",
+    "weight": 2.0,
+    "weight_per_rotation": 0.5,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "outside+",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    },
+    "tris": {
+     "Collision-colonly": 836,
+     "Mesh": 1144
+    },
+    "code": "wooo"
+   },
+   {
+    "item": 10,
+    "name": "room_wall_vein",
+    "file": "mine_room_wall_vein.glb",
+    "kind": "room",
+    "weight": 1.4,
+    "weight_per_rotation": 0.35,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "outside+",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    },
+    "tris": {
+     "Collision-colonly": 892,
+     "Mesh": 1240
+    },
+    "code": "wooo",
+    "feature": "vein"
+   },
+   {
+    "item": 11,
+    "name": "room_corner",
+    "file": "mine_room_corner.glb",
+    "kind": "room",
+    "weight": 4.0,
+    "weight_per_rotation": 1.0,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "outside+",
+     "east": "room",
+     "south": "room",
+     "west": "outside+"
+    },
+    "tris": {
+     "Collision-colonly": 888,
+     "Mesh": 1148
+    },
+    "code": "woow"
+   },
+   {
+    "item": 12,
+    "name": "mine_door",
+    "file": "mine_mine_door.glb",
+    "kind": "door",
+    "weight": 0.0,
+    "weight_per_rotation": 0.0,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "outside+",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    },
+    "tris": {
+     "Collision-colonly": 824,
+     "Mesh": 1356
+    },
+    "code": "wooo"
+   }
+  ],
+  "corridor_tiles": [
+   {
+    "item": 13,
+    "name": "corr_straight_frame",
+    "file": "mine_corr_straight_frame.glb",
+    "kind": "corridor",
+    "weight": 2.0,
+    "weight_per_rotation": 1.0,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
+    },
+    "tris": {
+     "Collision-colonly": 824,
+     "Mesh": 1148
+    },
+    "opens": "NS",
+    "variant": "frame"
+   },
+   {
+    "item": 14,
+    "name": "corr_straight_plain",
+    "file": "mine_corr_straight_plain.glb",
+    "kind": "corridor",
+    "weight": 1.2,
+    "weight_per_rotation": 0.6,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
+    },
+    "tris": {
+     "Collision-colonly": 800,
+     "Mesh": 1124
+    },
+    "opens": "NS",
+    "variant": "plain"
+   },
+   {
+    "item": 15,
+    "name": "corr_straight_crystal",
+    "file": "mine_corr_straight_crystal.glb",
+    "kind": "corridor",
+    "weight": 0.7,
+    "weight_per_rotation": 0.35,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
+    },
+    "tris": {
+     "Collision-colonly": 800,
+     "Mesh": 1240
+    },
+    "opens": "NS",
+    "variant": "crystal"
+   },
+   {
+    "item": 16,
+    "name": "corr_straight_lamp",
+    "file": "mine_corr_straight_lamp.glb",
+    "kind": "corridor",
+    "weight": 0.6,
+    "weight_per_rotation": 0.3,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
+    },
+    "tris": {
+     "Collision-colonly": 800,
+     "Mesh": 1188
+    },
+    "opens": "NS",
+    "variant": "lamp"
+   },
+   {
+    "item": 17,
+    "name": "corr_bend",
+    "file": "mine_corr_bend.glb",
+    "kind": "corridor",
+    "weight": 4.0,
+    "weight_per_rotation": 1.0,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "path",
+     "east": "path",
+     "south": "x",
+     "west": "x"
+    },
+    "tris": {
+     "Collision-colonly": 800,
+     "Mesh": 1656
+    },
+    "opens": "NE"
+   },
+   {
+    "item": 18,
+    "name": "corr_t",
+    "file": "mine_corr_t.glb",
+    "kind": "corridor",
+    "weight": 4.0,
+    "weight_per_rotation": 1.0,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "path",
+     "east": "path",
+     "south": "path",
+     "west": "x"
+    },
+    "tris": {
+     "Collision-colonly": 800,
+     "Mesh": 2316
+    },
+    "opens": "NES"
+   },
+   {
+    "item": 19,
+    "name": "corr_cross",
+    "file": "mine_corr_cross.glb",
+    "kind": "corridor",
+    "weight": 1.0,
+    "weight_per_rotation": 1.0,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "path",
+     "east": "path",
+     "south": "path",
+     "west": "path"
+    },
+    "tris": {
+     "Collision-colonly": 800,
+     "Mesh": 1300
+    },
+    "opens": "NESW"
+   },
+   {
+    "item": 20,
+    "name": "rock_a",
+    "file": "mine_rock_a.glb",
+    "kind": "rock",
+    "weight": 3.0,
+    "weight_per_rotation": 3.0,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "x",
+     "east": "x",
+     "south": "x",
+     "west": "x"
+    },
+    "tris": {
+     "Collision-colonly": 800,
+     "Mesh": 960
+    },
+    "variant": "a"
+   },
+   {
+    "item": 21,
+    "name": "rock_b",
+    "file": "mine_rock_b.glb",
+    "kind": "rock",
+    "weight": 0.35,
+    "weight_per_rotation": 0.35,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "x",
+     "east": "x",
+     "south": "x",
+     "west": "x"
+    },
+    "tris": {
+     "Collision-colonly": 800,
+     "Mesh": 1180
+    },
+    "variant": "b"
+   },
+   {
+    "item": 22,
+    "name": "rock_c",
+    "file": "mine_rock_c.glb",
+    "kind": "rock",
+    "weight": 0.2,
+    "weight_per_rotation": 0.2,
+    "rotation": "FourWay",
+    "sockets": {
+     "north": "x",
+     "east": "x",
+     "south": "x",
+     "west": "x"
+    },
+    "tris": {
+     "Collision-colonly": 800,
+     "Mesh": 1012
+    },
+    "variant": "c"
+   }
+  ]
+ },
+ "tiles": [
+  {
+   "item": 0,
+   "name": "room_floor",
+   "file": "mine_room_floor.glb",
+   "kind": "room",
+   "weight": 1.0,
+   "weight_per_rotation": 1.0,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 800,
+    "Mesh": 880
+   },
+   "code": "oooo",
+   "feature": "floor"
+  },
+  {
+   "item": 1,
+   "name": "room_rubble",
+   "file": "mine_room_rubble.glb",
+   "kind": "room",
+   "weight": 0.7,
+   "weight_per_rotation": 0.7,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 820,
+    "Mesh": 1012
+   },
+   "code": "oooo",
+   "feature": "rubble"
+  },
+  {
+   "item": 2,
+   "name": "room_crates",
+   "file": "mine_room_crates.glb",
+   "kind": "room",
+   "weight": 0.45,
+   "weight_per_rotation": 0.45,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 872,
+    "Mesh": 1136
+   },
+   "code": "oooo",
+   "feature": "crates"
+  },
+  {
+   "item": 3,
+   "name": "room_support",
+   "file": "mine_room_support.glb",
+   "kind": "room",
+   "weight": 0.45,
+   "weight_per_rotation": 0.45,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 812,
+    "Mesh": 1020
+   },
+   "code": "oooo",
+   "feature": "support"
+  },
+  {
+   "item": 4,
+   "name": "room_pillar",
+   "file": "mine_room_pillar.glb",
+   "kind": "room",
+   "weight": 0.45,
+   "weight_per_rotation": 0.45,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 828,
+    "Mesh": 995
+   },
+   "code": "oooo",
+   "feature": "pillar"
+  },
+  {
+   "item": 5,
+   "name": "room_crystal",
+   "file": "mine_room_crystal.glb",
+   "kind": "room",
+   "weight": 0.4,
+   "weight_per_rotation": 0.4,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 828,
+    "Mesh": 1102
+   },
+   "code": "oooo",
+   "feature": "crystal"
+  },
+  {
+   "item": 6,
+   "name": "room_cart",
+   "file": "mine_room_cart.glb",
+   "kind": "room",
+   "weight": 0.25,
+   "weight_per_rotation": 0.25,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 812,
+    "Mesh": 1246
+   },
+   "code": "oooo",
+   "feature": "cart"
+  },
+  {
+   "item": 7,
+   "name": "room_pool",
+   "file": "mine_room_pool.glb",
+   "kind": "room",
+   "weight": 0.25,
+   "weight_per_rotation": 0.25,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "room",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 836,
+    "Mesh": 1158
+   },
+   "code": "oooo",
+   "feature": "pool"
+  },
+  {
+   "item": 8,
+   "name": "room_wall",
+   "file": "mine_room_wall.glb",
+   "kind": "room",
+   "weight": 2.0,
+   "weight_per_rotation": 0.5,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "outside+",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 876,
+    "Mesh": 1172
+   },
+   "code": "wooo"
+  },
+  {
+   "item": 9,
+   "name": "room_wall_b",
+   "file": "mine_room_wall_b.glb",
+   "kind": "room",
+   "weight": 2.0,
+   "weight_per_rotation": 0.5,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "outside+",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 836,
+    "Mesh": 1144
+   },
+   "code": "wooo"
+  },
+  {
+   "item": 10,
+   "name": "room_wall_vein",
+   "file": "mine_room_wall_vein.glb",
+   "kind": "room",
+   "weight": 1.4,
+   "weight_per_rotation": 0.35,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "outside+",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 892,
+    "Mesh": 1240
+   },
+   "code": "wooo",
+   "feature": "vein"
+  },
+  {
+   "item": 11,
+   "name": "room_corner",
+   "file": "mine_room_corner.glb",
+   "kind": "room",
+   "weight": 4.0,
+   "weight_per_rotation": 1.0,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "outside+",
+    "east": "room",
+    "south": "room",
+    "west": "outside+"
+   },
+   "tris": {
+    "Collision-colonly": 888,
+    "Mesh": 1148
+   },
+   "code": "woow"
+  },
+  {
+   "item": 12,
+   "name": "mine_door",
+   "file": "mine_mine_door.glb",
+   "kind": "door",
+   "weight": 0.0,
+   "weight_per_rotation": 0.0,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "outside+",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 824,
+    "Mesh": 1356
+   },
+   "code": "wooo"
+  },
+  {
+   "item": 13,
+   "name": "corr_straight_frame",
+   "file": "mine_corr_straight_frame.glb",
+   "kind": "corridor",
+   "weight": 2.0,
+   "weight_per_rotation": 1.0,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
+   },
+   "tris": {
+    "Collision-colonly": 824,
+    "Mesh": 1148
+   },
+   "opens": "NS",
+   "variant": "frame"
+  },
+  {
+   "item": 14,
+   "name": "corr_straight_plain",
+   "file": "mine_corr_straight_plain.glb",
+   "kind": "corridor",
+   "weight": 1.2,
+   "weight_per_rotation": 0.6,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
+   },
+   "tris": {
+    "Collision-colonly": 800,
+    "Mesh": 1124
+   },
+   "opens": "NS",
+   "variant": "plain"
+  },
+  {
+   "item": 15,
+   "name": "corr_straight_crystal",
+   "file": "mine_corr_straight_crystal.glb",
+   "kind": "corridor",
+   "weight": 0.7,
+   "weight_per_rotation": 0.35,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
+   },
+   "tris": {
+    "Collision-colonly": 800,
+    "Mesh": 1240
+   },
+   "opens": "NS",
+   "variant": "crystal"
+  },
+  {
+   "item": 16,
+   "name": "corr_straight_lamp",
+   "file": "mine_corr_straight_lamp.glb",
+   "kind": "corridor",
+   "weight": 0.6,
+   "weight_per_rotation": 0.3,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
+   },
+   "tris": {
+    "Collision-colonly": 800,
+    "Mesh": 1188
+   },
+   "opens": "NS",
+   "variant": "lamp"
+  },
+  {
+   "item": 17,
+   "name": "corr_bend",
+   "file": "mine_corr_bend.glb",
+   "kind": "corridor",
+   "weight": 4.0,
+   "weight_per_rotation": 1.0,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "path",
+    "east": "path",
+    "south": "x",
+    "west": "x"
+   },
+   "tris": {
+    "Collision-colonly": 800,
+    "Mesh": 1656
+   },
+   "opens": "NE"
+  },
+  {
+   "item": 18,
+   "name": "corr_t",
+   "file": "mine_corr_t.glb",
+   "kind": "corridor",
+   "weight": 4.0,
+   "weight_per_rotation": 1.0,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "path",
+    "east": "path",
+    "south": "path",
+    "west": "x"
+   },
+   "tris": {
+    "Collision-colonly": 800,
+    "Mesh": 2316
+   },
+   "opens": "NES"
+  },
+  {
+   "item": 19,
+   "name": "corr_cross",
+   "file": "mine_corr_cross.glb",
+   "kind": "corridor",
+   "weight": 1.0,
+   "weight_per_rotation": 1.0,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "path",
+    "east": "path",
+    "south": "path",
+    "west": "path"
+   },
+   "tris": {
+    "Collision-colonly": 800,
+    "Mesh": 1300
+   },
+   "opens": "NESW"
+  },
+  {
+   "item": 20,
+   "name": "rock_a",
+   "file": "mine_rock_a.glb",
+   "kind": "rock",
+   "weight": 3.0,
+   "weight_per_rotation": 3.0,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "x",
+    "east": "x",
+    "south": "x",
+    "west": "x"
+   },
+   "tris": {
+    "Collision-colonly": 800,
+    "Mesh": 960
+   },
+   "variant": "a"
+  },
+  {
+   "item": 21,
+   "name": "rock_b",
+   "file": "mine_rock_b.glb",
+   "kind": "rock",
+   "weight": 0.35,
+   "weight_per_rotation": 0.35,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "x",
+    "east": "x",
+    "south": "x",
+    "west": "x"
+   },
+   "tris": {
+    "Collision-colonly": 800,
+    "Mesh": 1180
+   },
+   "variant": "b"
+  },
+  {
+   "item": 22,
+   "name": "rock_c",
+   "file": "mine_rock_c.glb",
+   "kind": "rock",
+   "weight": 0.2,
+   "weight_per_rotation": 0.2,
+   "rotation": "FourWay",
+   "sockets": {
+    "north": "x",
+    "east": "x",
+    "south": "x",
+    "west": "x"
+   },
+   "tris": {
+    "Collision-colonly": 800,
+    "Mesh": 1012
+   },
+   "variant": "c"
+  }
+ ]
+}

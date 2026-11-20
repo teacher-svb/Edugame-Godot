@@ -2,6 +2,26 @@
 
 All notable changes to godoodungeon are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses [Semantic Versioning](https://semver.org/).
 
+## [1.2.0] - 2026-11-20
+
+### Added
+- **Room boxes** (`DungeonRoomBox`): child nodes of the GridMap that fix a room where you put it; the dungeon is laid out and connected around them. **Generated** boxes fix a room's position and size and are filled with the room tile set; **Built** boxes keep the cells you built and get a corridor to every Door tile on their wall ring. Boxes count towards Room Count and are always the first rooms, so their numbers do not change between seeds. Add one with **Room Boxes → Add Room Box** or *Add Child Node*; drag its handles with the box or the GridMap selected. Errors name the box and draw it in red; the status counts the boxes; Preview Layout draws them per mode.
+- **The dungeon graph knows the boxes:** `DungeonRoom.Box` and `IsBuilt`, and a box's **Data** is copied to its room on every Generate, so it survives regenerating.
+- A room box demo: `demo/godoodungeon/dungeon_rooms.tscn`, with a Built boss room and a Generated entrance; `graph_demo.gd` heads for a room whose Data says `boss`.
+
+### Changed
+- godoodungeon now needs the shared box node of godoowave 1.5 (`editor_tools_common/Nodes/`), which its zip contains. Installed next to godoowave, use godoowave 1.5 or later.
+
+## [1.1.0] - 2026-11-20
+
+### Added
+- **Dungeon graph** for gameplay: Generate stores a `DungeonGraph` resource in the GridMap's metadata (`godoodads_dungeon_graph`), in the same undo step as the cells. Rooms are its vertices and the corridors, one per room graph connection with its cells from door to door, its edges. It answers which room holds a cell or a global position, the corridors through a cell, neighbours, distances in corridors and in corridor cells, shortest paths, the farthest room and the two rooms farthest apart. Every room and corridor has a `Data` dictionary for your own values. It works at runtime without the plugin, from GDScript and C#. Clear Dungeon removes it, and the status warns when Generate replaces a graph that carried Data. See *Dungeon graph* in the README.
+- **Preview Layout numbers the rooms**, with the numbers the status messages use (`DungeonRoom.Number`).
+- **Graph demo:** `demo/godoodungeon/dungeon_graph.tscn` with `graph_demo.gd`, which marks a start, a goal and the shortest way between them at runtime.
+
+### Changed
+- **Undo and redo of Generate set the dialog's Seed** to the seed of the dungeon now on the map, so Preview Layout shows that dungeon. Until now the preview kept showing the undone dungeon while the dialog was open. Other settings stay as you left them.
+
 ## [1.0.1] - 2026-11-16
 
 ### Changed
