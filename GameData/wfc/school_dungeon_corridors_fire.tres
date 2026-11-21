@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://rb5vled2paii" path="res://addons/editor_tools_common/Wfc/Resources/WfcTile.cs" id="2_tile"]
 [ext_resource type="MeshLibrary" uid="uid://bbamobqfkr1gt" path="res://assets/3D/village/interiors/school_interior/school_tiles_fire.meshlib" id="3_lib"]
 [ext_resource type="PackedScene" uid="uid://b46bwsxmk2pp7" path="res://assets/3D/village/interiors/school_interior/school_moving_platform_NS.tscn" id="m_1"]
-[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/fire_jets_NS.tscn" id="m_2"]
-[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/fire_sinking_NS.tscn" id="m_3"]
-[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/fire_flamebar_NS.tscn" id="m_4"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/corr_fire_jets.tscn" id="m_2"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/corr_fire_sinking.tscn" id="m_3"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/corr_fire_flamebar.tscn" id="m_4"]
 
 [sub_resource type="Resource" id="Tile_landing_gwwg"]
 script = ExtResource("2_tile")

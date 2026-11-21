@@ -1,20 +1,25 @@
 [gd_scene format=4 uid="uid://cuhod4w7q4x71"]
 
 [ext_resource type="Environment" path="res://GameData/environments/school_earth.tres" id="1_455hp"]
-[ext_resource type="MeshLibrary" path="res://assets/3D/village/interiors/school_interior/school_tiles_earth.meshlib" id="2_eg5fg"]
+[ext_resource type="MeshLibrary" uid="uid://cypnx7ea42aub" path="res://assets/3D/village/interiors/school_interior/school_tiles_earth.meshlib" id="2_eg5fg"]
 [ext_resource type="Resource" uid="uid://nhv77n1jw8ks" path="res://GameData/wfc/school_dungeon_corridors_earth.tres" id="3_fg6y2"]
 [ext_resource type="Resource" uid="uid://dgsyrb1biefqe" path="res://GameData/wfc/school_dungeon_rooms_earth.tres" id="4_p7ney"]
 [ext_resource type="Script" uid="uid://cgraummx7cyo2" path="res://addons/godoodungeon/Resources/DungeonSettings.cs" id="5_p0fmw"]
 [ext_resource type="PackedScene" uid="uid://b46bwsxmk2pp7" path="res://assets/3D/village/interiors/school_interior/school_moving_platform_NS.tscn" id="6_p0fmw"]
+[ext_resource type="Script" uid="uid://cpnq5njr2adxx" path="res://addons/godoodungeon/Resources/DungeonCorridor.cs" id="6_pdpwt"]
+[ext_resource type="Script" uid="uid://1ixkt6cweadw" path="res://addons/godoodungeon/Resources/DungeonRoom.cs" id="7_06jib"]
 [ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="7_sguok"]
-[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/earth_crumble_NS.tscn" id="8_sguok"]
-[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/earth_rocks_NS.tscn" id="9_pdpwt"]
+[ext_resource type="Script" uid="uid://b27dpvrinn6ki" path="res://addons/godoodungeon/Resources/DungeonGraph.cs" id="8_hqy5u"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/corr_earth_crumble.tscn" id="8_sguok"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/corr_earth_rocks.tscn" id="9_pdpwt"]
 [ext_resource type="Script" uid="uid://kevvfo7u3dqp" path="res://scripts/Game/Systems/Platforming/ChamberSafety.cs" id="10_cf5qa"]
+[ext_resource type="Script" uid="uid://dlw68x261wgl5" path="res://addons/godoodungeon/Nodes/DungeonRoomBox.cs" id="12_q27ah"]
 
-[sub_resource type="Resource" id="Resource_06jib"]
+[sub_resource type="Resource" id="Resource_wf7r7"]
 script = ExtResource("5_p0fmw")
 RandomiseSeed = true
-Seed = 313659113
+Seed = 3967620428
+PreviewLayout = true
 RoomTileSet = ExtResource("4_p7ney")
 CorridorTileSet = ExtResource("3_fg6y2")
 Door = 54
@@ -24,6 +29,113 @@ MinRoomSize = Vector2i(3, 3)
 MaxRoomSize = Vector2i(5, 5)
 MaxDoorsPerRoom = 3
 metadata/_custom_type_script = "uid://cgraummx7cyo2"
+
+[sub_resource type="Resource" id="Resource_eja3l"]
+script = ExtResource("6_pdpwt")
+RoomB = 1
+DoorA = Vector3i(3, 0, 16)
+DoorB = Vector3i(11, 0, 14)
+IsTreeEdge = true
+Cells = Array[Vector3i]([Vector3i(4, 0, 16), Vector3i(5, 0, 16), Vector3i(6, 0, 16), Vector3i(6, 0, 15), Vector3i(6, 0, 14), Vector3i(7, 0, 14), Vector3i(8, 0, 14), Vector3i(9, 0, 14), Vector3i(10, 0, 14)])
+
+[sub_resource type="Resource" id="Resource_hdiyk"]
+script = ExtResource("6_pdpwt")
+Index = 1
+RoomA = 1
+RoomB = 3
+DoorA = Vector3i(11, 0, 14)
+DoorB = Vector3i(12, 0, 7)
+IsTreeEdge = true
+Cells = Array[Vector3i]([Vector3i(10, 0, 14), Vector3i(9, 0, 14), Vector3i(9, 0, 13), Vector3i(9, 0, 12), Vector3i(9, 0, 11), Vector3i(9, 0, 10), Vector3i(9, 0, 9), Vector3i(10, 0, 9), Vector3i(11, 0, 9), Vector3i(12, 0, 9), Vector3i(12, 0, 8)])
+
+[sub_resource type="Resource" id="Resource_dtggg"]
+script = ExtResource("6_pdpwt")
+Index = 2
+RoomA = 2
+RoomB = 3
+DoorA = Vector3i(18, 0, 6)
+DoorB = Vector3i(12, 0, 7)
+IsTreeEdge = true
+Cells = Array[Vector3i]([Vector3i(17, 0, 6), Vector3i(16, 0, 6), Vector3i(16, 0, 7), Vector3i(16, 0, 8), Vector3i(16, 0, 9), Vector3i(15, 0, 9), Vector3i(14, 0, 9), Vector3i(13, 0, 9), Vector3i(12, 0, 9), Vector3i(12, 0, 8)])
+
+[sub_resource type="Resource" id="Resource_7su7g"]
+script = ExtResource("6_pdpwt")
+Index = 3
+RoomA = 3
+RoomB = 4
+DoorA = Vector3i(10, 0, 6)
+DoorB = Vector3i(5, 0, 3)
+IsTreeEdge = true
+Cells = Array[Vector3i]([Vector3i(9, 0, 6), Vector3i(8, 0, 6), Vector3i(8, 0, 5), Vector3i(8, 0, 4), Vector3i(8, 0, 3), Vector3i(7, 0, 3), Vector3i(6, 0, 3)])
+
+[sub_resource type="Resource" id="Resource_ocjug"]
+script = ExtResource("6_pdpwt")
+Index = 4
+RoomA = 1
+RoomB = 2
+DoorA = Vector3i(13, 0, 12)
+DoorB = Vector3i(18, 0, 6)
+Cells = Array[Vector3i]([Vector3i(14, 0, 12), Vector3i(15, 0, 12), Vector3i(15, 0, 11), Vector3i(15, 0, 10), Vector3i(15, 0, 9), Vector3i(16, 0, 9), Vector3i(16, 0, 8), Vector3i(16, 0, 7), Vector3i(16, 0, 6), Vector3i(17, 0, 6)])
+
+[sub_resource type="Resource" id="Resource_ivarh"]
+script = ExtResource("6_pdpwt")
+Index = 5
+RoomB = 4
+DoorA = Vector3i(2, 0, 15)
+DoorB = Vector3i(3, 0, 4)
+Cells = Array[Vector3i]([Vector3i(2, 0, 14), Vector3i(2, 0, 13), Vector3i(2, 0, 12), Vector3i(2, 0, 11), Vector3i(2, 0, 10), Vector3i(2, 0, 9), Vector3i(2, 0, 8), Vector3i(2, 0, 7), Vector3i(2, 0, 6), Vector3i(3, 0, 6), Vector3i(3, 0, 5)])
+
+[sub_resource type="Resource" id="Resource_17ukg"]
+script = ExtResource("7_06jib")
+Position = Vector3i(1, 0, 15)
+Size = Vector3i(3, 1, 3)
+DoorCells = Array[Vector3i]([Vector3i(2, 0, 15), Vector3i(3, 0, 16)])
+DoorDirections = Array[Vector3i]([Vector3i(0, 0, -1), Vector3i(1, 0, 0)])
+Corridors = PackedInt32Array(0, 5)
+Box = NodePath("RoomBox")
+IsBuilt = true
+
+[sub_resource type="Resource" id="Resource_lnk3q"]
+script = ExtResource("7_06jib")
+Index = 1
+Position = Vector3i(11, 0, 11)
+Size = Vector3i(3, 1, 5)
+DoorCells = Array[Vector3i]([Vector3i(11, 0, 14), Vector3i(13, 0, 12)])
+DoorDirections = Array[Vector3i]([Vector3i(-1, 0, 0), Vector3i(1, 0, 0)])
+Corridors = PackedInt32Array(0, 1, 4)
+
+[sub_resource type="Resource" id="Resource_6hr4i"]
+script = ExtResource("7_06jib")
+Index = 2
+Position = Vector3i(18, 0, 5)
+Size = Vector3i(3, 1, 5)
+DoorCells = Array[Vector3i]([Vector3i(18, 0, 6)])
+DoorDirections = Array[Vector3i]([Vector3i(-1, 0, 0)])
+Corridors = PackedInt32Array(2, 4)
+
+[sub_resource type="Resource" id="Resource_51ubf"]
+script = ExtResource("7_06jib")
+Index = 3
+Position = Vector3i(10, 0, 5)
+Size = Vector3i(4, 1, 3)
+DoorCells = Array[Vector3i]([Vector3i(12, 0, 7), Vector3i(10, 0, 6)])
+DoorDirections = Array[Vector3i]([Vector3i(0, 0, 1), Vector3i(-1, 0, 0)])
+Corridors = PackedInt32Array(1, 2, 3)
+
+[sub_resource type="Resource" id="Resource_lk2yg"]
+script = ExtResource("7_06jib")
+Index = 4
+Position = Vector3i(2, 0, 2)
+Size = Vector3i(4, 1, 3)
+DoorCells = Array[Vector3i]([Vector3i(5, 0, 3), Vector3i(3, 0, 4)])
+DoorDirections = Array[Vector3i]([Vector3i(1, 0, 0), Vector3i(0, 0, 1)])
+Corridors = PackedInt32Array(3, 5)
+
+[sub_resource type="Resource" id="Resource_ffgv7"]
+script = ExtResource("8_hqy5u")
+Size = Vector2i(22, 22)
+Rooms = Array[ExtResource("7_06jib")]([SubResource("Resource_17ukg"), SubResource("Resource_lnk3q"), SubResource("Resource_6hr4i"), SubResource("Resource_51ubf"), SubResource("Resource_lk2yg")])
+Corridors = Array[ExtResource("6_pdpwt")]([SubResource("Resource_eja3l"), SubResource("Resource_hdiyk"), SubResource("Resource_dtggg"), SubResource("Resource_7su7g"), SubResource("Resource_ocjug"), SubResource("Resource_ivarh")])
 
 [node name="SchoolEarthChamber" type="Node3D" unique_id=1375172682]
 
@@ -42,52 +154,56 @@ mesh_library = ExtResource("2_eg5fg")
 cell_size = Vector3(4, 1, 4)
 cell_center_y = false
 data = {
-"cells": PackedInt32Array(0, 0, 27, 1, 0, 27, 2, 0, 28, 3, 0, 27, 4, 0, 27, 5, 0, 27, 6, 0, 27, 7, 0, 27, 8, 0, 27, 9, 0, 27, 10, 0, 27, 11, 0, 27, 12, 0, 27, 13, 0, 27, 14, 0, 28, 15, 0, 27, 16, 0, 28, 17, 0, 27, 18, 0, 27, 19, 0, 27, 20, 0, 27, 21, 0, 28, 0, 1, 27, 1, 1, 27, 2, 1, 27, 3, 1, 27, 4, 1, 27, 5, 1, 28, 6, 1, 27, 7, 1, 27, 8, 1, 27, 9, 1, 27, 10, 1, 27, 11, 1, 27, 12, 1, 27, 13, 1, 28, 14, 1, 27, 15, 1, 27, 16, 1, 27, 17, 1, 27, 18, 1, 27, 19, 1, 28, 20, 1, 27, 21, 1, 27, 0, 2, 27, 1, 2, 9, 2, 2, 7, 3, 2, 1441801, 4, 2, 27, 5, 2, 28, 6, 2, 27, 7, 2, 27, 8, 2, 27, 9, 2, 27, 10, 2, 27, 11, 2, 28, 12, 2, 28, 13, 2, 27, 14, 2, 27, 15, 2, 27, 16, 2, 28, 17, 2, 27, 18, 2, 27, 19, 2, 27, 20, 2, 27, 21, 2, 28, 0, 3, 27, 1, 3, 1048583, 2, 3, 0, 3, 3, 1441799, 4, 3, 27, 5, 3, 27, 6, 3, 28, 7, 3, 27, 8, 3, 28, 9, 3, 27, 10, 3, 28, 11, 3, 27, 12, 3, 27, 13, 3, 27, 14, 3, 27, 15, 3, 27, 16, 3, 28, 17, 3, 27, 18, 3, 27, 19, 3, 27, 20, 3, 27, 21, 3, 28, 0, 4, 27, 1, 4, 1048583, 2, 4, 2, 3, 4, 1441799, 4, 4, 27, 5, 4, 27, 6, 4, 27, 7, 4, 27, 8, 4, 9, 9, 4, 7, 10, 4, 7, 11, 4, 7, 12, 4, 1441801, 13, 4, 28, 14, 4, 28, 15, 4, 27, 16, 4, 27, 17, 4, 28, 18, 4, 27, 19, 4, 27, 20, 4, 27, 21, 4, 28, 0, 5, 27, 1, 5, 1048583, 2, 5, 3, 3, 5, 1441846, 4, 5, 1441817, 5, 5, 1441817, 6, 5, 1048595, 7, 5, 1441853, 8, 5, 1048630, 9, 5, 0, 10, 5, 0, 11, 5, 1, 12, 5, 1441799, 13, 5, 27, 14, 5, 28, 15, 5, 27, 16, 5, 27, 17, 5, 27, 18, 5, 27, 19, 5, 27, 20, 5, 27, 21, 5, 27, 0, 6, 27, 1, 6, 1048585, 2, 6, 655414, 3, 6, 655369, 4, 6, 27, 5, 6, 27, 6, 6, 60, 7, 6, 27, 8, 6, 1048583, 9, 6, 2, 10, 6, 6, 11, 6, 0, 12, 6, 1441799, 13, 6, 27, 14, 6, 27, 15, 6, 27, 16, 6, 27, 17, 6, 27, 18, 6, 27, 19, 6, 27, 20, 6, 28, 21, 6, 27, 0, 7, 27, 1, 7, 28, 2, 7, 61, 3, 7, 27, 4, 7, 27, 5, 7, 27, 6, 7, 22, 7, 7, 27, 8, 7, 1048583, 9, 7, 2, 10, 7, 1, 11, 7, 1, 12, 7, 1441846, 13, 7, 1441813, 14, 7, 1048593, 15, 7, 28, 16, 7, 27, 17, 7, 28, 18, 7, 27, 19, 7, 27, 20, 7, 27, 21, 7, 28, 0, 8, 27, 1, 8, 27, 2, 8, 22, 3, 8, 27, 4, 8, 27, 5, 8, 27, 6, 8, 24, 7, 8, 27, 8, 8, 1048585, 9, 8, 655367, 10, 8, 655367, 11, 8, 655367, 12, 8, 655369, 13, 8, 27, 14, 8, 22, 15, 8, 27, 16, 8, 27, 17, 8, 9, 18, 8, 7, 19, 8, 7, 20, 8, 1441801, 21, 8, 27, 0, 9, 27, 1, 9, 27, 2, 9, 22, 3, 9, 27, 4, 9, 28, 5, 9, 27, 6, 9, 24, 7, 9, 27, 8, 9, 27, 9, 9, 27, 10, 9, 27, 11, 9, 27, 12, 9, 27, 13, 9, 27, 14, 9, 1441809, 15, 9, 1441853, 16, 9, 1441814, 17, 9, 1048630, 18, 9, 0, 19, 9, 2, 20, 9, 1441799, 21, 9, 27, 0, 10, 27, 1, 10, 27, 2, 10, 18, 3, 10, 27, 4, 10, 27, 5, 10, 27, 6, 10, 24, 7, 10, 28, 8, 10, 27, 9, 10, 27, 10, 10, 28, 11, 10, 27, 12, 10, 27, 13, 10, 27, 14, 10, 28, 15, 10, 27, 16, 10, 28, 17, 10, 1048585, 18, 10, 655367, 19, 10, 655367, 20, 10, 655369, 21, 10, 27, 0, 11, 28, 1, 11, 27, 2, 11, 21, 3, 11, 27, 4, 11, 27, 5, 11, 655377, 6, 11, 1441811, 7, 11, 1441814, 8, 11, 1441816, 9, 11, 1441853, 10, 11, 1048593, 11, 11, 27, 12, 11, 27, 13, 11, 27, 14, 11, 27, 15, 11, 27, 16, 11, 28, 17, 11, 27, 18, 11, 27, 19, 11, 27, 20, 11, 28, 21, 11, 27, 0, 12, 27, 1, 12, 27, 2, 12, 60, 3, 12, 27, 4, 12, 28, 5, 12, 21, 6, 12, 27, 7, 12, 27, 8, 12, 27, 9, 12, 27, 10, 12, 21, 11, 12, 27, 12, 12, 27, 13, 12, 27, 14, 12, 27, 15, 12, 27, 16, 12, 27, 17, 12, 27, 18, 12, 28, 19, 12, 27, 20, 12, 27, 21, 12, 27, 0, 13, 27, 1, 13, 9, 2, 13, 54, 3, 13, 1441801, 4, 13, 27, 5, 13, 60, 6, 13, 27, 7, 13, 9, 8, 13, 7, 9, 13, 7, 10, 13, 54, 11, 13, 1441801, 12, 13, 27, 13, 13, 28, 14, 13, 28, 15, 13, 27, 16, 13, 27, 17, 13, 27, 18, 13, 27, 19, 13, 27, 20, 13, 27, 21, 13, 27, 0, 14, 28, 1, 14, 1048583, 2, 14, 1, 3, 14, 1441799, 4, 14, 27, 5, 14, 18, 6, 14, 27, 7, 14, 1048583, 8, 14, 1, 9, 14, 3, 10, 14, 6, 11, 14, 1441799, 12, 14, 27, 13, 14, 28, 14, 14, 27, 15, 14, 27, 16, 14, 27, 17, 14, 27, 18, 14, 27, 19, 14, 27, 20, 14, 27, 21, 14, 27, 0, 15, 27, 1, 15, 1048583, 2, 15, 5, 3, 15, 1441846, 4, 15, 1441817, 5, 15, 17, 6, 15, 27, 7, 15, 1048583, 8, 15, 0, 9, 15, 0, 10, 15, 0, 11, 15, 1441799, 12, 15, 27, 13, 15, 27, 14, 15, 27, 15, 15, 27, 16, 15, 28, 17, 15, 27, 18, 15, 27, 19, 15, 28, 20, 15, 27, 21, 15, 28, 0, 16, 27, 1, 16, 1048585, 2, 16, 655367, 3, 16, 655369, 4, 16, 27, 5, 16, 28, 6, 16, 27, 7, 16, 1048583, 8, 16, 0, 9, 16, 1, 10, 16, 0, 11, 16, 1441799, 12, 16, 27, 13, 16, 27, 14, 16, 28, 15, 16, 28, 16, 16, 28, 17, 16, 28, 18, 16, 28, 19, 16, 27, 20, 16, 27, 21, 16, 27, 0, 17, 27, 1, 17, 27, 2, 17, 27, 3, 17, 27, 4, 17, 28, 5, 17, 27, 6, 17, 27, 7, 17, 1048585, 8, 17, 655367, 9, 17, 655367, 10, 17, 655367, 11, 17, 655369, 12, 17, 27, 13, 17, 27, 14, 17, 28, 15, 17, 28, 16, 17, 27, 17, 17, 28, 18, 17, 27, 19, 17, 27, 20, 17, 28, 21, 17, 27, 0, 18, 27, 1, 18, 27, 2, 18, 28, 3, 18, 27, 4, 18, 27, 5, 18, 27, 6, 18, 27, 7, 18, 27, 8, 18, 27, 9, 18, 27, 10, 18, 28, 11, 18, 27, 12, 18, 27, 13, 18, 27, 14, 18, 27, 15, 18, 27, 16, 18, 27, 17, 18, 27, 18, 18, 27, 19, 18, 27, 20, 18, 27, 21, 18, 27, 0, 19, 27, 1, 19, 27, 2, 19, 27, 3, 19, 27, 4, 19, 27, 5, 19, 27, 6, 19, 27, 7, 19, 28, 8, 19, 27, 9, 19, 27, 10, 19, 27, 11, 19, 28, 12, 19, 27, 13, 19, 28, 14, 19, 27, 15, 19, 27, 16, 19, 27, 17, 19, 27, 18, 19, 28, 19, 19, 27, 20, 19, 27, 21, 19, 27, 0, 20, 27, 1, 20, 27, 2, 20, 27, 3, 20, 27, 4, 20, 27, 5, 20, 28, 6, 20, 27, 7, 20, 27, 8, 20, 27, 9, 20, 28, 10, 20, 27, 11, 20, 27, 12, 20, 28, 13, 20, 27, 14, 20, 27, 15, 20, 27, 16, 20, 27, 17, 20, 27, 18, 20, 28, 19, 20, 27, 20, 20, 27, 21, 20, 28, 0, 21, 28, 1, 21, 27, 2, 21, 27, 3, 21, 27, 4, 21, 27, 5, 21, 27, 6, 21, 27, 7, 21, 27, 8, 21, 28, 9, 21, 27, 10, 21, 27, 11, 21, 27, 12, 21, 27, 13, 21, 27, 14, 21, 27, 15, 21, 27, 16, 21, 27, 17, 21, 27, 18, 21, 28, 19, 21, 27, 20, 21, 28, 21, 21, 27)
+"cells": PackedInt32Array(0, 0, 27, 1, 0, 28, 2, 0, 28, 3, 0, 27, 4, 0, 27, 5, 0, 27, 6, 0, 27, 7, 0, 27, 8, 0, 27, 9, 0, 27, 10, 0, 27, 11, 0, 27, 12, 0, 27, 13, 0, 27, 14, 0, 27, 15, 0, 28, 16, 0, 28, 17, 0, 27, 18, 0, 28, 19, 0, 28, 20, 0, 27, 21, 0, 27, 0, 1, 27, 1, 1, 27, 2, 1, 28, 3, 1, 27, 4, 1, 27, 5, 1, 27, 6, 1, 27, 7, 1, 27, 8, 1, 27, 9, 1, 28, 10, 1, 28, 11, 1, 28, 12, 1, 27, 13, 1, 28, 14, 1, 27, 15, 1, 27, 16, 1, 27, 17, 1, 27, 18, 1, 27, 19, 1, 27, 20, 1, 27, 21, 1, 27, 0, 2, 27, 1, 2, 27, 2, 2, 9, 3, 2, 7, 4, 2, 7, 5, 2, 1441801, 6, 2, 27, 7, 2, 27, 8, 2, 27, 9, 2, 27, 10, 2, 27, 11, 2, 27, 12, 2, 27, 13, 2, 27, 14, 2, 27, 15, 2, 27, 16, 2, 27, 17, 2, 27, 18, 2, 28, 19, 2, 28, 20, 2, 27, 21, 2, 27, 0, 3, 27, 1, 3, 27, 2, 3, 1048583, 3, 3, 0, 4, 3, 0, 5, 3, 1441846, 6, 3, 1048597, 7, 3, 1048597, 8, 3, 655386, 9, 3, 27, 10, 3, 27, 11, 3, 27, 12, 3, 28, 13, 3, 27, 14, 3, 27, 15, 3, 28, 16, 3, 27, 17, 3, 27, 18, 3, 27, 19, 3, 27, 20, 3, 28, 21, 3, 28, 0, 4, 27, 1, 4, 27, 2, 4, 1048585, 3, 4, 655414, 4, 4, 655367, 5, 4, 655369, 6, 4, 27, 7, 4, 27, 8, 4, 60, 9, 4, 27, 10, 4, 27, 11, 4, 27, 12, 4, 27, 13, 4, 27, 14, 4, 27, 15, 4, 27, 16, 4, 27, 17, 4, 27, 18, 4, 27, 19, 4, 28, 20, 4, 28, 21, 4, 27, 0, 5, 28, 1, 5, 27, 2, 5, 27, 3, 5, 24, 4, 5, 27, 5, 5, 27, 6, 5, 27, 7, 5, 27, 8, 5, 21, 9, 5, 27, 10, 5, 9, 11, 5, 7, 12, 5, 7, 13, 5, 1441801, 14, 5, 27, 15, 5, 27, 16, 5, 27, 17, 5, 28, 18, 5, 9, 19, 5, 7, 20, 5, 1441801, 21, 5, 27, 0, 6, 28, 1, 6, 27, 2, 6, 1441818, 3, 6, 1048602, 4, 6, 27, 5, 6, 27, 6, 6, 27, 7, 6, 27, 8, 6, 1441809, 9, 6, 1048599, 10, 6, 1048630, 11, 6, 0, 12, 6, 0, 13, 6, 1441799, 14, 6, 27, 15, 6, 27, 16, 6, 1441818, 17, 6, 1048636, 18, 6, 1048630, 19, 6, 1, 20, 6, 1441799, 21, 6, 28, 0, 7, 27, 1, 7, 27, 2, 7, 25, 3, 7, 27, 4, 7, 27, 5, 7, 27, 6, 7, 28, 7, 7, 27, 8, 7, 27, 9, 7, 27, 10, 7, 1048585, 11, 7, 655367, 12, 7, 655414, 13, 7, 655369, 14, 7, 28, 15, 7, 27, 16, 7, 21, 17, 7, 27, 18, 7, 1048583, 19, 7, 0, 20, 7, 1441799, 21, 7, 27, 0, 8, 27, 1, 8, 27, 2, 8, 22, 3, 8, 27, 4, 8, 28, 5, 8, 28, 6, 8, 27, 7, 8, 27, 8, 8, 27, 9, 8, 27, 10, 8, 27, 11, 8, 27, 12, 8, 21, 13, 8, 27, 14, 8, 27, 15, 8, 27, 16, 8, 25, 17, 8, 27, 18, 8, 1048583, 19, 8, 1, 20, 8, 1441799, 21, 8, 28, 0, 9, 27, 1, 9, 28, 2, 9, 24, 3, 9, 27, 4, 9, 27, 5, 9, 27, 6, 9, 28, 7, 9, 27, 8, 9, 27, 9, 9, 655377, 10, 9, 1048597, 11, 9, 1048598, 12, 9, 1441811, 13, 9, 1048594, 14, 9, 1048594, 15, 9, 1048595, 16, 9, 17, 17, 9, 27, 18, 9, 1048585, 19, 9, 655367, 20, 9, 655369, 21, 9, 27, 0, 10, 27, 1, 10, 27, 2, 10, 21, 3, 10, 27, 4, 10, 28, 5, 10, 28, 6, 10, 27, 7, 10, 27, 8, 10, 27, 9, 10, 60, 10, 10, 27, 11, 10, 27, 12, 10, 27, 13, 10, 27, 14, 10, 27, 15, 10, 21, 16, 10, 27, 17, 10, 27, 18, 10, 27, 19, 10, 27, 20, 10, 27, 21, 10, 27, 0, 11, 27, 1, 11, 27, 2, 11, 25, 3, 11, 28, 4, 11, 27, 5, 11, 27, 6, 11, 27, 7, 11, 27, 8, 11, 27, 9, 11, 23, 10, 11, 27, 11, 11, 9, 12, 11, 7, 13, 11, 1441801, 14, 11, 27, 15, 11, 21, 16, 11, 27, 17, 11, 27, 18, 11, 27, 19, 11, 27, 20, 11, 27, 21, 11, 27, 0, 12, 28, 1, 12, 27, 2, 12, 61, 3, 12, 27, 4, 12, 27, 5, 12, 28, 6, 12, 27, 7, 12, 28, 8, 12, 27, 9, 12, 21, 10, 12, 27, 11, 12, 1048583, 12, 12, 0, 13, 12, 1441846, 14, 12, 1048597, 15, 12, 1048602, 16, 12, 27, 17, 12, 27, 18, 12, 27, 19, 12, 27, 20, 12, 27, 21, 12, 28, 0, 13, 27, 1, 13, 27, 2, 13, 23, 3, 13, 27, 4, 13, 28, 5, 13, 27, 6, 13, 27, 7, 13, 27, 8, 13, 27, 9, 13, 24, 10, 13, 27, 11, 13, 1048583, 12, 13, 1, 13, 13, 1441799, 14, 13, 28, 15, 13, 27, 16, 13, 28, 17, 13, 27, 18, 13, 27, 19, 13, 27, 20, 13, 27, 21, 13, 27, 0, 14, 27, 1, 14, 28, 2, 14, 61, 3, 14, 28, 4, 14, 28, 5, 14, 27, 6, 14, 1441818, 7, 14, 1048600, 8, 14, 1048597, 9, 14, 1441811, 10, 14, 1048597, 11, 14, 1048630, 12, 14, 1, 13, 14, 1441799, 14, 14, 27, 15, 14, 28, 16, 14, 27, 17, 14, 28, 18, 14, 27, 19, 14, 27, 20, 14, 27, 21, 14, 28, 0, 15, 27, 4, 15, 28, 5, 15, 27, 6, 15, 22, 7, 15, 28, 8, 15, 27, 9, 15, 28, 10, 15, 27, 11, 15, 1048585, 12, 15, 655367, 13, 15, 655369, 14, 15, 27, 15, 15, 27, 16, 15, 27, 17, 15, 27, 18, 15, 27, 19, 15, 27, 20, 15, 27, 21, 15, 27, 0, 16, 27, 2, 16, 655362, 4, 16, 1048597, 5, 16, 1048637, 6, 16, 17, 7, 16, 28, 8, 16, 28, 9, 16, 27, 10, 16, 28, 11, 16, 27, 12, 16, 28, 13, 16, 27, 14, 16, 27, 15, 16, 27, 16, 16, 27, 17, 16, 27, 18, 16, 27, 19, 16, 27, 20, 16, 28, 21, 16, 27, 0, 17, 27, 4, 17, 28, 5, 17, 27, 6, 17, 28, 7, 17, 27, 8, 17, 27, 9, 17, 27, 10, 17, 27, 11, 17, 28, 12, 17, 28, 13, 17, 27, 14, 17, 27, 15, 17, 27, 16, 17, 27, 17, 17, 28, 18, 17, 27, 19, 17, 28, 20, 17, 27, 21, 17, 28, 0, 18, 27, 1, 18, 27, 2, 18, 27, 3, 18, 27, 4, 18, 27, 5, 18, 27, 6, 18, 28, 7, 18, 27, 8, 18, 27, 9, 18, 28, 10, 18, 27, 11, 18, 27, 12, 18, 27, 13, 18, 28, 14, 18, 27, 15, 18, 27, 16, 18, 27, 17, 18, 27, 18, 18, 27, 19, 18, 27, 20, 18, 27, 21, 18, 27, 0, 19, 27, 1, 19, 27, 2, 19, 27, 3, 19, 27, 4, 19, 27, 5, 19, 27, 6, 19, 27, 7, 19, 27, 8, 19, 28, 9, 19, 27, 10, 19, 27, 11, 19, 27, 12, 19, 27, 13, 19, 27, 14, 19, 27, 15, 19, 27, 16, 19, 27, 17, 19, 27, 18, 19, 27, 19, 19, 28, 20, 19, 28, 21, 19, 27, 0, 20, 27, 1, 20, 27, 2, 20, 27, 3, 20, 27, 4, 20, 28, 5, 20, 27, 6, 20, 27, 7, 20, 27, 8, 20, 27, 9, 20, 28, 10, 20, 27, 11, 20, 27, 12, 20, 27, 13, 20, 27, 14, 20, 27, 15, 20, 27, 16, 20, 28, 17, 20, 27, 18, 20, 27, 19, 20, 28, 20, 20, 27, 21, 20, 27, 0, 21, 28, 1, 21, 27, 2, 21, 27, 3, 21, 27, 4, 21, 28, 5, 21, 28, 6, 21, 27, 7, 21, 27, 8, 21, 27, 9, 21, 27, 10, 21, 27, 11, 21, 28, 12, 21, 27, 13, 21, 28, 14, 21, 27, 15, 21, 27, 16, 21, 27, 17, 21, 27, 18, 21, 27, 19, 21, 27, 20, 21, 27, 21, 21, 28, 3, 16, 1441846, 2, 15, 54, 3, 15, 1441801, 3, 17, 655369, 1, 17, 1048585, 1, 15, 9, 2, 17, 655367, 1, 16, 1048583)
 }
-metadata/godoodads_dungeon_settings = SubResource("Resource_06jib")
-metadata/godoodads_dungeon_generated = PackedByteArray("Ae1WbW6DMAw1/SAl/QpQok7NOfqru/9FdpBRGtbUNSGv26RJw08W4iV27CQ2fGTUSkYzmtOClpSTohUVpGlNG9rSjvZkqKSKajpQM82d5k5z/+zcSSaZ5D9JBmAGYA5gAWAJIAegAKwAFAA0gDWADYAtgB2APQADoARQAagBHAA0AE5tfV7V+WequoidG7E5geOcL1pV/jlm5xLW6Dnl+5WK5InkFvqdMb88FxXkxON2Eb/zVs+tvnmtW3333L3/3tdOOefC2xcBd2G55MJeje2L87GF45b5zbxe17/+LZaRvXeCn16Pkf3l8wthnPt1zO+Qlj5HG5yBdPaVEG/KmbuBePvxhsVS+1iOPq4y8f7y90vAN4J980Jt83t2Ec7jzHJM6SGK3fkquGOZr5kcrInefhnUW8n6BkVqwkV6ylA/U0H9Sn2Ja+r+D9UE32MH3A+017/yrfnOtyf1rrvEPvZT+fNcQLECZ8ZY+8Baa6xhrNa3QWmBju0sHlitb0aCje2mC0GZLxtt7bPPaMb2KTfzzFqB7ZYcSC1I4hflEw==")
+metadata/godoodads_dungeon_settings = SubResource("Resource_wf7r7")
+metadata/godoodads_dungeon_generated = PackedByteArray("Ae1W2W7CMBAczuBwOQQHyO538AT//xH9mSqpEa7r2N4iIbXKjlaOfMzOrg/4mADABFPMMMcCSxRYQaHEGhtsscMeGhUOqHGEGedirMN7zsP7Z/21WzDaaKP9X5sIMBVgJsBcgIUASwEKAVYCKAFKAdYCbATYCrATYJ8FnYUqCwcBagGOAhgBCABbJ6Gzs44HODhjPWfMJc8VgMK6elE7OV44r9QV6P+NGABtJC/O4FeWr/D03l6oN1k/B+aajDqxM6483jaQMwGoAJxsLg8rnPHW5nTtX3n0Y+yMXxLnQ9k1V/vNXj5FICYBaBL7Sh4PeXqKgF4O1Ja9WhgbuwZwsF7bMQrUlzwdHNB7y9ROAb9E8j8NaDKJM0cA7oE+Htib68CdoUANT5E7dE7sDUX4715tW8tn7P4Y74xShJu9tgn0KeFbZKzGauBec2I9R/SRN8aR9ZxZT0rUhl5wFs4dmv+b35/cHFMxc/ZLbN1B80wDjdal31uWfleQqWsa3X/pjumrdcM8mL73PqM7vaXWje5odCL4cDYdYccQC2PV+kIfap/fP3neZ58=")
+metadata/godoodads_dungeon_graph = SubResource("Resource_ffgv7")
 
 [node name="DungeonMarkers" type="Node3D" parent="School" unique_id=881309264]
 
-[node name="MovingPlatformEW" type="Node3D" parent="School/DungeonMarkers" unique_id=1343657364 instance=ExtResource("6_p0fmw")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 18, 0, 22)
-metadata/godoodads_dungeon_marker = true
-
-[node name="MovingPlatformEW2" type="Node3D" parent="School/DungeonMarkers" unique_id=1520705282 instance=ExtResource("6_p0fmw")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 22, 0, 22)
-metadata/godoodads_dungeon_marker = true
-
-[node name="EarthRocksEw" type="Node3D" parent="School/DungeonMarkers" unique_id=1603283021 instance=ExtResource("9_pdpwt")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 30, 0, 22)
-metadata/godoodads_dungeon_marker = true
-
 [node name="EarthCrumbleNs" type="Node3D" parent="School/DungeonMarkers" unique_id=1507043189 instance=ExtResource("8_sguok")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 26)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, 18)
 metadata/godoodads_dungeon_marker = true
 
-[node name="EarthRocksNs" type="Node3D" parent="School/DungeonMarkers" unique_id=672381617 instance=ExtResource("9_pdpwt")]
+[node name="EarthCrumbleNs2" type="Node3D" parent="School/DungeonMarkers" unique_id=181429221 instance=ExtResource("8_sguok")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 70, 0, 26)
+metadata/godoodads_dungeon_marker = true
+
+[node name="MovingPlatformNS" type="Node3D" parent="School/DungeonMarkers" unique_id=1227155482 instance=ExtResource("6_p0fmw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 30)
 metadata/godoodads_dungeon_marker = true
 
-[node name="EarthRocksEw2" type="Node3D" parent="School/DungeonMarkers" unique_id=221360310 instance=ExtResource("9_pdpwt")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 62, 0, 38)
+[node name="MovingPlatformNS2" type="Node3D" parent="School/DungeonMarkers" unique_id=1734247895 instance=ExtResource("6_p0fmw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 0, 34)
 metadata/godoodads_dungeon_marker = true
 
-[node name="EarthRocksEw3" type="Node3D" parent="School/DungeonMarkers" unique_id=1962310766 instance=ExtResource("9_pdpwt")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 38, 0, 46)
+[node name="EarthCrumbleNs3" type="Node3D" parent="School/DungeonMarkers" unique_id=1881212842 instance=ExtResource("8_sguok")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, 42)
 metadata/godoodads_dungeon_marker = true
 
-[node name="EarthCrumbleNs2" type="Node3D" parent="School/DungeonMarkers" unique_id=1973767745 instance=ExtResource("8_sguok")]
+[node name="MovingPlatformNS3" type="Node3D" parent="School/DungeonMarkers" unique_id=310138108 instance=ExtResource("6_p0fmw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 46)
+metadata/godoodads_dungeon_marker = true
+
+[node name="EarthRocksNs" type="Node3D" parent="School/DungeonMarkers" unique_id=672381617 instance=ExtResource("9_pdpwt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 50)
 metadata/godoodads_dungeon_marker = true
 
-[node name="EarthCrumbleNs3" type="Node3D" parent="School/DungeonMarkers" unique_id=1863077462 instance=ExtResource("8_sguok")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 54)
+[node name="EarthRocksNs2" type="Node3D" parent="School/DungeonMarkers" unique_id=1797459156 instance=ExtResource("9_pdpwt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 58)
 metadata/godoodads_dungeon_marker = true
 
-[node name="MovingPlatformEW3" type="Node3D" parent="School/DungeonMarkers" unique_id=778188501 instance=ExtResource("6_p0fmw")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 18, 0, 62)
+[node name="EarthRocksNs3" type="Node3D" parent="School/DungeonMarkers" unique_id=745243482 instance=ExtResource("9_pdpwt")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 22, 0, 66)
 metadata/godoodads_dungeon_marker = true
+
+[node name="RoomBox" type="Node3D" parent="School" unique_id=552802975]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 60)
+script = ExtResource("12_q27ah")
+Mode = 1
+Origin = Vector3i(1, 0, 15)
+Size = Vector3i(3, 1, 3)
 
 [node name="Player" parent="." unique_id=2069731022 instance=ExtResource("7_sguok")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.1, 67)

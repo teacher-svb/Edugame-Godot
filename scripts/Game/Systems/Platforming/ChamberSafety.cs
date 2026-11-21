@@ -19,8 +19,8 @@ namespace TnT.EduGame.Platforming
         /// <summary>Falling below this height (world Y) counts as a fall.</summary>
         [Export] public float KillY { get; set; } = -2.5f;
 
-        /// <summary>Cells whose item name starts with one of these are safe respawn points.</summary>
-        [Export] public string[] SafePrefixes { get; set; } = { "room_", "landing_", "dungeon_door", "door_", "stairs_" };
+        /// <summary>Cells whose item name starts with one of these are safe respawn points: room tiles (the door included) and bridge pads.</summary>
+        [Export] public string[] SafePrefixes { get; set; } = { "room_", "corr_pad_" };
 
         /// <summary>Seconds after a respawn during which hazards cannot hit again.</summary>
         [Export] public float Grace { get; set; } = 0.75f;

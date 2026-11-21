@@ -5,7 +5,8 @@
   "earth": "textures/T_SchoolEarthColorMap.png"
  },
  "tile_size_m": 4.0,
- "axes": "Godot: tile centre at the node origin, floor top at y = 0, north = -Z (top of the screen), south = +Z (towards the camera). One MeshLibrary item per shape, built in its base orientation (the sockets below) and turned in the GridMap: every tile is Rotation FourWay. Rotate cells around Y only, never mirror. Each shape is built with its south side open, so a wall or gate turned to the south has the full wall, merlons and arch (the old low south curb is gone; stairs_S keeps its own).",
+ "axes": "Godot: tile centre at the node origin, floor top at y = 0, north = -Z (top of the screen), south = +Z (towards the camera). One MeshLibrary item per shape, built in its base orientation (the sockets below) and turned in the GridMap: every tile is Rotation FourWay. Rotate cells around Y only, never mirror. Each shape is built with its south side open, so a wall or gate turned to the south has the full wall, merlons and arch. Base orientations: room_wall wall on the north, room_corner north and west, room_door outside to the north, corr_bridge* / corr_pad_straight / challenges run north-south, corr_bend opens north and east, corr_pad_bend north and west, corr_pad_t north, south and west.",
+ "naming": "Tile names say the godoodungeon tile set: room_* = room tile set (floors, room_wall, room_corner, and room_door = the Door tile), corr_* = corridor tile set (corr_bridge* straights, corr_bend, corr_pad_* bridge pads, corr_chasm* the empty tile, corr_<element>_<challenge> the element challenges of that chamber only). To build a room by hand: room_* tiles only, room_door on the wall ring (not in a corner).",
  "gridmap_turns": {
   "note": "Quarter turns around +Y as godoowave counts them (counter-clockwise seen from above): the base north side ends up facing the side named here. GridMap cell orientation index per turn.",
   "north": {
@@ -25,720 +26,82 @@
    "orientation": 22
   }
  },
- "replaces": "Per tile: the tiles of the old one-tile-per-rotation set it replaces, with the GridMap orientation index that gives the same tile (e.g. room_owoo = room_wooo at orientation 22). A wall that was a low curb on the south side is now a full wall.",
- "remap_old_items": {
-  "note": "Old MeshLibrary item -> [new item, GridMap orientation, keep]. keep = true: the old tile was already turned in the GridMap (chasm socket variants, dungeon door): keep the cell's orientation.",
+ "renamed_2026_11_21": {
+  "room_oooo_a": "room_floor",
+  "room_oooo_b": "room_floor_b",
+  "room_oooo_circle": "room_circle",
+  "room_oooo_dais": "room_dais",
+  "room_oooo_pit": "room_pit",
+  "room_oooo_pillar": "room_pillar",
+  "room_oooo_tiers": "room_tiers",
+  "room_wooo": "room_wall",
+  "room_woow": "room_corner",
+  "landing_gwwg": "corr_pad_bend",
+  "landing_gwgw": "corr_pad_straight",
+  "landing_gwgg": "corr_pad_t",
+  "landing_gggg": "corr_pad_cross",
+  "bridge_NS": "corr_bridge",
+  "broken_NS": "corr_bridge_broken",
+  "stones_NS": "corr_bridge_stones",
+  "steps_NS": "corr_bridge_steps",
+  "mover_NS": "corr_bridge_mover",
+  "bridge_NE": "corr_bend",
+  "chasm_a": "corr_chasm",
+  "chasm_b": "corr_chasm_b",
+  "dungeon_door": "room_door",
+  "fire_jets_NS": "corr_fire_jets",
+  "fire_sinking_NS": "corr_fire_sinking",
+  "fire_flamebar_NS": "corr_fire_flamebar",
+  "water_waterfall_NS": "corr_water_waterfall",
+  "water_raft_NS": "corr_water_raft",
+  "earth_crumble_NS": "corr_earth_crumble",
+  "earth_rocks_NS": "corr_earth_rocks"
+ },
+ "removed_items_2026_11_21": {
+  "note": "MeshLibrary items removed on 2026-11-21 with the godoowave chamber set (gate rooms, 3-wall rooms, dead-end landing, chasm socket variants, door_N / stairs_S). The other items kept their numbers, so the item list has gaps.",
   "items": {
-   "0": [
-    0,
-    0,
-    false
-   ],
-   "1": [
-    1,
-    0,
-    false
-   ],
-   "2": [
-    2,
-    0,
-    false
-   ],
-   "3": [
-    3,
-    0,
-    false
-   ],
-   "4": [
-    4,
-    0,
-    false
-   ],
-   "5": [
-    5,
-    0,
-    false
-   ],
-   "6": [
-    6,
-    0,
-    false
-   ],
-   "7": [
-    7,
-    16,
-    false
-   ],
-   "8": [
-    8,
-    16,
-    false
-   ],
-   "9": [
-    7,
-    10,
-    false
-   ],
-   "10": [
-    9,
-    16,
-    false
-   ],
-   "11": [
-    10,
-    16,
-    false
-   ],
-   "12": [
-    8,
-    10,
-    false
-   ],
-   "13": [
-    11,
-    10,
-    false
-   ],
-   "14": [
-    7,
-    22,
-    false
-   ],
-   "15": [
-    9,
-    10,
-    false
-   ],
-   "16": [
-    12,
-    10,
-    false
-   ],
-   "17": [
-    13,
-    10,
-    false
-   ],
-   "18": [
-    10,
-    10,
-    false
-   ],
-   "19": [
-    14,
-    10,
-    false
-   ],
-   "20": [
-    8,
-    22,
-    false
-   ],
-   "21": [
-    11,
-    22,
-    false
-   ],
-   "22": [
-    15,
-    10,
-    false
-   ],
-   "23": [
-    7,
-    0,
-    false
-   ],
-   "24": [
-    9,
-    0,
-    false
-   ],
-   "25": [
-    11,
-    16,
-    false
-   ],
-   "26": [
-    12,
-    16,
-    false
-   ],
-   "27": [
-    14,
-    16,
-    false
-   ],
-   "28": [
-    15,
-    16,
-    false
-   ],
-   "29": [
-    9,
-    22,
-    false
-   ],
-   "30": [
-    12,
-    0,
-    false
-   ],
-   "31": [
-    15,
-    0,
-    false
-   ],
-   "32": [
-    12,
-    22,
-    false
-   ],
-   "33": [
-    13,
-    22,
-    false
-   ],
-   "34": [
-    10,
-    22,
-    false
-   ],
-   "35": [
-    13,
-    0,
-    false
-   ],
-   "36": [
-    14,
-    22,
-    false
-   ],
-   "37": [
-    8,
-    0,
-    false
-   ],
-   "38": [
-    10,
-    0,
-    false
-   ],
-   "39": [
-    13,
-    16,
-    false
-   ],
-   "40": [
-    11,
-    0,
-    false
-   ],
-   "41": [
-    14,
-    0,
-    false
-   ],
-   "42": [
-    15,
-    22,
-    false
-   ],
-   "43": [
-    16,
-    16,
-    false
-   ],
-   "44": [
-    16,
-    10,
-    false
-   ],
-   "45": [
-    17,
-    16,
-    false
-   ],
-   "46": [
-    16,
-    22,
-    false
-   ],
-   "47": [
-    18,
-    22,
-    false
-   ],
-   "48": [
-    17,
-    10,
-    false
-   ],
-   "49": [
-    19,
-    16,
-    false
-   ],
-   "50": [
-    16,
-    0,
-    false
-   ],
-   "51": [
-    17,
-    0,
-    false
-   ],
-   "52": [
-    18,
-    0,
-    false
-   ],
-   "53": [
-    19,
-    0,
-    false
-   ],
-   "54": [
-    17,
-    22,
-    false
-   ],
-   "55": [
-    19,
-    22,
-    false
-   ],
-   "56": [
-    19,
-    10,
-    false
-   ],
-   "57": [
-    20,
-    0,
-    false
-   ],
-   "58": [
-    21,
-    0,
-    false
-   ],
-   "59": [
-    22,
-    0,
-    false
-   ],
-   "60": [
-    23,
-    0,
-    false
-   ],
-   "61": [
-    24,
-    0,
-    false
-   ],
-   "62": [
-    25,
-    0,
-    false
-   ],
-   "63": [
-    21,
-    22,
-    false
-   ],
-   "64": [
-    22,
-    22,
-    false
-   ],
-   "65": [
-    23,
-    22,
-    false
-   ],
-   "66": [
-    24,
-    22,
-    false
-   ],
-   "67": [
-    25,
-    22,
-    false
-   ],
-   "68": [
-    26,
-    0,
-    false
-   ],
-   "69": [
-    26,
-    22,
-    false
-   ],
-   "70": [
-    26,
-    10,
-    false
-   ],
-   "71": [
-    26,
-    16,
-    false
-   ],
-   "72": [
-    27,
-    0,
-    false
-   ],
-   "73": [
-    28,
-    0,
-    false
-   ],
-   "74": [
-    29,
-    0,
-    false
-   ],
-   "75": [
-    29,
-    22,
-    false
-   ],
-   "76": [
-    30,
-    0,
-    false
-   ],
-   "77": [
-    29,
-    16,
-    false
-   ],
-   "78": [
-    31,
-    0,
-    true
-   ],
-   "79": [
-    32,
-    0,
-    true
-   ],
-   "80": [
-    33,
-    0,
-    true
-   ],
-   "81": [
-    34,
-    0,
-    true
-   ],
-   "82": [
-    35,
-    0,
-    true
-   ],
-   "83": [
-    36,
-    0,
-    true
-   ],
-   "84": [
-    37,
-    0,
-    true
-   ],
-   "85": [
-    38,
-    0,
-    true
-   ],
-   "86": [
-    39,
-    0,
-    true
-   ],
-   "87": [
-    40,
-    0,
-    true
-   ],
-   "88": [
-    41,
-    0,
-    true
-   ],
-   "89": [
-    42,
-    0,
-    true
-   ],
-   "90": [
-    43,
-    0,
-    true
-   ],
-   "91": [
-    44,
-    0,
-    true
-   ],
-   "92": [
-    45,
-    0,
-    true
-   ],
-   "93": [
-    46,
-    0,
-    true
-   ],
-   "94": [
-    47,
-    0,
-    true
-   ],
-   "95": [
-    48,
-    0,
-    true
-   ],
-   "96": [
-    49,
-    0,
-    true
-   ],
-   "97": [
-    50,
-    0,
-    true
-   ],
-   "98": [
-    51,
-    0,
-    true
-   ],
-   "99": [
-    52,
-    0,
-    true
-   ],
-   "100": [
-    53,
-    0,
-    true
-   ],
-   "101": [
-    54,
-    0,
-    true
-   ],
-   "102": [
-    55,
-    0,
-    false
-   ],
-   "103": [
-    55,
-    22,
-    false
-   ],
-   "104": [
-    56,
-    0,
-    false
-   ],
-   "105": [
-    56,
-    22,
-    false
-   ],
-   "106": [
-    57,
-    0,
-    false
-   ],
-   "107": [
-    57,
-    22,
-    false
-   ],
-   "108": [
-    58,
-    0,
-    false
-   ],
-   "109": [
-    58,
-    22,
-    false
-   ],
-   "110": [
-    59,
-    0,
-    false
-   ],
-   "111": [
-    59,
-    22,
-    false
-   ],
-   "112": [
-    60,
-    0,
-    false
-   ],
-   "113": [
-    60,
-    22,
-    false
-   ],
-   "114": [
-    61,
-    0,
-    false
-   ],
-   "115": [
-    61,
-    22,
-    false
-   ]
-  },
-  "names": {
-   "0": "room_oooo_a",
-   "1": "room_oooo_b",
-   "2": "room_oooo_circle",
-   "3": "room_oooo_dais",
-   "4": "room_oooo_pit",
-   "5": "room_oooo_pillar",
-   "6": "room_oooo_tiers",
-   "7": "room_ooow",
-   "8": "room_ooog",
-   "9": "room_oowo",
-   "10": "room_ooww",
-   "11": "room_oowg",
-   "12": "room_oogo",
-   "13": "room_oogw",
-   "14": "room_owoo",
-   "15": "room_owwo",
-   "16": "room_owww",
-   "17": "room_owwg",
-   "18": "room_owgo",
-   "19": "room_owgw",
-   "20": "room_ogoo",
-   "21": "room_ogwo",
-   "22": "room_ogww",
-   "23": "room_wooo",
-   "24": "room_woow",
-   "25": "room_woog",
-   "26": "room_woww",
-   "27": "room_wowg",
-   "28": "room_wogw",
-   "29": "room_wwoo",
-   "30": "room_wwow",
-   "31": "room_wwog",
-   "32": "room_wwwo",
-   "33": "room_wwgo",
-   "34": "room_wgoo",
-   "35": "room_wgow",
-   "36": "room_wgwo",
-   "37": "room_gooo",
-   "38": "room_goow",
-   "39": "room_goww",
-   "40": "room_gwoo",
-   "41": "room_gwow",
-   "42": "room_gwwo",
-   "43": "landing_wwwg",
-   "44": "landing_wwgw",
-   "45": "landing_wwgg",
-   "46": "landing_wgww",
-   "47": "landing_wgwg",
-   "48": "landing_wggw",
-   "49": "landing_wggg",
-   "50": "landing_gwww",
-   "51": "landing_gwwg",
-   "52": "landing_gwgw",
-   "53": "landing_gwgg",
-   "54": "landing_ggww",
-   "55": "landing_ggwg",
-   "56": "landing_gggw",
-   "57": "landing_gggg",
-   "58": "bridge_NS",
-   "59": "broken_NS",
-   "60": "stones_NS",
-   "61": "steps_NS",
-   "62": "mover_NS",
-   "63": "bridge_EW",
-   "64": "broken_EW",
-   "65": "stones_EW",
-   "66": "steps_EW",
-   "67": "mover_EW",
-   "68": "bridge_NE",
-   "69": "bridge_ES",
-   "70": "bridge_SW",
-   "71": "bridge_WN",
-   "72": "chasm_a",
-   "73": "chasm_b",
-   "74": "door_N",
-   "75": "door_E",
-   "76": "stairs_S",
-   "77": "door_W",
-   "78": "chasm_vvvw",
-   "79": "chasm_fvvv",
-   "80": "chasm_vvww",
-   "81": "chasm_fvvw",
-   "82": "chasm_fwvv",
-   "83": "chasm_ffvv",
-   "84": "chasm_vwvw",
-   "85": "chasm_fvwv",
-   "86": "chasm_vwww",
-   "87": "chasm_fvww",
-   "88": "chasm_fwvw",
-   "89": "chasm_ffvw",
-   "90": "chasm_fvfv",
-   "91": "chasm_fwwv",
-   "92": "chasm_fvfw",
-   "93": "chasm_ffwv",
-   "94": "chasm_fffv",
-   "95": "chasm_wwww",
-   "96": "chasm_fwww",
-   "97": "chasm_ffww",
-   "98": "chasm_fwfw",
-   "99": "chasm_fffw",
-   "100": "chasm_ffff",
-   "101": "dungeon_door",
-   "102": "fire_jets_NS",
-   "103": "fire_jets_EW",
-   "104": "fire_sinking_NS",
-   "105": "fire_sinking_EW",
-   "106": "fire_flamebar_NS",
-   "107": "fire_flamebar_EW",
-   "108": "water_waterfall_NS",
-   "109": "water_waterfall_EW",
-   "110": "water_raft_NS",
-   "111": "water_raft_EW",
-   "112": "earth_crumble_NS",
-   "113": "earth_crumble_EW",
-   "114": "earth_rocks_NS",
-   "115": "earth_rocks_EW"
+   "8": "room_gooo",
+   "10": "room_goow",
+   "11": "room_gwoo",
+   "12": "room_wwow",
+   "13": "room_wgow",
+   "14": "room_gwow",
+   "15": "room_wwog",
+   "16": "landing_gwww",
+   "29": "door_N",
+   "30": "stairs_S",
+   "31": "chasm_vvvw",
+   "32": "chasm_fvvv",
+   "33": "chasm_vvww",
+   "34": "chasm_fvvw",
+   "35": "chasm_fwvv",
+   "36": "chasm_ffvv",
+   "37": "chasm_vwvw",
+   "38": "chasm_fvwv",
+   "39": "chasm_vwww",
+   "40": "chasm_fvww",
+   "41": "chasm_fwvw",
+   "42": "chasm_ffvw",
+   "43": "chasm_fvfv",
+   "44": "chasm_fwwv",
+   "45": "chasm_fvfw",
+   "46": "chasm_ffwv",
+   "47": "chasm_fffv",
+   "48": "chasm_wwww",
+   "49": "chasm_fwww",
+   "50": "chasm_ffww",
+   "51": "chasm_fwfw",
+   "52": "chasm_fffw",
+   "53": "chasm_ffff"
   }
  },
  "sockets": {
   "room": "floor continues into the next tile (inside a room)",
-  "wall+": "a wall or curb of a room or landing; fits only a chasm side wall-",
-  "gate+": "a gate (2 m opening) of a room or landing; fits only a bridge end gate-",
-  "gate-": "a bridge end; fits only gate+",
-  "flank+": "the side of a bridge; fits only a chasm side flank-",
-  "void": "chasm to chasm, the door side of the door / stairs tiles, and the map boundary"
+  "outside+": "a room wall or the door's outside (Room Edge Socket \"outside\"; the room bounds supply outside-)",
+  "path": "an open corridor side (Path Socket)",
+  "x": "a closed corridor side, and every side of the chasm (the empty tile)"
  },
- "socket_rule": "Plain labels fit the same label; x+ fits x- only. So rooms never touch wall to wall, rooms only connect over bridges, and bridges have chasm on both sides; a crossing longer than one cell goes bridge - landing - bridge. WFC fields: N = SocketNegZ, E = SocketPosX, S = SocketPosZ, W = SocketNegX; up and down \"ground\". Map boundary: void.",
- "room_codes": "room_<NESW> / landing_<NESW>: o = room (open), w = wall (edge), g = gate.",
+ "socket_rule": "Plain labels fit the same label; x+ fits x- only. WFC fields: N = SocketNegZ, E = SocketPosX, S = SocketPosZ, W = SocketNegX; up and down \"ground\".",
  "platforming": {
   "player": "tuned for jump velocity 3 m/s, speed 3 m/s, default gravity: about 0.46 m high and 1.8 m far",
   "broken": "gap 1.15 m (west half) and 1.25 m (east half) of the N-S build, deck at 0",
@@ -768,9 +131,12 @@
  "tiles": [
   {
    "item": 0,
-   "name": "room_oooo_a",
-   "file": "school_room_oooo_a.glb",
+   "name": "room_floor",
+   "old_name": "room_oooo_a",
+   "file": "school_room_floor.glb",
    "kind": "room",
+   "role": "room",
+   "set": "room",
    "rotation": "FourWay",
    "weight": 1.3,
    "weight_per_rotation": 1.3,
@@ -779,9 +145,6 @@
     "east": "room",
     "south": "room",
     "west": "room"
-   },
-   "replaces": {
-    "room_oooo_a": 0
    },
    "tris": {
     "Collision-colonly": 12,
@@ -791,9 +154,12 @@
   },
   {
    "item": 1,
-   "name": "room_oooo_b",
-   "file": "school_room_oooo_b.glb",
+   "name": "room_floor_b",
+   "old_name": "room_oooo_b",
+   "file": "school_room_floor_b.glb",
    "kind": "room",
+   "role": "room",
+   "set": "room",
    "rotation": "FourWay",
    "weight": 1.3,
    "weight_per_rotation": 1.3,
@@ -803,9 +169,6 @@
     "south": "room",
     "west": "room"
    },
-   "replaces": {
-    "room_oooo_b": 0
-   },
    "tris": {
     "Collision-colonly": 12,
     "Mesh": 80
@@ -814,9 +177,12 @@
   },
   {
    "item": 2,
-   "name": "room_oooo_circle",
-   "file": "school_room_oooo_circle.glb",
+   "name": "room_circle",
+   "old_name": "room_oooo_circle",
+   "file": "school_room_circle.glb",
    "kind": "room",
+   "role": "room",
+   "set": "room",
    "rotation": "FourWay",
    "weight": 0.5,
    "weight_per_rotation": 0.5,
@@ -826,9 +192,6 @@
     "south": "room",
     "west": "room"
    },
-   "replaces": {
-    "room_oooo_circle": 0
-   },
    "tris": {
     "Collision-colonly": 12,
     "Mesh": 164
@@ -837,9 +200,12 @@
   },
   {
    "item": 3,
-   "name": "room_oooo_dais",
-   "file": "school_room_oooo_dais.glb",
+   "name": "room_dais",
+   "old_name": "room_oooo_dais",
+   "file": "school_room_dais.glb",
    "kind": "room",
+   "role": "room",
+   "set": "room",
    "rotation": "FourWay",
    "weight": 0.35,
    "weight_per_rotation": 0.35,
@@ -849,9 +215,6 @@
     "south": "room",
     "west": "room"
    },
-   "replaces": {
-    "room_oooo_dais": 0
-   },
    "tris": {
     "Collision-colonly": 52,
     "Mesh": 182
@@ -860,9 +223,12 @@
   },
   {
    "item": 4,
-   "name": "room_oooo_pit",
-   "file": "school_room_oooo_pit.glb",
+   "name": "room_pit",
+   "old_name": "room_oooo_pit",
+   "file": "school_room_pit.glb",
    "kind": "room",
+   "role": "room",
+   "set": "room",
    "rotation": "FourWay",
    "weight": 0.3,
    "weight_per_rotation": 0.3,
@@ -871,9 +237,6 @@
     "east": "room",
     "south": "room",
     "west": "room"
-   },
-   "replaces": {
-    "room_oooo_pit": 0
    },
    "tris": {
     "Collision-colonly": 48,
@@ -883,9 +246,12 @@
   },
   {
    "item": 5,
-   "name": "room_oooo_pillar",
-   "file": "school_room_oooo_pillar.glb",
+   "name": "room_pillar",
+   "old_name": "room_oooo_pillar",
+   "file": "school_room_pillar.glb",
    "kind": "room",
+   "role": "room",
+   "set": "room",
    "rotation": "FourWay",
    "weight": 0.45,
    "weight_per_rotation": 0.45,
@@ -895,9 +261,6 @@
     "south": "room",
     "west": "room"
    },
-   "replaces": {
-    "room_oooo_pillar": 0
-   },
    "tris": {
     "Collision-colonly": 24,
     "Mesh": 198
@@ -906,9 +269,12 @@
   },
   {
    "item": 6,
-   "name": "room_oooo_tiers",
-   "file": "school_room_oooo_tiers.glb",
+   "name": "room_tiers",
+   "old_name": "room_oooo_tiers",
+   "file": "school_room_tiers.glb",
    "kind": "room",
+   "role": "room",
+   "set": "room",
    "rotation": "FourWay",
    "weight": 0.3,
    "weight_per_rotation": 0.3,
@@ -918,9 +284,6 @@
     "south": "room",
     "west": "room"
    },
-   "replaces": {
-    "room_oooo_tiers": 0
-   },
    "tris": {
     "Collision-colonly": 48,
     "Mesh": 144
@@ -929,23 +292,20 @@
   },
   {
    "item": 7,
-   "name": "room_wooo",
-   "file": "school_room_wooo.glb",
+   "name": "room_wall",
+   "old_name": "room_wooo",
+   "file": "school_room_wall.glb",
    "kind": "room",
+   "role": "room",
+   "set": "room",
    "rotation": "FourWay",
    "weight": 4.2,
    "weight_per_rotation": 1.0499999999999998,
    "sockets": {
-    "north": "wall+",
+    "north": "outside+",
     "east": "room",
     "south": "room",
     "west": "room"
-   },
-   "replaces": {
-    "room_ooow": 16,
-    "room_oowo": 10,
-    "room_owoo": 22,
-    "room_wooo": 0
    },
    "tris": {
     "Collision-colonly": 24,
@@ -953,49 +313,21 @@
    }
   },
   {
-   "item": 8,
-   "name": "room_gooo",
-   "file": "school_room_gooo.glb",
-   "kind": "room",
-   "rotation": "FourWay",
-   "weight": 2.1,
-   "weight_per_rotation": 0.5249999999999999,
-   "sockets": {
-    "north": "gate+",
-    "east": "room",
-    "south": "room",
-    "west": "room"
-   },
-   "replaces": {
-    "room_ooog": 16,
-    "room_oogo": 10,
-    "room_ogoo": 22,
-    "room_gooo": 0
-   },
-   "tris": {
-    "Collision-colonly": 60,
-    "Mesh": 308
-   }
-  },
-  {
    "item": 9,
-   "name": "room_woow",
-   "file": "school_room_woow.glb",
+   "name": "room_corner",
+   "old_name": "room_woow",
+   "file": "school_room_corner.glb",
    "kind": "room",
+   "role": "room",
+   "set": "room",
    "rotation": "FourWay",
    "weight": 2.7,
    "weight_per_rotation": 0.675,
    "sockets": {
-    "north": "wall+",
+    "north": "outside+",
     "east": "room",
     "south": "room",
-    "west": "wall+"
-   },
-   "replaces": {
-    "room_ooww": 16,
-    "room_owwo": 10,
-    "room_woow": 0,
-    "room_wwoo": 22
+    "west": "outside+"
    },
    "tris": {
     "Collision-colonly": 36,
@@ -1003,199 +335,21 @@
    }
   },
   {
-   "item": 10,
-   "name": "room_goow",
-   "file": "school_room_goow.glb",
-   "kind": "room",
-   "rotation": "FourWay",
-   "weight": 1.35,
-   "weight_per_rotation": 0.3375,
-   "sockets": {
-    "north": "gate+",
-    "east": "room",
-    "south": "room",
-    "west": "wall+"
-   },
-   "replaces": {
-    "room_oowg": 16,
-    "room_owgo": 10,
-    "room_wgoo": 22,
-    "room_goow": 0
-   },
-   "tris": {
-    "Collision-colonly": 72,
-    "Mesh": 380
-   }
-  },
-  {
-   "item": 11,
-   "name": "room_gwoo",
-   "file": "school_room_gwoo.glb",
-   "kind": "room",
-   "rotation": "FourWay",
-   "weight": 1.35,
-   "weight_per_rotation": 0.3375,
-   "sockets": {
-    "north": "gate+",
-    "east": "wall+",
-    "south": "room",
-    "west": "room"
-   },
-   "replaces": {
-    "room_oogw": 10,
-    "room_ogwo": 22,
-    "room_woog": 16,
-    "room_gwoo": 0
-   },
-   "tris": {
-    "Collision-colonly": 72,
-    "Mesh": 420
-   }
-  },
-  {
-   "item": 12,
-   "name": "room_wwow",
-   "file": "school_room_wwow.glb",
-   "kind": "room",
-   "rotation": "FourWay",
-   "weight": 0.18,
-   "weight_per_rotation": 0.045,
-   "sockets": {
-    "north": "wall+",
-    "east": "wall+",
-    "south": "room",
-    "west": "wall+"
-   },
-   "replaces": {
-    "room_owww": 10,
-    "room_woww": 16,
-    "room_wwow": 0,
-    "room_wwwo": 22
-   },
-   "tris": {
-    "Collision-colonly": 48,
-    "Mesh": 298
-   }
-  },
-  {
-   "item": 13,
-   "name": "room_wgow",
-   "file": "school_room_wgow.glb",
-   "kind": "room",
-   "rotation": "FourWay",
-   "weight": 0.09,
-   "weight_per_rotation": 0.0225,
-   "sockets": {
-    "north": "wall+",
-    "east": "gate+",
-    "south": "room",
-    "west": "wall+"
-   },
-   "replaces": {
-    "room_owwg": 10,
-    "room_wwgo": 22,
-    "room_wgow": 0,
-    "room_goww": 16
-   },
-   "tris": {
-    "Collision-colonly": 84,
-    "Mesh": 515
-   }
-  },
-  {
-   "item": 14,
-   "name": "room_gwow",
-   "file": "school_room_gwow.glb",
-   "kind": "room",
-   "rotation": "FourWay",
-   "weight": 0.09,
-   "weight_per_rotation": 0.0225,
-   "sockets": {
-    "north": "gate+",
-    "east": "wall+",
-    "south": "room",
-    "west": "wall+"
-   },
-   "replaces": {
-    "room_owgw": 10,
-    "room_wowg": 16,
-    "room_wgwo": 22,
-    "room_gwow": 0
-   },
-   "tris": {
-    "Collision-colonly": 84,
-    "Mesh": 446
-   }
-  },
-  {
-   "item": 15,
-   "name": "room_wwog",
-   "file": "school_room_wwog.glb",
-   "kind": "room",
-   "rotation": "FourWay",
-   "weight": 0.09,
-   "weight_per_rotation": 0.0225,
-   "sockets": {
-    "north": "wall+",
-    "east": "wall+",
-    "south": "room",
-    "west": "gate+"
-   },
-   "replaces": {
-    "room_ogww": 10,
-    "room_wogw": 16,
-    "room_wwog": 0,
-    "room_gwwo": 22
-   },
-   "tris": {
-    "Collision-colonly": 84,
-    "Mesh": 523
-   }
-  },
-  {
-   "item": 16,
-   "name": "landing_gwww",
-   "file": "school_landing_gwww.glb",
-   "kind": "landing",
-   "rotation": "FourWay",
-   "weight": 0.16,
-   "weight_per_rotation": 0.04,
-   "sockets": {
-    "north": "gate+",
-    "east": "wall+",
-    "south": "wall+",
-    "west": "wall+"
-   },
-   "replaces": {
-    "landing_wwwg": 16,
-    "landing_wwgw": 10,
-    "landing_wgww": 22,
-    "landing_gwww": 0
-   },
-   "tris": {
-    "Collision-colonly": 156,
-    "Mesh": 458
-   }
-  },
-  {
    "item": 17,
-   "name": "landing_gwwg",
-   "file": "school_landing_gwwg.glb",
+   "name": "corr_pad_bend",
+   "old_name": "landing_gwwg",
+   "file": "school_corr_pad_bend.glb",
    "kind": "landing",
+   "role": "corridor",
+   "set": "corridor",
    "rotation": "FourWay",
    "weight": 1.0,
    "weight_per_rotation": 0.25,
    "sockets": {
-    "north": "gate+",
-    "east": "wall+",
-    "south": "wall+",
-    "west": "gate+"
-   },
-   "replaces": {
-    "landing_wwgg": 16,
-    "landing_wggw": 10,
-    "landing_gwwg": 0,
-    "landing_ggww": 22
+    "north": "path",
+    "east": "x",
+    "south": "x",
+    "west": "path"
    },
    "tris": {
     "Collision-colonly": 204,
@@ -1204,21 +358,20 @@
   },
   {
    "item": 18,
-   "name": "landing_gwgw",
-   "file": "school_landing_gwgw.glb",
+   "name": "corr_pad_straight",
+   "old_name": "landing_gwgw",
+   "file": "school_corr_pad_straight.glb",
    "kind": "landing",
+   "role": "corridor",
+   "set": "corridor",
    "rotation": "FourWay",
    "weight": 0.7,
    "weight_per_rotation": 0.35,
    "sockets": {
-    "north": "gate+",
-    "east": "wall+",
-    "south": "gate+",
-    "west": "wall+"
-   },
-   "replaces": {
-    "landing_wgwg": 22,
-    "landing_gwgw": 0
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
    },
    "tris": {
     "Collision-colonly": 204,
@@ -1227,23 +380,20 @@
   },
   {
    "item": 19,
-   "name": "landing_gwgg",
-   "file": "school_landing_gwgg.glb",
+   "name": "corr_pad_t",
+   "old_name": "landing_gwgg",
+   "file": "school_corr_pad_t.glb",
    "kind": "landing",
+   "role": "corridor",
+   "set": "corridor",
    "rotation": "FourWay",
    "weight": 0.48,
    "weight_per_rotation": 0.12,
    "sockets": {
-    "north": "gate+",
-    "east": "wall+",
-    "south": "gate+",
-    "west": "gate+"
-   },
-   "replaces": {
-    "landing_wggg": 16,
-    "landing_gwgg": 0,
-    "landing_ggwg": 22,
-    "landing_gggw": 10
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "path"
    },
    "tris": {
     "Collision-colonly": 252,
@@ -1252,20 +402,20 @@
   },
   {
    "item": 20,
-   "name": "landing_gggg",
-   "file": "school_landing_gggg.glb",
+   "name": "corr_pad_cross",
+   "old_name": "landing_gggg",
+   "file": "school_corr_pad_cross.glb",
    "kind": "landing",
+   "role": "corridor",
+   "set": "corridor",
    "rotation": "FourWay",
    "weight": 0.08,
    "weight_per_rotation": 0.08,
    "sockets": {
-    "north": "gate+",
-    "east": "gate+",
-    "south": "gate+",
-    "west": "gate+"
-   },
-   "replaces": {
-    "landing_gggg": 0
+    "north": "path",
+    "east": "path",
+    "south": "path",
+    "west": "path"
    },
    "tris": {
     "Collision-colonly": 300,
@@ -1274,166 +424,152 @@
   },
   {
    "item": 21,
-   "name": "bridge_NS",
-   "file": "school_bridge_NS.glb",
+   "name": "corr_bridge",
+   "old_name": "bridge_NS",
+   "file": "school_corr_bridge.glb",
    "kind": "bridge",
+   "role": "corridor",
+   "set": "corridor",
    "rotation": "FourWay",
    "weight": 3.0,
    "weight_per_rotation": 1.5,
    "sockets": {
-    "north": "gate-",
-    "east": "flank+",
-    "south": "gate-",
-    "west": "flank+"
-   },
-   "replaces": {
-    "bridge_NS": 0,
-    "bridge_EW": 22
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
    },
    "tris": {
     "Collision-colonly": 36,
     "Mesh": 110
-   },
-   "axis": "NS"
+   }
   },
   {
    "item": 22,
-   "name": "broken_NS",
-   "file": "school_broken_NS.glb",
+   "name": "corr_bridge_broken",
+   "old_name": "broken_NS",
+   "file": "school_corr_bridge_broken.glb",
    "kind": "broken",
+   "role": "corridor",
+   "set": "corridor",
    "rotation": "FourWay",
    "weight": 0.7,
    "weight_per_rotation": 0.35,
    "sockets": {
-    "north": "gate-",
-    "east": "flank+",
-    "south": "gate-",
-    "west": "flank+"
-   },
-   "replaces": {
-    "broken_NS": 0,
-    "broken_EW": 22
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
    },
    "tris": {
     "Collision-colonly": 96,
     "Mesh": 340
-   },
-   "axis": "NS"
+   }
   },
   {
    "item": 23,
-   "name": "stones_NS",
-   "file": "school_stones_NS.glb",
+   "name": "corr_bridge_stones",
+   "old_name": "stones_NS",
+   "file": "school_corr_bridge_stones.glb",
    "kind": "stones",
+   "role": "corridor",
+   "set": "corridor",
    "rotation": "FourWay",
    "weight": 0.6,
    "weight_per_rotation": 0.3,
    "sockets": {
-    "north": "gate-",
-    "east": "flank+",
-    "south": "gate-",
-    "west": "flank+"
-   },
-   "replaces": {
-    "stones_NS": 0,
-    "stones_EW": 22
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
    },
    "tris": {
     "Collision-colonly": 100,
     "Mesh": 226
-   },
-   "axis": "NS"
+   }
   },
   {
    "item": 24,
-   "name": "steps_NS",
-   "file": "school_steps_NS.glb",
+   "name": "corr_bridge_steps",
+   "old_name": "steps_NS",
+   "file": "school_corr_bridge_steps.glb",
    "kind": "steps",
+   "role": "corridor",
+   "set": "corridor",
    "rotation": "FourWay",
    "weight": 0.6,
    "weight_per_rotation": 0.3,
    "sockets": {
-    "north": "gate-",
-    "east": "flank+",
-    "south": "gate-",
-    "west": "flank+"
-   },
-   "replaces": {
-    "steps_NS": 0,
-    "steps_EW": 22
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
    },
    "tris": {
     "Collision-colonly": 72,
     "Mesh": 190
-   },
-   "axis": "NS"
+   }
   },
   {
    "item": 25,
-   "name": "mover_NS",
-   "file": "school_mover_NS.glb",
+   "name": "corr_bridge_mover",
+   "old_name": "mover_NS",
+   "file": "school_corr_bridge_mover.glb",
    "kind": "mover",
+   "role": "corridor",
+   "set": "corridor",
    "rotation": "FourWay",
    "weight": 0.4,
    "weight_per_rotation": 0.2,
    "sockets": {
-    "north": "gate-",
-    "east": "flank+",
-    "south": "gate-",
-    "west": "flank+"
-   },
-   "replaces": {
-    "mover_NS": 0,
-    "mover_EW": 22
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
    },
    "tris": {
     "Collision-colonly": 120,
     "Mesh": 270
-   },
-   "axis": "NS"
+   }
   },
   {
    "item": 26,
-   "name": "bridge_NE",
-   "file": "school_bridge_NE.glb",
+   "name": "corr_bend",
+   "old_name": "bridge_NE",
+   "file": "school_corr_bend.glb",
    "kind": "corner",
+   "role": "corridor",
+   "set": "corridor",
    "rotation": "FourWay",
    "weight": 1.4,
    "weight_per_rotation": 0.35,
    "sockets": {
-    "north": "gate-",
-    "east": "gate-",
-    "south": "flank+",
-    "west": "flank+"
-   },
-   "replaces": {
-    "bridge_NE": 0,
-    "bridge_ES": 22,
-    "bridge_SW": 10,
-    "bridge_WN": 16
+    "north": "path",
+    "east": "path",
+    "south": "x",
+    "west": "x"
    },
    "tris": {
     "Collision-colonly": 72,
     "Mesh": 168
-   },
-   "axis": "NE"
+   }
   },
   {
    "item": 27,
-   "name": "chasm_a",
-   "file": "school_chasm_a.glb",
+   "name": "corr_chasm",
+   "old_name": "chasm_a",
+   "file": "school_corr_chasm.glb",
    "kind": "chasm",
+   "role": "empty",
+   "set": "corridor",
    "rotation": "FourWay",
    "weight": 0.4,
    "weight_per_rotation": 0.4,
    "sockets": {
-    "north": "void",
-    "east": "void",
-    "south": "void",
-    "west": "void"
-   },
-   "replaces": {
-    "chasm_a": 0
+    "north": "x",
+    "east": "x",
+    "south": "x",
+    "west": "x"
    },
    "tris": {
     "Mesh": 2
@@ -1441,383 +577,231 @@
   },
   {
    "item": 28,
-   "name": "chasm_b",
-   "file": "school_chasm_b.glb",
+   "name": "corr_chasm_b",
+   "old_name": "chasm_b",
+   "file": "school_corr_chasm_b.glb",
    "kind": "chasm",
+   "role": "empty",
+   "set": "corridor",
    "rotation": "FourWay",
    "weight": 0.1,
    "weight_per_rotation": 0.1,
    "sockets": {
-    "north": "void",
-    "east": "void",
-    "south": "void",
-    "west": "void"
-   },
-   "replaces": {
-    "chasm_b": 0
+    "north": "x",
+    "east": "x",
+    "south": "x",
+    "west": "x"
    },
    "tris": {
     "Mesh": 72
    }
   },
   {
-   "item": 29,
-   "name": "door_N",
-   "file": "school_door_N.glb",
-   "kind": "door",
+   "item": 54,
+   "name": "room_door",
+   "old_name": "dungeon_door",
+   "file": "school_room_door.glb",
+   "kind": "gatehouse",
+   "role": "door",
+   "set": "room",
    "rotation": "FourWay",
    "weight": 0.0,
    "weight_per_rotation": 0.0,
    "sockets": {
-    "north": "void",
-    "east": "wall+",
+    "north": "outside+",
+    "east": "room",
     "south": "room",
-    "west": "wall+"
-   },
-   "replaces": {
-    "door_N": 0,
-    "door_E": 22,
-    "door_W": 16
+    "west": "room"
    },
    "tris": {
-    "Collision-colonly": 60,
-    "Mesh": 518
-   },
-   "door": "N"
+    "Collision-colonly": 36,
+    "Mesh": 354
+   }
   },
   {
-   "item": 30,
-   "name": "stairs_S",
-   "file": "school_stairs_S.glb",
-   "kind": "door",
+   "item": 55,
+   "name": "corr_fire_jets",
+   "old_name": "fire_jets_NS",
+   "file": "school_corr_fire_jets.glb",
+   "kind": "challenge",
+   "role": "challenge",
+   "set": "corridor",
    "rotation": "FourWay",
-   "weight": 0.0,
-   "weight_per_rotation": 0.0,
+   "weight": 0.7,
+   "weight_per_rotation": 0.35,
    "sockets": {
-    "north": "room",
-    "east": "wall+",
-    "south": "void",
-    "west": "wall+"
-   },
-   "replaces": {
-    "stairs_S": 0
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
    },
    "tris": {
-    "Collision-colonly": 134,
-    "Mesh": 502
+    "Collision-colonly": 36,
+    "Mesh": 214
    },
-   "door": "S"
-  }
- ],
- "chasm_variants_note": "Socket variants of the chasm: each is its own MeshLibrary item (the WFC generator needs one item per tile) with the mesh of school_chasm_a.glb; no file of their own.",
- "chasm_variants": [
-  {
-   "name": "chasm_vvvw",
-   "item": 31,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
-   "sockets": {
-    "north": "void",
-    "east": "void",
-    "south": "void",
-    "west": "wall-"
-   }
+   "element": "fire",
+   "challenge": "jets",
+   "marker": "corr_fire_jets"
   },
   {
-   "name": "chasm_fvvv",
-   "item": 32,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
+   "item": 56,
+   "name": "corr_fire_sinking",
+   "old_name": "fire_sinking_NS",
+   "file": "school_corr_fire_sinking.glb",
+   "kind": "challenge",
+   "role": "challenge",
+   "set": "corridor",
+   "rotation": "FourWay",
+   "weight": 0.7,
+   "weight_per_rotation": 0.35,
    "sockets": {
-    "north": "flank-",
-    "east": "void",
-    "south": "void",
-    "west": "void"
-   }
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
+   },
+   "tris": {
+    "Collision-colonly": 120,
+    "Mesh": 358
+   },
+   "element": "fire",
+   "challenge": "sinking",
+   "marker": "corr_fire_sinking"
   },
   {
-   "name": "chasm_vvww",
-   "item": 33,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
+   "item": 57,
+   "name": "corr_fire_flamebar",
+   "old_name": "fire_flamebar_NS",
+   "file": "school_corr_fire_flamebar.glb",
+   "kind": "challenge",
+   "role": "challenge",
+   "set": "corridor",
+   "rotation": "FourWay",
+   "weight": 0.7,
+   "weight_per_rotation": 0.35,
    "sockets": {
-    "north": "void",
-    "east": "void",
-    "south": "wall-",
-    "west": "wall-"
-   }
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
+   },
+   "tris": {
+    "Collision-colonly": 224,
+    "Mesh": 446
+   },
+   "element": "fire",
+   "challenge": "flamebar",
+   "marker": "corr_fire_flamebar"
   },
   {
-   "name": "chasm_fvvw",
-   "item": 34,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
+   "item": 58,
+   "name": "corr_water_waterfall",
+   "old_name": "water_waterfall_NS",
+   "file": "school_corr_water_waterfall.glb",
+   "kind": "challenge",
+   "role": "challenge",
+   "set": "corridor",
+   "rotation": "FourWay",
+   "weight": 0.7,
+   "weight_per_rotation": 0.35,
    "sockets": {
-    "north": "flank-",
-    "east": "void",
-    "south": "void",
-    "west": "wall-"
-   }
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
+   },
+   "tris": {
+    "Collision-colonly": 72,
+    "Mesh": 206
+   },
+   "element": "water",
+   "challenge": "waterfall",
+   "marker": "corr_water_waterfall"
   },
   {
-   "name": "chasm_fwvv",
-   "item": 35,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
+   "item": 59,
+   "name": "corr_water_raft",
+   "old_name": "water_raft_NS",
+   "file": "school_corr_water_raft.glb",
+   "kind": "challenge",
+   "role": "challenge",
+   "set": "corridor",
+   "rotation": "FourWay",
+   "weight": 0.7,
+   "weight_per_rotation": 0.35,
    "sockets": {
-    "north": "flank-",
-    "east": "wall-",
-    "south": "void",
-    "west": "void"
-   }
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
+   },
+   "tris": {
+    "Collision-colonly": 120,
+    "Mesh": 350
+   },
+   "element": "water",
+   "challenge": "raft",
+   "marker": "corr_water_raft"
   },
   {
-   "name": "chasm_ffvv",
-   "item": 36,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
+   "item": 60,
+   "name": "corr_earth_crumble",
+   "old_name": "earth_crumble_NS",
+   "file": "school_corr_earth_crumble.glb",
+   "kind": "challenge",
+   "role": "challenge",
+   "set": "corridor",
+   "rotation": "FourWay",
+   "weight": 0.7,
+   "weight_per_rotation": 0.35,
    "sockets": {
-    "north": "flank-",
-    "east": "flank-",
-    "south": "void",
-    "west": "void"
-   }
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
+   },
+   "tris": {
+    "Collision-colonly": 120,
+    "Mesh": 534
+   },
+   "element": "earth",
+   "challenge": "crumble",
+   "marker": "corr_earth_crumble"
   },
   {
-   "name": "chasm_vwvw",
-   "item": 37,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 1.0,
+   "item": 61,
+   "name": "corr_earth_rocks",
+   "old_name": "earth_rocks_NS",
+   "file": "school_corr_earth_rocks.glb",
+   "kind": "challenge",
+   "role": "challenge",
+   "set": "corridor",
+   "rotation": "FourWay",
+   "weight": 0.7,
+   "weight_per_rotation": 0.35,
    "sockets": {
-    "north": "void",
-    "east": "wall-",
-    "south": "void",
-    "west": "wall-"
-   }
-  },
-  {
-   "name": "chasm_fvwv",
-   "item": 38,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
-   "sockets": {
-    "north": "flank-",
-    "east": "void",
-    "south": "wall-",
-    "west": "void"
-   }
-  },
-  {
-   "name": "chasm_vwww",
-   "item": 39,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
-   "sockets": {
-    "north": "void",
-    "east": "wall-",
-    "south": "wall-",
-    "west": "wall-"
-   }
-  },
-  {
-   "name": "chasm_fvww",
-   "item": 40,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
-   "sockets": {
-    "north": "flank-",
-    "east": "void",
-    "south": "wall-",
-    "west": "wall-"
-   }
-  },
-  {
-   "name": "chasm_fwvw",
-   "item": 41,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
-   "sockets": {
-    "north": "flank-",
-    "east": "wall-",
-    "south": "void",
-    "west": "wall-"
-   }
-  },
-  {
-   "name": "chasm_ffvw",
-   "item": 42,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
-   "sockets": {
-    "north": "flank-",
-    "east": "flank-",
-    "south": "void",
-    "west": "wall-"
-   }
-  },
-  {
-   "name": "chasm_fvfv",
-   "item": 43,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 1.0,
-   "sockets": {
-    "north": "flank-",
-    "east": "void",
-    "south": "flank-",
-    "west": "void"
-   }
-  },
-  {
-   "name": "chasm_fwwv",
-   "item": 44,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
-   "sockets": {
-    "north": "flank-",
-    "east": "wall-",
-    "south": "wall-",
-    "west": "void"
-   }
-  },
-  {
-   "name": "chasm_fvfw",
-   "item": 45,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
-   "sockets": {
-    "north": "flank-",
-    "east": "void",
-    "south": "flank-",
-    "west": "wall-"
-   }
-  },
-  {
-   "name": "chasm_ffwv",
-   "item": 46,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
-   "sockets": {
-    "north": "flank-",
-    "east": "flank-",
-    "south": "wall-",
-    "west": "void"
-   }
-  },
-  {
-   "name": "chasm_fffv",
-   "item": 47,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
-   "sockets": {
-    "north": "flank-",
-    "east": "flank-",
-    "south": "flank-",
-    "west": "void"
-   }
-  },
-  {
-   "name": "chasm_wwww",
-   "item": 48,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 0.5,
-   "sockets": {
-    "north": "wall-",
-    "east": "wall-",
-    "south": "wall-",
-    "west": "wall-"
-   }
-  },
-  {
-   "name": "chasm_fwww",
-   "item": 49,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
-   "sockets": {
-    "north": "flank-",
-    "east": "wall-",
-    "south": "wall-",
-    "west": "wall-"
-   }
-  },
-  {
-   "name": "chasm_ffww",
-   "item": 50,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
-   "sockets": {
-    "north": "flank-",
-    "east": "flank-",
-    "south": "wall-",
-    "west": "wall-"
-   }
-  },
-  {
-   "name": "chasm_fwfw",
-   "item": 51,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 1.0,
-   "sockets": {
-    "north": "flank-",
-    "east": "wall-",
-    "south": "flank-",
-    "west": "wall-"
-   }
-  },
-  {
-   "name": "chasm_fffw",
-   "item": 52,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 2.0,
-   "sockets": {
-    "north": "flank-",
-    "east": "flank-",
-    "south": "flank-",
-    "west": "wall-"
-   }
-  },
-  {
-   "name": "chasm_ffff",
-   "item": 53,
-   "mesh_file": "school_chasm_a.glb",
-   "rotation": "FourWay (quarter turns)",
-   "weight": 0.5,
-   "sockets": {
-    "north": "flank-",
-    "east": "flank-",
-    "south": "flank-",
-    "west": "flank-"
-   }
+    "north": "path",
+    "east": "x",
+    "south": "path",
+    "west": "x"
+   },
+   "tris": {
+    "Collision-colonly": 36,
+    "Mesh": 224
+   },
+   "element": "earth",
+   "challenge": "rocks",
+   "marker": "corr_earth_rocks"
   }
  ],
  "challenges": {
-  "note": "Element challenge bridges for the I.3 trial chambers: bridge tiles (sockets as bridge_NS / _EW) whose moving or dangerous parts are marker scenes in the game (marker = tile name). Items after the dungeon door. Each element corridor tile set uses only its own challenges.",
+  "note": "Element challenge bridges for the I.3 trial chambers: corridor straights (sockets as corr_bridge) whose moving or dangerous parts are marker scenes in the game (challenges/<tile name>.tscn). Items after room_door. Each element corridor tile set uses only its own challenges.",
   "tiles": [
    {
-    "name": "fire_jets_NS",
+    "name": "corr_fire_jets",
+    "old_name": "fire_jets_NS",
     "item": 55,
-    "file": "school_fire_jets_NS.glb",
+    "file": "school_corr_fire_jets.glb",
     "element": "fire",
     "challenge": "jets",
     "axis": "NS",
@@ -1825,25 +809,22 @@
     "weight": 0.7,
     "weight_per_rotation": 0.35,
     "sockets": {
-     "north": "gate-",
-     "east": "flank+",
-     "south": "gate-",
-     "west": "flank+"
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
     },
-    "replaces": {
-     "fire_jets_NS": 0,
-     "fire_jets_EW": 22
-    },
-    "marker": "fire_jets_NS",
+    "marker": "corr_fire_jets",
     "tris": {
      "Collision-colonly": 36,
      "Mesh": 214
     }
    },
    {
-    "name": "fire_sinking_NS",
+    "name": "corr_fire_sinking",
+    "old_name": "fire_sinking_NS",
     "item": 56,
-    "file": "school_fire_sinking_NS.glb",
+    "file": "school_corr_fire_sinking.glb",
     "element": "fire",
     "challenge": "sinking",
     "axis": "NS",
@@ -1851,25 +832,22 @@
     "weight": 0.7,
     "weight_per_rotation": 0.35,
     "sockets": {
-     "north": "gate-",
-     "east": "flank+",
-     "south": "gate-",
-     "west": "flank+"
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
     },
-    "replaces": {
-     "fire_sinking_NS": 0,
-     "fire_sinking_EW": 22
-    },
-    "marker": "fire_sinking_NS",
+    "marker": "corr_fire_sinking",
     "tris": {
      "Collision-colonly": 120,
      "Mesh": 358
     }
    },
    {
-    "name": "fire_flamebar_NS",
+    "name": "corr_fire_flamebar",
+    "old_name": "fire_flamebar_NS",
     "item": 57,
-    "file": "school_fire_flamebar_NS.glb",
+    "file": "school_corr_fire_flamebar.glb",
     "element": "fire",
     "challenge": "flamebar",
     "axis": "NS",
@@ -1877,25 +855,22 @@
     "weight": 0.7,
     "weight_per_rotation": 0.35,
     "sockets": {
-     "north": "gate-",
-     "east": "flank+",
-     "south": "gate-",
-     "west": "flank+"
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
     },
-    "replaces": {
-     "fire_flamebar_NS": 0,
-     "fire_flamebar_EW": 22
-    },
-    "marker": "fire_flamebar_NS",
+    "marker": "corr_fire_flamebar",
     "tris": {
      "Collision-colonly": 224,
      "Mesh": 446
     }
    },
    {
-    "name": "water_waterfall_NS",
+    "name": "corr_water_waterfall",
+    "old_name": "water_waterfall_NS",
     "item": 58,
-    "file": "school_water_waterfall_NS.glb",
+    "file": "school_corr_water_waterfall.glb",
     "element": "water",
     "challenge": "waterfall",
     "axis": "NS",
@@ -1903,25 +878,22 @@
     "weight": 0.7,
     "weight_per_rotation": 0.35,
     "sockets": {
-     "north": "gate-",
-     "east": "flank+",
-     "south": "gate-",
-     "west": "flank+"
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
     },
-    "replaces": {
-     "water_waterfall_NS": 0,
-     "water_waterfall_EW": 22
-    },
-    "marker": "water_waterfall_NS",
+    "marker": "corr_water_waterfall",
     "tris": {
      "Collision-colonly": 72,
      "Mesh": 206
     }
    },
    {
-    "name": "water_raft_NS",
+    "name": "corr_water_raft",
+    "old_name": "water_raft_NS",
     "item": 59,
-    "file": "school_water_raft_NS.glb",
+    "file": "school_corr_water_raft.glb",
     "element": "water",
     "challenge": "raft",
     "axis": "NS",
@@ -1929,25 +901,22 @@
     "weight": 0.7,
     "weight_per_rotation": 0.35,
     "sockets": {
-     "north": "gate-",
-     "east": "flank+",
-     "south": "gate-",
-     "west": "flank+"
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
     },
-    "replaces": {
-     "water_raft_NS": 0,
-     "water_raft_EW": 22
-    },
-    "marker": "water_raft_NS",
+    "marker": "corr_water_raft",
     "tris": {
      "Collision-colonly": 120,
      "Mesh": 350
     }
    },
    {
-    "name": "earth_crumble_NS",
+    "name": "corr_earth_crumble",
+    "old_name": "earth_crumble_NS",
     "item": 60,
-    "file": "school_earth_crumble_NS.glb",
+    "file": "school_corr_earth_crumble.glb",
     "element": "earth",
     "challenge": "crumble",
     "axis": "NS",
@@ -1955,25 +924,22 @@
     "weight": 0.7,
     "weight_per_rotation": 0.35,
     "sockets": {
-     "north": "gate-",
-     "east": "flank+",
-     "south": "gate-",
-     "west": "flank+"
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
     },
-    "replaces": {
-     "earth_crumble_NS": 0,
-     "earth_crumble_EW": 22
-    },
-    "marker": "earth_crumble_NS",
+    "marker": "corr_earth_crumble",
     "tris": {
      "Collision-colonly": 120,
      "Mesh": 534
     }
    },
    {
-    "name": "earth_rocks_NS",
+    "name": "corr_earth_rocks",
+    "old_name": "earth_rocks_NS",
     "item": 61,
-    "file": "school_earth_rocks_NS.glb",
+    "file": "school_corr_earth_rocks.glb",
     "element": "earth",
     "challenge": "rocks",
     "axis": "NS",
@@ -1981,16 +947,12 @@
     "weight": 0.7,
     "weight_per_rotation": 0.35,
     "sockets": {
-     "north": "gate-",
-     "east": "flank+",
-     "south": "gate-",
-     "west": "flank+"
+     "north": "path",
+     "east": "x",
+     "south": "path",
+     "west": "x"
     },
-    "replaces": {
-     "earth_rocks_NS": 0,
-     "earth_rocks_EW": 22
-    },
-    "marker": "earth_rocks_NS",
+    "marker": "corr_earth_rocks",
     "tris": {
      "Collision-colonly": 36,
      "Mesh": 224
@@ -2085,23 +1047,17 @@
   }
  },
  "dungeon": {
-  "note": "Tile sets for godoodungeon (rooms + corridors). Rooms: walls face out with outside+, the room bounds supply outside- (Room Edge Socket \"outside\"); the Door Tile is dungeon_door, one tile with four rotations whose only outside+ face is its outside. Corridors (Path Socket \"path\"): the bridges and bridge pads, open faces path, closed x; the chasm is the empty tile.",
+  "note": "Tile sets for godoodungeon (rooms + corridors). Rooms: walls face out with outside+, the room bounds supply outside- (Room Edge Socket \"outside\"; add outside- to the room set's External Sockets); the Door is room_door, one tile with four rotations whose only outside+ face is its outside. Corridors (Path Socket \"path\"): the bridges and bridge pads, open faces path, closed x; corr_chasm / corr_chasm_b are the empty tile. Element chambers add their corr_<element>_* tiles.",
   "room_edge_socket": "outside",
   "path_socket": "path",
-  "extra_tiles": [
-   {
-    "name": "dungeon_door",
-    "item": 54,
-    "file": "school_dungeon_door.glb",
-    "tris": {
-     "Collision-colonly": 36,
-     "Mesh": 354
-    }
-   }
+  "door_tile": "room_door",
+  "door_item": 54,
+  "room_external_sockets": [
+   "outside-"
   ],
   "room_tiles": [
    {
-    "name": "room_oooo_a",
+    "name": "room_floor",
     "item": 0,
     "rotation": "FourWay",
     "weight": 1.3,
@@ -2114,7 +1070,7 @@
     }
    },
    {
-    "name": "room_oooo_b",
+    "name": "room_floor_b",
     "item": 1,
     "rotation": "FourWay",
     "weight": 1.3,
@@ -2127,7 +1083,7 @@
     }
    },
    {
-    "name": "room_oooo_circle",
+    "name": "room_circle",
     "item": 2,
     "rotation": "FourWay",
     "weight": 0.5,
@@ -2140,7 +1096,7 @@
     }
    },
    {
-    "name": "room_oooo_dais",
+    "name": "room_dais",
     "item": 3,
     "rotation": "FourWay",
     "weight": 0.35,
@@ -2153,7 +1109,7 @@
     }
    },
    {
-    "name": "room_oooo_pit",
+    "name": "room_pit",
     "item": 4,
     "rotation": "FourWay",
     "weight": 0.3,
@@ -2166,7 +1122,7 @@
     }
    },
    {
-    "name": "room_oooo_pillar",
+    "name": "room_pillar",
     "item": 5,
     "rotation": "FourWay",
     "weight": 0.45,
@@ -2179,7 +1135,7 @@
     }
    },
    {
-    "name": "room_oooo_tiers",
+    "name": "room_tiers",
     "item": 6,
     "rotation": "FourWay",
     "weight": 0.3,
@@ -2192,7 +1148,7 @@
     }
    },
    {
-    "name": "room_wooo",
+    "name": "room_wall",
     "item": 7,
     "rotation": "FourWay",
     "weight": 4.2,
@@ -2205,7 +1161,7 @@
     }
    },
    {
-    "name": "room_woow",
+    "name": "room_corner",
     "item": 9,
     "rotation": "FourWay",
     "weight": 2.7,
@@ -2218,7 +1174,7 @@
     }
    },
    {
-    "name": "dungeon_door",
+    "name": "room_door",
     "item": 54,
     "rotation": "FourWay",
     "weight": 0.0,
@@ -2233,7 +1189,7 @@
   ],
   "corridor_tiles": [
    {
-    "name": "landing_gwwg",
+    "name": "corr_pad_bend",
     "item": 17,
     "rotation": "FourWay",
     "weight": 1.0,
@@ -2246,7 +1202,7 @@
     }
    },
    {
-    "name": "landing_gwgw",
+    "name": "corr_pad_straight",
     "item": 18,
     "rotation": "FourWay",
     "weight": 0.7,
@@ -2259,7 +1215,7 @@
     }
    },
    {
-    "name": "landing_gwgg",
+    "name": "corr_pad_t",
     "item": 19,
     "rotation": "FourWay",
     "weight": 0.48,
@@ -2272,7 +1228,7 @@
     }
    },
    {
-    "name": "landing_gggg",
+    "name": "corr_pad_cross",
     "item": 20,
     "rotation": "FourWay",
     "weight": 0.08,
@@ -2285,7 +1241,7 @@
     }
    },
    {
-    "name": "bridge_NS",
+    "name": "corr_bridge",
     "item": 21,
     "rotation": "FourWay",
     "weight": 3.0,
@@ -2298,7 +1254,7 @@
     }
    },
    {
-    "name": "broken_NS",
+    "name": "corr_bridge_broken",
     "item": 22,
     "rotation": "FourWay",
     "weight": 0.7,
@@ -2311,7 +1267,7 @@
     }
    },
    {
-    "name": "stones_NS",
+    "name": "corr_bridge_stones",
     "item": 23,
     "rotation": "FourWay",
     "weight": 0.6,
@@ -2324,7 +1280,7 @@
     }
    },
    {
-    "name": "steps_NS",
+    "name": "corr_bridge_steps",
     "item": 24,
     "rotation": "FourWay",
     "weight": 0.6,
@@ -2337,11 +1293,11 @@
     }
    },
    {
-    "name": "mover_NS",
+    "name": "corr_bridge_mover",
     "item": 25,
     "rotation": "FourWay",
     "weight": 0.4,
-    "marker": "mover_NS",
+    "marker": "corr_bridge_mover",
     "sockets": {
      "north": "path",
      "east": "x",
@@ -2350,7 +1306,7 @@
     }
    },
    {
-    "name": "bridge_NE",
+    "name": "corr_bend",
     "item": 26,
     "rotation": "FourWay",
     "weight": 1.4,
@@ -2363,7 +1319,7 @@
     }
    },
    {
-    "name": "chasm_a",
+    "name": "corr_chasm",
     "item": 27,
     "rotation": "FourWay",
     "weight": 0.4,
@@ -2376,7 +1332,7 @@
     }
    },
    {
-    "name": "chasm_b",
+    "name": "corr_chasm_b",
     "item": 28,
     "rotation": "FourWay",
     "weight": 0.1,
@@ -2388,6 +1344,21 @@
      "west": "x"
     }
    }
-  ]
+  ],
+  "element_corridor_tiles": {
+   "fire": [
+    "corr_fire_jets",
+    "corr_fire_sinking",
+    "corr_fire_flamebar"
+   ],
+   "water": [
+    "corr_water_waterfall",
+    "corr_water_raft"
+   ],
+   "earth": [
+    "corr_earth_crumble",
+    "corr_earth_rocks"
+   ]
+  }
  }
 }

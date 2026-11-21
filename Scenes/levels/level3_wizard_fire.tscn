@@ -5,10 +5,10 @@
 [ext_resource type="Resource" uid="uid://dpdqtm41pa614" path="res://GameData/wfc/school_dungeon_corridors_fire.tres" id="3_7uvon"]
 [ext_resource type="Resource" uid="uid://c30uqu0iog7a7" path="res://GameData/wfc/school_dungeon_rooms_fire.tres" id="4_tjpq6"]
 [ext_resource type="Script" uid="uid://cgraummx7cyo2" path="res://addons/godoodungeon/Resources/DungeonSettings.cs" id="5_suqbs"]
-[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/fire_sinking_NS.tscn" id="7_6bdgy"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/corr_fire_sinking.tscn" id="7_6bdgy"]
 [ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="7_cle8w"]
 [ext_resource type="PackedScene" uid="uid://b46bwsxmk2pp7" path="res://assets/3D/village/interiors/school_interior/school_moving_platform_NS.tscn" id="8_cle8w"]
-[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/fire_flamebar_NS.tscn" id="9_d58b1"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/corr_fire_flamebar.tscn" id="9_d58b1"]
 [ext_resource type="Script" uid="uid://kevvfo7u3dqp" path="res://scripts/Game/Systems/Platforming/ChamberSafety.cs" id="10_6bdgy"]
 
 [sub_resource type="Resource" id="Resource_jkgbt"]

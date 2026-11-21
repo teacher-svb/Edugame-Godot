@@ -41,14 +41,21 @@
   "south": "SocketPosZ",
   "west": "SocketNegX"
  },
+ "naming": "Tile names say the godoodungeon tile set: room_* = room tile set (room_door = the Door tile), corr_* = corridor tile set (corr_rock* = the empty tile). Same scheme as the school tiles.",
+ "renamed_2026_11_21": {
+  "mine_door": "room_door",
+  "rock_a": "corr_rock",
+  "rock_b": "corr_rock_b",
+  "rock_c": "corr_rock_c"
+ },
  "godoodungeon": {
   "room_edge_socket": "outside",
   "path_socket": "path",
-  "door_tile": "mine_door",
+  "door_tile": "room_door",
   "room_external_sockets": [
    "outside-"
   ],
-  "rules": "Room tile set: walls face out with outside+ (the room bounds supply outside-; add outside- to the room set's External Sockets), inner faces room. Corridor tile set: open faces path, closed faces x; rock_a / rock_b / rock_c are the empty tiles. Both tile sets use the same MeshLibrary as the GridMap (item = MeshLibrary item). Up / down sockets: leave as the tile set default. Every tile Rotation FourWay (also the symmetric ones: their rotations merge, and a cell you turned by hand is still read as that tile). weight is the tile total; godoowave splits it over the distinct rotations, which gives weight_per_rotation.",
+  "rules": "Room tile set: walls face out with outside+ (the room bounds supply outside-; add outside- to the room set's External Sockets), inner faces room. Corridor tile set: open faces path, closed faces x; corr_rock / corr_rock_b / corr_rock_c are the empty tiles. Both tile sets use the same MeshLibrary as the GridMap (item = MeshLibrary item). Up / down sockets: leave as the tile set default. Every tile Rotation FourWay (also the symmetric ones: their rotations merge, and a cell you turned by hand is still read as that tile). weight is the tile total; godoowave splits it over the distinct rotations, which gives weight_per_rotation.",
   "suggested_settings": {
    "min_room_size": [
     3,
@@ -316,8 +323,8 @@
    },
    {
     "item": 12,
-    "name": "mine_door",
-    "file": "mine_mine_door.glb",
+    "name": "room_door",
+    "file": "mine_room_door.glb",
     "kind": "door",
     "weight": 0.0,
     "weight_per_rotation": 0.0,
@@ -482,8 +489,8 @@
    },
    {
     "item": 20,
-    "name": "rock_a",
-    "file": "mine_rock_a.glb",
+    "name": "corr_rock",
+    "file": "mine_corr_rock.glb",
     "kind": "rock",
     "weight": 3.0,
     "weight_per_rotation": 3.0,
@@ -502,8 +509,8 @@
    },
    {
     "item": 21,
-    "name": "rock_b",
-    "file": "mine_rock_b.glb",
+    "name": "corr_rock_b",
+    "file": "mine_corr_rock_b.glb",
     "kind": "rock",
     "weight": 0.35,
     "weight_per_rotation": 0.35,
@@ -522,8 +529,8 @@
    },
    {
     "item": 22,
-    "name": "rock_c",
-    "file": "mine_rock_c.glb",
+    "name": "corr_rock_c",
+    "file": "mine_corr_rock_c.glb",
     "kind": "rock",
     "weight": 0.2,
     "weight_per_rotation": 0.2,
@@ -794,8 +801,8 @@
   },
   {
    "item": 12,
-   "name": "mine_door",
-   "file": "mine_mine_door.glb",
+   "name": "room_door",
+   "file": "mine_room_door.glb",
    "kind": "door",
    "weight": 0.0,
    "weight_per_rotation": 0.0,
@@ -958,8 +965,8 @@
   },
   {
    "item": 20,
-   "name": "rock_a",
-   "file": "mine_rock_a.glb",
+   "name": "corr_rock",
+   "file": "mine_corr_rock.glb",
    "kind": "rock",
    "weight": 3.0,
    "weight_per_rotation": 3.0,
@@ -978,8 +985,8 @@
   },
   {
    "item": 21,
-   "name": "rock_b",
-   "file": "mine_rock_b.glb",
+   "name": "corr_rock_b",
+   "file": "mine_corr_rock_b.glb",
    "kind": "rock",
    "weight": 0.35,
    "weight_per_rotation": 0.35,
@@ -998,8 +1005,8 @@
   },
   {
    "item": 22,
-   "name": "rock_c",
-   "file": "mine_rock_c.glb",
+   "name": "corr_rock_c",
+   "file": "mine_corr_rock_c.glb",
    "kind": "rock",
    "weight": 0.2,
    "weight_per_rotation": 0.2,

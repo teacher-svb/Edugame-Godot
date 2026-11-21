@@ -21,12 +21,12 @@ Every wall has the full timber shoring: posts, a header beam and plank lagging i
 | 8, 9 | `room_wall`, `room_wall_b` | wall on the north side | Hall wall; two variants with different lagging, so a long wall doesn't repeat |
 | 10 | `room_wall_vein` | wall on the north side | Hall wall with mana crystals growing from the rock |
 | 11 | `room_corner` | walls on the north and west sides | Hall corner |
-| 12 | `mine_door` | outside to the north | Timber portal in a wall; the rail track comes in from the corridor and ends just inside the hall |
+| 12 | `room_door` (was `mine_door`) | outside to the north | Timber portal in a wall; the rail track comes in from the corridor and ends just inside the hall |
 | 13-16 | `corr_straight_frame`, `_plain`, `_crystal`, `_lamp` | open north and south | Rail tunnel: timber set across, plain, crystals, lantern post |
 | 17 | `corr_bend` | open north and east | Curved track |
 | 18 | `corr_t` | open north, east and south | T piece with points into the side tunnel |
 | 19 | `corr_cross` | open on all sides | Crossing |
-| 20-22 | `rock_a`, `rock_b`, `rock_c` | closed on all sides | Solid rock (the empty tile): plain, with a crystal outcrop, or with a glowing vein |
+| 20-22 | `corr_rock`, `corr_rock_b`, `corr_rock_c` (were `rock_a`, `_b`, `_c`) | closed on all sides | Solid rock (the empty tile): plain, with a crystal outcrop, or with a glowing vein |
 
 ## Turning cells
 godoowave counts quarter turns around +Y, counter-clockwise seen from above. A tile's base north side then faces:
@@ -45,8 +45,8 @@ Only these four orientations count: a tilted or mirrored cell is ignored by the 
 
 1. Build a MeshLibrary from the GLBs, with item number = `item` (mesh plus its concave shape).
 2. **Room tile set** (`WfcTileSet`): the `room_tiles`, using the same MeshLibrary as the GridMap. Set the sockets as in the JSON (base orientation): north = `SocketNegZ`, east = `SocketPosX`, south = `SocketPosZ`, west = `SocketNegX`. Add `outside-` to **External Sockets**. Every tile is Rotation **FourWay**; `mine_door` has weight 0 (the layout places it).
-3. **Corridor tile set**: the `corridor_tiles`, also all FourWay. Open sides are `path` and closed sides are `x`. The `rock_*` tiles are the empty tiles.
-4. Dialog: Room Edge Socket `outside`, Path Socket `path`, Door `mine_door`. Suggested: room size 3 × 3 to 7 × 7, Gap 3, Margin 1, Wall Clearance 1, Max Doors Per Room 3.
+3. **Corridor tile set**: the `corridor_tiles`, also all FourWay. Open sides are `path` and closed sides are `x`. The `corr_rock*` tiles are the empty tiles.
+4. Dialog: Room Edge Socket `outside`, Path Socket `path`, Door `room_door`. Suggested: room size 3 × 3 to 7 × 7, Gap 3, Margin 1, Wall Clearance 1, Max Doors Per Room 3.
 
 **Weights.** `weight` in the JSON is the tile's total. godoowave splits it over the tile's distinct rotations (a wall has 4, a straight 2, a floor or rock 1), which gives `weight_per_rotation`. Those are the weights of the old set with one tile per rotation, so the mix is unchanged. Symmetric tiles are FourWay too: their rotations merge into one, and a cell you turned by hand is still read as that tile.
 
@@ -58,3 +58,7 @@ The tiles carry no lights. Use a dark environment with low ambient light, glow o
 - Turned in a GridMap with the orientation indices above, over 10 godoodungeon-like sample layouts: 7,194 downward rays all hit floor along every corridor and door path and rock on every closed edge.
 - Height field seams over 20 sample layouts with turned tiles: max difference 1e-15 m.
 - The tile set rules (as in `DungeonTileRules.cs`) were checked with the rotations expanded: one-sided `outside+`, a door with exactly one `outside+` face, straights both ways, bends, T pieces, a cross, and an empty tile with weight > 0.
+
+## Names (2026-11-21)
+
+A tile's name says which godoodungeon tile set it belongs to, the same scheme as the school tiles: `room_*` = room tile set (`room_door` is the Door tile), `corr_*` = corridor tile set (`corr_rock*` = the empty tile). Renamed on 2026-11-21: `mine_door` → `room_door`, `rock_a` / `rock_b` / `rock_c` → `corr_rock` / `corr_rock_b` / `corr_rock_c` (JSON `renamed_2026_11_21`). Item numbers and meshes are unchanged: all 23 GLBs are identical to the previous export apart from node names (previous export in `blend/mana_mine/versions/glb_before_rename/`).
