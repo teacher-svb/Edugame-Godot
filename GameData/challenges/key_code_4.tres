@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="MathChallenge" format=3 uid="uid://bgcggnr2qwv2o"]
+
+[ext_resource type="Script" uid="uid://cnfmeuouim0nn" path="res://scripts/Game/Systems/Challenges/ParamSpec.cs" id="1_spec"]
+[ext_resource type="Script" uid="uid://sup7lp6karaf" path="res://scripts/Game/Systems/Challenges/MathChallenge.cs" id="2_math"]
+[ext_resource type="Script" uid="uid://buuhx2qiqs0b0" path="res://scripts/Game/Systems/Challenges/Visualizations/KeyVisualization.cs" id="3_key"]
+[ext_resource type="Script" uid="uid://baghgk6rga1c1" path="res://scripts/Game/Systems/Challenges/Visualizations/GraphBar.cs" id="4_bar"]
+
+[sub_resource type="Resource" id="Spec_a"]
+script = ExtResource("1_spec")
+Name = "a"
+Max = 9
+
+[sub_resource type="Resource" id="Spec_b"]
+script = ExtResource("1_spec")
+Name = "b"
+Min = 0
+Max = 9
+
+[sub_resource type="Resource" id="Spec_c"]
+script = ExtResource("1_spec")
+Name = "c"
+Min = 0
+Max = 9
+
+[sub_resource type="Resource" id="Spec_d"]
+script = ExtResource("1_spec")
+Name = "d"
+Min = 0
+Max = 9
+
+[sub_resource type="Resource" id="Bar_a"]
+script = ExtResource("4_bar")
+Label = "D"
+Param = "a"
+
+[sub_resource type="Resource" id="Bar_b"]
+script = ExtResource("4_bar")
+Label = "H"
+Param = "b"
+
+[sub_resource type="Resource" id="Bar_c"]
+script = ExtResource("4_bar")
+Label = "T"
+Param = "c"
+
+[sub_resource type="Resource" id="Bar_d"]
+script = ExtResource("4_bar")
+Label = "E"
+Param = "d"
+
+[sub_resource type="Resource" id="Vis_key"]
+script = ExtResource("3_key")
+Bars = Array[ExtResource("4_bar")]([SubResource("Bar_a"), SubResource("Bar_b"), SubResource("Bar_c"), SubResource("Bar_d")])
+AxisMax = 9
+AxisStep = 1
+
+[resource]
+script = ExtResource("2_math")
+Name = "Sleutelcode"
+Formula = "a * 1000 + b * 100 + c * 10 + d"
+Params = Array[ExtResource("1_spec")]([SubResource("Spec_a"), SubResource("Spec_b"), SubResource("Spec_c"), SubResource("Spec_d")])
+Unknowns = PackedStringArray("a", "b", "c", "d")
+Visualization = SubResource("Vis_key")
+QuestionText = "De deur zit op slot. Snij de sleutel: elke tand is een cijfer van het getal (D = duizendtallen, H = honderdtallen, T = tientallen, E = eenheden). Het getal staat ergens in deze kamer."

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bp15dtwmw2ped" path="res://addons/editor_tools_common/Wfc/Resources/WfcTileSet.cs" id="1_set"]
 [ext_resource type="Script" uid="uid://rb5vled2paii" path="res://addons/editor_tools_common/Wfc/Resources/WfcTile.cs" id="2_tile"]
-[ext_resource type="MeshLibrary" uid="uid://bjswlytpw2n78" path="res://assets/3D/village/interiors/school_interior/school_tiles.meshlib" id="3_lib"]
+[ext_resource type="MeshLibrary" uid="uid://d00griyqcas4n" path="res://assets/3D/village/interiors/school_interior/school_tiles.meshlib" id="3_lib"]
 
 [sub_resource type="Resource" id="Tile_room_oooo_a"]
 script = ExtResource("2_tile")

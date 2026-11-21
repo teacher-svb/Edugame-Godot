@@ -26,13 +26,35 @@ namespace TnT.EduGame
         {
             GameData.CurrentLevelName = scenePath;
 
-            Bind<Character3D, CharacterSaveData>(ref GameData.characterData);
+            // characters before quests (quest steps can move them), doors and challenges after, as before
+            Bind<Character3D, CharacterSaveData>(GameData.characterData, null);
             Bind<QuestManager, QuestManagerSaveData>(ref GameData.questData);
-            Bind<Door, DoorSaveData>(ref GameData.doorData);
             Bind<PlayerTutorial, TutorialSaveData>(ref GameData.tutorialData);
-            Bind<MathChallengeTrigger, ChallengeSaveData>(ref GameData.challengeData);
+            BindEntities(null);
 
             StateManagerGame.Instance.StartPlay();
+        }
+
+        /// <summary>
+        /// Binds the saved data of nodes added after the scene loaded (doors and challenges placed by a dungeon
+        /// populator, say): call it once they are in the tree. Their PersistentId (node path) must be the same on
+        /// every run. Binding a node again (spawned before the scene finished loading) adds nothing.
+        /// </summary>
+        public void BindSubtree(Node root)
+        {
+            if (root == null)
+                return;
+            Bind<Character3D, CharacterSaveData>(GameData.characterData, root);
+            BindEntities(root);
+        }
+
+        // Doors and challenges, bound per subtree: one save entry per PersistentId. Add new saveable types here
+        // (characters are bound separately, before the quests).
+        void BindEntities(Node root)
+        {
+            Bind<Door, DoorSaveData>(GameData.doorData, root);
+            Bind<Doors.CodeDoor, DoorSaveData>(GameData.doorData, root);
+            Bind<MathChallengeTrigger, ChallengeSaveData>(GameData.challengeData, root);
         }
 
         protected void LoadScene(string scenePath)

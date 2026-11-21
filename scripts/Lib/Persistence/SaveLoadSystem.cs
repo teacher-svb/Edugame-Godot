@@ -40,9 +40,16 @@ namespace TnT.Systems.Persistence
             return;
         }
 
-        protected void Bind<U, TData>(ref List<TData> datas) where U : Node, IBind<TData> where TData : ISaveable, new()
+        protected void Bind<U, TData>(ref List<TData> datas) where U : Node, IBind<TData> where TData : ISaveable, new() =>
+            Bind<U, TData>(datas, null);
+
+        // Binds the entities in `root`'s subtree, root included (the whole tree when null). An entity
+        // already in `datas` (same PersistentId) gets that entry again, so binding twice adds nothing.
+        protected void Bind<U, TData>(List<TData> datas, Node root) where U : Node, IBind<TData> where TData : ISaveable, new()
         {
-            var entities = GetTree().FindObjectsByType<U>();
+            var entities = root == null ? GetTree().FindObjectsByType<U>() : root.FindObjectsByType<U>();
+            if (root is U self)
+                entities.Insert(0, self);
 
             foreach (var entity in entities)
             {

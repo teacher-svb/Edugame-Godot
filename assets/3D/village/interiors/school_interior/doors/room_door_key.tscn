@@ -1,0 +1,83 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://cklr30xga455" path="res://scripts/Game/Systems/Doors/CodeDoor.cs" id="1_door"]
+[ext_resource type="Script" uid="uid://diolsl1jtpyue" path="res://scripts/Game/Systems/Challenges/MathChallengeTrigger.cs" id="2_trigger"]
+[ext_resource type="Resource" path="res://GameData/challenges/key_code_4.tres" id="3_key"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_wood"]
+albedo_color = Color(0.45, 0.28, 0.14, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Mat_brass"]
+albedo_color = Color(0.83, 0.66, 0.26, 1)
+metallic = 0.8
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="Mat_hole"]
+albedo_color = Color(0.05, 0.04, 0.03, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_leaf"]
+material = SubResource("Mat_wood")
+size = Vector3(0.97, 2.1, 0.08)
+
+[sub_resource type="BoxMesh" id="Mesh_plate"]
+material = SubResource("Mat_brass")
+size = Vector3(0.16, 0.26, 0.12)
+
+[sub_resource type="BoxMesh" id="Mesh_keyhole"]
+material = SubResource("Mat_hole")
+size = Vector3(0.04, 0.1, 0.14)
+
+[sub_resource type="BoxShape3D" id="Shape_leaf"]
+size = Vector3(0.97, 2.1, 0.12)
+
+[sub_resource type="BoxShape3D" id="Shape_trigger"]
+size = Vector3(2, 2, 3)
+
+[node name="RoomDoorKey" type="Node3D" node_paths=PackedStringArray("Trigger", "Challenge", "Leaves")]
+script = ExtResource("1_door")
+Trigger = NodePath("Trigger")
+Challenge = NodePath("Challenge")
+Leaves = [NodePath("LeafWest"), NodePath("LeafEast")]
+
+[node name="LeafWest" type="AnimatableBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1.725)
+
+[node name="Mesh" type="MeshInstance3D" parent="LeafWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.505, 1.05, 0)
+mesh = SubResource("Mesh_leaf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeafWest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.505, 1.05, 0)
+shape = SubResource("Shape_leaf")
+
+[node name="LeafEast" type="AnimatableBody3D" parent="."]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 1, 0, -1.725)
+
+[node name="Mesh" type="MeshInstance3D" parent="LeafEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.505, 1.05, 0)
+mesh = SubResource("Mesh_leaf")
+
+[node name="LockPlate" type="MeshInstance3D" parent="LeafEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84, 1.0, 0)
+mesh = SubResource("Mesh_plate")
+
+[node name="Keyhole" type="MeshInstance3D" parent="LeafEast/LockPlate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03, 0)
+mesh = SubResource("Mesh_keyhole")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeafEast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.505, 1.05, 0)
+shape = SubResource("Shape_leaf")
+
+[node name="Trigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.725)
+collision_mask = 3
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trigger"]
+shape = SubResource("Shape_trigger")
+
+[node name="Challenge" type="Node" parent="."]
+script = ExtResource("2_trigger")
+_challenge = ExtResource("3_key")

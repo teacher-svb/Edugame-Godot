@@ -11,6 +11,12 @@ namespace TnT.EduGame.Question
     {
         [Export] MathChallenge _challenge;
 
+        public MathChallenge Challenge
+        {
+            get => _challenge;
+            set => _challenge = value;
+        }
+
         [Signal] public delegate void ChallengeCompletedEventHandler();
         [Signal] public delegate void ChallengeFailedEventHandler();
 
@@ -24,19 +30,59 @@ namespace TnT.EduGame.Question
             PersistentId = GetPath().ToString();
         }
 
-        public void Bind(ChallengeSaveData data) => _saveData = data;
+        // A new round seed: picked, set from outside, or a different one from the save data.
+        // Clues showing this trigger's values listen to it to redraw.
+        [Signal] public delegate void SeedChangedEventHandler();
+
+        // The seed of the round this trigger shows. Kept until the round is solved, so a failed
+        // attempt replays the same values. Reading it picks one when none is pending, so a clue can
+        // show the values before the challenge has ever run; setting it (e.g. the dungeon populator,
+        // so a door and its clue share a seed) only holds until a saved pending seed is bound.
+        public int Seed
+        {
+            get
+            {
+                if (!_saveData.HasPendingSeed)
+                    SetSeed((int)GD.Randi());
+                return _saveData.PendingSeed;
+            }
+            set => SetSeed(value);
+        }
+
+        // The round the challenge will show (same values as the UI). Null without a challenge.
+        public ChallengeRound Round => _challenge?.Roll(Seed);
+
+        // Bound on SceneLoaded, which can be after a clue read the seed or the populator set it:
+        // a saved pending seed wins, otherwise the seed picked or set so far carries over.
+        public void Bind(ChallengeSaveData data)
+        {
+            var early = _saveData;
+            _saveData = data;
+            if (data.HasPendingSeed)
+            {
+                if (!early.HasPendingSeed || early.PendingSeed != data.PendingSeed)
+                    EmitSignal(SignalName.SeedChanged);
+            }
+            else if (early.HasPendingSeed)
+            {
+                data.PendingSeed = early.PendingSeed;
+                data.HasPendingSeed = true;
+            }
+        }
+
+        void SetSeed(int seed)
+        {
+            bool changed = !_saveData.HasPendingSeed || _saveData.PendingSeed != seed;
+            _saveData.PendingSeed = seed;
+            _saveData.HasPendingSeed = true;
+            if (changed)
+                EmitSignal(SignalName.SeedChanged);
+        }
 
         public void TriggerChallenge()
         {
-            // keep the seed until the round is solved, so a failed attempt replays the same values
-            if (!_saveData.HasPendingSeed)
-            {
-                _saveData.PendingSeed = (int)GD.Randi();
-                _saveData.HasPendingSeed = true;
-            }
-
             ChallengeController.Instance.Answered += OnAnswered;
-            StateManagerGame.Instance.ShowChallenge((MathChallenge)_challenge.Duplicate(), _saveData.PendingSeed);
+            StateManagerGame.Instance.ShowChallenge((MathChallenge)_challenge.Duplicate(), Seed);
         }
 
         // Shows the challenge; true when solved, false when failed

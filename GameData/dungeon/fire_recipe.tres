@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DungeonRecipe" format=3 uid="uid://cbgrmigo7gfdi"]
+
+[ext_resource type="Script" uid="uid://bymwyp6t8df0y" path="res://scripts/Game/Systems/Dungeon/Encounters/DungeonEncounter.cs" id="1_ah0hn"]
+[ext_resource type="Script" uid="uid://14uvv6wawu3i" path="res://scripts/Game/Systems/Dungeon/DungeonRecipe.cs" id="1_recipe"]
+[ext_resource type="Script" uid="uid://l7saoeas48vi" path="res://scripts/Game/Systems/Dungeon/EncounterSlot.cs" id="2_slot"]
+[ext_resource type="Resource" path="res://GameData/dungeon/encounters/key_lock.tres" id="3_key"]
+
+[sub_resource type="Resource" id="Slot_goal_lock"]
+script = ExtResource("2_slot")
+Encounter = ExtResource("3_key")
+Place = 3
+
+[resource]
+script = ExtResource("1_recipe")
+Slots = Array[ExtResource("2_slot")]([SubResource("Slot_goal_lock")])
+Pool = Array[ExtResource("1_ah0hn")]([ExtResource("3_key")])
+Gates = 2

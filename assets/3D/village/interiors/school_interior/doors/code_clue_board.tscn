@@ -1,0 +1,56 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/Game/Systems/Doors/CodeClue.cs" id="1_clue"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_wood"]
+albedo_color = Color(0.45, 0.28, 0.14, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Mat_paper"]
+albedo_color = Color(0.95, 0.91, 0.8, 1)
+roughness = 1.0
+
+[sub_resource type="BoxMesh" id="Mesh_post"]
+material = SubResource("Mat_wood")
+size = Vector3(0.1, 1.2, 0.1)
+
+[sub_resource type="BoxMesh" id="Mesh_board"]
+material = SubResource("Mat_wood")
+size = Vector3(1.3, 0.8, 0.06)
+
+[sub_resource type="BoxMesh" id="Mesh_paper"]
+material = SubResource("Mat_paper")
+size = Vector3(1.1, 0.6, 0.02)
+
+[sub_resource type="BoxShape3D" id="Shape_board"]
+size = Vector3(1.3, 2, 0.3)
+
+[node name="CodeClueBoard" type="Node3D" node_paths=PackedStringArray("Label")]
+script = ExtResource("1_clue")
+Label = NodePath("Board/Label")
+
+[node name="Post" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("Mesh_post")
+
+[node name="Board" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.94, -0.34, 0, 0.34, 0.94, 0, 1.45, 0)
+mesh = SubResource("Mesh_board")
+
+[node name="Paper" type="MeshInstance3D" parent="Board"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.035)
+mesh = SubResource("Mesh_paper")
+
+[node name="Label" type="Label3D" parent="Board"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
+pixel_size = 0.004
+modulate = Color(0.2, 0.13, 0.07, 1)
+outline_size = 0
+text = "0000"
+font_size = 96
+
+[node name="Collision" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("Shape_board")

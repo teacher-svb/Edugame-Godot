@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LockEncounter" format=3]
+
+[ext_resource type="Script" path="res://scripts/Game/Systems/Dungeon/Encounters/LockEncounter.cs" id="1_lock"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/doors/room_door_key.tscn" id="2_door"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/doors/code_clue_board.tscn" id="3_clue"]
+
+[resource]
+script = ExtResource("1_lock")
+Id = "key_lock"
+DoorScene = ExtResource("2_door")
+ClueScene = ExtResource("3_clue")
+CluePlacement = 1
