@@ -135,6 +135,8 @@ public static class DungeonGridMap
         Origin = settings.BoundsOrigin,
         RoomTiles = tileSets.Room.Compiled,
         DoorTile = tileSets.DoorTile,
+        LockedDoorTile = tileSets.LockedDoorTile,
+        LockedCorridors = settings.LockedCorridors,
         EdgeSocket = settings.RoomEdgeSocket,
         CorridorTiles = tileSets.Corridor.Compiled,
         PathSocket = settings.PathSocket,

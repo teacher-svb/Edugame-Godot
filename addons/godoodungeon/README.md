@@ -146,6 +146,7 @@ int[] way = graph.ShortestPath(ends.X, ends.Y);
 | Corridor Tile Set | | Corridor pieces and an empty tile. |
 | Room Edge Socket | `outside` | The socket name of faces that point out of a room. Tiles use `outside+`; the room bounds supply `outside-`. |
 | Door | | The room tile placed at every door. It is stored by its MeshLibrary item, so it stays the same tile when you add, remove or reorder tiles. |
+| Locked Door | (none) | The room tile placed at locked doors instead of the Door (see Locked Corridors). Same shape as the Door; give it a marker scene that does the locking. |
 | Path Socket | `path` | The socket of the corridor tiles' open faces. |
 | Path Wander | 0.3 | 0 gives the most direct corridors, 1 the most meandering. |
 | **Bounds** | | |
@@ -160,6 +161,7 @@ int[] way = graph.ShortestPath(ends.X, ends.Y);
 | Wall Clearance | 1 | Cells around each room that corridors keep free, except outside the doors. 0 lets corridors run along room walls. |
 | Extra Connections | 0.15 | Loops per tree edge of the room graph: 0 gives a tree of rooms, 1 one loop per connection. |
 | Max Doors Per Room | 4 | A room never gets more doors; further connections share an existing door. |
+| Locked Corridors | 0 | Share of the corridors, picked from the seed, that get one of their doors as the Locked Door. A shared door locks every corridor through it; doors of Built rooms are never locked. |
 | **Limits** | | |
 | Layout Attempts | 4 | Whole layouts tried, each from a seed derived from yours, before Generate gives up. |
 | Attempts Per Room | 50 | Positions tried per room before it is left out. |
@@ -180,6 +182,7 @@ Both tile sets are ordinary `WfcTileSet` resources ([godoowave](../godoowave/REA
 - The room edge socket must be **one-sided**: tiles use `outside+`, and the room bounds supply `outside-`. A plain `outside` would let two walls meet inside a room.
 - Add `outside-` to the room tile set's **External Sockets**. The room bounds supply it, so the tile set check and the preview then count it as a partner instead of marking every wall face red.
 - The **Door** tile has exactly one `outside+` face, its outside. Give it weight 0, so only the layout places doors.
+- An optional **Locked Door** tile has the same shape and weight 0. It must be in the room tile set; its marker scene (a door that opens with a code, say) makes it a lock.
 - Walls, corners and doors need four rotations.
 
 ### Corridor tile set

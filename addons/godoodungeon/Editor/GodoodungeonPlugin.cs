@@ -738,7 +738,7 @@ public partial class GodoodungeonPlugin : EditorPlugin, ISerializationListener, 
 
     /// <summary>The settings Preview Layout depends on. The GridMap's cells are in the key too, see <see cref="UpdatePreview"/>.</summary>
     private string PreviewKey() => string.Join("|", string.Join(";", HandleBoxes().Select(b => $"{b.Name}{b.Origin}{b.Size}{b.Mode}")),
-        _settings.Door, _settings.BoundsOrigin, _settings.BoundsSize, _settings.RoomCount, _settings.MinRoomSize,
+        _settings.Door, _settings.LockedDoor, _settings.LockedCorridors, _settings.BoundsOrigin, _settings.BoundsSize, _settings.RoomCount, _settings.MinRoomSize,
         _settings.MaxRoomSize, _settings.RoomHeight, _settings.Gap, _settings.Margin, _settings.WallClearance, _settings.ExtraConnections,
         _settings.MaxDoorsPerRoom, _settings.PathWander, _settings.Seed, _settings.LayoutAttempts, _settings.AttemptsPerRoom);
 

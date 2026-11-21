@@ -18,11 +18,13 @@ Seed = 2638766450
 RoomTileSet = ExtResource("4_6mt53")
 CorridorTileSet = ExtResource("3_2vwka")
 Door = 54
+LockedDoor = 62
 BoundsSize = Vector3i(22, 1, 22)
 RoomCount = 5
 MinRoomSize = Vector2i(3, 3)
 MaxRoomSize = Vector2i(5, 5)
 MaxDoorsPerRoom = 3
+LockedCorridors = 0.25
 metadata/_custom_type_script = "uid://cgraummx7cyo2"
 
 [node name="SchoolWaterChamber" type="Node3D" unique_id=1375172682]

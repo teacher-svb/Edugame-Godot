@@ -47,6 +47,9 @@ public sealed class DungeonLayout
 
     /// <summary>Per edge (same index as <see cref="Edges"/>), the door each of its two rooms uses, or -1 when a room got none.</summary>
     public List<(int A, int B)> EdgeDoors { get; } = new();
+
+    /// <summary>Indices into <see cref="Doors"/> that get the Locked Door tile (<see cref="DoorLocks"/>).</summary>
+    public HashSet<int> LockedDoors { get; } = new();
     public List<string> Warnings { get; } = new();
     public List<string> Errors { get; } = new();
 

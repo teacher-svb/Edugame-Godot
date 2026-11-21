@@ -6,7 +6,7 @@
  },
  "tile_size_m": 4.0,
  "axes": "Godot: tile centre at the node origin, floor top at y = 0, north = -Z (top of the screen), south = +Z (towards the camera). One MeshLibrary item per shape, built in its base orientation (the sockets below) and turned in the GridMap: every tile is Rotation FourWay. Rotate cells around Y only, never mirror. Each shape is built with its south side open, so a wall or gate turned to the south has the full wall, merlons and arch. Base orientations: room_wall wall on the north, room_corner north and west, room_door outside to the north, corr_bridge* / corr_pad_straight / challenges run north-south, corr_bend opens north and east, corr_pad_bend north and west, corr_pad_t north, south and west.",
- "naming": "Tile names say the godoodungeon tile set: room_* = room tile set (floors, room_wall, room_corner, and room_door = the Door tile), corr_* = corridor tile set (corr_bridge* straights, corr_bend, corr_pad_* bridge pads, corr_chasm* the empty tile, corr_<element>_<challenge> the element challenges of that chamber only). To build a room by hand: room_* tiles only, room_door on the wall ring (not in a corner).",
+ "naming": "Tile names say the godoodungeon tile set: room_* = room tile set (floors, room_wall, room_corner, and room_door = the Door tile), corr_* = corridor tile set (corr_bridge* straights, corr_bend, corr_pad_* bridge pads, corr_chasm* the empty tile, corr_<element>_<challenge> the element challenges of that chamber only). To build a room by hand: room_* tiles only, room_door on the wall ring (not in a corner). room_door_locked = room_door with a doorframe; its door leaves (school_door_leaf.glb) are in its marker scene, which opens them when the door's code is solved.",
  "gridmap_turns": {
   "note": "Quarter turns around +Y as godoowave counts them (counter-clockwise seen from above): the base north side ends up facing the side named here. GridMap cell orientation index per turn.",
   "north": {
@@ -55,7 +55,8 @@
   "water_waterfall_NS": "corr_water_waterfall",
   "water_raft_NS": "corr_water_raft",
   "earth_crumble_NS": "corr_earth_crumble",
-  "earth_rocks_NS": "corr_earth_rocks"
+  "earth_rocks_NS": "corr_earth_rocks",
+  "null": "room_door_locked"
  },
  "removed_items_2026_11_21": {
   "note": "MeshLibrary items removed on 2026-11-21 with the godoowave chamber set (gate rooms, 3-wall rooms, dead-end landing, chasm socket variants, door_N / stairs_S). The other items kept their numbers, so the item list has gaps.",
@@ -792,6 +793,29 @@
    "element": "earth",
    "challenge": "rocks",
    "marker": "corr_earth_rocks"
+  },
+  {
+   "item": 62,
+   "name": "room_door_locked",
+   "old_name": null,
+   "file": "school_room_door_locked.glb",
+   "kind": "gatehouse",
+   "role": "locked_door",
+   "set": "room",
+   "rotation": "FourWay",
+   "weight": 0.0,
+   "weight_per_rotation": 0.0,
+   "sockets": {
+    "north": "outside+",
+    "east": "room",
+    "south": "room",
+    "west": "room"
+   },
+   "tris": {
+    "Collision-colonly": 36,
+    "Mesh": 414
+   },
+   "marker": "room_door_locked"
   }
  ],
  "challenges": {
@@ -967,6 +991,13 @@
      "Mesh": 80
     }
    },
+   "door_leaf": {
+    "file": "school_door_leaf.glb",
+    "tris": {
+     "Collision-colonly": 12,
+     "Mesh": 136
+    }
+   },
    "falling_rock": {
     "file": "school_falling_rock.glb",
     "tris": {
@@ -1055,6 +1086,16 @@
   "room_external_sockets": [
    "outside-"
   ],
+  "locked_door_tile": "room_door_locked",
+  "locked_door_item": 62,
+  "locked_door": {
+   "note": "godoodungeon Locked Door: same sockets as room_door; marker scene challenges/room_door_locked.tscn holds the two leaves (school_door_leaf.glb, origin at the hinge; the west leaf at x = -1, the east leaf the same prop turned 180 degrees at x = +1, both at Blender y = LEAF_Y = Godot z = -LEAF_Y). Leaves swing into the room (about the vertical axis, away from the outside).",
+   "leaf_y_blender": 1.725,
+   "hinge_x": [
+    -1.0,
+    1.0
+   ]
+  },
   "room_tiles": [
    {
     "name": "room_floor",
@@ -1062,6 +1103,8 @@
     "rotation": "FourWay",
     "weight": 1.3,
     "door": false,
+    "locked_door": false,
+    "marker": null,
     "sockets": {
      "north": "room",
      "east": "room",
@@ -1075,6 +1118,8 @@
     "rotation": "FourWay",
     "weight": 1.3,
     "door": false,
+    "locked_door": false,
+    "marker": null,
     "sockets": {
      "north": "room",
      "east": "room",
@@ -1088,6 +1133,8 @@
     "rotation": "FourWay",
     "weight": 0.5,
     "door": false,
+    "locked_door": false,
+    "marker": null,
     "sockets": {
      "north": "room",
      "east": "room",
@@ -1101,6 +1148,8 @@
     "rotation": "FourWay",
     "weight": 0.35,
     "door": false,
+    "locked_door": false,
+    "marker": null,
     "sockets": {
      "north": "room",
      "east": "room",
@@ -1114,6 +1163,8 @@
     "rotation": "FourWay",
     "weight": 0.3,
     "door": false,
+    "locked_door": false,
+    "marker": null,
     "sockets": {
      "north": "room",
      "east": "room",
@@ -1127,6 +1178,8 @@
     "rotation": "FourWay",
     "weight": 0.45,
     "door": false,
+    "locked_door": false,
+    "marker": null,
     "sockets": {
      "north": "room",
      "east": "room",
@@ -1140,6 +1193,8 @@
     "rotation": "FourWay",
     "weight": 0.3,
     "door": false,
+    "locked_door": false,
+    "marker": null,
     "sockets": {
      "north": "room",
      "east": "room",
@@ -1153,6 +1208,8 @@
     "rotation": "FourWay",
     "weight": 4.2,
     "door": false,
+    "locked_door": false,
+    "marker": null,
     "sockets": {
      "north": "outside+",
      "east": "room",
@@ -1166,6 +1223,8 @@
     "rotation": "FourWay",
     "weight": 2.7,
     "door": false,
+    "locked_door": false,
+    "marker": null,
     "sockets": {
      "north": "outside+",
      "east": "room",
@@ -1179,6 +1238,23 @@
     "rotation": "FourWay",
     "weight": 0.0,
     "door": true,
+    "locked_door": false,
+    "marker": null,
+    "sockets": {
+     "north": "outside+",
+     "east": "room",
+     "south": "room",
+     "west": "room"
+    }
+   },
+   {
+    "name": "room_door_locked",
+    "item": 62,
+    "rotation": "FourWay",
+    "weight": 0.0,
+    "door": false,
+    "locked_door": true,
+    "marker": "room_door_locked",
     "sockets": {
      "north": "outside+",
      "east": "room",

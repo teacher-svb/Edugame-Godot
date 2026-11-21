@@ -5,6 +5,7 @@
 | File | Contents |
 |---|---|
 | `school_<name>.glb` | One tile per shape, centre at the node origin, floor top at y = 0, in its base orientation. Turn it in the GridMap (around Y only, never mirror). |
+| `school_door_leaf.glb` | One door leaf of `room_door_locked`, origin at its hinge. Use it twice: the west leaf as is, the east leaf turned 180°. |
 | `school_moving_platform.glb` | The platform for the `corr_bridge_mover` tile (1.4 × 1.4 m, top at y = 0), moved by your game scene. |
 | `school_<prop>.glb` | The moving or dangerous parts of the element challenges (see below). |
 | `school_tiles.json` | Per tile: item number, old name, file, tile set, role, sockets, weights, triangle counts; the godoodungeon tile sets; platforming and challenge sizes; the renames and removed items of 2026-11-21. |
@@ -17,7 +18,7 @@ GLB, +Y up, 1 unit = 1 m, no vertex colours, no import script. Nodes per file: `
 
 A tile's name says which godoodungeon tile set it belongs to:
 
-- **`room_*`**: the room tile set. Floors, `room_wall`, `room_corner`, and **`room_door`, the Door tile**. To build a room by hand (for a Built room box), use only `room_*` tiles, and put `room_door` on the wall ring, not in a corner.
+- **`room_*`**: the room tile set. Floors, `room_wall`, `room_corner`, and **`room_door`, the Door tile**. To build a room by hand (for a Built room box), use only `room_*` tiles, and put `room_door` on the wall ring, not in a corner. **`room_door_locked`** is the same doorway with a doorframe, for a door that opens with a code.
 - **`corr_*`**: the corridor tile set. `corr_bridge*` straights, `corr_bend`, `corr_pad_*` bridge pads, `corr_chasm*` (the empty tile), and `corr_<element>_<challenge>` for the element chambers.
 
 **Renamed and removed on 2026-11-21.** The tiles had names from the older godoowave set (`room_wooo`, `landing_gwgw`, `bridge_NS`, `dungeon_door`, …). `renamed_2026_11_21` in the JSON maps every old name to its new one. The godoowave-only tiles were removed: the gate rooms, the 3-wall rooms, the dead-end landing, the 23 chasm socket variants, and `door_N` / `stairs_S`. All other items **kept their numbers**, so the MeshLibrary has gaps (8, 10–16, 29–53; listed under `removed_items_2026_11_21`). GridMaps and tile sets that use item numbers keep working. The meshes are byte-identical to the previous export. The earlier GLBs are in `blend/school_interior/versions/glb_before_rename/`.
@@ -74,6 +75,7 @@ Weights: the JSON `weight` is the tile's total; the generator splits it over the
 | 26 | `corr_bend` | `bridge_NE` | north to east | Bridge corner | 1.4 (0.35) |
 | 27, 28 | `corr_chasm`, `corr_chasm_b` | `chasm_a`, `_b` | – | The chasm, the empty tile: dark bottom at −6 m (`_b` with floating rocks and violet crystals) | 0.4, 0.1 |
 | 54 | `room_door` | `dungeon_door` | outside north | **The Door tile**: a gatehouse with two towers 1.45 m high with merlons, an arch, and blue sconces on the room side | 0 (the layout places it) |
+| 62 | `room_door_locked` | — | outside north | **The Locked Door tile**: `room_door` with a stone threshold and hinge pins in the arch. The leaves are `school_door_leaf.glb`, in its marker scene | 0 (the layout places it) |
 | 55–61 | `corr_<element>_<challenge>` | `<element>_<challenge>_NS` | along north–south | Element challenges (see below) | 0.7 (0.35) |
 
 ## godoodungeon setup
@@ -82,10 +84,11 @@ godoodungeon lays out rectangular rooms, solves each one with the room tile set,
 
 | Tile set | Contents |
 |---|---|
-| Rooms (10) | The 7 floors, `room_wall`, `room_corner`, and `room_door` (weight 0) |
+| Rooms (11) | The 7 floors, `room_wall`, `room_corner`, `room_door` and `room_door_locked` (both weight 0) |
 | Corridors (12) | Straight: `corr_bridge`, `_broken`, `_stones`, `_steps`, `_mover`, `corr_pad_straight`. Bend: `corr_bend`, `corr_pad_bend`. T: `corr_pad_t`. Cross: `corr_pad_cross`. Empty: `corr_chasm`, `corr_chasm_b`. An element chamber adds its own `corr_<element>_*` tiles. |
 
 - **Door:** `room_door`, MeshLibrary item 54. godoodungeon turns it for each side.
+- **Locked Door:** `room_door_locked`, MeshLibrary item 62, weight 0, in the room set too. Its marker scene holds the two leaves: hinges at x = ±1 m and z = −1.725 m (Godot, the base north build), the east leaf turned 180°. Opening them means turning them about Y so they swing into the room (towards +Z), which keeps them inside the tile. `school_tiles.json` → `dungeon.locked_door`.
 - **Room size:** walls included, so a room is at least 3 × 3 cells. 3–5 cells (12–20 m) suits the camera.
 - **Settings:** GridMap `cell_size` (4, 1, 4), `cell_center_y` off, one layer. Room Edge Socket `outside`, Path Socket `path`, Gap 3, Wall Clearance 1. Corridors keep a cell of chasm from the room walls, except at the doors.
 

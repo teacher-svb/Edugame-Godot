@@ -128,6 +128,13 @@ public partial class DungeonSettings : Resource
         }
     }
 
+    /// <summary>
+    /// The room tile placed at locked doors instead of <see cref="Door"/>, by its MeshLibrary item. It
+    /// needs the Door's shape: exactly one face with the edge socket, its outside. Its marker scene
+    /// (a door that opens with a code, say) is what makes it a lock. <see cref="NoDoor"/> locks nothing.
+    /// </summary>
+    [Export] public int LockedDoor { get; set; } = NoDoor;
+
     /// <summary>Turns a 1.0.0 tile position into the tile's item, once the room tile set is known.</summary>
     private void MigrateDoorTile()
     {
@@ -190,6 +197,9 @@ public partial class DungeonSettings : Resource
     [Export(PropertyHint.Range, "0,1,0.01")] public float ExtraConnections { get; set; } = 0.15f;
 
     [Export(PropertyHint.Range, "1,4,1")] public int MaxDoorsPerRoom { get; set; } = 4;
+
+    /// <summary>Share of the corridors, 0 to 1, that get one of their doors locked (the Locked Door tile), picked from the seed.</summary>
+    [Export(PropertyHint.Range, "0,1,0.01")] public float LockedCorridors { get; set; }
 
 
     // ---- Limits --------------------------------------------------------------------------
@@ -278,7 +288,7 @@ public partial class DungeonSettings : Resource
     {
         string name = property["name"].AsString();
         var usage = (PropertyUsageFlags)property["usage"].AsInt64();
-        if (name == PropertyName.Door)
+        if (name == PropertyName.Door || name == PropertyName.LockedDoor)
         {
             // A drop-down of the room tile set's tiles, stored as the tile's MeshLibrary item.
             var names = TileNames(_roomTileSet);

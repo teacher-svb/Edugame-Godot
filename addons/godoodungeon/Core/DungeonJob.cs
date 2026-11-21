@@ -18,6 +18,12 @@ public sealed record DungeonRequest
 
     public CompiledTileSet RoomTiles { get; init; }
     public int DoorTile { get; init; } = -1;
+
+    /// <summary>The room tile index of the Locked Door, or -1: nothing is locked.</summary>
+    public int LockedDoorTile { get; init; } = -1;
+
+    /// <summary>Share of the corridors that get a locked door, 0 to 1.</summary>
+    public float LockedCorridors { get; init; }
     public string EdgeSocket { get; init; } = "outside";
 
     public CompiledTileSet CorridorTiles { get; init; }
@@ -214,6 +220,9 @@ public sealed class DungeonJob
                 continue;
             }
 
+            if (request.LockedDoorTile >= 0)
+                DoorLocks.Pick(layout, request.LockedCorridors, LayoutSeeds.Locks(request.Seed, attempt));
+
             var solves = new List<DungeonSolve>();
             long backtracks = 0;
             int restarts = 0;
@@ -224,7 +233,8 @@ public sealed class DungeonJob
                 if (layout.IsBuilt(room))
                     continue;   // its cells are yours: not solved, not written (§13.3)
                 Volatile.Write(ref _stage, $"Layout {attempt + 1}: room {room + 1} of {layout.Rooms.Count}");
-                var input = SolveInputs.Room(layout, room, layout.Height(room), request.RoomTiles, request.DoorTile, request.EdgeSocket);
+                var input = SolveInputs.Room(layout, room, layout.Height(room), request.RoomTiles, request.DoorTile, request.EdgeSocket,
+                    request.LockedDoorTile);
                 if (!input.IsValid)
                     return new DungeonResult { Status = DungeonStatus.Invalid, Layout = layout, Errors = new[] { input.Error } };
                 var job = Solve(input, request.RoomTiles, LayoutSeeds.Room(request.Seed, attempt, room), request);

@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="MathChallenge" format=3]
+
+[ext_resource type="Script" uid="uid://cnfmeuouim0nn" path="res://scripts/Game/Systems/Challenges/ParamSpec.cs" id="1_spec"]
+[ext_resource type="Script" uid="uid://sup7lp6karaf" path="res://scripts/Game/Systems/Challenges/MathChallenge.cs" id="2_math"]
+[ext_resource type="Script" uid="uid://c4bsojhn3af82" path="res://scripts/Game/Systems/Challenges/Visualizations/TextVisualization.cs" id="3_textvis"]
+[ext_resource type="Script" uid="uid://2chy7qh6qta8" path="res://scripts/Game/Systems/Challenges/Inputs/CombinationLockInput.cs" id="4_lock"]
+
+[sub_resource type="Resource" id="Resource_input"]
+script = ExtResource("4_lock")
+
+[sub_resource type="Resource" id="Resource_x"]
+script = ExtResource("1_spec")
+Name = "x"
+Min = 2
+Max = 9
+metadata/_custom_type_script = "uid://cnfmeuouim0nn"
+
+[sub_resource type="Resource" id="Resource_y"]
+script = ExtResource("1_spec")
+Name = "y"
+Min = 2
+Max = 9
+metadata/_custom_type_script = "uid://cnfmeuouim0nn"
+
+[sub_resource type="Resource" id="Resource_vis"]
+script = ExtResource("3_textvis")
+
+[resource]
+script = ExtResource("2_math")
+Name = "Deurcode"
+Formula = "x * y"
+Params = Array[ExtResource("1_spec")]([SubResource("Resource_x"), SubResource("Resource_y")])
+Unknowns = PackedStringArray("answer")
+Visualization = SubResource("Resource_vis")
+Input = SubResource("Resource_input")
+QuestionText = "De deur zit op slot. Op het slot staat: {x} × {y}. Draai de code."
+metadata/_custom_type_script = "uid://sup7lp6karaf"

@@ -23,11 +23,13 @@ PreviewLayout = true
 RoomTileSet = ExtResource("4_p7ney")
 CorridorTileSet = ExtResource("3_fg6y2")
 Door = 54
+LockedDoor = 62
 BoundsSize = Vector3i(22, 1, 22)
 RoomCount = 5
 MinRoomSize = Vector2i(3, 3)
 MaxRoomSize = Vector2i(5, 5)
 MaxDoorsPerRoom = 3
+LockedCorridors = 0.25
 metadata/_custom_type_script = "uid://cgraummx7cyo2"
 
 [sub_resource type="Resource" id="Resource_eja3l"]
@@ -134,8 +136,8 @@ Corridors = PackedInt32Array(3, 5)
 [sub_resource type="Resource" id="Resource_ffgv7"]
 script = ExtResource("8_hqy5u")
 Size = Vector2i(22, 22)
-Rooms = Array[ExtResource("7_06jib")]([SubResource("Resource_17ukg"), SubResource("Resource_lnk3q"), SubResource("Resource_6hr4i"), SubResource("Resource_51ubf"), SubResource("Resource_lk2yg")])
-Corridors = Array[ExtResource("6_pdpwt")]([SubResource("Resource_eja3l"), SubResource("Resource_hdiyk"), SubResource("Resource_dtggg"), SubResource("Resource_7su7g"), SubResource("Resource_ocjug"), SubResource("Resource_ivarh")])
+Rooms = [SubResource("Resource_17ukg"), SubResource("Resource_lnk3q"), SubResource("Resource_6hr4i"), SubResource("Resource_51ubf"), SubResource("Resource_lk2yg")]
+Corridors = [SubResource("Resource_eja3l"), SubResource("Resource_hdiyk"), SubResource("Resource_dtggg"), SubResource("Resource_7su7g"), SubResource("Resource_ocjug"), SubResource("Resource_ivarh")]
 
 [node name="SchoolEarthChamber" type="Node3D" unique_id=1375172682]
 
@@ -162,51 +164,51 @@ metadata/godoodads_dungeon_graph = SubResource("Resource_ffgv7")
 
 [node name="DungeonMarkers" type="Node3D" parent="School" unique_id=881309264]
 
-[node name="EarthCrumbleNs" type="Node3D" parent="School/DungeonMarkers" unique_id=1507043189 instance=ExtResource("8_sguok")]
+[node name="EarthCrumbleNs" parent="School/DungeonMarkers" unique_id=1507043189 instance=ExtResource("8_sguok")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, 18)
 metadata/godoodads_dungeon_marker = true
 
-[node name="EarthCrumbleNs2" type="Node3D" parent="School/DungeonMarkers" unique_id=181429221 instance=ExtResource("8_sguok")]
+[node name="EarthCrumbleNs2" parent="School/DungeonMarkers" unique_id=181429221 instance=ExtResource("8_sguok")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 70, 0, 26)
 metadata/godoodads_dungeon_marker = true
 
-[node name="MovingPlatformNS" type="Node3D" parent="School/DungeonMarkers" unique_id=1227155482 instance=ExtResource("6_p0fmw")]
+[node name="MovingPlatformNS" parent="School/DungeonMarkers" unique_id=1227155482 instance=ExtResource("6_p0fmw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 30)
 metadata/godoodads_dungeon_marker = true
 
-[node name="MovingPlatformNS2" type="Node3D" parent="School/DungeonMarkers" unique_id=1734247895 instance=ExtResource("6_p0fmw")]
+[node name="MovingPlatformNS2" parent="School/DungeonMarkers" unique_id=1734247895 instance=ExtResource("6_p0fmw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 0, 34)
 metadata/godoodads_dungeon_marker = true
 
-[node name="EarthCrumbleNs3" type="Node3D" parent="School/DungeonMarkers" unique_id=1881212842 instance=ExtResource("8_sguok")]
+[node name="EarthCrumbleNs3" parent="School/DungeonMarkers" unique_id=1881212842 instance=ExtResource("8_sguok")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, 42)
 metadata/godoodads_dungeon_marker = true
 
-[node name="MovingPlatformNS3" type="Node3D" parent="School/DungeonMarkers" unique_id=310138108 instance=ExtResource("6_p0fmw")]
+[node name="MovingPlatformNS3" parent="School/DungeonMarkers" unique_id=310138108 instance=ExtResource("6_p0fmw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 46)
 metadata/godoodads_dungeon_marker = true
 
-[node name="EarthRocksNs" type="Node3D" parent="School/DungeonMarkers" unique_id=672381617 instance=ExtResource("9_pdpwt")]
+[node name="EarthRocksNs" parent="School/DungeonMarkers" unique_id=672381617 instance=ExtResource("9_pdpwt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 50)
 metadata/godoodads_dungeon_marker = true
 
-[node name="EarthRocksNs2" type="Node3D" parent="School/DungeonMarkers" unique_id=1797459156 instance=ExtResource("9_pdpwt")]
+[node name="EarthRocksNs2" parent="School/DungeonMarkers" unique_id=1797459156 instance=ExtResource("9_pdpwt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 58)
 metadata/godoodads_dungeon_marker = true
 
-[node name="EarthRocksNs3" type="Node3D" parent="School/DungeonMarkers" unique_id=745243482 instance=ExtResource("9_pdpwt")]
+[node name="EarthRocksNs3" parent="School/DungeonMarkers" unique_id=745243482 instance=ExtResource("9_pdpwt")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 22, 0, 66)
 metadata/godoodads_dungeon_marker = true
 
 [node name="RoomBox" type="Node3D" parent="School" unique_id=552802975]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 60)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -0.5, 66)
 script = ExtResource("12_q27ah")
 Mode = 1
 Origin = Vector3i(1, 0, 15)
 Size = Vector3i(3, 1, 3)
 
 [node name="Player" parent="." unique_id=2069731022 instance=ExtResource("7_sguok")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.1, 67)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.792274, 0.1, 65.98541)
 PersistentId = "Player"
 
 [node name="ChasmGlow" type="DirectionalLight3D" parent="." unique_id=454003873]
