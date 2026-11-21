@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bp15dtwmw2ped" path="res://addons/editor_tools_common/Wfc/Resources/WfcTileSet.cs" id="1_set"]
 [ext_resource type="Script" uid="uid://rb5vled2paii" path="res://addons/editor_tools_common/Wfc/Resources/WfcTile.cs" id="2_tile"]
 [ext_resource type="MeshLibrary" uid="uid://bjswlytpw2n78" path="res://assets/3D/village/interiors/school_interior/school_tiles.meshlib" id="3_lib"]
-[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/room_door_locked.tscn" id="m_locked"]
 
 [sub_resource type="Resource" id="Tile_room_oooo_a"]
 script = ExtResource("2_tile")
@@ -135,23 +134,9 @@ SocketPosZ = "room"
 SocketNegZ = "outside+"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
-[sub_resource type="Resource" id="Tile_room_door_locked"]
-script = ExtResource("2_tile")
-Item = 62
-Rotation = 2
-Weight = 0.0
-SocketPosX = "room"
-SocketNegX = "room"
-SocketPosY = "ground"
-SocketNegY = "ground"
-SocketPosZ = "room"
-SocketNegZ = "outside+"
-Marker = ExtResource("m_locked")
-metadata/_custom_type_script = "uid://rb5vled2paii"
-
 [resource]
 script = ExtResource("1_set")
 Library = ExtResource("3_lib")
-Tiles = Array[ExtResource("2_tile")]([SubResource("Tile_room_oooo_a"), SubResource("Tile_room_oooo_b"), SubResource("Tile_room_oooo_circle"), SubResource("Tile_room_oooo_dais"), SubResource("Tile_room_oooo_pit"), SubResource("Tile_room_oooo_pillar"), SubResource("Tile_room_oooo_tiers"), SubResource("Tile_room_wooo"), SubResource("Tile_room_woow"), SubResource("Tile_dungeon_door"), SubResource("Tile_room_door_locked")])
+Tiles = Array[ExtResource("2_tile")]([SubResource("Tile_room_oooo_a"), SubResource("Tile_room_oooo_b"), SubResource("Tile_room_oooo_circle"), SubResource("Tile_room_oooo_dais"), SubResource("Tile_room_oooo_pit"), SubResource("Tile_room_oooo_pillar"), SubResource("Tile_room_oooo_tiers"), SubResource("Tile_room_wooo"), SubResource("Tile_room_woow"), SubResource("Tile_dungeon_door")])
 ExternalSockets = Array[String](["outside-"])
 metadata/_custom_type_script = "uid://bp15dtwmw2ped"
