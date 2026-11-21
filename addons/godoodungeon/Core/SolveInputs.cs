@@ -37,11 +37,9 @@ public static class SolveInputs
     /// <summary>
     /// The solve of one room: its footprint × <paramref name="roomHeight"/> layers from the layout's
     /// bottom layer, with <paramref name="edgeSocket"/>- as the boundary on the four side faces and every
-    /// door cell fixed to the door variant whose outside faces out of the room (the Locked Door's for
-    /// the doors in <see cref="DungeonLayout.LockedDoors"/>). Other cells are free.
+    /// door cell fixed to the door variant whose outside faces out of the room. Other cells are free.
     /// </summary>
-    public static SolveInput Room(DungeonLayout layout, int room, int roomHeight, CompiledTileSet tiles, int doorTile, string edgeSocket,
-        int lockedDoorTile = -1)
+    public static SolveInput Room(DungeonLayout layout, int room, int roomHeight, CompiledTileSet tiles, int doorTile, string edgeSocket)
     {
         var rect = layout.Rooms[room];
         var origin = layout.GridCell(rect.Position);
@@ -56,16 +54,14 @@ public static class SolveInputs
         foreach (int direction in DungeonTileRules.HorizontalDirections)
             boundary[direction] = boundarySocket;
 
-        for (int index = 0; index < layout.Doors.Count; index++)
+        foreach (var door in layout.Doors)
         {
-            var door = layout.Doors[index];
             if (door.Room != room)
                 continue;
-            bool locked = lockedDoorTile >= 0 && layout.LockedDoors.Contains(index);
-            int variant = DungeonTileRules.DoorVariant(tiles, locked ? lockedDoorTile : doorTile, edge, Direction(door.Side));
+            int variant = DungeonTileRules.DoorVariant(tiles, doorTile, edge, Direction(door.Side));
             if (variant < 0)
                 return new SolveInput(origin, grid, initial, boundary,
-                    $"The {(locked ? "Locked Door" : "Door")} tile has no rotation whose '{edge}+' face points {Directions.Name(Direction(door.Side))}, so the door at {layout.GridCell(door.Cell)} cannot be placed.");
+                    $"The Door tile has no rotation whose '{edge}+' face points {Directions.Name(Direction(door.Side))}, so the door at {layout.GridCell(door.Cell)} cannot be placed.");
             var local = door.Cell - rect.Position;
             initial[grid.Index(new Vector3I(local.X, 0, local.Y))] = variant;
         }

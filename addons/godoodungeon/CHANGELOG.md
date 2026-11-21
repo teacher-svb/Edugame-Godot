@@ -2,11 +2,6 @@
 
 All notable changes to godoodungeon are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses [Semantic Versioning](https://semver.org/).
 
-## [1.3.0] - 2026-11-21
-
-### Added
-- **Locked doors:** choose a **Locked Door** tile (Tile Sets) and a **Locked Corridors** share (Corridors, 0 to 1). Each layout picks that share of its corridors from the seed, and each picked corridor gets one of its two doors as the Locked Door tile instead of the Door. A door that several corridors share locks all of them; doors of Built rooms are never locked. The Locked Door needs the Door's shape (exactly one `outside+` face) and is usually weight 0 in the room tile set; its marker scene is what makes it a lock (a door that opens with a code, say). The tile set check reports a Locked Door missing from the room set, or one without the Door's shape.
-
 ## [1.2.1] - 2026-11-21
 
 ### Changed

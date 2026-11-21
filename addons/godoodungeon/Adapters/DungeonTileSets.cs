@@ -19,9 +19,6 @@ public sealed class DungeonTileSets
     /// <summary>The room tile index of <see cref="DungeonSettings.Door"/>, or -1 when it is not in the room tile set.</summary>
     public int DoorTile { get; private set; } = -1;
 
-    /// <summary>The room tile index of <see cref="DungeonSettings.LockedDoor"/>, or -1 when none is chosen.</summary>
-    public int LockedDoorTile { get; private set; } = -1;
-
     public List<string> Errors { get; } = new();
     public List<string> Warnings { get; } = new();
     public bool IsValid => Errors.Count == 0;
@@ -58,36 +55,11 @@ public sealed class DungeonTileSets
             settings.RoomEdgeSocket, result.Corridor.Compiled, settings.PathSocket);
         result.Errors.AddRange(errors);
         result.Warnings.AddRange(warnings);
-        CheckLockedDoor(settings, result);
         string edge = settings.RoomEdgeSocket?.Trim() ?? "";
         if (edge.Length > 0 && !(settings.RoomTileSet.ExternalSockets ?? new()).Any(s => s?.Trim() == edge + "-"))
             result.Warnings.Add($"Add '{edge}-' to the room tile set's External Sockets: the room bounds supply it, "
                 + $"and without it the tile set preview marks every '{edge}+' face red.");
         return result;
-    }
-
-    private static void CheckLockedDoor(DungeonSettings settings, DungeonTileSets result)
-    {
-        if (settings.LockedDoor == DungeonSettings.NoDoor)
-        {
-            if (settings.LockedCorridors > 0)
-                result.Warnings.Add("Locked Corridors is above 0, but no Locked Door is chosen, so no door is locked.");
-            return;
-        }
-        result.LockedDoorTile = result.Room.TileForItem(settings.LockedDoor);
-        if (result.LockedDoorTile < 0)
-        {
-            result.Errors.Add("The Locked Door is not in the room tile set. Choose it from the room tile set, or (none).");
-            return;
-        }
-        if (result.LockedDoorTile == result.DoorTile)
-            result.Warnings.Add("The Locked Door is the Door tile, so locked doors look like every other door.");
-        string edge = settings.RoomEdgeSocket?.Trim() ?? "";
-        if (edge.Length > 0 && DungeonTileRules.HorizontalDirections.Any(d => DungeonTileRules.DoorVariant(result.Room.Compiled, result.LockedDoorTile, edge, d) < 0))
-            result.Errors.Add($"The Locked Door '{result.Room.TileNames[result.LockedDoorTile]}' needs the Door's shape: exactly one horizontal face with '{edge}+' "
-                + "(its outside), in four rotations.");
-        if (settings.LockedCorridors <= 0)
-            result.Warnings.Add("A Locked Door is chosen, but Locked Corridors is 0, so no door is locked.");
     }
 
     // Two loaded copies of one file count as the same library.

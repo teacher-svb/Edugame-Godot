@@ -56,7 +56,6 @@ public static class LayoutSeeds
     private const long LayoutStream = 1;
     private const long RoomStream = 2;
     private const long CorridorStream = 3;
-    private const long LockStream = 4;
 
     /// <summary>The seed of a layout attempt (room placement, graph and doors).</summary>
     public static long Layout(long seed, int attempt) => WfcRandom.Derive(WfcRandom.Derive(seed, LayoutStream), attempt);
@@ -67,7 +66,4 @@ public static class LayoutSeeds
 
     /// <summary>The seed of the corridor solve in a layout attempt.</summary>
     public static long Corridors(long seed, int attempt) => WfcRandom.Derive(WfcRandom.Derive(seed, CorridorStream), attempt);
-
-    /// <summary>The seed that picks the locked doors of a layout attempt.</summary>
-    public static long Locks(long seed, int attempt) => WfcRandom.Derive(WfcRandom.Derive(seed, LockStream), attempt);
 }
