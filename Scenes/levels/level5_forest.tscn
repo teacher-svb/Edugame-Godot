@@ -9,12 +9,12 @@
 [ext_resource type="Script" uid="uid://ch36n85vf88pf" path="res://addons/godooscatter/Resources/ScatterSettings.cs" id="7_scatter"]
 [ext_resource type="ArrayMesh" uid="uid://6475rfv566q7" path="res://assets/3D/nature/meshes/nature_tree_poplar.res" id="8_7lvh5"]
 [ext_resource type="Script" uid="uid://bm41ukop6ykag" path="res://addons/godoowave/Nodes/WfcPinBox.cs" id="9_pinbox"]
-
+[ext_resource type="Resource" path="res://GameData/characterData/Character_ManaGuard_CharacterData.tres" id="gate_cd"]
+[ext_resource type="PackedScene" path="res://Scenes/characters/mana_guard.tscn" id="gate_guard"]
+[ext_resource type="Script" uid="uid://fwhhpq3i7eb7" path="res://scripts/Game/Systems/Levels/GuardedGate.cs" id="gate_script"]
 [ext_resource type="Script" uid="uid://bbbrd61e4khhl" path="res://scripts/Game/Systems/Levels/LevelExit.cs" id="lv_exit"]
 [ext_resource type="Script" uid="uid://dub3134yuqw1k" path="res://scripts/Game/Systems/Levels/SpawnPoint.cs" id="lv_spawn"]
-[ext_resource type="PackedScene" path="res://Scenes/characters/mana_guard.tscn" id="gate_guard"]
-[ext_resource type="Script" path="res://scripts/Game/Systems/Levels/GuardedGate.cs" id="gate_script"]
-[ext_resource type="Resource" path="res://GameData/characterData/Character_ManaGuard_CharacterData.tres" id="gate_cd"]
+
 [sub_resource type="Resource" id="Resource_7lvh5"]
 script = ExtResource("3_settings")
 TileSet = ExtResource("4_tileset")
@@ -105,6 +105,8 @@ metadata/_custom_type_script = "uid://ch36n85vf88pf"
 [sub_resource type="BoxShape3D" id="BoxShape3D_exitHome"]
 size = Vector3(6, 2, 3)
 
+[sub_resource type="BoxShape3D" id="Shape_gate_block"]
+size = Vector3(2.4, 2.4, 0.3)
 
 [sub_resource type="StandardMaterial3D" id="Mat_gate_wood"]
 albedo_color = Color(0.45, 0.3, 0.17, 1)
@@ -118,11 +120,21 @@ size = Vector3(0.16, 1.5, 0.16)
 material = SubResource("Mat_gate_wood")
 size = Vector3(2.5, 0.18, 0.07)
 
-[sub_resource type="BoxShape3D" id="Shape_gate_block"]
-size = Vector3(2.4, 2.4, 0.3)
-
 [sub_resource type="BoxShape3D" id="Shape_gate_bark"]
 size = Vector3(4.5, 2, 3)
+
+
+[sub_resource type="WorldBoundaryShape3D" id="Shape_bounds_n"]
+plane = Plane(0, 0, 1, 0)
+
+[sub_resource type="WorldBoundaryShape3D" id="Shape_bounds_s"]
+plane = Plane(0, 0, -1, 0)
+
+[sub_resource type="WorldBoundaryShape3D" id="Shape_bounds_w"]
+plane = Plane(1, 0, 0, 0)
+
+[sub_resource type="WorldBoundaryShape3D" id="Shape_bounds_e"]
+plane = Plane(-1, 0, 0, 0)
 [node name="ForestTest" type="Node3D" unique_id=526854104]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=621573576]
@@ -144,8 +156,8 @@ data = {
 metadata/godoodads_wfc_settings = SubResource("Resource_7lvh5")
 metadata/godoodads_wfc_generated = PackedByteArray("Ae1XiXKcMAwVCyRBYJte7vX3/cbel2tjeXnVeNOY6bSd6VpxAFvnkyzYNyeid+F9+BA+hk/hc/gSvoZv4XsIgaijE/U00Eg3dEt3NBHTTIbehjaJ5Srzm2X+He4Q2uP9+6i2SVy5/2fuX/Mmzuu4juu4juv4c6M7QKcD1B+g4QCNB+jmAN0eoLsmmpqIm2hupqWZzAGyB8g10dpEj5rocRM9aaKnTfSsiXwTPW+iF030soleNdHrB9NJemO6mjjTl6mVe5wOZifTVfiS7CT3LM+9zA5sGLHZgd4edBjQb+FqlU+T0tfLuhX7BuIrduiCPgM42AuxGYinxMIgSwoXq/Az4FORnyWOCXw3CoPEs1T0WZA1kBsDvha+BewZecacF54F7CEmk/C4SjwnsMv3xGMu4Io5RruuUgdGxT1fqEUD9UoQM8PVKj7Ns1ywYwHLuVKzi8pLD+uzwmhRWOl6R0zcL3Bj8AmfUberYOmgdp3ydX5gDmdVJ7ZixwBP8Y8BJ6rk0oEvFmxNykfsBZgnhvnQXoJ6GXKEeR7jHOTqLuCxVHrdrHypnQUHMoPUD0HvwV6HMfRwbhboTfoclF5xkjmA7P69vF+LLz300x50U6XvFH03ov++OVbsdGALe8Go5PC95BQOJHzocw82Sjyj8qO75zw60DcAf6/i7pR9V+kR2Gtm0N8pvxGDTtl36r1r4Nwv6qwU/QPoKXjoXjiofo66uWKjnJ1BYdxBvZf8jdAHWPU57B+scjAAFkV/8W2EesD3A+qaVA/Cs1fkcSxgF78r5opuPGtWTadqpavoxr7B0I/Qbx2bjh3xRrw6hTcrHbqvzuqbYoCzNavvAMwbq3fQpOplUd8xdu/7Pv4IiWP1kc9zHH77XSIbcTUt+nh7/vNZZKW4usa5SeWd/H/j33Y2A35NSmljygzrbpp9Xoz30QWflWS2bWR/knubksi/ZnM+77LwSwQkbOt52e++Z21lcNzxa3Lf7/Y4/f7gHHJxpMR3NnT2DDSny+pLZAIG5/sVS3sV4R0GtZuXvQzet3xyOOUDBTaTPkHOP61vWTibIqmDLXeecL2AqcOL6UhL7CXGshxX81KSSEmWrPqcnW3r7AxEuIlRZs/lVQCXsDkh6jGEhPAP")
 
-[node name="PinBox" type="Node3D" parent="Forest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, -0.5, 76)
+[node name="PinBox" type="Node3D" parent="Forest" unique_id=764213581]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 94)
 script = ExtResource("9_pinbox")
 Origin = Vector3i(-5, 0, 19)
 Size = Vector3i(10, 1, 9)
@@ -173,9 +185,9 @@ multimesh = SubResource("MultiMesh_j32mp")
 metadata/godoodads_scatter_settings = SubResource("Resource_esfc7")
 
 [node name="Spawns" type="Node3D" parent="." unique_id=899734097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, 110)
 
 [node name="from_school" type="Marker3D" parent="Spawns" unique_id=1816689249]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0.1, 104)
 script = ExtResource("lv_spawn")
 Default = true
 
@@ -238,3 +250,21 @@ collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ManaSpringGate/BarkArea" unique_id=1620947321]
 shape = SubResource("Shape_gate_bark")
+
+[node name="WorldBounds" type="StaticBody3D" parent="." unique_id=1620947330]
+
+[node name="North" type="CollisionShape3D" parent="WorldBounds" unique_id=1620947331]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+shape = SubResource("Shape_bounds_n")
+
+[node name="South" type="CollisionShape3D" parent="WorldBounds" unique_id=1620947332]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 112)
+shape = SubResource("Shape_bounds_s")
+
+[node name="West" type="CollisionShape3D" parent="WorldBounds" unique_id=1620947333]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, 56)
+shape = SubResource("Shape_bounds_w")
+
+[node name="East" type="CollisionShape3D" parent="WorldBounds" unique_id=1620947334]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 56)
+shape = SubResource("Shape_bounds_e")
