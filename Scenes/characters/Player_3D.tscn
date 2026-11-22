@@ -47,6 +47,7 @@ albedo_texture = ExtResource("7_yx5mg")
 
 [node name="Player" unique_id=926984674 instance=ExtResource("1_v5scr")]
 _characterData = ExtResource("2_7dxc7")
+SharedAcrossLevels = true
 
 [node name="CharacterController3D" parent="." index="0" unique_id=631752590 node_paths=PackedStringArray("OcclusionRaycast", "Camera")]
 _speed = 3.0

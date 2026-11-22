@@ -30,6 +30,13 @@
 [ext_resource type="Resource" path="res://GameData/quests/I.3-WizardSchoolTrials-Water.tres" id="18_i3water"]
 [ext_resource type="Resource" path="res://GameData/quests/I.3-WizardSchoolTrials-Earth.tres" id="18_i3earth"]
 [ext_resource type="Resource" path="res://GameData/quests/I.4-TheHeavyHeart.tres" id="19_i4"]
+[ext_resource type="Resource" path="res://GameData/quests/II.1-TheDesperateHelp-Cornelis.tres" id="20_ii1"]
+[ext_resource type="Resource" path="res://GameData/quests/II.2-TheRumorMill.tres" id="21_ii2"]
+[ext_resource type="Script" path="res://scripts/Game/Dev/DevShortcuts.cs" id="dev_shortcuts"]
+[ext_resource type="Script" path="res://scripts/Game/Dev/DevCheckpoint.cs" id="dev_cp"]
+[ext_resource type="Resource" path="res://GameData/dev/01_act2-start.tres" id="dev_cp1"]
+[ext_resource type="Resource" path="res://GameData/dev/02_ii2.tres" id="dev_cp2"]
+[ext_resource type="Resource" path="res://GameData/dev/03_ii3.tres" id="dev_cp3"]
 [ext_resource type="Script" uid="uid://bf6jiou3no26s" path="res://scripts/Game/UI/MVC_Challenges/Controller/ChallengeController.cs" id="23_aum7h"]
 [ext_resource type="Script" uid="uid://dlqolcp4oddju" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeView.cs" id="24_qelhd"]
 [ext_resource type="PackedScene" uid="uid://dx5c0meqksg8l" path="res://Scenes/UI/ChallengeUI.tscn" id="25_d2cak"]
@@ -203,8 +210,13 @@ script = ExtResource("3_4v8vv")
 
 [node name="QuestManager" type="Node" parent="." unique_id=600992704]
 script = ExtResource("4_347u6")
-_quests = Array[ExtResource("11_aum7h")]([ExtResource("6_pnf1h"), ExtResource("17_56cnb"), ExtResource("17_hendrik"), ExtResource("17_liesbeth"), ExtResource("17_msbram"), ExtResource("18_i3fire"), ExtResource("18_i3water"), ExtResource("18_i3earth"), ExtResource("19_i4")])
+_quests = Array[ExtResource("11_aum7h")]([ExtResource("6_pnf1h"), ExtResource("17_56cnb"), ExtResource("17_hendrik"), ExtResource("17_liesbeth"), ExtResource("17_msbram"), ExtResource("18_i3fire"), ExtResource("18_i3water"), ExtResource("18_i3earth"), ExtResource("19_i4"), ExtResource("20_ii1"), ExtResource("21_ii2")])
 eventChannel = ExtResource("13_pnf1h")
+
+
+[node name="DevShortcuts" type="Node" parent="."]
+script = ExtResource("dev_shortcuts")
+Checkpoints = Array[ExtResource("dev_cp")]([ExtResource("dev_cp1"), ExtResource("dev_cp2"), ExtResource("dev_cp3")])
 
 [node name="UIManager" type="Node" parent="." unique_id=1207108139]
 script = ExtResource("4_c37v5")

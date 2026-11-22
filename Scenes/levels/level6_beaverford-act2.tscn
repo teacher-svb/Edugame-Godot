@@ -1,0 +1,372 @@
+[gd_scene format=3 uid="uid://dhsjpdmhgiba4"]
+
+[ext_resource type="Script" uid="uid://coeco3nsaywj6" path="res://scripts/Lib/OcclusionFader/OcclusionFader.cs" id="1_occl"]
+[ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://scripts/Lib/OcclusionFader/occlusionFader.gdshader" id="2_occl"]
+[ext_resource type="PackedScene" uid="uid://c7sx881ac5y6g" path="res://Scenes/levels/beaverford.tscn" id="3_town"]
+[ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="4_player"]
+[ext_resource type="PackedScene" uid="uid://by56kgwnxfbe5" path="res://Scenes/characters/hendrik.tscn" id="5_hendrik"]
+[ext_resource type="PackedScene" uid="uid://qqmsfnp0h0nk" path="res://Scenes/characters/liesbeth.tscn" id="6_liesbeth"]
+[ext_resource type="PackedScene" uid="uid://bx1wyqdgkro24" path="res://Scenes/characters/msBram.tscn" id="7_msbram"]
+[ext_resource type="PackedScene" uid="uid://brhrj77wopxwb" path="res://Scenes/characters/cornelis.tscn" id="8_cornelis"]
+[ext_resource type="Environment" uid="uid://detuifcyaequt" path="res://GameData/environments/beaverford_morning.tres" id="9_env"]
+[ext_resource type="Script" uid="uid://b6r73solgkl3m" path="res://scripts/Game/Systems/Audio/SceneMusic.cs" id="10_music"]
+[ext_resource type="Resource" path="res://GameData/music/route7-ramble-140.tres" id="11_track"]
+[ext_resource type="Script" uid="uid://dub3134yuqw1k" path="res://scripts/Game/Systems/Levels/SpawnPoint.cs" id="12_spawn"]
+[ext_resource type="Script" uid="uid://cq81buxdcg86j" path="res://scripts/Game/Systems/Levels/AnimatedProp.cs" id="13_prop"]
+[ext_resource type="Script" uid="uid://bbbrd61e4khhl" path="res://scripts/Game/Systems/Levels/LevelExit.cs" id="14_exit"]
+[ext_resource type="Script" uid="uid://bksw1ls1mwcv0" path="res://scripts/Game/Systems/QuestSystem/QuestNode.cs" id="20_questnode"]
+[ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="21_listener"]
+[ext_resource type="Script" uid="uid://ddispr5qrckr8" path="res://scripts/Game/Systems/QuestSystem/QuestsCompletedListener.cs" id="22_completed"]
+[ext_resource type="Script" uid="uid://cpedfcdw3s6jg" path="res://scripts/Game/Systems/QuestSystem/Steps/CallMethodStep.cs" id="23_call"]
+[ext_resource type="Script" uid="uid://d0ntv21juq2kk" path="res://scripts/Game/Systems/QuestSystem/Steps/ChallengeStep.cs" id="24_challengestep"]
+[ext_resource type="Script" uid="uid://v6ge3lx8r4vx" path="res://scripts/Game/Systems/QuestSystem/Steps/IdleStep.cs" id="25_idle"]
+[ext_resource type="Script" uid="uid://b2vy8ut3v0hfd" path="res://scripts/Game/Systems/QuestSystem/Steps/MessageStep.cs" id="26_message"]
+[ext_resource type="Script" uid="uid://diolsl1jtpyue" path="res://scripts/Game/Systems/Challenges/MathChallengeTrigger.cs" id="27_trigger"]
+[ext_resource type="Script" uid="uid://sup7lp6karaf" path="res://scripts/Game/Systems/Challenges/MathChallenge.cs" id="28_challenge"]
+[ext_resource type="Script" uid="uid://cnfmeuouim0nn" path="res://scripts/Game/Systems/Challenges/ParamSpec.cs" id="29_param"]
+[ext_resource type="Script" uid="uid://bduu2nqauu8sw" path="res://scripts/Game/Systems/Challenges/Visualizations/ImageVisualization.cs" id="30_imagevis"]
+[ext_resource type="Script" uid="uid://cecfqkgbbnr2u" path="res://scripts/Game/Systems/Challenges/Visualizations/ImageAnnotation.cs" id="31_annotation"]
+[ext_resource type="Script" uid="uid://2chy7qh6qta8" path="res://scripts/Game/Systems/Challenges/Inputs/CombinationLockInput.cs" id="32_lock"]
+[ext_resource type="Texture2D" uid="uid://c72t1e36d3fgo" path="res://project/images/drawbridge-diagram.png" id="33_bridgeimg"]
+[ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="34_channel"]
+[ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="35_questscript"]
+[ext_resource type="Resource" path="res://GameData/quests/I.4-TheHeavyHeart.tres" id="36_i4"]
+[ext_resource type="Resource" path="res://GameData/quests/II.1-TheDesperateHelp-Cornelis.tres" id="37_ii1"]
+[ext_resource type="Resource" uid="uid://bbk2oqbtmsp1u" path="res://GameData/characterData/Cornelis_CharacterData.tres" id="38_cornelisdata"]
+[ext_resource type="Resource" path="res://GameData/quests/II.2-TheRumorMill.tres" id="39_ii2"]
+[ext_resource type="Script" uid="uid://ch4x6amfugyhw" path="res://scripts/Game/Systems/QuestSystem/Steps/PatrolStep.cs" id="40_patrol"]
+[ext_resource type="Resource" uid="uid://bet0adq1t2ipo" path="res://GameData/characterData/Hendrik_CharacterData.tres" id="41_hendrikdata"]
+[ext_resource type="Resource" uid="uid://d0807nvddacru" path="res://GameData/characterData/Liesbeth_CharacterData.tres" id="42_liesbethdata"]
+[ext_resource type="Resource" uid="uid://de6dkaimr20b4" path="res://GameData/characterData/MsBram_CharacterData.tres" id="43_msbramdata"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_exitHome"]
+size = Vector3(1.2, 2, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_shout"]
+size = Vector3(16, 2, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_square"]
+size = Vector3(8, 2, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bank"]
+size = Vector3(5, 2, 3)
+
+[sub_resource type="Resource" id="Resource_ii1_b"]
+script = ExtResource("29_param")
+Name = "b"
+Pool = PackedInt32Array(50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150)
+
+[sub_resource type="Resource" id="Resource_ii1_s"]
+script = ExtResource("29_param")
+Name = "s"
+Pool = PackedInt32Array(10, 20, 30, 40, 50)
+
+[sub_resource type="Resource" id="Resource_ii1_c"]
+script = ExtResource("29_param")
+Name = "c"
+Pool = PackedInt32Array(20, 30, 40, 50, 60, 70, 80, 90, 100)
+
+[sub_resource type="Resource" id="Resource_ii1_label_b"]
+script = ExtResource("31_annotation")
+Text = "brug {b} kg"
+Position = Vector2(0.7, 0.21)
+
+[sub_resource type="Resource" id="Resource_ii1_label_s"]
+script = ExtResource("31_annotation")
+Text = "voorraad {s} kg"
+Position = Vector2(0.47, 0.38)
+
+[sub_resource type="Resource" id="Resource_ii1_label_c"]
+script = ExtResource("31_annotation")
+Text = "bak {c} kg"
+Position = Vector2(0.14, 0.2)
+
+[sub_resource type="Resource" id="Resource_ii1_vis"]
+script = ExtResource("30_imagevis")
+Image = ExtResource("33_bridgeimg")
+Annotations = Array[ExtResource("31_annotation")]([SubResource("Resource_ii1_label_b"), SubResource("Resource_ii1_label_s"), SubResource("Resource_ii1_label_c")])
+
+[sub_resource type="Resource" id="Resource_ii1_input"]
+script = ExtResource("32_lock")
+
+[sub_resource type="Resource" id="Resource_ii1_challenge"]
+script = ExtResource("28_challenge")
+Name = "Cornelis' brug (II.1)"
+Formula = "b + s - c"
+Params = Array[ExtResource("29_param")]([SubResource("Resource_ii1_b"), SubResource("Resource_ii1_s"), SubResource("Resource_ii1_c")])
+Constraints = PackedStringArray("answer > 0")
+Visualization = SubResource("Resource_ii1_vis")
+Input = SubResource("Resource_ii1_input")
+QuestionText = "De brug weegt {b} kg en Cornelis' voorraad op de brug weegt {s} kg.
+In de bak van het tegengewicht ligt {c} kg.
+Hoeveel kg moet er nog bij in de bak om de brug in evenwicht te brengen?"
+HintText = "Tel eerst de brug en de voorraad op. Trek daarna af wat er al in de bak ligt."
+
+[node name="BeaverfordActII" type="Node3D"]
+script = ExtResource("1_occl")
+OcclusionShader = ExtResource("2_occl")
+MaxRadius = 1.0
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = ExtResource("9_env")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(0.6427877, -0.5868241, 0.49240392, -5.8600456e-08, 0.64278775, 0.7660447, -0.76604456, -0.4924038, 0.413176, 0, 0, 0)
+light_color = Color(1, 0.93, 0.82, 1)
+light_indirect_energy = 1.2
+light_angular_distance = 0.5
+light_cull_mask = 4294442495
+shadow_enabled = true
+shadow_opacity = 0.85
+shadow_blur = 0.5
+shadow_caster_mask = 4294442495
+directional_shadow_max_distance = 50.0
+
+[node name="Beaverford" parent="." instance=ExtResource("3_town")]
+
+[node name="Drawbridge" type="Node" parent="." node_paths=PackedStringArray("Player")]
+script = ExtResource("13_prop")
+Player = NodePath("../Beaverford/NavigationRegion3D/drawbridge/AnimationPlayer")
+StartAnimation = &"Drawbridge_Raise"
+
+[node name="DrawbridgeNavLink" type="NavigationLink3D" parent="."]
+enabled = false
+start_position = Vector3(27, 0, 10.2)
+end_position = Vector3(27, 0, 23.6)
+
+[node name="Player" parent="." instance=ExtResource("4_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0.4, 42)
+
+[node name="Villagers" type="Node3D" parent="."]
+
+[node name="Cornelis" parent="Villagers" instance=ExtResource("8_cornelis")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0.3, 8.5)
+
+[node name="NavigationAgent3D" parent="Villagers/Cornelis"]
+path_desired_distance = 0.4
+target_desired_distance = 0.4
+path_height_offset = 0.0
+
+[node name="Hendrik" parent="Villagers" instance=ExtResource("5_hendrik")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.234116, 1.578182, 44.51187)
+
+[node name="Liesbeth" parent="Villagers" instance=ExtResource("6_liesbeth")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.835913, 0, 20.052374)
+
+[node name="MsBram" parent="Villagers" instance=ExtResource("7_msbram")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.942002, 0.68019676, -28.206722)
+
+[node name="Markers" type="Node3D" parent="."]
+
+[node name="TownSquare" type="Marker3D" parent="Markers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 2)
+
+[node name="DrawbridgeSouthBank" type="Marker3D" parent="Markers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0, 23.5)
+
+[node name="CornelisRoute" type="Node3D" parent="Markers"]
+
+[node name="2_Square" type="Marker3D" parent="Markers/CornelisRoute"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3)
+
+[node name="Quests" type="Node" parent="."]
+
+[node name="II_1-The Desperate Help" type="Node" parent="Quests"]
+script = ExtResource("20_questnode")
+_quest = ExtResource("37_ii1")
+
+[node name="MathChallengeTrigger" type="Node" parent="Quests/II_1-The Desperate Help"]
+script = ExtResource("27_trigger")
+_challenge = SubResource("Resource_ii1_challenge")
+
+[node name="obj2-init-Challenge" type="Node" parent="Quests/II_1-The Desperate Help"]
+script = ExtResource("21_listener")
+_checkObjectiveId = true
+_objectiveId = "daaeb60f-a9fb-4892-9e1a-d7390bcd1c02"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("34_channel")
+
+[node name="ChallengeStep" type="Node" parent="Quests/II_1-The Desperate Help/obj2-init-Challenge" node_paths=PackedStringArray("_trigger")]
+script = ExtResource("24_challengestep")
+_trigger = NodePath("../../MathChallengeTrigger")
+
+[node name="obj3-init-LowerBridge" type="Node" parent="Quests/II_1-The Desperate Help"]
+script = ExtResource("21_listener")
+_checkObjectiveId = true
+_objectiveId = "daaeb60f-a9fb-4892-9e1a-d7390bcd1c03"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("34_channel")
+
+[node name="LowerBridge" type="Node" parent="Quests/II_1-The Desperate Help/obj3-init-LowerBridge" node_paths=PackedStringArray("Target")]
+script = ExtResource("23_call")
+Target = NodePath("../../../../Drawbridge")
+_method = "Play"
+_args = ["Drawbridge_Lower"]
+
+[node name="CornelisAmazed" type="Node" parent="Quests/II_1-The Desperate Help/obj3-init-LowerBridge"]
+script = ExtResource("26_message")
+_text = "Hij zakt... hij ZAKT! Geen toverstaf, geen spreuk, en toch werkt mijn brug weer. Hoe dééd je dat?"
+_character = ExtResource("38_cornelisdata")
+
+[node name="I4-completed-CornelisCalls" type="Node" parent="Quests"]
+script = ExtResource("22_completed")
+_quests = Array[ExtResource("35_questscript")]([ExtResource("36_i4")])
+eventChannel = ExtResource("34_channel")
+
+[node name="II1-completed-BridgeDown" type="Node" parent="Quests"]
+script = ExtResource("22_completed")
+_quests = Array[ExtResource("35_questscript")]([ExtResource("37_ii1")])
+eventChannel = ExtResource("34_channel")
+
+[node name="BridgeDown" type="Node" parent="Quests/II1-completed-BridgeDown" node_paths=PackedStringArray("Target")]
+script = ExtResource("23_call")
+Target = NodePath("../../../Drawbridge")
+_method = "SetPose"
+_args = ["Drawbridge_Lower", true]
+
+[node name="II1-completed-CornelisToSquare" type="Node" parent="Quests"]
+script = ExtResource("22_completed")
+_quests = Array[ExtResource("35_questscript")]([ExtResource("37_ii1")])
+eventChannel = ExtResource("34_channel")
+
+[node name="OpenBridgeForWalkers" type="Node" parent="Quests/II1-completed-CornelisToSquare" node_paths=PackedStringArray("Target")]
+script = ExtResource("23_call")
+Target = NodePath("../../../DrawbridgeNavLink")
+_method = "set_Enabled"
+_args = [true]
+
+[node name="CornelisRunsToSquare" type="Node" parent="Quests/II1-completed-CornelisToSquare" node_paths=PackedStringArray("_character", "_waypoints")]
+script = ExtResource("40_patrol")
+_character = NodePath("../../../Villagers/Cornelis")
+_waypoints = [NodePath("../../../Markers/CornelisRoute/2_Square")]
+
+[node name="II1-completed-ArmSquare" type="Node" parent="Quests"]
+script = ExtResource("22_completed")
+_quests = Array[ExtResource("35_questscript")]([ExtResource("37_ii1")])
+eventChannel = ExtResource("34_channel")
+
+[node name="II_2-The Rumor Mill" type="Node" parent="Quests"]
+script = ExtResource("20_questnode")
+_quest = ExtResource("39_ii2")
+
+[node name="obj1-init-Reactions" type="Node" parent="Quests/II_2-The Rumor Mill"]
+script = ExtResource("21_listener")
+_checkObjectiveId = true
+_objectiveId = "fff66ceb-01f6-41ab-8d61-552129f73b01"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("34_channel")
+
+[node name="Hendrik" type="Node" parent="Quests/II_2-The Rumor Mill/obj1-init-Reactions"]
+script = ExtResource("26_message")
+_text = "Zonder toverstaf? Dan kan ze vast ook mijn molen weer aan de praat krijgen!"
+_character = ExtResource("41_hendrikdata")
+
+[node name="Liesbeth" type="Node" parent="Quests/II_2-The Rumor Mill/obj1-init-Reactions"]
+script = ExtResource("26_message")
+_text = "Toverij die je niet eens ziet... Onzichtbare magie, dat is het!"
+_character = ExtResource("42_liesbethdata")
+
+[node name="MsBram" type="Node" parent="Quests/II_2-The Rumor Mill/obj1-init-Reactions"]
+script = ExtResource("26_message")
+_text = "Een wonderkind, hier in ons eigen Beaverford. En ik had haar nog in mijn klas!"
+_character = ExtResource("43_msbramdata")
+
+[node name="obj2-init-Requests" type="Node" parent="Quests/II_2-The Rumor Mill"]
+script = ExtResource("21_listener")
+_checkObjectiveId = true
+_objectiveId = "fff66ceb-01f6-41ab-8d61-552129f73b02"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("34_channel")
+
+[node name="Hendrik" type="Node" parent="Quests/II_2-The Rumor Mill/obj2-init-Requests"]
+script = ExtResource("26_message")
+_text = "Mabel, mijn molensteen draait veel te snel. Het meel komt er als gruis uit. Kom je kijken bij de molen?"
+_character = ExtResource("41_hendrikdata")
+
+[node name="Liesbeth" type="Node" parent="Quests/II_2-The Rumor Mill/obj2-init-Requests"]
+script = ExtResource("26_message")
+_text = "En mijn betoverde weegschaal klopt niet meer! Mijn broden mislukken. Kom je naar de bakkerij?"
+_character = ExtResource("42_liesbethdata")
+
+[node name="MsBram" type="Node" parent="Quests/II_2-The Rumor Mill/obj2-init-Requests"]
+script = ExtResource("26_message")
+_text = "De schoolbel luidt op de verkeerde tijden. De kinderen weten niet meer wanneer de les begint. Kom je naar school?"
+_character = ExtResource("43_msbramdata")
+
+[node name="CornelisShoutArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 1, 27)
+collision_layer = 0
+collision_mask = 3
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CornelisShoutArea"]
+shape = SubResource("BoxShape3D_shout")
+
+[node name="CornelisBankArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 1, 23.5)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CornelisBankArea"]
+shape = SubResource("BoxShape3D_bank")
+
+[node name="RumorSquareArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 2)
+collision_layer = 0
+collision_mask = 3
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RumorSquareArea"]
+shape = SubResource("BoxShape3D_square")
+
+[node name="SceneMusic" type="Node" parent="."]
+script = ExtResource("10_music")
+Track = ExtResource("11_track")
+
+[node name="Spawns" type="Node3D" parent="."]
+
+[node name="from_home" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0.4, 42)
+script = ExtResource("12_spawn")
+Default = true
+
+[node name="bridge_approach" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0.3, 33)
+script = ExtResource("12_spawn")
+
+[node name="bridge" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0.3, 24.5)
+script = ExtResource("12_spawn")
+
+[node name="Exits" type="Node3D" parent="."]
+
+[node name="ExitToHome" type="Area3D" parent="Exits"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 1, 40.75)
+collision_mask = 3
+monitoring = false
+script = ExtResource("14_exit")
+TargetScene = "uid://lsbk05nndu58"
+_targetSpawnPath = "Spawns/front_door"
+Enabled = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Exits/ExitToHome"]
+shape = SubResource("BoxShape3D_exitHome")
+
+[connection signal="ChallengeCompleted" from="Quests/II_1-The Desperate Help/MathChallengeTrigger" to="Quests/II_1-The Desperate Help" method="CompleteObjective" binds= ["daaeb60f-a9fb-4892-9e1a-d7390bcd1c02"]]
+[connection signal="ChallengeFailed" from="Quests/II_1-The Desperate Help/MathChallengeTrigger" to="Quests/II_1-The Desperate Help" method="FailObjective" binds= ["daaeb60f-a9fb-4892-9e1a-d7390bcd1c02"]]
+[connection signal="ReactionEnd" from="Quests/II_1-The Desperate Help/obj3-init-LowerBridge" to="Quests/II_1-The Desperate Help" method="CompleteObjective" binds= ["daaeb60f-a9fb-4892-9e1a-d7390bcd1c03"]]
+[connection signal="ReactionEnd" from="Quests/I4-completed-CornelisCalls" to="CornelisShoutArea" method="set_deferred" binds= ["monitoring", true]]
+[connection signal="body_entered" from="CornelisShoutArea" to="Quests/II_1-The Desperate Help" method="_OnPlayerStartObjective" binds= ["daaeb60f-a9fb-4892-9e1a-d7390bcd1c01"]]
+[connection signal="body_entered" from="CornelisBankArea" to="Quests/II_1-The Desperate Help" method="_OnPlayerCompleteObjective" binds= ["daaeb60f-a9fb-4892-9e1a-d7390bcd1c01"]]
+[connection signal="ReactionEnd" from="Quests/II1-completed-ArmSquare" to="RumorSquareArea" method="set_deferred" binds= ["monitoring", true]]
+[connection signal="body_entered" from="RumorSquareArea" to="Quests/II_2-The Rumor Mill" method="_OnPlayerStartObjective" binds= ["fff66ceb-01f6-41ab-8d61-552129f73b01"]]
+[connection signal="ReactionEnd" from="Quests/II_2-The Rumor Mill/obj1-init-Reactions" to="Quests/II_2-The Rumor Mill" method="CompleteObjective" binds= ["fff66ceb-01f6-41ab-8d61-552129f73b01"]]
+[connection signal="ReactionEnd" from="Quests/II_2-The Rumor Mill/obj2-init-Requests" to="Quests/II_2-The Rumor Mill" method="CompleteObjective" binds= ["fff66ceb-01f6-41ab-8d61-552129f73b02"]]
+
+[editable path="Villagers/Cornelis"]

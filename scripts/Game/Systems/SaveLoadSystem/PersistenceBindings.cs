@@ -8,14 +8,25 @@ namespace TnT.EduGame.Characters
     public partial class Character3D : IBind<CharacterSaveData>
     {
         [Export] public string PersistentId { get; set; }
+        /// <summary>
+        /// Off (villagers, wizards): the character is saved per level, under "&lt;level scene&gt;#&lt;PersistentId&gt;",
+        /// so the same villager in another level (Act I town, Act II town) keeps its own position there.
+        /// On (the player, set in Player_3D.tscn): one entry for all levels; LoadScene puts the player at the spawn point.
+        /// </summary>
+        [Export] public bool SharedAcrossLevels { get; set; }
         CharacterSaveData _saveData;
+
+        // the save key; PersistentId itself stays the plain character id (LoadCharacter)
+        string IUnique.PersistentId =>
+            SharedAcrossLevels ? PersistentId : $"{GetTree()?.CurrentScene?.SceneFilePath}#{PersistentId}";
 
         public void Bind(CharacterSaveData data)
         {
             _saveData = data;
             if (!data.IsNew)
                 this.Position = _saveData.position;
-            LoadCharacter(_saveData.characterId);
+            // a new entry has no characterId yet: keep this character's own id (was: PersistentId became null)
+            LoadCharacter(string.IsNullOrEmpty(_saveData.characterId) ? PersistentId : _saveData.characterId);
         }
     }
 }

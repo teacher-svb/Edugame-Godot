@@ -54,6 +54,7 @@
 [ext_resource type="Script" uid="uid://dub3134yuqw1k" path="res://scripts/Game/Systems/Levels/SpawnPoint.cs" id="lv_spawn"]
 [ext_resource type="Resource" path="res://GameData/quests/I.4-TheHeavyHeart.tres" id="q_i4"]
 [ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/QuestsCompletedListener.cs" id="q_completed"]
+[ext_resource type="Script" uid="uid://cpedfcdw3s6jg" path="res://scripts/Game/Systems/QuestSystem/Steps/CallMethodStep.cs" id="q_call"]
 [ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="q_quest_script"]
 [ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Steps/ActCardStep.cs" id="q_actcard"]
 [ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Steps/SaveGameStep.cs" id="q_save"]
@@ -469,6 +470,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4, 0.20000002, -48.7)
 shape = SubResource("BoxShape3D_tile")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
+[node name="transporter_livingroom_act2" type="Area3D" parent="transporters" unique_id=1733560401]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0.4, 42)
+collision_mask = 3
+monitoring = false
+script = ExtResource("lv_exit")
+TargetScene = "uid://dhsjpdmhgiba4"
+_targetSpawnPath = "Spawns/from_home"
+Enabled = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="transporters/transporter_livingroom_act2" unique_id=1733560402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1, 0.20000002, -46.425)
+shape = SubResource("BoxShape3D_exit")
+debug_color = Color(0.6, 0.4, 0.1, 1)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="transporters/transporter_livingroom_act2" unique_id=1733560403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4, 0.20000002, -48.7)
+shape = SubResource("BoxShape3D_tile")
+debug_color = Color(0.6, 0.4, 0.1, 1)
+
 [node name="Quests" type="Node" parent="." unique_id=371530256]
 
 [node name="LookingForAvocado" type="Node" parent="Quests" unique_id=819544074]
@@ -664,6 +684,21 @@ _subtitle = "Welkom in Beaverford"
 
 [node name="Autosave" type="Node" parent="Quests/I4-completed-EndOfActI" unique_id=1733550412]
 script = ExtResource("q_save")
+
+[node name="I4-completed-TownIsActII" type="Node" parent="Quests" unique_id=1733560404]
+script = ExtResource("q_completed")
+_quests = Array[ExtResource("q_quest_script")]([ExtResource("q_i4")])
+eventChannel = ExtResource("28_kdqke")
+
+[node name="CloseActITown" type="Node" parent="Quests/I4-completed-TownIsActII" unique_id=1733560405 node_paths=PackedStringArray("Target")]
+script = ExtResource("q_call")
+Target = NodePath("../../../transporters/transporter_livingroom_level2")
+_method = "Close"
+
+[node name="OpenActIITown" type="Node" parent="Quests/I4-completed-TownIsActII" unique_id=1733560406 node_paths=PackedStringArray("Target")]
+script = ExtResource("q_call")
+Target = NodePath("../../../transporters/transporter_livingroom_act2")
+_method = "Open"
 
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj1-completed-OpenDoor" to="NavigationRegion3D/Bedroom/StaticBody3D" method="ToggleDoor"]
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj2-completed-removeTutorial" to="Player/tutorial" method="queue_free"]
