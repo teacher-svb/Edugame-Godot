@@ -150,11 +150,12 @@ StartSpawn = NodePath("../StartSpawn")
 GoalRoom = NodePath("../GoalRoom")
 
 [node name="StartSpawn" type="Marker3D" parent="." unique_id=1103862353]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 0.1, 78)
 script = ExtResource("lv_spawn")
 Default = true
 
 [node name="GoalRoom" type="Node3D" parent="." unique_id=137568963]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 70, 0, 18)
 
 [node name="SparkTestPlatform" parent="GoalRoom" unique_id=467808755 instance=ExtResource("goal_spark")]
 

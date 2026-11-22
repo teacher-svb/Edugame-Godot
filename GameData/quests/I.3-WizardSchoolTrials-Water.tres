@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" format=3]
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://dfceuk1oi0ksl"]
 
 [ext_resource type="Script" uid="uid://bkc5aqh43okjh" path="res://scripts/Game/Systems/QuestSystem/QuestObjective.cs" id="1_obj"]
 [ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="2_mabel"]
@@ -8,7 +8,6 @@
 [sub_resource type="Resource" id="Objective_reach"]
 script = ExtResource("1_obj")
 _startText = "Water! Het stroomt overal. Ik moet op het goede moment van vlot naar vlot springen."
-_failText = ""
 _completeText = "Droog aangekomen! Daar staat de watertovenaar."
 _characterData = ExtResource("2_mabel")
 _objectiveId = "ea871cbc-3987-48ad-892e-8f56e553d101"
@@ -17,7 +16,6 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 [sub_resource type="Resource" id="Objective_spark"]
 script = ExtResource("1_obj")
 _startText = "Ah, de leerling van het vuur. Stap op het platform. Misschien stroomt er water door je heen."
-_failText = ""
 _completeText = "Niets. Geen druppel, niet eens een beetje mist."
 _characterData = ExtResource("3_wizard")
 _objectiveId = "ea871cbc-3987-48ad-892e-8f56e553d102"
@@ -26,7 +24,6 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 [sub_resource type="Resource" id="Objective_onwards"]
 script = ExtResource("1_obj")
 _startText = "Water is ook niet jouw element. Ga maar naar de aardtovenaar."
-_failText = ""
 _completeText = "De poort achter mij staat open. Ga maar."
 _characterData = ExtResource("3_wizard")
 _objectiveId = "ea871cbc-3987-48ad-892e-8f56e553d103"

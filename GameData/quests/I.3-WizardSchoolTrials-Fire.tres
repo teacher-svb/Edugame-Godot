@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" format=3]
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://c5d5d7wsyi8k2"]
 
 [ext_resource type="Script" uid="uid://bkc5aqh43okjh" path="res://scripts/Game/Systems/QuestSystem/QuestObjective.cs" id="1_obj"]
 [ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="2_mabel"]
@@ -8,7 +8,6 @@
 [sub_resource type="Resource" id="Objective_reach"]
 script = ExtResource("1_obj")
 _startText = "Vlammen! De tovenaar wacht aan de overkant. Ik moet precies op het goede moment tussen het vuur door."
-_failText = ""
 _completeText = "Gehaald! Daar staat de vuurtovenaar."
 _characterData = ExtResource("2_mabel")
 _objectiveId = "76aea55d-b75f-46d0-a036-841e8309a201"
@@ -17,7 +16,6 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 [sub_resource type="Resource" id="Objective_spark"]
 script = ExtResource("1_obj")
 _startText = "Zo, jij bent Mabel. Stap op het platform voor de Vonkproef, dan zien we of er vuur in je zit."
-_failText = ""
 _completeText = "Hm. Geen vonk. Niet eens een rookpluimpje."
 _characterData = ExtResource("3_fire")
 _objectiveId = "76aea55d-b75f-46d0-a036-841e8309a202"
@@ -26,7 +24,6 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 [sub_resource type="Resource" id="Objective_onwards"]
 script = ExtResource("1_obj")
 _startText = "Vuur is niet jouw element, kind. Probeer het maar bij de watertovenaar."
-_failText = ""
 _completeText = "De poort achter mij staat open. Ga maar."
 _characterData = ExtResource("3_fire")
 _objectiveId = "76aea55d-b75f-46d0-a036-841e8309a203"
