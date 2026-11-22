@@ -29,6 +29,7 @@
 [ext_resource type="Resource" path="res://GameData/quests/I.3-WizardSchoolTrials-Fire.tres" id="18_i3fire"]
 [ext_resource type="Resource" path="res://GameData/quests/I.3-WizardSchoolTrials-Water.tres" id="18_i3water"]
 [ext_resource type="Resource" path="res://GameData/quests/I.3-WizardSchoolTrials-Earth.tres" id="18_i3earth"]
+[ext_resource type="Resource" path="res://GameData/quests/I.4-TheHeavyHeart.tres" id="19_i4"]
 [ext_resource type="Script" uid="uid://bf6jiou3no26s" path="res://scripts/Game/UI/MVC_Challenges/Controller/ChallengeController.cs" id="23_aum7h"]
 [ext_resource type="Script" uid="uid://dlqolcp4oddju" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeView.cs" id="24_qelhd"]
 [ext_resource type="PackedScene" uid="uid://dx5c0meqksg8l" path="res://Scenes/UI/ChallengeUI.tscn" id="25_d2cak"]
@@ -51,6 +52,10 @@
 [ext_resource type="PackedScene" uid="uid://ddarmu38cbcs" path="res://Scenes/UI/SettingsUI.tscn" id="42_n2kwl"]
 [ext_resource type="Script" uid="uid://7u5mhmxl340a" path="res://scripts/Game/UI/MVC_Fade/FadeView.cs" id="43_wgk6c"]
 [ext_resource type="Script" path="res://scripts/Game/Systems/Audio/MusicManager.cs" id="48_music"]
+[ext_resource type="Script" path="res://scripts/Game/StateManagementGame/GameStateActCard.cs" id="60_actstate"]
+[ext_resource type="Script" path="res://scripts/Game/UI/MVC_ActCard/ActCardController.cs" id="61_actctrl"]
+[ext_resource type="Script" path="res://scripts/Game/UI/MVC_ActCard/ActCardModel.cs" id="62_actmodel"]
+[ext_resource type="Script" path="res://scripts/Game/UI/MVC_ActCard/ActCardView.cs" id="63_actview"]
 
 [sub_resource type="Resource" id="Resource_hwrcp"]
 script = ExtResource("16_ut70p")
@@ -137,6 +142,19 @@ InputReference = "open"
 ActionName = "open"
 metadata/_custom_type_script = "uid://ch4u84myc17c2"
 
+
+[sub_resource type="LabelSettings" id="LabelSettings_act_title"]
+font_size = 72
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_act_subtitle"]
+font_size = 40
+font_color = Color(0.95, 0.85, 0.6, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_act_hint"]
+font_size = 22
+font_color = Color(1, 1, 1, 0.6)
 [node name="Managers" type="Node" unique_id=583445644]
 process_mode = 3
 
@@ -167,6 +185,9 @@ script = ExtResource("7_blwmm")
 script = ExtResource("9_56cnb")
 metadata/_custom_type_script = "uid://c673wplbelsyw"
 
+[node name="GameStateActCard" type="Node" parent="StateManagerGame" unique_id=1733550401]
+script = ExtResource("60_actstate")
+
 [node name="GameStateSettings" type="Node" parent="StateManagerGame" unique_id=2037842696]
 script = ExtResource("10_wgk6c")
 metadata/_custom_type_script = "uid://cypyw7658ri5r"
@@ -182,7 +203,7 @@ script = ExtResource("3_4v8vv")
 
 [node name="QuestManager" type="Node" parent="." unique_id=600992704]
 script = ExtResource("4_347u6")
-_quests = Array[ExtResource("11_aum7h")]([ExtResource("6_pnf1h"), ExtResource("17_56cnb"), ExtResource("17_hendrik"), ExtResource("17_liesbeth"), ExtResource("17_msbram"), ExtResource("18_i3fire"), ExtResource("18_i3water"), ExtResource("18_i3earth")])
+_quests = Array[ExtResource("11_aum7h")]([ExtResource("6_pnf1h"), ExtResource("17_56cnb"), ExtResource("17_hendrik"), ExtResource("17_liesbeth"), ExtResource("17_msbram"), ExtResource("18_i3fire"), ExtResource("18_i3water"), ExtResource("18_i3earth"), ExtResource("19_i4")])
 eventChannel = ExtResource("13_pnf1h")
 
 [node name="UIManager" type="Node" parent="." unique_id=1207108139]
@@ -310,6 +331,76 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="ActCardController" type="Node" parent="UIManager/CanvasLayer" unique_id=1733550402 node_paths=PackedStringArray("view", "model")]
+script = ExtResource("61_actctrl")
+view = NodePath("ActCardView")
+model = NodePath("ActCardModel")
+
+[node name="ActCardModel" type="Node" parent="UIManager/CanvasLayer/ActCardController" unique_id=1733550403]
+script = ExtResource("62_actmodel")
+
+[node name="ActCardView" type="Control" parent="UIManager/CanvasLayer/ActCardController" unique_id=1733550404 node_paths=PackedStringArray("_background", "_text", "_title", "_subtitle", "_hint")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("63_actview")
+_background = NodePath("Background")
+_text = NodePath("Text")
+_title = NodePath("Text/Title")
+_subtitle = NodePath("Text/Subtitle")
+_hint = NodePath("Hint")
+
+[node name="Background" type="ColorRect" parent="UIManager/CanvasLayer/ActCardController/ActCardView" unique_id=1733550405]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Text" type="VBoxContainer" parent="UIManager/CanvasLayer/ActCardController/ActCardView" unique_id=1733550406]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="UIManager/CanvasLayer/ActCardController/ActCardView/Text" unique_id=1733550407]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_act_title")
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="UIManager/CanvasLayer/ActCardController/ActCardView/Text" unique_id=1733550408]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_act_subtitle")
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="UIManager/CanvasLayer/ActCardController/ActCardView" unique_id=1733550409]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -80.0
+offset_right = 300.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Druk op spatie om verder te gaan"
+label_settings = SubResource("LabelSettings_act_hint")
+horizontal_alignment = 1
 
 [node name="MusicManager" type="Node" parent="." unique_id=358640137]
 script = ExtResource("48_music")

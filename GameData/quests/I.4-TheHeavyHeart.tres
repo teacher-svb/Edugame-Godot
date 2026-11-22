@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Quest" format=3]
+
+[ext_resource type="Script" uid="uid://bkc5aqh43okjh" path="res://scripts/Game/Systems/QuestSystem/QuestObjective.cs" id="1_obj"]
+[ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="2_mabel"]
+[ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="3_quest"]
+
+[sub_resource type="Resource" id="Objective_forest"]
+script = ExtResource("1_obj")
+_startText = "Geen mana. Geen tovenaar. Dan ga ik maar naar huis, door het bos."
+_completeText = "Daarboven, tussen de rotsen: de manabron. Alle magie komt daarvandaan... maar voor mij is er niets."
+_characterData = ExtResource("2_mabel")
+_objectiveId = "0402a3f0-34b9-41f6-9ed7-7756703a1801"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[sub_resource type="Resource" id="Objective_home"]
+script = ExtResource("1_obj")
+_startText = "Kom op, Mabel. Naar huis."
+_completeText = "Thuis. En nu? Ik ben geen tovenaar, en dat word ik ook nooit."
+_characterData = ExtResource("2_mabel")
+_objectiveId = "0402a3f0-34b9-41f6-9ed7-7756703a1802"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[resource]
+script = ExtResource("3_quest")
+_id = "0402a3f0-34b9-41f6-9ed7-7756703a1800"
+_name = "The Heavy Heart"
+_objectives = Array[ExtResource("1_obj")]([SubResource("Objective_forest"), SubResource("Objective_home")])
+metadata/_custom_type_script = "uid://k32terbd7gqc"

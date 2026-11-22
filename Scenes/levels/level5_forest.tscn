@@ -14,6 +14,8 @@
 [ext_resource type="Script" uid="uid://fwhhpq3i7eb7" path="res://scripts/Game/Systems/Levels/GuardedGate.cs" id="gate_script"]
 [ext_resource type="Script" uid="uid://bbbrd61e4khhl" path="res://scripts/Game/Systems/Levels/LevelExit.cs" id="lv_exit"]
 [ext_resource type="Script" uid="uid://dub3134yuqw1k" path="res://scripts/Game/Systems/Levels/SpawnPoint.cs" id="lv_spawn"]
+[ext_resource type="Resource" path="res://GameData/quests/I.4-TheHeavyHeart.tres" id="q_i4"]
+[ext_resource type="Script" uid="uid://bksw1ls1mwcv0" path="res://scripts/Game/Systems/QuestSystem/QuestNode.cs" id="q_node"]
 
 [sub_resource type="Resource" id="Resource_7lvh5"]
 script = ExtResource("3_settings")
@@ -135,6 +137,12 @@ plane = Plane(1, 0, 0, 0)
 
 [sub_resource type="WorldBoundaryShape3D" id="Shape_bounds_e"]
 plane = Plane(-1, 0, 0, 0)
+
+[sub_resource type="BoxShape3D" id="Shape_i4_arrival"]
+size = Vector3(4, 2, 4)
+
+[sub_resource type="BoxShape3D" id="Shape_i4_spring"]
+size = Vector3(3, 3, 24)
 [node name="ForestTest" type="Node3D" unique_id=526854104]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=621573576]
@@ -268,3 +276,28 @@ shape = SubResource("Shape_bounds_w")
 [node name="East" type="CollisionShape3D" parent="WorldBounds" unique_id=1620947334]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 56)
 shape = SubResource("Shape_bounds_e")
+
+[node name="I4_Arrival" type="Area3D" parent="Spawns/from_school" unique_id=1733540401]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spawns/from_school/I4_Arrival" unique_id=1733540402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("Shape_i4_arrival")
+
+[node name="I4_PassSpring" type="Area3D" parent="." unique_id=1733540403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.5, 64)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="I4_PassSpring" unique_id=1733540404]
+shape = SubResource("Shape_i4_spring")
+
+[node name="Quests" type="Node" parent="." unique_id=1733540405]
+
+[node name="I_4-The Heavy Heart" type="Node" parent="Quests" unique_id=1733540406]
+script = ExtResource("q_node")
+_quest = ExtResource("q_i4")
+
+[connection signal="body_entered" from="Spawns/from_school/I4_Arrival" to="Quests/I_4-The Heavy Heart" method="_OnPlayerStartObjective" binds= ["0402a3f0-34b9-41f6-9ed7-7756703a1801"]]
+[connection signal="body_entered" from="I4_PassSpring" to="Quests/I_4-The Heavy Heart" method="_OnPlayerCompleteObjective" binds= ["0402a3f0-34b9-41f6-9ed7-7756703a1801"]]

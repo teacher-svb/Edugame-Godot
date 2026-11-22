@@ -73,6 +73,15 @@ namespace TnT.EduGame.GameState
             Push(state.GetState(new() { text = text, character = character, next = ManagerUI.Instance.Next, close = ManagerUI.Instance.Close, onDismissed = onDismissed }));
         }
 
+        /// <summary>The card between acts (e.g. "Einde van Akte I"); <paramref name="onDismissed"/> runs once it is closed.</summary>
+        public void ShowActCard(string title, string subtitle, Action onDismissed = null)
+        {
+            var state = _registeredStates.OfType<GameStateActCard>().FirstOrDefault()
+                ?? throw new Exception("no act card state assigned");
+
+            Push(state.GetState(new() { title = title, subtitle = subtitle, next = ManagerUI.Instance.Next, close = ManagerUI.Instance.Close, onDismissed = onDismissed }));
+        }
+
         // seed decides the round's values; pass the same seed to replay a round
         public void ShowChallenge(MathChallenge challenge, int? seed = null)
         {
