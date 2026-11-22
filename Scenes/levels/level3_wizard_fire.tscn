@@ -21,6 +21,14 @@
 [ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/goal/spark_test_platform.tscn" id="goal_spark"]
 [ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/goal/goal_portal.tscn" id="goal_portal"]
 [ext_resource type="PackedScene" uid="uid://dn22n65gqr5v7" path="res://Scenes/characters/wizard_fire.tscn" id="goal_wizard"]
+[ext_resource type="Resource" path="res://GameData/quests/I.3-WizardSchoolTrials-Fire.tres" id="q_fire"]
+[ext_resource type="Script" uid="uid://bksw1ls1mwcv0" path="res://scripts/Game/Systems/QuestSystem/QuestNode.cs" id="q_node"]
+[ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="q_listener"]
+[ext_resource type="Script" uid="uid://ddispr5qrckr8" path="res://scripts/Game/Systems/QuestSystem/QuestsCompletedListener.cs" id="q_completed"]
+[ext_resource type="Script" uid="uid://v6ge3lx8r4vx" path="res://scripts/Game/Systems/QuestSystem/Steps/IdleStep.cs" id="q_idle"]
+[ext_resource type="Script" uid="uid://cpedfcdw3s6jg" path="res://scripts/Game/Systems/QuestSystem/Steps/CallMethodStep.cs" id="q_call"]
+[ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="q_quest_script"]
+[ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="q_channel"]
 [sub_resource type="Resource" id="Resource_5pcem"]
 script = ExtResource("5_suqbs")
 RandomiseSeed = true
@@ -131,6 +139,12 @@ Size = Vector2i(22, 22)
 Rooms = Array[ExtResource("7_0u7v8")]([SubResource("Resource_lgkrd"), SubResource("Resource_ws1qw"), SubResource("Resource_pdhk1"), SubResource("Resource_a53ag"), SubResource("Resource_bnjyj")])
 Corridors = Array[ExtResource("6_vfto7")]([SubResource("Resource_3fvej"), SubResource("Resource_8vbwi"), SubResource("Resource_aa7th"), SubResource("Resource_61r6x"), SubResource("Resource_7ore1")])
 
+
+[sub_resource type="BoxShape3D" id="Shape_quest_start"]
+size = Vector3(4, 2, 4)
+
+[sub_resource type="BoxShape3D" id="Shape_quest_arrival"]
+size = Vector3(3.6, 2, 3.2)
 [node name="SchoolFireChamber" type="Node3D" unique_id=1375172682]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1733842760]
@@ -228,3 +242,53 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 0, -2.2)
 [node name="ExitToNext" parent="GoalRoom" unique_id=1445292428 instance=ExtResource("goal_portal")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.6)
 TargetScene = "uid://2dhg6rdjvp18"
+
+[node name="StartArea" type="Area3D" parent="StartSpawn" unique_id=1733510401]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartSpawn/StartArea" unique_id=1733510402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("Shape_quest_start")
+
+[node name="ArrivalArea" type="Area3D" parent="GoalRoom" unique_id=1733510403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.6)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GoalRoom/ArrivalArea" unique_id=1733510404]
+shape = SubResource("Shape_quest_arrival")
+
+[node name="Quests" type="Node" parent="." unique_id=1733510405]
+
+[node name="I_3-Fire" type="Node" parent="Quests" unique_id=1733510406]
+script = ExtResource("q_node")
+_quest = ExtResource("q_fire")
+
+[node name="obj3-init-SendOn" type="Node" parent="Quests/I_3-Fire" unique_id=1733510407]
+script = ExtResource("q_listener")
+_checkObjectiveId = true
+_objectiveId = "76aea55d-b75f-46d0-a036-841e8309a203"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("q_channel")
+
+[node name="IdleStep" type="Node" parent="Quests/I_3-Fire/obj3-init-SendOn" unique_id=1733510408 node_paths=PackedStringArray("_character")]
+script = ExtResource("q_idle")
+_character = NodePath("../../../../GoalRoom/FireWizard")
+_durationMs = 1500
+
+[node name="completed-OpenExit" type="Node" parent="Quests" unique_id=1733510409]
+script = ExtResource("q_completed")
+_quests = Array[ExtResource("q_quest_script")]([ExtResource("q_fire")])
+eventChannel = ExtResource("q_channel")
+
+[node name="OpenExit" type="Node" parent="Quests/completed-OpenExit" unique_id=1733510410 node_paths=PackedStringArray("Target")]
+script = ExtResource("q_call")
+Target = NodePath("../../../GoalRoom/ExitToNext")
+_method = "Open"
+
+[connection signal="body_entered" from="StartSpawn/StartArea" to="Quests/I_3-Fire" method="_OnPlayerStartObjective" binds= ["76aea55d-b75f-46d0-a036-841e8309a201"]]
+[connection signal="body_entered" from="GoalRoom/ArrivalArea" to="Quests/I_3-Fire" method="_OnPlayerCompleteObjective" binds= ["76aea55d-b75f-46d0-a036-841e8309a201"]]
+[connection signal="Tested" from="GoalRoom/SparkTestPlatform" to="Quests/I_3-Fire" method="CompleteObjective" binds= ["76aea55d-b75f-46d0-a036-841e8309a202"]]
+[connection signal="ReactionEnd" from="Quests/I_3-Fire/obj3-init-SendOn" to="Quests/I_3-Fire" method="CompleteObjective" binds= ["76aea55d-b75f-46d0-a036-841e8309a203"]]

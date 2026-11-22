@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3]
+
+[ext_resource type="Script" uid="uid://bqblbalohjolq" path="res://scripts/Game/Character/CharacterData.cs" id="1_cd"]
+
+[resource]
+script = ExtResource("1_cd")
+_name = "Bewaker"
+CharacterScenePath = "res://Scenes/characters/mana_guard.tscn"
+CharacterAbilities = null
+metadata/_custom_type_script = "uid://bqblbalohjolq"

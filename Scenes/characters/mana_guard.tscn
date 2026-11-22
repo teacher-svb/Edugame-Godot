@@ -1,0 +1,58 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_base.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://GameData/characterData/Character_ManaGuard_CharacterData.tres" id="2_data"]
+[ext_resource type="PackedScene" path="res://assets/3D/characters/Knight.glb" id="3_knight"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_guard"]
+radius = 0.3
+height = 1.2
+
+[node name="ManaGuard" unique_id=497783338 instance=ExtResource("1_base")]
+_characterData = ExtResource("2_data")
+PersistentId = "mana_guard"
+
+[node name="CollisionShape3D" parent="." index="2" unique_id=293151575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("CapsuleShape3D_guard")
+
+[node name="CharacterAnimator" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
+VisualRoot = NodePath("../../../Knight")
+
+[node name="AnimationTree" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
+root_node = NodePath("../../../Knight")
+
+[node name="AnimationPlayer" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="2" unique_id=933369381]
+root_node = NodePath("../../../Knight")
+
+[node name="Knight" parent="." index="5" unique_id=840045192 instance=ExtResource("3_knight")]
+transform = Transform3D(0.525, 0, 0, 0, 0.525, 0, 0, 0, 0.525, 0, 0, 0)
+
+[node name="Knight_ArmLeft" parent="Knight/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(840045192, 1452926588) index="0" unique_id=1454196629]
+layers = 524289
+
+[node name="Knight_ArmRight" parent="Knight/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(840045192, 1452926588) index="1" unique_id=350529862]
+layers = 524289
+
+[node name="Knight_Body" parent="Knight/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(840045192, 1452926588) index="2" unique_id=2024808535]
+layers = 524289
+
+[node name="Knight_Cape" parent="Knight/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(840045192, 1452926588) index="3" unique_id=1538853665]
+layers = 524289
+
+[node name="Knight_Head" parent="Knight/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(840045192, 1452926588) index="4" unique_id=407789094]
+layers = 524289
+
+[node name="Knight_Helmet" parent="Knight/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(840045192, 1452926588) index="5" unique_id=2136704359]
+layers = 524289
+
+[node name="Knight_HelmetVisor" parent="Knight/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(840045192, 1452926588) index="6" unique_id=547185486]
+layers = 524289
+
+[node name="Knight_LegLeft" parent="Knight/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(840045192, 1452926588) index="7" unique_id=1720148889]
+layers = 524289
+
+[node name="Knight_LegRight" parent="Knight/Rig_Medium/Skeleton3D" parent_id_path=PackedInt32Array(840045192, 1452926588) index="8" unique_id=2077188563]
+layers = 524289
+
+[editable path="Knight"]

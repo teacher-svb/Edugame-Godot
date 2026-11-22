@@ -12,6 +12,9 @@
 
 [ext_resource type="Script" uid="uid://bbbrd61e4khhl" path="res://scripts/Game/Systems/Levels/LevelExit.cs" id="lv_exit"]
 [ext_resource type="Script" uid="uid://dub3134yuqw1k" path="res://scripts/Game/Systems/Levels/SpawnPoint.cs" id="lv_spawn"]
+[ext_resource type="PackedScene" path="res://Scenes/characters/mana_guard.tscn" id="gate_guard"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/Levels/GuardedGate.cs" id="gate_script"]
+[ext_resource type="Resource" path="res://GameData/characterData/Character_ManaGuard_CharacterData.tres" id="gate_cd"]
 [sub_resource type="Resource" id="Resource_7lvh5"]
 script = ExtResource("3_settings")
 TileSet = ExtResource("4_tileset")
@@ -102,6 +105,24 @@ metadata/_custom_type_script = "uid://ch36n85vf88pf"
 [sub_resource type="BoxShape3D" id="BoxShape3D_exitHome"]
 size = Vector3(6, 2, 3)
 
+
+[sub_resource type="StandardMaterial3D" id="Mat_gate_wood"]
+albedo_color = Color(0.45, 0.3, 0.17, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="Mesh_gate_post"]
+material = SubResource("Mat_gate_wood")
+size = Vector3(0.16, 1.5, 0.16)
+
+[sub_resource type="BoxMesh" id="Mesh_gate_plank"]
+material = SubResource("Mat_gate_wood")
+size = Vector3(2.5, 0.18, 0.07)
+
+[sub_resource type="BoxShape3D" id="Shape_gate_block"]
+size = Vector3(2.4, 2.4, 0.3)
+
+[sub_resource type="BoxShape3D" id="Shape_gate_bark"]
+size = Vector3(4.5, 2, 3)
 [node name="ForestTest" type="Node3D" unique_id=526854104]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=621573576]
@@ -169,3 +190,51 @@ _targetSpawnPath = "Spawns/front_door"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exits/ExitToHome" unique_id=591592158]
 shape = SubResource("BoxShape3D_exitHome")
+
+[node name="ManaSpringGate" type="Node3D" parent="." unique_id=1620947311 node_paths=PackedStringArray("Guards", "Block", "BarkArea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 38)
+script = ExtResource("gate_script")
+Guards = [NodePath("GuardWest"), NodePath("GuardEast")]
+Block = NodePath("Barrier")
+BarkArea = NodePath("BarkArea")
+BarkText = "Halt! Geen toegang tot de bron. Bevel van de tovenaar."
+BarkCharacter = ExtResource("gate_cd")
+
+[node name="GuardWest" parent="ManaSpringGate" unique_id=1620947312 instance=ExtResource("gate_guard")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0, 1.8)
+PersistentId = "mana_guard_west"
+
+[node name="GuardEast" parent="ManaSpringGate" unique_id=1620947313 instance=ExtResource("gate_guard")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0, 1.8)
+PersistentId = "mana_guard_east"
+
+[node name="Barrier" type="StaticBody3D" parent="ManaSpringGate" unique_id=1620947314]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ManaSpringGate/Barrier" unique_id=1620947315]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+shape = SubResource("Shape_gate_block")
+
+[node name="PostWest" type="MeshInstance3D" parent="ManaSpringGate/Barrier" unique_id=1620947316]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05, 0.75, 0)
+mesh = SubResource("Mesh_gate_post")
+
+[node name="PostEast" type="MeshInstance3D" parent="ManaSpringGate/Barrier" unique_id=1620947317]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0.75, 0)
+mesh = SubResource("Mesh_gate_post")
+
+[node name="PlankA" type="MeshInstance3D" parent="ManaSpringGate/Barrier" unique_id=1620947318]
+transform = Transform3D(0.9063, 0.4226, 0, -0.4226, 0.9063, 0, 0, 0, 1, 0, 0.8, 0.1)
+mesh = SubResource("Mesh_gate_plank")
+
+[node name="PlankB" type="MeshInstance3D" parent="ManaSpringGate/Barrier" unique_id=1620947319]
+transform = Transform3D(0.9063, -0.4226, 0, 0.4226, 0.9063, 0, 0, 0, 1, 0, 0.8, 0.1)
+mesh = SubResource("Mesh_gate_plank")
+
+[node name="BarkArea" type="Area3D" parent="ManaSpringGate" unique_id=1620947320]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.6)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ManaSpringGate/BarkArea" unique_id=1620947321]
+shape = SubResource("Shape_gate_bark")
