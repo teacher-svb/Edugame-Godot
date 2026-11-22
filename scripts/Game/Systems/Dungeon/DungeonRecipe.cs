@@ -26,10 +26,14 @@ namespace TnT.EduGame.Dungeon
         /// <summary>Fillers (objects) in total, slots included.</summary>
         [Export(PropertyHint.Range, "0,50,1,or_greater")] public int Fillers { get; set; }
 
-        /// <summary>The placements, in the context; <paramref name="skipped"/> gets a line per slot that didn't fit.</summary>
-        public EncounterContext Plan(DungeonGraphData graph, DungeonRoute route, Func<Vector3I, bool> isFreeFloor, long seed, List<string> skipped = null)
+        /// <summary>
+        /// The placements, in the context; <paramref name="skipped"/> gets a line per slot that didn't fit. Nothing is
+        /// placed on <paramref name="reserved"/> cells.
+        /// </summary>
+        public EncounterContext Plan(DungeonGraphData graph, DungeonRoute route, Func<Vector3I, bool> isFreeFloor, long seed, List<string> skipped = null, IEnumerable<Vector3I> reserved = null)
         {
             var context = new EncounterContext(graph, route, isFreeFloor, seed);
+            context.Reserve(reserved);
             foreach (var pass in new[] { EncounterPass.Gate, EncounterPass.Filler })
             {
                 int budget = pass == EncounterPass.Gate ? Gates : Fillers;

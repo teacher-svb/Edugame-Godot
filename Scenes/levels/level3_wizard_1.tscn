@@ -12,6 +12,8 @@
 [ext_resource type="Resource" path="res://GameData/dungeon/wizard1_recipe.tres" id="91_recipe"]
 
 [ext_resource type="Script" uid="uid://dub3134yuqw1k" path="res://scripts/Game/Systems/Levels/SpawnPoint.cs" id="lv_spawn"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/goal/spark_test_platform.tscn" id="goal_spark"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/goal/goal_portal.tscn" id="goal_portal"]
 [sub_resource type="Environment" id="Environment_school"]
 background_mode = 1
 background_color = Color(0.035, 0.03, 0.07, 1)
@@ -139,14 +141,23 @@ metadata/godoodads_dungeon_graph = SubResource("Resource_fu5p2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.1, 67)
 PersistentId = "Player"
 
-[node name="DungeonPopulator" type="Node3D" parent="." unique_id=1378012504 node_paths=PackedStringArray("Map", "Player", "StartSpawn")]
+[node name="DungeonPopulator" type="Node3D" parent="." unique_id=1378012504 node_paths=PackedStringArray("Map", "Player", "StartSpawn", "GoalRoom")]
 script = ExtResource("90_pop")
 Map = NodePath("../School")
 Recipe = ExtResource("91_recipe")
 Player = NodePath("../Player")
 StartSpawn = NodePath("../StartSpawn")
+GoalRoom = NodePath("../GoalRoom")
 
 [node name="StartSpawn" type="Marker3D" parent="." unique_id=1103862353]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("lv_spawn")
 Default = true
+
+[node name="GoalRoom" type="Node3D" parent="." unique_id=137568963]
+
+[node name="SparkTestPlatform" parent="GoalRoom" unique_id=467808755 instance=ExtResource("goal_spark")]
+
+[node name="ExitToNext" parent="GoalRoom" unique_id=1037912462 instance=ExtResource("goal_portal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.6)
+TargetScene = "uid://ce7tg67jxe5p5"

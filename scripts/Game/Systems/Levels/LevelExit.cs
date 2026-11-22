@@ -45,7 +45,16 @@ namespace TnT.EduGame.Levels
         public bool Enabled
         {
             get => _enabled;
-            set { _enabled = value; if (IsInsideTree()) SetDeferred(Area3D.PropertyName.Monitoring, value); else Monitoring = value; }
+            set { _enabled = value; if (IsInsideTree()) SetDeferred(Area3D.PropertyName.Monitoring, value); else Monitoring = value; UpdateVisual(); }
+        }
+
+        /// <summary>Optional: shown in the game only while the exit is open (e.g. a portal). Always shown in the editor.</summary>
+        [Export] public Node3D Visual { get; set; }
+
+        void UpdateVisual()
+        {
+            if (Visual != null && !Engine.IsEditorHint())
+                Visual.Visible = _enabled;
         }
 
         [Signal] public delegate void UsedEventHandler();
@@ -59,6 +68,7 @@ namespace TnT.EduGame.Levels
         public override void _Ready()
         {
             Monitoring = _enabled;
+            UpdateVisual();
             if (Engine.IsEditorHint())
                 return;
             BodyEntered += OnBodyEntered;

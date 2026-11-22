@@ -1,0 +1,60 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://bbbrd61e4khhl" path="res://scripts/Game/Systems/Levels/LevelExit.cs" id="1_exit"]
+
+[sub_resource type="BoxShape3D" id="Shape_exit"]
+size = Vector3(2, 2.4, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="Mat_ring"]
+albedo_color = Color(0.55, 0.4, 0.95, 1)
+emission_enabled = true
+emission = Color(0.55, 0.4, 1, 1)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="TorusMesh" id="Mesh_ring"]
+material = SubResource("Mat_ring")
+inner_radius = 0.95
+outer_radius = 1.1
+rings = 48
+ring_segments = 8
+
+[sub_resource type="StandardMaterial3D" id="Mat_veil"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.6, 0.5, 1, 0.45)
+cull_mode = 2
+
+[sub_resource type="CylinderMesh" id="Mesh_veil"]
+material = SubResource("Mat_veil")
+top_radius = 0.95
+bottom_radius = 0.95
+height = 0.02
+radial_segments = 48
+
+[node name="GoalPortal" type="Area3D" node_paths=PackedStringArray("Visual")]
+collision_layer = 0
+collision_mask = 3
+monitoring = false
+script = ExtResource("1_exit")
+Enabled = false
+Visual = NodePath("Portal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+shape = SubResource("Shape_exit")
+
+[node name="Portal" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+
+[node name="Ring" type="MeshInstance3D" parent="Portal"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+mesh = SubResource("Mesh_ring")
+
+[node name="Veil" type="MeshInstance3D" parent="Portal"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+mesh = SubResource("Mesh_veil")
+
+[node name="Light" type="OmniLight3D" parent="Portal"]
+light_color = Color(0.6, 0.45, 1, 1)
+light_energy = 1.5
+omni_range = 5.0

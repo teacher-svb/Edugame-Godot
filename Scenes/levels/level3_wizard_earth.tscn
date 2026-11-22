@@ -18,6 +18,9 @@
 [ext_resource type="Resource" uid="uid://c2ww42748bqlq" path="res://GameData/dungeon/earth_recipe.tres" id="14_recipe"]
 
 [ext_resource type="Script" uid="uid://dub3134yuqw1k" path="res://scripts/Game/Systems/Levels/SpawnPoint.cs" id="lv_spawn"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/goal/spark_test_platform.tscn" id="goal_spark"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/goal/goal_portal.tscn" id="goal_portal"]
+[ext_resource type="PackedScene" uid="uid://bf1g5lkob5vw" path="res://Scenes/characters/wizard_earth.tscn" id="goal_wizard"]
 [sub_resource type="Resource" id="Resource_pdpwt"]
 script = ExtResource("5_p0fmw")
 RandomiseSeed = true
@@ -199,14 +202,26 @@ light_energy = 0.35
 script = ExtResource("10_cf5qa")
 Grid = NodePath("../School")
 
-[node name="DungeonPopulator" type="Node3D" parent="." unique_id=189687577 node_paths=PackedStringArray("Map", "Player", "StartSpawn")]
+[node name="DungeonPopulator" type="Node3D" parent="." unique_id=189687577 node_paths=PackedStringArray("Map", "Player", "StartSpawn", "GoalRoom")]
 script = ExtResource("13_pop")
 Map = NodePath("../School")
 Recipe = ExtResource("14_recipe")
 Player = NodePath("../Player")
 StartSpawn = NodePath("../StartSpawn")
+GoalRoom = NodePath("../GoalRoom")
 
 [node name="StartSpawn" type="Marker3D" parent="." unique_id=1395556254]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("lv_spawn")
 Default = true
+
+[node name="GoalRoom" type="Node3D" parent="." unique_id=234012328]
+
+[node name="SparkTestPlatform" parent="GoalRoom" unique_id=1448635303 instance=ExtResource("goal_spark")]
+
+[node name="EarthWizard" parent="GoalRoom" unique_id=930529022 instance=ExtResource("goal_wizard")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 0, -2.2)
+
+[node name="ExitToNext" parent="GoalRoom" unique_id=1826957224 instance=ExtResource("goal_portal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.6)
+TargetScene = "uid://dl6j3p5xq67or"

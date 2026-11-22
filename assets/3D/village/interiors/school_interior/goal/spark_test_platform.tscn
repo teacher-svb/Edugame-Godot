@@ -1,0 +1,88 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/Game/Systems/School/SparkTestPlatform.cs" id="1_spark"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_stone"]
+albedo_color = Color(0.42, 0.4, 0.44, 1)
+roughness = 0.85
+
+[sub_resource type="CylinderMesh" id="Mesh_base"]
+material = SubResource("Mat_stone")
+top_radius = 1.1
+bottom_radius = 1.2
+height = 0.08
+
+[sub_resource type="StandardMaterial3D" id="Mat_rune"]
+albedo_color = Color(0.95, 0.78, 0.35, 1)
+emission_enabled = true
+emission = Color(0.95, 0.7, 0.3, 1)
+emission_energy_multiplier = 0.6
+
+[sub_resource type="TorusMesh" id="Mesh_rune"]
+material = SubResource("Mat_rune")
+inner_radius = 0.82
+outer_radius = 0.9
+rings = 48
+ring_segments = 6
+
+[sub_resource type="BoxShape3D" id="Shape_trigger"]
+size = Vector3(1.6, 1.5, 1.6)
+
+[sub_resource type="ParticleProcessMaterial" id="Pm_sparks"]
+emission_shape = 1
+emission_sphere_radius = 0.3
+direction = Vector3(0, 1, 0)
+spread = 35.0
+initial_velocity_min = 2.0
+initial_velocity_max = 3.5
+gravity = Vector3(0, -9, 0)
+scale_min = 0.6
+scale_max = 1.2
+color = Color(1, 0.75, 0.35, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_spark"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+
+[sub_resource type="QuadMesh" id="Mesh_spark"]
+material = SubResource("Mat_spark")
+size = Vector2(0.07, 0.07)
+
+[node name="SparkTestPlatform" type="Area3D"]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_spark")
+_sparks = NodePath("Sparks")
+_glow = NodePath("Glow")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+mesh = SubResource("Mesh_base")
+
+[node name="Rune" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.085, 0)
+mesh = SubResource("Mesh_rune")
+
+[node name="Trigger" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("Shape_trigger")
+
+[node name="Sparks" type="GPUParticles3D" parent="."]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+emitting = false
+amount = 24
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.9
+process_material = SubResource("Pm_sparks")
+draw_pass_1 = SubResource("Mesh_spark")
+
+[node name="Glow" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+light_color = Color(1, 0.65, 0.3, 1)
+light_energy = 0.0
+omni_range = 4.0

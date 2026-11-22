@@ -36,10 +36,21 @@ namespace TnT.EduGame.Dungeon
         /// <summary>Moved to the start room's centre, so a <see cref="Levels.LevelExit"/> into this level lands there.</summary>
         [Export] public Levels.SpawnPoint StartSpawn { get; set; }
 
+        /// <summary>
+        /// The goal room's fixed set (Spark Test platform, wizard, exit), built in the level around its origin: moved
+        /// to the <see cref="GoalAnchor"/> cell and turned so its +Z points out through the entrance. Its cell and the
+        /// one behind it are kept free of locks, clues and objects.
+        /// </summary>
+        [Export] public Node3D GoalRoom { get; set; }
+
+        /// <summary>MeshLibrary items the goal set may stand on (plain floor: no walls, pillars).</summary>
+        [Export] public string[] GoalFloorTiles { get; set; } = { "room_floor", "room_floor_b", "room_circle" };
+
         DungeonGraph _graph;
 
         public DungeonRoute Route { get; private set; }
         public IReadOnlyList<Placement> Placements { get; private set; } = Array.Empty<Placement>();
+        public GoalAnchor? Goal { get; private set; }
 
         public override void _Ready()
         {
@@ -68,9 +79,15 @@ namespace TnT.EduGame.Dungeon
             var roles = graph.Rooms.Select(RoleOf).ToArray();
             Route = RoutePlanner.Plan(graph.CoreGraph, roles, seed);
 
+            var goalFloor = new HashSet<string>(GoalFloorTiles ?? Array.Empty<string>());
+            Goal = GoalRoom == null ? null : GoalAnchorPicker.Pick(graph.CoreGraph, Route, cell => goalFloor.Contains(ItemName(cell)));
+            if (GoalRoom != null && Goal == null)
+                GD.PushWarning($"{Name}: no floor cell for {GoalRoom.Name} in the goal room (room {Route.Goal})");
+            var reserved = Goal is { } g ? new[] { g.Cell, g.Behind } : null;
+
             var free = new HashSet<string>(FreeFloorTiles ?? Array.Empty<string>());
             var skipped = new List<string>();
-            Placements = Recipe.Plan(graph.CoreGraph, Route, cell => free.Contains(ItemName(cell)), seed, skipped).Placements;
+            Placements = Recipe.Plan(graph.CoreGraph, Route, cell => free.Contains(ItemName(cell)), seed, skipped, reserved).Placements;
             foreach (var line in skipped)
                 GD.PushWarning($"{Name}: slot skipped: {line}");
 
@@ -109,6 +126,10 @@ namespace TnT.EduGame.Dungeon
                 Player.GlobalPosition = start;
             if (StartSpawn != null)
                 StartSpawn.GlobalPosition = start;
+            if (GoalRoom != null && Goal is { } goal)
+                GoalRoom.GlobalTransform = Map.GlobalTransform * new Transform3D(
+                    Basis.LookingAt(new Vector3(goal.Facing.X, 0, goal.Facing.Z), Vector3.Up, useModelFront: true),
+                    Map.MapToLocal(goal.Cell));
 
             SaveLoadManager.Instance?.BindSubtree(this);
         }

@@ -53,6 +53,13 @@ namespace TnT.EduGame.Dungeon
             return true;
         }
 
+        /// <summary>Keeps cells free of everything planned, e.g. the goal room's fixed set (<see cref="GoalAnchor"/>).</summary>
+        public void Reserve(IEnumerable<Vector3I> cells)
+        {
+            foreach (var cell in cells ?? Array.Empty<Vector3I>())
+                _takenCells.Add(cell);
+        }
+
         public bool IsDoorTaken(Vector3I doorCell) => _takenDoors.Contains(doorCell);
 
         /// <summary>Takes a door cell (e.g. for a lock); false when something already has it.</summary>
