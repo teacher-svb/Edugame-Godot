@@ -20,6 +20,14 @@
 [ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/goal/spark_test_platform.tscn" id="goal_spark"]
 [ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/goal/goal_portal.tscn" id="goal_portal"]
 [ext_resource type="PackedScene" uid="uid://122tfs1g580r" path="res://Scenes/characters/wizard_water.tscn" id="goal_wizard"]
+[ext_resource type="Resource" path="res://GameData/quests/I.3-WizardSchoolTrials-Water.tres" id="q_quest"]
+[ext_resource type="Script" uid="uid://bksw1ls1mwcv0" path="res://scripts/Game/Systems/QuestSystem/QuestNode.cs" id="q_node"]
+[ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="q_listener"]
+[ext_resource type="Script" uid="uid://ddispr5qrckr8" path="res://scripts/Game/Systems/QuestSystem/QuestsCompletedListener.cs" id="q_completed"]
+[ext_resource type="Script" uid="uid://v6ge3lx8r4vx" path="res://scripts/Game/Systems/QuestSystem/Steps/IdleStep.cs" id="q_idle"]
+[ext_resource type="Script" uid="uid://cpedfcdw3s6jg" path="res://scripts/Game/Systems/QuestSystem/Steps/CallMethodStep.cs" id="q_call"]
+[ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="q_quest_script"]
+[ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="q_channel"]
 [sub_resource type="Resource" id="Resource_ocsdh"]
 script = ExtResource("5_t7bd3")
 RandomiseSeed = true
@@ -131,6 +139,12 @@ Size = Vector2i(22, 22)
 Rooms = Array[ExtResource("7_k8jov")]([SubResource("Resource_dmpye"), SubResource("Resource_2mxh4"), SubResource("Resource_l1a8n"), SubResource("Resource_8kk2g"), SubResource("Resource_um3xg")])
 Corridors = Array[ExtResource("6_loc42")]([SubResource("Resource_4k2xy"), SubResource("Resource_q8utx"), SubResource("Resource_8ase3"), SubResource("Resource_rpaag"), SubResource("Resource_bd8x8")])
 
+
+[sub_resource type="BoxShape3D" id="Shape_quest_start"]
+size = Vector3(4, 2, 4)
+
+[sub_resource type="BoxShape3D" id="Shape_quest_arrival"]
+size = Vector3(3.6, 2, 3.2)
 [node name="SchoolWaterChamber" type="Node3D" unique_id=1375172682]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1733842760]
@@ -220,3 +234,53 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 0, -2.2)
 [node name="ExitToNext" parent="GoalRoom" unique_id=177758214 instance=ExtResource("goal_portal")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.6)
 TargetScene = "uid://cuhod4w7q4x71"
+
+[node name="StartArea" type="Area3D" parent="StartSpawn" unique_id=1733520401]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartSpawn/StartArea" unique_id=1733520402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("Shape_quest_start")
+
+[node name="ArrivalArea" type="Area3D" parent="GoalRoom" unique_id=1733520403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.6)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GoalRoom/ArrivalArea" unique_id=1733520404]
+shape = SubResource("Shape_quest_arrival")
+
+[node name="Quests" type="Node" parent="." unique_id=1733520405]
+
+[node name="I_3-Water" type="Node" parent="Quests" unique_id=1733520406]
+script = ExtResource("q_node")
+_quest = ExtResource("q_quest")
+
+[node name="obj3-init-SendOn" type="Node" parent="Quests/I_3-Water" unique_id=1733520407]
+script = ExtResource("q_listener")
+_checkObjectiveId = true
+_objectiveId = "ea871cbc-3987-48ad-892e-8f56e553d103"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("q_channel")
+
+[node name="IdleStep" type="Node" parent="Quests/I_3-Water/obj3-init-SendOn" unique_id=1733520408 node_paths=PackedStringArray("_character")]
+script = ExtResource("q_idle")
+_character = NodePath("../../../../GoalRoom/WaterWizard")
+_durationMs = 1500
+
+[node name="completed-OpenExit" type="Node" parent="Quests" unique_id=1733520409]
+script = ExtResource("q_completed")
+_quests = Array[ExtResource("q_quest_script")]([ExtResource("q_quest")])
+eventChannel = ExtResource("q_channel")
+
+[node name="OpenExit" type="Node" parent="Quests/completed-OpenExit" unique_id=1733520410 node_paths=PackedStringArray("Target")]
+script = ExtResource("q_call")
+Target = NodePath("../../../GoalRoom/ExitToNext")
+_method = "Open"
+
+[connection signal="body_entered" from="StartSpawn/StartArea" to="Quests/I_3-Water" method="_OnPlayerStartObjective" binds= ["ea871cbc-3987-48ad-892e-8f56e553d101"]]
+[connection signal="body_entered" from="GoalRoom/ArrivalArea" to="Quests/I_3-Water" method="_OnPlayerCompleteObjective" binds= ["ea871cbc-3987-48ad-892e-8f56e553d101"]]
+[connection signal="Tested" from="GoalRoom/SparkTestPlatform" to="Quests/I_3-Water" method="CompleteObjective" binds= ["ea871cbc-3987-48ad-892e-8f56e553d102"]]
+[connection signal="ReactionEnd" from="Quests/I_3-Water/obj3-init-SendOn" to="Quests/I_3-Water" method="CompleteObjective" binds= ["ea871cbc-3987-48ad-892e-8f56e553d103"]]

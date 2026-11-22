@@ -27,6 +27,7 @@
 [ext_resource type="Resource" uid="uid://b4r7x8oy4xdtc" path="res://GameData/quests/I.2-theAmbition-Liesbeth.tres" id="17_liesbeth"]
 [ext_resource type="Resource" uid="uid://bx6bq5o64me5r" path="res://GameData/quests/I.2-theAmbition-MsBram.tres" id="17_msbram"]
 [ext_resource type="Resource" path="res://GameData/quests/I.3-WizardSchoolTrials-Fire.tres" id="18_i3fire"]
+[ext_resource type="Resource" path="res://GameData/quests/I.3-WizardSchoolTrials-Water.tres" id="18_i3water"]
 [ext_resource type="Script" uid="uid://bf6jiou3no26s" path="res://scripts/Game/UI/MVC_Challenges/Controller/ChallengeController.cs" id="23_aum7h"]
 [ext_resource type="Script" uid="uid://dlqolcp4oddju" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeView.cs" id="24_qelhd"]
 [ext_resource type="PackedScene" uid="uid://dx5c0meqksg8l" path="res://Scenes/UI/ChallengeUI.tscn" id="25_d2cak"]
@@ -180,7 +181,7 @@ script = ExtResource("3_4v8vv")
 
 [node name="QuestManager" type="Node" parent="." unique_id=600992704]
 script = ExtResource("4_347u6")
-_quests = Array[ExtResource("11_aum7h")]([ExtResource("6_pnf1h"), ExtResource("17_56cnb"), ExtResource("17_hendrik"), ExtResource("17_liesbeth"), ExtResource("17_msbram"), ExtResource("18_i3fire")])
+_quests = Array[ExtResource("11_aum7h")]([ExtResource("6_pnf1h"), ExtResource("17_56cnb"), ExtResource("17_hendrik"), ExtResource("17_liesbeth"), ExtResource("17_msbram"), ExtResource("18_i3fire"), ExtResource("18_i3water")])
 eventChannel = ExtResource("13_pnf1h")
 
 [node name="UIManager" type="Node" parent="." unique_id=1207108139]
