@@ -42,6 +42,9 @@
 
 [ext_resource type="Script" uid="uid://bbbrd61e4khhl" path="res://scripts/Game/Systems/Levels/LevelExit.cs" id="lv_exit"]
 [ext_resource type="Script" uid="uid://dub3134yuqw1k" path="res://scripts/Game/Systems/Levels/SpawnPoint.cs" id="lv_spawn"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Steps/MessageStep.cs" id="qs_message"]
+[ext_resource type="Script" uid="uid://cpedfcdw3s6jg" path="res://scripts/Game/Systems/QuestSystem/Steps/CallMethodStep.cs" id="qs_call"]
+[ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="cd_mabel"]
 [sub_resource type="Curve3D" id="Curve3D_hq36d"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 1, 0, 0, 0, 0, 0, -0.8560414, 0, 0, 0.8560414, 0, 0, 5.049999, 0, 0.47696686, 0, -0.8560414, 0, 0, 0.8560414, 0, 6.6000004, 1.5500002, 0.32573128, 0.8560414, 0, 0, -0.8560414, 0, 0, 5.05, 3.1, 0, 0, 0.8560414, 0, 0, -0.8560414, 0, 3.5000002, 1.55, 0, -0.8560414, 0, 0, 0.8560414, 0, 0, 5.05, 0, 0, -1, 0, 0, 0, 0, 0, 10.1, 0, 0),
@@ -689,6 +692,21 @@ _character = NodePath("../../../../../MsBram")
 script = ExtResource("qs_quests_completed")
 _quests = Array[ExtResource("qs_quest_script")]([ExtResource("14_dlsi4"), ExtResource("qs_quest_liesbeth"), ExtResource("qs_quest_hendrik")])
 eventChannel = ExtResource("15_jttql")
+
+[node name="I_2-completed-OpenSchool" type="Node" parent="Quests" unique_id=1730215094]
+script = ExtResource("qs_quests_completed")
+_quests = Array[ExtResource("qs_quest_script")]([ExtResource("14_dlsi4"), ExtResource("qs_quest_hendrik"), ExtResource("qs_quest_liesbeth"), ExtResource("qs_quest_msbram")])
+eventChannel = ExtResource("15_jttql")
+
+[node name="MabelDecides" type="Node" parent="Quests/I_2-completed-OpenSchool" unique_id=1730215095]
+script = ExtResource("qs_message")
+_text = "Niemand laat me helpen met een beetje rekenwerk... Dan word ik gewoon een échte tovenaar. Op naar de Tovenaarsschool!"
+_character = ExtResource("cd_mabel")
+
+[node name="OpenSchoolExit" type="Node" parent="Quests/I_2-completed-OpenSchool" unique_id=1730215096 node_paths=PackedStringArray("Target")]
+script = ExtResource("qs_call")
+Target = NodePath("../../../Exits/ExitToSchool")
+_method = "Open"
 
 [node name="CornelisDrawbridgeArea" type="Area3D" parent="." unique_id=475543381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.325844, 0, 20.187727)

@@ -63,11 +63,19 @@ namespace TnT.EduGame.QuestSystem
         public string PersistentId { get; private set; } = "QuestManager";
         QuestManagerSaveData _saveData;
 
+        /// <summary>
+        /// Raised after the quest states are restored from the save data. That happens after the level's _Ready
+        /// (the scene loader binds once the scene is in the tree) and raises no quest events, so anything that
+        /// reads quest states on _Ready (e.g. <see cref="QuestsCompletedListener"/>) checks again here.
+        /// </summary>
+        public event System.Action Bound;
+
         public void Bind(QuestManagerSaveData data)
         {
             _saveData = data;
             _saveData.Id = PersistentId;
             Quests.ForEach(q => q.Bind(_saveData.quests?.FirstOrDefault(s => s.Id == q.Id)));
+            Bound?.Invoke();
         }
     }
 

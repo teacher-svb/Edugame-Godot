@@ -38,13 +38,21 @@ namespace TnT.EduGame.QuestSystem
                 quest.ObjectiveTransitionRequested += QuestObjectTransitionRequested;
             }
 
-            if (_saveData != null)
-                _saveData.quests = _quests.Select(q => q.GetSaveData()).ToArray();
+            SyncSaveData();
         }
 
         private void QuestObjectStateChanged(QuestObjective o)
         {
+            // the state changes here, when the player dismissed the quest message, i.e. after UpdateQuest synced
+            // the save data: without this the last objective of a quest never reached the save
+            SyncSaveData();
             EmitSignal(SignalName.OnQuestUpdated, o);
+        }
+
+        void SyncSaveData()
+        {
+            if (_saveData != null)
+                _saveData.quests = _quests.Select(q => q.GetSaveData()).ToArray();
         }
 
         private void QuestObjectTransitionRequested(QuestObjective o, QuestState requestedState, Action commit)
@@ -60,7 +68,7 @@ namespace TnT.EduGame.QuestSystem
             }
             _questChain.Process(msg, Quests);
 
-            _saveData.quests = _quests.Select(q => q.GetSaveData()).ToArray();
+            SyncSaveData();
         }
 
         // Starts the quest's first objective. Does nothing once any objective has been touched,

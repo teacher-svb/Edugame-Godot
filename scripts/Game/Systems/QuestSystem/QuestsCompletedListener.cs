@@ -11,8 +11,11 @@ namespace TnT.EduGame.QuestSystem
     /// </summary>
     /// <remarks>
     /// Also checks on _Ready, since quests completed in another scene raised their events before
-    /// this node existed. That run happens mid scene load, so its steps must not show anything
-    /// (no quest messages, challenges): enable a trigger area instead of starting a quest directly.
+    /// this node existed, and again when the <see cref="QuestManager"/> is bound to the save data
+    /// (loading a save restores the quest states after _Ready, without quest events). That catch-up
+    /// run happens mid scene load and passes no objective, so its steps must not show anything
+    /// (no quest messages, challenges; <see cref="MessageStep"/> skips itself): enable a trigger
+    /// area instead of starting a quest directly.
     /// </remarks>
     [GlobalClass]
     public partial class QuestsCompletedListener : QuestStepListener
@@ -26,8 +29,25 @@ namespace TnT.EduGame.QuestSystem
             base._Ready();
 
             if (!_quests.Any(q => q != null))
+            {
                 GD.PrintErr($"QuestsCompletedListener '{Name}': No quests assigned.");
-            else if (AllCompleted())
+                return;
+            }
+
+            QuestManager.Instance.Bound += CatchUp;
+            CatchUp();
+        }
+
+        public override void _ExitTree()
+        {
+            base._ExitTree();
+            if (QuestManager.Instance != null)
+                QuestManager.Instance.Bound -= CatchUp;
+        }
+
+        void CatchUp()
+        {
+            if (AllCompleted())
                 Trigger(null);
         }
 
