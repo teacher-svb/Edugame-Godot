@@ -4,7 +4,6 @@
 [ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://scripts/Lib/OcclusionFader/occlusionFader.gdshader" id="2_mglpj"]
 [ext_resource type="Script" uid="uid://r0pfr1dce2fx" path="res://scripts/Game/Door.cs" id="20_7vwr8"]
 [ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="21_ycjjd"]
-[ext_resource type="Script" uid="uid://bhsdjlrhck4qd" path="res://scripts/test/Transporter.cs" id="22_182vs"]
 [ext_resource type="PackedScene" uid="uid://d4keiam33cb1i" path="res://Scenes/characters/dad.tscn" id="25_14bvk"]
 [ext_resource type="Script" uid="uid://dwo8a5sv4sh5o" path="res://scripts/Game/PlayerTutorial.cs" id="25_lhsq1"]
 [ext_resource type="PackedScene" uid="uid://dv3mlsoycb230" path="res://Scenes/characters/character_avocado.tscn" id="25_mglpj"]
@@ -51,6 +50,8 @@
 [ext_resource type="Script" uid="uid://bksw1ls1mwcv0" path="res://scripts/Game/Systems/QuestSystem/QuestNode.cs" id="qs_questnode"]
 [ext_resource type="Resource" uid="uid://bcgox3enbg4ph" path="res://GameData/quests/I.1-MorningInBeaverford.tres" id="qs_quest_i1"]
 
+[ext_resource type="Script" uid="uid://bbbrd61e4khhl" path="res://scripts/Game/Systems/Levels/LevelExit.cs" id="lv_exit"]
+[ext_resource type="Script" uid="uid://dub3134yuqw1k" path="res://scripts/Game/Systems/Levels/SpawnPoint.cs" id="lv_spawn"]
 [sub_resource type="Gradient" id="Gradient_upsym"]
 offsets = PackedFloat32Array(0.117647, 1)
 colors = PackedColorArray(0.0277098, 0.0773411, 0.103768, 1, 1, 0.939093, 0.819838, 1)
@@ -421,22 +422,22 @@ transform = Transform3D(0.618024, 0, 0.786159, 0, 1, 0, -0.786159, 0, 0.618024, 
 
 [node name="transporters" type="Node" parent="." unique_id=838434594]
 
-[node name="transporter_bedroom-livingroom" type="Area3D" parent="transporters" unique_id=1189788667 node_paths=PackedStringArray("_destination")]
+[node name="transporter_bedroom-livingroom" type="Area3D" parent="transporters" unique_id=1189788667]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0.05, -9.5)
 collision_mask = 3
-script = ExtResource("22_182vs")
-_destination = NodePath("../transporter_livingroom-bedroom")
+script = ExtResource("lv_exit")
+_targetSpawnPath = "Spawns/from_bedroom"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="transporters/transporter_bedroom-livingroom" unique_id=608856689]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1)
 shape = SubResource("BoxShape3D_stairs")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
-[node name="transporter_livingroom-bedroom" type="Area3D" parent="transporters" unique_id=415332278 node_paths=PackedStringArray("_destination")]
+[node name="transporter_livingroom-bedroom" type="Area3D" parent="transporters" unique_id=415332278]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3, 0.05, -12.1)
 collision_mask = 3
-script = ExtResource("22_182vs")
-_destination = NodePath("../transporter_bedroom-livingroom")
+script = ExtResource("lv_exit")
+_targetSpawnPath = "Spawns/from_livingroom"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="transporters/transporter_livingroom-bedroom" unique_id=1753850150]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0000002, 0.5, 0.24999988)
@@ -446,8 +447,9 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 [node name="transporter_livingroom_level2" type="Area3D" parent="transporters" unique_id=1664634794]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0.4, 42)
 collision_mask = 3
-script = ExtResource("22_182vs")
-_sceneToLoadPath = "uid://selmqjc4dpgf"
+script = ExtResource("lv_exit")
+TargetScene = "uid://selmqjc4dpgf"
+_targetSpawnPath = "Spawns/from_home"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="transporters/transporter_livingroom_level2" unique_id=167783104]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1, 0.20000002, -46.425)
@@ -614,9 +616,21 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 script = ExtResource("music_scene")
 Track = ExtResource("music_track")
 
-[connection signal="body_entered" from="transporters/transporter_bedroom-livingroom" to="transporters/transporter_bedroom-livingroom" method="_OnBodyEntered"]
-[connection signal="body_entered" from="transporters/transporter_livingroom-bedroom" to="transporters/transporter_livingroom-bedroom" method="_OnBodyEntered"]
-[connection signal="body_entered" from="transporters/transporter_livingroom_level2" to="transporters/transporter_livingroom_level2" method="_OnBodyEntered"]
+[node name="Spawns" type="Node3D" parent="." unique_id=1664667154]
+
+[node name="front_door" type="Marker3D" parent="Spawns" unique_id=1068530903]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0.05, -6)
+script = ExtResource("lv_spawn")
+Default = true
+
+[node name="from_bedroom" type="Marker3D" parent="Spawns" unique_id=1487203315]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3, 0.05, -12.1)
+script = ExtResource("lv_spawn")
+
+[node name="from_livingroom" type="Marker3D" parent="Spawns" unique_id=1739025841]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0.05, -9.5)
+script = ExtResource("lv_spawn")
+
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj1-completed-OpenDoor" to="NavigationRegion3D/Bedroom/StaticBody3D" method="ToggleDoor"]
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj2-completed-removeTutorial" to="Player/tutorial" method="queue_free"]
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj3-init-DadReaction" to="Quests/LookingForAvocado" method="CompleteObjective" binds= ["67bc9a4e-a340-4225-a816-1a8b2b1b8923"]]

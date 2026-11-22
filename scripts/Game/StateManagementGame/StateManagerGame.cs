@@ -82,13 +82,22 @@ namespace TnT.EduGame.GameState
             Push(state.GetState(new() { challenge = challenge, seed = seed ?? (int)GD.Randi() }));
         }
 
-        public void LoadScene(string scenePath, Vector3 targetLocation)
+        public void LoadScene(string scenePath, Vector3 targetLocation) => LoadScene(scenePath, targetLocation, null);
+
+        /// <summary>
+        /// Loads the scene and puts the player at its <see cref="Levels.SpawnPoint"/> at <paramref name="spawnPath"/>
+        /// (relative to the scene root; empty = the level's default spawn point), after the save data is bound (so it
+        /// wins over the position saved in the previous level).
+        /// </summary>
+        public void LoadScene(string scenePath, NodePath spawnPath) => LoadScene(scenePath, Vector3.Zero, spawnPath ?? new NodePath());
+
+        void LoadScene(string scenePath, Vector3 targetLocation, NodePath spawnPath)
         {
             var state = _registeredStates.OfType<GameStateLoadingScreen>().FirstOrDefault()
                 ?? throw new Exception("no scene loader state assigned");
 
             // ResetStack();
-            Push(state.GetState<SceneLoaderOptions>(new() { scenePath = scenePath, targetLocation = targetLocation, onSceneReady = p => { Pop(); EmitSignal(SignalName.SceneLoaded, p); } }));
+            Push(state.GetState<SceneLoaderOptions>(new() { scenePath = scenePath, targetLocation = targetLocation, spawnPath = spawnPath, onSceneReady = p => { Pop(); EmitSignal(SignalName.SceneLoaded, p); } }));
         }
 
         public void LoadLocation(Vector3 targetLocation)

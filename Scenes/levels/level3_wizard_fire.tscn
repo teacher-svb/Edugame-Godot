@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://dwwieccxf3i2m" path="res://scripts/Game/Systems/Dungeon/DungeonPopulator.cs" id="90_pop"]
 [ext_resource type="Resource" uid="uid://cbgrmigo7gfdi" path="res://GameData/dungeon/fire_recipe.tres" id="91_recipe"]
 
+[ext_resource type="Script" uid="uid://dub3134yuqw1k" path="res://scripts/Game/Systems/Levels/SpawnPoint.cs" id="lv_spawn"]
 [sub_resource type="Resource" id="Resource_5pcem"]
 script = ExtResource("5_suqbs")
 RandomiseSeed = true
@@ -201,8 +202,14 @@ light_energy = 0.6
 script = ExtResource("10_6bdgy")
 Grid = NodePath("../School")
 
-[node name="DungeonPopulator" type="Node3D" parent="." unique_id=583142825 node_paths=PackedStringArray("Map", "Player")]
+[node name="DungeonPopulator" type="Node3D" parent="." unique_id=583142825 node_paths=PackedStringArray("Map", "Player", "StartSpawn")]
 script = ExtResource("90_pop")
 Map = NodePath("../School")
 Recipe = ExtResource("91_recipe")
 Player = NodePath("../Player")
+StartSpawn = NodePath("../StartSpawn")
+
+[node name="StartSpawn" type="Marker3D" parent="." unique_id=799799656]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("lv_spawn")
+Default = true

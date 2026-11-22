@@ -154,6 +154,16 @@ The element challenge bridges (MeshLibrary items 55-61, `corr_<element>_<challen
 
 **Tile sets are one MeshLibrary item per shape, turned in the GridMap** (since 2026-11-20; school, forest, mana mine): every WfcTile is Rotation FourWay, and a tile's other directions are the same item at GridMap orientation 16 / 10 / 22 (base north turned to west / south / east). Marker scenes exist only in their N-S build; the generators place them turned with their cell. Each set's export JSON (`replaces`, `remap_old_items`) maps the old one-tile-per-rotation items.
 
+### 5c. Level Exits and Spawn Points
+
+Components in `scripts/Game/Systems/Levels/` (namespace `TnT.EduGame.Levels`, since 2026-11-21):
+- `LevelExit` (Area3D) - the player walking in loads `TargetScene` and arrives at its spawn point `TargetSpawn`: a node path relative to the target scene's root (empty = the level's default one), With **no `TargetScene`** it teleports within the current level instead (`StateManagerGame.LoadLocation`, with the fade; usable again once the player has left it). Picked in the inspector from the **Spawn Point** dropdown, which lists the spawn points saved in `TargetScene` (or, without one, those in the edited scene) (`SpawnPoint.ListIn`, read from its `SceneState`; not those inside instanced sub-scenes). Saved as a string (`_targetSpawnPath`), not a `NodePath`: the editor rewrites `NodePath` properties when a node is moved or renamed. A path that no longer exists shows as `(missing)` with a configuration warning, and at run time falls back to the default spawn. `Enabled` / `Open()` / `Close()`: a quest opens a closed exit with a `CallMethodStep` under a `QuestsCompletedListener` (which also runs on `_Ready`, so no save data). A player who arrives inside an exit is ignored until they step out. Signal `Used`.
+- `SpawnPoint` (Marker3D) - `Default` (one per level). Renaming or moving a spawn point breaks the exits that point to it (they show a warning). Keep spawn points out of exit areas.
+- `StateManagerGame.LoadScene(path, NodePath spawnPath)` puts the player at the spawn point **after** the save data is bound. Without that, the position saved in the previous level wins, because the player's `CharacterSaveData` is shared by all levels. `LoadScene(path, Vector3)` (load game, `Transporter`) keeps the saved position.
+- Chambers: `DungeonPopulator.StartSpawn` moves the level's default spawn point to the start room.
+- Act I route: home `level1` (`Spawns/front_door`) ↔ town `level2_beaverford-in-the-morning` (`Spawns/from_home`; `ExitToSchool` at the wizard tower door, closed until the I.2 quests are done) → `level3_wizard_fire` (`StartSpawn`, the default). Forest `level5_forest`: `from_school` at the west exit, `ExitToHome` at the east exit → home. The chamber exits to the next level are placed in the goal rooms (`act1-chamber-goal-rooms`).
+- In-level teleports: home bedroom ↔ living room (`transporters/transporter_bedroom-livingroom` → `Spawns/from_bedroom`, back → `Spawns/from_livingroom`). `scripts/test/Transporter.cs` is now only used by the guild workshop's placeholder `transporter_exit_village` (no target set yet; make it a `LevelExit` once the village scene exists).
+
 ### 6. Input Handling
 
 **Centralized polling** through `InputManager` (autoloaded):

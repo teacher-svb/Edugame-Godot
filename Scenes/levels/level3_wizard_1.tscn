@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://dwwieccxf3i2m" path="res://scripts/Game/Systems/Dungeon/DungeonPopulator.cs" id="90_pop"]
 [ext_resource type="Resource" path="res://GameData/dungeon/wizard1_recipe.tres" id="91_recipe"]
 
+[ext_resource type="Script" uid="uid://dub3134yuqw1k" path="res://scripts/Game/Systems/Levels/SpawnPoint.cs" id="lv_spawn"]
 [sub_resource type="Environment" id="Environment_school"]
 background_mode = 1
 background_color = Color(0.035, 0.03, 0.07, 1)
@@ -138,8 +139,14 @@ metadata/godoodads_dungeon_graph = SubResource("Resource_fu5p2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.1, 67)
 PersistentId = "Player"
 
-[node name="DungeonPopulator" type="Node3D" parent="." unique_id=1378012504 node_paths=PackedStringArray("Map", "Player")]
+[node name="DungeonPopulator" type="Node3D" parent="." unique_id=1378012504 node_paths=PackedStringArray("Map", "Player", "StartSpawn")]
 script = ExtResource("90_pop")
 Map = NodePath("../School")
 Recipe = ExtResource("91_recipe")
 Player = NodePath("../Player")
+StartSpawn = NodePath("../StartSpawn")
+
+[node name="StartSpawn" type="Marker3D" parent="." unique_id=1103862353]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("lv_spawn")
+Default = true

@@ -33,6 +33,9 @@ namespace TnT.EduGame.Dungeon
         /// <summary>Put here at the start room's centre (a new game; a saved position is bound later and wins).</summary>
         [Export] public Node3D Player { get; set; }
 
+        /// <summary>Moved to the start room's centre, so a <see cref="Levels.LevelExit"/> into this level lands there.</summary>
+        [Export] public Levels.SpawnPoint StartSpawn { get; set; }
+
         DungeonGraph _graph;
 
         public DungeonRoute Route { get; private set; }
@@ -101,8 +104,11 @@ namespace TnT.EduGame.Dungeon
                 spawned[i] = node;
             }
 
+            var start = graph.RoomCentre(Map, Route.Start) + Vector3.Up * 0.1f;
             if (Player != null)
-                Player.GlobalPosition = graph.RoomCentre(Map, Route.Start) + Vector3.Up * 0.1f;
+                Player.GlobalPosition = start;
+            if (StartSpawn != null)
+                StartSpawn.GlobalPosition = start;
 
             SaveLoadManager.Instance?.BindSubtree(this);
         }

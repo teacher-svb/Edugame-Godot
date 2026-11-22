@@ -10,6 +10,8 @@
 [ext_resource type="ArrayMesh" uid="uid://6475rfv566q7" path="res://assets/3D/nature/meshes/nature_tree_poplar.res" id="8_7lvh5"]
 [ext_resource type="Script" uid="uid://bm41ukop6ykag" path="res://addons/godoowave/Nodes/WfcPinBox.cs" id="9_pinbox"]
 
+[ext_resource type="Script" uid="uid://bbbrd61e4khhl" path="res://scripts/Game/Systems/Levels/LevelExit.cs" id="lv_exit"]
+[ext_resource type="Script" uid="uid://dub3134yuqw1k" path="res://scripts/Game/Systems/Levels/SpawnPoint.cs" id="lv_spawn"]
 [sub_resource type="Resource" id="Resource_7lvh5"]
 script = ExtResource("3_settings")
 TileSet = ExtResource("4_tileset")
@@ -97,6 +99,9 @@ GridMapItems = PackedStringArray("border_full", "border_full_b", "border_full_c"
 SurfacePath = NodePath("../../Forest")
 metadata/_custom_type_script = "uid://ch36n85vf88pf"
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_exitHome"]
+size = Vector3(6, 2, 3)
+
 [node name="ForestTest" type="Node3D" unique_id=526854104]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=621573576]
@@ -145,3 +150,22 @@ metadata/godoodads_scatter_settings = SubResource("Resource_mmbjm")
 [node name="Trees_poplar_dense2" type="MultiMeshInstance3D" parent="Vegetation" unique_id=1005581580]
 multimesh = SubResource("MultiMesh_j32mp")
 metadata/godoodads_scatter_settings = SubResource("Resource_esfc7")
+
+[node name="Spawns" type="Node3D" parent="." unique_id=899734097]
+
+[node name="from_school" type="Marker3D" parent="Spawns" unique_id=1816689249]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0.1, 104)
+script = ExtResource("lv_spawn")
+Default = true
+
+[node name="Exits" type="Node3D" parent="." unique_id=397880035]
+
+[node name="ExitToHome" type="Area3D" parent="Exits" unique_id=1973508237]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 1, 110.5)
+collision_mask = 3
+script = ExtResource("lv_exit")
+TargetScene = "uid://lsbk05nndu58"
+_targetSpawnPath = "Spawns/front_door"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Exits/ExitToHome" unique_id=591592158]
+shape = SubResource("BoxShape3D_exitHome")

@@ -40,7 +40,7 @@ namespace TnT.EduGame.GameState
                 return new BaseState(new()
                 {
                     ExitOnNextUpdate = () => _loadingFinished,
-                    OnEnter = () => LoadScene(sceneLoaderOptions.scenePath, sceneLoaderOptions.targetLocation, sceneLoaderOptions.onSceneReady),
+                    OnEnter = () => LoadScene(sceneLoaderOptions.scenePath, sceneLoaderOptions.targetLocation, sceneLoaderOptions.spawnPath, sceneLoaderOptions.onSceneReady),
                     OnExit = FadeOut
                 });
             }
@@ -77,7 +77,7 @@ namespace TnT.EduGame.GameState
             _loadingFinished = true;
         }
 
-        async Task LoadScene(string scenePath, Vector3 target, Action<string> onSceneReady)
+        async Task LoadScene(string scenePath, Vector3 target, NodePath spawnPath, Action<string> onSceneReady)
         {
             await FadeIn();
 
@@ -97,7 +97,18 @@ namespace TnT.EduGame.GameState
 
                 onSceneReady?.Invoke(scenePath);
 
-                if (target != Vector3.Zero)
+                // after binding: a saved position (from the previous level) must not win over the spawn point
+                if (spawnPath != null)
+                {
+                    var spawn = Levels.SpawnPoint.Find(tree, spawnPath, out bool missing);
+                    if (missing)
+                        GD.PushWarning($"{scenePath}: no spawn point at '{spawnPath}', using the default one");
+                    if (spawn != null)
+                        tree.FindAnyObjectByType<Player>().MoveTo(spawn.GlobalPosition);
+                    else
+                        GD.PushWarning($"{scenePath}: no default spawn point");
+                }
+                else if (target != Vector3.Zero)
                     tree.FindAnyObjectByType<Player>().MoveTo(target);
                 _loadingFinished = true;
             }
@@ -129,6 +140,11 @@ namespace TnT.EduGame.GameState
         public class SceneLoaderOptions : LocationLoaderOptions
         {
             public string scenePath;
+            /// <summary>
+            /// The spawn point's node path relative to the scene root. null: no spawn point (a loaded save keeps its
+            /// position); empty: the level's default one.
+            /// </summary>
+            public NodePath spawnPath;
             public Action<string> onSceneReady;
         }
     }
