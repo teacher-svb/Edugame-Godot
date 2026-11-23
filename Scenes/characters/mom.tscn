@@ -20,19 +20,16 @@ PersistentId = "mom"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 shape = SubResource("CapsuleShape3D_yni83")
 
-[node name="CharacterAnimator" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
-VisualRoot = NodePath("../../../Farmer_B")
-
 [node name="AnimationTree" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
-root_node = NodePath("../../../Farmer_B")
+root_node = NodePath("../../Farmer_B")
 
 [node name="AnimationPlayer" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="2" unique_id=933369381]
-root_node = NodePath("../../../Farmer_B")
+root_node = NodePath("../../Farmer_B")
 
-[node name="Farmer_B" parent="." index="5" unique_id=1612237503 instance=ExtResource("3_h71mi")]
+[node name="Farmer_B" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="2" unique_id=1612237503 instance=ExtResource("3_h71mi")]
 transform = Transform3D(0.525, 0, 0, 0, 0.525, 0, 0, 0, 0.525, 0, 0, 0)
 
-[node name="Skeleton3D" parent="Farmer_B/Rig_Medium" parent_id_path=PackedInt32Array(1612237503, 1435051955) index="0" unique_id=554156878]
+[node name="Skeleton3D" parent="VisualRoot/Farmer_B/Rig_Medium" parent_id_path=PackedInt32Array(1612237503, 1435051955) index="0" unique_id=554156878]
 bones/1/position = Vector3(0, 0.3839962, 0)
 bones/1/rotation = Quaternion(0.0046559577, 0.043157276, 0.00020113171, 0.9990574)
 bones/1/scale = Vector3(0.99999994, 1, 0.99999994)
@@ -85,33 +82,33 @@ bones/21/scale = Vector3(1.0000004, 1.0000007, 0.9999993)
 bones/22/rotation = Quaternion(-9.895962e-07, 0.9202346, -0.39136732, 2.787472e-07)
 bones/22/scale = Vector3(1.0000001, 0.9999975, 1.0000027)
 
-[node name="Farmer_B_Hat" parent="Farmer_B/Rig_Medium/Skeleton3D" index="2" unique_id=1767203609]
+[node name="Farmer_B_Hat" parent="VisualRoot/Farmer_B/Rig_Medium/Skeleton3D" index="2" unique_id=1767203609]
 visible = false
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_A")
 
-[node name="Farmer_ArmLeft" parent="Farmer_B/Rig_Medium/Skeleton3D" index="0"]
+[node name="Farmer_ArmLeft" parent="VisualRoot/Farmer_B/Rig_Medium/Skeleton3D" index="0"]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_A")
 
-[node name="Farmer_ArmRight" parent="Farmer_B/Rig_Medium/Skeleton3D" index="1"]
+[node name="Farmer_ArmRight" parent="VisualRoot/Farmer_B/Rig_Medium/Skeleton3D" index="1"]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_A")
 
-[node name="Farmer_B_Head" parent="Farmer_B/Rig_Medium/Skeleton3D" index="3"]
+[node name="Farmer_B_Head" parent="VisualRoot/Farmer_B/Rig_Medium/Skeleton3D" index="3"]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_A")
 
-[node name="Farmer_Body" parent="Farmer_B/Rig_Medium/Skeleton3D" index="4"]
+[node name="Farmer_Body" parent="VisualRoot/Farmer_B/Rig_Medium/Skeleton3D" index="4"]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_A")
 
-[node name="Farmer_LegLeft" parent="Farmer_B/Rig_Medium/Skeleton3D" index="5"]
+[node name="Farmer_LegLeft" parent="VisualRoot/Farmer_B/Rig_Medium/Skeleton3D" index="5"]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_A")
 
-[node name="Farmer_LegRight" parent="Farmer_B/Rig_Medium/Skeleton3D" index="6"]
+[node name="Farmer_LegRight" parent="VisualRoot/Farmer_B/Rig_Medium/Skeleton3D" index="6"]
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_farmer_alt_A")
 
-[editable path="Farmer_B"]
+[editable path="VisualRoot/Farmer_B"]

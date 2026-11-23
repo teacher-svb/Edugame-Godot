@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" format=3]
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://dx80b1hedgl44"]
 
 [ext_resource type="Script" uid="uid://bkc5aqh43okjh" path="res://scripts/Game/Systems/QuestSystem/QuestObjective.cs" id="1_obj"]
 [ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="2_mabel"]

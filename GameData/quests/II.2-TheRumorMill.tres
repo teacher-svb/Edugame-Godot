@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" format=3]
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://qwiau32b0cdw"]
 
 [ext_resource type="Script" uid="uid://bkc5aqh43okjh" path="res://scripts/Game/Systems/QuestSystem/QuestObjective.cs" id="1_obj"]
 [ext_resource type="Resource" uid="uid://bbk2oqbtmsp1u" path="res://GameData/characterData/Cornelis_CharacterData.tres" id="2_cornelis"]
@@ -8,7 +8,6 @@
 [sub_resource type="Resource" id="Resource_obj1"]
 script = ExtResource("1_obj")
 _startText = "Daar is ze! Mensen, luister! Mabel heeft mijn ophaalbrug gemaakt. Zonder toverstaf! Zonder één spreuk!"
-_failText = ""
 _completeText = "Lang leve Mabel, het wonderkind van Beaverford!"
 _characterData = ExtResource("2_cornelis")
 _objectiveId = "fff66ceb-01f6-41ab-8d61-552129f73b01"
@@ -17,7 +16,6 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 [sub_resource type="Resource" id="Resource_obj2"]
 script = ExtResource("1_obj")
 _startText = "Maar... het was geen toverij. Ik heb gewoon gerekend."
-_failText = ""
 _completeText = "Goed dan. Eén voor één. Eerst maar eens gaan kijken!"
 _characterData = ExtResource("3_mabel")
 _objectiveId = "fff66ceb-01f6-41ab-8d61-552129f73b02"

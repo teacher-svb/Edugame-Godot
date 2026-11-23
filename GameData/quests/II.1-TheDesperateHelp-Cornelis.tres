@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" format=3]
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://de1c1unrtwvoo"]
 
 [ext_resource type="Script" uid="uid://bkc5aqh43okjh" path="res://scripts/Game/Systems/QuestSystem/QuestObjective.cs" id="1_obj"]
 [ext_resource type="Resource" uid="uid://bbk2oqbtmsp1u" path="res://GameData/characterData/Cornelis_CharacterData.tres" id="2_cornelis"]
@@ -26,7 +26,6 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 [sub_resource type="Resource" id="Resource_obj3"]
 script = ExtResource("1_obj")
 _startText = "Wat doe je nu met die bak? Hé... hé! Er beweegt iets!"
-_failText = ""
 _completeText = "Wacht maar tot de anderen dit horen!"
 _characterData = ExtResource("2_cornelis")
 _objectiveId = "daaeb60f-a9fb-4892-9e1a-d7390bcd1c03"

@@ -1,9 +1,12 @@
-[gd_resource type="Resource" script_class="MathChallenge" format=3]
+[gd_resource type="Resource" script_class="MathChallenge" format=3 uid="uid://cdsvfnmpnl62k"]
 
 [ext_resource type="Script" uid="uid://cnfmeuouim0nn" path="res://scripts/Game/Systems/Challenges/ParamSpec.cs" id="1_spec"]
 [ext_resource type="Script" uid="uid://sup7lp6karaf" path="res://scripts/Game/Systems/Challenges/MathChallenge.cs" id="2_math"]
-[ext_resource type="Script" path="res://scripts/Game/Systems/Challenges/Visualizations/SequenceVisualization.cs" id="3_seq"]
+[ext_resource type="Script" uid="uid://bbce8egcjf0mv" path="res://scripts/Game/Systems/Challenges/Visualizations/SequenceVisualization.cs" id="3_seq"]
 [ext_resource type="Script" uid="uid://4oiioqw1bbcc" path="res://scripts/Game/Systems/Challenges/Inputs/DropdownInput.cs" id="4_drop"]
+
+[sub_resource type="Resource" id="Input_drop"]
+script = ExtResource("4_drop")
 
 [sub_resource type="Resource" id="Spec_s"]
 script = ExtResource("1_spec")
@@ -28,15 +31,11 @@ TermCount = "n + 1"
 MissingTerm = "n"
 Unit = "min"
 
-[sub_resource type="Resource" id="Input_drop"]
-script = ExtResource("4_drop")
-
 [resource]
 script = ExtResource("2_math")
 Name = "Schoolbel"
 Formula = "s + n * d"
 Params = Array[ExtResource("1_spec")]([SubResource("Spec_s"), SubResource("Spec_n"), SubResource("Spec_d")])
-Unknowns = PackedStringArray("answer")
 Constraints = PackedStringArray("d % 5 = 0", "answer % 5 = 0")
 Visualization = SubResource("Vis_seq")
 Input = SubResource("Input_drop")

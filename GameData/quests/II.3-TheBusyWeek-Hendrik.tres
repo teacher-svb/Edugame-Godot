@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" format=3]
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://bh74tupurvxyd"]
 
 [ext_resource type="Script" uid="uid://bkc5aqh43okjh" path="res://scripts/Game/Systems/QuestSystem/QuestObjective.cs" id="1_obj"]
 [ext_resource type="Resource" uid="uid://bet0adq1t2ipo" path="res://GameData/characterData/Hendrik_CharacterData.tres" id="2_hendrik"]
@@ -8,7 +8,6 @@
 [sub_resource type="Resource" id="Resource_obj1"]
 script = ExtResource("1_obj")
 _startText = "Daar ben je, Mabel. Hoor je dat? De molensteen raast maar door, en mijn meel komt eruit als gruis."
-_failText = ""
 _completeText = "Het tandwielrad bepaalt hoe snel de steen draait. Maar al die getallen erop... daar word ik duizelig van."
 _characterData = ExtResource("2_hendrik")
 _objectiveId = "bda3574b-3ad5-4852-82a9-86818f51d501"
@@ -26,7 +25,6 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 [sub_resource type="Resource" id="Resource_obj3"]
 script = ExtResource("1_obj")
 _startText = "Je zet het rad goed en... hoor! De steen maalt weer rustig."
-_failText = ""
 _completeText = "Fijn meel, zoals het hoort. Dank je wel, Mabel!"
 _characterData = ExtResource("2_hendrik")
 _objectiveId = "bda3574b-3ad5-4852-82a9-86818f51d503"

@@ -26,7 +26,6 @@
 [ext_resource type="Script" uid="uid://cnfmeuouim0nn" path="res://scripts/Game/Systems/Challenges/ParamSpec.cs" id="29_param"]
 [ext_resource type="Script" uid="uid://bduu2nqauu8sw" path="res://scripts/Game/Systems/Challenges/Visualizations/ImageVisualization.cs" id="30_imagevis"]
 [ext_resource type="Script" uid="uid://cecfqkgbbnr2u" path="res://scripts/Game/Systems/Challenges/Visualizations/ImageAnnotation.cs" id="31_annotation"]
-[ext_resource type="Script" uid="uid://2chy7qh6qta8" path="res://scripts/Game/Systems/Challenges/Inputs/CombinationLockInput.cs" id="32_lock"]
 [ext_resource type="Texture2D" uid="uid://c72t1e36d3fgo" path="res://project/images/drawbridge-diagram.png" id="33_bridgeimg"]
 [ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="34_channel"]
 [ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="35_questscript"]
@@ -82,17 +81,17 @@ Pool = PackedInt32Array(20, 30, 40, 50, 60, 70, 80, 90, 100)
 
 [sub_resource type="Resource" id="Resource_ii1_label_b"]
 script = ExtResource("31_annotation")
-Text = "brug {b} kg"
+Text = "{b} kg"
 Position = Vector2(0.7, 0.21)
 
 [sub_resource type="Resource" id="Resource_ii1_label_s"]
 script = ExtResource("31_annotation")
-Text = "voorraad {s} kg"
+Text = "{s} kg"
 Position = Vector2(0.47, 0.38)
 
 [sub_resource type="Resource" id="Resource_ii1_label_c"]
 script = ExtResource("31_annotation")
-Text = "bak {c} kg"
+Text = "{c} kg"
 Position = Vector2(0.14, 0.2)
 
 [sub_resource type="Resource" id="Resource_ii1_vis"]
@@ -101,7 +100,7 @@ Image = ExtResource("33_bridgeimg")
 Annotations = Array[ExtResource("31_annotation")]([SubResource("Resource_ii1_label_b"), SubResource("Resource_ii1_label_s"), SubResource("Resource_ii1_label_c")])
 
 [sub_resource type="Resource" id="Resource_ii1_input"]
-script = ExtResource("32_lock")
+script = ExtResource("45_textinput")
 
 [sub_resource type="Resource" id="Resource_ii1_challenge"]
 script = ExtResource("28_challenge")
@@ -139,7 +138,7 @@ Pool = PackedInt32Array(100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 6
 
 [sub_resource type="Resource" id="Resource_ii3l_label_a"]
 script = ExtResource("31_annotation")
-Text = "recept: {a} g meel per brood"
+Text = "{a} g/brood"
 Position = Vector2(0.5, 0.05)
 
 [sub_resource type="Resource" id="Resource_ii3l_label_b"]
@@ -149,7 +148,7 @@ Position = Vector2(0.75, 0.7)
 
 [sub_resource type="Resource" id="Resource_ii3l_label_c"]
 script = ExtResource("31_annotation")
-Text = "al {c} g meel op de schaal"
+Text = "{c} g"
 Position = Vector2(0.24, 0.8)
 
 [sub_resource type="Resource" id="Resource_ii3l_vis"]

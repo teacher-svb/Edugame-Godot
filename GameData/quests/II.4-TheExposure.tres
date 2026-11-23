@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" format=3]
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://csbyqxecfmuxt"]
 
 [ext_resource type="Script" uid="uid://bkc5aqh43okjh" path="res://scripts/Game/Systems/QuestSystem/QuestObjective.cs" id="1_obj"]
 [ext_resource type="Resource" path="res://GameData/characterData/Character_TravelingWizard_CharacterData.tres" id="2_wizard"]
@@ -8,7 +8,6 @@
 [sub_resource type="Resource" id="Resource_obj1"]
 script = ExtResource("1_obj")
 _startText = "Zo. Dus jij bent het 'wonderkind' van Beaverford, waar het hele dorp over praat?"
-_failText = ""
 _completeText = "Echte magie laat vonken zien. Stap op de proefsteen, dan ziet iedereen het."
 _characterData = ExtResource("2_wizard")
 _objectiveId = "fb25da60-3efc-422e-8eba-bddc9ddea401"
@@ -17,7 +16,6 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 [sub_resource type="Resource" id="Resource_obj2"]
 script = ExtResource("1_obj")
 _startText = "Weer zo'n proefsteen... Goed dan."
-_failText = ""
 _completeText = "Nee... niet weer. Er gebeurt niets."
 _characterData = ExtResource("3_mabel")
 _objectiveId = "fb25da60-3efc-422e-8eba-bddc9ddea402"
@@ -26,7 +24,6 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 [sub_resource type="Resource" id="Resource_obj3"]
 script = ExtResource("1_obj")
 _startText = "Geen vonk. Geen greintje mana. Dit kind kan helemaal niet toveren!"
-_failText = ""
 _completeText = "Lees het maar goed, allemaal. Dan laat niemand zich nog beetnemen."
 _characterData = ExtResource("2_wizard")
 _objectiveId = "fb25da60-3efc-422e-8eba-bddc9ddea403"
@@ -35,7 +32,6 @@ metadata/_custom_type_script = "uid://bkc5aqh43okjh"
 [sub_resource type="Resource" id="Resource_obj4"]
 script = ExtResource("1_obj")
 _startText = "Wat heeft hij daar opgehangen...?"
-_failText = ""
 _completeText = "Iedereen kijkt naar me... Ik wil gewoon naar huis."
 _characterData = ExtResource("3_mabel")
 _objectiveId = "fb25da60-3efc-422e-8eba-bddc9ddea404"
