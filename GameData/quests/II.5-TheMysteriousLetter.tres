@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Quest" format=3]
+
+[ext_resource type="Script" uid="uid://bkc5aqh43okjh" path="res://scripts/Game/Systems/QuestSystem/QuestObjective.cs" id="1_obj"]
+[ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="2_mabel"]
+[ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="3_quest"]
+
+[sub_resource type="Resource" id="Resource_obj1"]
+script = ExtResource("1_obj")
+_startText = "Thuis. Hè? Wat ligt daar op tafel?"
+_failText = ""
+_completeText = "Een brief. Voor mij? Met een zegel in de vorm van een tandwiel..."
+_characterData = ExtResource("2_mabel")
+_objectiveId = "3c2415fe-208a-4dd5-928f-903a8aeb0801"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[sub_resource type="Resource" id="Resource_obj2"]
+script = ExtResource("1_obj")
+_startText = "Wie schrijft mij nu een brief? Ik maak hem open."
+_failText = ""
+_completeText = "Een gilde van ingenieurs, die zonder toverij dingen maken... net als ik. Vannacht dus. Bij de put, na twaalf slagen van de schoolbel."
+_characterData = ExtResource("2_mabel")
+_objectiveId = "3c2415fe-208a-4dd5-928f-903a8aeb0802"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[resource]
+script = ExtResource("3_quest")
+_id = "3c2415fe-208a-4dd5-928f-903a8aeb0800"
+_name = "The Mysterious Letter"
+_objectives = Array[ExtResource("1_obj")]([SubResource("Resource_obj1"), SubResource("Resource_obj2")])
+metadata/_custom_type_script = "uid://k32terbd7gqc"

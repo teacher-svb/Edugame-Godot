@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="MathChallenge" format=3]
+
+[ext_resource type="Script" uid="uid://cnfmeuouim0nn" path="res://scripts/Game/Systems/Challenges/ParamSpec.cs" id="1_spec"]
+[ext_resource type="Script" uid="uid://sup7lp6karaf" path="res://scripts/Game/Systems/Challenges/MathChallenge.cs" id="2_math"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/Challenges/Visualizations/SequenceVisualization.cs" id="3_seq"]
+[ext_resource type="Script" uid="uid://df1px4otq51h8" path="res://scripts/Game/Systems/Challenges/Inputs/TextChallengeInput.cs" id="4_text"]
+
+[sub_resource type="Resource" id="Spec_a"]
+script = ExtResource("1_spec")
+Name = "a"
+Min = 2
+Max = 20
+
+[sub_resource type="Resource" id="Spec_d"]
+script = ExtResource("1_spec")
+Name = "d"
+Min = 2
+Max = 9
+
+[sub_resource type="Resource" id="Vis_seq"]
+script = ExtResource("3_seq")
+Term = "a + i * d"
+TermCount = "5"
+MissingTerm = "-1"
+
+[sub_resource type="Resource" id="Input_text"]
+script = ExtResource("4_text")
+
+[resource]
+script = ExtResource("2_math")
+Name = "Getallenrij"
+Formula = "a + 4 * d"
+Params = Array[ExtResource("1_spec")]([SubResource("Spec_a"), SubResource("Spec_d")])
+Unknowns = PackedStringArray("answer")
+Constraints = PackedStringArray("answer >= 0")
+Visualization = SubResource("Vis_seq")
+Input = SubResource("Input_text")
+QuestionText = "Welk getal hoort op de plek van het vraagteken?"
+HintText = "Hoeveel komt er elke keer bij?"

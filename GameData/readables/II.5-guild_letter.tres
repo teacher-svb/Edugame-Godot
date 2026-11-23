@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ReadableText" format=3]
+
+[ext_resource type="Script" path="res://scripts/Game/Systems/Reading/ReadableText.cs" id="1_text"]
+
+[resource]
+script = ExtResource("1_text")
+Title = "Aan Mabel"
+Body = "Beste Mabel,
+
+Wij hebben gezien wat je deze week in Beaverford hebt gedaan. De ophaalbrug van Cornelis, de molen van Hendrik, de weegschaal van Liesbeth, de schoolbel van Mevrouw Bram: alles werkt weer. En dat zonder één vonk mana.
+
+De tovenaar noemt dat bedrog. Wij noemen het vakmanschap. Je hebt geen toverstaf nodig: je hebt een hoofd dat kan rekenen en handen die kunnen bouwen.
+---
+Wij zijn de [b]Geheime Gilde van Ingenieurs[/b]. Al heel lang werken wij in het verborgen, onder het dorp. Wij willen je vragen om onze leerling te worden.
+
+Kom [b]vannacht[/b], als de schoolbel twaalf keer heeft geslagen, naar de [b]oude waterput op het plein[/b]. Kom alleen, en vertel niemand over deze brief.
+
+Zoek op de rand van de put het teken van het tandwiel, hetzelfde als op het zegel van deze brief. Daar begint de weg naar beneden.
+---
+Wij wachten op je.
+
+[i]De Gilde van Ingenieurs[/i]
+
+P.S. Neem deze brief niet mee. Wat erin staat, moet je onthouden."
+Look = 1

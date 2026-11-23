@@ -32,11 +32,18 @@
 [ext_resource type="Resource" path="res://GameData/quests/I.4-TheHeavyHeart.tres" id="19_i4"]
 [ext_resource type="Resource" path="res://GameData/quests/II.1-TheDesperateHelp-Cornelis.tres" id="20_ii1"]
 [ext_resource type="Resource" path="res://GameData/quests/II.2-TheRumorMill.tres" id="21_ii2"]
+[ext_resource type="Resource" path="res://GameData/quests/II.3-TheBusyWeek-Liesbeth.tres" id="22_ii3l"]
+[ext_resource type="Resource" path="res://GameData/quests/II.3-TheBusyWeek-Hendrik.tres" id="23_ii3h"]
+[ext_resource type="Resource" path="res://GameData/quests/II.3-TheBusyWeek-MsBram.tres" id="24_ii3m"]
+[ext_resource type="Resource" path="res://GameData/quests/II.4-TheExposure.tres" id="25_ii4"]
+[ext_resource type="Resource" path="res://GameData/quests/II.5-TheMysteriousLetter.tres" id="26_ii5"]
 [ext_resource type="Script" path="res://scripts/Game/Dev/DevShortcuts.cs" id="dev_shortcuts"]
 [ext_resource type="Script" path="res://scripts/Game/Dev/DevCheckpoint.cs" id="dev_cp"]
 [ext_resource type="Resource" path="res://GameData/dev/01_act2-start.tres" id="dev_cp1"]
 [ext_resource type="Resource" path="res://GameData/dev/02_ii2.tres" id="dev_cp2"]
 [ext_resource type="Resource" path="res://GameData/dev/03_ii3.tres" id="dev_cp3"]
+[ext_resource type="Resource" path="res://GameData/dev/04_ii4.tres" id="dev_cp4"]
+[ext_resource type="Resource" path="res://GameData/dev/05_ii5.tres" id="dev_cp5"]
 [ext_resource type="Script" uid="uid://bf6jiou3no26s" path="res://scripts/Game/UI/MVC_Challenges/Controller/ChallengeController.cs" id="23_aum7h"]
 [ext_resource type="Script" uid="uid://dlqolcp4oddju" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeView.cs" id="24_qelhd"]
 [ext_resource type="PackedScene" uid="uid://dx5c0meqksg8l" path="res://Scenes/UI/ChallengeUI.tscn" id="25_d2cak"]
@@ -63,6 +70,10 @@
 [ext_resource type="Script" path="res://scripts/Game/UI/MVC_ActCard/ActCardController.cs" id="61_actctrl"]
 [ext_resource type="Script" path="res://scripts/Game/UI/MVC_ActCard/ActCardModel.cs" id="62_actmodel"]
 [ext_resource type="Script" path="res://scripts/Game/UI/MVC_ActCard/ActCardView.cs" id="63_actview"]
+[ext_resource type="Script" path="res://scripts/Game/StateManagementGame/GameStateReading.cs" id="64_readstate"]
+[ext_resource type="Script" path="res://scripts/Game/UI/MVC_Reading/ReadingController.cs" id="65_readctrl"]
+[ext_resource type="Script" path="res://scripts/Game/UI/MVC_Reading/ReadingModel.cs" id="66_readmodel"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/ReadingPanel.tscn" id="67_readview"]
 
 [sub_resource type="Resource" id="Resource_hwrcp"]
 script = ExtResource("16_ut70p")
@@ -195,6 +206,9 @@ metadata/_custom_type_script = "uid://c673wplbelsyw"
 [node name="GameStateActCard" type="Node" parent="StateManagerGame" unique_id=1733550401]
 script = ExtResource("60_actstate")
 
+[node name="GameStateReading" type="Node" parent="StateManagerGame"]
+script = ExtResource("64_readstate")
+
 [node name="GameStateSettings" type="Node" parent="StateManagerGame" unique_id=2037842696]
 script = ExtResource("10_wgk6c")
 metadata/_custom_type_script = "uid://cypyw7658ri5r"
@@ -210,13 +224,13 @@ script = ExtResource("3_4v8vv")
 
 [node name="QuestManager" type="Node" parent="." unique_id=600992704]
 script = ExtResource("4_347u6")
-_quests = Array[ExtResource("11_aum7h")]([ExtResource("6_pnf1h"), ExtResource("17_56cnb"), ExtResource("17_hendrik"), ExtResource("17_liesbeth"), ExtResource("17_msbram"), ExtResource("18_i3fire"), ExtResource("18_i3water"), ExtResource("18_i3earth"), ExtResource("19_i4"), ExtResource("20_ii1"), ExtResource("21_ii2")])
+_quests = Array[ExtResource("11_aum7h")]([ExtResource("6_pnf1h"), ExtResource("17_56cnb"), ExtResource("17_hendrik"), ExtResource("17_liesbeth"), ExtResource("17_msbram"), ExtResource("18_i3fire"), ExtResource("18_i3water"), ExtResource("18_i3earth"), ExtResource("19_i4"), ExtResource("20_ii1"), ExtResource("21_ii2"), ExtResource("22_ii3l"), ExtResource("23_ii3h"), ExtResource("24_ii3m"), ExtResource("25_ii4"), ExtResource("26_ii5")])
 eventChannel = ExtResource("13_pnf1h")
 
 
 [node name="DevShortcuts" type="Node" parent="."]
 script = ExtResource("dev_shortcuts")
-Checkpoints = Array[ExtResource("dev_cp")]([ExtResource("dev_cp1"), ExtResource("dev_cp2"), ExtResource("dev_cp3")])
+Checkpoints = Array[ExtResource("dev_cp")]([ExtResource("dev_cp1"), ExtResource("dev_cp2"), ExtResource("dev_cp3"), ExtResource("dev_cp4"), ExtResource("dev_cp5")])
 
 [node name="UIManager" type="Node" parent="." unique_id=1207108139]
 script = ExtResource("4_c37v5")
@@ -413,6 +427,16 @@ grow_vertical = 0
 text = "Druk op spatie om verder te gaan"
 label_settings = SubResource("LabelSettings_act_hint")
 horizontal_alignment = 1
+
+[node name="ReadingController" type="Node" parent="UIManager/CanvasLayer" node_paths=PackedStringArray("view", "model")]
+script = ExtResource("65_readctrl")
+view = NodePath("ReadingView")
+model = NodePath("ReadingModel")
+
+[node name="ReadingModel" type="Node" parent="UIManager/CanvasLayer/ReadingController"]
+script = ExtResource("66_readmodel")
+
+[node name="ReadingView" parent="UIManager/CanvasLayer/ReadingController" instance=ExtResource("67_readview")]
 
 [node name="MusicManager" type="Node" parent="." unique_id=358640137]
 script = ExtResource("48_music")

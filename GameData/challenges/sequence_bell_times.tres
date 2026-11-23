@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="MathChallenge" format=3]
+
+[ext_resource type="Script" uid="uid://cnfmeuouim0nn" path="res://scripts/Game/Systems/Challenges/ParamSpec.cs" id="1_spec"]
+[ext_resource type="Script" uid="uid://sup7lp6karaf" path="res://scripts/Game/Systems/Challenges/MathChallenge.cs" id="2_math"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/Challenges/Visualizations/SequenceVisualization.cs" id="3_seq"]
+[ext_resource type="Script" uid="uid://4oiioqw1bbcc" path="res://scripts/Game/Systems/Challenges/Inputs/DropdownInput.cs" id="4_drop"]
+
+[sub_resource type="Resource" id="Spec_s"]
+script = ExtResource("1_spec")
+Name = "s"
+Pool = PackedInt32Array(0, 10, 15, 30)
+
+[sub_resource type="Resource" id="Spec_n"]
+script = ExtResource("1_spec")
+Name = "n"
+Min = 3
+Max = 5
+
+[sub_resource type="Resource" id="Spec_d"]
+script = ExtResource("1_spec")
+Name = "d"
+Pool = PackedInt32Array(40, 45, 50)
+
+[sub_resource type="Resource" id="Vis_seq"]
+script = ExtResource("3_seq")
+Term = "s + i * d"
+TermCount = "n + 1"
+MissingTerm = "n"
+Unit = "min"
+
+[sub_resource type="Resource" id="Input_drop"]
+script = ExtResource("4_drop")
+
+[resource]
+script = ExtResource("2_math")
+Name = "Schoolbel"
+Formula = "s + n * d"
+Params = Array[ExtResource("1_spec")]([SubResource("Spec_s"), SubResource("Spec_n"), SubResource("Spec_d")])
+Unknowns = PackedStringArray("answer")
+Constraints = PackedStringArray("d % 5 = 0", "answer % 5 = 0")
+Visualization = SubResource("Vis_seq")
+Input = SubResource("Input_drop")
+QuestionText = "De schoolbel gaat elke dag op vaste tijden, in minuten na acht uur. Wanneer gaat de laatste bel?"
+HintText = "Hoeveel minuten zitten er tussen twee bellen?"

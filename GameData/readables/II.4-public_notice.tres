@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ReadableText" format=3]
+
+[ext_resource type="Script" path="res://scripts/Game/Systems/Reading/ReadableText.cs" id="1_text"]
+
+[resource]
+script = ExtResource("1_text")
+Title = "Bekendmaking"
+Body = "Aan alle inwoners van Beaverford,
+
+Vandaag heb ik, in opdracht van de Tovenaarsschool, het meisje Mabel op het plein getest. Ze stond op de proefsteen, en de steen bleef donker: geen vonk, geen gloed, geen enkel spoor van mana.
+
+Wie geen mana heeft, kan niet toveren. Dat is de eerste wet van de magie.
+---
+Wat Mabel deed met de ophaalbrug, de molen, de weegschaal en de schoolbel, was dus [b]geen toverij[/b]. Laat u niet langer wijsmaken dat zij een tovenares is.
+
+Hebt u een probleem dat magie nodig heeft? Wacht dan op een echte tovenaar, met een echte toverstaf.
+
+Getekend,
+de reizende tovenaar,
+namens de Tovenaarsschool"
+Look = 2

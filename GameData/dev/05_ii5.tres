@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="DevCheckpoint" format=3]
+
+[ext_resource type="Script" path="res://scripts/Game/Dev/DevCheckpoint.cs" id="1_cp"]
+[ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="2_quest"]
+[ext_resource type="Resource" path="res://GameData/quests/I.1-MorningInBeaverford.tres" id="q_i1"]
+[ext_resource type="Resource" path="res://GameData/quests/I.2-theAmbition-Cornelis.tres" id="q_i2c"]
+[ext_resource type="Resource" path="res://GameData/quests/I.2-theAmbition-Hendrik.tres" id="q_i2h"]
+[ext_resource type="Resource" path="res://GameData/quests/I.2-theAmbition-Liesbeth.tres" id="q_i2l"]
+[ext_resource type="Resource" path="res://GameData/quests/I.2-theAmbition-MsBram.tres" id="q_i2m"]
+[ext_resource type="Resource" path="res://GameData/quests/I.3-WizardSchoolTrials-Fire.tres" id="q_i3f"]
+[ext_resource type="Resource" path="res://GameData/quests/I.3-WizardSchoolTrials-Water.tres" id="q_i3w"]
+[ext_resource type="Resource" path="res://GameData/quests/I.3-WizardSchoolTrials-Earth.tres" id="q_i3e"]
+[ext_resource type="Resource" path="res://GameData/quests/I.4-TheHeavyHeart.tres" id="q_i4"]
+[ext_resource type="Resource" path="res://GameData/quests/II.1-TheDesperateHelp-Cornelis.tres" id="q_ii1"]
+[ext_resource type="Resource" path="res://GameData/quests/II.2-TheRumorMill.tres" id="q_ii2"]
+[ext_resource type="Resource" path="res://GameData/quests/II.3-TheBusyWeek-Liesbeth.tres" id="q_ii3l"]
+[ext_resource type="Resource" path="res://GameData/quests/II.3-TheBusyWeek-Hendrik.tres" id="q_ii3h"]
+[ext_resource type="Resource" path="res://GameData/quests/II.3-TheBusyWeek-MsBram.tres" id="q_ii3m"]
+[ext_resource type="Resource" path="res://GameData/quests/II.4-TheExposure.tres" id="q_ii4"]
+
+[resource]
+script = ExtResource("1_cp")
+Id = "ii5"
+Title = "II.5: Exposure done, at home (the Letter)"
+CompletedQuests = Array[ExtResource("2_quest")]([ExtResource("q_i1"), ExtResource("q_i2c"), ExtResource("q_i2h"), ExtResource("q_i2l"), ExtResource("q_i2m"), ExtResource("q_i3f"), ExtResource("q_i3w"), ExtResource("q_i3e"), ExtResource("q_i4"), ExtResource("q_ii1"), ExtResource("q_ii2"), ExtResource("q_ii3l"), ExtResource("q_ii3h"), ExtResource("q_ii3m"), ExtResource("q_ii4")])
+Scene = "res://Scenes/levels/level1.tscn"
+Spawn = "Spawns/front_door"

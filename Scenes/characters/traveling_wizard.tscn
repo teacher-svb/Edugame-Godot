@@ -1,0 +1,58 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_base.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://GameData/characterData/Character_TravelingWizard_CharacterData.tres" id="2_data"]
+[ext_resource type="PackedScene" uid="uid://dtujrckbw1coe" path="res://assets/3D/characters/Lorekeeper.glb" id="3_model"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tw"]
+radius = 0.3
+height = 1.2
+
+[node name="TravelingWizard" instance=ExtResource("1_base")]
+_characterData = ExtResource("2_data")
+PersistentId = "traveling-wizard"
+
+[node name="CharacterController3D" parent="." index="0"]
+_speed = 2.0
+
+[node name="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("CapsuleShape3D_tw")
+
+[node name="dialogCamera" parent="VisualRoot" index="0"]
+far = 1.5
+
+[node name="AnimationTree" parent="VisualRoot/Animation" index="1"]
+root_node = NodePath("../../Lorekeeper")
+
+[node name="AnimationPlayer" parent="VisualRoot/Animation" index="2"]
+root_node = NodePath("../../Lorekeeper")
+
+[node name="Lorekeeper" parent="VisualRoot" index="2" instance=ExtResource("3_model")]
+transform = Transform3D(0.525, 0, 0, 0, 0.525, 0, 0, 0, 0.525, 0, 0, 0)
+
+[node name="Lorekeeper_ArmLeft" parent="VisualRoot/Lorekeeper/Rig_Medium/Skeleton3D" index="0"]
+layers = 524289
+
+[node name="Lorekeeper_ArmRight" parent="VisualRoot/Lorekeeper/Rig_Medium/Skeleton3D" index="1"]
+layers = 524289
+
+[node name="Lorekeeper_Backpack" parent="VisualRoot/Lorekeeper/Rig_Medium/Skeleton3D" index="2"]
+layers = 524289
+
+[node name="Lorekeeper_Body" parent="VisualRoot/Lorekeeper/Rig_Medium/Skeleton3D" index="3"]
+layers = 524289
+
+[node name="Lorekeeper_Glasses" parent="VisualRoot/Lorekeeper/Rig_Medium/Skeleton3D" index="4"]
+layers = 524289
+
+[node name="Lorekeeper_Head" parent="VisualRoot/Lorekeeper/Rig_Medium/Skeleton3D" index="5"]
+layers = 524289
+
+[node name="Lorekeeper_LegLeft" parent="VisualRoot/Lorekeeper/Rig_Medium/Skeleton3D" index="6"]
+layers = 524289
+
+[node name="Lorekeeper_LegRight" parent="VisualRoot/Lorekeeper/Rig_Medium/Skeleton3D" index="7"]
+layers = 524289
+
+[editable path="VisualRoot/Lorekeeper"]

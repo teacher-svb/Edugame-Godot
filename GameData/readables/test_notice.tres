@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ReadableText" format=3]
+
+[ext_resource type="Script" path="res://scripts/Game/Systems/Reading/ReadableText.cs" id="1_text"]
+
+[resource]
+script = ExtResource("1_text")
+Title = "Bekendmaking"
+Body = "Aan alle inwoners van Beaverford.
+
+Dit is een proeftekst voor het leespaneel. Hij is langer dan een gewone zin in een tekstballon, zodat je kunt zien hoe een hele alinea eruitziet op het bord.
+
+Lees alles goed: op de volgende bladzijde staat nog meer.
+---
+[b]Tweede bladzijde[/b]
+
+Druk op spatie om het paneel te sluiten. Pas als je deze bladzijde gezien hebt, telt de tekst als gelezen.
+
+Getekend,
+de proefschrijver"
+Look = 2

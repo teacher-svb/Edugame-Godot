@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ReadableText" format=3]
+
+[ext_resource type="Script" path="res://scripts/Game/Systems/Reading/ReadableText.cs" id="1_text"]
+
+[resource]
+script = ExtResource("1_text")
+Title = "Een brief"
+Body = "Beste Mabel,
+
+Dit is een proefbrief op één bladzijde. Spatie sluit hem meteen, en dan telt hij als gelezen.
+
+Groetjes"
+Look = 1

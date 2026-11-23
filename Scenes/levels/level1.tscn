@@ -58,6 +58,10 @@
 [ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="q_quest_script"]
 [ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Steps/ActCardStep.cs" id="q_actcard"]
 [ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Steps/SaveGameStep.cs" id="q_save"]
+[ext_resource type="Resource" path="res://GameData/quests/II.4-TheExposure.tres" id="q_ii4"]
+[ext_resource type="Resource" path="res://GameData/quests/II.5-TheMysteriousLetter.tres" id="q_ii5"]
+[ext_resource type="PackedScene" path="res://Scenes/interactables/readable.tscn" id="rd_readable"]
+[ext_resource type="Resource" path="res://GameData/readables/II.5-guild_letter.tres" id="rd_letter"]
 [sub_resource type="Gradient" id="Gradient_upsym"]
 offsets = PackedFloat32Array(0.117647, 1)
 colors = PackedColorArray(0.0277098, 0.0773411, 0.103768, 1, 1, 0.939093, 0.819838, 1)
@@ -193,6 +197,26 @@ size = Vector3(0.9, 1, 0.9)
 
 [sub_resource type="BoxShape3D" id="Shape_i4_home"]
 size = Vector3(3, 2, 3)
+[sub_resource type="BoxMesh" id="BoxMesh_letter"]
+size = Vector3(0.3, 0.01, 0.22)
+
+[sub_resource type="StandardMaterial3D" id="Mat_letter"]
+albedo_color = Color(0.95, 0.91, 0.8, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_seal"]
+top_radius = 0.035
+bottom_radius = 0.035
+height = 0.012
+radial_segments = 12
+
+[sub_resource type="StandardMaterial3D" id="Mat_seal"]
+albedo_color = Color(0.72, 0.55, 0.2, 1)
+metallic = 0.6
+roughness = 0.4
+
+[sub_resource type="BoxShape3D" id="Shape_ii5_table"]
+size = Vector3(3.5, 2, 2.8)
+
 [node name="Node3D2" type="Node3D" unique_id=565024144]
 script = ExtResource("1_14bvk")
 OcclusionShader = ExtResource("2_mglpj")
@@ -640,6 +664,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.70000005, 0.5)
 shape = SubResource("BoxShape3D_tile")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
+[node name="Letter" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -7.5)
+visible = false
+
+[node name="Paper" type="MeshInstance3D" parent="Letter"]
+transform = Transform3D(0.9659258, 0, 0.25881904, 0, 1, 0, -0.25881904, 0, 0.9659258, 0, 0.772, 0)
+mesh = SubResource("BoxMesh_letter")
+surface_material_override/0 = SubResource("Mat_letter")
+
+[node name="Seal" type="MeshInstance3D" parent="Letter/Paper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009, 0)
+mesh = SubResource("CylinderMesh_seal")
+surface_material_override/0 = SubResource("Mat_seal")
+
+[node name="Readable" parent="Letter" instance=ExtResource("rd_readable")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0, 0)
+Text = ExtResource("rd_letter")
+Enabled = false
+
+[node name="II5_TableArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, -8.1)
+collision_layer = 0
+collision_mask = 3
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="II5_TableArea"]
+shape = SubResource("Shape_ii5_table")
+
 [node name="SceneMusic" type="Node" parent="." unique_id=1730452011]
 script = ExtResource("music_scene")
 Track = ExtResource("music_track")
@@ -700,6 +752,51 @@ script = ExtResource("q_call")
 Target = NodePath("../../../transporters/transporter_livingroom_act2")
 _method = "Open"
 
+[node name="II4-completed-StayHome" type="Node" parent="Quests"]
+script = ExtResource("q_completed")
+_quests = Array[ExtResource("q_quest_script")]([ExtResource("q_ii4")])
+eventChannel = ExtResource("28_kdqke")
+
+[node name="CloseActIITown" type="Node" parent="Quests/II4-completed-StayHome" node_paths=PackedStringArray("Target")]
+script = ExtResource("q_call")
+Target = NodePath("../../../transporters/transporter_livingroom_act2")
+_method = "Close"
+
+[node name="ShowLetter" type="Node" parent="Quests/II4-completed-StayHome" node_paths=PackedStringArray("Target")]
+script = ExtResource("q_call")
+Target = NodePath("../../../Letter")
+_method = "Show"
+
+[node name="OpenLetter" type="Node" parent="Quests/II4-completed-StayHome" node_paths=PackedStringArray("Target")]
+script = ExtResource("q_call")
+Target = NodePath("../../../Letter/Readable")
+_method = "Open"
+
+[node name="II5-completed-EndOfActII" type="Node" parent="Quests"]
+script = ExtResource("q_completed")
+_quests = Array[ExtResource("q_quest_script")]([ExtResource("q_ii5")])
+eventChannel = ExtResource("28_kdqke")
+
+[node name="ActCard" type="Node" parent="Quests/II5-completed-EndOfActII"]
+script = ExtResource("q_actcard")
+_title = "Einde van Akte II"
+_subtitle = "Toveren zonder toverstaf"
+
+[node name="Autosave" type="Node" parent="Quests/II5-completed-EndOfActII"]
+script = ExtResource("q_save")
+
+[node name="II_5-The Mysterious Letter" type="Node" parent="Quests"]
+script = ExtResource("qs_questnode")
+_quest = ExtResource("q_ii5")
+
+[node name="obj1-init-FoundLetter" type="Node" parent="Quests/II_5-The Mysterious Letter"]
+script = ExtResource("26_0tae3")
+_checkObjectiveId = true
+_objectiveId = "3c2415fe-208a-4dd5-928f-903a8aeb0801"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("28_kdqke")
+
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj1-completed-OpenDoor" to="NavigationRegion3D/Bedroom/StaticBody3D" method="ToggleDoor"]
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj2-completed-removeTutorial" to="Player/tutorial" method="queue_free"]
 [connection signal="ReactionEnd" from="Quests/LookingForAvocado/Reactions/obj3-init-DadReaction" to="Quests/LookingForAvocado" method="CompleteObjective" binds= ["67bc9a4e-a340-4225-a816-1a8b2b1b8923"]]
@@ -710,6 +807,10 @@ _method = "Open"
 [connection signal="body_entered" from="start-looking-for-avocado" to="Quests/LookingForAvocado" method="_OnPlayerStartObjective" binds= ["67bc9a4e-a340-4225-a816-1a8b2b1b8921"]]
 [connection signal="body_entered" from="avocado-niet-in-bed" to="Quests/LookingForAvocado" method="_OnPlayerCompleteObjective" binds= ["67bc9a4e-a340-4225-a816-1a8b2b1b8921"]]
 [connection signal="body_entered" from="Spawns/front_door/I4_ArriveHome" to="Quests/I_4-The Heavy Heart" method="_OnPlayerCompleteObjective" binds= ["0402a3f0-34b9-41f6-9ed7-7756703a1802"]]
+[connection signal="ReactionEnd" from="Quests/II4-completed-StayHome" to="II5_TableArea" method="set_deferred" binds= ["monitoring", true]]
+[connection signal="body_entered" from="II5_TableArea" to="Quests/II_5-The Mysterious Letter" method="_OnPlayerStartObjective" binds= ["3c2415fe-208a-4dd5-928f-903a8aeb0801"]]
+[connection signal="ReactionEnd" from="Quests/II_5-The Mysterious Letter/obj1-init-FoundLetter" to="Quests/II_5-The Mysterious Letter" method="CompleteObjective" binds= ["3c2415fe-208a-4dd5-928f-903a8aeb0801"]]
+[connection signal="Read" from="Letter/Readable" to="Quests/II_5-The Mysterious Letter" method="CompleteObjective" binds= ["3c2415fe-208a-4dd5-928f-903a8aeb0802"]]
 
 [editable path="NavigationRegion3D/Livingroom/mabel_home_interior_ground"]
 [editable path="NavigationRegion3D/Bedroom/mabel_home_interior_upper"]

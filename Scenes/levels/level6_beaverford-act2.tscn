@@ -38,6 +38,20 @@
 [ext_resource type="Resource" uid="uid://bet0adq1t2ipo" path="res://GameData/characterData/Hendrik_CharacterData.tres" id="41_hendrikdata"]
 [ext_resource type="Resource" uid="uid://d0807nvddacru" path="res://GameData/characterData/Liesbeth_CharacterData.tres" id="42_liesbethdata"]
 [ext_resource type="Resource" uid="uid://de6dkaimr20b4" path="res://GameData/characterData/MsBram_CharacterData.tres" id="43_msbramdata"]
+[ext_resource type="Resource" path="res://GameData/quests/II.3-TheBusyWeek-Liesbeth.tres" id="44_ii3l"]
+[ext_resource type="Script" uid="uid://df1px4otq51h8" path="res://scripts/Game/Systems/Challenges/Inputs/TextChallengeInput.cs" id="45_textinput"]
+[ext_resource type="Texture2D" uid="uid://cva3nbii7dftk" path="res://project/images/scales-diagram.png" id="46_scalesimg"]
+[ext_resource type="Resource" path="res://GameData/quests/II.3-TheBusyWeek-Hendrik.tres" id="47_ii3h"]
+[ext_resource type="Script" uid="uid://c8pvgprwcuxo3" path="res://scripts/Game/Systems/Challenges/Visualizations/ConcentricCirclesVisualization.cs" id="48_rings"]
+[ext_resource type="Resource" path="res://GameData/quests/II.3-TheBusyWeek-MsBram.tres" id="49_ii3m"]
+[ext_resource type="Resource" path="res://GameData/challenges/sequence_bell_times.tres" id="50_bellchallenge"]
+[ext_resource type="PackedScene" path="res://Scenes/characters/traveling_wizard.tscn" id="51_wizard"]
+[ext_resource type="Resource" path="res://GameData/characterData/Character_TravelingWizard_CharacterData.tres" id="52_wizarddata"]
+[ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="53_mabeldata"]
+[ext_resource type="Resource" path="res://GameData/quests/II.4-TheExposure.tres" id="54_ii4"]
+[ext_resource type="Resource" path="res://GameData/readables/II.4-public_notice.tres" id="55_notice"]
+[ext_resource type="PackedScene" path="res://Scenes/interactables/readable.tscn" id="56_readable"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/goal/spark_test_platform.tscn" id="57_spark"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_exitHome"]
 size = Vector3(1.2, 2, 0.9)
@@ -102,6 +116,117 @@ In de bak van het tegengewicht ligt {c} kg.
 Hoeveel kg moet er nog bij in de bak om de brug in evenwicht te brengen?"
 HintText = "Tel eerst de brug en de voorraad op. Trek daarna af wat er al in de bak ligt."
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_bakery"]
+size = Vector3(6, 2, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_scales"]
+size = Vector3(2.5, 2, 2.5)
+
+[sub_resource type="Resource" id="Resource_ii3l_a"]
+script = ExtResource("29_param")
+Name = "a"
+Pool = PackedInt32Array(300, 350, 400, 450, 500)
+
+[sub_resource type="Resource" id="Resource_ii3l_b"]
+script = ExtResource("29_param")
+Name = "b"
+Pool = PackedInt32Array(2, 3, 4, 5, 6)
+
+[sub_resource type="Resource" id="Resource_ii3l_c"]
+script = ExtResource("29_param")
+Name = "c"
+Pool = PackedInt32Array(100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000)
+
+[sub_resource type="Resource" id="Resource_ii3l_label_a"]
+script = ExtResource("31_annotation")
+Text = "recept: {a} g meel per brood"
+Position = Vector2(0.5, 0.05)
+
+[sub_resource type="Resource" id="Resource_ii3l_label_b"]
+script = ExtResource("31_annotation")
+Text = "{b} broden"
+Position = Vector2(0.75, 0.7)
+
+[sub_resource type="Resource" id="Resource_ii3l_label_c"]
+script = ExtResource("31_annotation")
+Text = "al {c} g meel op de schaal"
+Position = Vector2(0.24, 0.8)
+
+[sub_resource type="Resource" id="Resource_ii3l_vis"]
+script = ExtResource("30_imagevis")
+Image = ExtResource("46_scalesimg")
+Annotations = Array[ExtResource("31_annotation")]([SubResource("Resource_ii3l_label_a"), SubResource("Resource_ii3l_label_b"), SubResource("Resource_ii3l_label_c")])
+
+[sub_resource type="Resource" id="Resource_ii3l_input"]
+script = ExtResource("45_textinput")
+
+[sub_resource type="Resource" id="Resource_ii3l_challenge"]
+script = ExtResource("28_challenge")
+Name = "Liesbeths weegschaal (II.3)"
+Formula = "a * b - c"
+Params = Array[ExtResource("29_param")]([SubResource("Resource_ii3l_a"), SubResource("Resource_ii3l_b"), SubResource("Resource_ii3l_c")])
+Constraints = PackedStringArray("answer > 0")
+Visualization = SubResource("Resource_ii3l_vis")
+Input = SubResource("Resource_ii3l_input")
+QuestionText = "Volgens het recept gaat er {a} g meel in één brood.
+Liesbeth moet vanavond {b} broden bakken.
+Er ligt al {c} g meel op de schaal.
+Hoeveel gram meel moet er nog bij?"
+HintText = "Reken eerst uit hoeveel meel alle broden samen nodig hebben. Trek daarna af wat er al op de schaal ligt."
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mill"]
+size = Vector3(6, 4, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_millstone"]
+size = Vector3(2.5, 3, 2.5)
+
+[sub_resource type="Resource" id="Resource_ii3h_a"]
+script = ExtResource("29_param")
+Name = "a"
+Min = 2
+Max = 12
+
+[sub_resource type="Resource" id="Resource_ii3h_b"]
+script = ExtResource("29_param")
+Name = "b"
+Min = 2
+Max = 9
+
+[sub_resource type="Resource" id="Resource_ii3h_c"]
+script = ExtResource("29_param")
+Name = "c"
+Min = 2
+Max = 15
+
+[sub_resource type="Resource" id="Resource_ii3h_vis"]
+script = ExtResource("48_rings")
+Operators = PackedStringArray("+", "-", "*")
+
+[sub_resource type="Resource" id="Resource_ii3h_input"]
+script = ExtResource("45_textinput")
+
+[sub_resource type="Resource" id="Resource_ii3h_challenge"]
+script = ExtResource("28_challenge")
+Name = "Hendriks molen (II.3)"
+Formula = "a * b - c"
+Params = Array[ExtResource("29_param")]([SubResource("Resource_ii3h_a"), SubResource("Resource_ii3h_b"), SubResource("Resource_ii3h_c")])
+Constraints = PackedStringArray("answer > 0")
+Visualization = SubResource("Resource_ii3h_vis")
+Input = SubResource("Resource_ii3h_input")
+QuestionText = "Het tandwielrad van de molen rekent uit hoe snel de molensteen moet draaien.
+Lees de ringen van buiten naar binnen.
+Hoeveel toeren per minuut moet de molensteen draaien?"
+HintText = "Vermenigvuldigen gaat voor optellen en aftrekken. Reken dus eerst de × uit."
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_school"]
+size = Vector3(6, 4, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bell"]
+size = Vector3(2.5, 3, 2.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_noticepaper"]
+size = Vector3(0.45, 0.6, 0.01)
+
 [node name="BeaverfordActII" type="Node3D"]
 script = ExtResource("1_occl")
 OcclusionShader = ExtResource("2_occl")
@@ -158,6 +283,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.835913, 0, 20.052374)
 [node name="MsBram" parent="Villagers" instance=ExtResource("7_msbram")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.942002, 0.68019676, -28.206722)
 
+[node name="TravelingWizard" parent="Villagers" instance=ExtResource("51_wizard")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 32)
+visible = false
+collision_layer = 0
+
+[node name="NavigationAgent3D" parent="Villagers/TravelingWizard"]
+path_desired_distance = 0.4
+target_desired_distance = 0.4
+path_height_offset = 0.0
+
+[node name="NavigationAgent3D" parent="Villagers/Hendrik"]
+path_desired_distance = 0.4
+target_desired_distance = 0.4
+path_height_offset = 0.0
+
+[node name="NavigationAgent3D" parent="Villagers/Liesbeth"]
+path_desired_distance = 0.4
+target_desired_distance = 0.4
+path_height_offset = 0.0
+
 [node name="Markers" type="Node3D" parent="."]
 
 [node name="TownSquare" type="Marker3D" parent="Markers"]
@@ -170,6 +315,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0, 23.5)
 
 [node name="2_Square" type="Marker3D" parent="Markers/CornelisRoute"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3)
+
+[node name="Exposure" type="Node3D" parent="Markers"]
+
+[node name="Wizard" type="Marker3D" parent="Markers/Exposure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.5)
+
+[node name="Hendrik" type="Marker3D" parent="Markers/Exposure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0, 0.5)
+
+[node name="Liesbeth" type="Marker3D" parent="Markers/Exposure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0, 3)
 
 [node name="Quests" type="Node" parent="."]
 
@@ -299,6 +455,257 @@ script = ExtResource("26_message")
 _text = "De schoolbel luidt op de verkeerde tijden. De kinderen weten niet meer wanneer de les begint. Kom je naar school?"
 _character = ExtResource("43_msbramdata")
 
+[node name="II2-completed-ArmBakery" type="Node" parent="Quests"]
+script = ExtResource("22_completed")
+_quests = Array[ExtResource("35_questscript")]([ExtResource("39_ii2")])
+eventChannel = ExtResource("34_channel")
+
+[node name="II_3-The Busy Week-Liesbeth" type="Node" parent="Quests"]
+script = ExtResource("20_questnode")
+_quest = ExtResource("44_ii3l")
+
+[node name="MathChallengeTrigger" type="Node" parent="Quests/II_3-The Busy Week-Liesbeth"]
+script = ExtResource("27_trigger")
+_challenge = SubResource("Resource_ii3l_challenge")
+
+[node name="obj2-init-Challenge" type="Node" parent="Quests/II_3-The Busy Week-Liesbeth"]
+script = ExtResource("21_listener")
+_checkObjectiveId = true
+_objectiveId = "13a54ec8-e70e-42c3-b25b-6a35c8d9a902"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("34_channel")
+
+[node name="ChallengeStep" type="Node" parent="Quests/II_3-The Busy Week-Liesbeth/obj2-init-Challenge" node_paths=PackedStringArray("_trigger")]
+script = ExtResource("24_challengestep")
+_trigger = NodePath("../../MathChallengeTrigger")
+
+[node name="obj3-init-ScalesFixed" type="Node" parent="Quests/II_3-The Busy Week-Liesbeth"]
+script = ExtResource("21_listener")
+_checkObjectiveId = true
+_objectiveId = "13a54ec8-e70e-42c3-b25b-6a35c8d9a903"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("34_channel")
+
+[node name="LiesbethAmazed" type="Node" parent="Quests/II_3-The Busy Week-Liesbeth/obj3-init-ScalesFixed"]
+script = ExtResource("26_message")
+_text = "Geen toverstaf te zien, en toch klopt alles weer. Onzichtbare magie, ik zei het toch!"
+_character = ExtResource("42_liesbethdata")
+
+[node name="II2-completed-ArmMill" type="Node" parent="Quests"]
+script = ExtResource("22_completed")
+_quests = Array[ExtResource("35_questscript")]([ExtResource("39_ii2")])
+eventChannel = ExtResource("34_channel")
+
+[node name="II_3-The Busy Week-Hendrik" type="Node" parent="Quests"]
+script = ExtResource("20_questnode")
+_quest = ExtResource("47_ii3h")
+
+[node name="MathChallengeTrigger" type="Node" parent="Quests/II_3-The Busy Week-Hendrik"]
+script = ExtResource("27_trigger")
+_challenge = SubResource("Resource_ii3h_challenge")
+
+[node name="obj2-init-Challenge" type="Node" parent="Quests/II_3-The Busy Week-Hendrik"]
+script = ExtResource("21_listener")
+_checkObjectiveId = true
+_objectiveId = "bda3574b-3ad5-4852-82a9-86818f51d502"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("34_channel")
+
+[node name="ChallengeStep" type="Node" parent="Quests/II_3-The Busy Week-Hendrik/obj2-init-Challenge" node_paths=PackedStringArray("_trigger")]
+script = ExtResource("24_challengestep")
+_trigger = NodePath("../../MathChallengeTrigger")
+
+[node name="obj3-init-MillFixed" type="Node" parent="Quests/II_3-The Busy Week-Hendrik"]
+script = ExtResource("21_listener")
+_checkObjectiveId = true
+_objectiveId = "bda3574b-3ad5-4852-82a9-86818f51d503"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("34_channel")
+
+[node name="HendrikHumbled" type="Node" parent="Quests/II_3-The Busy Week-Hendrik/obj3-init-MillFixed"]
+script = ExtResource("26_message")
+_text = "En ik maar zeggen dat je echte magie nodig had, geen sommetjes... Ik had het mis, meisje."
+_character = ExtResource("41_hendrikdata")
+
+[node name="II2-completed-ArmSchool" type="Node" parent="Quests"]
+script = ExtResource("22_completed")
+_quests = Array[ExtResource("35_questscript")]([ExtResource("39_ii2")])
+eventChannel = ExtResource("34_channel")
+
+[node name="II_3-The Busy Week-MsBram" type="Node" parent="Quests"]
+script = ExtResource("20_questnode")
+_quest = ExtResource("49_ii3m")
+
+[node name="MathChallengeTrigger" type="Node" parent="Quests/II_3-The Busy Week-MsBram"]
+script = ExtResource("27_trigger")
+_challenge = ExtResource("50_bellchallenge")
+
+[node name="obj2-init-Challenge" type="Node" parent="Quests/II_3-The Busy Week-MsBram"]
+script = ExtResource("21_listener")
+_checkObjectiveId = true
+_objectiveId = "5db5ba3b-7f5e-4770-85b6-3070aff45902"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("34_channel")
+
+[node name="ChallengeStep" type="Node" parent="Quests/II_3-The Busy Week-MsBram/obj2-init-Challenge" node_paths=PackedStringArray("_trigger")]
+script = ExtResource("24_challengestep")
+_trigger = NodePath("../../MathChallengeTrigger")
+
+[node name="obj3-init-BellFixed" type="Node" parent="Quests/II_3-The Busy Week-MsBram"]
+script = ExtResource("21_listener")
+_checkObjectiveId = true
+_objectiveId = "5db5ba3b-7f5e-4770-85b6-3070aff45903"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("34_channel")
+
+[node name="MsBramProud" type="Node" parent="Quests/II_3-The Busy Week-MsBram/obj3-init-BellFixed"]
+script = ExtResource("26_message")
+_text = "En ik die je naar de Tovenaarsschool stuurde... Jij hebt helemaal geen toverstaf nodig, Mabel."
+_character = ExtResource("43_msbramdata")
+
+[node name="II3-completed-WizardArrives" type="Node" parent="Quests"]
+script = ExtResource("22_completed")
+_quests = Array[ExtResource("35_questscript")]([ExtResource("44_ii3l"), ExtResource("47_ii3h"), ExtResource("49_ii3m")])
+eventChannel = ExtResource("34_channel")
+
+[node name="MabelHearsCrowd" type="Node" parent="Quests/II3-completed-WizardArrives"]
+script = ExtResource("26_message")
+_text = "Klaar, alle drie! Maar... wat is dat voor drukte op het plein?"
+_character = ExtResource("53_mabeldata")
+
+[node name="ShowWizard" type="Node" parent="Quests/II3-completed-WizardArrives" node_paths=PackedStringArray("Target")]
+script = ExtResource("23_call")
+Target = NodePath("../../../Villagers/TravelingWizard")
+_method = "Show"
+_args = []
+
+[node name="WizardSolid" type="Node" parent="Quests/II3-completed-WizardArrives" node_paths=PackedStringArray("Target")]
+script = ExtResource("23_call")
+Target = NodePath("../../../Villagers/TravelingWizard")
+_method = "set_CollisionLayer"
+_args = [2]
+
+[node name="ShowPlatform" type="Node" parent="Quests/II3-completed-WizardArrives" node_paths=PackedStringArray("Target")]
+script = ExtResource("23_call")
+Target = NodePath("../../../SparkTestPlatform")
+_method = "Show"
+_args = []
+
+[node name="ArmPlatform" type="Node" parent="Quests/II3-completed-WizardArrives" node_paths=PackedStringArray("Target")]
+script = ExtResource("23_call")
+Target = NodePath("../../../SparkTestPlatform")
+_method = "set_Monitoring"
+_args = [true]
+
+[node name="WizardToSquare" type="Node" parent="Quests/II3-completed-WizardArrives" node_paths=PackedStringArray("_character", "_waypoints")]
+script = ExtResource("40_patrol")
+_character = NodePath("../../../Villagers/TravelingWizard")
+_waypoints = [NodePath("../../../Markers/Exposure/Wizard")]
+_waitUntilDone = false
+
+[node name="HendrikToSquare" type="Node" parent="Quests/II3-completed-WizardArrives" node_paths=PackedStringArray("_character", "_waypoints")]
+script = ExtResource("40_patrol")
+_character = NodePath("../../../Villagers/Hendrik")
+_waypoints = [NodePath("../../../Markers/Exposure/Hendrik")]
+_waitUntilDone = false
+
+[node name="LiesbethToSquare" type="Node" parent="Quests/II3-completed-WizardArrives" node_paths=PackedStringArray("_character", "_waypoints")]
+script = ExtResource("40_patrol")
+_character = NodePath("../../../Villagers/Liesbeth")
+_waypoints = [NodePath("../../../Markers/Exposure/Liesbeth")]
+_waitUntilDone = false
+
+[node name="II3-completed-ArmExposure" type="Node" parent="Quests"]
+script = ExtResource("22_completed")
+_quests = Array[ExtResource("35_questscript")]([ExtResource("44_ii3l"), ExtResource("47_ii3h"), ExtResource("49_ii3m")])
+eventChannel = ExtResource("34_channel")
+
+[node name="II_4-The Exposure" type="Node" parent="Quests"]
+script = ExtResource("20_questnode")
+_quest = ExtResource("54_ii4")
+
+[node name="obj1-init-Challenge" type="Node" parent="Quests/II_4-The Exposure"]
+script = ExtResource("21_listener")
+_checkObjectiveId = true
+_objectiveId = "fb25da60-3efc-422e-8eba-bddc9ddea401"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("34_channel")
+
+[node name="CornelisCheers" type="Node" parent="Quests/II_4-The Exposure/obj1-init-Challenge"]
+script = ExtResource("26_message")
+_text = "Laat het hem maar zien, Mabel! Net als bij mijn brug!"
+_character = ExtResource("38_cornelisdata")
+
+[node name="obj3-init-Verdict" type="Node" parent="Quests/II_4-The Exposure"]
+script = ExtResource("21_listener")
+_checkObjectiveId = true
+_objectiveId = "fb25da60-3efc-422e-8eba-bddc9ddea403"
+_checkState = true
+_state = 1
+eventChannel = ExtResource("34_channel")
+
+[node name="Hendrik" type="Node" parent="Quests/II_4-The Exposure/obj3-init-Verdict"]
+script = ExtResource("26_message")
+_text = "Geen magie? Maar mijn molen draait toch weer..."
+_character = ExtResource("41_hendrikdata")
+
+[node name="Liesbeth" type="Node" parent="Quests/II_4-The Exposure/obj3-init-Verdict"]
+script = ExtResource("26_message")
+_text = "Dus het was allemaal... gewoon geluk?"
+_character = ExtResource("42_liesbethdata")
+
+[node name="MsBram" type="Node" parent="Quests/II_4-The Exposure/obj3-init-Verdict"]
+script = ExtResource("26_message")
+_text = "Mabel, zeg dat het niet waar is. Je hebt ons toch niets wijsgemaakt?"
+_character = ExtResource("43_msbramdata")
+
+[node name="WizardPostsNotice" type="Node" parent="Quests/II_4-The Exposure/obj3-init-Verdict"]
+script = ExtResource("26_message")
+_text = "Ik hang een bekendmaking op. Zwart op wit, zodat niemand het vergeet."
+_character = ExtResource("52_wizarddata")
+
+[node name="ShowPaper" type="Node" parent="Quests/II_4-The Exposure/obj3-init-Verdict" node_paths=PackedStringArray("Target")]
+script = ExtResource("23_call")
+Target = NodePath("../../../../Noticeboard/Paper")
+_method = "Show"
+_args = []
+
+[node name="OpenNotice" type="Node" parent="Quests/II_4-The Exposure/obj3-init-Verdict" node_paths=PackedStringArray("Target")]
+script = ExtResource("23_call")
+Target = NodePath("../../../../Noticeboard/Notice")
+_method = "Open"
+_args = []
+
+[node name="II4-completed-OpenExitHome" type="Node" parent="Quests"]
+script = ExtResource("22_completed")
+_quests = Array[ExtResource("35_questscript")]([ExtResource("54_ii4")])
+eventChannel = ExtResource("34_channel")
+
+[node name="OpenExit" type="Node" parent="Quests/II4-completed-OpenExitHome" node_paths=PackedStringArray("Target")]
+script = ExtResource("23_call")
+Target = NodePath("../../../Exits/ExitToHome")
+_method = "Open"
+_args = []
+
+[node name="ShowPaper" type="Node" parent="Quests/II4-completed-OpenExitHome" node_paths=PackedStringArray("Target")]
+script = ExtResource("23_call")
+Target = NodePath("../../../Noticeboard/Paper")
+_method = "Show"
+_args = []
+
+[node name="OpenNotice" type="Node" parent="Quests/II4-completed-OpenExitHome" node_paths=PackedStringArray("Target")]
+script = ExtResource("23_call")
+Target = NodePath("../../../Noticeboard/Notice")
+_method = "Open"
+_args = []
+
 [node name="CornelisShoutArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 1, 27)
 collision_layer = 0
@@ -325,6 +732,84 @@ monitoring = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RumorSquareArea"]
 shape = SubResource("BoxShape3D_square")
 
+[node name="LiesbethBakeryArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.98, 1, 20.43)
+collision_layer = 0
+collision_mask = 3
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LiesbethBakeryArea"]
+shape = SubResource("BoxShape3D_bakery")
+
+[node name="LiesbethScalesArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.84, 1, 20.05)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LiesbethScalesArea"]
+shape = SubResource("BoxShape3D_scales")
+
+[node name="HendrikMillArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.23, 1.6, 45)
+collision_layer = 0
+collision_mask = 3
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HendrikMillArea"]
+shape = SubResource("BoxShape3D_mill")
+
+[node name="HendrikMillstoneArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.23, 1.6, 44.51)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HendrikMillstoneArea"]
+shape = SubResource("BoxShape3D_millstone")
+
+[node name="MsBramSchoolArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.94, 0.7, -26.5)
+collision_layer = 0
+collision_mask = 3
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MsBramSchoolArea"]
+shape = SubResource("BoxShape3D_school")
+
+[node name="MsBramBellArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.94, 0.7, -28.21)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MsBramBellArea"]
+shape = SubResource("BoxShape3D_bell")
+
+[node name="ExposureSquareArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 2)
+collision_layer = 0
+collision_mask = 3
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExposureSquareArea"]
+shape = SubResource("BoxShape3D_square")
+
+[node name="SparkTestPlatform" parent="." instance=ExtResource("57_spark")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 6)
+visible = false
+monitoring = false
+
+[node name="Noticeboard" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0, -0.5)
+
+[node name="Paper" type="MeshInstance3D" parent="Noticeboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0.08)
+visible = false
+mesh = SubResource("BoxMesh_noticepaper")
+
+[node name="Notice" parent="Noticeboard" instance=ExtResource("56_readable")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+Text = ExtResource("55_notice")
+Enabled = false
+
 [node name="SceneMusic" type="Node" parent="."]
 script = ExtResource("10_music")
 Track = ExtResource("11_track")
@@ -342,6 +827,10 @@ script = ExtResource("12_spawn")
 
 [node name="bridge" type="Marker3D" parent="Spawns"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0.3, 24.5)
+script = ExtResource("12_spawn")
+
+[node name="square_south" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.3, 10)
 script = ExtResource("12_spawn")
 
 [node name="Exits" type="Node3D" parent="."]
@@ -368,5 +857,32 @@ shape = SubResource("BoxShape3D_exitHome")
 [connection signal="body_entered" from="RumorSquareArea" to="Quests/II_2-The Rumor Mill" method="_OnPlayerStartObjective" binds= ["fff66ceb-01f6-41ab-8d61-552129f73b01"]]
 [connection signal="ReactionEnd" from="Quests/II_2-The Rumor Mill/obj1-init-Reactions" to="Quests/II_2-The Rumor Mill" method="CompleteObjective" binds= ["fff66ceb-01f6-41ab-8d61-552129f73b01"]]
 [connection signal="ReactionEnd" from="Quests/II_2-The Rumor Mill/obj2-init-Requests" to="Quests/II_2-The Rumor Mill" method="CompleteObjective" binds= ["fff66ceb-01f6-41ab-8d61-552129f73b02"]]
+[connection signal="ReactionEnd" from="Quests/II2-completed-ArmBakery" to="LiesbethBakeryArea" method="set_deferred" binds= ["monitoring", true]]
+[connection signal="body_entered" from="LiesbethBakeryArea" to="Quests/II_3-The Busy Week-Liesbeth" method="_OnPlayerStartObjective" binds= ["13a54ec8-e70e-42c3-b25b-6a35c8d9a901"]]
+[connection signal="body_entered" from="LiesbethScalesArea" to="Quests/II_3-The Busy Week-Liesbeth" method="_OnPlayerCompleteObjective" binds= ["13a54ec8-e70e-42c3-b25b-6a35c8d9a901"]]
+[connection signal="ChallengeCompleted" from="Quests/II_3-The Busy Week-Liesbeth/MathChallengeTrigger" to="Quests/II_3-The Busy Week-Liesbeth" method="CompleteObjective" binds= ["13a54ec8-e70e-42c3-b25b-6a35c8d9a902"]]
+[connection signal="ChallengeFailed" from="Quests/II_3-The Busy Week-Liesbeth/MathChallengeTrigger" to="Quests/II_3-The Busy Week-Liesbeth" method="FailObjective" binds= ["13a54ec8-e70e-42c3-b25b-6a35c8d9a902"]]
+[connection signal="ReactionEnd" from="Quests/II_3-The Busy Week-Liesbeth/obj3-init-ScalesFixed" to="Quests/II_3-The Busy Week-Liesbeth" method="CompleteObjective" binds= ["13a54ec8-e70e-42c3-b25b-6a35c8d9a903"]]
+[connection signal="ReactionEnd" from="Quests/II2-completed-ArmMill" to="HendrikMillArea" method="set_deferred" binds= ["monitoring", true]]
+[connection signal="body_entered" from="HendrikMillArea" to="Quests/II_3-The Busy Week-Hendrik" method="_OnPlayerStartObjective" binds= ["bda3574b-3ad5-4852-82a9-86818f51d501"]]
+[connection signal="body_entered" from="HendrikMillstoneArea" to="Quests/II_3-The Busy Week-Hendrik" method="_OnPlayerCompleteObjective" binds= ["bda3574b-3ad5-4852-82a9-86818f51d501"]]
+[connection signal="ChallengeCompleted" from="Quests/II_3-The Busy Week-Hendrik/MathChallengeTrigger" to="Quests/II_3-The Busy Week-Hendrik" method="CompleteObjective" binds= ["bda3574b-3ad5-4852-82a9-86818f51d502"]]
+[connection signal="ChallengeFailed" from="Quests/II_3-The Busy Week-Hendrik/MathChallengeTrigger" to="Quests/II_3-The Busy Week-Hendrik" method="FailObjective" binds= ["bda3574b-3ad5-4852-82a9-86818f51d502"]]
+[connection signal="ReactionEnd" from="Quests/II_3-The Busy Week-Hendrik/obj3-init-MillFixed" to="Quests/II_3-The Busy Week-Hendrik" method="CompleteObjective" binds= ["bda3574b-3ad5-4852-82a9-86818f51d503"]]
+[connection signal="ReactionEnd" from="Quests/II2-completed-ArmSchool" to="MsBramSchoolArea" method="set_deferred" binds= ["monitoring", true]]
+[connection signal="body_entered" from="MsBramSchoolArea" to="Quests/II_3-The Busy Week-MsBram" method="_OnPlayerStartObjective" binds= ["5db5ba3b-7f5e-4770-85b6-3070aff45901"]]
+[connection signal="body_entered" from="MsBramBellArea" to="Quests/II_3-The Busy Week-MsBram" method="_OnPlayerCompleteObjective" binds= ["5db5ba3b-7f5e-4770-85b6-3070aff45901"]]
+[connection signal="ChallengeCompleted" from="Quests/II_3-The Busy Week-MsBram/MathChallengeTrigger" to="Quests/II_3-The Busy Week-MsBram" method="CompleteObjective" binds= ["5db5ba3b-7f5e-4770-85b6-3070aff45902"]]
+[connection signal="ChallengeFailed" from="Quests/II_3-The Busy Week-MsBram/MathChallengeTrigger" to="Quests/II_3-The Busy Week-MsBram" method="FailObjective" binds= ["5db5ba3b-7f5e-4770-85b6-3070aff45902"]]
+[connection signal="ReactionEnd" from="Quests/II_3-The Busy Week-MsBram/obj3-init-BellFixed" to="Quests/II_3-The Busy Week-MsBram" method="CompleteObjective" binds= ["5db5ba3b-7f5e-4770-85b6-3070aff45903"]]
+[connection signal="ReactionEnd" from="Quests/II3-completed-ArmExposure" to="ExposureSquareArea" method="set_deferred" binds= ["monitoring", true]]
+[connection signal="body_entered" from="ExposureSquareArea" to="Quests/II_4-The Exposure" method="_OnPlayerStartObjective" binds= ["fb25da60-3efc-422e-8eba-bddc9ddea401"]]
+[connection signal="ReactionEnd" from="Quests/II_4-The Exposure/obj1-init-Challenge" to="Quests/II_4-The Exposure" method="CompleteObjective" binds= ["fb25da60-3efc-422e-8eba-bddc9ddea401"]]
+[connection signal="Tested" from="SparkTestPlatform" to="Quests/II_4-The Exposure" method="CompleteObjective" binds= ["fb25da60-3efc-422e-8eba-bddc9ddea402"]]
+[connection signal="ReactionEnd" from="Quests/II_4-The Exposure/obj3-init-Verdict" to="Quests/II_4-The Exposure" method="CompleteObjective" binds= ["fb25da60-3efc-422e-8eba-bddc9ddea403"]]
+[connection signal="Read" from="Noticeboard/Notice" to="Quests/II_4-The Exposure" method="CompleteObjective" binds= ["fb25da60-3efc-422e-8eba-bddc9ddea404"]]
 
 [editable path="Villagers/Cornelis"]
+[editable path="Villagers/Hendrik"]
+[editable path="Villagers/Liesbeth"]
+[editable path="Villagers/TravelingWizard"]

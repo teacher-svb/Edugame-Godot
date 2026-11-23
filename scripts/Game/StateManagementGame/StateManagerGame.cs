@@ -82,6 +82,18 @@ namespace TnT.EduGame.GameState
             Push(state.GetState(new() { title = title, subtitle = subtitle, next = ManagerUI.Instance.Next, close = ManagerUI.Instance.Close, onDismissed = onDismissed }));
         }
 
+        /// <summary>
+        /// The reading panel for a longer text (letter, notice); <paramref name="onClosed"/> runs once it is closed,
+        /// with whether the player reached the last page.
+        /// </summary>
+        public void ShowReading(Reading.ReadableText text, Action<bool> onClosed = null)
+        {
+            var state = _registeredStates.OfType<GameStateReading>().FirstOrDefault()
+                ?? throw new Exception("no reading state assigned");
+
+            Push(state.GetState(new() { text = text, next = ManagerUI.Instance.Next, close = ManagerUI.Instance.Close, onClosed = onClosed }));
+        }
+
         // seed decides the round's values; pass the same seed to replay a round
         public void ShowChallenge(MathChallenge challenge, int? seed = null)
         {
