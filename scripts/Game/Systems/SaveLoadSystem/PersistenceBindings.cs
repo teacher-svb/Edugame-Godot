@@ -81,6 +81,29 @@ namespace TnT.EduGame.QuestSystem
         /// </summary>
         public event System.Action Bound;
 
+        /// <summary>
+        /// Sets the quest states in memory to <paramref name="data"/> (null: every quest not started), without quest
+        /// events. Call it before loading a level for a loaded save or a new game: the level's listeners check the
+        /// in-memory states on _Ready, before <see cref="Bind"/> restores them, and would otherwise react to the
+        /// states of the session that was running (bug-load-stale-quest-states).
+        /// </summary>
+        public void Restore(QuestManagerSaveData data)
+        {
+            foreach (var quest in Quests)
+            {
+                quest.Reset();
+                var saved = data?.quests?.FirstOrDefault(s => s.Id == quest.Id);
+                if (saved?.Objectives == null)
+                    continue;
+                foreach (var objective in quest.Objectives)
+                {
+                    var savedObjective = saved.Objectives.FirstOrDefault(s => s.Id == objective.ObjectiveId);
+                    if (savedObjective != null)
+                        objective.State = savedObjective.State;
+                }
+            }
+        }
+
         public void Bind(QuestManagerSaveData data)
         {
             _saveData = data;

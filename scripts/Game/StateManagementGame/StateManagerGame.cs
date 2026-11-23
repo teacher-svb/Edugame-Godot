@@ -70,7 +70,13 @@ namespace TnT.EduGame.GameState
             var state = _registeredStates.OfType<GameStateMessage>().FirstOrDefault()
                 ?? throw new Exception("no dialog state assigned");
 
-            Push(state.GetState(new() { text = text, character = character, next = ManagerUI.Instance.Next, close = ManagerUI.Instance.Close, onDismissed = onDismissed }));
+            var options = new GameStateMessage.MessageOptions { text = text, character = character, next = ManagerUI.Instance.Next, close = ManagerUI.Instance.Close, onDismissed = onDismissed };
+            // a box already open (or pushed this frame) takes the message: a second message state on top of it
+            // would share the controller's queue and lose its callback
+            if (state.IsOpen)
+                state.Enqueue(options);
+            else
+                Push(state.GetState(options));
         }
 
         /// <summary>The card between acts (e.g. "Einde van Akte I"); <paramref name="onDismissed"/> runs once it is closed.</summary>

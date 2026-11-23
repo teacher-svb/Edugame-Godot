@@ -69,12 +69,14 @@ namespace TnT.EduGame
                 Name = _gameName,
                 CurrentLevelName = _startScene,
             };
+            QuestManager.Instance?.Restore(null);   // before the level's _Ready: no quest state from the running session
             LoadScene(GameData.CurrentLevelName);
         }
 
         public override void LoadGame(string gameName)
         {
             GameData = dataService.Load(gameName);
+            QuestManager.Instance?.Restore(GameData.questData);   // before the level's _Ready, see QuestManager.Restore
 
             if (String.IsNullOrWhiteSpace(GameData.CurrentLevelName))
             {

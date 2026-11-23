@@ -269,11 +269,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0.4, 42)
 [node name="Cornelis" parent="Villagers" instance=ExtResource("8_cornelis")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0.3, 8.5)
 
-[node name="NavigationAgent3D" parent="Villagers/Cornelis"]
-path_desired_distance = 0.4
-target_desired_distance = 0.4
-path_height_offset = 0.0
-
 [node name="Hendrik" parent="Villagers" instance=ExtResource("5_hendrik")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.234116, 1.578182, 44.51187)
 
@@ -287,21 +282,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.942002, 0.68019676, -28.20
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 32)
 visible = false
 collision_layer = 0
-
-[node name="NavigationAgent3D" parent="Villagers/TravelingWizard"]
-path_desired_distance = 0.4
-target_desired_distance = 0.4
-path_height_offset = 0.0
-
-[node name="NavigationAgent3D" parent="Villagers/Hendrik"]
-path_desired_distance = 0.4
-target_desired_distance = 0.4
-path_height_offset = 0.0
-
-[node name="NavigationAgent3D" parent="Villagers/Liesbeth"]
-path_desired_distance = 0.4
-target_desired_distance = 0.4
-path_height_offset = 0.0
 
 [node name="Markers" type="Node3D" parent="."]
 
@@ -882,7 +862,3 @@ shape = SubResource("BoxShape3D_exitHome")
 [connection signal="ReactionEnd" from="Quests/II_4-The Exposure/obj3-init-Verdict" to="Quests/II_4-The Exposure" method="CompleteObjective" binds= ["fb25da60-3efc-422e-8eba-bddc9ddea403"]]
 [connection signal="Read" from="Noticeboard/Notice" to="Quests/II_4-The Exposure" method="CompleteObjective" binds= ["fb25da60-3efc-422e-8eba-bddc9ddea404"]]
 
-[editable path="Villagers/Cornelis"]
-[editable path="Villagers/Hendrik"]
-[editable path="Villagers/Liesbeth"]
-[editable path="Villagers/TravelingWizard"]

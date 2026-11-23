@@ -98,12 +98,7 @@ namespace TnT.EduGame.Dev
             };
             // the quests in memory too: the new level's listeners check them on _Ready, before the save data is bound
             // (jumping back from a later checkpoint would otherwise run their reactions from the old states)
-            foreach (var quest in QuestManager.Instance.Quests)
-            {
-                quest.Reset();
-                if (completed.Contains(quest))
-                    quest.Objectives.ForEach(o => o.State = QuestState.COMPLETED);
-            }
+            QuestManager.Instance.Restore(save.GameData.questData);
             GD.Print($"DevShortcuts: jump to '{checkpoint.Id}' ({completed.Count} quests completed) → {checkpoint.Scene} {checkpoint.Spawn}");
             StateManagerGame.Instance.LoadScene(checkpoint.Scene, new NodePath(checkpoint.Spawn));
         }

@@ -195,9 +195,8 @@ metadata/_custom_type_script = "uid://dw3ggojroh7rn"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=293151575]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1876010761]
-path_desired_distance = 0.2
-target_desired_distance = 0.2
-path_height_offset = 0.75
+path_desired_distance = 0.4
+target_desired_distance = 0.4
 debug_enabled = true
 debug_path_custom_color = Color(1, 0, 1, 1)
 
