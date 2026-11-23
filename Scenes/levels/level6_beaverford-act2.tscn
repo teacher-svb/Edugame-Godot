@@ -629,6 +629,7 @@ _checkObjectiveId = true
 _objectiveId = "fb25da60-3efc-422e-8eba-bddc9ddea403"
 _checkState = true
 _state = 1
+_catchUpAfterLoad = true
 eventChannel = ExtResource("34_channel")
 
 [node name="Hendrik" type="Node" parent="Quests/II_4-The Exposure/obj3-init-Verdict"]

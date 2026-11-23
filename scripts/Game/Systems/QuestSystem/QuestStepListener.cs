@@ -25,9 +25,11 @@ namespace TnT.EduGame.QuestSystem
         // async void: fire-and-forget from Raise. A failing step is logged and skipped;
         // OperationCanceledException stops the remaining steps. finally guarantees ReactionEnd.
         // KNOWN ISSUE: no timeout. A step that never completes stalls the steps after it.
-        protected async void RunSteps(QuestObjective objective)
+        // signals = false for a catch-up after loading that must not drive anything wired to them again
+        protected async void RunSteps(QuestObjective objective, bool signals = true)
         {
-            EmitSignal(SignalName.ReactionStart);
+            if (signals)
+                EmitSignal(SignalName.ReactionStart);
             try
             {
                 foreach (var step in GetChildren().OfType<QuestStep>())
@@ -48,7 +50,8 @@ namespace TnT.EduGame.QuestSystem
             }
             finally
             {
-                EmitSignal(SignalName.ReactionEnd);
+                if (signals)
+                    EmitSignal(SignalName.ReactionEnd);
             }
         }
     }
