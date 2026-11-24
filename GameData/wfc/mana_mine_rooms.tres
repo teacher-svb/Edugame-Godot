@@ -8,7 +8,6 @@
 script = ExtResource("2_tile")
 Item = 0
 Rotation = 2
-Weight = 1.0
 SocketPosX = "room"
 SocketNegX = "room"
 SocketPosY = "ground"

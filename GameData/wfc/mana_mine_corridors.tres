@@ -86,7 +86,6 @@ metadata/_custom_type_script = "uid://rb5vled2paii"
 script = ExtResource("2_tile")
 Item = 19
 Rotation = 2
-Weight = 1.0
 SocketPosX = "path"
 SocketNegX = "path"
 SocketPosY = "ground"

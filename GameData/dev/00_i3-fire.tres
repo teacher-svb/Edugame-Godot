@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DevCheckpoint" format=3]
+
+[ext_resource type="Script" path="res://scripts/Game/Dev/DevCheckpoint.cs" id="1_cp"]
+[ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="2_quest"]
+[ext_resource type="Resource" path="res://GameData/quests/I.1-MorningInBeaverford.tres" id="q_i1"]
+[ext_resource type="Resource" path="res://GameData/quests/I.2-theAmbition-Cornelis.tres" id="q_i2c"]
+[ext_resource type="Resource" path="res://GameData/quests/I.2-theAmbition-Hendrik.tres" id="q_i2h"]
+[ext_resource type="Resource" path="res://GameData/quests/I.2-theAmbition-Liesbeth.tres" id="q_i2l"]
+[ext_resource type="Resource" path="res://GameData/quests/I.2-theAmbition-MsBram.tres" id="q_i2m"]
+
+[resource]
+script = ExtResource("1_cp")
+Id = "i3-fire"
+Title = "I.3 Fire: I.1 and I.2 done, at the start of the first wizard chamber"
+CompletedQuests = Array[ExtResource("2_quest")]([ExtResource("q_i1"), ExtResource("q_i2c"), ExtResource("q_i2h"), ExtResource("q_i2l"), ExtResource("q_i2m")])
+Scene = "res://Scenes/levels/level3_wizard_fire.tscn"
+Spawn = ""

@@ -12,11 +12,11 @@ script = ExtResource("2_tile")
 Item = 17
 Rotation = 2
 SocketPosX = "x"
-SocketNegX = "path"
+SocketNegX = "path, pitfall"
 SocketPosY = "ground"
 SocketNegY = "ground"
 SocketPosZ = "x"
-SocketNegZ = "path"
+SocketNegZ = "path, pitfall"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_landing_gwgw"]
@@ -28,8 +28,8 @@ SocketPosX = "x"
 SocketNegX = "x"
 SocketPosY = "ground"
 SocketNegY = "ground"
-SocketPosZ = "path"
-SocketNegZ = "path"
+SocketPosZ = "path, pitfall"
+SocketNegZ = "path, pitfall"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_landing_gwgg"]
@@ -38,11 +38,11 @@ Item = 19
 Rotation = 2
 Weight = 0.48
 SocketPosX = "x"
-SocketNegX = "path"
+SocketNegX = "path, pitfall"
 SocketPosY = "ground"
 SocketNegY = "ground"
-SocketPosZ = "path"
-SocketNegZ = "path"
+SocketPosZ = "path, pitfall"
+SocketNegZ = "path, pitfall"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_landing_gggg"]
@@ -50,12 +50,12 @@ script = ExtResource("2_tile")
 Item = 20
 Rotation = 2
 Weight = 0.08
-SocketPosX = "path"
-SocketNegX = "path"
+SocketPosX = "path, pitfall"
+SocketNegX = "path, pitfall"
 SocketPosY = "ground"
 SocketNegY = "ground"
-SocketPosZ = "path"
-SocketNegZ = "path"
+SocketPosZ = "path, pitfall"
+SocketNegZ = "path, pitfall"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_bridge_NS"]
@@ -67,8 +67,8 @@ SocketPosX = "x"
 SocketNegX = "x"
 SocketPosY = "ground"
 SocketNegY = "ground"
-SocketPosZ = "path"
-SocketNegZ = "path"
+SocketPosZ = "path, pitfall"
+SocketNegZ = "path, pitfall"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_broken_NS"]
@@ -80,8 +80,8 @@ SocketPosX = "x"
 SocketNegX = "x"
 SocketPosY = "ground"
 SocketNegY = "ground"
-SocketPosZ = "path"
-SocketNegZ = "path"
+SocketPosZ = "pitfall"
+SocketNegZ = "pitfall"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_stones_NS"]
@@ -93,8 +93,8 @@ SocketPosX = "x"
 SocketNegX = "x"
 SocketPosY = "ground"
 SocketNegY = "ground"
-SocketPosZ = "path"
-SocketNegZ = "path"
+SocketPosZ = "pitfall"
+SocketNegZ = "pitfall"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_steps_NS"]
@@ -106,8 +106,8 @@ SocketPosX = "x"
 SocketNegX = "x"
 SocketPosY = "ground"
 SocketNegY = "ground"
-SocketPosZ = "path"
-SocketNegZ = "path"
+SocketPosZ = "path, pitfall"
+SocketNegZ = "path, pitfall"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_mover_NS"]
@@ -120,8 +120,8 @@ SocketPosX = "x"
 SocketNegX = "x"
 SocketPosY = "ground"
 SocketNegY = "ground"
-SocketPosZ = "path"
-SocketNegZ = "path"
+SocketPosZ = "pitfall"
+SocketNegZ = "pitfall"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_bridge_NE"]
@@ -129,12 +129,12 @@ script = ExtResource("2_tile")
 Item = 26
 Rotation = 2
 Weight = 1.4
-SocketPosX = "path"
+SocketPosX = "path, pitfall"
 SocketNegX = "x"
 SocketPosY = "ground"
 SocketNegY = "ground"
 SocketPosZ = "x"
-SocketNegZ = "path"
+SocketNegZ = "path, pitfall"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_chasm_a"]
@@ -173,8 +173,8 @@ SocketPosX = "x"
 SocketNegX = "x"
 SocketPosY = "ground"
 SocketNegY = "ground"
-SocketPosZ = "path"
-SocketNegZ = "path"
+SocketPosZ = "pitfall"
+SocketNegZ = "pitfall"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [sub_resource type="Resource" id="Tile_earth_rocks_NS"]
@@ -187,8 +187,8 @@ SocketPosX = "x"
 SocketNegX = "x"
 SocketPosY = "ground"
 SocketNegY = "ground"
-SocketPosZ = "path"
-SocketNegZ = "path"
+SocketPosZ = "pitfall"
+SocketNegZ = "pitfall"
 metadata/_custom_type_script = "uid://rb5vled2paii"
 
 [resource]

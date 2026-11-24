@@ -39,6 +39,7 @@
 [ext_resource type="Resource" path="res://GameData/quests/II.5-TheMysteriousLetter.tres" id="26_ii5"]
 [ext_resource type="Script" path="res://scripts/Game/Dev/DevShortcuts.cs" id="dev_shortcuts"]
 [ext_resource type="Script" path="res://scripts/Game/Dev/DevCheckpoint.cs" id="dev_cp"]
+[ext_resource type="Resource" path="res://GameData/dev/00_i3-fire.tres" id="dev_cp0"]
 [ext_resource type="Resource" path="res://GameData/dev/01_act2-start.tres" id="dev_cp1"]
 [ext_resource type="Resource" path="res://GameData/dev/02_ii2.tres" id="dev_cp2"]
 [ext_resource type="Resource" path="res://GameData/dev/03_ii3.tres" id="dev_cp3"]
@@ -230,7 +231,7 @@ eventChannel = ExtResource("13_pnf1h")
 
 [node name="DevShortcuts" type="Node" parent="."]
 script = ExtResource("dev_shortcuts")
-Checkpoints = Array[ExtResource("dev_cp")]([ExtResource("dev_cp1"), ExtResource("dev_cp2"), ExtResource("dev_cp3"), ExtResource("dev_cp4"), ExtResource("dev_cp5")])
+Checkpoints = Array[ExtResource("dev_cp")]([ExtResource("dev_cp0"), ExtResource("dev_cp1"), ExtResource("dev_cp2"), ExtResource("dev_cp3"), ExtResource("dev_cp4"), ExtResource("dev_cp5")])
 
 [node name="UIManager" type="Node" parent="." unique_id=1207108139]
 script = ExtResource("4_c37v5")
