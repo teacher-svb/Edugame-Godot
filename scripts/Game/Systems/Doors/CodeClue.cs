@@ -1,5 +1,5 @@
 using Godot;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 
 namespace TnT.EduGame.Doors
 {

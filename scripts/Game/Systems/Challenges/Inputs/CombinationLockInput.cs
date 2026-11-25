@@ -1,6 +1,6 @@
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // One spinnable wheel per unknown, cycling through the round's options for it.
     [GlobalClass, Tool]

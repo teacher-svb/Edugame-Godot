@@ -4,7 +4,7 @@ using System.Linq;
 using Godot;
 using Godoodads.Dungeon;
 using TnT.EduGame.Doors;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 using TnT.Extensions;
 
 namespace TnT.EduGame.Dungeon

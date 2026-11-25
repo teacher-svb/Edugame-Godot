@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     [GlobalClass]
     public partial class MessageModel : Node

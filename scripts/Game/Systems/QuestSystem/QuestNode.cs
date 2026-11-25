@@ -1,6 +1,7 @@
 using System.Linq;
 using Godot;
 using TnT.Extensions;
+using TnT.EduGame.Characters;
 
 namespace TnT.EduGame.QuestSystem
 {

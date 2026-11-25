@@ -1,6 +1,6 @@
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // One dropdown per unknown, listing the round's options for it.
     [GlobalClass, Tool]

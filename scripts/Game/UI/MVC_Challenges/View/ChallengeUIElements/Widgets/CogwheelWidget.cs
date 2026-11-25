@@ -3,7 +3,7 @@ using System.Linq;
 using Godot;
 using TnT.Extensions;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // One toggle button per number in the combined option pool of all unknowns.
     // Pressing fills the first empty unknown (in formula order); releasing frees it again.

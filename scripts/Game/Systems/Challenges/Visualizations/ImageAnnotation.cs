@@ -1,6 +1,6 @@
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // A label placed on an ImageVisualization's picture.
     [GlobalClass, Tool]

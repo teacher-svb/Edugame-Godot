@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dj54ruaq6u4he" path="res://Scenes/characters/character_base.tscn" id="1_v5scr"]
 [ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="2_7dxc7"]
 [ext_resource type="PackedScene" uid="uid://dwmsot5m0pw1o" path="res://Scenes/PlayerCamera.tscn" id="3_eym15"]
-[ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Player.cs" id="4_cvtri"]
+[ext_resource type="Script" uid="uid://pedpgwksk61h" path="res://scripts/Game/Character/Player.cs" id="4_cvtri"]
 [ext_resource type="PackedScene" uid="uid://cavfw5nv28qmx" path="res://assets/3D/characters/Rogue.glb" id="6_7dxc7"]
 [ext_resource type="Texture2D" uid="uid://qf76v0037sfl" path="res://assets/3D/characters/textures/rogue_texture_D.png" id="7_yx5mg"]
 [ext_resource type="Texture2D" uid="uid://22l4wvbueyg3" path="res://assets/ring.png" id="10_lgshl"]

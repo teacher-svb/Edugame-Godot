@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Godot;
 using TnT.EduGame.Platforming;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 using TnT.Systems.Persistence;
 
 namespace TnT.EduGame.Doors

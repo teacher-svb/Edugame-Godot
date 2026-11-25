@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // Radar screen: distance rings with labels and a blip at one of the round's
     // values, for "how far away is X?" questions (e.g. formula `d`, unknown `answer`).

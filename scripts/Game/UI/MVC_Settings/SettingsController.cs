@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Godot;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     [GlobalClass]
     public partial class SettingsController : Node

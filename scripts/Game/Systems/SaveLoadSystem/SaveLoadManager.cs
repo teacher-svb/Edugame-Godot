@@ -4,8 +4,8 @@ using TnT.Systems.Persistence;
 using Godot;
 using TnT.EduGame.Characters;
 using TnT.EduGame.QuestSystem;
-using TnT.EduGame.GameState;
-using TnT.EduGame.Question;
+using TnT.EduGame.GameStates;
+using TnT.EduGame.Challenges;
 
 namespace TnT.EduGame
 {
@@ -18,11 +18,12 @@ namespace TnT.EduGame
         {
             _gameName = "test";
             base._Ready();
+            StateManagerGame.Instance.SceneLoaded += OnSceneLoaded;
             Instance = this;
             GameData = new MyGameData { Name = _gameName, CurrentLevelName = _startScene };
         }
         
-        protected override void OnSceneLoaded(string scenePath)
+        private void OnSceneLoaded(string scenePath)
         {
             GameData.CurrentLevelName = scenePath;
 

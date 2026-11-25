@@ -4,7 +4,7 @@ using System;
 using Godot;
 using TnT.Input;
 
-namespace TnT.EduGame.GameState
+namespace TnT.EduGame.GameStates
 {
     [GlobalClass]
     public partial class GameStatePlay : BaseGameState, IStateObject<GameStatePlay.PlayOptions>

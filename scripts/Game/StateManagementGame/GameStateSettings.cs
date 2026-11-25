@@ -2,9 +2,8 @@ using System.Threading.Tasks;
 using TnT.Systems.State;
 using Godot;
 using TnT.Input;
-using TnT.Systems.UI;
-
-namespace TnT.EduGame.GameState
+using TnT.EduGame.UI;
+namespace TnT.EduGame.GameStates
 {
     [GlobalClass]
     public partial class GameStateSettings : BaseGameState, IStateObject<GameStateSettings.Options>

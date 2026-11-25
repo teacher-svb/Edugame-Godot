@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Godot;
 using TnT.EduGame.Reading;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     /// <summary>What the reading panel shows: the text, split into pages, and the page the player is on.</summary>
     [GlobalClass]

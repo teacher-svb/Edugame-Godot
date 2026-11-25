@@ -10,7 +10,7 @@ using TnT.Input;
 using TnT.Systems;
 using TnT.Systems.State;
 
-namespace TnT.EduGame.CharacterState
+namespace TnT.EduGame.Characters.States
 {
     public partial class CharacterStateManager : AbstractStateStack
     {

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Godot;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // The number series in a row of boxes with arrows between them; the boxes pop in one after
     // another. The missing term is a dashed box with `?`, so the row shows where the gap is.

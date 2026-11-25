@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
-using TnT.Easings;
-using TnT.EduGame.Question;
-using static TnT.EduGame.Question.ConcentricCirclesVisualization;
+using TnT.Systems.Easing;
+using TnT.EduGame.Challenges;
+using static TnT.EduGame.Challenges.ConcentricCirclesVisualization;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // Draws the rings outer → inner around a centre disc, spins each one to its
     // selected segment (staggered, alternating direction) and locks it in under
@@ -61,7 +61,7 @@ namespace TnT.Systems.UI
             var target = -_rings[ring].SelectedIndex * step;
             var to = from + direction * (SpinTurns * Mathf.Tau + Mathf.PosMod(direction * (target - from), Mathf.Tau));
 
-            await foreach (var t in Easings.Easings.Animate(duration, Ease.EaseOutCubic))
+            await foreach (var t in Easings.Animate(duration, Ease.EaseOutCubic))
             {
                 if (!IsInsideTree())
                     return;
@@ -69,7 +69,7 @@ namespace TnT.Systems.UI
                 QueueRedraw();
             }
 
-            await foreach (var t in Easings.Easings.Animate(LockPulseDuration, Ease.EaseOutQuad))
+            await foreach (var t in Easings.Animate(LockPulseDuration, Ease.EaseOutQuad))
             {
                 if (!IsInsideTree())
                     return;

@@ -1,8 +1,8 @@
 using System;
 using Godot;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // Shared base of everything ChallengeUI puts in a slot: gets the challenge, the
     // rolled round and the element (visualization / input resource) it renders.

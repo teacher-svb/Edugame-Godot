@@ -1,6 +1,6 @@
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // Typed variants of the slot widgets: `Settings` is the widget's own resource type,
     // and Init rejects a mismatched resource with a clear message instead of a cast error.

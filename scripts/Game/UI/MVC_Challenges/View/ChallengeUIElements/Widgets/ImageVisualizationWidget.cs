@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 using TnT.Extensions;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // Shows the picture aspect-fitted and keeps each annotation on its spot of the
     // picture (not of the widget) whenever the widget resizes.

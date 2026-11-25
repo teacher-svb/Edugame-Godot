@@ -1,6 +1,5 @@
 using System.Linq;
 using Godot;
-using TnT.EduGame.Characters;
 using TnT.Extensions;
 
 namespace TnT.Systems.OcclusionFade
@@ -14,7 +13,7 @@ namespace TnT.Systems.OcclusionFade
     {
         /// <summary>The occlusion fader shader (occlusionFader.gdshader).</summary>
         [Export] private Shader OcclusionShader { get; set; }
-        Character3D _playerCharacter;
+        Node3D _playerCharacter;
         Camera3D _camera;
         RayCast3D _playerRayCast;
         /// <summary>How fast the hole opens and closes, in units per second.</summary>
@@ -33,15 +32,19 @@ namespace TnT.Systems.OcclusionFade
 
         public override void _Ready()
         {
-            _playerCharacter = GetTree()
-                .FindAnyObjectByType<Player>()
-                .FindAncestorOfType<Character3D>();
-
-            _camera = _playerCharacter.FindAnyObjectByType<CharacterController3D>().Camera;
-            _playerRayCast = _playerCharacter.FindAnyObjectByType<CharacterController3D>().OcclusionRaycast;
+            var target = GetTree().Root.FindObjectsByType<Node>().OfType<IOcclusionTarget>().FirstOrDefault();
+            if (target == null)
+            {
+                GD.PushWarning($"{nameof(OcclusionFader)}: no {nameof(IOcclusionTarget)} in the scene, fading off.");
+                SetProcess(false);
+                return;
+            }
+            _playerCharacter = target.OcclusionBody;
+            _camera = target.OcclusionCamera;
+            _playerRayCast = target.OcclusionRaycast;
             GetTree()
                 .FindObjectsByType<MeshInstance3D>()
-                .Where(n => n.FindAncestorOfType<Character3D>() == null && !n.IsInGroup(ExcludeGroup))
+                .Where(n => !IsExempt(n) && !n.IsInGroup(ExcludeGroup))
                 .ForEach(ApplyToMeshInstance);
 
             foreach (var gm in GetTree().FindObjectsByType<GridMap>().Where(gm => !gm.IsInGroup(ExcludeGroup)))
@@ -60,6 +63,13 @@ namespace TnT.Systems.OcclusionFade
             RenderingServer.GlobalShaderParameterSet("player_pos", _playerCharacter.GlobalPosition);
             RenderingServer.GlobalShaderParameterSet("occlusion_radius", _currentRadius);
             RenderingServer.GlobalShaderParameterSet("camera_pos", _camera.GlobalPosition);
+        }
+
+        private static bool IsExempt(Node node)
+        {
+            for (var n = node.GetParent(); n != null; n = n.GetParent())
+                if (n is IOcclusionExempt) return true;
+            return false;
         }
 
         private bool IsCollidingWithOccluder()

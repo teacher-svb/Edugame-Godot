@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // Base for resources with string fields that name a formula param. The owning
     // MathChallenge passes its param names down (SetAvailableParams), so those

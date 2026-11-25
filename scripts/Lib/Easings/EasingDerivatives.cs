@@ -2,7 +2,7 @@
 using Godot;
 using System;
 
-namespace TnT.Easings
+namespace TnT.Systems.Easing
 {
     /// <summary>
     /// Collection of derivative easing functions representing speed of easing.

@@ -1,172 +1,173 @@
 using Godot;
-using TnT.EduGame.Characters;
 using TnT.Extensions;
-using TnT.Systems;
 
-/// <summary>
-/// 3D character controller that handles physics-based movement, jumping, and rotation
-/// for a <see cref="CharacterBody3D"/>. Implements <see cref="ICharacterController"/>
-/// so it can be driven by the game's character and input systems.
-/// </summary>
-[GlobalClass]
-public partial class CharacterController3D : Node, ICharacterController
+namespace TnT.EduGame.Characters
 {
-    [Export] private float _speed = 5.0f;
-    [Export] private float _jumpVelocity = 4.5f;
-    [Export] private float _rotationSpeed = 10.0f;
-    Character3D _character;
-    public Vector3 GlobalPosition => _character.GlobalPosition;
-
-
     /// <summary>
-    /// Raycast used to detect occlusion between the camera and the character.
+    /// 3D character controller that handles physics-based movement, jumping, and rotation
+    /// for a <see cref="CharacterBody3D"/>. Implements <see cref="ICharacterController"/>
+    /// so it can be driven by the game's character and input systems.
     /// </summary>
-    [Export] public RayCast3D OcclusionRaycast { get; private set; }
-
-    /// <summary>
-    /// The camera that follows or is attached to this character.
-    /// </summary>
-    [Export] public Camera3D Camera { get; private set; }
-
-    [Export] public Node3D VisualRoot { get; private set; }
-    public float Speed { get => _speed; set => _speed = value; }
-
-    /// <summary>
-    /// Emitted whenever the character's movement state changes.
-    /// Possible state values are <c>"idle"</c>, <c>"run"</c>, <c>"jump"</c>,
-    /// <c>"fall"</c> and <c>"land"</c>. Repeats are suppressed, so <c>"jump"</c>
-    /// fires once per jump and <c>"land"</c> once per touchdown.
-    /// </summary>
-    [Signal] public delegate void MovementStateChangedEventHandler(string state);
-
-    private string _currentState = "";
-    private bool _wasOnFloor = true;
-    private bool _justJumped = false;
-
-    Vector2 inputDir;
-
-    bool _jump = false;
-
-    Vector3 _push;
-
-    public override void _Ready()
+    [GlobalClass]
+    public partial class CharacterController3D : Node, ICharacterController
     {
-        _character = this.FindAncestorOfType<Character3D>();
-        OcclusionRaycast?.AddException(_character);
-    }
+        [Export] private float _speed = 5.0f;
+        [Export] private float _jumpVelocity = 4.5f;
+        [Export] private float _rotationSpeed = 10.0f;
+        Character3D _character;
+        public Vector3 GlobalPosition => _character.GlobalPosition;
 
-    /// <summary>
-    /// Processes physics each frame: applies gravity, handles jumping,
-    /// moves the character, rotates the visual root toward the direction of travel,
-    /// and emits movement state changes.
-    /// </summary>
-    public override void _PhysicsProcess(double delta)
-    {
-        Vector3 velocity = _character.Velocity;
 
-        if (_character.IsOnFloor() == false)
-            velocity += _character.GetGravity() * (float)delta;
+        /// <summary>
+        /// Raycast used to detect occlusion between the camera and the character.
+        /// </summary>
+        [Export] public RayCast3D OcclusionRaycast { get; private set; }
 
-        if (_character.IsOnFloor() && _jump)
+        /// <summary>
+        /// The camera that follows or is attached to this character.
+        /// </summary>
+        [Export] public Camera3D Camera { get; private set; }
+
+        [Export] public Node3D VisualRoot { get; private set; }
+        public float Speed { get => _speed; set => _speed = value; }
+
+        /// <summary>
+        /// Emitted whenever the character's movement state changes.
+        /// Possible state values are <c>"idle"</c>, <c>"run"</c>, <c>"jump"</c>,
+        /// <c>"fall"</c> and <c>"land"</c>. Repeats are suppressed, so <c>"jump"</c>
+        /// fires once per jump and <c>"land"</c> once per touchdown.
+        /// </summary>
+        [Signal] public delegate void MovementStateChangedEventHandler(string state);
+
+        private string _currentState = "";
+        private bool _wasOnFloor = true;
+        private bool _justJumped = false;
+
+        Vector2 inputDir;
+
+        bool _jump = false;
+
+        Vector3 _push;
+
+        public override void _Ready()
         {
-            velocity.Y = _jumpVelocity;
-            _jump = false;
-            _justJumped = true;
+            _character = this.FindAncestorOfType<Character3D>();
+            OcclusionRaycast?.AddException(_character);
         }
 
-        Vector3 direction = (_character.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
-
-        if (direction != Vector3.Zero)
+        /// <summary>
+        /// Processes physics each frame: applies gravity, handles jumping,
+        /// moves the character, rotates the visual root toward the direction of travel,
+        /// and emits movement state changes.
+        /// </summary>
+        public override void _PhysicsProcess(double delta)
         {
-            velocity.X = direction.X * _speed;
-            velocity.Z = direction.Z * _speed;
+            Vector3 velocity = _character.Velocity;
+
+            if (_character.IsOnFloor() == false)
+                velocity += _character.GetGravity() * (float)delta;
+
+            if (_character.IsOnFloor() && _jump)
+            {
+                velocity.Y = _jumpVelocity;
+                _jump = false;
+                _justJumped = true;
+            }
+
+            Vector3 direction = (_character.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+
+            if (direction != Vector3.Zero)
+            {
+                velocity.X = direction.X * _speed;
+                velocity.Z = direction.Z * _speed;
+            }
+            else
+            {
+                velocity.X = Mathf.MoveToward(_character.Velocity.X, 0, _speed);
+                velocity.Z = Mathf.MoveToward(_character.Velocity.Z, 0, _speed);
+            }
+
+            // external push (e.g. a waterfall), added on top of the player's own movement; sources add it every frame
+            velocity.X += _push.X;
+            velocity.Z += _push.Z;
+            _push = Vector3.Zero;
+
+            _character.Velocity = velocity;
+            _character.MoveAndSlide();
+
+            if (direction != Vector3.Zero)
+                OrientToDirection(direction, delta);
+
+            EmitMovementState(direction);
+            inputDir = Vector2.Zero;
         }
-        else
+
+        private void OrientToDirection(Vector3 direction, double delta)
         {
-            velocity.X = Mathf.MoveToward(_character.Velocity.X, 0, _speed);
-            velocity.Z = Mathf.MoveToward(_character.Velocity.Z, 0, _speed);
+            if (VisualRoot == null) return;
+            var target = Basis.LookingAt(-direction, Vector3.Up);
+            VisualRoot.Basis = VisualRoot.Basis.Orthonormalized().Slerp(target, _rotationSpeed * (float)delta);
         }
 
-        // external push (e.g. a waterfall), added on top of the player's own movement; sources add it every frame
-        velocity.X += _push.X;
-        velocity.Z += _push.Z;
-        _push = Vector3.Zero;
-
-        _character.Velocity = velocity;
-        _character.MoveAndSlide();
-
-        if (direction != Vector3.Zero)
-            OrientToDirection(direction, delta);
-
-        EmitMovementState(direction);
-        inputDir = Vector2.Zero;
-    }
-
-    private void OrientToDirection(Vector3 direction, double delta)
-    {
-        if (VisualRoot == null) return;
-        var target = Basis.LookingAt(-direction, Vector3.Up);
-        VisualRoot.Basis = VisualRoot.Basis.Orthonormalized().Slerp(target, _rotationSpeed * (float)delta);
-    }
-
-    private void EmitMovementState(Vector3 direction)
-    {
-        string state;
-
-        if (_justJumped)
+        private void EmitMovementState(Vector3 direction)
         {
-            state = "jump";
-            _justJumped = false;
+            string state;
+
+            if (_justJumped)
+            {
+                state = "jump";
+                _justJumped = false;
+            }
+            else if (!_wasOnFloor && _character.IsOnFloor())
+                state = "land";
+            else if (_character.IsOnFloor() == false)
+                state = _character.Velocity.Y > 0 ? "jump" : "fall";
+            else if (direction != Vector3.Zero)
+                state = "run";
+            else
+                state = "idle";
+
+            _wasOnFloor = _character.IsOnFloor();
+
+            if (state == _currentState) return;
+            _currentState = state;
+            EmitSignal(SignalName.MovementStateChanged, state);
         }
-        else if (!_wasOnFloor && _character.IsOnFloor())
-            state = "land";
-        else if (_character.IsOnFloor() == false)
-            state = _character.Velocity.Y > 0 ? "jump" : "fall";
-        else if (direction != Vector3.Zero)
-            state = "run";
-        else
-            state = "idle";
 
-        _wasOnFloor = _character.IsOnFloor();
+        /// <summary>
+        /// Pushes the character horizontally during the next physics frame, on top of its own movement.
+        /// Call it every physics frame while the push lasts (pushes from several sources add up).
+        /// </summary>
+        /// <param name="velocity">Push velocity in world space (m/s); the Y component is ignored.</param>
+        public void AddPush(Vector3 velocity)
+        {
+            _push += velocity;
+        }
 
-        if (state == _currentState) return;
-        _currentState = state;
-        EmitSignal(SignalName.MovementStateChanged, state);
-    }
+        public void Jump()
+        {
+            _jump = true;
+        }
 
-    /// <summary>
-    /// Pushes the character horizontally during the next physics frame, on top of its own movement.
-    /// Call it every physics frame while the push lasts (pushes from several sources add up).
-    /// </summary>
-    /// <param name="velocity">Push velocity in world space (m/s); the Y component is ignored.</param>
-    public void AddPush(Vector3 velocity)
-    {
-        _push += velocity;
-    }
+        /// <summary>
+        /// Queues a movement input to be applied during the next physics frame.
+        /// </summary>
+        /// <param name="movement">
+        /// A 2D direction vector where X maps to the local right/left axis
+        /// and Y maps to the local forward/back axis.
+        /// </param>
+        public void Move(Vector2 movement)
+        {
+            inputDir = movement;
+        }
 
-    public void Jump()
-    {
-        _jump = true;
-    }
-
-    /// <summary>
-    /// Queues a movement input to be applied during the next physics frame.
-    /// </summary>
-    /// <param name="movement">
-    /// A 2D direction vector where X maps to the local right/left axis
-    /// and Y maps to the local forward/back axis.
-    /// </param>
-    public void Move(Vector2 movement)
-    {
-        inputDir = movement;
-    }
-
-    /// <summary>
-    /// Teleports the character instantly to the specified world-space position.
-    /// </summary>
-    /// <param name="position">The target position in world space.</param>
-    public void MoveTo(Vector3 position)
-    {
-        _character.Position = position;
+        /// <summary>
+        /// Teleports the character instantly to the specified world-space position.
+        /// </summary>
+        /// <param name="position">The target position in world space.</param>
+        public void MoveTo(Vector3 position)
+        {
+            _character.Position = position;
+        }
     }
 }

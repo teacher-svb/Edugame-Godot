@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 using TnT.Extensions;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // One carrousel wheel per unknown. Every wheel always shows a value, so each
     // one is assigned as soon as it's built and the player only has to spin.

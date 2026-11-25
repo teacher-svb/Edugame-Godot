@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace TnT.Easings
+namespace TnT.Systems.Easing
 {
     public enum Ease
     {

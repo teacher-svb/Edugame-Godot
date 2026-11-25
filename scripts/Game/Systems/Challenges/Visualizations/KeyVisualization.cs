@@ -1,6 +1,6 @@
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // A key whose teeth are the bars of a bar graph: each GraphBar is one tooth, its param the
     // tooth's depth on 0..AxisMax. The widget doubles as input: the player sets the depth of

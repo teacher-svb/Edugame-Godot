@@ -1,6 +1,6 @@
 using Godot;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     /// <summary>What the act card shows: the act's title and a subtitle.</summary>
     [GlobalClass]

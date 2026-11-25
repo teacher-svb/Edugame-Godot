@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Godot;
 using TnT.Systems.UIAnimation;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     [GlobalClass]
     public partial class SettingsView : Control

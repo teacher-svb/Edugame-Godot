@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Godot;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     /// <summary>The card shown between acts (card act1-end-of-act), through <c>StateManagerGame.ShowActCard</c>.</summary>
     [GlobalClass]

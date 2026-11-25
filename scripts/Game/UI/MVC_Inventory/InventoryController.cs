@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using Godot;
 using TnT.EduGame.Inventory;
-using static TnT.Systems.UI.InventoryModel;
+using static TnT.EduGame.UI.InventoryModel;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     public partial class InventoryController : Node
     {

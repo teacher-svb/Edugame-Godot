@@ -1,8 +1,8 @@
 
 using System;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // Anything that lets the player supply a value for one of the round's unknowns.
     // Implemented by every input widget, and by visualization widgets that double

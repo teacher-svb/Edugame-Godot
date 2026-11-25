@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Godot;
 using TnT.EduGame.Reading;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     /// <summary>The reading panel for longer texts (R2), through <c>StateManagerGame.ShowReading</c>.</summary>
     [GlobalClass]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dj54ruaq6u4he"]
 
-[ext_resource type="Script" uid="uid://dt1pmf2iuc4nb" path="res://scripts/CharacterAnimator.cs" id="1_1wrgq"]
-[ext_resource type="Script" uid="uid://dc4u7vqilp6dd" path="res://scripts/CharacterController3D.cs" id="1_707x3"]
+[ext_resource type="Script" uid="uid://dt1pmf2iuc4nb" path="res://scripts/Game/Character/CharacterAnimator.cs" id="1_1wrgq"]
+[ext_resource type="Script" uid="uid://dc4u7vqilp6dd" path="res://scripts/Game/Character/CharacterController3D.cs" id="1_707x3"]
 [ext_resource type="Script" uid="uid://c861mplcf03p7" path="res://scripts/Game/Character/Character3D.cs" id="1_u1x07"]
 [ext_resource type="Script" uid="uid://dikx3tegvslhi" path="res://scripts/Game/StateManagementCharacter/CharacterStateManager.cs" id="3_d75bo"]
 [ext_resource type="Script" uid="uid://55xneh1xtvnj" path="res://scripts/Game/StateManagementCharacter/CharacterStateIdle.cs" id="4_u1x07"]

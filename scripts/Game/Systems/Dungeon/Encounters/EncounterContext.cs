@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godoodads.Dungeon.Core;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 
 namespace TnT.EduGame.Dungeon
 {

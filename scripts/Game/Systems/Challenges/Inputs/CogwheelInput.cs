@@ -1,6 +1,6 @@
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // A shared row of numbers (all unknowns' options combined); each pick fills the next
     // empty unknown, picking again takes it back. Pair with a `distinct(...)` rule:

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Godot;
-using TnT.EduGame.GameState;
+using TnT.EduGame.GameStates;
 
 namespace TnT.EduGame.QuestSystem
 {

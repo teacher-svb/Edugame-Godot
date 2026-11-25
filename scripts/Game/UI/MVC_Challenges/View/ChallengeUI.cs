@@ -3,10 +3,10 @@
 using System;
 using System.Linq;
 using Godot;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 using TnT.Extensions;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // Three slots: visualization (left), question text (right), input (bottom centre).
     [GlobalClass]

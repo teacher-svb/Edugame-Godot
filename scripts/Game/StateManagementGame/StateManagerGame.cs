@@ -2,15 +2,15 @@ using System;
 using TnT.Systems.State;
 using System.Collections.Generic;
 using System.Linq;
-using static TnT.EduGame.GameState.GameStateLoadingScreen;
+using static TnT.EduGame.GameStates.GameStateLoadingScreen;
 using Godot;
 using TnT.EduGame.Characters;
 using TnT.Extensions;
 using TnT.EduGame.QuestSystem;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 using TnT.Input;
 
-namespace TnT.EduGame.GameState
+namespace TnT.EduGame.GameStates
 {
     public partial class StateManagerGame : AbstractStateStack, IInputActionable
     {

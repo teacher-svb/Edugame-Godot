@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using Godot;
 using TnT.Extensions;
 using TnT.Input;
-using TnT.EduGame.CharacterState;
+using TnT.EduGame.Characters.States;
 
+using TnT.Systems.OcclusionFade;
 namespace TnT.EduGame.Characters
 {
     [GlobalClass]
-    public partial class Character3D : CharacterBody3D
+    public partial class Character3D : CharacterBody3D, IOcclusionExempt
     {
         [Export]
         CharacterData _characterData;

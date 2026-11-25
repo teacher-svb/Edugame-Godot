@@ -5,7 +5,7 @@ using TnT.Systems.Persistence;
 using Godot;
 using TnT.EduGame.Characters;
 using TnT.EduGame.QuestSystem;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 
 namespace TnT.EduGame
 {

@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // A number series with one term missing (card challenge-sequence), e.g. the school bell times
     // 15, 60, 105, ?: the player finds the rule. Each term is `Term` with `i` the term's index (0 for

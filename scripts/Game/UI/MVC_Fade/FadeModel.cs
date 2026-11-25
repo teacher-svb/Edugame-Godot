@@ -3,7 +3,7 @@ using Godot;
 using TnT.Extensions;
 
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     [GlobalClass]
     public partial class FadeModel : Node

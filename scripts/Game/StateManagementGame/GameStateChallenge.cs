@@ -2,10 +2,9 @@ using System.Threading.Tasks;
 using TnT.Systems.State;
 using System;
 using Godot;
-using TnT.EduGame.Question;
-using TnT.Systems.UI;
-
-namespace TnT.EduGame.GameState
+using TnT.EduGame.Challenges;
+using TnT.EduGame.UI;
+namespace TnT.EduGame.GameStates
 {
     [GlobalClass]
     public partial class GameStateChallenge : BaseGameState, IStateObject<GameStateChallenge.ChallengeOptions>

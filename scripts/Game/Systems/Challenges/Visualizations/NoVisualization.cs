@@ -1,4 +1,4 @@
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // Null Object for a challenge without a visualization: rolls like the base class
     // and renders an empty widget, so nothing downstream needs a null check.

@@ -1,7 +1,7 @@
 using Godot;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // Draws the radar: screen, distance rings with labels, crosshair, a rotating
     // sweep with a fading trail and the blip, which flares as the sweep passes it.

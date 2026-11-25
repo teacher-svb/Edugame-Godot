@@ -3,7 +3,7 @@ using System;
 using System.Threading.Tasks;
 using Godot;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     public partial class MessageController : Node { 
         public static MessageController Instance { get; private set; }

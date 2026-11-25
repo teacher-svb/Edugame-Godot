@@ -5,9 +5,8 @@ using System.Collections.Generic;
 using Godot;
 using TnT.EduGame.Characters;
 using TnT.Input;
-using TnT.Systems.UI;
-
-namespace TnT.EduGame.GameState
+using TnT.EduGame.UI;
+namespace TnT.EduGame.GameStates
 {
     /// <summary>
     /// Character dialogue. One message state shows a <see cref="Session"/>: the message it was opened with plus every

@@ -5,7 +5,7 @@ using TnT.EduGame.Characters;
 using TnT.Extensions;
 using TnT.Systems.State;
 
-namespace TnT.EduGame.CharacterState
+namespace TnT.EduGame.Characters.States
 {
     [GlobalClass]
     public partial class CharacterStateFollowing : BaseCharacterState, IStateObject<CharacterStateFollowing.FollowOptions>

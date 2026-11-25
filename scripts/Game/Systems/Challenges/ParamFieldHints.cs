@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // Implemented via ParamAwareResource (visualizations, graph bars).
     public interface IParamFieldOwner

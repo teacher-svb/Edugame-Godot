@@ -4,9 +4,8 @@ using Godot;
 using TnT.EduGame.Reading;
 using TnT.Input;
 using TnT.Systems.State;
-using TnT.Systems.UI;
-
-namespace TnT.EduGame.GameState
+using TnT.EduGame.UI;
+namespace TnT.EduGame.GameStates
 {
     /// <summary>
     /// Reading a longer text (letter, notice): pauses the game and shows the reading panel. Next turns the page, and

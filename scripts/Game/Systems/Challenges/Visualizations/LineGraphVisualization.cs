@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // Line graph of an expression in a variable over a labelled grid, e.g. oil level
     // `v - r * t` over days `t`, or RPM `s * t` over wind speed. Optional marker at MarkX

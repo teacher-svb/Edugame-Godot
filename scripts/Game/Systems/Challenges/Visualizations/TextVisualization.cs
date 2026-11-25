@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // Shows the challenge as a written-out sum, e.g. `5 - 3 = ?`.
     [GlobalClass, Tool]

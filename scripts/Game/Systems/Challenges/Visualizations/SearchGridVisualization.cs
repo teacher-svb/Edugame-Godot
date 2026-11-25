@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // Coordinate grid (optionally over a map picture) with labelled lines and a
     // marker at one of the round's values, for "what is the X location of A?"

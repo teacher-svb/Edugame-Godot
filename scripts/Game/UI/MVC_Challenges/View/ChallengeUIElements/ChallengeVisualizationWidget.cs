@@ -1,6 +1,6 @@
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // Base for anything placed in ChallengeUI's visualization slot: renders the
     // round's givens and hides its unknowns. A widget that also lets the player

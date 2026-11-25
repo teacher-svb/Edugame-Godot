@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     [GlobalClass]
     public partial class ChallengeModel : Node

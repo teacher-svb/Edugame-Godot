@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // A key lying on its side: bow on the left, blade to the right, one tooth per GraphBar
     // hanging from the blade, in reading order. Known teeth are cut already; the player cuts

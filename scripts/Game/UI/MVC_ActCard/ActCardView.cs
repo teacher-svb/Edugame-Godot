@@ -3,7 +3,7 @@ using Godot;
 using TnT.Extensions;
 using TnT.Systems.UIAnimation;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     /// <summary>
     /// A full-screen card between acts: the screen fades to black, then the title and subtitle fade in; the hint

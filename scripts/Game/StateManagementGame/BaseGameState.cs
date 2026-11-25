@@ -2,7 +2,7 @@
 using Godot;
 using TnT.Extensions;
 
-namespace TnT.EduGame.GameState
+namespace TnT.EduGame.GameStates
 {
     public abstract partial class BaseGameState : Node
     {

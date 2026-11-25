@@ -4,7 +4,7 @@ using System.Linq;
 using Godot;
 using TnT.EduGame.Inventory;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     [GlobalClass]
     public partial class InventoryModel : Node

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // Concentric rings, read outer → inner: numbers and operators alternate, each
     // ring spins to its option and locks in at the top, the centre shows the

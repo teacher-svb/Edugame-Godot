@@ -1,6 +1,6 @@
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // A custom picture with the round's values written onto it at authored spots,
     // e.g. a floor plan with `{x} m` along the walls and `?` in the middle.

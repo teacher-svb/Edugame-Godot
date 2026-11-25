@@ -4,7 +4,7 @@ using TnT.EduGame.Reading;
 using TnT.Extensions;
 using TnT.Systems.UIAnimation;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     /// <summary>
     /// The reading panel: the game dims, a sheet (letter paper, notice, or plain) shows the title and one page of the

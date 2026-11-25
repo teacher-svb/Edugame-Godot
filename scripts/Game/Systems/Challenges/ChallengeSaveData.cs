@@ -2,7 +2,7 @@ using System;
 using Godot;
 using TnT.Systems.Persistence;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // Seed of a challenge round the player hasn't solved yet, so a retry (also
     // after save/load) shows the exact same values.

@@ -3,9 +3,8 @@ using System.Threading.Tasks;
 using Godot;
 using TnT.Input;
 using TnT.Systems.State;
-using TnT.Systems.UI;
-
-namespace TnT.EduGame.GameState
+using TnT.EduGame.UI;
+namespace TnT.EduGame.GameStates
 {
     /// <summary>
     /// The card between acts: pauses the game, shows the card and waits until the player presses next or close

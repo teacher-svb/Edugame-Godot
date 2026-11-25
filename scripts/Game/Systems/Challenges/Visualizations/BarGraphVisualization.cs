@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // Bar chart drawn from the round's values: one bar per GraphBar, heights read off a
     // labelled value axis. A bar whose param is unknown is drawn as an outline with `?`.

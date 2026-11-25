@@ -1,6 +1,6 @@
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // Shared base of the pluggable parts of a challenge (visualizations, inputs):
     // a resource with its own settings that knows which widget scene renders it.

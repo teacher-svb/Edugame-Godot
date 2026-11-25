@@ -4,7 +4,7 @@ using Godot;
 using TnT.Extensions;
 using TnT.Systems.UIAnimation;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     [GlobalClass]
     public partial class MessageView : Control

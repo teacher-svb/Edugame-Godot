@@ -1,7 +1,7 @@
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using TnT.EduGame.GameState;
+using TnT.EduGame.GameStates;
 using TnT.EduGame.QuestSystem;
 
 namespace TnT.EduGame.Dev

@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // One concrete, rolled instance of a MathChallenge: every formula param plus
     // `answer` has a value, and Unknowns lists the ones the player must supply.

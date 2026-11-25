@@ -1,6 +1,6 @@
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // How the player supplies values for a round's unknowns. Concrete subclasses
     // carry their own settings and point at the scene that renders them.

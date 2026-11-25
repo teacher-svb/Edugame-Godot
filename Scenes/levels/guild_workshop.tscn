@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://coeco3nsaywj6" path="res://scripts/Lib/OcclusionFader/OcclusionFader.cs" id="1_fader"]
 [ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://scripts/Lib/OcclusionFader/occlusionFader.gdshader" id="2_fadershader"]
 [ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="3_player"]
-[ext_resource type="Script" uid="uid://bhsdjlrhck4qd" path="res://scripts/test/Transporter.cs" id="4_transporter"]
+[ext_resource type="Script" uid="uid://bhsdjlrhck4qd" path="res://scripts/Game/Systems/Levels/Transporter.cs" id="4_transporter"]
 [ext_resource type="PackedScene" uid="uid://ckvwdeosf0ql5" path="res://assets/3D/guild_workshop/level/guild_workshop.glb" id="5_level"]
 [ext_resource type="Script" uid="uid://b6r73solgkl3m" path="res://scripts/Game/Systems/Audio/SceneMusic.cs" id="30_et6py"]
 [ext_resource type="AudioStream" uid="uid://df7qaripqyahb" path="res://assets/music/guild-of-engineers-110bpm.wav" id="31_xeqbk"]

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // How a challenge is shown. Concrete subclasses carry their own settings
     // (grid size, image, ring count, ...) and point at the scene that renders

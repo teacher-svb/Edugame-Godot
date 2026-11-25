@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // Draws the line graph: vertical gridlines with x values, the line drawn in from left
     // to right (clipped to the plot), and the marked point with dashed guides to both axes.

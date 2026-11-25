@@ -1,8 +1,9 @@
 using System.Linq;
 using Godot;
-using TnT.EduGame.GameState;
+using TnT.EduGame.GameStates;
 using TnT.Extensions;
 using TnT.Input;
+using TnT.EduGame.Characters;
 
 namespace TnT.EduGame.Inventory
 {

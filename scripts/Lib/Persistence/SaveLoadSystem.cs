@@ -5,7 +5,6 @@ using System.Linq;
 using Godot;
 using TnT.Extensions;
 using Newtonsoft.Json;
-using TnT.EduGame.GameState;
 
 namespace TnT.Systems.Persistence
 {
@@ -21,10 +20,7 @@ namespace TnT.Systems.Persistence
         public override void _Ready()
         {
             dataService = new FileDataService<T>(new JsonSerializer());
-            StateManagerGame.Instance.SceneLoaded += OnSceneLoaded;
         }
-
-        protected abstract void OnSceneLoaded(string scenePath);
 
         protected void Bind<U, TData>(ref TData data) where U : Node, IBind<TData> where TData : ISaveable, new()
         {

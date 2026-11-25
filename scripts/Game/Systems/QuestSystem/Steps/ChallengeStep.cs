@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Godot;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 
 namespace TnT.EduGame.QuestSystem
 {

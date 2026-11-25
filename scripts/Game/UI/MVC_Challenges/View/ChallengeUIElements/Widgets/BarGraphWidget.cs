@@ -1,8 +1,8 @@
 using System.Linq;
 using Godot;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // Draws the bar chart; bars grow into place when shown. A bar whose param is
     // unknown shows only a dashed slot with `?`, so its height isn't given away.

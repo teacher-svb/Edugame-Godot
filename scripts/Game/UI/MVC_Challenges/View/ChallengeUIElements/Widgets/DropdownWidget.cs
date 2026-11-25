@@ -1,7 +1,7 @@
 using Godot;
 using TnT.Extensions;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // One OptionButton per unknown, prefixed with the param name when there's more than one.
     public partial class DropdownWidget : ChallengeInputWidget

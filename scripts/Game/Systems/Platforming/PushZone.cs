@@ -1,4 +1,5 @@
 using Godot;
+using TnT.EduGame.Characters;
 
 namespace TnT.EduGame.Platforming
 {

@@ -54,7 +54,7 @@ The game uses a **stack-based state machine** as its architectural foundation:
 
 - **`StateManagerGame`** (autoloaded) - Global state coordinator that inherits from `AbstractStateStack`
 - States can be pushed/popped like a navigation stack, maintaining state history
-- Five main game states:
+- Nine game states (`scripts/Game/StateManagementGame/`):
   - `GameStatePlay` - Normal gameplay
   - `GameStateChallenge` - Math challenge overlay
   - `GameStateMessage` - Character dialogue/notifications. One message box at a time: `StateManagerGame.ShowMessage` adds a message to the open box (`IsOpen` / `Enqueue`) instead of pushing a second message state; each message keeps its `onDismissed` and they all run in order once the box is closed (since 2026-11-24, `bug-message-queue-drops-commit`)
@@ -62,10 +62,11 @@ The game uses a **stack-based state machine** as its architectural foundation:
   - `GameStateLoadingScreen` - Scene transitions
   - `GameStateActCard` - Card between acts (`StateManagerGame.ShowActCard(title, subtitle, onDismissed)`): pauses, fades to black, closes on next/close after `MinSeconds`
   - `GameStateReading` - Reading panel for a longer text (`StateManagerGame.ShowReading(readableText, onClosed(readToEnd))`): pauses; next turns the page and closes on the last one, close closes on any page (see 5e)
+  - `GameStatePauseMenu` - Pause menu
+  - `GameStateSettings` - Settings screen
 
 **Key abstractions** in `scripts/Lib/StateManagement/`:
-- `AbstractStateManager` - Manages state transitions with lifecycle (TransitionIn/TransitionOut)
-- `AbstractStateStack` - Extends manager with Push/Pop semantics
+- `AbstractStateStack` - Manages state transitions with Push/Pop semantics and lifecycle (TransitionIn/TransitionOut)
 - `BaseState` - Encapsulates state behavior with OnEnter/OnExit/OnUpdate delegates
 - `IStateObject<T>` - Factory pattern interface for state creation
 
@@ -83,7 +84,7 @@ Most managers expose a static `Instance` property for global access.
 
 ### 3. MVC Pattern for All UI Systems
 
-**Every UI subsystem** follows strict Model-View-Controller pattern in `scripts/Game/UI/MVC_*`:
+**Every UI subsystem** follows the Model-View-Controller pattern in `scripts/Game/UI/MVC_*` (namespace `TnT.EduGame.UI`):
 
 ```
 MVC_[Feature]/
@@ -92,13 +93,16 @@ MVC_[Feature]/
   └── Model/[Feature]Model.cs            - Business logic and data
 ```
 
+New systems use the `Controller/View/Model/` subfolders. Small systems may be flat (the three files directly in `MVC_[Feature]/`): `MVC_Fade`, `MVC_Inventory`, `MVC_PauseMenu` and `MVC_Settings` are, and stay that way (moving them would break scene refs).
+
 Implemented systems:
 - MVC_Challenges - Math challenge UI
 - MVC_Messages - Notification/dialogue. The speaker closeup copies the character's `VisualRoot` (with its `dialogCamera`) into a `SubViewport` with `own_world_3d`, its own `CloseupEnvironment` (ambient light + the town's tonemap; without it the unlit side renders pure black) and `CloseupLight` (aimed from the closeup camera for every new model); without its own world the copy stands in the level at the origin (`bug-closeup-model-in-level`, 2026-11-23). So a character's model **must hang under `VisualRoot`** (as in `dad.tscn`: `root_node = "../../<model>"`, no `CharacterAnimator.VisualRoot` override), or its portrait is empty (`bug-portrait-missing-model`)
 - MVC_Inventory - Inventory UI
 - MVC_Fade - Screen transitions
-- MVC_CharacterSelection - Character picker
-- MVC_ActionsMenu - In-game action menus
+- MVC_PauseMenu - Pause menu
+- MVC_Settings - Settings screen
+- MVC_StartMenu - Start menu
 - MVC_ActCard - Card between acts ("Einde van Akte I")
 - MVC_Reading - Reading panel for letters and notices (R2)
 
@@ -172,7 +176,7 @@ Components in `scripts/Game/Systems/Levels/` (namespace `TnT.EduGame.Levels`, si
 - Act I route: home `level1` (`Spawns/front_door`) ↔ town `level2_beaverford-in-the-morning` (`Spawns/from_home`; `ExitToSchool` at the wizard tower door, opened by `Quests/I_2-completed-OpenSchool` once the four I.2 quests are done, after Mabel's line) → `level3_wizard_fire` (`StartSpawn`, the default). Forest `level5_forest`: `from_school` at the west exit, `ExitToHome` at the east exit → home. `WorldBounds` (StaticBody3D, 4 `WorldBoundaryShape3D` planes facing inwards on the edge of the 23 x 28 cell grid, x -44..48, z 0..112: no height or thickness to tunnel through) keeps the player on the map; the south exits run into it, so their `LevelExit` areas must stay inside the grid. I.4 (`GameData/quests/I.4-TheHeavyHeart.tres`, since 2026-11-22): `Spawns/from_school/I4_Arrival` starts obj1, `I4_PassSpring` (a 3 m band across the only way from the west to the east half, x 0.5..3.5, z 52..76, where the spur to the spring branches off) completes it; home `Spawns/front_door/I4_ArriveHome` completes obj2 (`Quests/I_4-The Heavy Heart` in `level1`). **End of Act I:** `level1` `Quests/I4-completed-EndOfActI` (`QuestsCompletedListener` over I.4) → `ActCardStep` ("Einde van Akte I" / "Welkom in Beaverford") → `SaveGameStep`. Act II starts from "I.4 completed": give the II.1 quest a `QuestsCompletedListener` over `I.4-TheHeavyHeart.tres` (no separate save flag). The chamber exits to the next level are `GoalRoom/ExitToNext` (closed until the chamber's I.3 quest opens it), see Goal rooms in 5b.
 - `GuardedGate` (Node3D, since 2026-11-22) - a way guards keep closed: `Guards` stand in front of a `Block` (e.g. a StaticBody3D barrier), and walking into `BarkArea` shows `BarkText` from `BarkCharacter` (again after stepping out). `Unguard()` removes guards, block and bark area for good (from a `CallMethodStep` under a `QuestsCompletedListener`, which also catches up after loading, so no save data). Forest: `ManaSpringGate` at the mana mine entrance (`mine_C` cell (0, 9), world (2, 0, 38); tunnel mouth z ≈ 38.2), two `Scenes/characters/mana_guard.tscn` (Knight) at (0.6 / 3.4, 0, 39.8) facing south, a placeholder wooden barricade across the mouth, bark "Halt! Geen toegang tot de bron. Bevel van de tovenaar." Unguarded in IV.2 (`engi10`).
 - Act II town: `Scenes/levels/level6_beaverford-act2.tscn` (since 2026-11-22), a separate level from the Act I town (`level2` is all Act I quest wiring). Same `beaverford.tscn`, morning environment and music; villagers under `Villagers/` (Cornelis on the moat-house side of the raised drawbridge at (27, 0.3, 8.5); Hendrik, Liesbeth and Mevrouw Bram at their Act I spots by the mill, bakery and school), `Markers/TownSquare` (by the noticeboard, for II.4) and `Markers/DrawbridgeSouthBank`, an empty `Quests` node, `Spawns/from_home` (default), `Exits/ExitToHome` (closed; opened at the end of II.4 by `wzrd05`, → home `Spawns/front_door`). **Act II route** (since 2026-11-22): home `level1` has two front-door exits on the same spot, `transporters/transporter_livingroom_level2` (→ Act I town) and `transporters/transporter_livingroom_act2` (→ Act II town `Spawns/from_home`, closed); `Quests/I4-completed-TownIsActII` (`QuestsCompletedListener` over I.4, also catches up after loading) closes the first and opens the second. **II.5** (`GameData/quests/II.5-TheMysteriousLetter.tres`, since 2026-11-23, in `level1`): `Quests/II4-completed-StayHome` (`QuestsCompletedListener` over II.4, placed after `I4-completed-TownIsActII` so its catch-up runs later) closes `transporter_livingroom_act2` (Mabel stays home; it stays closed after II.5: the way out is Act III's), shows `Letter` (paper with a gear seal on the dining table at (10, 0.77, -7.5); the `Livingroom` node is offset by (2, 0, -5), so its props' local positions are not world positions) and opens `Letter/Readable` (at the table's free west end, `GameData/readables/II.5-guild_letter.tres`, 3 pages, Letter look; it sends her to the old well on the square tonight, after twelve strokes of the school bell, to look for the gear sign on its rim), and arms `II5_TableArea` (3.5 x 2.8 m around the table, kept clear of `Spawns/front_door` so arriving home doesn't start the quest during the load). The table area starts obj1 (Mabel finds the letter; completes right away), `Letter/Readable.Read` completes obj2. **End of Act II** (`act2-4`, since 2026-11-23): `level1` `Quests/II5-completed-EndOfActII` (`QuestsCompletedListener` over II.5) → `ActCardStep` ("Einde van Akte II" / "Toveren zonder toverstaf") → `SaveGameStep`. Act III starts from "II.5 completed", like Act II from "I.4 completed". `Drawbridge` (`AnimatedProp`, `scripts/Game/Systems/Levels/`: holds an `AnimationPlayer` at the end or start of `StartAnimation` in `_Ready`; quests call `Play(anim)` (awaited until finished) and `SetPose(anim, atEnd)` through `CallMethodStep`, which is why both take a plain `string`: `CallMethodStep` can't convert a string arg to `StringName`) holds the bridge raised (`Drawbridge_Raise` end); it sits before `Quests`, so a quest's catch-up after loading wins. **II.1** (`GameData/quests/II.1-TheDesperateHelp-Cornelis.tres`, since 2026-11-22): `Quests/I4-completed-CornelisCalls` arms `CornelisShoutArea` (16 x 10 m south of the moat, starts obj1: Cornelis shouts), `CornelisBankArea` (at `Markers/DrawbridgeSouthBank`) completes obj1; obj2 (Mabel) runs the challenge (`Quests/II_1-The Desperate Help/MathChallengeTrigger`: `b + s - c`, drawbridge picture with bridge, supplies and counterweight labels, `TextChallengeInput`; was `CombinationLockInput` until 2026-11-23, see backlog `bug-combination-lock-input`); obj3 (Cornelis) plays `Drawbridge_Lower` and his amazed line (`MessageStep`), then completes. `Quests/II1-completed-BridgeDown` puts the bridge down again after loading (`SetPose`). The drawbridge's static collider has ramps at the deck ends (since 2026-11-22, `Edugame-Design` README "Ramps on the collider"), so characters without step-up walk over the lowered bridge. The town's navmesh was baked with the bridge half raised and doesn't cross the moat: `DrawbridgeNavLink` (`NavigationLink3D`, island (27, 0, 10.2) ↔ south bank (27, 0, 23.6), off) is switched on when II.1 is completed. **II.2** (`GameData/quests/II.2-TheRumorMill.tres`, since 2026-11-22): `Quests/II1-completed-CornelisToSquare` (`CallMethodStep` `set_Enabled` on `DrawbridgeNavLink`, then `PatrolStep` with one waypoint `Markers/CornelisRoute/2_Square`: Cornelis walks over the bridge to the square at 2 m/s (his `_speed`, like dad), about 15–20 s; on a catch-up he already stands there) and `Quests/II1-completed-ArmSquare` (arms `RumorSquareArea`, 8 x 8 m by the noticeboard, kept separate so a stuck walk can't block II.2). obj1 (Cornelis) starts in the square: reactions from Hendrik, Liesbeth, Mevrouw Bram (`MessageStep`s, the villagers stay at their workplaces); obj2 (Mabel: "het was gewoon rekenen"): their requests for help, which lead into II.3. NPC agents (`character_base.tscn` `NavigationAgent3D`, since 2026-11-24): `path_height_offset` 0, path/target distance 0.4. A character's origin is at its feet, so a navmesh must be baked close to the floor: `cell_height` 0.1 (town `beaverford.tscn`, home `level1`); a coarse `cell_height` lifts the navmesh surface (home had 0.5: surface at 0.6 m) and the agent never reaches a path point. **II.3 Liesbeth** (`GameData/quests/II.3-TheBusyWeek-Liesbeth.tres`, since 2026-11-23; one of the three Busy Week jobs, any order): `Quests/II2-completed-ArmBakery` arms `LiesbethBakeryArea` (6 x 6 m around the bakery, starts obj1: Liesbeth asks), `LiesbethScalesArea` (2.5 x 2.5 m at Liesbeth) completes obj1; obj2 (Mabel) runs the challenge (`Quests/II_3-The Busy Week-Liesbeth/MathChallengeTrigger`: `a * b - c`, a 300–500 g flour per loaf, b 2–6 loaves, c 100–1000 g already on the scale, all flour in steps of 50, `answer > 0`; `scales-diagram.png` with two labels (recipe `{a} g`, scale `{c} g`; the loaves are only in the question), `TextChallengeInput`); obj3 (Liesbeth) says the scales balance again plus one `MessageStep`, then completes. **II.3 Hendrik** (`GameData/quests/II.3-TheBusyWeek-Hendrik.tres`, since 2026-11-23, same pattern): `Quests/II2-completed-ArmMill` arms `HendrikMillArea` (6 x 6 m around Hendrik on the mill platform), `HendrikMillstoneArea` (2.5 x 2.5 m at Hendrik) completes obj1; the challenge (`Quests/II_3-The Busy Week-Hendrik/MathChallengeTrigger`) is `a * b - c` on `ConcentricCirclesVisualization` with `Operators` [+, -, *], so each round picks its own operators (a 2–12, b 2–9, c 2–15, `answer > 0`; the hint is about × before + and −), `TextChallengeInput`. **II.3 Mevrouw Bram** (`GameData/quests/II.3-TheBusyWeek-MsBram.tres`, since 2026-11-23, same pattern): `Quests/II2-completed-ArmSchool` arms `MsBramSchoolArea` (6 x 6 m in front of the school, on her +z side), `MsBramBellArea` (2.5 x 2.5 m at her) completes obj1; the challenge is the shared `GameData/challenges/sequence_bell_times.tres` (`SequenceVisualization` of the bell times in minutes past 8:00, last one missing, `DropdownInput`). All three II.3 jobs are armed by their own `II2-completed-Arm*` listener. **Busy Week gate** (`act2-3`, since 2026-11-23): `Quests/II3-completed-WizardArrives` (`QuestsCompletedListener` over the three II.3 quests) shows Mabel's line (live only), reveals the traveling wizard (`Villagers/TravelingWizard`, waiting hidden at (0, 0.4, 32) on the road with `collision_layer` 0, so he stands on the floor but the player walks through him; revealed with `Show` and `set_CollisionLayer` 2) and the `SparkTestPlatform` (-3.5, 0, 6; `Show`, `set_Monitoring`), then walks the wizard, Hendrik and Liesbeth to `Markers/Exposure/*` in the square (`PatrolStep`, not awaited; about 13 / 10 / 6 s). Mevrouw Bram stays at the school: her porch is a navmesh island, and the stream bridge (-10, 0, -22) has a deck step NPCs can't climb (backlog `world-stream-bridge-ramps`). `Quests/II3-completed-ArmExposure` arms `ExposureSquareArea` (8 x 8 m at the square) on its own. **II.4** (`GameData/quests/II.4-TheExposure.tres`, since 2026-11-23): the square area starts obj1 (the wizard; Cornelis cheers, then obj1 completes); obj2 (Mabel) is completed by `SparkTestPlatform.Tested` (the Act I fizzle); obj3 (the verdict: Hendrik, Liesbeth, Mevrouw Bram, the wizard) shows `Noticeboard/Paper` and opens `Noticeboard/Notice` (a `Readable` 1 m in front of the board at (-5.5, 0, -0.5), `GameData/readables/II.4-public_notice.tres`, 2 pages, Notice look), then completes; obj4 (Mabel) is completed by `Notice.Read`. `Quests/II4-completed-OpenExitHome` opens `Exits/ExitToHome` and keeps the notice up after loading. **Note:** `CallMethodStep` calls C# methods by reflection: use `Show`, `set_Monitoring`, `set_CollisionLayer` (C# names), not Godot's `show` / `set_deferred`.
-- In-level teleports: home bedroom ↔ living room (`transporters/transporter_bedroom-livingroom` → `Spawns/from_bedroom`, back → `Spawns/from_livingroom`). `scripts/test/Transporter.cs` is now only used by the guild workshop's placeholder `transporter_exit_village` (no target set yet; make it a `LevelExit` once the village scene exists).
+- In-level teleports: home bedroom ↔ living room (`transporters/transporter_bedroom-livingroom` → `Spawns/from_bedroom`, back → `Spawns/from_livingroom`). `scripts/Game/Systems/Levels/Transporter.cs` is now only used by the guild workshop's placeholder `transporter_exit_village` (no target set yet; make it a `LevelExit` once the village scene exists).
 
 ### 5d. Dev Shortcuts (debug builds only)
 
@@ -212,7 +216,7 @@ Longer texts (a letter, a notice) are read in a panel, not in dialogue boxes. `s
 **Core abstractions** in `scripts/Lib/Persistence/`:
 - `SaveLoadSystem<T>` - Abstract base class generic over `GameData` type
 - `IDataService<T>` - File operations interface
-- `IBind<TData>` - Interface for saveable entities requiring `UniqueId` property
+- `IBind<TData>` - Interface for saveable entities; they also implement `IUnique` (`PersistentId`)
 - `ISaveable` - Interface for save data classes requiring `Id` and `IsNew`
 - `FileDataService<T>` - JSON-based storage using Newtonsoft.Json, saves to Godot's `user://` directory
 
@@ -225,14 +229,13 @@ Longer texts (a letter, a notice) are read in a panel, not in dialogue boxes. `s
 ### 8. Character System (Component-Based with Mediator)
 
 **Key components:**
-- `Character` - Main logic component attached to `CharacterController2D`
-  - Loads `CharacterData` (Resource) by ID
-  - Manages Stats and Attributes via mediator pattern
-  - Processes abilities via input actions
-- `CharacterController2D` - Movement controller (CharacterBody2D)
-  - Grid-based tile movement with interpolation
-  - Raycast collision detection
-- `CharacterAgent2D` - AI pathfinding component (separate from player)
+All in `scripts/Game/Character/` (namespace `TnT.EduGame.Characters`); the character states are in `scripts/Game/StateManagementCharacter/` (`TnT.EduGame.Characters.States`). There is no 2D character code.
+- `Character3D` (CharacterBody3D, root of `Scenes/characters/character_base.tscn`) - Main logic component
+  - Builds Stats and Attributes from its `CharacterData` (Resource) via the mediator pattern
+  - Holds the `CharacterStateManager` (idle, move input, following via `NavigationAgent3D`, patrolling)
+- `CharacterController3D` (implements `ICharacterController`) - Physics movement, jumping and rotation; owns the `Camera` and the `OcclusionRaycast`
+- `CharacterAnimator` (implements `IMovementAnimator`) - Plays animations on movement state changes
+- `Player` (in `Scenes/characters/Player_3D.tscn`) - Feeds input into its character; implements `IOcclusionTarget` for the `OcclusionFader`
 
 **Stats/Attributes System:**
 - `StatsMediator` - Processes stat modifiers dynamically
@@ -261,10 +264,11 @@ Longer texts (a letter, a notice) are read in a panel, not in dialogue boxes. `s
 ## Coding Conventions and Patterns
 
 ### Namespacing
-- `TnT.Systems.*` - Framework/library code
-- `TnT.EduGame.*` - Game-specific code
+- `TnT.Systems.*` - Framework/library code in `scripts/Lib/` (e.g. `TnT.Systems.UI` for the `UIAnimation` helpers, `TnT.Systems.Easing`, `TnT.Systems.Persistence`, `TnT.Systems.OcclusionFade`). **Lib never references `TnT.EduGame`**: when Lib needs something from the game, it defines an interface (e.g. `IOcclusionTarget`) or the game subscribes itself (e.g. `SaveLoadManager` subscribes to `SceneLoaded`)
+- `TnT.EduGame.*` - Game-specific code in `scripts/Game/`, one namespace per folder: `.UI` (all `MVC_*`), `.Challenges`, `.Characters`, `.Characters.States`, `.GameStates`, `.Camera`, `.Levels`, `.Platforming`, `.Doors`, `.Dungeon`, `.Inventory`, `.QuestSystem`, `.Reading`, `.Dev`, ... Folder names that differ (`StateManagementGame` → `.GameStates`, `StateManagementCharacter` → `.Characters.States`, `InventorySystem` → `.Inventory`) stay as they are, because renaming folders breaks scene refs
 - `TnT.Extensions` - Extension methods
 - `TnT.Input` - Input system
+- Not yet cleaned up: some files are still global or in bare `TnT.EduGame` (e.g. `Game/UI/Carrousel/`, `Lib/Beziers/`, `Game/Door.cs`, the stats/attributes/abilities code)
 
 ### Design Patterns in Use
 1. **Singleton** - Managers expose static `Instance` property set in `_EnterTree()` or `_Ready()`
@@ -344,17 +348,15 @@ Full checklist: `project/workflows.md`. In short:
 ### Working with Save Data
 1. Define save data class implementing `ISaveable` with `Id` and `IsNew` properties
 2. Add save data field to `MyGameData` class
-3. Entities to be saved implement `IBind<YourSaveData>` with `UniqueId` property
+3. Entities to be saved implement `IBind<YourSaveData>` and `IUnique` (`PersistentId`)
 4. In `SaveLoadManager`, call `Bind<EntityType, SaveDataType>()` on scene load
    - List-type data (one entry per `PersistentId`: doors, challenges, characters) is bound per subtree too: nodes added after the scene loaded (e.g. by a dungeon populator) call `SaveLoadManager.Instance.BindSubtree(root)` once in the tree; add new list types to `BindEntities`. Their node paths must be the same on every run. Binding twice adds nothing
 5. Save data persists to `user://` directory as JSON
 
 ### Character and Movement
-- Player character uses `CharacterController2D` for grid-based movement
-- Movement is tile-based with smooth interpolation
-- Use `Move(Vector2I direction)` for relative movement
-- Use `MoveTo(Vector2I targetTile)` for absolute positioning
-- NPCs use `CharacterAgent2D` for pathfinding with NavigationAgent2D
+- Characters move through `CharacterController3D` (`ICharacterController`): `Move(Vector2 movement)` for input direction, `MoveTo(Vector3 position)` for a target
+- The player's input goes through `Player`; NPCs walk via their `CharacterStateManager` and `NavigationAgent3D`
+- The game camera is `scripts/Game/Camera/CameraLookAt.cs` on `Scenes/PlayerCamera.tscn`
 
 ## Important Notes
 
@@ -368,6 +370,7 @@ Full checklist: `project/workflows.md`. In short:
 - Managers scene composes all systems as node hierarchy
 - UI Controllers instantiate View/Model as child nodes
 - Resources (.tres) reference script classes via metadata
+- Some scenes reference a script by path only, without a `uid` (e.g. the generated school challenge scenes: `ChallengeHazard`, `CrumblingPlatform`, `PushZone`, `CodeClue`). Move scripts through the editor's FileSystem dock, or `git mv` the `.cs` together with its `.cs.uid` and fix every `res://` path; then grep for leftover `res://scripts/...` strings. Also check `Edugame-Design/.work/scripts/` (its generators write script paths). Namespace renames are free: no scene, resource or save file stores a namespace
 
 ### Editor Tooling
 - Use `[Tool]` attribute for scripts that run in editor
@@ -387,7 +390,7 @@ Full checklist: `project/workflows.md`. In short:
 - Game states implementation: `scripts/Game/StateManagementGame/`
 - UI systems: `scripts/Game/UI/MVC_*/`
 - Challenge system: `scripts/Game/Systems/Challenges/` (data), `scripts/Game/UI/MVC_Challenges/` (UI)
-- Quest system: `scripts/Game/Quests/`
+- Quest system: `scripts/Game/Systems/QuestSystem/`
 - Character system: `scripts/Game/Character/`
 - Persistence: `scripts/Lib/Persistence/`
 - Input: `scripts/Lib/Input/`

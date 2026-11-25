@@ -2,10 +2,11 @@ using System.Threading.Tasks;
 using TnT.Systems.State;
 using System;
 using Godot;
-using TnT.Systems.UI;
 using TnT.Extensions;
 
-namespace TnT.EduGame.GameState
+using TnT.EduGame.UI;
+using TnT.EduGame.Characters;
+namespace TnT.EduGame.GameStates
 {
     [GlobalClass]
     public partial class GameStateLoadingScreen : BaseGameState, IStateObject<GameStateLoadingScreen.LoaderOptions>

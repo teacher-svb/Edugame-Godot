@@ -1,6 +1,6 @@
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // Describes how one formula param gets its value when a round is rolled.
     // Precedence: fixed value → pool → [Min, Max] range.

@@ -1,6 +1,6 @@
 using Godot;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     [GlobalClass]
     public partial class SettingsModel : Node

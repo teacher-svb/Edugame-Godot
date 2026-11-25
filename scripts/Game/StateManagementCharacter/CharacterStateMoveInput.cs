@@ -7,7 +7,7 @@ using TnT.Extensions;
 using TnT.Input;
 using TnT.Systems.State;
 
-namespace TnT.EduGame.CharacterState
+namespace TnT.EduGame.Characters.States
 {
     [GlobalClass]
     public partial class CharacterStateMoveInput :

@@ -1,10 +1,9 @@
 using System.Threading.Tasks;
 using Godot;
-using TnT.EduGame.GameState;
+using TnT.EduGame.GameStates;
 using TnT.Systems.Persistence;
-using TnT.Systems.UI;
-
-namespace TnT.EduGame.Question
+using TnT.EduGame.UI;
+namespace TnT.EduGame.Challenges
 {
     [GlobalClass]
     public partial class MathChallengeTrigger : Node, IBind<ChallengeSaveData>

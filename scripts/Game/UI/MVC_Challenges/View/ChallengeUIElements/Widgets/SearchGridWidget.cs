@@ -1,7 +1,7 @@
 using Godot;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // Draws the grid with square cells, axis values along the bottom and left, an
     // optional background picture and a pulsing marker at the round's coordinates.

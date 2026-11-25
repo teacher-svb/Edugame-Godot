@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using TnT.EduGame.GameState;
+using TnT.EduGame.GameStates;
 
 namespace TnT.EduGame.QuestSystem
 {

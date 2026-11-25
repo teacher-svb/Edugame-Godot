@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 using Godot;
-using TnT.EduGame.Question;
+using TnT.EduGame.Challenges;
 using TnT.Extensions;
 using TnT.Systems.UIAnimation;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     [GlobalClass]
     public partial class ChallengeView : Control

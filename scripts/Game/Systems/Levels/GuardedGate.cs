@@ -1,6 +1,6 @@
 using Godot;
 using TnT.EduGame.Characters;
-using TnT.EduGame.GameState;
+using TnT.EduGame.GameStates;
 using TnT.Extensions;
 
 namespace TnT.EduGame.Levels

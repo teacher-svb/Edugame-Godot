@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // Parses and evaluates challenge formulas and rules (plain C#, via System.Data.DataTable).
     // Formulas only count with a whole-number result; rules are true/false expressions in the

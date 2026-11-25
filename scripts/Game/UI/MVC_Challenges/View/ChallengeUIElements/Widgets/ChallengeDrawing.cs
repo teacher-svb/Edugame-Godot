@@ -1,6 +1,6 @@
 using Godot;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     // Drawing helpers shared by the custom-drawn visualization widgets (_Draw).
     public static class ChallengeDrawing

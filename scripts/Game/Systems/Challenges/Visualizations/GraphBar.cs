@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // One bar of a BarGraphVisualization: a category label and the param that sets its height.
     [GlobalClass, Tool]

@@ -5,7 +5,7 @@ using Godot;
 using TnT.EduGame.Characters;
 using TnT.Extensions;
 
-namespace TnT.Systems.UI
+namespace TnT.EduGame.UI
 {
     public partial class Notification : Control
     {

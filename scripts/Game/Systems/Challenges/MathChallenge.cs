@@ -2,7 +2,7 @@ using System.Linq;
 using Godot;
 
 
-namespace TnT.EduGame.Question
+namespace TnT.EduGame.Challenges
 {
     // What a challenge asks, independent of how it's shown or answered: a formula
     // whose result is the implicit `answer`, how each param gets its value, and
