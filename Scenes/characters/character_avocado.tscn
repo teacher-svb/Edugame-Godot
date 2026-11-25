@@ -94,10 +94,11 @@ bones/4/rotation = Quaternion(0.00023839239, 0.042440332, -0.0842824, 0.99553776
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 0, 0)
 layers = 524289
 
-[node name="ItemRef" type="Node3D" parent="." index="5" unique_id=563072524]
+[node name="ItemRef" type="Node3D" parent="." index="5" unique_id=563072524 node_paths=PackedStringArray("_area")]
 script = ExtResource("3_ch0qv")
 _staticData = ExtResource("4_da6yh")
 _pickupChannel = ExtResource("5_da6yh")
+_area = NodePath("../Area3D")
 
 [node name="Node3D" type="Node3D" parent="ItemRef" index="0" unique_id=627201557]
 
@@ -122,7 +123,5 @@ collision_mask = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=1623215847]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3418579, 0)
 shape = SubResource("CylinderShape3D_da6yh")
-
-[connection signal="body_entered" from="Area3D" to="ItemRef" method="_OnBodyEntered"]
 
 [editable path="VisualRoot/avocado2"]

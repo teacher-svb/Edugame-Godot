@@ -30,7 +30,10 @@ namespace TnT.EduGame.Dungeon
         /// <summary>MeshLibrary items something may stand on.</summary>
         [Export] public string[] FreeFloorTiles { get; set; } = { "room_floor", "room_floor_b", "room_circle", "room_wall" };
 
-        /// <summary>Put here at the start room's centre (a new game; a saved position is bound later and wins).</summary>
+        /// <summary>
+        /// Put here at the start room's centre (a new game; a saved position is bound later and wins). No lock, clue or
+        /// object is planned on the cells under that spot.
+        /// </summary>
         [Export] public Node3D Player { get; set; }
 
         /// <summary>Moved to the start room's centre, so a <see cref="Levels.LevelExit"/> into this level lands there.</summary>
@@ -63,7 +66,10 @@ namespace TnT.EduGame.Dungeon
             Populate(graph);
         }
 
-        /// <summary>Replaces everything this populator placed with a fresh plan for <paramref name="graph"/>.</summary>
+        /// <summary>
+        /// Replaces everything this populator placed with a fresh plan for <paramref name="graph"/>. Without a recipe,
+        /// graph or map (or a route) it only clears: <see cref="Route"/>, <see cref="Goal"/> and <see cref="Placements"/> are empty then.
+        /// </summary>
         public void Populate(DungeonGraph graph)
         {
             foreach (var child in GetChildren())
@@ -72,12 +78,19 @@ namespace TnT.EduGame.Dungeon
                 child.Free();   // now: the new nodes reuse the names
             }
             _graph = graph;
+            // nothing from an earlier plan survives an early return (finding 6.7)
+            Route = null;
+            Goal = null;
+            Placements = Array.Empty<Placement>();
             if (Recipe == null || graph == null || Map == null)
                 return;
 
             long seed = Seed != 0 ? Seed : DungeonSettings.StoredOn(Map)?.Seed ?? 0;
-            var roles = graph.Rooms.Select(RoleOf).ToArray();
-            Route = RoutePlanner.Plan(graph.CoreGraph, roles, seed);
+            Route = PlanRoute(graph, seed);
+            if (Route == null)
+                return;
+            foreach (var problem in Recipe.IdProblems())
+                GD.PushWarning($"{Name}: recipe {Recipe.ResourcePath}: {problem}");
 
             var goalFloor = new HashSet<string>(GoalFloorTiles ?? Array.Empty<string>());
             Goal = GoalRoom == null ? null : GoalAnchorPicker.Pick(graph.CoreGraph, Route, cell => goalFloor.Contains(ItemName(cell)));
@@ -87,7 +100,9 @@ namespace TnT.EduGame.Dungeon
 
             var free = new HashSet<string>(FreeFloorTiles ?? Array.Empty<string>());
             var skipped = new List<string>();
-            Placements = Recipe.Plan(graph.CoreGraph, Route, cell => free.Contains(ItemName(cell)), seed, skipped, reserved).Placements;
+            // the player spawns in the middle of the start room: nothing planned there (finding 6.1)
+            var spawnCells = SpawnCells(graph.CoreGraph.Rooms[Route.Start]);
+            Placements = Recipe.Plan(graph.CoreGraph, Route, cell => free.Contains(ItemName(cell)), seed, skipped, reserved, spawnCells).Placements;
             foreach (var line in skipped)
                 GD.PushWarning($"{Name}: slot skipped: {line}");
 
@@ -135,6 +150,44 @@ namespace TnT.EduGame.Dungeon
         }
 
         /// <summary>
+        /// The route for the room boxes' roles; when those can't be joined (a start and goal with no way between them),
+        /// an error and the route between the graph's diameter ends, the roles ignored (finding 6.5). Null, with an
+        /// error, when there is no route at all (no rooms).
+        /// </summary>
+        DungeonRoute PlanRoute(DungeonGraph graph, long seed)
+        {
+            var roles = graph.Rooms.Select(RoleOf).ToArray();
+            try
+            {
+                return RoutePlanner.Plan(graph.CoreGraph, roles, seed);
+            }
+            catch (Exception e) when (e is InvalidOperationException or ArgumentException)
+            {
+                GD.PushError($"{Name}: no route for the room roles ({e.Message}); using the dungeon's longest way instead, roles ignored");
+            }
+            try
+            {
+                return RoutePlanner.Plan(graph.CoreGraph, null, seed);
+            }
+            catch (Exception e) when (e is InvalidOperationException or ArgumentException)
+            {
+                GD.PushError($"{Name}: no route through the dungeon ({e.Message}); nothing placed");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// The cells under the player's spawn (<see cref="DungeonGraph.RoomCentre"/>, the middle of the room's footprint):
+        /// the centre cell of an odd-sized room; on an even side the spawn is on the line between two cells, so both.
+        /// </summary>
+        static IEnumerable<Vector3I> SpawnCells(Godoodads.Dungeon.Core.GraphRoom room)
+        {
+            var xs = new[] { room.Position.X + (room.Size.X - 1) / 2, room.Position.X + room.Size.X / 2 }.Distinct();
+            var zs = new[] { room.Position.Z + (room.Size.Z - 1) / 2, room.Position.Z + room.Size.Z / 2 }.Distinct();
+            return zs.SelectMany(z => xs.Select(x => new Vector3I(x, room.Position.Y, z))).ToList();
+        }
+
+        /// <summary>
         /// A room's role ("start", "goal"): from its room box when it has one, so a role set on the box after the
         /// last Generate counts too (Generate is what copies the box's Data into the graph); else the graph's copy.
         /// </summary>
@@ -169,7 +222,7 @@ namespace TnT.EduGame.Dungeon
         }
 
         static MathChallengeTrigger TriggerIn(Node node) =>
-            node is CodeDoor door ? door.Challenge : node.FindObjectsByType<MathChallengeTrigger>().FirstOrDefault();
+            node is CodeDoor door ? door.Challenge : node.FindObjectsByType<MathChallengeTrigger>(includeSelf: false).FirstOrDefault();
 
         /// <summary>
         /// Doors are built N-S with the outside to the north (-Z): turn -Z to the door direction. Clues and

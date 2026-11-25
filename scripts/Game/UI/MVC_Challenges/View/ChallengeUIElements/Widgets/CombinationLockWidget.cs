@@ -1,13 +1,15 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Godot;
-using TnT.EduGame.Challenges;
 using TnT.Extensions;
 
 namespace TnT.EduGame.UI
 {
-    // One carrousel wheel per unknown. Every wheel always shows a value, so each
-    // one is assigned as soon as it's built and the player only has to spin.
+    // One carrousel wheel per unknown. Every wheel always shows a value, so each one is
+    // reported as soon as it's built (deferred: ChallengeUI subscribes after adding the widget,
+    // and the wheel's own first ValueSelected fires inside Init, i.e. in this _Ready) and the
+    // player only has to spin.
     public partial class CombinationLockWidget : ChallengeInputWidget
     {
         // Carrousel wheel instanced per unknown; its CarrouselValue children are
@@ -21,22 +23,37 @@ namespace TnT.EduGame.UI
 
         public override void _Ready()
         {
-            var fields = this.FindAnyObjectByType<HBoxContainer>();
+            var fields = this.FindAnyObjectByType<HBoxContainer>(includeSelf: true);
             var wheelScene = GD.Load<PackedScene>(WheelScenePath);
 
+            var wheels = new List<(string Param, Carrousel Carrousel)>();
             foreach (var paramName in Round.Unknowns)
             {
                 var wheel = wheelScene.Instantiate<Control>();
                 wheel.CustomMinimumSize = WheelSize;
 
-                var carrousel = wheel.FindAnyObjectByType<Carrousel>();
+                var carrousel = wheel.FindAnyObjectByType<Carrousel>(includeSelf: true);
                 FillValues(carrousel, Round.OptionsFor(paramName));
-                carrousel.ValueSelected += v => EmitValueAssigned(paramName, int.Parse(v));
+                carrousel.ValueSelected += v => EmitValueAssigned(paramName, ParseValue(v));
 
                 fields.AddChild(wheel);
                 carrousel.Init();
+                wheels.Add((paramName, carrousel));
+                FirstFocus ??= wheel.FindAnyObjectByType<CarrouselController>(includeSelf: true)?.BtnNext;
             }
+
+            Callable.From(() => ReportStart(wheels)).CallDeferred();
         }
+
+        void ReportStart(List<(string Param, Carrousel Carrousel)> wheels)
+        {
+            if (!IsInstanceValid(this))
+                return;
+            foreach (var (param, carrousel) in wheels)
+                EmitValueAssigned(param, ParseValue(carrousel.CurrentValue));
+        }
+
+        static int ParseValue(string value) => int.Parse(value, CultureInfo.InvariantCulture);
 
         // Swap the scene's placeholder values for the options, keeping the first
         // placeholder's look as template.
@@ -45,15 +62,15 @@ namespace TnT.EduGame.UI
             var placeholders = carrousel.GetChildren().OfType<CarrouselValue>().ToList();
             var template = placeholders.First();
 
-            var padded = options.AsEnumerable();
-            while (padded.Count() < MinVisibleValues)
-                padded = padded.Concat(options);
+            var padded = options.ToList();
+            while (options.Count > 0 && padded.Count < MinVisibleValues)
+                padded.AddRange(options);
 
             foreach (var option in padded)
             {
                 var value = (CarrouselValue)template.Duplicate();
                 value.Value = option.ToString();
-                var label = value.FindAnyObjectByType<RichTextLabel>();
+                var label = value.FindAnyObjectByType<RichTextLabel>(includeSelf: true);
                 if (label != null)
                     label.Text = option.ToString();
                 carrousel.AddChild(value);

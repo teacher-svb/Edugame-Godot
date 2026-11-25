@@ -15,15 +15,14 @@ namespace TnT.EduGame.QuestSystem
         public List<Quest> Quests => _quests.ToList();
         IQuestProcessor _questChain;
 
-        // UnityEvent<QuestObjective> OnQuestUpdated;
         [Signal]
         public delegate void OnQuestUpdatedEventHandler(QuestObjective objective);
         [Export] QuestEventChannel eventChannel;
 
+        public override void _EnterTree() => Instance = this;
 
         public override void _Ready()
         {
-            Instance = this;
             base._Ready();
             _questChain = new QuestProcessor<QuestMessageStart>(QuestState.NOTSTARTED, QuestState.INPROGRESS);
             _questChain
@@ -39,6 +38,20 @@ namespace TnT.EduGame.QuestSystem
             }
 
             SyncSaveData();
+        }
+
+        // the quests are shared Resources and outlive this node
+        public override void _ExitTree()
+        {
+            foreach (var quest in _quests)
+            {
+                if (quest == null)
+                    continue;
+                quest.OnObjectiveStateChanged -= QuestObjectStateChanged;
+                quest.ObjectiveTransitionRequested -= QuestObjectTransitionRequested;
+            }
+            if (Instance == this)
+                Instance = null;
         }
 
         private void QuestObjectStateChanged(QuestObjective o)
@@ -57,6 +70,13 @@ namespace TnT.EduGame.QuestSystem
 
         private void QuestObjectTransitionRequested(QuestObjective o, QuestState requestedState, Action commit)
         {
+            // nothing to say (a fail without a fail text): commit at once instead of showing an empty box
+            var text = o.GetText(requestedState);
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                commit();
+                return;
+            }
             StateManagerGame.Instance.ShowQuestMessage(o, requestedState, commit);
         }
 
@@ -71,8 +91,9 @@ namespace TnT.EduGame.QuestSystem
             SyncSaveData();
         }
 
-        // Starts the quest's first objective. Does nothing once any objective has been touched,
-        // so it is safe to call repeatedly (e.g. every time the player talks to the quest giver).
+        // Starts the quest's first objective. Does nothing once any objective has been touched or while its
+        // start is pending (message not dismissed yet), so it is safe to call repeatedly (e.g. every time the
+        // player talks to the quest giver).
         public void StartQuest(string questId)
         {
             var quest = _quests.FirstOrDefault(q => q.Id == questId);
@@ -82,7 +103,7 @@ namespace TnT.EduGame.QuestSystem
                 return;
             }
 
-            if (quest.Objectives.Any(o => o.State != QuestState.NOTSTARTED))
+            if (quest.HasPendingTransition || quest.Objectives.Any(o => o.State != QuestState.NOTSTARTED))
                 return;
 
             UpdateQuest(new QuestMessageStart { QuestId = questId, ObjectiveId = quest.CurrentObjectiveId });
@@ -93,60 +114,4 @@ namespace TnT.EduGame.QuestSystem
         public void FailObjective(string questId, string objectiveId) => UpdateQuest(new QuestMessageFail { QuestId = questId, ObjectiveId = objectiveId });
 
     }
-
-    public interface IQuestProcessor
-    {
-        IQuestProcessor SetNext(IQuestProcessor processor);
-        void Process(QuestMessage msg, List<Quest> quests);
-    }
-
-    public abstract class QuestProcessor : IQuestProcessor
-    {
-        IQuestProcessor _next;
-        public virtual void Process(QuestMessage msg, List<Quest> quests) => _next?.Process(msg, quests);
-        public IQuestProcessor SetNext(IQuestProcessor processor) => _next = processor;
-    }
-
-    public class QuestProcessor<T> : QuestProcessor where T : QuestMessage
-    {
-        QuestState _currentState;
-        QuestState _resultState;
-        public QuestProcessor(QuestState currentState, QuestState resultState)
-        {
-            _currentState = currentState;
-            _resultState = resultState;
-        }
-        public override void Process(QuestMessage msg, List<Quest> quests)
-        {
-            if (msg is T)
-            {
-                var quest = quests.FirstOrDefault(q => q.Id == msg.QuestId);
-
-                // Messages only apply to the current objective in the expected state; anything
-                // else is ignored, so warn instead of failing silently (usually a wiring mistake).
-                if (quest == null)
-                    GD.PushWarning($"QuestManager: {typeof(T).Name} ignored, no quest with id '{msg.QuestId}'.");
-                else if (quest.CurrentObjectiveId != msg.ObjectiveId)
-                    GD.PushWarning($"QuestManager: {typeof(T).Name} for objective '{msg.ObjectiveId}' ignored in '{quest.Name}', current objective is '{quest.CurrentObjectiveId}'.");
-                else if (quest.State != _currentState)
-                    GD.PushWarning($"QuestManager: {typeof(T).Name} for objective '{msg.ObjectiveId}' ignored in '{quest.Name}', it is {quest.State} but must be {_currentState}.");
-                else
-                    quest.State = _resultState;
-
-                return;
-            }
-
-            base.Process(msg, quests);
-        }
-    }
-
-    public abstract class QuestMessage
-    {
-        public string QuestId { get; set; }
-        public string ObjectiveId { get; set; }
-    }
-
-    public class QuestMessageStart : QuestMessage { }
-    public class QuestMessageFail : QuestMessage { }
-    public class QuestMessageComplete : QuestMessage { }
 }

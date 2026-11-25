@@ -1,9 +1,9 @@
-using System.Linq;
 using Godot;
 using TnT.EduGame.GameStates;
 using TnT.Extensions;
 using TnT.Input;
 using TnT.EduGame.Characters;
+using TnT.EduGame.Interaction;
 
 namespace TnT.EduGame.Reading
 {
@@ -11,10 +11,11 @@ namespace TnT.EduGame.Reading
     /// Something in the world the player can read (a letter on the table, a notice on a board): while the player is
     /// inside this area, <see cref="Prompt"/> shows the interact key, and pressing it opens <see cref="Text"/> in the
     /// reading panel. <see cref="Read"/> fires each time it is closed after reaching the last page: connect it to
-    /// <c>QuestNode.CompleteObjective</c> with the objective id, or wait for it with a <c>ReadStep</c>.
+    /// <c>QuestNode.CompleteObjective</c> with the objective id, or wait for it with a <c>ReadStep</c>. The interact key is
+    /// shared with items: in range of several, only the nearest (<see cref="InteractionFocus"/>) shows its prompt and reacts.
     /// </summary>
     [GlobalClass]
-    public partial class Readable : Area3D
+    public partial class Readable : Area3D, IInteractable
     {
         [Export] public ReadableText Text { get; set; }
         /// <summary>Shown while the player can read this (e.g. a Label3D with the key); optional.</summary>
@@ -34,19 +35,29 @@ namespace TnT.EduGame.Reading
 
         public override void _Ready()
         {
-            BodyEntered += b => { if (IsPlayer(b)) { _playerInRange = true; UpdatePrompt(); } };
-            BodyExited += b => { if (IsPlayer(b)) { _playerInRange = false; UpdatePrompt(); } };
-            if (Prompt?.FindAnyObjectByType<Label3D>() is Label3D label && InteractAction != null
-                && InputMap.ActionGetEvents(InteractAction.ActionName).FirstOrDefault(e => e is InputEventKey) is InputEventKey key)
-                label.Text = OS.GetKeycodeString(DisplayServer.KeyboardGetKeycodeFromPhysical(key.PhysicalKeycode));
+            BodyEntered += b => { if (Player.IsPlayer(b)) { _playerInRange = true; InteractionFocus.Add(this); UpdatePrompt(); } };
+            BodyExited += b => { if (Player.IsPlayer(b)) { _playerInRange = false; InteractionFocus.Remove(this); UpdatePrompt(); } };
+            // headless-safe, like Item: the headless display server has no keyboard layout
+            if (Prompt?.FindAnyObjectByType<Label3D>(includeSelf: true) is Label3D label && InteractionFocus.KeyLabel(InteractAction) is string key)
+                label.Text = key;
             UpdatePrompt();
+        }
+
+        public override void _ExitTree()
+        {
+            _playerInRange = false;
+            InteractionFocus.Remove(this);
         }
 
         public override void _Process(double delta)
         {
-            if (_playerInRange && Enabled && !_reading && InteractAction?.Triggered == true)
+            UpdatePrompt();   // the focus moves as the player walks between interactables
+            if (InteractionFocus.TryUse(this, InteractAction))
                 Interact();
         }
+
+        Vector3 IInteractable.InteractPosition => GlobalPosition;
+        bool IInteractable.CanInteract => _playerInRange && Enabled && !_reading;
 
         /// <summary>Opens the text in the reading panel, as if the player pressed the interact key.</summary>
         public void Interact()
@@ -75,9 +86,8 @@ namespace TnT.EduGame.Reading
         void UpdatePrompt()
         {
             if (Prompt != null)
-                Prompt.Visible = Enabled && _playerInRange && !_reading;
+                Prompt.Visible = InteractionFocus.IsFocused(this);   // in range, enabled, not open, and the nearest
         }
 
-        static bool IsPlayer(Node body) => body.FindAnyObjectByType<Player>() != null;
     }
 }

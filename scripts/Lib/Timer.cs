@@ -8,7 +8,11 @@ namespace TnT.Systems.TimeSystem
         public double Time { get; set; }
         public bool IsRunning { get; protected set; }
 
-        public double Progress => Time / initialTime;
+        /// <summary>
+        /// <see cref="Time"/> as a fraction of the initial time (a countdown: 1 at the start, 0 when finished).
+        /// 0 when the initial time is 0 or less (no length; was a division by zero: infinity or NaN).
+        /// </summary>
+        public double Progress => initialTime > 0 ? Time / initialTime : 0;
 
         public Action OnTimerStart = delegate { };
         public Action OnTimerStop = delegate { };
@@ -70,22 +74,5 @@ namespace TnT.Systems.TimeSystem
             initialTime = newTime;
             Reset();
         }
-    }
-
-    public class StopwatchTimer : Timer
-    {
-        public StopwatchTimer() : base(0) { }
-
-        public override void Tick(double deltaTime)
-        {
-            if (IsRunning)
-            {
-                Time += deltaTime;
-            }
-        }
-
-        public void Reset() => Time = 0;
-
-        public double GetTime() => Time;
     }
 }

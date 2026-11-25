@@ -21,6 +21,9 @@ public partial class Carrousel : BoxContainer
 
 	CarrouselValue SelectedValue => Children[Children.Length / 2];
 
+	/// <summary>The value in the centre now (ValueSelected only reports changes, the first one inside Init).</summary>
+	public string CurrentValue => SelectedValue.Value;
+
 	public void Init()
 	{
 		var numChildren = GetChildren().Count;
@@ -48,15 +51,20 @@ public partial class Carrousel : BoxContainer
 		var animateFrom = children.Select(c => c.SizeFlagsStretchRatio).ToArray();
 		var animateTo = allRatios.Rotate(direction).ToArray();
 
-		// Animate
+		// Animate (on the tree's process frames, which go on after the carrousel is freed: a challenge closed or its
+		// next round shown within a spin; then the rest of the slide is skipped)
 		await foreach (var t in Easings.Animate(duration, Ease.EaseInOutCubic))
 		{
+			if (Gone(children))
+				return;
 			for (int i = 0; i < children.Length; i++)
 			{
 				children[i].SizeFlagsStretchRatio = Mathf.Lerp(animateFrom[i], animateTo[i], t);
 				children[i].Modulate = children[i].Modulate.Lerp(new Color(animateTo[i], animateTo[i], animateTo[i]), t);
 			}
 		}
+		if (Gone(children))
+			return;
 
 		HideBorders();
 
@@ -76,18 +84,28 @@ public partial class Carrousel : BoxContainer
 	}
 
 
-	public async void _SelectPrevious()
+	bool Gone(CarrouselValue[] children) =>
+		!IsInstanceValid(this) || children.Any(c => !IsInstanceValid(c));
+
+	// async void: button handlers (CarrouselController); exceptions are logged here, nothing awaits them
+	public void _SelectPrevious() => SlideFromButton(-1);
+	public void _SelectNext() => SlideFromButton(1);
+
+	async void SlideFromButton(int direction)
 	{
 		if (_isScrolling) return;
 		_isScrolling = true;
-		await Slide(-1);
-		_isScrolling = false;
-	}
-	public async void _SelectNext()
-	{
-		if (_isScrolling) return;
-		_isScrolling = true;
-		await Slide(1);
-		_isScrolling = false;
+		try
+		{
+			await Slide(direction);
+		}
+		catch (Exception e)
+		{
+			GD.PushError($"Carrousel: slide failed: {e}");
+		}
+		finally
+		{
+			_isScrolling = false;
+		}
 	}
 }

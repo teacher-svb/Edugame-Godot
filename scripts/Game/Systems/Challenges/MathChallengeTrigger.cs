@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Godot;
 using TnT.EduGame.GameStates;
@@ -16,18 +17,18 @@ namespace TnT.EduGame.Challenges
             set => _challenge = value;
         }
 
+        // A one-shot challenge (CodeDoor sets it): a correct answer keeps the seed, so its clue keeps
+        // showing the solved values, also after save/load. Off (reusable quest challenges): a correct
+        // answer drops the seed and the next run, and its clues, get new values.
+        [Export] public bool KeepSolvedSeed { get; set; }
+
         [Signal] public delegate void ChallengeCompletedEventHandler();
         [Signal] public delegate void ChallengeFailedEventHandler();
 
-        public string PersistentId { get; private set; }
+        public string PersistentId => PersistentIds.SceneScoped(this);   // "<level scene>#<path in the level>", read at bind time
 
         // replaced by the persisted data once SaveLoadManager binds this trigger
         ChallengeSaveData _saveData = new();
-
-        public override void _EnterTree()
-        {
-            PersistentId = GetPath().ToString();
-        }
 
         // A new round seed: picked, set from outside, or a different one from the save data.
         // Clues showing this trigger's values listen to it to redraw.
@@ -35,14 +36,18 @@ namespace TnT.EduGame.Challenges
 
         // The seed of the round this trigger shows. Kept until the round is solved, so a failed
         // attempt replays the same values. Reading it picks one when none is pending, so a clue can
-        // show the values before the challenge has ever run; setting it (e.g. the dungeon populator,
+        // show the values before the challenge has ever run (without SeedChanged: whoever reads it
+        // uses it right away, and a clue's Refresh reads it); setting it (e.g. the dungeon populator,
         // so a door and its clue share a seed) only holds until a saved pending seed is bound.
         public int Seed
         {
             get
             {
                 if (!_saveData.HasPendingSeed)
-                    SetSeed((int)GD.Randi());
+                {
+                    _saveData.PendingSeed = (int)GD.Randi();
+                    _saveData.HasPendingSeed = true;
+                }
                 return _saveData.PendingSeed;
             }
             set => SetSeed(value);
@@ -69,6 +74,13 @@ namespace TnT.EduGame.Challenges
             }
         }
 
+        // the next read picks a new seed; clues showing the old values redraw
+        void DropSeed()
+        {
+            _saveData.HasPendingSeed = false;
+            EmitSignal(SignalName.SeedChanged);
+        }
+
         void SetSeed(int seed)
         {
             bool changed = !_saveData.HasPendingSeed || _saveData.PendingSeed != seed;
@@ -78,10 +90,35 @@ namespace TnT.EduGame.Challenges
                 EmitSignal(SignalName.SeedChanged);
         }
 
-        public void TriggerChallenge()
+        public void TriggerChallenge() => TryTriggerChallenge();
+
+        // false when it isn't shown: another challenge is already open, or this one can't be rolled
+        // or shown (error logged). Answered is only subscribed once it is shown, so a failure can't
+        // leave a handler behind that would also answer for the next challenge.
+        bool TryTriggerChallenge()
         {
+            if (_challenge == null)
+            {
+                GD.PushError($"{Name}: MathChallengeTrigger has no challenge");
+                return false;
+            }
+
+            var seed = Seed;
+            try
+            {
+                if (!StateManagerGame.Instance.ShowChallenge((MathChallenge)_challenge.Duplicate(), seed))
+                    return false;
+            }
+            catch (Exception e)
+            {
+                // e.g. no valid round for this seed in the roll attempts: don't keep (and save) a
+                // seed that fails every retry; a broken challenge fails with the next one too
+                GD.PushError($"{Name}: challenge '{_challenge.Name}' could not be shown (seed {seed}): {e.Message}");
+                DropSeed();
+                return false;
+            }
             ChallengeController.Instance.Answered += OnAnswered;
-            StateManagerGame.Instance.ShowChallenge((MathChallenge)_challenge.Duplicate(), Seed);
+            return true;
         }
 
         // Shows the challenge; true when solved, false when failed
@@ -96,24 +133,43 @@ namespace TnT.EduGame.Challenges
             ChallengeFailed += OnFailed;
             try
             {
-                TriggerChallenge();
+                if (!TryTriggerChallenge())
+                    return false;
                 return await answered.Task;
             }
             finally
             {
-                ChallengeCompleted -= OnCompleted;
-                ChallengeFailed -= OnFailed;
+                // a freed trigger (scene change) can't be unsubscribed from, and has nothing left to call
+                if (IsInstanceValid(this))
+                {
+                    ChallengeCompleted -= OnCompleted;
+                    ChallengeFailed -= OnFailed;
+                }
             }
         }
 
         private async void OnAnswered(bool isCorrect)
         {
             ChallengeController.Instance.Answered -= OnAnswered;
-            if (isCorrect)
-                _saveData.HasPendingSeed = false;
+            try
+            {
+                if (isCorrect && !KeepSolvedSeed)
+                    DropSeed();   // solved: the next run rolls new values, and clues show those
 
-            await StateManagerGame.Instance.Pop();
-            EmitSignal(isCorrect ? SignalName.ChallengeCompleted : SignalName.ChallengeFailed);
+                await StateManagerGame.Instance.CloseChallenge();   // the challenge state, not whatever is on top
+            }
+            catch (Exception e)
+            {
+                var what = IsInstanceValid(this) ? $"{Name}: closing challenge '{_challenge?.Name}'" : "MathChallengeTrigger: closing a challenge";
+                GD.PushError($"{what} failed: {e}");
+            }
+            finally
+            {
+                // always report, or a waiting door (busy flag) or ChallengeStep would hang; unless the trigger was
+                // freed during the close (scene change): its door and quest step are gone with it
+                if (IsInstanceValid(this))
+                    EmitSignal(isCorrect ? SignalName.ChallengeCompleted : SignalName.ChallengeFailed);
+            }
         }
     }
 }

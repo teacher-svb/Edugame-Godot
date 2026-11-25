@@ -7,11 +7,11 @@ namespace TnT.EduGame.UI
     // optional background picture and a pulsing marker at the round's coordinates.
     public partial class SearchGridWidget : ChallengeVisualizationWidget<SearchGridVisualization>
     {
-        [Export] public Color PaperColor { get; set; } = new(0.97f, 0.94f, 0.86f);
+        [Export] public Color PaperColor { get; set; } = ChallengePalette.Paper;
         [Export] public Color LineColor { get; set; } = new(0.35f, 0.25f, 0.15f, 0.45f);
-        [Export] public Color BorderColor { get; set; } = new(0.35f, 0.25f, 0.15f);
-        [Export] public Color LabelColor { get; set; } = new(0.20f, 0.13f, 0.07f);
-        [Export] public Color MarkerColor { get; set; } = new(0.80f, 0.20f, 0.15f);
+        [Export] public Color BorderColor { get; set; } = ChallengePalette.Frame;
+        [Export] public Color LabelColor { get; set; } = ChallengePalette.Ink;
+        [Export] public Color MarkerColor { get; set; } = ChallengePalette.Accent;
 
         // seconds per marker pulse
         [Export] public float PulsePeriod { get; set; } = 1.2f;

@@ -26,7 +26,6 @@ namespace TnT.EduGame
         AttributesMediator _mediator = new();
         public AttributesMediator Mediator => _mediator;
 
-        // public int Health => _attributes.FirstOrDefault(a => a.Key == AttributeType.Health).Value;
         public int Get(AttributeType type)
         {
             if (_clampResolvers.TryGetValue(type, out var clamp))

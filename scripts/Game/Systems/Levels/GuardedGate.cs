@@ -1,7 +1,6 @@
 using Godot;
 using TnT.EduGame.Characters;
 using TnT.EduGame.GameStates;
-using TnT.Extensions;
 
 namespace TnT.EduGame.Levels
 {
@@ -63,11 +62,9 @@ namespace TnT.EduGame.Levels
             BarkArea = null;
         }
 
-        static bool IsPlayer(Node body) => body.FindAnyObjectByType<Player>() != null;
-
         void OnBarkEntered(Node3D body)
         {
-            if (!IsPlayer(body) || _inside)
+            if (!Player.IsPlayer(body) || _inside)
                 return;
             _inside = true;
             if (!IsGuarded || _frames < SettleFrames || string.IsNullOrWhiteSpace(BarkText) || BarkCharacter == null)
@@ -78,7 +75,7 @@ namespace TnT.EduGame.Levels
 
         void OnBarkExited(Node3D body)
         {
-            if (IsPlayer(body))
+            if (Player.IsPlayer(body))
                 _inside = false;
         }
     }

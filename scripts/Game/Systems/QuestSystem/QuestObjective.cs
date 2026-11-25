@@ -3,7 +3,6 @@ using Godot;
 using TnT.EduGame.Characters;
 
 
-
 namespace TnT.EduGame.QuestSystem
 {
     [GlobalClass]
@@ -28,11 +27,16 @@ namespace TnT.EduGame.QuestSystem
         [Export]
         public QuestState State;
 
+        // the state requested and waiting for its quest message to be dismissed (Quest.RequestTransition); not saved
+        internal QuestState? PendingState { get; set; }
+        public bool HasPendingTransition => PendingState != null;
+
         public string GetText()
         {
             return GetText(State);
         }
 
+        /// <summary>The quest message for a move to <paramref name="state"/>; empty when there is nothing to say.</summary>
         public string GetText(QuestState state)
         {
             string icon = "";
@@ -42,7 +46,9 @@ namespace TnT.EduGame.QuestSystem
                 case QuestState.NOTSTARTED:
                     // Only ever reached via a failed transition (Quest.Reset() writes State
                     // directly and bypasses GetText), so this doubles as the fail message.
-                    icon = $"[color=red]{FailText}[/color]";
+                    // No fail text: no message (was an empty red box).
+                    if (!string.IsNullOrWhiteSpace(FailText))
+                        icon = $"[color=red]{FailText}[/color]";
                     break;
                 case QuestState.INPROGRESS:
                     icon = $"[color=#FFD700][font_size=50]󰲼[/font_size][/color] {StartText}";
@@ -54,5 +60,5 @@ namespace TnT.EduGame.QuestSystem
 
             return icon;
         }
-}
     }
+}

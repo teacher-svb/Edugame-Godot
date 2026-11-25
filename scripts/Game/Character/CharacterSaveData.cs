@@ -4,12 +4,12 @@ using TnT.Systems.Persistence;
 
 namespace TnT.EduGame.Characters
 {
-    [GlobalClass]
-    public partial class CharacterSaveData : Resource, ISaveable
+    // plain C# (not a Godot Resource): Newtonsoft writes only these fields (Vector3 as X/Y/Z)
+    public class CharacterSaveData : ISaveable
     {
-        [Export] public string Id { get; set; } = Guid.NewGuid().ToString();
-        [Export] public bool IsNew { get; set; }
-        [Export] public Vector3 position;
-        [Export] public string characterId;
+        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public bool IsNew { get; set; }
+        public Vector3 position;
+        public string characterId;
     }
 }

@@ -32,10 +32,11 @@ namespace TnT.EduGame.UI
                     default:
                         break;
                 }
-                view.RefreshView(model.Items);
-
+                // no RefreshView here: OnInventoryChanged (raised just before) already rebuilt the slots
             };
-            _pickupItemListener.OnItemEvent += model.AddItem;
+            // the pickup channel asks first (Accepts), so a full inventory leaves the item in the world
+            _pickupItemListener.OnItemEvent += item => model.AddItem(item);
+            _pickupItemListener.Accepts = _ => model.HasFreeSlot;
             view.InitializeView(model.Items);
         }
 

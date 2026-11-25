@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Godot;
 
 namespace TnT.EduGame
 {
@@ -9,6 +8,9 @@ namespace TnT.EduGame
     {
         private readonly List<AttributeModifier> modifiers = new();
         public event Action<AttributeType, int, AttributeContext> OnAttributeModified = delegate { };
+
+        /// <summary>Whether a modifier is held (an expired one until the next <see cref="Update"/>); without one, <see cref="Update"/> has nothing to do.</summary>
+        public bool HasModifiers => modifiers.Count > 0;
 
         public void AddModifier(AttributeModifier mod)
         {
@@ -30,7 +32,7 @@ namespace TnT.EduGame
 
         public void Update(double deltaTime)
         {
-            modifiers.ForEach(m => m.Update(deltaTime));
+            modifiers.ToList().ForEach(m => m.Update(deltaTime));   // a copy: an OnApply handler may add a modifier
             modifiers
                 .Where(e => e.IsExpired)
                 .ToList()

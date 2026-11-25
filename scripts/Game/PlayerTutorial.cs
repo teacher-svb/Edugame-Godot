@@ -1,5 +1,5 @@
-using System.Linq;
 using Godot;
+using TnT.EduGame.Interaction;
 using TnT.Input;
 
 namespace TnT.EduGame
@@ -10,12 +10,6 @@ namespace TnT.EduGame
         [Export] Label3D _label;
         public InputAction2D MoveAction { get; set; }
 
-
-        public override void _EnterTree()
-        {
-            PersistentId = GetPath().ToString();
-        }
-
         public void MarkCompleted()
         {
             if (_saveData != null)
@@ -23,12 +17,8 @@ namespace TnT.EduGame
             Hide();
         }
 
-        string GetKeyText(InputActionBase action)
-        {
-            var @event = InputMap.ActionGetEvents(action.ActionName).FirstOrDefault(e => e is InputEventKey) as InputEventKey;
-            var key = DisplayServer.KeyboardGetKeycodeFromPhysical(@event.PhysicalKeycode);
-            return OS.GetKeycodeString(key);
-        }
+        // the key on this keyboard layout; empty without a keyboard binding (was an NRE), physical key headless
+        static string GetKeyText(InputActionBase action) => InteractionFocus.KeyLabel(action) ?? "";
 
         public void ShowDirection(Vector2I direction, InputActionBase action)
         {

@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Godot;
 using TnT.EduGame.Reading;
-using TnT.Extensions;
 using TnT.Systems.UIAnimation;
 
 namespace TnT.EduGame.UI
@@ -32,10 +31,8 @@ namespace TnT.EduGame.UI
             _title.Text = title;
             _title.Visible = !string.IsNullOrEmpty(title);
             Modulate = Colors.Transparent;
+            // on its own CanvasLayer (UIManager/ReadingLayer in managers.tscn): above the game UI, below the act card
             Visible = true;
-            var canvas = this.FindAncestorOfType<CanvasLayer>();
-            if (canvas != null)
-                canvas.Layer = 998;   // above the game and the HUD, below the act card
             await this.FadeIn(fade);
         }
 
@@ -60,11 +57,9 @@ namespace TnT.EduGame.UI
 
         public async Task HideView(float fade = 0.3f)
         {
-            await this.FadeOut(fade);
-            Visible = false;
-            var canvas = this.FindAncestorOfType<CanvasLayer>();
-            if (canvas != null)
-                canvas.Layer = -1;
+            // not when a ShowView took over during the fade-out
+            if (await this.FadeOut(fade))
+                Visible = false;
         }
 
         public string ShownText => _body.Text;

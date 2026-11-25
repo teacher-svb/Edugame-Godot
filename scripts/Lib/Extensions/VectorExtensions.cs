@@ -11,13 +11,13 @@ namespace TnT.Extensions
     public static class VectorExtensions
     {
         /// <summary>
-        /// Converts a <see cref="Vector3"/> to a <see cref="Vector2"/> using the XZ plane
-        /// (equivalent to <see cref="ToVector2XZ"/>). Use this when the Y axis is the vertical
-        /// axis and X/Z represent the horizontal plane.
+        /// Converts a <see cref="Vector3"/> to a <see cref="Vector2"/> using the XY plane
+        /// (equivalent to <see cref="ToVector2XY"/>), the inverse of <see cref="ToVector3(Vector2)"/>:
+        /// <c>v.ToVector3().ToVector2() == v</c>. For the horizontal ground plane use <see cref="ToVector2XZ"/>.
         /// </summary>
         /// <param name="v">The vector to convert.</param>
-        /// <returns>A <see cref="Vector2"/> with components <c>(v.X, v.Z)</c>.</returns>
-        public static Vector2 ToVector2(this Vector3 v) => ToVector2XZ(v);
+        /// <returns>A <see cref="Vector2"/> with components <c>(v.X, v.Y)</c>.</returns>
+        public static Vector2 ToVector2(this Vector3 v) => ToVector2XY(v);
 
         /// <summary>
         /// Converts a <see cref="Vector3"/> to a <see cref="Vector2"/> by dropping the Y component,
@@ -37,7 +37,8 @@ namespace TnT.Extensions
 
         /// <summary>
         /// Converts a <see cref="Vector2"/> to a <see cref="Vector3"/> using the XY plane
-        /// (equivalent to <see cref="ToVector3XY"/>). Z is set to <c>0</c>.
+        /// (equivalent to <see cref="ToVector3XY"/>), the inverse of <see cref="ToVector2(Vector3)"/>. Z is set to <c>0</c>.
+        /// For the horizontal ground plane use <see cref="ToVector3XZ"/>.
         /// </summary>
         /// <param name="v">The vector to convert.</param>
         /// <returns>A <see cref="Vector3"/> with components <c>(v.X, v.Y, 0)</c>.</returns>
@@ -81,7 +82,7 @@ namespace TnT.Extensions
         /// <returns>The snapped <see cref="Vector2"/>.</returns>
         public static Vector2 Snap(this Vector2 v, float gridSize = 16.0f)
         {
-            return v.ToVector3().Snap(gridSize).ToVector2();
+            return v.ToVector3XY().Snap(gridSize).ToVector2XY();
         }
 
         /// <summary>
@@ -113,7 +114,7 @@ namespace TnT.Extensions
         /// <returns>The offset-snapped <see cref="Vector2"/>.</returns>
         public static Vector2 SnapOffset(this Vector2 v, Vector2 offset, float gridSize = 16.0f)
         {
-            return v.ToVector3().SnapOffset(offset.ToVector3(), gridSize).ToVector2();
+            return v.ToVector3XY().SnapOffset(offset.ToVector3XY(), gridSize).ToVector2XY();
         }
     }
 }

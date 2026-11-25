@@ -15,6 +15,8 @@ namespace TnT.EduGame.GameStates
             public bool showDisplay;
             public bool showControls;
             public bool showAccessibility;
+            /// <summary>Runs once the screen is closed (Back, Escape, or unwound by a scene load).</summary>
+            public System.Action onClosed;
         }
 
         private bool _closed;
@@ -24,7 +26,7 @@ namespace TnT.EduGame.GameStates
         {
             _options = options;
             _closed = false;
-            return new BaseState(new() { OnEnter = Open, OnExit = Close, ExitOnNextUpdate = Exit, OnUpdate = Update });
+            return new BaseState(new() { OnEnter = Open, OnResume = Resume, OnExit = Close, ExitOnNextUpdate = Exit, OnUpdate = Update });
         }
 
         private void Update()
@@ -47,11 +49,19 @@ namespace TnT.EduGame.GameStates
             );
         }
 
+        // a state on top of it closed (and disabled the shared close action)
+        private Task Resume()
+        {
+            _options.close.Enable();
+            return Task.CompletedTask;
+        }
+
         private async Task Close()
         {
             SettingsController.Instance.OnBack -= HandleBack;
             _options.close.Disable();
             await SettingsController.Instance.Hide();
+            _options.onClosed?.Invoke();
         }
 
         private void HandleBack() => _closed = true;

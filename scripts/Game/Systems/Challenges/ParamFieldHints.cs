@@ -4,12 +4,6 @@ using Godot;
 
 namespace TnT.EduGame.Challenges
 {
-    // Implemented via ParamAwareResource (visualizations, graph bars).
-    public interface IParamFieldOwner
-    {
-        void SetAvailableParams(string[] names);
-    }
-
     public static class ParamFieldHints
     {
         // turns the listed string fields into a dropdown of `available` (typing a

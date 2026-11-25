@@ -1,5 +1,4 @@
 using Godot;
-using TnT.Extensions;
 using TnT.EduGame.Characters;
 
 namespace TnT.EduGame.School
@@ -33,11 +32,9 @@ namespace TnT.EduGame.School
                 _glow.LightEnergy = 0;
         }
 
-        static bool IsPlayer(Node body) => body.FindAnyObjectByType<Player>() != null;
-
         void OnBodyEntered(Node3D body)
         {
-            if (!IsPlayer(body) || _inside)
+            if (!Player.IsPlayer(body) || _inside)
                 return;
             _inside = true;
             Tests++;
@@ -47,7 +44,7 @@ namespace TnT.EduGame.School
 
         void OnBodyExited(Node3D body)
         {
-            if (IsPlayer(body))
+            if (Player.IsPlayer(body))
                 _inside = false;
         }
 

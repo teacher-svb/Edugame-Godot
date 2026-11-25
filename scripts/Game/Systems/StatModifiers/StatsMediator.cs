@@ -11,6 +11,9 @@ namespace TnT.EduGame
     {
         readonly List<StatModifier> modifiers = new();
 
+        /// <summary>Whether a modifier is added; without one, <see cref="Update"/> has nothing to do.</summary>
+        public bool HasModifiers => modifiers.Count > 0;
+
         /// <summary>
         /// Event invoked when a stat query is made.
         /// </summary>
@@ -48,7 +51,7 @@ namespace TnT.EduGame
         /// <param name="deltaTime">The time delta to update.</param>
         public void Update(double deltaTime)
         {
-            modifiers.ForEach(m => m.Update(deltaTime));
+            modifiers.ToList().ForEach(m => m.Update(deltaTime));   // a copy: an OnApply handler may add a modifier
 
             modifiers
                 .Where(m => m.MarkedForRemoval)

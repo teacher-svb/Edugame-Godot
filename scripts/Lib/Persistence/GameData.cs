@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Godot;
-using TnT.Extensions;
-using Newtonsoft.Json;
-
 namespace TnT.Systems.Persistence
 {
-    [GlobalClass]
-    public abstract partial class GameData : Resource
+    /// <summary>
+    /// Root of a save file. A plain C# class (not a Godot Resource), so Newtonsoft only writes the game's own
+    /// fields; save data classes must stay plain C# too (no Godot object fields).
+    /// </summary>
+    public abstract class GameData
     {
-        [Export] public string Name;
+        public string Name;
     }
 }

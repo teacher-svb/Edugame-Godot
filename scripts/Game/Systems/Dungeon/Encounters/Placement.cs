@@ -11,9 +11,6 @@ namespace TnT.EduGame.Dungeon
     /// </summary>
     public sealed record Placement(PlacementKind Kind, DungeonEncounter Encounter, int Room, Vector3I Cell, int Seed)
     {
-        /// <summary>Locks: the corridor the door closes (one of them when the door is shared), else -1.</summary>
-        public int Corridor { get; init; } = -1;
-
         /// <summary>Locks: one step out of <see cref="Room"/> through the door, to turn the N-S built door scene.</summary>
         public Vector3I DoorDirection { get; init; }
 

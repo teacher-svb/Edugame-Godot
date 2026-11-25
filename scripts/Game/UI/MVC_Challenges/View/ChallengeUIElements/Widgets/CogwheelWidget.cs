@@ -7,26 +7,31 @@ namespace TnT.EduGame.UI
 {
     // One toggle button per number in the combined option pool of all unknowns.
     // Pressing fills the first empty unknown (in formula order); releasing frees it again.
+    // A button gives its number once, so a number that several unknowns have in the rolled
+    // round gets that many buttons (otherwise e.g. 3 + 3 could never be entered).
     public partial class CogwheelWidget : ChallengeInputWidget
     {
         readonly Dictionary<string, Button> _picked = new();
 
         public override void _Ready()
         {
-            var fields = this.FindAnyObjectByType<HBoxContainer>();
+            var fields = this.FindAnyObjectByType<HBoxContainer>(includeSelf: true);
 
             var pool = Round.Unknowns
                 .SelectMany(u => Round.OptionsFor(u))
                 .Distinct();
+            var copies = Round.Unknowns.GroupBy(u => Round.Values[u]).ToDictionary(g => g.Key, g => g.Count());
 
             foreach (var value in pool)
-            {
-                var button = fields.CreateChild<Button>();
-                button.Text = value.ToString();
-                button.ToggleMode = true;
-                button.CustomMinimumSize = new Vector2(56, 56);
-                button.Toggled += pressed => OnToggled(button, value, pressed);
-            }
+                for (int copy = 0; copy < copies.GetValueOrDefault(value, 1); copy++)
+                {
+                    var button = fields.CreateChild<Button>();
+                    button.Text = value.ToString();
+                    button.ToggleMode = true;
+                    button.CustomMinimumSize = new Vector2(56, 56);
+                    button.Toggled += pressed => OnToggled(button, value, pressed);
+                    FirstFocus ??= button;
+                }
         }
 
         void OnToggled(Button button, int value, bool pressed)

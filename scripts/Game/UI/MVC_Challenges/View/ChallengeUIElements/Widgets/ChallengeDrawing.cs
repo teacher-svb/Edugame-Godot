@@ -2,9 +2,29 @@ using Godot;
 
 namespace TnT.EduGame.UI
 {
+    // The paper-and-ink look the custom-drawn widgets share: the defaults of their colour
+    // exports (each widget keeps its own exports, so a scene can still recolour one).
+    public static class ChallengePalette
+    {
+        public static readonly Color Paper = new(0.97f, 0.94f, 0.86f);
+        public static readonly Color Grid = new(0.35f, 0.25f, 0.15f, 0.25f);
+        public static readonly Color Ink = new(0.20f, 0.13f, 0.07f);      // labels, text
+        public static readonly Color Frame = new(0.35f, 0.25f, 0.15f);    // axes, outlines
+        public static readonly Color Accent = new(0.80f, 0.20f, 0.15f);   // unknowns, markers, selection
+        public static readonly Color Green = new(0.32f, 0.53f, 0.21f);    // bars, locked-in ring
+    }
+
     // Drawing helpers shared by the custom-drawn visualization widgets (_Draw).
     public static class ChallengeDrawing
     {
+        // outline of `rect` in dashes (an unknown's slot)
+        public static void DrawDashedRect(this CanvasItem canvas, Rect2 rect, Color color, float width = 2, float dash = 6)
+        {
+            Vector2[] corners = [rect.Position, new(rect.End.X, rect.Position.Y), rect.End, new(rect.Position.X, rect.End.Y)];
+            for (int i = 0; i < 4; i++)
+                canvas.DrawDashedLine(corners[i], corners[(i + 1) % 4], color, width, dash);
+        }
+
         // unit vector for an angle measured from straight up, clockwise
         public static Vector2 Direction(float angle) => Vector2.Up.Rotated(angle);
 

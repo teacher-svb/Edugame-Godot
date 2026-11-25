@@ -28,12 +28,14 @@ namespace TnT.EduGame.Dungeon
 
         /// <summary>
         /// The placements, in the context; <paramref name="skipped"/> gets a line per slot that didn't fit. Nothing is
-        /// placed on <paramref name="reserved"/> cells.
+        /// placed on <paramref name="reserved"/> or <paramref name="avoided"/> cells (see <see cref="EncounterContext.Avoid"/>).
         /// </summary>
-        public EncounterContext Plan(DungeonGraphData graph, DungeonRoute route, Func<Vector3I, bool> isFreeFloor, long seed, List<string> skipped = null, IEnumerable<Vector3I> reserved = null)
+        public EncounterContext Plan(DungeonGraphData graph, DungeonRoute route, Func<Vector3I, bool> isFreeFloor, long seed, List<string> skipped = null,
+            IEnumerable<Vector3I> reserved = null, IEnumerable<Vector3I> avoided = null)
         {
             var context = new EncounterContext(graph, route, isFreeFloor, seed);
             context.Reserve(reserved);
+            context.Avoid(avoided);
             foreach (var pass in new[] { EncounterPass.Gate, EncounterPass.Filler })
             {
                 int budget = pass == EncounterPass.Gate ? Gates : Fillers;
@@ -62,6 +64,23 @@ namespace TnT.EduGame.Dungeon
                 }
             }
             return context;
+        }
+
+        /// <summary>
+        /// A line per encounter id problem: encounters of a kind draw their random streams by
+        /// <see cref="DungeonEncounter.Id"/> (<c>lock:&lt;Id&gt;:n</c>), so two different ones with the same (or an
+        /// empty) id share streams and plan alike; an empty id also leaves warnings and placements unnamed.
+        /// </summary>
+        public IEnumerable<string> IdProblems()
+        {
+            var encounters = Slots.Where(s => s?.Encounter != null).Select(s => s.Encounter)
+                .Concat(Pool.Where(e => e != null))
+                .Distinct()
+                .ToList();
+            foreach (var e in encounters.Where(e => string.IsNullOrEmpty(e.Id)))
+                yield return $"an encounter ({e.GetType().Name}{(string.IsNullOrEmpty(e.ResourcePath) ? "" : " " + e.ResourcePath)}) has no Id";
+            foreach (var group in encounters.Where(e => !string.IsNullOrEmpty(e.Id)).GroupBy(e => (Kind: e.GetType().Name, e.Id)).Where(g => g.Count() > 1))
+                yield return $"{group.Count()} different {group.Key.Kind}s share the Id '{group.Key.Id}' (and their random streams)";
         }
 
         static DungeonEncounter Draw(List<DungeonEncounter> pool, Random rng)

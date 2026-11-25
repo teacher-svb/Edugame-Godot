@@ -1,11 +1,16 @@
 using System;
 using TnT.EduGame.Characters;
 using TnT.Systems.TimeSystem;
-using Godot;
 
 namespace TnT.EduGame
 {
 
+    /// <summary>
+    /// A change to an attribute (e.g. damage or healing). It is applied once when added to an
+    /// <see cref="AttributesMediator"/>; with a duration (<see cref="AttributeContext.Duration"/> &gt; 0) and a frequency
+    /// (<see cref="AttributeContext.Frequency"/> &gt; 0) it is applied again that many times per second until the
+    /// duration ends. Without a duration it is applied once and expires.
+    /// </summary>
     public abstract class AttributeModifier : IDisposable
     {
         public bool IsExpired { get; private set; }
@@ -21,21 +26,33 @@ namespace TnT.EduGame
             _attributeType = attributeType;
             _context = context;
 
-            _timer = new CountdownTimer(_context.Duration);
-            _tickTimer = new CountdownTimer(1f / _context.Frequency);
+            // no timers without a duration: applied once (Handle expires it). No tick timer without a frequency: the
+            // default -1 made a -1 s tick timer, which stopped and re-applied the modifier every frame (finding 7.17).
+            if (_context.Duration > 0)
+            {
+                _timer = new CountdownTimer(_context.Duration);
+                if (_context.Frequency > 0)
+                    _tickTimer = new CountdownTimer(1.0 / _context.Frequency);
+            }
         }
         internal void Init()
         {
-            _timer.OnTimerStop += () => IsExpired = true;
-            _timer.Start();
-
-            _tickTimer.OnTimerStop += () =>
+            if (_timer != null)
             {
-                Handle();
-                if (!IsExpired)
-                    _tickTimer.Start();
-            };
-            _tickTimer.Start();
+                _timer.OnTimerStop += () => IsExpired = true;
+                _timer.Start();
+            }
+
+            if (_tickTimer != null)
+            {
+                _tickTimer.OnTimerStop += () =>
+                {
+                    Handle();
+                    if (!IsExpired)
+                        _tickTimer.Start();
+                };
+                _tickTimer.Start();
+            }
             Handle();
         }
         public void Handle()
@@ -62,7 +79,7 @@ namespace TnT.EduGame
     public class BasicAttributeModifier : AttributeModifier
     {
         Func<int, int> _effect;
-        public BasicAttributeModifier(AttributeType attributeType, Func<int, int> effect, AttributeContext context, int duration = -1/*, int uses = 1*/) : base(attributeType, context)
+        public BasicAttributeModifier(AttributeType attributeType, Func<int, int> effect, AttributeContext context) : base(attributeType, context)
         {
             _effect = effect;
         }

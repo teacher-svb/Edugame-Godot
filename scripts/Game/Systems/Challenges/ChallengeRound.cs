@@ -24,6 +24,8 @@ namespace TnT.EduGame.Challenges
         const int MinDistractorSpread = 5;
         const int MaxDistractorSpread = 10000;
         const int DefaultOptionCount = 4;
+        // relative; only for Check, rolling stays exact so seeds keep their rounds
+        const double CheckTolerance = 1e-9;
         public int Seed { get; }
         public string Formula { get; }
         // every param plus `answer`
@@ -71,6 +73,9 @@ namespace TnT.EduGame.Challenges
             if (unspecified.Any())
                 throw new ArgumentException($"Formula '{formula}' has params without a ParamSpec: {string.Join(", ", unspecified)}");
 
+            // a typo or school notation (`a : b`) would otherwise fail every roll below with a misleading message
+            FormulaEvaluator.ValidateFormula(formula, specList.Select(s => s.Name).ToList());
+
             var known = specList.Select(s => s.Name).Append(AnswerParam).ToHashSet();
             for (int i = 0; i < ruleList.Count; i++)
                 FormulaEvaluator.ValidateRule(ruleList[i], expandedRules[i], known);
@@ -104,11 +109,14 @@ namespace TnT.EduGame.Challenges
             foreach (var unknown in Unknowns)
                 all[unknown] = playerValues[unknown];
 
-            return FormulaEvaluator.TryEvaluate(Formula, all, out var result) && result == all[AnswerParam];
+            // `/` is a Double in the evaluator: `a / 3 * 3` can miss a whole number by a rounding error
+            return FormulaEvaluator.TryEvaluate(Formula, all, out var result, CheckTolerance) && result == all[AnswerParam];
         }
 
-        // Values an input widget may offer for `param`: the authored pool if there
-        // is one, otherwise the correct value plus seeded distractors.
+        // Values an input widget may offer for `param`: the authored pool if there is one (exactly
+        // that pool, shuffled: the rules and `count` don't apply, the author picked the values), otherwise
+        // the correct value plus seeded distractors that keep every rule true (the other values as rolled).
+        // A fixed param has no pool to offer (Sample ignores a leftover one too), so it gets distractors.
         public IReadOnlyList<int> OptionsFor(string param, int count = DefaultOptionCount)
         {
             if (!Values.TryGetValue(param, out var correct))
@@ -117,7 +125,7 @@ namespace TnT.EduGame.Challenges
             var rng = RandomFor($"options:{param}");
             _specs.TryGetValue(param, out var spec);
 
-            if (spec?.Pool is { Length: > 0 })
+            if (spec is { IsFixed: false, Pool.Length: > 0 })
                 return spec.Pool.Distinct().OrderBy(_ => rng.Next()).ToList();
 
             List<int> candidates;

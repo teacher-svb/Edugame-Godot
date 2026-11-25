@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using TnT.EduGame.Characters;
-using TnT.Systems.EventSystem;
-using TnT.Systems.Persistence;
 
 
 namespace TnT.EduGame.QuestSystem
@@ -39,37 +36,61 @@ namespace TnT.EduGame.QuestSystem
         public delegate void OnQuestObjectiveTransitionRequested(QuestObjective objective, QuestState requestedState, Action commit);
         public OnQuestObjectiveTransitionRequested ObjectiveTransitionRequested;
 
-        [Export]
-        public QuestState State
+        // bumped by Reset (a load or a new game): a commit requested before it belongs to the old session
+        int _generation;
+
+        QuestObjective CurrentObjective => _objectives?.FirstOrDefault(s => s.State != QuestState.COMPLETED);
+
+        /// <summary>The current objective's state; COMPLETED once every objective is.</summary>
+        public QuestState State => IsCompleted ? QuestState.COMPLETED : CurrentObjective?.State ?? QuestState.NOTSTARTED;
+
+        /// <summary>True while the current objective waits for its requested transition to be committed.</summary>
+        public bool HasPendingTransition => CurrentObjective?.HasPendingTransition ?? false;
+
+        public string CurrentObjectiveId => CurrentObjective?.ObjectiveId ?? Guid.Empty.ToString();
+
+        /// <summary>
+        /// Requests the current objective's move to <paramref name="value"/>. The actual change waits until whoever
+        /// shows the associated quest message calls back (the player dismissed it), so other systems never observe
+        /// the new state before the player has. Until then the objective is pending: another request is ignored.
+        /// </summary>
+        internal void RequestTransition(QuestState value)
         {
-            get => _objectives?.FirstOrDefault(s => s.State != QuestState.COMPLETED)?.State ?? QuestState.NOTSTARTED;
-            set
+            var currentObjective = CurrentObjective;
+            if (currentObjective == null)
+                return;
+            if (currentObjective.HasPendingTransition)
             {
-                var currentObjective = _objectives?.FirstOrDefault(s => s.State != QuestState.COMPLETED);
-                if (currentObjective == null)
-                    return;
-
-                // Defer the actual mutation until whoever is showing the associated
-                // quest message calls back (i.e. the player dismissed it), so other
-                // systems never observe the new state before the player has.
-                if (ObjectiveTransitionRequested == null)
-                {
-                    CommitTransition(currentObjective, value);
-                    return;
-                }
-
-                ObjectiveTransitionRequested.Invoke(currentObjective, value, () => CommitTransition(currentObjective, value));
+                GD.PushWarning($"Quest '{Name}': transition of '{currentObjective.ObjectiveId}' to {value} ignored, one to {currentObjective.PendingState} is pending.");
+                return;
             }
+
+            currentObjective.PendingState = value;
+            int generation = _generation;
+            if (ObjectiveTransitionRequested == null)
+                CommitTransition(currentObjective, value, generation);
+            else
+                ObjectiveTransitionRequested.Invoke(currentObjective, value, () => CommitTransition(currentObjective, value, generation));
         }
 
-        void CommitTransition(QuestObjective currentObjective, QuestState value)
+        void CommitTransition(QuestObjective currentObjective, QuestState value, int generation)
         {
+            if (generation != _generation)
+            {
+                // e.g. a message of the old level unwound while a save is loaded: the loaded states win
+                GD.PushWarning($"Quest '{Name}': transition of '{currentObjective.ObjectiveId}' to {value} dropped, the quest was reset or loaded since it was requested.");
+                return;
+            }
+            if (currentObjective.PendingState != value)
+                return;   // committed already (a callback that runs twice)
+
+            currentObjective.PendingState = null;
             currentObjective.State = value;
             OnObjectiveStateChanged?.Invoke(currentObjective);
 
             if (value == QuestState.COMPLETED)
             {
-                var nextObjective = _objectives?.FirstOrDefault(s => s.State != QuestState.COMPLETED);
+                var nextObjective = CurrentObjective;
                 if (nextObjective != null)
                     QuestManager.Instance.UpdateQuest(new QuestMessageStart { QuestId = Id, ObjectiveId = nextObjective.ObjectiveId });
 
@@ -83,46 +104,15 @@ namespace TnT.EduGame.QuestSystem
             }
         }
 
-        public string CurrentObjectiveId
+        /// <summary>Every objective not started, nothing pending; commits requested before this are dropped.</summary>
+        public void Reset()
         {
-            get => _objectives?.FirstOrDefault(s => s.State != QuestState.COMPLETED)?.ObjectiveId ?? Guid.Empty.ToString();
+            _generation++;
+            foreach (var objective in _objectives)
+            {
+                objective.State = QuestState.NOTSTARTED;
+                objective.PendingState = null;
+            }
         }
-
-        public void Initialize()
-        {
-            var firstObjective = _objectives.FirstOrDefault();
-            if (firstObjective == null || firstObjective.State == QuestState.COMPLETED)
-                return;
-            _objectives.FirstOrDefault().State = QuestState.INPROGRESS;
-        }
-
-        public void Reset() => Objectives.ForEach(o => o.State = QuestState.NOTSTARTED);
-
-        // #region LOAD/SAVE
-        // private QuestSaveData _saveData;
-        // public QuestSaveData SaveData => _saveData;
-
-        // public void Bind(QuestSaveData data)
-        // {
-        //     if (data == null)
-        //     {
-        //         Reset();
-        //         return;
-        //     }
-        //     _saveData = data;
-        //     _id = _saveData.Id;
-        //     Objectives.ForEach(o => o.Bind(data.Objectives.FirstOrDefault(s => s.Id == o.ObjectiveId)));
-        // }
-
-        // public QuestSaveData GetSaveData()
-        // {
-        //     if (_saveData == null)
-        //         _saveData = new();
-        //     _saveData.Id = _id;
-        //     _saveData.Objectives = _objectives.Select(o => o.GetSaveData()).ToArray();
-        //     return _saveData;
-        // }
-        // #endregion
-
     }
 }

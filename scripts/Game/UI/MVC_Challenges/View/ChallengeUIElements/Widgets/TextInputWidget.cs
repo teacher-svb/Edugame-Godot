@@ -1,3 +1,4 @@
+using System.Globalization;
 using Godot;
 using TnT.Extensions;
 
@@ -8,7 +9,7 @@ namespace TnT.EduGame.UI
     {
         public override void _Ready()
         {
-            var fields = this.FindAnyObjectByType<HBoxContainer>();
+            var fields = this.FindAnyObjectByType<HBoxContainer>(includeSelf: true);
             var labelled = Round.Unknowns.Count > 1;
 
             foreach (var paramName in Round.Unknowns)
@@ -26,15 +27,32 @@ namespace TnT.EduGame.UI
                 spinbox.SelectAllOnFocus = true;
                 spinbox.SetValueNoSignal(0);
 
-                // ValueChanged covers the arrows; TextChanged also catches typing
-                // the value the box already holds (e.g. an answer of 0)
+                // ValueChanged covers the arrows; TextChanged also catches typing the value the
+                // box already holds (e.g. an answer of 0), and an empty or unfinished field (`-`)
+                // takes the value back, so Submit can't grade a number that is no longer there
+                var lineEdit = spinbox.GetLineEdit();
                 spinbox.ValueChanged += value => EmitValueAssigned(paramName, (int)value);
-                spinbox.GetLineEdit().TextChanged += text =>
+                lineEdit.TextChanged += text => Report(paramName, text);
+                // the box puts its last value back in a field left empty (SpinBox does that
+                // deferred), so report what it shows once it has
+                void Resync() => Callable.From(() =>
                 {
-                    if (int.TryParse(text, out var value))
-                        EmitValueAssigned(paramName, value);
-                };
+                    if (IsInstanceValid(lineEdit))
+                        Report(paramName, lineEdit.Text);
+                }).CallDeferred();
+                lineEdit.FocusExited += Resync;
+                lineEdit.TextSubmitted += _ => Resync();
+
+                FirstFocus ??= lineEdit;
             }
+        }
+
+        void Report(string paramName, string text)
+        {
+            if (int.TryParse(text.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out var value))
+                EmitValueAssigned(paramName, value);
+            else
+                EmitValueCleared(paramName);
         }
     }
 }

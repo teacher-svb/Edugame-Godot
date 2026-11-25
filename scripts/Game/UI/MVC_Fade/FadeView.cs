@@ -11,35 +11,28 @@ namespace TnT.EduGame.UI
         Node _root;
         ColorRect _fadeRect;
 
-        public async Task InitializeView()
+        public void InitializeView()
         {
             _root = this.FindAncestorOfType<FadeController>();
 
-
-            _fadeRect = this.FindAnyObjectByType<ColorRect>();
+            _fadeRect = this.FindAnyObjectByType<ColorRect>(includeSelf: true);
             _fadeRect.Modulate = new Color(1f, 1f, 1f, 0f);
             _fadeRect.SetAnchorsPreset(LayoutPreset.FullRect);
             this.Visible = false;
-
-            await Task.Yield();
         }
 
+        // drawn on its own CanvasLayer (UIManager/FadeLayer in managers.tscn), above every other UI
         public async Task Show(float durationSeconds = 1f)
         {
-            var canvas = this.FindAncestorOfType<CanvasLayer>();
-            canvas.Layer = 999;
-
             this.Visible = true;
             await _fadeRect.FadeIn(durationSeconds);
         }
 
         public async Task Hide(float durationSeconds = 1f)
         {
-            await _fadeRect.FadeOut(durationSeconds);
-            this.Visible = false;
-
-            var canvas = this.FindAncestorOfType<CanvasLayer>();
-            canvas.Layer = -1;
+            // not when a Show took over during the fade-out
+            if (await _fadeRect.FadeOut(durationSeconds))
+                this.Visible = false;
         }
     }
 }

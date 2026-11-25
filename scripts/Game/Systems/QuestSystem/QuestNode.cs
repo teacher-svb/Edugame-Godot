@@ -1,6 +1,5 @@
 using System.Linq;
 using Godot;
-using TnT.Extensions;
 using TnT.EduGame.Characters;
 
 namespace TnT.EduGame.QuestSystem
@@ -24,7 +23,15 @@ namespace TnT.EduGame.QuestSystem
 				GD.PrintErr($"QuestNode '{Name}': No quest assigned.");
 		}
 
-		public void StartQuest() => QuestManager.Instance.StartQuest(_quest.Id);
+		public void StartQuest()
+		{
+			if (_quest == null)
+			{
+				GD.PrintErr($"QuestNode '{Name}': No quest assigned.");
+				return;
+			}
+			QuestManager.Instance.StartQuest(_quest.Id);
+		}
 
 		public void StartObjective(string objectiveId)
 		{
@@ -46,23 +53,21 @@ namespace TnT.EduGame.QuestSystem
 
 		void _OnPlayerStartObjective(Node body, string objectiveId)
 		{
-			if (IsPlayer(body))
+			if (Player.IsPlayer(body))
 				StartObjective(objectiveId);
 		}
 
 		void _OnPlayerCompleteObjective(Node body, string objectiveId)
 		{
-			if (IsPlayer(body))
+			if (Player.IsPlayer(body))
 				CompleteObjective(objectiveId);
 		}
 
 		void _OnPlayerFailObjective(Node body, string objectiveId)
 		{
-			if (IsPlayer(body))
+			if (Player.IsPlayer(body))
 				FailObjective(objectiveId);
 		}
-
-		static bool IsPlayer(Node body) => body.FindAnyObjectByType<Player>() != null;
 
 		// A typo in a connection's extra argument would otherwise fail silently.
 		bool IsKnownObjective(string objectiveId)

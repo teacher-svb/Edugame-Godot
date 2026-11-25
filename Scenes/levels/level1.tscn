@@ -453,6 +453,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -10.5)
 [node name="avocado" parent="." unique_id=15025039 instance=ExtResource("25_mglpj")]
 transform = Transform3D(0.618024, 0, 0.786159, 0, 1, 0, -0.786159, 0, 0.618024, 3.6, 0, -5.8)
 
+[node name="ItemRef" parent="avocado" index="5" unique_id=563072524]
+_quest = ExtResource("qs_quest_i1")
+_availableFromObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8925"
+
 [node name="transporters" type="Node" parent="." unique_id=838434594]
 
 [node name="transporter_bedroom-livingroom" type="Area3D" parent="transporters" unique_id=1189788667]
@@ -538,6 +542,7 @@ _checkObjectiveId = true
 _objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8923"
 _checkState = true
 _state = 1
+_resumeAfterLoad = true
 eventChannel = ExtResource("28_kdqke")
 
 [node name="IdleStep" type="Node" parent="Quests/LookingForAvocado/Reactions/obj3-init-DadReaction" unique_id=896922654 node_paths=PackedStringArray("_character")]
@@ -574,6 +579,7 @@ _checkObjectiveId = true
 _objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8924"
 _checkState = true
 _state = 1
+_resumeAfterLoad = true
 eventChannel = ExtResource("28_kdqke")
 
 [node name="PatrolStep" type="Node" parent="Quests/LookingForAvocado/Reactions/obj4-init-DadReaction" unique_id=2144464097 node_paths=PackedStringArray("_character", "_waypoints")]
@@ -685,6 +691,7 @@ _checkObjectiveId = true
 _objectiveId = "3c2415fe-208a-4dd5-928f-903a8aeb0801"
 _checkState = true
 _state = 1
+_resumeAfterLoad = true
 eventChannel = ExtResource("28_kdqke")
 
 [node name="ItemEventListener" type="Node" parent="." unique_id=893104707]

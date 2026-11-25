@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Godot;
 using TnT.EduGame.Platforming;
@@ -7,12 +8,16 @@ using TnT.Systems.Persistence;
 namespace TnT.EduGame.Doors
 {
     /// <summary>
-    /// A closed door that opens with a code: when the player walks up to it (<see cref="Trigger"/>), it runs its
-    /// <see cref="Challenge"/> (a <see cref="MathChallengeTrigger"/>, usually with a combination lock). Solved, the
-    /// leaves swing open and their collision goes; the open state is saved (<see cref="DoorSaveData"/>, bound by
-    /// <c>SaveLoadManager</c>). Failed, the player has to step away and come back to try again (same values).
+    /// A closed door that opens with a code: when the player walks into its <see cref="Trigger"/>, it runs its
+    /// <see cref="Challenge"/> (a <see cref="MathChallengeTrigger"/>; the key door's is <c>key_code_4.tres</c>, a key to
+    /// cut on a <c>KeyVisualization</c>). A <see cref="CodeClue"/> with the trigger as its <c>Source</c> shows the values
+    /// (the <c>DungeonPopulator</c> sets the trigger's <c>Seed</c> and the clue's <c>Source</c>). Solved, the leaves
+    /// swing into the room (<see cref="OpenAngles"/>) and <see cref="Opened"/> fires; the open state is saved
+    /// (<see cref="DoorSaveData"/> under a scene-scoped id, bound by <c>SaveLoadManager</c>), and the trigger keeps the
+    /// solved seed (<see cref="MathChallengeTrigger.KeepSolvedSeed"/>), so the clue goes on showing the code that
+    /// opened it. Wrong or closed, the player steps out and back in to try again, with the same values.
     /// Stands on a <c>room_door</c> cell in its N-S build (outside to the north, -Z), placed by the game, e.g. the
-    /// key door <c>doors/room_door_key.tscn</c> with a key challenge.
+    /// key door <c>doors/room_door_key.tscn</c>.
     /// </summary>
     [GlobalClass]
     public partial class CodeDoor : Node3D, IBind<DoorSaveData>
@@ -33,14 +38,12 @@ namespace TnT.EduGame.Doors
 
         [Signal] public delegate void OpenedEventHandler();
 
-        public string PersistentId { get; private set; }
+        public string PersistentId => PersistentIds.SceneScoped(this);   // "<level scene>#<path in the level>", read at bind time
         public bool IsOpen { get; private set; }
 
         DoorSaveData _saveData;
         bool _busy;
         float[] _closedY = [];
-
-        public override void _EnterTree() => PersistentId = GetPath().ToString();
 
         public override void _Ready()
         {
@@ -49,6 +52,9 @@ namespace TnT.EduGame.Doors
                 _closedY[i] = Leaves[i].RotationDegrees.Y;
             if (Trigger != null)
                 Trigger.BodyEntered += OnBodyEntered;
+            // the door opens once: its clue keeps showing the code that opened it
+            if (Challenge != null)
+                Challenge.KeepSolvedSeed = true;
             if (IsOpen)
                 SetOpen(1f);   // bound before _Ready
         }
@@ -71,8 +77,14 @@ namespace TnT.EduGame.Doors
             _busy = true;
             try
             {
-                if (await Challenge.RunChallengeAsync())
+                // solved, but the level may have been left during the challenge's close: nothing to open then
+                if (await Challenge.RunChallengeAsync() && IsInstanceValid(this) && IsInsideTree())
                     await Open();
+            }
+            catch (Exception e)
+            {
+                // async void (a signal handler): nothing awaits it, so log here
+                GD.PushError($"CodeDoor: opening after the challenge failed: {e}");
             }
             finally
             {
@@ -91,7 +103,8 @@ namespace TnT.EduGame.Doors
             var tween = CreateTween().SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
             tween.TweenMethod(Callable.From<float>(SetOpen), 0f, 1f, OpenSeconds);
             await ToSignal(tween, Tween.SignalName.Finished);
-            EmitSignal(SignalName.Opened);
+            if (IsInstanceValid(this))
+                EmitSignal(SignalName.Opened);
         }
 
         void SetOpen(float t)

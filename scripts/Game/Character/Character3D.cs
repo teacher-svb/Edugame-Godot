@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
@@ -25,15 +23,14 @@ namespace TnT.EduGame.Characters
 
         public override void _Ready()
         {
-            // _InitSubNodes();
-
             if (this._characterData != null)
             {
                 this.Stats = new Stats(this._characterData.CharacterBaseStats);
                 this.Attributes = new Attributes(this.Stats);
             }
 
-            this._characterData?.CharacterAbilities.ForEach(a => a.Key.Enabled = true);
+            // most CharacterData resources store CharacterAbilities = null (no abilities)
+            this._characterData?.CharacterAbilities?.ForEach(a => a.Key.Enabled = true);
         }
 
         public override void _EnterTree()
@@ -41,24 +38,18 @@ namespace TnT.EduGame.Characters
             _InitSubNodes();
         }
 
+        // _EnterTree runs again after every re-parenting / re-adding: look up and subscribe only once (finding 4.15)
         private void _InitSubNodes()
         {
-            // this._controller = this.FindAnyObjectByType<CharacterController3D>();
-            this._stateManager = this.FindAnyObjectByType<CharacterStateManager>();
-            this._stateManager.SequenceCompleted += () => EmitSignal(SignalName.StateCompleted);
+            if (this._stateManager != null)
+                return;
+            this._stateManager = this.FindAnyObjectByType<CharacterStateManager>(includeSelf: true);
+            this._stateManager.SequenceCompleted += OnSequenceCompleted;
         }
 
-        public string CharacterId
-        {
-            get { return this.PersistentId; }
-            // set
-            // {
-            //     _characterData =
-            //         ResourceFinder
-            //             .FindObjectsOfTypeAll<CharacterData>()
-            //             .FirstOrDefault(c => c. == value) ?? _characterData;
-            // }
-        }
+        void OnSequenceCompleted() => EmitSignal(SignalName.StateCompleted);
+
+        public string CharacterId => this.PersistentId;
 
         public CharacterData CharacterData { get => _characterData; }
         public Camera3D CloseupCamera { get => _closeupCamera; }
@@ -74,12 +65,15 @@ namespace TnT.EduGame.Characters
 
         public override void _Process(double delta)
         {
-            Stats?.Mediator.Update(delta);
-            Attributes?.Mediator?.Update(delta);
+            // only with modifiers: nothing to tick otherwise (the usual case: no ability adds any)
+            if (Stats?.Mediator.HasModifiers == true)
+                Stats.Mediator.Update(delta);
+            if (Attributes?.Mediator.HasModifiers == true)
+                Attributes.Mediator.Update(delta);
             if (_saveData != null)
                 _saveData.position = this.Position;
 
-            this._characterData?.CharacterAbilities
+            this._characterData?.CharacterAbilities?
                 .Where(a => a.Key.Triggered)
                 .ForEach(a => a.Value.Activate(this, this));
         }
@@ -89,32 +83,19 @@ namespace TnT.EduGame.Characters
             _stateManager.Idling(durationMs);
         }
 
-        // Completes when the idle is over. Returns at once while patrolling/following,
-        // because Idling is ignored then and StateCompleted would never fire.
-        // Note: StateCompleted (used here and in PatrolAsync) only fires once the state stack
-        // is back to its base state, so these only complete when nothing else is pushed on top.
-        public async Task IdleAsync(int durationMs)
-        {
-            if (_stateManager.IsAutonomousBehaviorActive)
-                return;
-
-            var completed = ToSignal(this, SignalName.StateCompleted);
-            SetStateToIdle(durationMs);
-            await completed;
-        }
+        // Completes when this idle leaves the stack (its own state: it no longer waits for the whole stack to be back
+        // at its base). Returns at once while patrolling/following, because Idling is ignored then.
+        public Task IdleAsync(int durationMs) => _stateManager.Idling(durationMs);
 
         public void SetStateToPatrolling(params Node[] patrolTargets)
         {
             _stateManager.StartPatrol(patrolTargets);
         }
 
-        // Completes when the patrol ends; never completes for a looping patrol
-        public async Task PatrolAsync(Node3D[] waypoints)
-        {
-            var completed = ToSignal(this, SignalName.StateCompleted);
-            SetStateToPatrolling(waypoints);
-            await completed;
-        }
+        // Completes when this patrol ends: true at the end of its route (unreachable waypoints are skipped with a
+        // warning), false when it was stopped first (replaced by another patrol or follow, popped). A looping patrol
+        // only completes when stopped.
+        public Task<bool> PatrolAsync(Node3D[] waypoints) => _stateManager.StartPatrol(waypoints);
 
         public void SetStateToInput(InputAction2D moveAction, InputAction jumpAction)
         {

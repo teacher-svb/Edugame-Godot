@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Godot;
 using TnT.Input;
@@ -21,6 +20,6 @@ namespace TnT.EduGame.Characters
         [Export]
         public BaseStats CharacterBaseStats { get; private set; }
 
-        public InputActionBase[] InputActions => CharacterAbilities.Keys.ToArray();
+        public InputActionBase[] InputActions => CharacterAbilities?.Keys.ToArray() ?? [];
     }
 }

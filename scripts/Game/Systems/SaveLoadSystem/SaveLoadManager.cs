@@ -1,18 +1,19 @@
 using System;
-using TnT.Extensions;
 using TnT.Systems.Persistence;
 using Godot;
 using TnT.EduGame.Characters;
 using TnT.EduGame.QuestSystem;
 using TnT.EduGame.GameStates;
 using TnT.EduGame.Challenges;
+using TnT.EduGame.UI;
+using TnT.EduGame.Inventory;
 
 namespace TnT.EduGame
 {
     public partial class SaveLoadManager : SaveLoadSystem<MyGameData>
     {
         public static SaveLoadManager Instance { get; private set; }
-        [Export] public override MyGameData GameData { get; set; }
+        public override MyGameData GameData { get; set; }
 
         public override void _Ready()
         {
@@ -27,11 +28,12 @@ namespace TnT.EduGame
         {
             GameData.CurrentLevelName = scenePath;
 
-            // characters before quests (quest steps can move them), doors and challenges after, as before
+            // quests last: their Bound event runs the listeners' catch-ups and resumes, which must see the bound
+            // scene (characters at their saved positions, doors, challenge seeds) and not be overwritten by it
             Bind<Character3D, CharacterSaveData>(GameData.characterData, null);
-            Bind<QuestManager, QuestManagerSaveData>(ref GameData.questData);
             Bind<PlayerTutorial, TutorialSaveData>(ref GameData.tutorialData);
             BindEntities(null);
+            Bind<QuestManager, QuestManagerSaveData>(ref GameData.questData);
 
             StateManagerGame.Instance.StartPlay();
         }
@@ -49,18 +51,19 @@ namespace TnT.EduGame
             BindEntities(root);
         }
 
-        // Doors and challenges, bound per subtree: one save entry per PersistentId. Add new saveable types here
-        // (characters are bound separately, before the quests).
+        // Doors, challenges and world items, bound per subtree: one save entry per PersistentId. Add new saveable
+        // types here (characters are bound separately, before the quests).
         void BindEntities(Node root)
         {
             Bind<Door, DoorSaveData>(GameData.doorData, root);
             Bind<Doors.CodeDoor, DoorSaveData>(GameData.doorData, root);
             Bind<MathChallengeTrigger, ChallengeSaveData>(GameData.challengeData, root);
+            Bind<Item, WorldItemSaveData>(GameData.worldItemData, root);   // a picked-up item removes itself
         }
 
         protected void LoadScene(string scenePath)
         {
-            StateManagerGame.Instance.LoadScene(scenePath, Vector3.Zero);
+            StateManagerGame.Instance.LoadScene(scenePath);   // no target: the player keeps the saved position
         }
 
         public override void NewGame()
@@ -71,19 +74,62 @@ namespace TnT.EduGame
                 CurrentLevelName = _startScene,
             };
             QuestManager.Instance?.Restore(null);   // before the level's _Ready: no quest state from the running session
+            InventoryController.Instance?.model?.Restore(null);
             LoadScene(GameData.CurrentLevelName);
         }
 
-        public override void LoadGame(string gameName)
-        {
-            GameData = dataService.Load(gameName);
-            QuestManager.Instance?.Restore(GameData.questData);   // before the level's _Ready, see QuestManager.Restore
+        /// <summary>
+        /// False while a quest reaction runs that a load wouldn't replay (e.g. the bridge lowering before its
+        /// objective completes): a save then would store the objective halfway (finding 5.1). The pause menu
+        /// greys out Save; see <see cref="QuestStepListener.BlockingReactionsChanged"/>.
+        /// </summary>
+        public bool CanSave => !QuestStepListener.AnyBlockingReaction;
 
-            if (String.IsNullOrWhiteSpace(GameData.CurrentLevelName))
+        public override bool SaveGame() => SaveGame(null);
+
+        /// <summary>
+        /// Saves unless a quest reaction runs (<see cref="CanSave"/>); false (with a warning) when refused.
+        /// <paramref name="autosaveIn"/>: the listener whose reaction asks for this save (<see cref="SaveGameStep"/>),
+        /// whose own reaction doesn't count.
+        /// </summary>
+        public bool SaveGame(QuestStepListener autosaveIn)
+        {
+            int running = QuestStepListener.BlockingReactionsExcept(autosaveIn);
+            if (running > 0)
             {
-                GameData.CurrentLevelName = _startScene;
+                GD.PushWarning($"SaveLoadManager: not saved, {running} quest reaction(s) running");
+                return false;
             }
+            // the inventory lives in the managers scene, not in a level: copied into the save data here
+            var inventory = InventoryController.Instance?.model;
+            if (inventory != null)
+                GameData.inventoryData = inventory.GetSaveData();
+            return base.SaveGame();
+        }
+
+        public override bool LoadGame(string gameName)
+        {
+            if (!dataService.TryLoad(gameName, out var loaded))
+                return false;   // logged; the running game stays as it was
+            if (String.IsNullOrWhiteSpace(loaded.CurrentLevelName))
+                loaded.CurrentLevelName = _startScene;
+            if (!ResourceLoader.Exists(loaded.CurrentLevelName))
+            {
+                // check before anything is replaced: a failed scene load keeps the running level
+                GD.PushError($"Save '{gameName}': level '{loaded.CurrentLevelName}' not found; nothing loaded");
+                return false;
+            }
+            GameData = loaded;
+            GameData.characterData ??= new();
+            GameData.doorData ??= new();
+            GameData.challengeData ??= new();
+            GameData.inventoryData ??= new();
+            GameData.worldItemData ??= new();
+            QuestManager.Instance?.Restore(GameData.questData);   // before the level's _Ready, see QuestManager.Restore
+            InventoryController.Instance?.model?.Restore(GameData.inventoryData);
+
             LoadScene(GameData.CurrentLevelName);
+            return true;
         }
     }
 }

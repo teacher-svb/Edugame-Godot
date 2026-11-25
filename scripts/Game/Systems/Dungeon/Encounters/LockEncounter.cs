@@ -78,7 +78,6 @@ namespace TnT.EduGame.Dungeon
                 int seed = rng.Next();
                 int lockIndex = context.Add(new Placement(PlacementKind.Lock, this, choice.Door.Room, choice.Door.Cell, seed)
                 {
-                    Corridor = route.PathCorridors[choice.Step],
                     DoorDirection = RoomCellPicker.Outward(choice.Door.Side),
                 });
                 foreach (var (room, cell) in clueCells)

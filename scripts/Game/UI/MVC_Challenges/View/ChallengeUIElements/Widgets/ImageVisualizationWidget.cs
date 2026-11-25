@@ -15,7 +15,7 @@ namespace TnT.EduGame.UI
 
         public override void _Ready()
         {
-            _image = this.FindAnyObjectByType<TextureRect>();
+            _image = this.FindAnyObjectByType<TextureRect>(includeSelf: true);
             _image.Texture = Settings.Image;
 
             foreach (var annotation in Settings.Annotations.Where(a => a != null))

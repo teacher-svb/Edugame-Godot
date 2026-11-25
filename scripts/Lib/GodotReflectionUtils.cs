@@ -33,6 +33,8 @@ namespace TnT.Systems
         // NodePath variants are resolved to a Node when the target type is a GodotObject subclass,
         // or kept as NodePath when the target type is NodePath.
         // GodotObject subclasses (non-path) are handled via As<GodotObject>() to preserve the runtime type.
+        // StringName and string convert both ways. Enums take an int (the value) or a string (the member name,
+        // case-insensitive; an unknown name throws ArgumentException).
         public static object ConvertVariant(Variant v, Type t, Node context = null)
         {
             if (v.VariantType == Variant.Type.NodePath)
@@ -41,6 +43,14 @@ namespace TnT.Systems
                 if (typeof(GodotObject).IsAssignableFrom(t)) return context?.GetNodeOrNull(v.AsNodePath());
             }
             if (typeof(GodotObject).IsAssignableFrom(t)) return v.As<GodotObject>();
+            bool isText = v.VariantType is Variant.Type.String or Variant.Type.StringName;
+            if (t == typeof(StringName) && isText) return v.AsStringName();
+            if (t == typeof(string) && isText) return v.AsString();
+            if (t.IsEnum)
+            {
+                if (v.VariantType == Variant.Type.Int) return Enum.ToObject(t, v.As<long>());
+                if (isText) return Enum.Parse(t, v.AsString(), ignoreCase: true);
+            }
             return v.VariantType switch
             {
                 Variant.Type.Bool   => v.As<bool>(),

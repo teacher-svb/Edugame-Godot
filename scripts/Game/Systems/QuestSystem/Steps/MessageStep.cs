@@ -10,10 +10,11 @@ namespace TnT.EduGame.QuestSystem
     /// for reactions that aren't an objective's own start/complete/fail text.
     /// </summary>
     /// <remarks>
-    /// Skipped when the reaction has no objective: that is the catch-up run of a
-    /// <see cref="QuestsCompletedListener"/> in _Ready (quests completed earlier, e.g. a loaded
-    /// save), which happens mid scene load, where a message breaks the loading screen. The line
-    /// is meant for the moment itself, so it isn't repeated after loading either.
+    /// Skipped when the reaction has no objective: that is a catch-up run (a
+    /// <see cref="QuestsCompletedListener"/> or a <c>_catchUpAfterLoad</c> listener, run once the scene is
+    /// ready and bound, for quests completed earlier, e.g. in a loaded save). The line is meant for the
+    /// moment itself, so it isn't repeated after loading (a reaction resumed with <c>_resumeAfterLoad</c>
+    /// passes its objective, so it does show the line again).
     /// </remarks>
     [GlobalClass]
     public partial class MessageStep : QuestStep

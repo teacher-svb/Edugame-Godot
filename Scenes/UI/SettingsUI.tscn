@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://blmeierxcviwj" path="res://scripts/Game/UI/MVC_Settings/SettingsView.cs" id="1_0o640"]
 [ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="1_qep6s"]
 
-[node name="Control" type="Control" unique_id=29440267 node_paths=PackedStringArray("_audioPanel", "_displayPanel", "_accessibilityPanel", "_backButton")]
+[node name="Control" type="Control" unique_id=29440267 node_paths=PackedStringArray("_audioPanel", "_displayPanel", "_accessibilityPanel", "_audioHeading", "_displayHeading", "_accessibilityHeading", "_musicSlider", "_sfxSlider", "_fullscreenToggle", "_textSizeSlider", "_backButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,6 +15,13 @@ script = ExtResource("1_0o640")
 _audioPanel = NodePath("PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Audio")
 _displayPanel = NodePath("PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Graphics")
 _accessibilityPanel = NodePath("PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Accessibility")
+_audioHeading = NodePath("PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Label")
+_displayHeading = NodePath("PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Label2")
+_accessibilityHeading = NodePath("PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Label3")
+_musicSlider = NodePath("PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Audio/Audio/GridContainer/HSlider")
+_sfxSlider = NodePath("PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Audio/Audio/GridContainer/HSlider2")
+_fullscreenToggle = NodePath("PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Graphics/GraphicsSettings/GridContainer/Toggle")
+_textSizeSlider = NodePath("PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Accessibility/AccessibilitySettings/GridContainer/HSlider2")
 _backButton = NodePath("Button")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1758009128]
@@ -149,7 +156,7 @@ columns = 2
 [node name="Text Size" type="Label" parent="PanelContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/Accessibility/AccessibilitySettings/GridContainer" unique_id=653719838]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Effecten"
+text = "Tekstgrootte"
 horizontal_alignment = 2
 vertical_alignment = 1
 

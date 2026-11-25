@@ -8,7 +8,7 @@ namespace TnT.EduGame.UI
     {
         public override void _Ready()
         {
-            var label = this.FindAnyObjectByType<Label>();
+            var label = this.FindAnyObjectByType<Label>(includeSelf: true);
             label.Text = Settings.Render(Challenge, Round);
         }
     }

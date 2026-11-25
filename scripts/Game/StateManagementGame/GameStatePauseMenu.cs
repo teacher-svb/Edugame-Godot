@@ -20,7 +20,7 @@ namespace TnT.EduGame.GameStates
         {
             _options = options;
             _closed = false;
-            return new BaseState(new() { OnEnter = Open, OnExit = Close, ExitOnNextUpdate = Exit, OnUpdate = Update });
+            return new BaseState(new() { OnEnter = Open, OnPause = Pause, OnResume = Resume, OnExit = Close, ExitOnNextUpdate = Exit, OnUpdate = Update });
         }
 
         private void Update()
@@ -31,6 +31,7 @@ namespace TnT.EduGame.GameStates
 
         private bool Exit() => _closed;
 
+        // once per push: back from Settings is a resume, not a second Open (the handlers would double up)
         private async Task Open()
         {
             ManagerUI.Instance.GetTree().Paused = true;
@@ -40,6 +41,22 @@ namespace TnT.EduGame.GameStates
             PauseMenuController.Instance.OnSave     += HandleSave;
             PauseMenuController.Instance.OnLoad     += HandleLoad;
             await PauseMenuController.Instance.Show();
+        }
+
+        // Settings opened on top: Space/Enter must not press the menu's focused button behind it
+        private Task Pause()
+        {
+            PauseMenuController.Instance.Pause();
+            return Task.CompletedTask;
+        }
+
+        // back from Settings: its Close disabled the shared close action
+        private Task Resume()
+        {
+            ManagerUI.Instance.GetTree().Paused = true;
+            _options.close.Enable();
+            PauseMenuController.Instance.Resume();
+            return Task.CompletedTask;
         }
 
         private async Task Close()
@@ -58,18 +75,15 @@ namespace TnT.EduGame.GameStates
         private void HandleSettings() =>
             StateManagerGame.Instance.OpenSettings(audio: true, display: false, controls: false, accessibility: true);
 
-        private void HandleSave() => SaveLoadManager.Instance.SaveGame();
-
-        private void HandleLoad()
+        private void HandleSave()
         {
-            // ResetStack() will wipe this state without calling Close() — clean up manually
-            PauseMenuController.Instance.OnResume   -= HandleResume;
-            PauseMenuController.Instance.OnSettings -= HandleSettings;
-            PauseMenuController.Instance.OnSave     -= HandleSave;
-            PauseMenuController.Instance.OnLoad     -= HandleLoad;
-            _options.close.Disable();
-            ManagerUI.Instance.GetTree().Paused = false;
-            SaveLoadManager.Instance.ReloadGame();
+            SaveLoadManager.Instance.SaveGame();
+            PauseMenuController.Instance.RefreshLoadEnabled();   // the first save enables "Laden"
         }
+
+        // the loader unwinds the stack below itself before it changes the scene, so this state's Close runs then
+        // (handlers off, menu hidden); nothing to clean up here. No (readable) save: ReloadGame logs and returns
+        // false without changing anything, the menu stays open.
+        private void HandleLoad() => SaveLoadManager.Instance.ReloadGame();
     }
 }

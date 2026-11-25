@@ -13,9 +13,9 @@ namespace TnT.EduGame.UI
         public Action NextBtnPushed;
         public Action CloseBtnPushed;
 
-        public async Task InitializeView()
+        public void InitializeView()
         {
-            _message = this.FindAnyObjectByType<Notification>();
+            _message = this.FindAnyObjectByType<Notification>(includeSelf: true);
             Modulate = Colors.Transparent;
             Scale = Vector2.Zero;
 
@@ -23,8 +23,6 @@ namespace TnT.EduGame.UI
 
             _message.NextBtnPushed += () => NextBtnPushed?.Invoke();
             _message.CloseBtnPushed += () => CloseBtnPushed?.Invoke();
-
-            await Task.Yield();
         }
 
         public async Task ShowView(float duration = 0.2f) => await this.ScaleIn(duration);

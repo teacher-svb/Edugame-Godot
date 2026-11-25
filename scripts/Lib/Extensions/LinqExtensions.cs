@@ -159,16 +159,16 @@ namespace TnT.Extensions
         }
 
         /// <summary>
-        /// Specifies how padding elements are distributed around the original sequence
-        /// when using <see cref="Pad{T}"/>.
+        /// Where the original sequence ends up when using <see cref="Pad{T}"/> (like text alignment): the padding
+        /// goes on the other side.
         /// </summary>
         public enum PadAlignment
         {
-            /// <summary>Padding is added to the left (before) the sequence.</summary>
+            /// <summary>The sequence stays at the left: all padding is added after it.</summary>
             Left,
-            /// <summary>Padding is split evenly; when the total is odd, the right side receives the extra element.</summary>
+            /// <summary>Padding is split evenly; when the total is odd, the left side (before the sequence) receives the extra element.</summary>
             Center,
-            /// <summary>Padding is added to the right (after) the sequence.</summary>
+            /// <summary>The sequence moves to the right: all padding is added before it.</summary>
             Right
         }
 
@@ -218,7 +218,7 @@ namespace TnT.Extensions
                     break;
 
                 case PadAlignment.Center:
-                    // For even padding, right gets more
+                    // rounded down: for an odd total the left side gets the extra element
                     rightPadding = totalPadding / 2;
                     break;
             }

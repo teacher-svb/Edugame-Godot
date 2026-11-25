@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using Godot;
-using TnT.Extensions;
 using TnT.Systems.UIAnimation;
 
 namespace TnT.EduGame.UI
@@ -32,11 +31,8 @@ namespace TnT.EduGame.UI
             _text.Modulate = Colors.Transparent;
             _hint.Modulate = Colors.Transparent;
             Modulate = Colors.White;
+            // on its own CanvasLayer (UIManager/ActCardLayer in managers.tscn): above the game UI, below the fade
             Visible = true;
-            var canvas = this.FindAncestorOfType<CanvasLayer>();
-            if (canvas != null)
-                canvas.Layer = 999;   // above the game, like the fade
-
             await _background.FadeIn(fade);
             await _text.FadeIn(fade);
         }
@@ -45,11 +41,8 @@ namespace TnT.EduGame.UI
 
         public async Task HideView(float fade = 1f)
         {
-            await this.FadeOut(fade);
-            Visible = false;
-            var canvas = this.FindAncestorOfType<CanvasLayer>();
-            if (canvas != null)
-                canvas.Layer = -1;
+            if (await this.FadeOut(fade))
+                Visible = false;
         }
     }
 }

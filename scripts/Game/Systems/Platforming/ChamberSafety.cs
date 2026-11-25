@@ -95,8 +95,15 @@ namespace TnT.EduGame.Platforming
         {
             var body = PlayerBody;
             if (body == null || !_hasSafe) return;
-            body.Velocity = Vector3.Zero;
-            body.GlobalPosition = _lastSafe;
+            // through the controller: it also drops a jump pressed during the fall (it would fire on arrival)
+            var controller = body.GetNodeOrNull<CharacterController3D>("CharacterController3D");
+            if (controller != null)
+                controller.MoveTo(_lastSafe);
+            else
+            {
+                body.Velocity = Vector3.Zero;
+                body.GlobalPosition = _lastSafe;
+            }
             _graceLeft = Grace;
             EmitSignal(SignalName.Respawned);
         }

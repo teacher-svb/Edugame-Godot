@@ -18,7 +18,7 @@ model = NodePath("StartMenuModel")
 [node name="StartMenuModel" type="Node" parent="StartMenuController" unique_id=1192498697]
 script = ExtResource("2_model")
 
-[node name="StartMenuView" type="Control" parent="StartMenuController" unique_id=1449964898 node_paths=PackedStringArray("_newGameButton", "_loadGameButton")]
+[node name="StartMenuView" type="Control" parent="StartMenuController" unique_id=1449964898 node_paths=PackedStringArray("_newGameButton", "_loadGameButton", "_settingsButton", "_quitButton")]
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
@@ -29,6 +29,8 @@ grow_vertical = 2
 script = ExtResource("3_view")
 _newGameButton = NodePath("CenterContainer/VBoxContainer/NewGame")
 _loadGameButton = NodePath("CenterContainer/VBoxContainer/Load")
+_settingsButton = NodePath("CenterContainer/VBoxContainer/Settings")
+_quitButton = NodePath("CenterContainer/VBoxContainer/Quit")
 
 [node name="CenterContainer" type="CenterContainer" parent="StartMenuController/StartMenuView" unique_id=95930037]
 layout_mode = 1

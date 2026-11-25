@@ -18,18 +18,29 @@ namespace TnT.EduGame.Challenges
         }
         Godot.Collections.Array<GraphBar> _bars = new();
 
+        // These four have per-class defaults (KeyVisualization overrides the Default* below). No
+        // initializers on purpose: Godot reads an export's default from its initializer, the bar
+        // graph's for a key too (revert went to 100, and an explicit 100 on a key wasn't saved).
+        // Without one, a value is always saved, and the inspector reverts via _PropertyGetRevert.
+        protected virtual int DefaultAxisMax => 100;
+        protected virtual int DefaultAxisStep => 10;
+        protected virtual bool DefaultSnapToGrid => true;
+        protected virtual bool DefaultShowValues => false;
+        int? _axisMax, _axisStep;
+        bool? _snapToGrid, _showValues;
+
         // value axis: 0..AxisMax with a gridline every AxisStep
-        [Export] public int AxisMax { get; set; } = 100;
-        [Export] public int AxisStep { get; set; } = 10;
+        [Export] public int AxisMax { get => _axisMax ?? DefaultAxisMax; set => _axisMax = value; }
+        [Export] public int AxisStep { get => _axisStep ?? DefaultAxisStep; set => _axisStep = value; }
 
         // shown with the axis values, e.g. "L"
         [Export] public string Unit { get; set; } = "";
 
         // write each bar's value on top of it (makes reading trivial; off for reading practice)
-        [Export] public bool ShowValues { get; set; }
+        [Export] public bool ShowValues { get => _showValues ?? DefaultShowValues; set => _showValues = value; }
 
         // bar heights land exactly on gridlines, so they can be read off
-        [Export] public bool SnapToGrid { get; set; } = true;
+        [Export] public bool SnapToGrid { get => _snapToGrid ?? DefaultSnapToGrid; set => _snapToGrid = value; }
 
         protected override string DefaultScenePath => "res://Scenes/UI/ChallengeVisualizations/BarGraph.tscn";
 
@@ -61,6 +72,20 @@ namespace TnT.EduGame.Challenges
 
             // nothing on the grid in range: keep the spec, the implied rules then report the problem
             return gridValues.Length == 0 ? spec : new ParamSpec(spec.Name) { Pool = gridValues };
+        }
+
+        public override bool _PropertyCanRevert(StringName property) =>
+            property == PropertyName.AxisMax || property == PropertyName.AxisStep
+            || property == PropertyName.SnapToGrid || property == PropertyName.ShowValues
+            || base._PropertyCanRevert(property);
+
+        public override Variant _PropertyGetRevert(StringName property)
+        {
+            if (property == PropertyName.AxisMax) return DefaultAxisMax;
+            if (property == PropertyName.AxisStep) return DefaultAxisStep;
+            if (property == PropertyName.SnapToGrid) return DefaultSnapToGrid;
+            if (property == PropertyName.ShowValues) return DefaultShowValues;
+            return base._PropertyGetRevert(property);
         }
 
         public override void SetAvailableParams(string[] names)

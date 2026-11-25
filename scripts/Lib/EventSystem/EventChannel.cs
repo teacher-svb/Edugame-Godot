@@ -10,9 +10,11 @@ namespace TnT.Systems.EventSystem {
     [GlobalClass]
     public abstract partial class EventChannel : Resource
     {
-        readonly HashSet<EventListener> observers = new();
+        // a list, not a set: listeners are raised in the order they registered (entered the tree), every time
+        readonly List<EventListener> observers = new();
 
-        // Over a copy: a reaction may add or remove listeners (e.g. free a node) while the event is raised
+        // In registration order, over a copy: a reaction may add or remove listeners (e.g. free a node) while the
+        // event is raised
         public void Invoke(params Variant[] values)
         {
             foreach (var observer in observers.ToArray())
@@ -24,7 +26,15 @@ namespace TnT.Systems.EventSystem {
             }
         }
 
-        public void Register(EventListener observer) => observers.Add(observer);
+        /// <summary>The listeners registered now (still valid), for a channel that asks them before it raises an event.</summary>
+        protected IEnumerable<EventListener> Listeners => observers.Where(GodotObject.IsInstanceValid);
+
+        public void Register(EventListener observer)
+        {
+            if (observer != null && !observers.Contains(observer))
+                observers.Add(observer);
+        }
+
         public void Deregister(EventListener observer) => observers.Remove(observer);
     }
 }

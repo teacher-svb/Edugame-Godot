@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using TnT.Systems.TimeSystem;
 
 namespace TnT.EduGame
@@ -20,7 +19,8 @@ namespace TnT.EduGame
         /// <summary>
         /// Initializes a new instance of the StatModifier class.
         /// </summary>
-        /// <param name="duration">Duration for which the modifier is active (in seconds). Defaults to 0.</param>
+        /// <param name="duration">How long the modifier is active (in seconds); 0 or less (the default): no time limit, it
+        /// stays until it is disposed.</param>
         protected StatModifier(StatType statType, ElementalType elementalType = ElementalType.None, float duration = -1)
         {
             _statType = statType;
@@ -35,20 +35,13 @@ namespace TnT.EduGame
         }
 
         /// <summary>
-        /// Handles a stat query and applies the modifier.
+        /// Handles a stat query and applies the modifier. A query never removes it: one without a duration used to be
+        /// marked for removal by the first query of any stat, also one it doesn't modify (finding 7.17).
         /// </summary>
-        /// <param name="sender">Object that triggered the stat query.</param>
         /// <param name="q">Stat query to be modified.</param>
         /// <param name="c">Context information for the stat change.</param>
         /// <returns>Modified result of the stat query.</returns>
-        public int Handle(StatQuery q, StatContext c)
-        {
-            int result = Modify(q, c);
-            if (_timer == null)
-                MarkedForRemoval = true;
-            // ConsumeUse();
-            return result;
-        }
+        public int Handle(StatQuery q, StatContext c) => Modify(q, c);
 
         /// <summary>
         /// Updates the timer for the modifier.
@@ -64,7 +57,6 @@ namespace TnT.EduGame
         /// <summary>
         /// Modifies a stat query based on the specific implementation of the subclass.
         /// </summary>
-        /// <param name="sender">Object that triggered the stat query.</param>
         /// <param name="q">Stat query to be modified.</param>
         /// <param name="c">Context information for the stat change.</param>
         /// <returns>Modified result of the stat query.</returns>
@@ -83,16 +75,16 @@ namespace TnT.EduGame
         /// </summary>
         /// <param name="statType">Type of stat being modified.</param>
         /// <param name="operation">Arithmetic operation to apply.</param>
-        /// <param name="duration">Duration for which the modifier is active (in seconds). Defaults to 0 (no duration).</param>
-        public BasicStatModifier(StatType statType, Func<int, int> operation, float duration = -1/*, int uses = -1*/, ElementalType elementalType = ElementalType.None) : base(statType, elementalType: elementalType, duration: duration/*, uses: uses*/)
+        /// <param name="duration">How long the modifier is active (in seconds); 0 or less (the default): until disposed.</param>
+        /// <param name="elementalType">Elemental type of the modifier.</param>
+        public BasicStatModifier(StatType statType, Func<int, int> operation, float duration = -1, ElementalType elementalType = ElementalType.None) : base(statType, elementalType: elementalType, duration: duration)
         {
             this._operation = operation;
         }
 
         /// <summary>
-        /// Modifies a stat query based on the specific implementation of the subclass.
+        /// Applies the operation when the query is for this modifier's stat; other queries pass unchanged.
         /// </summary>
-        /// <param name="sender">Object that triggered the stat query.</param>
         /// <param name="q">Stat query to be modified.</param>
         /// <param name="c">Context information for the stat change.</param>
         /// <returns>Modified result of the stat query.</returns>

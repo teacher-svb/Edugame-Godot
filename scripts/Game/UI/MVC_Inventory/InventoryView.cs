@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using TnT.EduGame.Inventory;
-using TnT.Extensions;
 using TnT.Systems.UIAnimation;
 
 namespace TnT.EduGame.UI
@@ -16,7 +15,9 @@ namespace TnT.EduGame.UI
 
         public void InitializeView(IEnumerable<ItemData> inventoryItems)
         {
+            // hidden, not only transparent: the slots would catch mouse clicks while the inventory is closed
             Modulate = Colors.Transparent;
+            Visible = false;
             FillSlots(inventoryItems);
         }
 
@@ -44,14 +45,15 @@ namespace TnT.EduGame.UI
 
         public async Task ShowView(float duration = 0.2f)
         {
-            await this.FadeIn(duration);
             Visible = true;
+            await this.FadeIn(duration);
         }
 
         public async Task HideView(float duration = 0.2f)
         {
-            await this.FadeOut(duration);
-            Visible = false;
+            // not when a ShowView took over during the fade-out
+            if (await this.FadeOut(duration))
+                Visible = false;
         }
 
         private TextureRect MakeIcon(Texture2D texture)

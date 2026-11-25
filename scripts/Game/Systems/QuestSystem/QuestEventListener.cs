@@ -8,13 +8,21 @@ namespace TnT.EduGame.QuestSystem
     /// on a match raises the base event and runs its child <see cref="QuestStep"/>s.
     /// </summary>
     /// <remarks>
-    /// Loading a save raises no quest events, so a reaction that changed the world (opened something a later
-    /// objective needs) is lost when the game was saved after it but before the quest was completed. Set
-    /// <see cref="_catchUpAfterLoad"/> on such a listener: on _Ready and when the <see cref="QuestManager"/> is
-    /// bound, if its objective is already past the state it listens for (COMPLETED), it runs its steps once more
-    /// without an objective (messages, cards and saves skip themselves) and without ReactionStart/ReactionEnd (those
-    /// usually complete the objective, or toggle something that saves itself). Opt-in: a step that walks, toggles or
-    /// opens a challenge must not run again.
+    /// Loading a save (or entering the level) raises no quest events. Two opt-in flags make up for that; both run
+    /// once the scene is ready and bound to the save data (<see cref="QuestStepListener.CallWhenSceneReady"/>) and
+    /// need an objective id and a state:
+    /// <list type="bullet">
+    /// <item><see cref="_catchUpAfterLoad"/>: a reaction that changed the world (opened something a later objective
+    /// needs) is lost when the game was saved after it. If the objective is already past the state listened for
+    /// (COMPLETED), the steps run once more without an objective (messages, cards and saves skip themselves) and
+    /// without ReactionStart/ReactionEnd (those usually complete the objective, or toggle something that saves
+    /// itself). A step that walks, toggles or opens a challenge must not run again.</item>
+    /// <item><see cref="_resumeAfterLoad"/>: for an INPROGRESS reaction that completes its own objective
+    /// (ReactionEnd → CompleteObjective). If the objective is still INPROGRESS after the load (saved before this
+    /// change blocked saving mid-reaction, or the level was left while it ran), the reaction runs again from its
+    /// first step, with the objective and with signals, so ReactionEnd completes it.</item>
+    /// </list>
+    /// Live reactions hold up saving while they run (<see cref="SaveLoadManager.SaveGame()"/> refuses).
     /// </remarks>
     [GlobalClass]
     public partial class QuestEventListener : QuestStepListener
@@ -24,39 +32,35 @@ namespace TnT.EduGame.QuestSystem
         [Export] bool _checkState;
         [Export] QuestState _state;
         [Export] bool _catchUpAfterLoad;
-
-        bool _caughtUp;
+        [Export] bool _resumeAfterLoad;
+        public bool ResumesAfterLoad => _resumeAfterLoad;
 
         public override void _Ready()
         {
             base._Ready();
-            if (!_catchUpAfterLoad)
+            if (!_catchUpAfterLoad && !_resumeAfterLoad)
                 return;
             if (!_checkObjectiveId || !_checkState)
             {
-                GD.PushWarning($"QuestEventListener '{Name}': catch-up after load needs an objective id and a state");
+                GD.PushWarning($"QuestEventListener '{Name}': catch-up / resume after load needs an objective id and a state");
                 return;
             }
-            QuestManager.Instance.Bound += CatchUp;
-            CatchUp();
+            if (_resumeAfterLoad && _state != QuestState.INPROGRESS)
+                GD.PushWarning($"QuestEventListener '{Name}': resume after load only works for state INPROGRESS");
+            CallWhenSceneReady();
         }
 
-        public override void _ExitTree()
+        protected override void OnSceneReady()
         {
-            base._ExitTree();
-            if (_catchUpAfterLoad && QuestManager.Instance != null)
-                QuestManager.Instance.Bound -= CatchUp;
-        }
+            var objective = QuestManager.Instance?.Quests.SelectMany(q => q.Objectives).FirstOrDefault(o => o.ObjectiveId == _objectiveId);
+            if (objective == null)
+                return;
 
-        void CatchUp()
-        {
-            if (_caughtUp)
-                return;
-            var objective = QuestManager.Instance.Quests.SelectMany(q => q.Objectives).FirstOrDefault(o => o.ObjectiveId == _objectiveId);
-            if (objective == null || !IsPast(objective.State))
-                return;
-            _caughtUp = true;
-            RunSteps(null, signals: false);
+            if (_catchUpAfterLoad && IsPast(objective.State))
+                RunSteps(null, signals: false);
+            else if (_resumeAfterLoad && _state == QuestState.INPROGRESS
+                     && objective.State == QuestState.INPROGRESS && !objective.HasPendingTransition)
+                RunSteps(objective, signals: true, blocksSaving: true);
         }
 
         // the reaction to `_state` has run once the objective got past it: reached COMPLETED
@@ -76,7 +80,7 @@ namespace TnT.EduGame.QuestSystem
                     if (_checkObjectiveId && o.ObjectiveId != _objectiveId) return;
                     if (_checkState && o.State != _state) return;
                     base.Raise(o);
-                    RunSteps(o);
+                    RunSteps(o, blocksSaving: true);
                 }
             }
         }

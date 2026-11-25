@@ -2,7 +2,6 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace TnT.Systems.Easing
 {
@@ -70,7 +69,9 @@ namespace TnT.Systems.Easing
 
         // Elastic easing constants
         private const float ELASTIC_PERIOD_SCALE = 0.3f;
-        private const float ELASTIC_AMPLITUDE_MULTIPLIER = 2.75f;
+        // phase shift s = p / 4: the sine starts at -1 (a quarter period), so the curve starts at `start` (in) or
+        // ends at `end` (out) without a jump (was p / 2.75, a jump of about a quarter of the range)
+        private const float ELASTIC_PHASE_DIVISOR = 4f;
 
         private const float DEFAULT_DURATION = 1f;
 
@@ -526,7 +527,7 @@ namespace TnT.Systems.Easing
             if (value == 1) return end;
 
             float p = ELASTIC_PERIOD_SCALE;
-            float s = p / ELASTIC_AMPLITUDE_MULTIPLIER;
+            float s = p / ELASTIC_PHASE_DIVISOR;
             value -= 1;
             return -(delta * (float)Math.Pow(2, 10 * value) * Mathf.Sin((value - s) * TWO_PI / p)) + start;
         }
@@ -546,7 +547,7 @@ namespace TnT.Systems.Easing
             if (value == 1) return end;
 
             float p = ELASTIC_PERIOD_SCALE;
-            float s = p / ELASTIC_AMPLITUDE_MULTIPLIER;
+            float s = p / ELASTIC_PHASE_DIVISOR;
             return delta * (float)Math.Pow(2, -10 * value) * Mathf.Sin((value - s) * TWO_PI / p) + delta + start;
         }
 
@@ -565,7 +566,7 @@ namespace TnT.Systems.Easing
             if (value == 1) return end;
 
             float p = ELASTIC_PERIOD_SCALE * 1.5f;
-            float s = p / ELASTIC_AMPLITUDE_MULTIPLIER;
+            float s = p / ELASTIC_PHASE_DIVISOR;
             value *= 2;
 
             if (value < 1)
@@ -574,7 +575,8 @@ namespace TnT.Systems.Easing
                 return -0.5f * (delta * (float)Math.Pow(2, 10 * value) * Mathf.Sin((value - s) * TWO_PI / p)) + start;
             }
             value -= 1;
-            return delta * 0.5f * (float)Math.Pow(2, -10 * value) * Mathf.Sin((value - s) * TWO_PI / p) + delta * 0.5f + start;
+            // second half starts at the midpoint: sin(-s * 2pi / p) = -1, so 0.5 * delta * -1 + delta = delta / 2
+            return delta * 0.5f * (float)Math.Pow(2, -10 * value) * Mathf.Sin((value - s) * TWO_PI / p) + delta + start;
         }        /// <summary>
                  /// Exponential easing in function.
                  /// Starts slowly and accelerates rapidly towards the end.

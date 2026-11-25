@@ -35,17 +35,16 @@ namespace TnT.EduGame
 {
     public partial class Door : IBind<DoorSaveData>
     {
-        public string PersistentId { get; private set; }
+        public string PersistentId => PersistentIds.SceneScoped(this);   // "<level scene>#<path in the level>", read at bind time
         DoorSaveData _saveData;
 
         public void Bind(DoorSaveData data)
         {
-            GD.Print($"door bind {data} {data?.IsOpen}");
             _saveData = data;
             if (!data.IsNew && data.IsOpen)
             {
-                _col ??= this.FindAnyObjectByType<CollisionShape3D>();
-                _animPlayer ??= this.FindAnyObjectByType<AnimationPlayer>();
+                _col ??= this.FindAnyObjectByType<CollisionShape3D>(includeSelf: true);
+                _animPlayer ??= this.FindAnyObjectByType<AnimationPlayer>(includeSelf: true);
                 _col.Disabled = true;
                 _animPlayer?.Play("door_open");
                 _animPlayer?.Advance(_animPlayer.CurrentAnimationLength);
@@ -56,7 +55,7 @@ namespace TnT.EduGame
 
     public partial class PlayerTutorial : IBind<TutorialSaveData>
     {
-        public string PersistentId { get; private set; }
+        public string PersistentId => PersistentIds.SceneScoped(this);   // "<level scene>#<path in the level>", read at bind time
         TutorialSaveData _saveData;
 
         public void Bind(TutorialSaveData data)
@@ -73,22 +72,27 @@ namespace TnT.EduGame.QuestSystem
     {
         public string PersistentId { get; private set; } = "QuestManager";
         QuestManagerSaveData _saveData;
+        ulong _boundSceneId;   // instance id of the scene the save data was last bound in (0: none)
 
         /// <summary>
-        /// Raised after the quest states are restored from the save data. That happens after the level's _Ready
-        /// (the scene loader binds once the scene is in the tree) and raises no quest events, so anything that
-        /// reads quest states on _Ready (e.g. <see cref="QuestsCompletedListener"/>) checks again here.
+        /// Raised once the loaded scene is bound to the save data: after every node's _Ready and after the other
+        /// bindings (SaveLoadManager binds the quests last). Loading raises no quest events, so the listeners catch
+        /// up here (<see cref="QuestStepListener.CallWhenSceneReady"/>).
         /// </summary>
         public event System.Action Bound;
 
+        /// <summary>True once <see cref="Bind"/> ran for <paramref name="scene"/> (a node added later can't wait for <see cref="Bound"/>).</summary>
+        public bool IsBoundTo(Node scene) => scene != null && _boundSceneId != 0 && scene.GetInstanceId() == _boundSceneId;
+
         /// <summary>
         /// Sets the quest states in memory to <paramref name="data"/> (null: every quest not started), without quest
-        /// events. Call it before loading a level for a loaded save or a new game: the level's listeners check the
-        /// in-memory states on _Ready, before <see cref="Bind"/> restores them, and would otherwise react to the
-        /// states of the session that was running (bug-load-stale-quest-states).
+        /// events, and drops transitions still pending from the running session. Call it before loading a level for a
+        /// loaded save or a new game: the level's listeners read the in-memory states, and <see cref="Bind"/> takes
+        /// them as they are (bug-load-stale-quest-states). Until the level binds, nothing is written to the old save data.
         /// </summary>
         public void Restore(QuestManagerSaveData data)
         {
+            _saveData = null;   // the running game's save data (a new game must not share or write its objects)
             foreach (var quest in Quests)
             {
                 quest.Reset();
@@ -104,65 +108,35 @@ namespace TnT.EduGame.QuestSystem
             }
         }
 
+        // The states in memory are the truth here: Restore set them for a load or a new game, and a level change
+        // keeps the running session's. Bind attaches the save data and writes them into it.
         public void Bind(QuestManagerSaveData data)
         {
+            if (data == null)
+            {
+                GD.PushError("QuestManager.Bind: no save data");
+                return;
+            }
             _saveData = data;
             _saveData.Id = PersistentId;
-            Quests.ForEach(q => q.Bind(_saveData.quests?.FirstOrDefault(s => s.Id == q.Id)));
+            SyncSaveData();
+            _boundSceneId = GetTree()?.CurrentScene?.GetInstanceId() ?? 0;
             Bound?.Invoke();
         }
     }
 
-    // Quest class binding implementation
-    // Note: This one does NOT inherit from IBind<T> because it is a Resource and not a Node
+    // Quest save data: a fresh copy each time (a Resource, so no IBind)
     public partial class Quest
     {
-        QuestSaveData _saveData;
-
-        public void Bind(QuestSaveData data)
+        public QuestSaveData GetSaveData() => new()
         {
-            if (data == null)
-            {
-                Reset();
-                return;
-            }
-            _saveData = data;
-            _id = _saveData.Id;
-            Objectives.ForEach(o => o.Bind(data.Objectives.FirstOrDefault(s => s.Id == o.ObjectiveId)));
-        }
-
-        public QuestSaveData GetSaveData()
-        {
-            if (_saveData == null)
-                _saveData = new();
-            _saveData.Id = _id;
-            _saveData.Objectives = _objectives.Select(o => o.GetSaveData()).ToArray();
-            return _saveData;
-        }
+            Id = _id,
+            Objectives = _objectives.Select(o => o.GetSaveData()).ToArray(),
+        };
     }
 
-    // QuestObjective class binding implementation
-    // Note: This one does NOT inherit from IBind<T> because it is a Resource and not a Node
     public partial class QuestObjective
     {
-        QuestObjectiveSaveData _saveData;
-        public QuestObjectiveSaveData SaveData => _saveData;
-        public void Bind(QuestObjectiveSaveData data)
-        {
-            if (data == null)
-                return;
-            _saveData = data;
-            State = _saveData.State;
-            _objectiveId = _saveData.Id;
-        }
-
-        public QuestObjectiveSaveData GetSaveData()
-        {
-            if (_saveData == null)
-                _saveData = new();
-            _saveData.Id = _objectiveId;
-            _saveData.State = State;
-            return _saveData;
-        }
+        public QuestObjectiveSaveData GetSaveData() => new() { Id = _objectiveId, State = State };
     }
 }

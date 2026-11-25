@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using TnT.EduGame.GameStates;
-using TnT.Extensions;
 using TnT.EduGame.Characters;
 
 namespace TnT.EduGame.Levels
@@ -85,11 +84,9 @@ namespace TnT.EduGame.Levels
         public void Open() => Enabled = true;
         public void Close() => Enabled = false;
 
-        static bool IsPlayer(Node body) => body.FindAnyObjectByType<Player>() != null;
-
         void OnBodyEntered(Node3D body)
         {
-            if (!IsPlayer(body))
+            if (!Player.IsPlayer(body))
                 return;
             if (_frames < SettleFrames)
             {
@@ -127,7 +124,7 @@ namespace TnT.EduGame.Levels
 
         void OnBodyExited(Node3D body)
         {
-            if (!IsPlayer(body))
+            if (!Player.IsPlayer(body))
                 return;
             _playerInsideAtStart = false;
             if (TargetScene == "")

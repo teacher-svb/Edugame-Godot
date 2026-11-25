@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 namespace TnT.EduGame.Inventory

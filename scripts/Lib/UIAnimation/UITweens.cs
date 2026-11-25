@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 
@@ -7,16 +9,14 @@ namespace TnT.Systems.UIAnimation
 
     public static class UITweens
     {
-        private const string TweenMetaKey = "__ui_tween__";
-
         // ── Bump ─────────────────────────────────────────────────────────────
 
-        public static async Task Bump(this Control control, float scale = 1.2f, float rotDeg = 15f)
+        public static Task<bool> Bump(this Control control, float scale = 1.2f, float rotDeg = 15f)
         {
             control.PivotOffset = control.Size / 2f;
             float rotDir = GD.RandRange(0, 1) > 0.5f ? 1f : -1f;
 
-            var tween = control.ReplaceTween("bump")
+            var tween = control.ReplaceTween("bump", out var done)
                 .SetEase(Tween.EaseType.Out)
                 .SetTrans(Tween.TransitionType.Back);
             tween.SetParallel(true);
@@ -27,103 +27,103 @@ namespace TnT.Systems.UIAnimation
             tween.TweenProperty(control, "scale:y", 1f, 0.3f).SetDelay(0.25f);
             tween.TweenProperty(control, "rotation_degrees", 0f, 0.1f).SetDelay(0.15f);
 
-            await control.ToSignal(tween, Tween.SignalName.Finished);
+            return done;
         }
 
         // ── Fade ─────────────────────────────────────────────────────────────
 
-        public static async Task FadeIn(this Control control, float duration = 0.3f)
+        public static Task<bool> FadeIn(this Control control, float duration = 0.3f)
         {
-            var tween = control.ReplaceTween("fade")
+            var tween = control.ReplaceTween("fade", out var done)
                 .SetEase(Tween.EaseType.Out)
                 .SetTrans(Tween.TransitionType.Sine);
             tween.TweenProperty(control, "modulate:a", 1f, duration);
 
-            await control.ToSignal(tween, Tween.SignalName.Finished);
+            return done;
         }
 
-        public static async Task FadeOut(this Control control, float duration = 0.3f)
+        public static Task<bool> FadeOut(this Control control, float duration = 0.3f)
         {
-            var tween = control.ReplaceTween("fade")
+            var tween = control.ReplaceTween("fade", out var done)
                 .SetEase(Tween.EaseType.In)
                 .SetTrans(Tween.TransitionType.Sine);
             tween.TweenProperty(control, "modulate:a", 0f, duration);
 
-            await control.ToSignal(tween, Tween.SignalName.Finished);
+            return done;
         }
 
         // ── Scale ─────────────────────────────────────────────────────────────
 
-        public static async Task ScaleIn(this Control control, float duration = 0.3f)
+        public static Task<bool> ScaleIn(this Control control, float duration = 0.3f)
         {
             control.PivotOffset = control.Size / 2f;
             control.Scale = Vector2.Zero;
             control.Modulate = new Color(control.Modulate, 0f);
 
-            var tween = control.ReplaceTween("scale")
+            var tween = control.ReplaceTween("scale", out var done)
                 .SetEase(Tween.EaseType.Out)
                 .SetTrans(Tween.TransitionType.Back);
             tween.SetParallel(true);
             tween.TweenProperty(control, "scale", Vector2.One, duration);
             tween.TweenProperty(control, "modulate:a", 1f, duration * 0.3f);
 
-            await control.ToSignal(tween, Tween.SignalName.Finished);
+            return done;
         }
 
-        public static async Task ScaleOut(this Control control, float duration = 0.25f)
+        public static Task<bool> ScaleOut(this Control control, float duration = 0.25f)
         {
             control.PivotOffset = control.Size / 2f;
 
-            var tween = control.ReplaceTween("scale")
+            var tween = control.ReplaceTween("scale", out var done)
                 .SetEase(Tween.EaseType.In)
                 .SetTrans(Tween.TransitionType.Back);
             tween.SetParallel(true);
             tween.TweenProperty(control, "scale", Vector2.Zero, duration);
             tween.TweenProperty(control, "modulate:a", 0f, duration * 0.8f);
 
-            await control.ToSignal(tween, Tween.SignalName.Finished);
+            return done;
         }
 
         // ── Slide ─────────────────────────────────────────────────────────────
 
-        public static async Task SlideIn(this Control control, SlideDirection direction = SlideDirection.Left, float duration = 0.25f)
+        public static Task<bool> SlideIn(this Control control, SlideDirection direction = SlideDirection.Left, float duration = 0.25f)
         {
             Vector2 from = control.Position + SlideOffset(control, direction);
             control.Modulate = new Color(control.Modulate, 0f);
 
-            var tween = control.ReplaceTween("slide")
+            var tween = control.ReplaceTween("slide", out var done)
                 .SetEase(Tween.EaseType.Out)
                 .SetTrans(Tween.TransitionType.Back);
             tween.SetParallel(true);
             tween.TweenProperty(control, "position", control.Position, duration).From(from);
             tween.TweenProperty(control, "modulate:a", 1f, duration * 0.4f);
 
-            await control.ToSignal(tween, Tween.SignalName.Finished);
+            return done;
         }
 
-        public static async Task SlideOut(this Control control, SlideDirection direction = SlideDirection.Left, float duration = 0.2f)
+        public static Task<bool> SlideOut(this Control control, SlideDirection direction = SlideDirection.Left, float duration = 0.2f)
         {
             Vector2 to = control.Position + SlideOffset(control, direction);
 
-            var tween = control.ReplaceTween("slide")
+            var tween = control.ReplaceTween("slide", out var done)
                 .SetEase(Tween.EaseType.In)
                 .SetTrans(Tween.TransitionType.Sine);
             tween.SetParallel(true);
             tween.TweenProperty(control, "position", to, duration);
             tween.TweenProperty(control, "modulate:a", 0f, duration * 0.8f);
 
-            await control.ToSignal(tween, Tween.SignalName.Finished);
+            return done;
         }
 
         // ── Hover ─────────────────────────────────────────────────────────────
 
-        public static async Task HoverBounce(this Control control, float scaleRatio = 1f)
+        public static Task<bool> HoverBounce(this Control control, float scaleRatio = 1f)
         {
             control.PivotOffset = control.Size / 2f;
             float scaleTarget = 1f + 0.2f * scaleRatio;
             float rotDir = GD.RandRange(0, 1) > 0.5f ? 1f : -1f;
 
-            var tween = control.ReplaceTween("hover")
+            var tween = control.ReplaceTween("hover", out var done)
                 .SetEase(Tween.EaseType.Out)
                 .SetTrans(Tween.TransitionType.Back);
             tween.SetParallel(true);
@@ -132,12 +132,12 @@ namespace TnT.Systems.UIAnimation
             tween.TweenProperty(control, "rotation_degrees", 5f * scaleRatio * rotDir, 0.1f);
             tween.TweenProperty(control, "rotation_degrees", 0f, 0.1f).SetDelay(0.1f);
 
-            await control.ToSignal(tween, Tween.SignalName.Finished);
+            return done;
         }
 
-        public static async Task UnhoverBounce(this Control control)
+        public static Task<bool> UnhoverBounce(this Control control)
         {
-            var tween = control.ReplaceTween("hover")
+            var tween = control.ReplaceTween("hover", out var done)
                 .SetEase(Tween.EaseType.Out)
                 .SetTrans(Tween.TransitionType.Back);
             tween.SetParallel(true);
@@ -145,20 +145,79 @@ namespace TnT.Systems.UIAnimation
             tween.TweenProperty(control, "scale:y", 1f, 0.2f);
             tween.TweenProperty(control, "rotation_degrees", 0f, 0.15f);
 
-            await control.ToSignal(tween, Tween.SignalName.Finished);
+            return done;
         }
 
         // ── Internals ─────────────────────────────────────────────────────────
 
-        private static Tween ReplaceTween(this Control control, string slot)
+        // One running tween per (control, slot). Every helper returns a task that completes with true when its
+        // tween finished, or with false when it was replaced by a new tween in the same slot or killed in another
+        // way (its control freed, Kill() from outside). A killed tween never emits Finished, so an awaiter of
+        // Tween.Finished alone would never resume. Callers that change the control after the await (Visible = false
+        // after a fade-out) do so only on true: on false another animation owns the control now.
+        private sealed class Running
         {
-            string key = TweenMetaKey + slot;
-            if (control.HasMeta(key) && control.GetMeta(key).As<GodotObject>() is Tween existing && existing.IsValid())
-                existing.Kill();
+            public Tween Tween;
+            public readonly TaskCompletionSource<bool> Done = new();
+        }
 
-            var tween = control.CreateTween();
-            control.SetMeta(key, tween);
-            return tween;
+        private static readonly Dictionary<(ulong Control, string Slot), Running> _running = new();
+        private static SceneTree _watchedTree;
+
+        private static Tween ReplaceTween(this Control control, string slot, out Task<bool> done)
+        {
+            var key = (control.GetInstanceId(), slot);
+            if (_running.Remove(key, out var previous))
+            {
+                if (GodotObject.IsInstanceValid(previous.Tween) && previous.Tween.IsValid())
+                    previous.Tween.Kill();
+                // deferred: resumed inline, the old awaiter could start another tween in this slot before the
+                // caller has built the new one
+                Callable.From(() => previous.Done.TrySetResult(false)).CallDeferred();
+            }
+
+            var running = new Running { Tween = control.CreateTween() };
+            _running[key] = running;
+            // inline, like awaiting Tween.Finished did
+            running.Tween.Finished += () =>
+            {
+                if (_running.TryGetValue(key, out var current) && current == running)
+                    _running.Remove(key);
+                running.Done.TrySetResult(true);
+            };
+            WatchForKilled();
+            done = running.Done.Task;
+            return running.Tween;
+        }
+
+        // checked once per frame (also while the tree is paused), only while a tween runs
+        private static void WatchForKilled()
+        {
+            if (_watchedTree != null || Engine.GetMainLoop() is not SceneTree tree)
+                return;
+            _watchedTree = tree;
+            tree.ProcessFrame += ResolveKilled;
+        }
+
+        private static void ResolveKilled()
+        {
+            List<Running> killed = null;
+            foreach (var (key, running) in _running.ToArray())
+            {
+                if (GodotObject.IsInstanceValid(running.Tween) && running.Tween.IsValid())
+                    continue;
+                _running.Remove(key);
+                (killed ??= new()).Add(running);
+            }
+
+            if (_running.Count == 0 && _watchedTree != null)
+            {
+                _watchedTree.ProcessFrame -= ResolveKilled;
+                _watchedTree = null;
+            }
+
+            foreach (var running in killed ?? [])
+                running.Done.TrySetResult(false);
         }
 
         private static Vector2 SlideOffset(Control control, SlideDirection direction) => direction switch

@@ -1,5 +1,3 @@
-using System;
-using Godot;
 using TnT.EduGame.Characters;
 
 namespace TnT.EduGame

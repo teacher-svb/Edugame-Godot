@@ -87,7 +87,7 @@ namespace TnT.Extensions
         /// </summary>
         public static void Clear<T>(this Node parent) where T : Node
         {
-            var children = parent.FindObjectsByType<T>();
+            var children = parent.FindObjectsByType<T>(includeSelf: false);
             foreach (var child in children)
                 child.QueueFree();
         }

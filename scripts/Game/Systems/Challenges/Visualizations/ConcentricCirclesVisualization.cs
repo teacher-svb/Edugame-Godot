@@ -85,14 +85,32 @@ namespace TnT.EduGame.Challenges
             }).ToList();
         }
 
+        // Alternating number and operator tokens, number first and last; anything a ring can't
+        // show is an error with the formula in the message (before: silently dropped, so `2.5`
+        // became two rings and a unary minus an operator ring without a number in front).
         public static IReadOnlyList<string> Tokenize(string formula)
         {
+            formula ??= "";
             if (formula.IndexOfAny(['(', ')']) >= 0)
                 throw new ArgumentException($"Concentric circles can't show parentheses: '{formula}'");
 
-            return Regex.Matches(formula, @"[a-zA-Z_][a-zA-Z0-9_]*|\d+|[+\-*/]")
+            var tokens = Regex.Matches(formula, @"[a-zA-Z_][a-zA-Z0-9_]*|\d+(?:\.\d+)?|[+\-*/]|\S")
                 .Select(m => m.Value)
                 .ToList();
+
+            var foreign = tokens.FirstOrDefault(t => !IsOperator(t) && !Regex.IsMatch(t, @"^([a-zA-Z_][a-zA-Z0-9_]*|\d+(\.\d+)?)$"));
+            if (foreign != null)
+                throw new ArgumentException($"Concentric circles can't show '{foreign}' in '{formula}'; use + - * / between numbers and params");
+
+            for (int i = 0; i < tokens.Count; i++)
+                if (IsOperator(tokens[i]) != (i % 2 == 1))
+                    throw new ArgumentException(i == 0 && IsOperator(tokens[i])
+                        ? $"Concentric circles can't show a leading '{tokens[i]}' in '{formula}'; write e.g. '0 - a'"
+                        : $"Concentric circles need a number or param between operators in '{formula}'");
+            if (tokens.Count % 2 == 0)
+                throw new ArgumentException($"Concentric circles need a number or param after the last operator in '{formula}'");
+
+            return tokens;
         }
 
         static bool IsOperator(string token) => token is "+" or "-" or "*" or "/";

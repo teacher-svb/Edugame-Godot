@@ -1,5 +1,3 @@
-using TnT.EduGame.Challenges;
-
 namespace TnT.EduGame.UI
 {
     // Base for anything placed in ChallengeUI's visualization slot: renders the

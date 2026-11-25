@@ -26,5 +26,8 @@ namespace TnT.EduGame.UI
         }
 
         protected virtual bool Accepts(ChallengeElement element) => true;
+
+        /// <summary>What gets keyboard focus when the challenge opens (input widgets); null: nothing.</summary>
+        public virtual Control FocusTarget => null;
     }
 }

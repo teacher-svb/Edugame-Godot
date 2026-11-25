@@ -10,12 +10,13 @@ namespace TnT.EduGame.QuestSystem
     /// quest diagram): wire ReactionEnd to whatever starts the next quest.
     /// </summary>
     /// <remarks>
-    /// Also checks on _Ready, since quests completed in another scene raised their events before
-    /// this node existed, and again when the <see cref="QuestManager"/> is bound to the save data
-    /// (loading a save restores the quest states after _Ready, without quest events). That catch-up
-    /// run happens mid scene load and passes no objective, so its steps must not show anything
-    /// (no quest messages, challenges; <see cref="MessageStep"/> skips itself): enable a trigger
-    /// area instead of starting a quest directly.
+    /// Also checks once the scene is ready and bound to the save data (<see cref="QuestStepListener.CallWhenSceneReady"/>:
+    /// after every node's _Ready and the bindings, so a catch-up isn't overwritten by them), since quests completed in
+    /// another scene or in a loaded save raised their events before this node existed. That catch-up run happens mid
+    /// scene load and passes no objective, so its steps must not show anything (no quest messages, challenges;
+    /// <see cref="MessageStep"/> skips itself): enable a trigger area instead of starting a quest directly. It
+    /// emits ReactionStart/ReactionEnd (that is how areas get armed again) but not OnListen.
+    /// Its reactions don't hold up saving: the catch-up runs them again after every load.
     /// </remarks>
     [GlobalClass]
     public partial class QuestsCompletedListener : QuestStepListener
@@ -34,18 +35,11 @@ namespace TnT.EduGame.QuestSystem
                 return;
             }
 
-            QuestManager.Instance.Bound += CatchUp;
-            CatchUp();
+            CallWhenSceneReady();
         }
 
-        public override void _ExitTree()
-        {
-            base._ExitTree();
-            if (QuestManager.Instance != null)
-                QuestManager.Instance.Bound -= CatchUp;
-        }
-
-        void CatchUp()
+        // the catch-up: quests completed before this scene was loaded
+        protected override void OnSceneReady()
         {
             if (AllCompleted())
                 Trigger(null);
@@ -66,7 +60,8 @@ namespace TnT.EduGame.QuestSystem
                 return;
 
             _triggered = true;
-            base.Raise(objective);
+            if (objective != null)
+                base.Raise(objective);   // OnListen only for a live completion, not with nothing on a catch-up
             RunSteps(objective);
         }
 

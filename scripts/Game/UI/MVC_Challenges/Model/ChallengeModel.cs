@@ -9,14 +9,12 @@ namespace TnT.EduGame.UI
     [GlobalClass]
     public partial class ChallengeModel : Node
     {
-        [Export]
-        MathChallenge _challenge;
-        public MathChallenge Challenge { get => _challenge; set => _challenge = value; }
+        public MathChallenge Challenge { get; private set; }
         public ChallengeRound Round { get; private set; }
 
-        public string ChallengeName => Challenge.Name;
-        public string Question => Challenge.QuestionFor(Round);
-        public string Hint => Challenge.HintFor(Round);
+        public string ChallengeName => Challenge?.Name;
+        /// <summary>The round's hint with its values filled in; empty when the challenge has none.</summary>
+        public string Hint => Challenge == null || Round == null ? "" : Challenge.HintFor(Round);
 
         readonly Dictionary<string, int> _answers = new();
 
@@ -28,10 +26,12 @@ namespace TnT.EduGame.UI
 
         public bool CheckAnswer() => Round.Check(_answers);
 
+        // rolls first: a challenge that can't be rolled leaves the model as it was
         public void SetChallenge(MathChallenge challenge, int seed)
         {
+            var round = challenge.Roll(seed);
             Challenge = challenge;
-            Round = challenge.Roll(seed);
+            Round = round;
             _answers.Clear();
         }
     }

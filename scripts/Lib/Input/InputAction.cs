@@ -29,25 +29,19 @@ namespace TnT.Input
             bool isPressed = Godot.Input.IsActionPressed(InputReference);
             IsPressed = isPressed;
 
-            // Pressed (first frame)
-            if (isPressed && !_wasPressed)
-            {
-                Triggered = true;
-                InvokeOnPressed();
-            }
+            bool pressedNow = isPressed && !_wasPressed;
+            bool releasedNow = !isPressed && _wasPressed;
+            // state first: a throwing handler must not leave _wasPressed stale (the action would re-trigger every frame)
+            _wasPressed = isPressed;
+            Triggered = pressedNow;   // reset each poll (also when the handlers below throw)
+            WasReleasedThisFrame = releasedNow;
 
-            // Held
+            if (pressedNow)
+                InvokeOnPressed();
             if (isPressed)
                 InvokeOnHeld();
-
-            // Released
-            if (!isPressed && _wasPressed)
-            {
-                WasReleasedThisFrame = true;
+            if (releasedNow)
                 InvokeOnReleased();
-            }
-
-            _wasPressed = isPressed;
         }
     }
 }

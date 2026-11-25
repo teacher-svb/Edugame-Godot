@@ -286,6 +286,7 @@ _checkObjectiveId = true
 _objectiveId = "76aea55d-b75f-46d0-a036-841e8309a203"
 _checkState = true
 _state = 1
+_resumeAfterLoad = true
 eventChannel = ExtResource("q_channel")
 
 [node name="IdleStep" type="Node" parent="Quests/I_3-Fire/obj3-init-SendOn" unique_id=1733510408 node_paths=PackedStringArray("_character")]

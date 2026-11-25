@@ -7,7 +7,7 @@ namespace TnT.EduGame.Challenges
     // MathChallenge passes its param names down (SetAvailableParams), so those
     // fields get a dropdown in the inspector instead of free text.
     [Tool]
-    public abstract partial class ParamAwareResource : Resource, IParamFieldOwner
+    public abstract partial class ParamAwareResource : Resource
     {
         protected string[] AvailableParams { get; private set; } = [];
 

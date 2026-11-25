@@ -10,13 +10,11 @@ namespace TnT.EduGame.Challenges
     [GlobalClass, Tool]
     public partial class KeyVisualization : BarGraphVisualization
     {
-        public KeyVisualization()
-        {
-            AxisMax = 9;
-            AxisStep = 1;
-            SnapToGrid = true;
-            ShowValues = false;
-        }
+        // depth 0..9 in steps of 1 on the grid, no values written (see BarGraphVisualization's defaults)
+        protected override int DefaultAxisMax => 9;
+        protected override int DefaultAxisStep => 1;
+        protected override bool DefaultSnapToGrid => true;
+        protected override bool DefaultShowValues => false;
 
         protected override string DefaultScenePath => "res://Scenes/UI/ChallengeVisualizations/Key.tscn";
     }

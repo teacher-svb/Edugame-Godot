@@ -8,11 +8,11 @@ namespace TnT.EduGame.UI
     // another. The missing term is a dashed box with `?`, so the row shows where the gap is.
     public partial class SequenceWidget : ChallengeVisualizationWidget<SequenceVisualization>
     {
-        [Export] public Color PaperColor { get; set; } = new(0.97f, 0.94f, 0.86f);
+        [Export] public Color PaperColor { get; set; } = ChallengePalette.Paper;
         [Export] public Color BoxColor { get; set; } = new(1f, 0.99f, 0.95f);
-        [Export] public Color FrameColor { get; set; } = new(0.35f, 0.25f, 0.15f);
-        [Export] public Color LabelColor { get; set; } = new(0.20f, 0.13f, 0.07f);
-        [Export] public Color UnknownColor { get; set; } = new(0.80f, 0.20f, 0.15f);
+        [Export] public Color FrameColor { get; set; } = ChallengePalette.Frame;
+        [Export] public Color LabelColor { get; set; } = ChallengePalette.Ink;
+        [Export] public Color UnknownColor { get; set; } = ChallengePalette.Accent;
 
         // seconds between two boxes popping in
         [Export] public float StepDuration { get; set; } = 0.15f;
@@ -82,7 +82,7 @@ namespace TnT.EduGame.UI
 
                 if (i == _missing)
                 {
-                    DrawDashedRect(rect, UnknownColor);
+                    this.DrawDashedRect(rect, UnknownColor);
                     if (t >= 1)
                         this.DrawTextCentered(font, "?", center, (int)(fontSize * 1.4f), UnknownColor);
                 }
@@ -102,13 +102,6 @@ namespace TnT.EduGame.UI
             var head = (to - from).Normalized() * Mathf.Min(8, from.DistanceTo(to) * 0.5f);
             DrawLine(to, to - head.Rotated(0.5f), FrameColor, 2);
             DrawLine(to, to - head.Rotated(-0.5f), FrameColor, 2);
-        }
-
-        void DrawDashedRect(Rect2 rect, Color color)
-        {
-            Vector2[] corners = [rect.Position, new(rect.End.X, rect.Position.Y), rect.End, new(rect.Position.X, rect.End.Y)];
-            for (int i = 0; i < 4; i++)
-                DrawDashedLine(corners[i], corners[(i + 1) % 4], color, 2, 6);
         }
     }
 }

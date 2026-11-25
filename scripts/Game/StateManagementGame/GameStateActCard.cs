@@ -34,7 +34,7 @@ namespace TnT.EduGame.GameStates
             _options = options;
             _ready = false;
             _done = false;
-            return new BaseState(new() { OnEnter = Open, OnExit = Close, ExitOnNextUpdate = () => _done, OnUpdate = Update });
+            return new BaseState(new() { OnEnter = Open, OnResume = Resume, OnExit = Close, ExitOnNextUpdate = () => _done, OnUpdate = Update });
         }
 
         void Update()
@@ -53,6 +53,18 @@ namespace TnT.EduGame.GameStates
             _options.close.Enable();
             _ready = true;
             await ActCardController.Instance.ShowHint();
+        }
+
+        // a state on top of it closed: it may have unpaused the tree and disabled the shared next/close actions
+        Task Resume()
+        {
+            ManagerUI.Instance.GetTree().Paused = true;
+            if (_ready)
+            {
+                _options.next.Enable();
+                _options.close.Enable();
+            }
+            return Task.CompletedTask;
         }
 
         async Task Close()

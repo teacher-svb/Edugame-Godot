@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using TnT.Input;
 
 namespace TnT.EduGame

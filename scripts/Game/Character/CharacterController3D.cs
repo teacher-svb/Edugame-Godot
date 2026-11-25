@@ -14,6 +14,8 @@ namespace TnT.EduGame.Characters
         [Export] private float _speed = 5.0f;
         [Export] private float _jumpVelocity = 4.5f;
         [Export] private float _rotationSpeed = 10.0f;
+        /// <summary>Seconds a jump pressed in the air is kept, so it still fires when the character lands right after.</summary>
+        [Export] private float _jumpBufferSeconds = 0.15f;
         Character3D _character;
         public Vector3 GlobalPosition => _character.GlobalPosition;
 
@@ -44,8 +46,12 @@ namespace TnT.EduGame.Characters
         private bool _justJumped = false;
 
         Vector2 inputDir;
+        // a world-space walk direction (NPCs on a navigation path); wins over inputDir, cleared every frame
+        Vector3 _worldDir;
 
-        bool _jump = false;
+        // time left on a requested jump: it fires on the floor within that time, or is dropped (finding 4.12: a
+        // jump pressed in the air used to fire on the next landing, however late, also after a teleport)
+        double _jumpBufferLeft = 0;
 
         Vector3 _push;
 
@@ -67,14 +73,24 @@ namespace TnT.EduGame.Characters
             if (_character.IsOnFloor() == false)
                 velocity += _character.GetGravity() * (float)delta;
 
-            if (_character.IsOnFloor() && _jump)
+            if (_jumpBufferLeft > 0)
             {
-                velocity.Y = _jumpVelocity;
-                _jump = false;
-                _justJumped = true;
+                if (_character.IsOnFloor())
+                {
+                    velocity.Y = _jumpVelocity;
+                    _jumpBufferLeft = 0;
+                    _justJumped = true;
+                }
+                else
+                    _jumpBufferLeft -= delta;
             }
 
-            Vector3 direction = (_character.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+            // Move: in the body's space (the player's input); MoveInWorld: as given, whatever the body's rotation.
+            // The body's global rotation, not its local Transform.Basis: under a rotated parent the input turned by the
+            // local basis only, so it no longer matched the camera's directions (scale left out)
+            Vector3 direction = _worldDir != Vector3.Zero
+                ? new Vector3(_worldDir.X, 0, _worldDir.Z).Normalized()
+                : (_character.GlobalBasis.Orthonormalized() * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 
             if (direction != Vector3.Zero)
             {
@@ -100,13 +116,21 @@ namespace TnT.EduGame.Characters
 
             EmitMovementState(direction);
             inputDir = Vector2.Zero;
+            _worldDir = Vector3.Zero;
         }
 
         private void OrientToDirection(Vector3 direction, double delta)
         {
             if (VisualRoot == null) return;
-            var target = Basis.LookingAt(-direction, Vector3.Up);
-            VisualRoot.Basis = VisualRoot.Basis.Orthonormalized().Slerp(target, _rotationSpeed * (float)delta);
+            // through Quaternion, which keeps the node's scale: setting an orthonormalized Basis reset it to 1
+            // (finding 4.8: the Earth wizard's Mage2 at 0.525 grew to full size once he walked)
+            // direction is world space, the quaternion is relative to VisualRoot's parent: turn the world facing
+            // into the parent's space, so a character whose body is rotated in the level faces the right way
+            var target = new Quaternion(Basis.LookingAt(-direction, Vector3.Up));
+            if (VisualRoot.GetParentOrNull<Node3D>() is Node3D parent)
+                target = (parent.GlobalBasis.GetRotationQuaternion().Inverse() * target).Normalized();
+            float weight = Mathf.Min(_rotationSpeed * (float)delta, 1f);
+            VisualRoot.Quaternion = VisualRoot.Quaternion.Normalized().Slerp(target, weight);
         }
 
         private void EmitMovementState(Vector3 direction)
@@ -144,30 +168,50 @@ namespace TnT.EduGame.Characters
             _push += velocity;
         }
 
+        /// <summary>Jumps now when on the floor, or on landing within the jump buffer time.</summary>
         public void Jump()
         {
-            _jump = true;
+            _jumpBufferLeft = _jumpBufferSeconds;
         }
 
         /// <summary>
         /// Queues a movement input to be applied during the next physics frame.
         /// </summary>
         /// <param name="movement">
-        /// A 2D direction vector where X maps to the local right/left axis
-        /// and Y maps to the local forward/back axis.
+        /// A 2D direction vector where X maps to the body's right/left axis
+        /// and Y maps to its forward/back axis (the body's global rotation, its parents' included).
         /// </param>
         public void Move(Vector2 movement)
         {
             inputDir = movement;
+            _worldDir = Vector3.Zero;
         }
 
         /// <summary>
-        /// Teleports the character instantly to the specified world-space position.
+        /// Queues a walk in a world-space direction for the next physics frame (Y ignored, any length: the character
+        /// walks at its speed), not turned by the body's rotation as <see cref="Move"/> is. For NPCs following a
+        /// navigation path, whose next path point is a world position: with <see cref="Move"/> a character whose
+        /// body is rotated in the level walked in a rotated direction.
+        /// </summary>
+        public void MoveInWorld(Vector3 direction)
+        {
+            _worldDir = direction;
+            inputDir = Vector2.Zero;
+        }
+
+        /// <summary>
+        /// Teleports the character instantly to the specified world-space position, standing still: its velocity,
+        /// a buffered jump and this frame's queued input and push are dropped.
         /// </summary>
         /// <param name="position">The target position in world space.</param>
         public void MoveTo(Vector3 position)
         {
-            _character.Position = position;
+            _character.GlobalPosition = position;
+            _character.Velocity = Vector3.Zero;
+            _jumpBufferLeft = 0;
+            inputDir = Vector2.Zero;
+            _worldDir = Vector3.Zero;
+            _push = Vector3.Zero;
         }
     }
 }

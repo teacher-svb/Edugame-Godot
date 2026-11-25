@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 namespace TnT.Input
@@ -35,8 +36,44 @@ namespace TnT.Input
         /// <inheritdoc/>
         public override void _Process(double delta)
         {
-            foreach (var actionable in _actionables)
-                actionable.Poll();
+            // a copy: a poll can free an actionable (NodeRemoved → Unregister) during the loop
+            foreach (var actionable in _actionables.ToArray())
+            {
+                if (actionable is GodotObject obj && !GodotObject.IsInstanceValid(obj))
+                    continue;
+                // one failing actionable must not stop polling the rest for this frame
+                try { actionable.Poll(); }
+                catch (Exception e) { ReportOnce(actionable, e); }
+            }
+        }
+
+        /// <summary>
+        /// Polls <paramref name="action"/>; an exception (e.g. an <see cref="InputAction"/> naming an InputMap action
+        /// that doesn't exist) is logged once per action instead of aborting the caller's loop. Null is skipped.
+        /// </summary>
+        public static void PollSafely(InputActionBase action)
+        {
+            if (action == null)
+                return;
+            try { action.Poll(); }
+            catch (Exception e) { ReportOnce(action, e); }
+        }
+
+        // a broken action throws every frame: log it once, not 60 times a second
+        static readonly HashSet<object> _reported = new(ReferenceEqualityComparer.Instance);
+
+        static void ReportOnce(object source, Exception e)
+        {
+            if (!_reported.Add(source))
+                return;
+            string what = source switch
+            {
+                InputActionBase action => $"{action.GetType().Name} '{action.ActionName}'"
+                    + (string.IsNullOrEmpty(action.ResourcePath) ? "" : $" ({action.ResourcePath})"),
+                Node node when node.IsInsideTree() => node.GetPath().ToString(),
+                _ => source.ToString(),
+            };
+            GD.PushError($"{nameof(InputManager)}: polling {what} failed (reported once): {e}");
         }
 
         /// <summary>Adds <paramref name="actionable"/> to the poll list if not already registered.</summary>

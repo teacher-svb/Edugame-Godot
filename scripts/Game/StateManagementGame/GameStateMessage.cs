@@ -31,7 +31,6 @@ namespace TnT.EduGame.GameStates
         {
             public MessageOptions Options;
             public readonly List<Action> Dismissed = new();
-            public bool Opened;
             public bool AllRead;
             public bool Retrieving;
             public Action OnNext;
@@ -53,6 +52,7 @@ namespace TnT.EduGame.GameStates
             return new BaseState(new()
             {
                 OnEnter = () => Open(session),
+                OnResume = () => Resume(session),
                 OnExit = () => Close(session),
                 ExitOnNextUpdate = () => session.AllRead,
                 OnUpdate = () => Update(session),
@@ -69,7 +69,8 @@ namespace TnT.EduGame.GameStates
 
         static void Add(Session session, MessageOptions options)
         {
-            MessageController.Instance.AddMessage(options.text, options.character.CharacterScenePath, options.character.CharacterName);
+            // no character: a text-only box (no closeup, no name)
+            MessageController.Instance.AddMessage(options.text, options.character?.CharacterScenePath, options.character?.CharacterName);
             if (options.onDismissed != null)
                 session.Dismissed.Add(options.onDismissed);
         }
@@ -100,28 +101,55 @@ namespace TnT.EduGame.GameStates
                 return;
             }
             session.Retrieving = true;
-            await MessageController.Instance.Hide(.1f);
-            await MessageController.Instance.Show();
-            session.Retrieving = false;
+            try
+            {
+                await MessageController.Instance.Hide(.1f);
+                // CleanQuit frees the autoloads a few frames before the engine quits
+                if (!GodotObject.IsInstanceValid(MessageController.Instance))
+                    return;
+                // checked again: a close during the hide emptied the queue (Show would dequeue from an empty queue)
+                if (session.AllRead)
+                    return;
+                if (MessageController.Instance.Count == 0)
+                {
+                    ClearMessages(session);
+                    return;
+                }
+                await MessageController.Instance.Show();
+            }
+            finally
+            {
+                session.Retrieving = false;
+            }
         }
 
         async Task Open(Session session)
         {
             var tree = ManagerUI.Instance.GetTree();
             tree.Paused = true;
-            // entered again after a state on top of it was popped: the box is already showing
-            if (session.Opened)
-                return;
-            session.Opened = true;
+            await MessageController.Instance.Show();
+            // only once the box is shown: a Next during the scale-in started a Hide that killed the scale-in tween
+            // (UITweens now resumes such an awaiter anyway)
             MessageController.Instance.NextBtnPushed += session.OnNext;
             MessageController.Instance.CloseBtnPushed += session.OnClose;
-            await MessageController.Instance.Show();
             session.Options.next.Enable();
             session.Options.close.Enable();
         }
 
+        // a state on top of the box closed (the box is still showing): it may have unpaused the tree and disabled
+        // the shared next/close actions
+        Task Resume(Session session)
+        {
+            ManagerUI.Instance.GetTree().Paused = true;
+            session.Options.next.Enable();
+            session.Options.close.Enable();
+            return Task.CompletedTask;
+        }
+
         async Task Close(Session session)
         {
+            // removed before it was read to the end (a scene load unwound it): its lines must not show in the next box
+            ClearMessages(session);
             MessageController.Instance.NextBtnPushed -= session.OnNext;
             MessageController.Instance.CloseBtnPushed -= session.OnClose;
             session.Options.next.Disable();
@@ -130,7 +158,7 @@ namespace TnT.EduGame.GameStates
             ManagerUI.Instance.GetTree().Paused = false;
             if (_session == session)
                 _session = null;
-            // after the state is popped (AbstractStateStack.TransitionOut pops before awaiting ExitState), so a
+            // after the state is popped (AbstractStateStack removes a state before awaiting its ExitState), so a
             // message pushed by a callback (e.g. the next objective's start) opens a new box, and the ones after it
             // join that box
             foreach (var dismissed in session.Dismissed)

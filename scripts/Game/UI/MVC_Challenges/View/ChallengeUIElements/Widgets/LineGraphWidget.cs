@@ -9,12 +9,12 @@ namespace TnT.EduGame.UI
     // to right (clipped to the plot), and the marked point with dashed guides to both axes.
     public partial class LineGraphWidget : ChallengeVisualizationWidget<LineGraphVisualization>
     {
-        [Export] public Color PaperColor { get; set; } = new(0.97f, 0.94f, 0.86f);
-        [Export] public Color GridColor { get; set; } = new(0.35f, 0.25f, 0.15f, 0.25f);
-        [Export] public Color LabelColor { get; set; } = new(0.20f, 0.13f, 0.07f);
-        [Export] public Color FrameColor { get; set; } = new(0.35f, 0.25f, 0.15f);
+        [Export] public Color PaperColor { get; set; } = ChallengePalette.Paper;
+        [Export] public Color GridColor { get; set; } = ChallengePalette.Grid;
+        [Export] public Color LabelColor { get; set; } = ChallengePalette.Ink;
+        [Export] public Color FrameColor { get; set; } = ChallengePalette.Frame;
         [Export] public Color LineColor { get; set; } = new(0.20f, 0.40f, 0.70f);
-        [Export] public Color MarkerColor { get; set; } = new(0.80f, 0.20f, 0.15f);
+        [Export] public Color MarkerColor { get; set; } = ChallengePalette.Accent;
 
         // seconds to draw the line in
         [Export] public float DrawDuration { get; set; } = 0.8f;

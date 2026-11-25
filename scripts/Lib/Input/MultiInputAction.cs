@@ -29,7 +29,9 @@ namespace TnT.Input
 
             foreach (var action in Actions)
             {
-                action.Poll();
+                if (action == null)
+                    continue;
+                InputManager.PollSafely(action);
 
                 if (action.Triggered)
                 {

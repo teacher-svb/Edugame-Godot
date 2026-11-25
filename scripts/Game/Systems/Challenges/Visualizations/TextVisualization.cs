@@ -7,7 +7,8 @@ namespace TnT.EduGame.Challenges
     [GlobalClass, Tool]
     public partial class TextVisualization : ChallengeVisualization
     {
-        // `{param}` / `{answer}` placeholders; empty means "formula = answer"
+        // `{param}` / `{answer}` placeholders; empty means "formula = answer". Shown as written
+        // (e.g. `{d} km/u`); only the generated formula gets school notation.
         [Export(PropertyHint.MultilineText)]
         public string Template { get; set; } = "";
 
@@ -17,9 +18,9 @@ namespace TnT.EduGame.Challenges
         {
             var template = Template != ""
                 ? Template
-                : $"{Regex.Replace(challenge.Formula, FormulaEvaluator.ParamPattern, m => $"{{{m.Value}}}")} = {{{ChallengeRound.AnswerParam}}}";
+                : $"{PrettifyOperators(Regex.Replace(challenge.Formula, FormulaEvaluator.ParamPattern, m => $"{{{m.Value}}}"))} = {{{ChallengeRound.AnswerParam}}}";
 
-            return PrettifyOperators(round.Format(template));
+            return round.Format(template);
         }
 
         // school notation rather than programmer notation

@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using TnT.Extensions;
 
 [GlobalClass]
@@ -18,7 +17,7 @@ public partial class CarrouselController : Control
 
     public override void _Ready()
     {
-        var buttons = this.FindObjectsByType<Button>();
+        var buttons = this.FindObjectsByType<Button>(includeSelf: false);
 
         BtnPrevious.Pressed += Carrousel._SelectPrevious;
 

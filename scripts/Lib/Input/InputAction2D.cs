@@ -16,10 +16,22 @@ namespace TnT.Input
         /// <inheritdoc/>
         public override void Poll()
         {
-            NegativeX?.Poll();
-            PositiveX?.Poll();
-            NegativeY?.Poll();
-            PositiveY?.Poll();
+            if (!Enabled)
+            {
+                // as InputAction: a disabled action reads as not pressed (no release event); a key still held when it
+                // is enabled again triggers it
+                Value = Vector2.Zero;
+                Triggered = false;
+                WasReleasedThisFrame = false;
+                IsPressed = false;
+                return;
+            }
+
+            // each on its own: one broken direction doesn't stop the others
+            InputManager.PollSafely(NegativeX);
+            InputManager.PollSafely(PositiveX);
+            InputManager.PollSafely(NegativeY);
+            InputManager.PollSafely(PositiveY);
 
             var raw = new Vector2(
                 (PositiveX?.IsPressed == true ? 1f : 0f) - (NegativeX?.IsPressed == true ? 1f : 0f),

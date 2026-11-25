@@ -1,5 +1,3 @@
-using Godot;
-
 namespace TnT.EduGame.Characters
 {
     public interface IMovementAnimator

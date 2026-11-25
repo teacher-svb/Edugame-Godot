@@ -13,28 +13,33 @@ namespace TnT.EduGame.UI
 
         public ChallengeUI ChallengeUI => _challengeUi;
 
-        public async Task InitializeView()
+        public void InitializeView()
         {
-            _challengeUi = this.FindAnyObjectByType<ChallengeUI>();
+            _challengeUi = this.FindAnyObjectByType<ChallengeUI>(includeSelf: true);
             Modulate = Colors.Transparent;
             Scale = Vector2.Zero;
-
-            await Task.Yield();
+            // hidden until the first challenge: no clicks, no Enter shortcut on Submit
+            Hide();
         }
 
+        // visible (and on top) before the scale-in, or from the 2nd opening on it would run hidden
         public async Task ShowView(float duration = 0.2f)
         {
-            await this.ScaleIn(duration);
             Show();
-            this.ZIndex = 1000;
-            
+            ZIndex = 1000;
+            _challengeUi.FocusInput();
+            await this.ScaleIn(duration);
         }
 
         public async Task HideView(float duration = 0.2f)
         {
-            this.ZIndex = -1;
-            await this.ScaleOut(duration);
-            Hide();
+            ZIndex = -1;
+            // no second submit or input while it scales out
+            _challengeUi.SetSubmitEnabled(false);
+            _challengeUi.ReleaseInputFocus();
+            // not when a ShowView took over during the scale-out (UITweens resumes the replaced awaiter with false)
+            if (await this.ScaleOut(duration))
+                Hide();
         }
 
         public void Refresh(MathChallenge challenge, ChallengeRound round)

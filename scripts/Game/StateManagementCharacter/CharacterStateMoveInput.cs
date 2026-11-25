@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Godot;
-using TnT.Extensions;
 using TnT.Input;
 using TnT.Systems.State;
 
@@ -20,6 +17,8 @@ namespace TnT.EduGame.Characters.States
             public NavigationAgent3D agent;
             public InputAction2D moveAction;
             public InputAction jumpAction;
+            /// <summary>Called once, when the state leaves the stack.</summary>
+            public Action ended;
         }
 
         MovingOptions _options;
@@ -27,7 +26,16 @@ namespace TnT.EduGame.Characters.States
         public BaseState GetState(MovingOptions options = default)
         {
             _options = options;
-            return new BaseState(new() { OnEnter = OnEnter, OnExit = OnExit, OnUpdate = OnUpdate });
+            return new BaseState(new()
+            {
+                OnEnter = OnEnter,
+                OnUpdate = OnUpdate,
+                OnExit = () =>
+                {
+                    options.ended?.Invoke();   // this push's callback, not the field's (set again by the next push)
+                    return Task.CompletedTask;
+                },
+            });
         }
 
         private void OnUpdate()
@@ -48,17 +56,6 @@ namespace TnT.EduGame.Characters.States
         {
             if (_options.jumpAction.IsPressed)
                 _options.cc.Jump();
-        }
-
-        private async Task OnExit()
-        {
-        }
-
-        private void OnHeld(InputActionBase action)
-        {
-            var dir = (action as InputAction2D).Value;
-            if (dir != Vector2.Zero)
-                _options.cc.Move(dir);
         }
     }
 }

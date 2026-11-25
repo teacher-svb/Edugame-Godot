@@ -16,6 +16,9 @@ namespace TnT.EduGame.UI
 
         [Signal] public delegate void AnsweredEventHandler(bool isCorrect);
 
+        // from Show until the answer or Hide
+        bool _open;
+
         public override void _Ready()
         {
             Instance = this;
@@ -28,9 +31,11 @@ namespace TnT.EduGame.UI
             Refresh();
         }
 
-        async void Initialize()
+        // synchronous, so a challenge shown in the first frame (a dev checkpoint, a trigger in a
+        // level's _Ready) finds the view wired
+        void Initialize()
         {
-            await view.InitializeView();
+            view.InitializeView();
 
             // ChallengeUI is scene-singleton furniture, never recreated between
             // challenges, so it's wired once here rather than re-subscribed on
@@ -38,22 +43,31 @@ namespace TnT.EduGame.UI
             view.ChallengeUI.OnValueAssigned += ValueAssigned;
             view.ChallengeUI.OnValueCleared += ValueCleared;
             view.ChallengeUI.OnSubmit += SubmitChallenge;
+            view.ChallengeUI.SetSubmitEnabled(false);   // nothing to submit before the first round
         }
 
         private void ValueAssigned(string paramName, int value)
         {
             model.AssignValue(paramName, value);
-            view.ChallengeUI.SetSubmitEnabled(model.IsComplete);
+            UpdateSubmit();
         }
 
         private void ValueCleared(string paramName)
         {
             model.ClearValue(paramName);
-            view.ChallengeUI.SetSubmitEnabled(model.IsComplete);
+            UpdateSubmit();
         }
 
         private void SubmitChallenge()
         {
+            if (!_open)
+                return;   // hiding or hidden: the answer is in already
+            if (model.Round == null)
+            {
+                GD.PushWarning("ChallengeController: submit without a challenge round, ignored");
+                return;
+            }
+
             bool isCorrect;
             try
             {
@@ -66,25 +80,36 @@ namespace TnT.EduGame.UI
                 GD.PushError($"Checking challenge '{model.ChallengeName}' failed: {ex}");
                 isCorrect = false;
             }
+            // one answer per showing: the challenge closes now (possibly only after the rest of its
+            // open animation), and nothing may answer again before the next Show
+            _open = false;
+            UpdateSubmit();
             EmitSignal(SignalName.Answered, isCorrect);
         }
 
         void Refresh()
         {
             view.Refresh(model.Challenge, model.Round);
-            view.ChallengeUI.SetSubmitEnabled(model.IsComplete);
+            UpdateSubmit();
+            view.ChallengeUI.SetHint(model.Hint);
         }
 
-        public async Task Show()
+        // Submit only while the challenge is shown and every unknown has a value. A value reported
+        // while it scales out (e.g. the text field's resync when HideView releases its focus) must not
+        // enable it again, or a second Enter would answer twice.
+        void UpdateSubmit() => view.ChallengeUI.SetSubmitEnabled(_open && model.IsComplete);
+
+        public Task Show()
         {
-            await Task.Yield();
-            await view.ShowView();
+            _open = true;
+            UpdateSubmit();   // start values reported before the view opened (lock, key)
+            return view.ShowView();
         }
 
-        public async Task Hide()
+        public Task Hide()
         {
-            await view.HideView();
-            await Task.Yield();
+            _open = false;
+            return view.HideView();
         }
     }
 }

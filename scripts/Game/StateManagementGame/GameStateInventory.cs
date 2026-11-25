@@ -20,7 +20,7 @@ namespace TnT.EduGame.GameStates
         {
             _options = options;
             _closed = false;
-            return new BaseState(new() { OnEnter = Open, OnExit = Close, ExitOnNextUpdate = Exit, OnUpdate = Update });
+            return new BaseState(new() { OnEnter = Open, OnResume = Resume, OnExit = Close, ExitOnNextUpdate = Exit, OnUpdate = Update });
         }
 
         private void Update()
@@ -33,16 +33,21 @@ namespace TnT.EduGame.GameStates
 
         private async Task Open()
         {
-            // ManagerUI.Instance.GetTree().Paused = true;
             await InventoryController.Instance.Show();
             _options.close.Enable();
+        }
+
+        // a state on top of it (e.g. a message) closed and disabled the shared close action
+        private Task Resume()
+        {
+            _options.close.Enable();
+            return Task.CompletedTask;
         }
 
         private async Task Close()
         {
             _options.close.Disable();
             await InventoryController.Instance.Hide();
-            // ManagerUI.Instance.GetTree().Paused = false;
         }
     }
 }

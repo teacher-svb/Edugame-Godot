@@ -1,15 +1,13 @@
-
-using Godot;
 using TnT.Systems.Persistence;
 
 namespace TnT.EduGame.QuestSystem
 {
-        [GlobalClass]
-        public partial class QuestManagerSaveData : Resource, ISaveable
-        {
-            [Export] public string Id { get; set; }
-            [Export] public bool IsNew { get; set; }
+    // plain C# (not a Godot Resource): Newtonsoft writes only these fields
+    public class QuestManagerSaveData : ISaveable
+    {
+        public string Id { get; set; }
+        public bool IsNew { get; set; }
 
-            public QuestSaveData[] quests = [];
+        public QuestSaveData[] quests = [];
+    }
 }
-        }

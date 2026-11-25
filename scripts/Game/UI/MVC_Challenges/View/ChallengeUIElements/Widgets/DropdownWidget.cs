@@ -8,7 +8,7 @@ namespace TnT.EduGame.UI
     {
         public override void _Ready()
         {
-            var fields = this.FindAnyObjectByType<HBoxContainer>();
+            var fields = this.FindAnyObjectByType<HBoxContainer>(includeSelf: true);
             var labelled = Round.Unknowns.Count > 1;
 
             foreach (var paramName in Round.Unknowns)
@@ -28,6 +28,7 @@ namespace TnT.EduGame.UI
                 // nothing preselected, so the player has to make a choice
                 dropdown.Selected = -1;
                 dropdown.ItemSelected += index => EmitValueAssigned(paramName, options[(int)index]);
+                FirstFocus ??= dropdown;
             }
         }
     }

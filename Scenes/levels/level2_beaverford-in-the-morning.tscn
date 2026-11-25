@@ -564,6 +564,7 @@ _checkObjectiveId = true
 _objectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa03"
 _checkState = true
 _state = 1
+_resumeAfterLoad = true
 eventChannel = ExtResource("15_jttql")
 metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 
@@ -603,6 +604,7 @@ _checkObjectiveId = true
 _objectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee03"
 _checkState = true
 _state = 1
+_resumeAfterLoad = true
 eventChannel = ExtResource("15_jttql")
 metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 
@@ -642,6 +644,7 @@ _checkObjectiveId = true
 _objectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd03"
 _checkState = true
 _state = 1
+_resumeAfterLoad = true
 eventChannel = ExtResource("15_jttql")
 metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 
@@ -681,6 +684,7 @@ _checkObjectiveId = true
 _objectiveId = "3a861b47-c25e-4265-8205-81e4394e3903"
 _checkState = true
 _state = 1
+_resumeAfterLoad = true
 eventChannel = ExtResource("15_jttql")
 metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 

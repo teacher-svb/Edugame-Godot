@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using Godot;
-using TnT.Extensions;
 
 namespace TnT.EduGame.UI
 {
@@ -10,12 +9,7 @@ namespace TnT.EduGame.UI
         [Export] public FadeView view;
         [Export] public FadeModel model;
 
-        public override void _Ready()
-        {
-            Initialize();
-        }
-
-        async void Initialize() => await view.InitializeView();
+        public override void _Ready() => view.InitializeView();
 
         public async Task ShowView()
         {

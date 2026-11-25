@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dsdamnlwcc0j1"]
 
 [ext_resource type="Script" uid="uid://b66cprwwqv431" path="res://scripts/Game/Systems/SaveLoadSystem/SaveLoadManager.cs" id="1_3yhdi"]
-[ext_resource type="Script" uid="uid://cerfog7uyabpn" path="res://scripts/Game/Systems/SaveLoadSystem/MyGameData.cs" id="2_4v8vv"]
 [ext_resource type="Script" uid="uid://d3ttmxb4thh1c" path="res://scripts/Lib/Input/InputManager.cs" id="3_4v8vv"]
 [ext_resource type="Script" uid="uid://x737eafgbb37" path="res://scripts/Lib/Input/InputAction2D.cs" id="3_fkgmb"]
 [ext_resource type="Script" uid="uid://7nvtadqep3kv" path="res://scripts/Game/Systems/QuestSystem/QuestManager.cs" id="4_347u6"]
@@ -49,7 +48,6 @@
 [ext_resource type="Script" uid="uid://dlqolcp4oddju" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeView.cs" id="24_qelhd"]
 [ext_resource type="PackedScene" uid="uid://dx5c0meqksg8l" path="res://Scenes/UI/ChallengeUI.tscn" id="25_d2cak"]
 [ext_resource type="Script" uid="uid://bmfvn3p4u73k5" path="res://scripts/Game/UI/MVC_Challenges/Model/ChallengeModel.cs" id="26_2a8cd"]
-[ext_resource type="Resource" uid="uid://bvtaxgkyu400b" path="res://GameData/challenges/SelectThree_easy.tres" id="27_kpb3h"]
 [ext_resource type="Script" uid="uid://bfyn33tven763" path="res://scripts/Game/UI/MVC_Inventory/InventoryController.cs" id="29_yi7uc"]
 [ext_resource type="Resource" uid="uid://clf3iqsa6rjxf" path="res://GameData/EventChannels/PickupItemEventChannel.tres" id="30_5t4y7"]
 [ext_resource type="Resource" uid="uid://cmj45lqtdr2l6" path="res://GameData/EventChannels/UseItemEventChannel.tres" id="30_fkgmb"]
@@ -65,6 +63,7 @@
 [ext_resource type="Script" uid="uid://c20c4ihxalgfu" path="res://scripts/Game/UI/MVC_Settings/SettingsModel.cs" id="41_n2kwl"]
 [ext_resource type="Script" uid="uid://cvgoslwqcj457" path="res://scripts/Game/UI/MVC_Fade/FadeModel.cs" id="42_56cnb"]
 [ext_resource type="PackedScene" uid="uid://ddarmu38cbcs" path="res://Scenes/UI/SettingsUI.tscn" id="42_n2kwl"]
+[ext_resource type="Theme" uid="uid://les3xc8lryk4" path="res://GameData/themes/Notifications.tres" id="43_ui_theme"]
 [ext_resource type="Script" uid="uid://7u5mhmxl340a" path="res://scripts/Game/UI/MVC_Fade/FadeView.cs" id="43_wgk6c"]
 [ext_resource type="Script" path="res://scripts/Game/Systems/Audio/MusicManager.cs" id="48_music"]
 [ext_resource type="Script" path="res://scripts/Game/StateManagementGame/GameStateActCard.cs" id="60_actstate"]
@@ -139,10 +138,6 @@ Enabled = true
 ActionName = "jump"
 metadata/_custom_type_script = "uid://ch4u84myc17c2"
 
-[sub_resource type="Resource" id="Resource_72h8h"]
-script = ExtResource("2_4v8vv")
-metadata/_custom_type_script = "uid://cerfog7uyabpn"
-
 [sub_resource type="Resource" id="Resource_5t4y7"]
 script = ExtResource("16_ut70p")
 InputReference = "next"
@@ -216,7 +211,6 @@ metadata/_custom_type_script = "uid://cypyw7658ri5r"
 
 [node name="SaveLoadManager" type="Node" parent="." unique_id=977596409]
 script = ExtResource("1_3yhdi")
-GameData = SubResource("Resource_72h8h")
 _startScene = "uid://lsbk05nndu58"
 _gameName = "FooBar"
 
@@ -286,7 +280,6 @@ layout_mode = 1
 
 [node name="ChallengeModel" type="Node" parent="UIManager/CanvasLayer/ChallengeController" unique_id=1213671079]
 script = ExtResource("26_2a8cd")
-_challenge = ExtResource("27_kpb3h")
 metadata/_custom_type_script = "uid://bmfvn3p4u73k5"
 
 [node name="InventoryController" type="Node" parent="UIManager/CanvasLayer" unique_id=898957681 node_paths=PackedStringArray("view", "model", "_pickupItemListener")]
@@ -326,20 +319,24 @@ metadata/_custom_type_script = "uid://vxn3gfrl3h1l"
 
 [node name="SettingsModel" type="Node" parent="UIManager/CanvasLayer/SettingsController" unique_id=14836353]
 script = ExtResource("41_n2kwl")
+_textTheme = ExtResource("43_ui_theme")
 metadata/_custom_type_script = "uid://c20c4ihxalgfu"
 
 [node name="Control" parent="UIManager/CanvasLayer/SettingsController" unique_id=29440267 instance=ExtResource("42_n2kwl")]
 
-[node name="FadeController" type="Node" parent="UIManager/CanvasLayer" unique_id=2005056650 node_paths=PackedStringArray("view", "model")]
+[node name="FadeLayer" type="CanvasLayer" parent="UIManager"]
+layer = 100
+
+[node name="FadeController" type="Node" parent="UIManager/FadeLayer" unique_id=2005056650 node_paths=PackedStringArray("view", "model")]
 script = ExtResource("41_d2cak")
 view = NodePath("FadeView")
 model = NodePath("FadeModel")
 
-[node name="FadeModel" type="Node" parent="UIManager/CanvasLayer/FadeController" unique_id=692979143]
+[node name="FadeModel" type="Node" parent="UIManager/FadeLayer/FadeController" unique_id=692979143]
 script = ExtResource("42_56cnb")
 metadata/_custom_type_script = "uid://cvgoslwqcj457"
 
-[node name="FadeView" type="Control" parent="UIManager/CanvasLayer/FadeController" unique_id=671778685]
+[node name="FadeView" type="Control" parent="UIManager/FadeLayer/FadeController" unique_id=671778685]
 z_index = -1
 layout_mode = 3
 anchors_preset = 15
@@ -350,7 +347,7 @@ grow_vertical = 2
 script = ExtResource("43_wgk6c")
 metadata/_custom_type_script = "uid://7u5mhmxl340a"
 
-[node name="ColorRect" type="ColorRect" parent="UIManager/CanvasLayer/FadeController/FadeView" unique_id=1217746912]
+[node name="ColorRect" type="ColorRect" parent="UIManager/FadeLayer/FadeController/FadeView" unique_id=1217746912]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -359,15 +356,18 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="ActCardController" type="Node" parent="UIManager/CanvasLayer" unique_id=1733550402 node_paths=PackedStringArray("view", "model")]
+[node name="ActCardLayer" type="CanvasLayer" parent="UIManager"]
+layer = 20
+
+[node name="ActCardController" type="Node" parent="UIManager/ActCardLayer" unique_id=1733550402 node_paths=PackedStringArray("view", "model")]
 script = ExtResource("61_actctrl")
 view = NodePath("ActCardView")
 model = NodePath("ActCardModel")
 
-[node name="ActCardModel" type="Node" parent="UIManager/CanvasLayer/ActCardController" unique_id=1733550403]
+[node name="ActCardModel" type="Node" parent="UIManager/ActCardLayer/ActCardController" unique_id=1733550403]
 script = ExtResource("62_actmodel")
 
-[node name="ActCardView" type="Control" parent="UIManager/CanvasLayer/ActCardController" unique_id=1733550404 node_paths=PackedStringArray("_background", "_text", "_title", "_subtitle", "_hint")]
+[node name="ActCardView" type="Control" parent="UIManager/ActCardLayer/ActCardController" unique_id=1733550404 node_paths=PackedStringArray("_background", "_text", "_title", "_subtitle", "_hint")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -382,7 +382,7 @@ _title = NodePath("Text/Title")
 _subtitle = NodePath("Text/Subtitle")
 _hint = NodePath("Hint")
 
-[node name="Background" type="ColorRect" parent="UIManager/CanvasLayer/ActCardController/ActCardView" unique_id=1733550405]
+[node name="Background" type="ColorRect" parent="UIManager/ActCardLayer/ActCardController/ActCardView" unique_id=1733550405]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -392,7 +392,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Text" type="VBoxContainer" parent="UIManager/CanvasLayer/ActCardController/ActCardView" unique_id=1733550406]
+[node name="Text" type="VBoxContainer" parent="UIManager/ActCardLayer/ActCardController/ActCardView" unique_id=1733550406]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -402,17 +402,17 @@ grow_vertical = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Title" type="Label" parent="UIManager/CanvasLayer/ActCardController/ActCardView/Text" unique_id=1733550407]
+[node name="Title" type="Label" parent="UIManager/ActCardLayer/ActCardController/ActCardView/Text" unique_id=1733550407]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_act_title")
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="UIManager/CanvasLayer/ActCardController/ActCardView/Text" unique_id=1733550408]
+[node name="Subtitle" type="Label" parent="UIManager/ActCardLayer/ActCardController/ActCardView/Text" unique_id=1733550408]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_act_subtitle")
 horizontal_alignment = 1
 
-[node name="Hint" type="Label" parent="UIManager/CanvasLayer/ActCardController/ActCardView" unique_id=1733550409]
+[node name="Hint" type="Label" parent="UIManager/ActCardLayer/ActCardController/ActCardView" unique_id=1733550409]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -429,15 +429,18 @@ text = "Druk op spatie om verder te gaan"
 label_settings = SubResource("LabelSettings_act_hint")
 horizontal_alignment = 1
 
-[node name="ReadingController" type="Node" parent="UIManager/CanvasLayer" node_paths=PackedStringArray("view", "model")]
+[node name="ReadingLayer" type="CanvasLayer" parent="UIManager"]
+layer = 10
+
+[node name="ReadingController" type="Node" parent="UIManager/ReadingLayer" node_paths=PackedStringArray("view", "model")]
 script = ExtResource("65_readctrl")
 view = NodePath("ReadingView")
 model = NodePath("ReadingModel")
 
-[node name="ReadingModel" type="Node" parent="UIManager/CanvasLayer/ReadingController"]
+[node name="ReadingModel" type="Node" parent="UIManager/ReadingLayer/ReadingController"]
 script = ExtResource("66_readmodel")
 
-[node name="ReadingView" parent="UIManager/CanvasLayer/ReadingController" instance=ExtResource("67_readview")]
+[node name="ReadingView" parent="UIManager/ReadingLayer/ReadingController" instance=ExtResource("67_readview")]
 
 [node name="MusicManager" type="Node" parent="." unique_id=358640137]
 script = ExtResource("48_music")

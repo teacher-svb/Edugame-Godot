@@ -14,13 +14,13 @@ namespace TnT.EduGame.UI
     // works as with the other inputs; the round is only checked on Submit.
     public partial class KeyWidget : ChallengeVisualizationWidget<KeyVisualization>, IChallengeInput
     {
-        [Export] public Color PaperColor { get; set; } = new(0.97f, 0.94f, 0.86f);
+        [Export] public Color PaperColor { get; set; } = ChallengePalette.Paper;
         [Export] public Color MetalColor { get; set; } = new(0.83f, 0.66f, 0.26f);
         [Export] public Color MetalShadeColor { get; set; } = new(0.60f, 0.45f, 0.15f);
-        [Export] public Color GridColor { get; set; } = new(0.35f, 0.25f, 0.15f, 0.25f);
-        [Export] public Color LabelColor { get; set; } = new(0.20f, 0.13f, 0.07f);
+        [Export] public Color GridColor { get; set; } = ChallengePalette.Grid;
+        [Export] public Color LabelColor { get; set; } = ChallengePalette.Ink;
         [Export] public Color SlotColor { get; set; } = new(0.35f, 0.25f, 0.15f, 0.45f);
-        [Export] public Color SelectedColor { get; set; } = new(0.80f, 0.20f, 0.15f);
+        [Export] public Color SelectedColor { get; set; } = ChallengePalette.Accent;
 
         public event Action<string, int> ValueAssigned;
         // a cut tooth always has a depth, so the key never takes a value back
@@ -48,9 +48,14 @@ namespace TnT.EduGame.UI
             FocusExited += QueueRedraw;
 
             // ChallengeUI subscribes after adding the widget, so report the starting depths a step later
+            // (focus: ChallengeUI.FocusInput once the view is shown, see FocusTarget)
             Callable.From(ReportAll).CallDeferred();
-            Callable.From(() => GrabFocus()).CallDeferred();
         }
+
+        public override Control FocusTarget => this;
+
+        // only the teeth are inputs; ChallengeUI falls back to an input widget for other unknowns
+        public bool Handles(string param) => Settings.Bars.Any(b => b != null && b.Param == param);
 
         void ReportAll()
         {
@@ -188,7 +193,7 @@ namespace TnT.EduGame.UI
                 var depth = DepthOf(tooth);
 
                 if (unknown)
-                    DrawDashedRect(column, i == _selected && HasFocus() ? SelectedColor : SlotColor, i == _selected ? 3 : 2);
+                    this.DrawDashedRect(column, i == _selected && HasFocus() ? SelectedColor : SlotColor, i == _selected ? 3 : 2);
 
                 if (depth > 0)
                 {
@@ -203,13 +208,6 @@ namespace TnT.EduGame.UI
                 if (tooth.Label != "")
                     this.DrawTextCentered(font, Round.Format(tooth.Label), new Vector2(centreX, l.LabelY + fontSize), fontSize, LabelColor);
             }
-        }
-
-        void DrawDashedRect(Rect2 rect, Color color, float width)
-        {
-            Vector2[] corners = [rect.Position, new(rect.End.X, rect.Position.Y), rect.End, new(rect.Position.X, rect.End.Y)];
-            for (int i = 0; i < 4; i++)
-                DrawDashedLine(corners[i], corners[(i + 1) % 4], color, width, 6);
         }
 
         // Where everything sits for the current size, also used to map the pointer to a tooth and depth.

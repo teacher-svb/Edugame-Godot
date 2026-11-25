@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using TnT.Systems.Easing;
@@ -17,9 +15,9 @@ namespace TnT.EduGame.UI
         [Export] public Color NumberRingColor { get; set; } = new(0.93f, 0.86f, 0.70f);
         [Export] public Color OperatorRingColor { get; set; } = new(0.78f, 0.62f, 0.42f);
         [Export] public Color CenterColor { get; set; } = new(0.98f, 0.95f, 0.88f);
-        [Export] public Color LineColor { get; set; } = new(0.35f, 0.25f, 0.15f);
-        [Export] public Color TextColor { get; set; } = new(0.20f, 0.13f, 0.07f);
-        [Export] public Color LockedColor { get; set; } = new(0.32f, 0.53f, 0.21f);
+        [Export] public Color LineColor { get; set; } = ChallengePalette.Frame;
+        [Export] public Color TextColor { get; set; } = ChallengePalette.Ink;
+        [Export] public Color LockedColor { get; set; } = ChallengePalette.Green;
         [Export] public Color WindowColor { get; set; } = new(1f, 1f, 1f, 0.35f);
 
         // full turns each ring makes before landing
@@ -50,6 +48,10 @@ namespace TnT.EduGame.UI
                 _ = Spin(i, Settings.SpinDuration + i * StaggerPerRing);
         }
 
+        // the spins run on the tree's process frames, which go on after the widget is freed (the next round clears
+        // its slot): every frame checks the widget first (IsInsideTree on a freed widget throws)
+        bool Gone => !IsInstanceValid(this) || !IsInsideTree();
+
         async Task Spin(int ring, float duration)
         {
             var step = Mathf.Tau / _rings[ring].Segments.Count;
@@ -63,7 +65,7 @@ namespace TnT.EduGame.UI
 
             await foreach (var t in Easings.Animate(duration, Ease.EaseOutCubic))
             {
-                if (!IsInsideTree())
+                if (Gone)
                     return;
                 _angles[ring] = Mathf.Lerp(from, to, t);
                 QueueRedraw();
@@ -71,7 +73,7 @@ namespace TnT.EduGame.UI
 
             await foreach (var t in Easings.Animate(LockPulseDuration, Ease.EaseOutQuad))
             {
-                if (!IsInsideTree())
+                if (Gone)
                     return;
                 _lock[ring] = t;
                 QueueRedraw();

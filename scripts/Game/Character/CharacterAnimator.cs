@@ -22,11 +22,11 @@ namespace TnT.EduGame.Characters
             if (VisualRoot != null)
                 _restScale = VisualRoot.Scale;
 
-            CharacterController3D cc = this.FindAncestorOfType<Character3D>()?.FindAnyObjectByType<CharacterController3D>();
+            CharacterController3D cc = this.FindAncestorOfType<Character3D>()?.FindAnyObjectByType<CharacterController3D>(includeSelf: true);
             if (cc == null) return;
             cc.MovementStateChanged += OnMovementStateChanged;
 
-            AnimationTree = this.FindAncestorOfType<Character3D>().FindAnyObjectByType<AnimationTree>();
+            AnimationTree = this.FindAncestorOfType<Character3D>().FindAnyObjectByType<AnimationTree>(includeSelf: true);
             if (AnimationTree == null) return;
             AnimationTree.Active = true;
             _stateMachine = (AnimationNodeStateMachinePlayback)
