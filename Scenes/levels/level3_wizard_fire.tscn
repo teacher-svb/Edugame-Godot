@@ -10,8 +10,10 @@
 [ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/corr_fire_sinking.tscn" id="7_6bdgy"]
 [ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="7_cle8w"]
 [ext_resource type="Script" uid="uid://b27dpvrinn6ki" path="res://addons/godoodungeon/Resources/DungeonGraph.cs" id="8_tgwq2"]
-[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/corr_fire_flamebar.tscn" id="9_d58b1"]
+[ext_resource type="PackedScene" uid="uid://sf5srugrcenv" path="res://assets/3D/village/interiors/school_interior/challenges/corr_fire_flamebar.tscn" id="9_d58b1"]
+[ext_resource type="PackedScene" uid="uid://b46bwsxmk2pp7" path="res://assets/3D/village/interiors/school_interior/school_moving_platform_NS.tscn" id="9_pdhk1"]
 [ext_resource type="Script" uid="uid://kevvfo7u3dqp" path="res://scripts/Game/Systems/Platforming/ChamberSafety.cs" id="10_6bdgy"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/corr_fire_jets.tscn" id="12_a53ag"]
 [ext_resource type="Script" uid="uid://dlw68x261wgl5" path="res://addons/godoodungeon/Nodes/DungeonRoomBox.cs" id="13_a53ag"]
 [ext_resource type="Script" uid="uid://dwwieccxf3i2m" path="res://scripts/Game/Systems/Dungeon/DungeonPopulator.cs" id="90_pop"]
 [ext_resource type="Resource" uid="uid://cbgrmigo7gfdi" path="res://GameData/dungeon/fire_recipe.tres" id="91_recipe"]
@@ -23,14 +25,14 @@
 [ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="q_channel"]
 [ext_resource type="Script" uid="uid://ddispr5qrckr8" path="res://scripts/Game/Systems/QuestSystem/QuestsCompletedListener.cs" id="q_completed"]
 [ext_resource type="Resource" uid="uid://c5d5d7wsyi8k2" path="res://GameData/quests/I.3-WizardSchoolTrials-Fire.tres" id="q_fire"]
-[ext_resource type="Script" uid="uid://v6ge3lx8r4vx" path="res://scripts/Game/Systems/QuestSystem/Steps/IdleStep.cs" id="q_idle"]
 [ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="q_listener"]
 [ext_resource type="Script" uid="uid://bksw1ls1mwcv0" path="res://scripts/Game/Systems/QuestSystem/QuestNode.cs" id="q_node"]
 [ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="q_quest_script"]
 
-[sub_resource type="Resource" id="Resource_ws1qw"]
+[sub_resource type="Resource" id="Resource_bnjyj"]
 script = ExtResource("5_suqbs")
-Seed = 1947974143
+RandomiseSeed = true
+Seed = 1461207216
 PreviewLayout = true
 RoomTileSet = ExtResource("4_tjpq6")
 CorridorTileSet = ExtResource("3_7uvon")
@@ -42,54 +44,54 @@ MaxRoomSize = Vector2i(5, 5)
 MaxDoorsPerRoom = 3
 metadata/_custom_type_script = "uid://cgraummx7cyo2"
 
-[sub_resource type="Resource" id="Resource_pdhk1"]
+[sub_resource type="Resource" id="Resource_0rhi0"]
 script = ExtResource("6_vfto7")
 RoomB = 3
 DoorA = Vector3i(7, 0, 16)
-DoorB = Vector3i(5, 0, 12)
+DoorB = Vector3i(11, 0, 12)
 IsTreeEdge = true
-Cells = Array[Vector3i]([Vector3i(7, 0, 15), Vector3i(7, 0, 14), Vector3i(6, 0, 14), Vector3i(5, 0, 14), Vector3i(5, 0, 13)])
+Cells = Array[Vector3i]([Vector3i(7, 0, 15), Vector3i(7, 0, 14), Vector3i(8, 0, 14), Vector3i(9, 0, 14), Vector3i(10, 0, 14), Vector3i(11, 0, 14), Vector3i(11, 0, 13)])
 
-[sub_resource type="Resource" id="Resource_a53ag"]
+[sub_resource type="Resource" id="Resource_6euci"]
 script = ExtResource("6_vfto7")
 Index = 1
-RoomA = 2
+RoomA = 1
 RoomB = 3
-DoorA = Vector3i(10, 0, 5)
-DoorB = Vector3i(5, 0, 10)
+DoorA = Vector3i(18, 0, 10)
+DoorB = Vector3i(11, 0, 12)
 IsTreeEdge = true
-Cells = Array[Vector3i]([Vector3i(10, 0, 6), Vector3i(10, 0, 7), Vector3i(10, 0, 8), Vector3i(9, 0, 8), Vector3i(8, 0, 8), Vector3i(7, 0, 8), Vector3i(6, 0, 8), Vector3i(5, 0, 8), Vector3i(5, 0, 9)])
+Cells = Array[Vector3i]([Vector3i(18, 0, 9), Vector3i(18, 0, 8), Vector3i(17, 0, 8), Vector3i(16, 0, 8), Vector3i(15, 0, 8), Vector3i(15, 0, 9), Vector3i(15, 0, 10), Vector3i(15, 0, 11), Vector3i(15, 0, 12), Vector3i(15, 0, 13), Vector3i(15, 0, 14), Vector3i(14, 0, 14), Vector3i(13, 0, 14), Vector3i(12, 0, 14), Vector3i(11, 0, 14), Vector3i(11, 0, 13)])
 
-[sub_resource type="Resource" id="Resource_bnjyj"]
+[sub_resource type="Resource" id="Resource_k44tx"]
 script = ExtResource("6_vfto7")
 Index = 2
 RoomA = 2
-RoomB = 4
-DoorA = Vector3i(13, 0, 2)
-DoorB = Vector3i(17, 0, 3)
+RoomB = 3
+DoorA = Vector3i(5, 0, 7)
+DoorB = Vector3i(10, 0, 9)
 IsTreeEdge = true
-Cells = Array[Vector3i]([Vector3i(14, 0, 2), Vector3i(15, 0, 2), Vector3i(15, 0, 3), Vector3i(16, 0, 3)])
+Cells = Array[Vector3i]([Vector3i(6, 0, 7), Vector3i(7, 0, 7), Vector3i(8, 0, 7), Vector3i(8, 0, 8), Vector3i(8, 0, 9), Vector3i(9, 0, 9)])
 
-[sub_resource type="Resource" id="Resource_0rhi0"]
+[sub_resource type="Resource" id="Resource_6hjqe"]
 script = ExtResource("6_vfto7")
 Index = 3
 RoomA = 1
 RoomB = 4
 DoorA = Vector3i(18, 0, 10)
-DoorB = Vector3i(17, 0, 3)
+DoorB = Vector3i(18, 0, 3)
 IsTreeEdge = true
-Cells = Array[Vector3i]([Vector3i(18, 0, 9), Vector3i(18, 0, 8), Vector3i(18, 0, 7), Vector3i(18, 0, 6), Vector3i(17, 0, 6), Vector3i(16, 0, 6), Vector3i(15, 0, 6), Vector3i(15, 0, 5), Vector3i(15, 0, 4), Vector3i(15, 0, 3), Vector3i(16, 0, 3)])
+Cells = Array[Vector3i]([Vector3i(18, 0, 9), Vector3i(18, 0, 8), Vector3i(18, 0, 7), Vector3i(18, 0, 6), Vector3i(18, 0, 5), Vector3i(18, 0, 4)])
 
-[sub_resource type="Resource" id="Resource_6euci"]
+[sub_resource type="Resource" id="Resource_o6vdm"]
 script = ExtResource("6_vfto7")
 Index = 4
-RoomA = 1
-RoomB = 2
-DoorA = Vector3i(18, 0, 10)
-DoorB = Vector3i(10, 0, 5)
-Cells = Array[Vector3i]([Vector3i(18, 0, 9), Vector3i(18, 0, 8), Vector3i(18, 0, 7), Vector3i(18, 0, 6), Vector3i(17, 0, 6), Vector3i(16, 0, 6), Vector3i(15, 0, 6), Vector3i(15, 0, 7), Vector3i(14, 0, 7), Vector3i(13, 0, 7), Vector3i(12, 0, 7), Vector3i(11, 0, 7), Vector3i(10, 0, 7), Vector3i(10, 0, 6)])
+RoomA = 3
+RoomB = 4
+DoorA = Vector3i(11, 0, 8)
+DoorB = Vector3i(18, 0, 3)
+Cells = Array[Vector3i]([Vector3i(11, 0, 7), Vector3i(11, 0, 6), Vector3i(12, 0, 6), Vector3i(13, 0, 6), Vector3i(14, 0, 6), Vector3i(15, 0, 6), Vector3i(16, 0, 6), Vector3i(17, 0, 6), Vector3i(18, 0, 6), Vector3i(18, 0, 5), Vector3i(18, 0, 4)])
 
-[sub_resource type="Resource" id="Resource_k44tx"]
+[sub_resource type="Resource" id="Resource_58vte"]
 script = ExtResource("7_0u7v8")
 Position = Vector3i(6, 0, 16)
 Size = Vector3i(5, 1, 4)
@@ -102,52 +104,52 @@ Data = {
 "role": "start"
 }
 
-[sub_resource type="Resource" id="Resource_6hjqe"]
+[sub_resource type="Resource" id="Resource_63ck2"]
 script = ExtResource("7_0u7v8")
 Index = 1
 Position = Vector3i(17, 0, 10)
 Size = Vector3i(3, 1, 3)
 DoorCells = Array[Vector3i]([Vector3i(18, 0, 10)])
 DoorDirections = Array[Vector3i]([Vector3i(0, 0, -1)])
-Corridors = PackedInt32Array(3, 4)
+Corridors = PackedInt32Array(1, 3)
 Box = NodePath("RoomBox2")
 IsBuilt = true
 Data = {
 "role": "goal"
 }
 
-[sub_resource type="Resource" id="Resource_o6vdm"]
+[sub_resource type="Resource" id="Resource_n8eo4"]
 script = ExtResource("7_0u7v8")
 Index = 2
-Position = Vector3i(9, 0, 1)
-Size = Vector3i(5, 1, 5)
-DoorCells = Array[Vector3i]([Vector3i(10, 0, 5), Vector3i(13, 0, 2)])
-DoorDirections = Array[Vector3i]([Vector3i(0, 0, 1), Vector3i(1, 0, 0)])
-Corridors = PackedInt32Array(1, 2, 4)
+Position = Vector3i(2, 0, 4)
+Size = Vector3i(4, 1, 5)
+DoorCells = Array[Vector3i]([Vector3i(5, 0, 7)])
+DoorDirections = Array[Vector3i]([Vector3i(1, 0, 0)])
+Corridors = PackedInt32Array(2)
 
-[sub_resource type="Resource" id="Resource_58vte"]
+[sub_resource type="Resource" id="Resource_16cgm"]
 script = ExtResource("7_0u7v8")
 Index = 3
-Position = Vector3i(2, 0, 10)
-Size = Vector3i(5, 1, 3)
-DoorCells = Array[Vector3i]([Vector3i(5, 0, 12), Vector3i(5, 0, 10)])
-DoorDirections = Array[Vector3i]([Vector3i(0, 0, 1), Vector3i(0, 0, -1)])
-Corridors = PackedInt32Array(0, 1)
+Position = Vector3i(10, 0, 8)
+Size = Vector3i(3, 1, 5)
+DoorCells = Array[Vector3i]([Vector3i(11, 0, 12), Vector3i(10, 0, 9), Vector3i(11, 0, 8)])
+DoorDirections = Array[Vector3i]([Vector3i(0, 0, 1), Vector3i(-1, 0, 0), Vector3i(0, 0, -1)])
+Corridors = PackedInt32Array(0, 1, 2, 4)
 
-[sub_resource type="Resource" id="Resource_63ck2"]
+[sub_resource type="Resource" id="Resource_u5ldu"]
 script = ExtResource("7_0u7v8")
 Index = 4
 Position = Vector3i(17, 0, 1)
-Size = Vector3i(4, 1, 4)
-DoorCells = Array[Vector3i]([Vector3i(17, 0, 3)])
-DoorDirections = Array[Vector3i]([Vector3i(-1, 0, 0)])
-Corridors = PackedInt32Array(2, 3)
+Size = Vector3i(3, 1, 3)
+DoorCells = Array[Vector3i]([Vector3i(18, 0, 3)])
+DoorDirections = Array[Vector3i]([Vector3i(0, 0, 1)])
+Corridors = PackedInt32Array(3, 4)
 
-[sub_resource type="Resource" id="Resource_n8eo4"]
+[sub_resource type="Resource" id="Resource_4xs4v"]
 script = ExtResource("8_tgwq2")
 Size = Vector2i(22, 22)
-Rooms = Array[ExtResource("7_0u7v8")]([SubResource("Resource_k44tx"), SubResource("Resource_6hjqe"), SubResource("Resource_o6vdm"), SubResource("Resource_58vte"), SubResource("Resource_63ck2")])
-Corridors = Array[ExtResource("6_vfto7")]([SubResource("Resource_pdhk1"), SubResource("Resource_a53ag"), SubResource("Resource_bnjyj"), SubResource("Resource_0rhi0"), SubResource("Resource_6euci")])
+Rooms = Array[ExtResource("7_0u7v8")]([SubResource("Resource_58vte"), SubResource("Resource_63ck2"), SubResource("Resource_n8eo4"), SubResource("Resource_16cgm"), SubResource("Resource_u5ldu")])
+Corridors = Array[ExtResource("6_vfto7")]([SubResource("Resource_0rhi0"), SubResource("Resource_6euci"), SubResource("Resource_k44tx"), SubResource("Resource_6hjqe"), SubResource("Resource_o6vdm")])
 
 [sub_resource type="BoxShape3D" id="Shape_quest_start"]
 size = Vector3(4, 2, 4)
@@ -172,31 +174,43 @@ mesh_library = ExtResource("2_sr7sr")
 cell_size = Vector3(4, 1, 4)
 cell_center_y = false
 data = {
-"cells": PackedInt32Array(0, 0, 27, 1, 0, 27, 2, 0, 27, 3, 0, 27, 4, 0, 28, 5, 0, 27, 6, 0, 27, 7, 0, 28, 8, 0, 27, 9, 0, 27, 10, 0, 28, 11, 0, 27, 12, 0, 27, 13, 0, 27, 14, 0, 27, 15, 0, 28, 16, 0, 27, 17, 0, 27, 18, 0, 27, 19, 0, 27, 20, 0, 27, 21, 0, 27, 0, 1, 27, 1, 1, 27, 2, 1, 27, 3, 1, 27, 4, 1, 28, 5, 1, 27, 6, 1, 27, 7, 1, 27, 8, 1, 27, 9, 1, 9, 10, 1, 7, 11, 1, 7, 12, 1, 7, 13, 1, 1441801, 14, 1, 27, 15, 1, 27, 16, 1, 27, 17, 1, 9, 18, 1, 7, 19, 1, 7, 20, 1, 1441801, 21, 1, 27, 0, 2, 27, 1, 2, 28, 2, 2, 27, 3, 2, 27, 4, 2, 27, 5, 2, 28, 6, 2, 27, 7, 2, 27, 8, 2, 27, 9, 2, 1048583, 10, 2, 1, 11, 2, 0, 12, 2, 0, 13, 2, 1441846, 14, 2, 1048597, 15, 2, 655386, 16, 2, 27, 17, 2, 1048583, 18, 2, 1, 19, 2, 3, 20, 2, 1441799, 21, 2, 28, 0, 3, 27, 1, 3, 28, 2, 3, 27, 3, 3, 28, 4, 3, 27, 5, 3, 27, 6, 3, 27, 7, 3, 27, 8, 3, 27, 9, 3, 1048583, 10, 3, 0, 11, 3, 5, 12, 3, 6, 13, 3, 1441799, 14, 3, 27, 15, 3, 655379, 16, 3, 1048599, 17, 3, 1048630, 18, 3, 1, 19, 3, 5, 20, 3, 1441799, 21, 3, 27, 0, 4, 27, 1, 4, 27, 2, 4, 27, 3, 4, 27, 4, 4, 27, 5, 4, 27, 6, 4, 28, 7, 4, 27, 8, 4, 27, 9, 4, 1048583, 10, 4, 4, 11, 4, 0, 12, 4, 1, 13, 4, 1441799, 14, 4, 28, 15, 4, 23, 16, 4, 27, 17, 4, 1048585, 18, 4, 655367, 19, 4, 655367, 20, 4, 655369, 21, 4, 27, 0, 5, 27, 1, 5, 27, 2, 5, 27, 3, 5, 27, 4, 5, 28, 5, 5, 27, 6, 5, 27, 7, 5, 27, 8, 5, 27, 9, 5, 1048585, 10, 5, 655414, 11, 5, 655367, 12, 5, 655367, 13, 5, 655369, 14, 5, 27, 15, 5, 56, 16, 5, 28, 17, 5, 27, 18, 5, 27, 19, 5, 28, 20, 5, 27, 21, 5, 27, 0, 6, 27, 1, 6, 27, 2, 6, 28, 3, 6, 27, 4, 6, 27, 5, 6, 27, 6, 6, 27, 7, 6, 27, 8, 6, 28, 9, 6, 27, 10, 6, 57, 11, 6, 27, 12, 6, 27, 13, 6, 27, 14, 6, 27, 15, 6, 655379, 16, 6, 1048594, 17, 6, 1048597, 18, 6, 655386, 19, 6, 28, 20, 6, 27, 21, 6, 27, 0, 7, 27, 1, 7, 27, 2, 7, 28, 3, 7, 27, 4, 7, 27, 5, 7, 27, 6, 7, 27, 7, 7, 27, 8, 7, 27, 9, 7, 27, 10, 7, 655379, 11, 7, 1048597, 12, 7, 1048600, 13, 7, 1048600, 14, 7, 1048597, 15, 7, 17, 16, 7, 27, 17, 7, 27, 18, 7, 21, 19, 7, 27, 20, 7, 27, 21, 7, 27, 0, 8, 27, 1, 8, 27, 2, 8, 28, 3, 8, 27, 4, 8, 28, 5, 8, 1441818, 6, 8, 1048597, 7, 8, 1048600, 8, 8, 1048597, 9, 8, 1048597, 10, 8, 17, 11, 8, 28, 12, 8, 27, 13, 8, 27, 14, 8, 28, 15, 8, 27, 16, 8, 27, 17, 8, 27, 18, 8, 57, 19, 8, 27, 20, 8, 27, 21, 8, 27, 0, 9, 27, 1, 9, 27, 2, 9, 27, 3, 9, 28, 4, 9, 27, 5, 9, 21, 6, 9, 27, 7, 9, 27, 8, 9, 27, 9, 9, 27, 10, 9, 27, 11, 9, 27, 12, 9, 27, 13, 9, 27, 14, 9, 28, 15, 9, 27, 16, 9, 28, 17, 9, 27, 18, 9, 22, 19, 9, 27, 20, 9, 27, 21, 9, 27, 0, 10, 27, 1, 10, 27, 2, 10, 9, 3, 10, 7, 4, 10, 7, 5, 10, 54, 6, 10, 1441801, 7, 10, 28, 8, 10, 28, 9, 10, 27, 10, 10, 28, 11, 10, 27, 12, 10, 28, 13, 10, 28, 14, 10, 27, 15, 10, 27, 16, 10, 27, 20, 10, 27, 21, 10, 27, 0, 11, 27, 1, 11, 27, 2, 11, 1048583, 3, 11, 1, 4, 11, 5, 5, 11, 1, 6, 11, 1441799, 7, 11, 27, 8, 11, 27, 9, 11, 27, 10, 11, 27, 11, 11, 28, 12, 11, 27, 13, 11, 27, 14, 11, 27, 15, 11, 27, 16, 11, 27, 20, 11, 27, 21, 11, 27, 0, 12, 27, 1, 12, 27, 2, 12, 1048585, 3, 12, 655367, 4, 12, 655367, 5, 12, 655414, 6, 12, 655369, 7, 12, 27, 8, 12, 27, 9, 12, 27, 10, 12, 27, 11, 12, 27, 12, 12, 27, 13, 12, 27, 14, 12, 27, 15, 12, 27, 16, 12, 27, 20, 12, 28, 21, 12, 27, 0, 13, 27, 1, 13, 27, 2, 13, 27, 3, 13, 27, 4, 13, 27, 5, 13, 57, 6, 13, 27, 7, 13, 27, 8, 13, 27, 9, 13, 27, 10, 13, 27, 11, 13, 27, 12, 13, 27, 13, 13, 27, 14, 13, 28, 15, 13, 28, 16, 13, 27, 17, 13, 27, 18, 13, 27, 19, 13, 27, 20, 13, 27, 21, 13, 27, 0, 14, 27, 1, 14, 27, 2, 14, 27, 3, 14, 27, 4, 14, 27, 5, 14, 26, 6, 14, 1048597, 7, 14, 655386, 8, 14, 27, 9, 14, 27, 10, 14, 27, 11, 14, 27, 12, 14, 27, 13, 14, 27, 14, 14, 27, 15, 14, 28, 16, 14, 27, 17, 14, 27, 18, 14, 27, 19, 14, 27, 20, 14, 27, 21, 14, 27, 0, 15, 27, 1, 15, 27, 2, 15, 27, 3, 15, 27, 4, 15, 28, 5, 15, 28, 6, 15, 28, 7, 15, 57, 8, 15, 27, 9, 15, 27, 10, 15, 27, 11, 15, 27, 12, 15, 27, 13, 15, 27, 14, 15, 27, 15, 15, 27, 16, 15, 27, 17, 15, 28, 18, 15, 27, 19, 15, 27, 20, 15, 27, 21, 15, 27, 0, 16, 27, 1, 16, 28, 2, 16, 27, 3, 16, 27, 4, 16, 27, 5, 16, 27, 11, 16, 27, 12, 16, 28, 13, 16, 28, 14, 16, 27, 15, 16, 27, 16, 16, 28, 17, 16, 28, 18, 16, 27, 19, 16, 27, 20, 16, 27, 21, 16, 27, 0, 17, 27, 1, 17, 27, 2, 17, 27, 3, 17, 28, 4, 17, 28, 5, 17, 27, 11, 17, 28, 12, 17, 27, 13, 17, 27, 14, 17, 27, 15, 17, 27, 16, 17, 28, 17, 17, 28, 18, 17, 27, 19, 17, 27, 20, 17, 27, 21, 17, 27, 0, 18, 27, 1, 18, 27, 2, 18, 27, 3, 18, 27, 4, 18, 27, 5, 18, 27, 11, 18, 27, 12, 18, 28, 13, 18, 27, 14, 18, 27, 15, 18, 27, 16, 18, 27, 17, 18, 27, 18, 18, 27, 19, 18, 27, 20, 18, 27, 21, 18, 27, 0, 19, 27, 1, 19, 27, 2, 19, 27, 3, 19, 28, 4, 19, 27, 5, 19, 27, 11, 19, 27, 12, 19, 27, 13, 19, 27, 14, 19, 28, 15, 19, 27, 16, 19, 27, 17, 19, 27, 18, 19, 28, 19, 19, 27, 20, 19, 27, 21, 19, 27, 0, 20, 28, 1, 20, 28, 2, 20, 27, 3, 20, 27, 4, 20, 27, 5, 20, 27, 6, 20, 27, 7, 20, 27, 8, 20, 27, 9, 20, 27, 10, 20, 28, 11, 20, 27, 12, 20, 28, 13, 20, 27, 14, 20, 27, 15, 20, 27, 16, 20, 27, 17, 20, 27, 18, 20, 27, 19, 20, 27, 20, 20, 27, 21, 20, 27, 0, 21, 27, 1, 21, 27, 2, 21, 27, 3, 21, 27, 4, 21, 28, 5, 21, 27, 6, 21, 27, 7, 21, 27, 8, 21, 27, 9, 21, 27, 10, 21, 27, 11, 21, 28, 12, 21, 27, 13, 21, 27, 14, 21, 28, 15, 21, 27, 16, 21, 27, 17, 21, 27, 18, 21, 27, 19, 21, 27, 20, 21, 27, 21, 21, 28, 19, 10, 1441801, 19, 12, 655369, 17, 12, 1048585, 17, 10, 9, 6, 16, 9, 10, 16, 1441801, 10, 19, 655369, 6, 19, 1048585, 9, 19, 655367, 8, 19, 655367, 7, 19, 655367, 6, 18, 1048583, 6, 17, 1048583, 10, 17, 1441799, 10, 18, 1441799, 9, 16, 7, 8, 16, 7, 19, 11, 1441799, 18, 12, 655367, 17, 11, 1048583, 8, 18, 1048578, 7, 18, 1048576, 7, 17, 1048576, 8, 17, 1048576, 9, 17, 1048576, 9, 18, 1048576, 18, 11, 1048576, 18, 10, 54, 7, 16, 54)
+"cells": PackedInt32Array(0, 0, 27, 1, 0, 27, 2, 0, 28, 3, 0, 27, 4, 0, 27, 5, 0, 27, 6, 0, 28, 7, 0, 27, 8, 0, 27, 9, 0, 27, 10, 0, 28, 11, 0, 27, 12, 0, 27, 13, 0, 27, 14, 0, 27, 15, 0, 28, 16, 0, 27, 17, 0, 27, 18, 0, 27, 19, 0, 27, 20, 0, 27, 21, 0, 27, 0, 1, 27, 1, 1, 27, 2, 1, 27, 3, 1, 27, 4, 1, 27, 5, 1, 27, 6, 1, 28, 7, 1, 27, 8, 1, 27, 9, 1, 27, 10, 1, 27, 11, 1, 28, 12, 1, 27, 13, 1, 27, 14, 1, 27, 15, 1, 27, 16, 1, 27, 17, 1, 9, 18, 1, 7, 19, 1, 1441801, 20, 1, 27, 21, 1, 27, 0, 2, 27, 1, 2, 27, 2, 2, 27, 3, 2, 27, 4, 2, 28, 5, 2, 27, 6, 2, 27, 7, 2, 27, 8, 2, 28, 9, 2, 27, 10, 2, 27, 11, 2, 27, 12, 2, 28, 13, 2, 27, 14, 2, 27, 15, 2, 27, 16, 2, 28, 17, 2, 1048583, 18, 2, 1, 19, 2, 1441799, 20, 2, 27, 21, 2, 27, 0, 3, 28, 1, 3, 27, 2, 3, 27, 3, 3, 27, 4, 3, 28, 5, 3, 27, 6, 3, 27, 7, 3, 28, 8, 3, 27, 9, 3, 27, 10, 3, 28, 11, 3, 27, 12, 3, 27, 13, 3, 27, 14, 3, 28, 15, 3, 28, 16, 3, 27, 17, 3, 1048585, 18, 3, 655414, 19, 3, 655369, 20, 3, 27, 21, 3, 27, 0, 4, 27, 1, 4, 27, 2, 4, 9, 3, 4, 7, 4, 4, 7, 5, 4, 1441801, 6, 4, 28, 7, 4, 27, 8, 4, 27, 9, 4, 27, 10, 4, 28, 11, 4, 27, 12, 4, 27, 13, 4, 27, 14, 4, 27, 15, 4, 28, 16, 4, 27, 17, 4, 27, 18, 4, 25, 19, 4, 27, 20, 4, 27, 21, 4, 28, 0, 5, 27, 1, 5, 27, 2, 5, 1048583, 3, 5, 0, 4, 5, 5, 5, 5, 1441799, 6, 5, 28, 7, 5, 28, 8, 5, 27, 9, 5, 27, 10, 5, 28, 11, 5, 27, 12, 5, 27, 13, 5, 27, 14, 5, 27, 15, 5, 28, 16, 5, 27, 17, 5, 27, 18, 5, 21, 19, 5, 28, 20, 5, 27, 21, 5, 27, 0, 6, 27, 1, 6, 27, 2, 6, 1048583, 3, 6, 0, 4, 6, 1, 5, 6, 1441799, 6, 6, 27, 7, 6, 27, 8, 6, 27, 9, 6, 27, 10, 6, 27, 11, 6, 1441818, 12, 6, 1048600, 13, 6, 1048597, 14, 6, 1048597, 15, 6, 1048600, 16, 6, 1048598, 17, 6, 1048597, 18, 6, 19, 19, 6, 27, 20, 6, 27, 21, 6, 27, 0, 7, 27, 1, 7, 27, 2, 7, 1048583, 3, 7, 3, 4, 7, 1, 5, 7, 1441846, 6, 7, 1048598, 7, 7, 1048597, 8, 7, 655386, 9, 7, 27, 10, 7, 27, 11, 7, 23, 12, 7, 27, 13, 7, 27, 14, 7, 28, 15, 7, 27, 16, 7, 27, 17, 7, 27, 18, 7, 57, 19, 7, 27, 20, 7, 27, 21, 7, 27, 0, 8, 28, 1, 8, 27, 2, 8, 1048585, 3, 8, 655367, 4, 8, 655367, 5, 8, 655369, 6, 8, 27, 7, 8, 27, 8, 8, 18, 9, 8, 27, 10, 8, 9, 11, 8, 54, 12, 8, 1441801, 13, 8, 27, 14, 8, 28, 15, 8, 1441818, 16, 8, 1048594, 17, 8, 1048632, 18, 8, 19, 19, 8, 27, 20, 8, 27, 21, 8, 27, 0, 9, 27, 1, 9, 27, 2, 9, 27, 3, 9, 27, 4, 9, 27, 5, 9, 27, 6, 9, 28, 7, 9, 27, 8, 9, 26, 9, 9, 1048600, 10, 9, 1048630, 11, 9, 1, 12, 9, 1441799, 13, 9, 27, 14, 9, 27, 15, 9, 18, 16, 9, 27, 17, 9, 27, 18, 9, 18, 19, 9, 27, 20, 9, 28, 21, 9, 27, 0, 10, 27, 1, 10, 27, 2, 10, 27, 3, 10, 28, 4, 10, 27, 5, 10, 27, 6, 10, 27, 7, 10, 27, 8, 10, 27, 9, 10, 27, 10, 10, 1048583, 11, 10, 0, 12, 10, 1441799, 13, 10, 27, 14, 10, 27, 15, 10, 22, 16, 10, 27, 20, 10, 27, 21, 10, 27, 0, 11, 28, 1, 11, 27, 2, 11, 27, 3, 11, 27, 4, 11, 27, 5, 11, 27, 6, 11, 28, 7, 11, 27, 8, 11, 27, 9, 11, 27, 10, 11, 1048583, 11, 11, 5, 12, 11, 1441799, 13, 11, 27, 14, 11, 27, 15, 11, 21, 16, 11, 27, 20, 11, 28, 21, 11, 27, 0, 12, 27, 1, 12, 27, 2, 12, 27, 3, 12, 27, 4, 12, 27, 5, 12, 27, 6, 12, 27, 7, 12, 27, 8, 12, 27, 9, 12, 27, 10, 12, 1048585, 11, 12, 655414, 12, 12, 655369, 13, 12, 27, 14, 12, 27, 15, 12, 23, 16, 12, 27, 20, 12, 27, 21, 12, 27, 0, 13, 27, 1, 13, 27, 2, 13, 28, 3, 13, 27, 4, 13, 28, 5, 13, 28, 6, 13, 27, 7, 13, 27, 8, 13, 28, 9, 13, 27, 10, 13, 27, 11, 13, 21, 12, 13, 28, 13, 13, 28, 14, 13, 27, 15, 13, 25, 16, 13, 28, 17, 13, 27, 18, 13, 27, 19, 13, 28, 20, 13, 27, 21, 13, 27, 0, 14, 27, 1, 14, 28, 2, 14, 27, 3, 14, 27, 4, 14, 27, 5, 14, 27, 6, 14, 28, 7, 14, 655377, 8, 14, 1048632, 9, 14, 1048601, 10, 14, 1048631, 11, 14, 1441811, 12, 14, 1048597, 13, 14, 1048598, 14, 14, 1048594, 15, 14, 17, 16, 14, 27, 17, 14, 27, 18, 14, 27, 19, 14, 27, 20, 14, 27, 21, 14, 28, 0, 15, 27, 1, 15, 28, 2, 15, 27, 3, 15, 28, 4, 15, 27, 5, 15, 27, 6, 15, 27, 7, 15, 56, 8, 15, 27, 9, 15, 27, 10, 15, 27, 11, 15, 27, 12, 15, 27, 13, 15, 27, 14, 15, 27, 15, 15, 27, 16, 15, 27, 17, 15, 27, 18, 15, 27, 19, 15, 28, 20, 15, 27, 21, 15, 27, 0, 16, 27, 1, 16, 27, 2, 16, 27, 3, 16, 27, 4, 16, 27, 5, 16, 28, 11, 16, 28, 12, 16, 27, 13, 16, 27, 14, 16, 27, 15, 16, 27, 16, 16, 27, 17, 16, 27, 18, 16, 27, 19, 16, 28, 20, 16, 27, 21, 16, 27, 0, 17, 28, 1, 17, 27, 2, 17, 27, 3, 17, 27, 4, 17, 27, 5, 17, 27, 11, 17, 27, 12, 17, 27, 13, 17, 27, 14, 17, 27, 15, 17, 27, 16, 17, 28, 17, 17, 28, 18, 17, 27, 19, 17, 27, 20, 17, 27, 21, 17, 27, 0, 18, 27, 1, 18, 28, 2, 18, 27, 3, 18, 27, 4, 18, 27, 5, 18, 27, 11, 18, 27, 12, 18, 27, 13, 18, 27, 14, 18, 27, 15, 18, 27, 16, 18, 27, 17, 18, 27, 18, 18, 27, 19, 18, 27, 20, 18, 28, 21, 18, 27, 0, 19, 27, 1, 19, 27, 2, 19, 28, 3, 19, 27, 4, 19, 27, 5, 19, 27, 11, 19, 27, 12, 19, 27, 13, 19, 28, 14, 19, 27, 15, 19, 28, 16, 19, 27, 17, 19, 27, 18, 19, 27, 19, 19, 27, 20, 19, 27, 21, 19, 27, 0, 20, 27, 1, 20, 27, 2, 20, 27, 3, 20, 28, 4, 20, 27, 5, 20, 27, 6, 20, 27, 7, 20, 28, 8, 20, 27, 9, 20, 27, 10, 20, 27, 11, 20, 27, 12, 20, 27, 13, 20, 27, 14, 20, 27, 15, 20, 27, 16, 20, 27, 17, 20, 27, 18, 20, 27, 19, 20, 27, 20, 20, 27, 21, 20, 27, 0, 21, 27, 1, 21, 28, 2, 21, 27, 3, 21, 27, 4, 21, 27, 5, 21, 27, 6, 21, 27, 7, 21, 27, 8, 21, 27, 9, 21, 27, 10, 21, 27, 11, 21, 27, 12, 21, 27, 13, 21, 27, 14, 21, 27, 15, 21, 27, 16, 21, 28, 17, 21, 28, 18, 21, 27, 19, 21, 27, 20, 21, 27, 21, 21, 27, 19, 10, 1441801, 19, 12, 655369, 17, 12, 1048585, 17, 10, 9, 6, 16, 9, 10, 16, 1441801, 10, 19, 655369, 6, 19, 1048585, 9, 19, 655367, 8, 19, 655367, 7, 19, 655367, 6, 18, 1048583, 6, 17, 1048583, 10, 17, 1441799, 10, 18, 1441799, 9, 16, 7, 8, 16, 7, 19, 11, 1441799, 18, 12, 655367, 17, 11, 1048583, 8, 18, 1048578, 7, 18, 1048576, 7, 17, 1048576, 8, 17, 1048576, 9, 17, 1048576, 9, 18, 1048576, 18, 11, 1048576, 18, 10, 54, 7, 16, 54)
 }
-metadata/godoodads_dungeon_settings = SubResource("Resource_ws1qw")
-metadata/godoodads_dungeon_generated = PackedByteArray("Ae1W227CMAw9HZeQcAuUjIn4O9D4/4f91lRkiTRrGxsmBFJ9FKW2E+fYuag/FQBU+MAEU8wwh8ECFg5LrLDGBlt47LBHjQPCOBbvVIfnj3pu1q8y4n/zG2WUUd5PKgU+FJgoMFVgpsBcAaPAQgGrgBNhKcJKhLUCGwW2CvgidkXsi6iLOCgQFIhAq5HgOw7YYk+jDpsFYJJmB/x2IBZlurm+HDc5A9e/gFPmn/A3ZXGoJwfD8WYA5qxHADWAI69Tsd8o6mEATDl2lXA6FuoQBfU9d8z9fmBviftLh68GsE9qTXecmZrnf3ELAHaJPxR4Ea8dkvmBY9AAj4tgr4LinBP3nz3jbLIvZ9ap5yxSYU2TnLuq5+yR8J7aDl5R2GjAdxHOJ8V6Mdnr0wPcYg8PEvKOgvsSC7mSgCMV3ii6o36kHB8VuXbpkvVK7/AjOZXevdQnkOZ637pGfKN61/S5Fc53WQHvnEusrqW2xHnfdjnvm6AJo9wgoJ/zSU0DZP5Ixu1F5Bc=")
-metadata/godoodads_dungeon_graph = SubResource("Resource_n8eo4")
+metadata/godoodads_dungeon_settings = SubResource("Resource_bnjyj")
+metadata/godoodads_dungeon_generated = PackedByteArray("Ae1U7W7CMAw8Pkpo+QqFloH9HB28/4+91kTlsdI1jY0QGlJ9ipLajnO5pPkaAcAIY0wwRYIZHOZIkWGBJVZYYwOPLXLssEcx5OKddHh91mt3/V8ynru/wQYb7P1sZMDYgIkBUwMSA2YGOAPmBqQGZCosVFiqsDJgbcDGAB/FNoo8il0UewMKAwioG0tPym8K+CjS2FAnBeCkJ2U9Vny7+mVB3ZNiHkfyuMG3CvBNZT0nYzbqcgz4nbyUiYw5wpdaviKQ424vMO50okY7AfiQGoWMSxnvAnMcgInUrRr5p0bOoYf/JbCXtKUvScsDZ8OyZg7g3MOXAuudZL9Vh0Z5x5iN/48T/V3DVyrnc0etpFWrUHCgwD2uWhofIjy4504WrfhR8b9Rh28r53gE8CnnWYhmucQpwpE66p+N+rAizoYabFybH+RFynms1PFZdZ+l+yO6qe16ydrmu71ZFp7j+72lr+3X6/1PsUZ5cZV1/D4YoPTX2+W6Ee+zzHt/palIfZ19Aw==")
+metadata/godoodads_dungeon_graph = SubResource("Resource_4xs4v")
 
 [node name="DungeonMarkers" type="Node3D" parent="School" unique_id=881309264]
 
-[node name="FireSinkingNs" type="Node3D" parent="School/DungeonMarkers" unique_id=1674098091 instance=ExtResource("7_6bdgy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 0, 22)
+[node name="MovingPlatformNS" type="Node3D" parent="School/DungeonMarkers" unique_id=1011050168 instance=ExtResource("9_pdhk1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74, 0, 18)
 metadata/godoodads_dungeon_marker = true
 
 [node name="FireFlamebarNs" type="Node3D" parent="School/DungeonMarkers" unique_id=1136337641 instance=ExtResource("9_d58b1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 26)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74, 0, 30)
 metadata/godoodads_dungeon_marker = true
 
-[node name="FireFlamebarNs2" type="Node3D" parent="School/DungeonMarkers" unique_id=1551270489 instance=ExtResource("9_d58b1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74, 0, 34)
+[node name="FireSinkingNs" type="Node3D" parent="School/DungeonMarkers" unique_id=1674098091 instance=ExtResource("7_6bdgy")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 70, 0, 34)
 metadata/godoodads_dungeon_marker = true
 
-[node name="FireFlamebarNs3" type="Node3D" parent="School/DungeonMarkers" unique_id=437391665 instance=ExtResource("9_d58b1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 54)
+[node name="MovingPlatformNS2" type="Node3D" parent="School/DungeonMarkers" unique_id=569318726 instance=ExtResource("9_pdhk1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 0, 54)
 metadata/godoodads_dungeon_marker = true
 
-[node name="FireFlamebarNs4" type="Node3D" parent="School/DungeonMarkers" unique_id=1729609693 instance=ExtResource("9_d58b1")]
+[node name="FireSinkingNs2" type="Node3D" parent="School/DungeonMarkers" unique_id=653776819 instance=ExtResource("7_6bdgy")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 34, 0, 58)
+metadata/godoodads_dungeon_marker = true
+
+[node name="MovingPlatformNS3" type="Node3D" parent="School/DungeonMarkers" unique_id=776808383 instance=ExtResource("9_pdhk1")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 38, 0, 58)
+metadata/godoodads_dungeon_marker = true
+
+[node name="FireJetsNs" type="Node3D" parent="School/DungeonMarkers" unique_id=1830633305 instance=ExtResource("12_a53ag")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 42, 0, 58)
+metadata/godoodads_dungeon_marker = true
+
+[node name="FireSinkingNs3" type="Node3D" parent="School/DungeonMarkers" unique_id=210071946 instance=ExtResource("7_6bdgy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 62)
 metadata/godoodads_dungeon_marker = true
 
@@ -288,11 +302,6 @@ _checkState = true
 _state = 1
 _resumeAfterLoad = true
 eventChannel = ExtResource("q_channel")
-
-[node name="IdleStep" type="Node" parent="Quests/I_3-Fire/obj3-init-SendOn" unique_id=1733510408 node_paths=PackedStringArray("_character")]
-script = ExtResource("q_idle")
-_character = NodePath("../../../../GoalRoom/FireWizard")
-_durationMs = 1500
 
 [node name="completed-OpenExit" type="Node" parent="Quests" unique_id=1733510409]
 script = ExtResource("q_completed")

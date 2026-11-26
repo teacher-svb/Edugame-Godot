@@ -1,10 +1,51 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dq1et0d608ucb"]
 
 [ext_resource type="ArrayMesh" path="res://assets/3D/village/interiors/school_interior/meshes/school_water_curtain.res" id="1_tt65s"]
-[ext_resource type="Script" path="res://scripts/Game/Systems/Platforming/PushZone.cs" id="2_bf6eb"]
+[ext_resource type="Script" uid="uid://f23ooxmgxm4t" path="res://scripts/Game/Systems/Platforming/PushZone.cs" id="2_bf6eb"]
+[ext_resource type="Texture2D" uid="uid://cxp67epeyxd24" path="res://assets/3D/village/interiors/school_interior/textures/T_SchoolWaterColorMap.png" id="3_watertex"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_waterglow"]
+resource_name = "M_SchoolGlow"
+albedo_texture = ExtResource("3_watertex")
+roughness = 0.4
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_operator = 1
+emission_texture = ExtResource("3_watertex")
+texture_filter = 2
+metadata/_gltf_primary_texture_coord = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ovayu"]
 size = Vector3(2, 1.8, 1)
+
+[sub_resource type="Curve" id="Curve_splash"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.3), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_splash"]
+curve = SubResource("Curve_splash")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_splash"]
+emission_shape = 3
+emission_box_extents = Vector3(0.95, 0.02, 0.12)
+direction = Vector3(0, 1, 0)
+spread = 35.0
+initial_velocity_min = 1.2
+initial_velocity_max = 2.6
+scale_min = 0.6
+scale_max = 1.4
+scale_curve = SubResource("CurveTexture_splash")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_splash"]
+shading_mode = 0
+albedo_color = Color(0.78, 0.92, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_splash"]
+material = SubResource("StandardMaterial3D_splash")
+radius = 0.05
+height = 0.1
+radial_segments = 6
+rings = 3
 
 [sub_resource type="Animation" id="Animation_xficc"]
 length = 5.0
@@ -17,7 +58,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.35, 2.6, 2.95, 5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"transitions": PackedFloat32Array(2, 1, 2, 1, 1),
 "update": 0,
 "values": [Vector3(1, 0.01, 1), Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1, 0.01, 1), Vector3(1, 0.01, 1)]
 }
@@ -28,7 +69,31 @@ tracks/1/path = NodePath("Push:Active")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 2.8),
+"times": PackedFloat32Array(0, 0.3, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Curtain:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.6, 2.95, 5),
+"transitions": PackedFloat32Array(1, 2, 1, 1),
+"update": 0,
+"values": [Vector3(0, 2.1, 0), Vector3(0, 2.1, 0), Vector3(0, 0.021, 0), Vector3(0, 0.021, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Splash:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.32, 2.93),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -47,6 +112,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
 [node name="Water" type="MeshInstance3D" parent="Curtain" unique_id=1854264050]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1, 0)
 mesh = ExtResource("1_tt65s")
+surface_material_override/0 = SubResource("StandardMaterial3D_waterglow")
 
 [node name="Push" type="Area3D" parent="." unique_id=373133406]
 collision_mask = 3
@@ -56,6 +122,16 @@ Active = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Push" unique_id=568831363]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("BoxShape3D_ovayu")
+
+[node name="Splash" type="GPUParticles3D" parent="." unique_id=338706985]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0.03)
+emitting = false
+amount = 48
+lifetime = 0.55
+randomness = 0.4
+visibility_aabb = AABB(-1.6, -0.2, -1, 3.2, 1.4, 2)
+process_material = SubResource("ParticleProcessMaterial_splash")
+draw_pass_1 = SubResource("SphereMesh_splash")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=81195814]
 callback_mode_process = 0

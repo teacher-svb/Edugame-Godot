@@ -53,6 +53,7 @@ script = ExtResource("3_key")
 Bars = Array[ExtResource("4_bar")]([SubResource("Bar_a"), SubResource("Bar_b"), SubResource("Bar_c"), SubResource("Bar_d")])
 AxisMax = 9
 AxisStep = 1
+SnapToGrid = true
 
 [resource]
 script = ExtResource("2_math")

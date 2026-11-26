@@ -23,7 +23,6 @@
 [ext_resource type="Script" uid="uid://cpedfcdw3s6jg" path="res://scripts/Game/Systems/QuestSystem/Steps/CallMethodStep.cs" id="q_call"]
 [ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="q_channel"]
 [ext_resource type="Script" uid="uid://ddispr5qrckr8" path="res://scripts/Game/Systems/QuestSystem/QuestsCompletedListener.cs" id="q_completed"]
-[ext_resource type="Script" uid="uid://v6ge3lx8r4vx" path="res://scripts/Game/Systems/QuestSystem/Steps/IdleStep.cs" id="q_idle"]
 [ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="q_listener"]
 [ext_resource type="Script" uid="uid://bksw1ls1mwcv0" path="res://scripts/Game/Systems/QuestSystem/QuestNode.cs" id="q_node"]
 [ext_resource type="Resource" uid="uid://dvk0b5k8wvlto" path="res://GameData/quests/I.3-WizardSchoolTrials-Earth.tres" id="q_quest"]
@@ -284,11 +283,6 @@ _checkState = true
 _state = 1
 _resumeAfterLoad = true
 eventChannel = ExtResource("q_channel")
-
-[node name="IdleStep" type="Node" parent="Quests/I_3-Earth/obj3-init-SendOn" unique_id=1733530408 node_paths=PackedStringArray("_character")]
-script = ExtResource("q_idle")
-_character = NodePath("../../../../GoalRoom/EarthWizard")
-_durationMs = 1500
 
 [node name="completed-OpenExit" type="Node" parent="Quests" unique_id=1733530409]
 script = ExtResource("q_completed")

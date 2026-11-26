@@ -33,10 +33,42 @@ namespace TnT.EduGame.Characters
             this._characterData?.CharacterAbilities?.ForEach(a => a.Key.Enabled = true);
         }
 
+        // the characters in the tree, for TurnSpeakerToPlayer
+        static readonly System.Collections.Generic.List<Character3D> _inTree = new();
+
         public override void _EnterTree()
         {
             _InitSubNodes();
+            _inTree.Add(this);
         }
+
+        public override void _ExitTree()
+        {
+            _inTree.Remove(this);
+        }
+
+        /// <summary>
+        /// Turns the character that speaks a line toward the player: the nearest one in the tree with
+        /// <paramref name="speaker"/> as its data, not the player itself. Nothing for a line without a character, one
+        /// the player speaks, or a speaker that isn't in the level.
+        /// </summary>
+        public static void TurnSpeakerToPlayer(CharacterData speaker)
+        {
+            if (speaker == null || !IsInstanceValid(Player.Instance) || !Player.Instance.IsInsideTree())
+                return;
+            var player = Player.Instance.FindAncestorOfType<Character3D>();
+            if (player == null)
+                return;
+            var nearest = _inTree
+                .Where(c => c != player && IsInstanceValid(c) && c.IsInsideTree() && IsSameCharacter(c._characterData, speaker))
+                .OrderBy(c => c.GlobalPosition.DistanceSquaredTo(player.GlobalPosition))
+                .FirstOrDefault();
+            nearest?.FindAnyObjectByType<CharacterController3D>(includeSelf: true)?.FaceTowards(player.GlobalPosition);
+        }
+
+        // the same resource, or the same file (a duplicated or reloaded copy)
+        static bool IsSameCharacter(CharacterData a, CharacterData b) =>
+            a != null && (a == b || (!string.IsNullOrEmpty(a.ResourcePath) && a.ResourcePath == b.ResourcePath));
 
         // _EnterTree runs again after every re-parenting / re-adding: look up and subscribe only once (finding 4.15)
         private void _InitSubNodes()

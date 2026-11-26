@@ -1,0 +1,12 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://c55qe5snf1y51" path="res://assets/Particle_FX/Prefabs/FX/FX_Fire_Medium_01.tscn" id="1_fire"]
+
+[node name="FireMediumLocal" instance=ExtResource("1_fire")]
+local_coords = true
+
+[node name="FX_Fire_Embers_01" parent="." index="0"]
+local_coords = true
+
+[node name="FX_Fire_Spread_01" parent="." index="1"]
+local_coords = true

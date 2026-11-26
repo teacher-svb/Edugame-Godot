@@ -10,10 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="7_7ey8e"]
 [ext_resource type="Script" uid="uid://1ixkt6cweadw" path="res://addons/godoodungeon/Resources/DungeonRoom.cs" id="7_k8jov"]
 [ext_resource type="Script" uid="uid://b27dpvrinn6ki" path="res://addons/godoodungeon/Resources/DungeonGraph.cs" id="8_nb0mp"]
-[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/corr_water_waterfall.tscn" id="9_a4u63"]
+[ext_resource type="PackedScene" uid="uid://dq1et0d608ucb" path="res://assets/3D/village/interiors/school_interior/challenges/corr_water_waterfall.tscn" id="9_a4u63"]
 [ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/corr_water_raft.tscn" id="10_gppnp"]
 [ext_resource type="Script" uid="uid://kevvfo7u3dqp" path="res://scripts/Game/Systems/Platforming/ChamberSafety.cs" id="10_us0e6"]
 [ext_resource type="Script" uid="uid://dlw68x261wgl5" path="res://addons/godoodungeon/Nodes/DungeonRoomBox.cs" id="12_l1a8n"]
+[ext_resource type="Material" uid="uid://d34k3ljvagp8q" path="res://materials/RoystanToonWaterShader.tres" id="28_l1a8n"]
 [ext_resource type="Script" uid="uid://dwwieccxf3i2m" path="res://scripts/Game/Systems/Dungeon/DungeonPopulator.cs" id="90_pop"]
 [ext_resource type="Resource" uid="uid://x4emgm7aet1i" path="res://GameData/dungeon/water_recipe.tres" id="91_recipe"]
 [ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/goal/goal_portal.tscn" id="goal_portal"]
@@ -23,7 +24,6 @@
 [ext_resource type="Script" uid="uid://cpedfcdw3s6jg" path="res://scripts/Game/Systems/QuestSystem/Steps/CallMethodStep.cs" id="q_call"]
 [ext_resource type="Resource" uid="uid://b4ixyrgs7jx1" path="res://GameData/EventChannels/QuestEventChannel.tres" id="q_channel"]
 [ext_resource type="Script" uid="uid://ddispr5qrckr8" path="res://scripts/Game/Systems/QuestSystem/QuestsCompletedListener.cs" id="q_completed"]
-[ext_resource type="Script" uid="uid://v6ge3lx8r4vx" path="res://scripts/Game/Systems/QuestSystem/Steps/IdleStep.cs" id="q_idle"]
 [ext_resource type="Script" uid="uid://dd1g4qvshevqa" path="res://scripts/Game/Systems/QuestSystem/QuestEventListener.cs" id="q_listener"]
 [ext_resource type="Script" uid="uid://bksw1ls1mwcv0" path="res://scripts/Game/Systems/QuestSystem/QuestNode.cs" id="q_node"]
 [ext_resource type="Resource" uid="uid://dfceuk1oi0ksl" path="res://GameData/quests/I.3-WizardSchoolTrials-Water.tres" id="q_quest"]
@@ -149,6 +149,12 @@ size = Vector3(4, 2, 4)
 [sub_resource type="BoxShape3D" id="Shape_quest_arrival"]
 size = Vector3(3.6, 2, 3.2)
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_8kk2g"]
+material = ExtResource("28_l1a8n")
+size = Vector2(200, 200)
+subdivide_width = 50
+subdivide_depth = 50
+
 [node name="SchoolWaterChamber" type="Node3D" unique_id=1375172682]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1733842760]
@@ -174,59 +180,59 @@ metadata/godoodads_dungeon_graph = SubResource("Resource_838jl")
 
 [node name="DungeonMarkers" type="Node3D" parent="School" unique_id=881309264]
 
-[node name="WaterWaterfallNs" type="Node3D" parent="School/DungeonMarkers" unique_id=1734687145 instance=ExtResource("9_a4u63")]
+[node name="WaterWaterfallNs" parent="School/DungeonMarkers" unique_id=1734687145 instance=ExtResource("9_a4u63")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58, 0, 18)
 metadata/godoodads_dungeon_marker = true
 
-[node name="WaterRaftNs" type="Node3D" parent="School/DungeonMarkers" unique_id=93163597 instance=ExtResource("10_gppnp")]
+[node name="WaterRaftNs" parent="School/DungeonMarkers" unique_id=93163597 instance=ExtResource("10_gppnp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 22)
 metadata/godoodads_dungeon_marker = true
 
-[node name="WaterWaterfallNs2" type="Node3D" parent="School/DungeonMarkers" unique_id=1195265331 instance=ExtResource("9_a4u63")]
+[node name="WaterWaterfallNs2" parent="School/DungeonMarkers" unique_id=1195265331 instance=ExtResource("9_a4u63")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58, 0, 26)
 metadata/godoodads_dungeon_marker = true
 
-[node name="WaterRaftNs2" type="Node3D" parent="School/DungeonMarkers" unique_id=263772921 instance=ExtResource("10_gppnp")]
+[node name="WaterRaftNs2" parent="School/DungeonMarkers" unique_id=263772921 instance=ExtResource("10_gppnp")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 22, 0, 30)
 metadata/godoodads_dungeon_marker = true
 
-[node name="WaterWaterfallNs3" type="Node3D" parent="School/DungeonMarkers" unique_id=1189638644 instance=ExtResource("9_a4u63")]
+[node name="WaterWaterfallNs3" parent="School/DungeonMarkers" unique_id=1189638644 instance=ExtResource("9_a4u63")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 30, 0, 30)
 metadata/godoodads_dungeon_marker = true
 
-[node name="WaterWaterfallNs4" type="Node3D" parent="School/DungeonMarkers" unique_id=287432926 instance=ExtResource("9_a4u63")]
+[node name="WaterWaterfallNs4" parent="School/DungeonMarkers" unique_id=287432926 instance=ExtResource("9_a4u63")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54, 0, 38)
 metadata/godoodads_dungeon_marker = true
 
-[node name="WaterRaftNs3" type="Node3D" parent="School/DungeonMarkers" unique_id=119727542 instance=ExtResource("10_gppnp")]
+[node name="WaterRaftNs3" parent="School/DungeonMarkers" unique_id=119727542 instance=ExtResource("10_gppnp")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 50, 0, 42)
 metadata/godoodads_dungeon_marker = true
 
-[node name="MovingPlatformNS" type="Node3D" parent="School/DungeonMarkers" unique_id=727409425 instance=ExtResource("6_us0e6")]
+[node name="MovingPlatformNS" parent="School/DungeonMarkers" unique_id=727409425 instance=ExtResource("6_us0e6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54, 0, 54)
 metadata/godoodads_dungeon_marker = true
 
-[node name="WaterWaterfallNs5" type="Node3D" parent="School/DungeonMarkers" unique_id=474249575 instance=ExtResource("9_a4u63")]
+[node name="WaterWaterfallNs5" parent="School/DungeonMarkers" unique_id=474249575 instance=ExtResource("9_a4u63")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54, 0, 58)
 metadata/godoodads_dungeon_marker = true
 
-[node name="WaterRaftNs4" type="Node3D" parent="School/DungeonMarkers" unique_id=1616770779 instance=ExtResource("10_gppnp")]
+[node name="WaterRaftNs4" parent="School/DungeonMarkers" unique_id=1616770779 instance=ExtResource("10_gppnp")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 26, 0, 62)
 metadata/godoodads_dungeon_marker = true
 
-[node name="WaterRaftNs5" type="Node3D" parent="School/DungeonMarkers" unique_id=1494037452 instance=ExtResource("10_gppnp")]
+[node name="WaterRaftNs5" parent="School/DungeonMarkers" unique_id=1494037452 instance=ExtResource("10_gppnp")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 42, 0, 62)
 metadata/godoodads_dungeon_marker = true
 
-[node name="WaterRaftNs6" type="Node3D" parent="School/DungeonMarkers" unique_id=1164908489 instance=ExtResource("10_gppnp")]
+[node name="WaterRaftNs6" parent="School/DungeonMarkers" unique_id=1164908489 instance=ExtResource("10_gppnp")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 46, 0, 62)
 metadata/godoodads_dungeon_marker = true
 
-[node name="WaterWaterfallNs6" type="Node3D" parent="School/DungeonMarkers" unique_id=931614248 instance=ExtResource("9_a4u63")]
+[node name="WaterWaterfallNs6" parent="School/DungeonMarkers" unique_id=931614248 instance=ExtResource("9_a4u63")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54, 0, 70)
 metadata/godoodads_dungeon_marker = true
 
-[node name="WaterWaterfallNs7" type="Node3D" parent="School/DungeonMarkers" unique_id=2141092492 instance=ExtResource("9_a4u63")]
+[node name="WaterWaterfallNs7" parent="School/DungeonMarkers" unique_id=2141092492 instance=ExtResource("9_a4u63")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 58, 0, 74)
 metadata/godoodads_dungeon_marker = true
 
@@ -250,7 +256,7 @@ Origin = Vector3i(1, 0, 18)
 Size = Vector3i(3, 1, 3)
 
 [node name="Player" parent="." unique_id=2069731022 instance=ExtResource("7_7ey8e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.1, 67)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.845, 0.1, 71.865)
 PersistentId = "Player"
 
 [node name="ChasmGlow" type="DirectionalLight3D" parent="." unique_id=1328796195]
@@ -318,11 +324,6 @@ _state = 1
 _resumeAfterLoad = true
 eventChannel = ExtResource("q_channel")
 
-[node name="IdleStep" type="Node" parent="Quests/I_3-Water/obj3-init-SendOn" unique_id=1733520408 node_paths=PackedStringArray("_character")]
-script = ExtResource("q_idle")
-_character = NodePath("../../../../GoalRoom/WaterWizard")
-_durationMs = 1500
-
 [node name="completed-OpenExit" type="Node" parent="Quests" unique_id=1733520409]
 script = ExtResource("q_completed")
 _quests = Array[ExtResource("q_quest_script")]([ExtResource("q_quest")])
@@ -332,6 +333,11 @@ eventChannel = ExtResource("q_channel")
 script = ExtResource("q_call")
 Target = NodePath("../../../GoalRoom/ExitToNext")
 _method = "Open"
+
+[node name="water-hendrik" type="MeshInstance3D" parent="." unique_id=810714909 groups=["occlusion_exclude"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, -4.5, 40)
+mesh = SubResource("PlaneMesh_8kk2g")
+skeleton = NodePath("")
 
 [connection signal="body_entered" from="StartSpawn/StartArea" to="Quests/I_3-Water" method="_OnPlayerStartObjective" binds= ["ea871cbc-3987-48ad-892e-8f56e553d101"]]
 [connection signal="Tested" from="GoalRoom/SparkTestPlatform" to="Quests/I_3-Water" method="CompleteObjective" binds= ["ea871cbc-3987-48ad-892e-8f56e553d102"]]

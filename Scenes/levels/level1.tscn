@@ -54,9 +54,9 @@
 [ext_resource type="Script" uid="uid://cnq1ox81dkvb3" path="res://scripts/Game/Systems/QuestSystem/Steps/ActCardStep.cs" id="q_actcard"]
 [ext_resource type="Script" uid="uid://cpedfcdw3s6jg" path="res://scripts/Game/Systems/QuestSystem/Steps/CallMethodStep.cs" id="q_call"]
 [ext_resource type="Script" uid="uid://ddispr5qrckr8" path="res://scripts/Game/Systems/QuestSystem/QuestsCompletedListener.cs" id="q_completed"]
-[ext_resource type="Resource" path="res://GameData/quests/I.4-TheHeavyHeart.tres" id="q_i4"]
-[ext_resource type="Resource" path="res://GameData/quests/II.4-TheExposure.tres" id="q_ii4"]
-[ext_resource type="Resource" path="res://GameData/quests/II.5-TheMysteriousLetter.tres" id="q_ii5"]
+[ext_resource type="Resource" uid="uid://dx80b1hedgl44" path="res://GameData/quests/I.4-TheHeavyHeart.tres" id="q_i4"]
+[ext_resource type="Resource" uid="uid://csbyqxecfmuxt" path="res://GameData/quests/II.4-TheExposure.tres" id="q_ii4"]
+[ext_resource type="Resource" uid="uid://y83orpag4go4" path="res://GameData/quests/II.5-TheMysteriousLetter.tres" id="q_ii5"]
 [ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="q_quest_script"]
 [ext_resource type="Script" uid="uid://dmavm0iev218p" path="res://scripts/Game/Systems/QuestSystem/Steps/SaveGameStep.cs" id="q_save"]
 [ext_resource type="Resource" path="res://GameData/readables/II.5-guild_letter.tres" id="rd_letter"]
@@ -186,7 +186,7 @@ material = SubResource("StandardMaterial3D_csk8p")
 size = Vector3(0.8, 1.1, 0.8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dvh8o"]
-size = Vector3(0.8, 1.1, 1.7)
+size = Vector3(0.46171874, 1.1, 1.5291992)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_exit"]
 size = Vector3(0.8, 1.2, 0.35)
@@ -257,21 +257,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -5)
 
 [node name="mabel_home_interior_ground" parent="NavigationRegion3D/Livingroom" unique_id=908461966 instance=ExtResource("30_10buh")]
 
-[node name="Front_Wall_Corners" parent="NavigationRegion3D/Livingroom/mabel_home_interior_ground/Interior_Ground/Front_Wall_Cover" parent_id_path=PackedInt32Array(908461966, 1483955485) index="2" unique_id=155067289]
+[node name="Front_Wall_Corners" parent="NavigationRegion3D/Livingroom/mabel_home_interior_ground/Interior_Ground/Front_Wall_Cover" parent_id_path=PackedInt32Array(908461966, 366931612) index="2" unique_id=124648733]
 visible = false
 
-[node name="Front_Wall_Left" parent="NavigationRegion3D/Livingroom/mabel_home_interior_ground/Interior_Ground/Front_Wall_Cover" parent_id_path=PackedInt32Array(908461966, 1483955485) index="3" unique_id=763969748]
+[node name="Front_Wall_Left" parent="NavigationRegion3D/Livingroom/mabel_home_interior_ground/Interior_Ground/Front_Wall_Cover" parent_id_path=PackedInt32Array(908461966, 366931612) index="3" unique_id=2106095077]
 visible = false
 
-[node name="Front_Wall_Over_Door" parent="NavigationRegion3D/Livingroom/mabel_home_interior_ground/Interior_Ground/Front_Wall_Cover" parent_id_path=PackedInt32Array(908461966, 1483955485) index="4" unique_id=1403757586]
+[node name="Front_Wall_Over_Door" parent="NavigationRegion3D/Livingroom/mabel_home_interior_ground/Interior_Ground/Front_Wall_Cover" parent_id_path=PackedInt32Array(908461966, 366931612) index="4" unique_id=2121532885]
 visible = false
 
-[node name="Front_Wall_Right" parent="NavigationRegion3D/Livingroom/mabel_home_interior_ground/Interior_Ground/Front_Wall_Cover" parent_id_path=PackedInt32Array(908461966, 1483955485) index="5" unique_id=684023249]
+[node name="Front_Wall_Right" parent="NavigationRegion3D/Livingroom/mabel_home_interior_ground/Interior_Ground/Front_Wall_Cover" parent_id_path=PackedInt32Array(908461966, 366931612) index="5" unique_id=39470635]
 visible = false
 
-[node name="Ground_Static_FireGlow" parent="NavigationRegion3D/Livingroom/mabel_home_interior_ground/Interior_Ground" parent_id_path=PackedInt32Array(908461966, 668498775) index="3" unique_id=1418899878 groups=["occlusion_exclude"]]
+[node name="Ground_Static_FireGlow" parent="NavigationRegion3D/Livingroom/mabel_home_interior_ground/Interior_Ground" parent_id_path=PackedInt32Array(908461966, 1487558823) index="3" unique_id=515382766 groups=["occlusion_exclude"]]
 
-[node name="Ground_Static_WindowGlow" parent="NavigationRegion3D/Livingroom/mabel_home_interior_ground/Interior_Ground" parent_id_path=PackedInt32Array(908461966, 668498775) index="7" unique_id=2084039524 groups=["occlusion_exclude"]]
+[node name="Ground_Static_WindowGlow" parent="NavigationRegion3D/Livingroom/mabel_home_interior_ground/Interior_Ground" parent_id_path=PackedInt32Array(908461966, 1487558823) index="7" unique_id=617764219 groups=["occlusion_exclude"]]
 
 [node name="Props" type="Node3D" parent="NavigationRegion3D/Livingroom" unique_id=355618627]
 
@@ -366,13 +366,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -6)
 [node name="mabel_home_interior_upper" parent="NavigationRegion3D/Bedroom" unique_id=1746525530 instance=ExtResource("29_8w3rv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 0)
 
-[node name="Upper_Front_Wall" parent="NavigationRegion3D/Bedroom/mabel_home_interior_upper/Interior_Upper/Upper_Cover" parent_id_path=PackedInt32Array(1746525530, 265220154) index="4" unique_id=68520251]
+[node name="Upper_Front_Wall" parent="NavigationRegion3D/Bedroom/mabel_home_interior_upper/Interior_Upper/Upper_Cover" parent_id_path=PackedInt32Array(1746525530, 1534528927) index="4" unique_id=151109803]
 visible = false
 
-[node name="Upper_Front_Wall_Corners" parent="NavigationRegion3D/Bedroom/mabel_home_interior_upper/Interior_Upper/Upper_Cover" parent_id_path=PackedInt32Array(1746525530, 265220154) index="5" unique_id=86940545]
+[node name="Upper_Front_Wall_Corners" parent="NavigationRegion3D/Bedroom/mabel_home_interior_upper/Interior_Upper/Upper_Cover" parent_id_path=PackedInt32Array(1746525530, 1534528927) index="5" unique_id=1313067882]
 visible = false
 
-[node name="Upper_Static_WindowGlow" parent="NavigationRegion3D/Bedroom/mabel_home_interior_upper/Interior_Upper" parent_id_path=PackedInt32Array(1746525530, 272866040) index="17" unique_id=1648358614 groups=["occlusion_exclude"]]
+[node name="Upper_Static_WindowGlow" parent="NavigationRegion3D/Bedroom/mabel_home_interior_upper/Interior_Upper" parent_id_path=PackedInt32Array(1746525530, 1919106691) index="17" unique_id=1912113414 groups=["occlusion_exclude"]]
 
 [node name="Props" type="Node3D" parent="NavigationRegion3D/Bedroom" unique_id=1741843891]
 
@@ -453,10 +453,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -10.5)
 [node name="avocado" parent="." unique_id=15025039 instance=ExtResource("25_mglpj")]
 transform = Transform3D(0.618024, 0, 0.786159, 0, 1, 0, -0.786159, 0, 0.618024, 3.6, 0, -5.8)
 
-[node name="ItemRef" parent="avocado" index="5" unique_id=563072524]
-_quest = ExtResource("qs_quest_i1")
-_availableFromObjectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8925"
-
 [node name="transporters" type="Node" parent="." unique_id=838434594]
 
 [node name="transporter_bedroom-livingroom" type="Area3D" parent="transporters" unique_id=1189788667]
@@ -477,7 +473,7 @@ script = ExtResource("lv_exit")
 _targetSpawnPath = "Spawns/from_livingroom"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="transporters/transporter_livingroom-bedroom" unique_id=1753850150]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0000002, 0.5, 0.24999988)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1691408, 0.5, 0.16459942)
 shape = SubResource("BoxShape3D_dvh8o")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 

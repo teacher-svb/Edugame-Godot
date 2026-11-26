@@ -28,6 +28,7 @@ namespace TnT.EduGame.UI
         {
             var nextMsg = model.messages.Dequeue();
             view.SetMessage(nextMsg.text, nextMsg.characterScenePath, nextMsg.name);
+            Characters.Character3D.TurnSpeakerToPlayer(nextMsg.character);
             await view.ShowView(duration);
         }
 
@@ -36,9 +37,11 @@ namespace TnT.EduGame.UI
             await view.HideView(duration);
         }
 
-        public void AddMessage(string text, string characterScenePath, string name)
+        /// <param name="character">Who speaks the line (null: a text-only box): its closeup and name, and it turns
+        /// toward the player when the line shows.</param>
+        public void AddMessage(string text, Characters.CharacterData character)
         {
-            model.messages.Enqueue(new() { text = text, characterScenePath = characterScenePath, name = name });
+            model.messages.Enqueue(new() { text = text, characterScenePath = character?.CharacterScenePath, name = character?.CharacterName, character = character });
         }
 
         internal void Clear()

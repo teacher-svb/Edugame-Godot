@@ -677,6 +677,12 @@ Target = NodePath("../../../Exits/ExitToHome")
 _method = "Open"
 _args = []
 
+[node name="OpenHomeDoor" type="Node" parent="Quests/II4-completed-OpenExitHome" node_paths=PackedStringArray("Target")]
+script = ExtResource("23_call")
+Target = NodePath("../../../Beaverford/Doors/MabelHome_Door")
+_method = "Open"
+_args = []
+
 [node name="ShowPaper" type="Node" parent="Quests/II4-completed-OpenExitHome" node_paths=PackedStringArray("Target")]
 script = ExtResource("23_call")
 Target = NodePath("../../../Noticeboard/Paper")

@@ -20,6 +20,39 @@
 [ext_resource type="PackedScene" uid="uid://c85p8jr34aro1" path="res://assets/3D/village/structures/well.glb" id="16_fx4dj"]
 [ext_resource type="PackedScene" uid="uid://ble2kqrwnk41h" path="res://assets/3D/village/structures/windmill.glb" id="17_74o8w"]
 [ext_resource type="PackedScene" uid="uid://b2j6332ae8huh" path="res://assets/3D/village/structures/wizard_tower.glb" id="18_4fuop"]
+[ext_resource type="Script" uid="uid://cby3wucrmmb66" path="res://scripts/Game/Systems/Doors/StructureDoor.cs" id="sd_door"]
+[ext_resource type="PackedScene" uid="uid://ci835dy2dti3" path="res://assets/3D/village/props/prop_barrel_a.glb" id="pr_barrel_a"]
+[ext_resource type="PackedScene" uid="uid://c5lr8ap7vxfno" path="res://assets/3D/village/props/prop_barrel_b.glb" id="pr_barrel_b"]
+[ext_resource type="PackedScene" uid="uid://dl3wtxg5wyqy4" path="res://assets/3D/village/props/prop_barrel_chock.glb" id="pr_barrel_chock"]
+[ext_resource type="PackedScene" uid="uid://ug6py2wuu0kx" path="res://assets/3D/village/props/prop_bench_a.glb" id="pr_bench_a"]
+[ext_resource type="PackedScene" uid="uid://32y026ae7e7o" path="res://assets/3D/village/props/prop_bench_b.glb" id="pr_bench_b"]
+[ext_resource type="PackedScene" uid="uid://4tn4ot43ykhn" path="res://assets/3D/village/props/prop_bench_c.glb" id="pr_bench_c"]
+[ext_resource type="PackedScene" uid="uid://ccge17m4sakrp" path="res://assets/3D/village/props/prop_bench_d.glb" id="pr_bench_d"]
+[ext_resource type="PackedScene" uid="uid://ci68v44jp1rxy" path="res://assets/3D/village/props/prop_boat.glb" id="pr_boat"]
+[ext_resource type="PackedScene" uid="uid://cteh8eudkw1df" path="res://assets/3D/village/props/prop_bucket.glb" id="pr_bucket"]
+[ext_resource type="PackedScene" uid="uid://bb1w0axgue3ua" path="res://assets/3D/village/props/prop_cauldron.glb" id="pr_cauldron"]
+[ext_resource type="PackedScene" uid="uid://cyuqaejlyounm" path="res://assets/3D/village/props/prop_cellar_hatch.glb" id="pr_cellar_hatch"]
+[ext_resource type="PackedScene" uid="uid://chvgiequxmme8" path="res://assets/3D/village/props/prop_chopping_block.glb" id="pr_chopping_block"]
+[ext_resource type="PackedScene" uid="uid://c48vr4cgsy0l4" path="res://assets/3D/village/props/prop_hay_pile.glb" id="pr_hay_pile"]
+[ext_resource type="PackedScene" uid="uid://ldlbv8isl30f" path="res://assets/3D/village/props/prop_hayfork.glb" id="pr_hayfork"]
+[ext_resource type="PackedScene" uid="uid://brd3idlghb7o6" path="res://assets/3D/village/props/prop_hitch_rail.glb" id="pr_hitch_rail"]
+[ext_resource type="PackedScene" uid="uid://ddse4fpbgip38" path="res://assets/3D/village/props/prop_lantern_post.glb" id="pr_lantern_post"]
+[ext_resource type="PackedScene" uid="uid://dpq7pnr7iilk6" path="res://assets/3D/village/props/prop_market_stand.glb" id="pr_market_stand"]
+[ext_resource type="PackedScene" uid="uid://boxbc35ltkreo" path="res://assets/3D/village/props/prop_noticeboard.glb" id="pr_noticeboard"]
+[ext_resource type="PackedScene" uid="uid://cq4q4aomisy4" path="res://assets/3D/village/props/prop_peel_a.glb" id="pr_peel_a"]
+[ext_resource type="PackedScene" uid="uid://cc0w2crdo4q0v" path="res://assets/3D/village/props/prop_peel_b.glb" id="pr_peel_b"]
+[ext_resource type="PackedScene" uid="uid://cqnx5vgpxg6pp" path="res://assets/3D/village/props/prop_peel_c.glb" id="pr_peel_c"]
+[ext_resource type="PackedScene" uid="uid://cr4kdckppl3k1" path="res://assets/3D/village/props/prop_pot_flowers.glb" id="pr_pot_flowers"]
+[ext_resource type="PackedScene" uid="uid://dilf2cc80845l" path="res://assets/3D/village/props/prop_pot_plant.glb" id="pr_pot_plant"]
+[ext_resource type="PackedScene" uid="uid://xi8rfgx3dio5" path="res://assets/3D/village/props/prop_sack_a.glb" id="pr_sack_a"]
+[ext_resource type="PackedScene" uid="uid://cadg7xmqxnho5" path="res://assets/3D/village/props/prop_sack_b.glb" id="pr_sack_b"]
+[ext_resource type="PackedScene" uid="uid://bioj4llc8hs6g" path="res://assets/3D/village/props/prop_sack_c.glb" id="pr_sack_c"]
+[ext_resource type="PackedScene" uid="uid://b1lkal3aw0sux" path="res://assets/3D/village/props/prop_signpost.glb" id="pr_signpost"]
+[ext_resource type="PackedScene" uid="uid://degoclcn3vyk5" path="res://assets/3D/village/props/prop_table.glb" id="pr_table"]
+[ext_resource type="PackedScene" uid="uid://dtb8o6dhqho0m" path="res://assets/3D/village/props/prop_trough.glb" id="pr_trough"]
+[ext_resource type="PackedScene" uid="uid://cvx707nq3rdy4" path="res://assets/3D/village/props/prop_vegetable_garden.glb" id="pr_vegetable_garden"]
+[ext_resource type="PackedScene" uid="uid://casiefj7porm1" path="res://assets/3D/village/props/prop_water_barrel.glb" id="pr_water_barrel"]
+[ext_resource type="PackedScene" uid="uid://bndyqal68mdkt" path="res://assets/3D/village/props/prop_wheelbarrow.glb" id="pr_wheelbarrow"]
 
 [sub_resource type="MultiMesh" id="MultiMesh_djt8d"]
 transform_format = 1
@@ -133,17 +166,228 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 1.5, 40.100002)
 [node name="wizard_tower" parent="NavigationRegion3D" unique_id=1795995315 instance=ExtResource("18_4fuop")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 1.3, -31.7)
 
-[node name="WizardTower_Level_2" parent="NavigationRegion3D/wizard_tower/WizardTower" parent_id_path=PackedInt32Array(1795995315, 793365441) index="7" unique_id=551670011]
+[node name="WizardTower_Level_2" parent="NavigationRegion3D/wizard_tower/WizardTower" parent_id_path=PackedInt32Array(1795995315, 1339769149) index="7" unique_id=780104073]
 transform = Transform3D(0.9876883, -0.15605338, -0.010912316, 0.15643446, 0.9852823, 0.068897665, -2.7939677e-09, -0.06975648, 0.997564, 0.20319988, 8.9152, -0.35030055)
 
-[node name="WizardTower_Level_3" parent="NavigationRegion3D/wizard_tower/WizardTower" parent_id_path=PackedInt32Array(1795995315, 793365441) index="8" unique_id=1138822902]
+[node name="WizardTower_Level_3" parent="NavigationRegion3D/wizard_tower/WizardTower" parent_id_path=PackedInt32Array(1795995315, 1339769149) index="8" unique_id=202095509]
 transform = Transform3D(0.9975648, 0.069744915, 4.3389853e-05, -0.069060005, 0.9878553, -0.13918564, -0.009750352, 0.1388437, 0.9902663, 0.08189988, 13.0174, -0.23860057)
 
-[node name="WizardTower_Level_4" parent="NavigationRegion3D/wizard_tower/WizardTower" parent_id_path=PackedInt32Array(1795995315, 793365441) index="9" unique_id=251147294]
+[node name="WizardTower_Level_4" parent="NavigationRegion3D/wizard_tower/WizardTower" parent_id_path=PackedInt32Array(1795995315, 1339769149) index="9" unique_id=2062941472]
 transform = Transform3D(0.99756396, -0.06975782, 2.6701018e-05, 0.069234155, 0.990122, 0.12192254, -0.008531488, -0.12162368, 0.99253964, 0.21439987, 14.8944, 0.025199428)
 
-[node name="AnimationPlayer" parent="NavigationRegion3D/wizard_tower" index="1" unique_id=2044521408]
+[node name="AnimationPlayer" parent="NavigationRegion3D/wizard_tower" index="1" unique_id=1820055792]
 autoplay = &"WizardTower_Turn"
+
+[node name="PROP_barrel_a_01" parent="NavigationRegion3D/tavern" instance=ExtResource("pr_barrel_a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25146, 0.00812, -2.60478)
+
+[node name="PROP_barrel_a_02" parent="NavigationRegion3D/tavern" instance=ExtResource("pr_barrel_a")]
+transform = Transform3D(0.7648419, 0, 0.6442182, 0, 1, 0, -0.6442182, 0, 0.7648419, 6.30146, -0.00904, -3.35478)
+
+[node name="PROP_barrel_a_03" parent="NavigationRegion3D/tavern" instance=ExtResource("pr_barrel_a")]
+transform = Transform3D(-6.024e-07, 0.3467875, -0.9379444, -1.000001, -6.024e-07, 0, 0, 0.9379444, 0.3467869, 6.10408, 0.28535, 1.94659)
+
+[node name="PROP_barrel_a_04" parent="NavigationRegion3D/tavern" instance=ExtResource("pr_barrel_a")]
+transform = Transform3D(-3.3897e-07, 0.6922572, 0.7216513, -1, -3.3897e-07, 0, 0, -0.7216513, 0.6922569, 5.95726, 0.29704, 1.99192)
+
+[node name="PROP_barrel_a_05" parent="NavigationRegion3D/tavern" instance=ExtResource("pr_barrel_a")]
+transform = Transform3D(1.374998e-06, 0.8540989, -0.5201106, -1, 1.374998e-06, -3.8197e-07, 3.8197e-07, 0.5201106, 0.8540989, 5.88847, 0.31719, 0.80417)
+
+[node name="PROP_barrel_a_06" parent="NavigationRegion3D/tavern" instance=ExtResource("pr_barrel_a")]
+transform = Transform3D(-9.1605e-07, 0.1425238, 0.9897912, -0.9999998, -9.1605e-07, -9.26e-07, 9.26e-07, -0.9897912, 0.142524, 6.19089, 0.8498, 2.43588)
+
+[node name="PROP_barrel_a_07" parent="NavigationRegion3D/tavern" instance=ExtResource("pr_barrel_a")]
+transform = Transform3D(-1.336008e-06, 0.1538946, 0.9880875, -1, -1.336008e-06, -9.1984e-07, 9.1984e-07, -0.9880875, 0.1538944, 6.18606, 0.86644, 1.77516)
+
+[node name="PROP_barrel_a_08" parent="NavigationRegion3D/tavern" instance=ExtResource("pr_barrel_a")]
+transform = Transform3D(1.321598e-06, -0.827689, -0.5611847, -0.9999987, 1.321598e-06, 0, 0, 0.5611847, -0.8276877, 6.60323, 1.41704, 1.44672)
+
+[node name="PROP_barrel_b_01" parent="NavigationRegion3D/general_store" instance=ExtResource("pr_barrel_b")]
+transform = Transform3D(0.9210613, 0, 0.3894179, 0, 1, 0, -0.3894179, 0, 0.9210613, -3.54848, 0.02229, 4.12134)
+
+[node name="PROP_barrel_chock_01" parent="NavigationRegion3D/tavern" instance=ExtResource("pr_barrel_chock")]
+transform = Transform3D(-6.18898e-07, 0, 1.000001, 0, 1, 0, -1.000001, 0, -6.18898e-07, 5.85129, 0.01052, 1.69122)
+
+[node name="PROP_barrel_chock_02" parent="NavigationRegion3D/tavern" instance=ExtResource("pr_barrel_chock")]
+transform = Transform3D(0.00031125, -0.004773103, 1.002989, 6.740979e-05, 1.002989, 0.004773083, -1.003001, 6.592475e-05, 0.0003115673, 6.65086, 0.01099, 1.69046)
+
+[node name="PROP_water_barrel_01" parent="NavigationRegion3D/mabel_home" instance=ExtResource("pr_water_barrel")]
+transform = Transform3D(0.9553366, 0, 0.2955199, 0, 1, 0, -0.2955199, 0, 0.9553366, 3.45, 0.0002, 1.85)
+
+[node name="PROP_water_barrel_02" parent="NavigationRegion3D/moat_house" instance=ExtResource("pr_water_barrel")]
+transform = Transform3D(0.8895615, 0, 0.4859696, 0, 1.01365, 0, -0.4859696, 0, 0.8895615, 2.29814, 0.04996, 2.99951)
+
+[node name="PROP_bench_a_01" parent="NavigationRegion3D/tavern" instance=ExtResource("pr_bench_a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.70502, 0.00118, 5.26624)
+
+[node name="PROP_bench_a_02" parent="NavigationRegion3D/tavern" instance=ExtResource("pr_bench_a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.70502, 0.00118, 6.82624)
+
+[node name="PROP_bench_b_01" parent="NavigationRegion3D/school" instance=ExtResource("pr_bench_b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.84507, 0.00013, 3.9516)
+
+[node name="PROP_bench_c_01" parent="NavigationRegion3D/general_store" instance=ExtResource("pr_bench_c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74492, 0.01543, 4.27235)
+
+[node name="PROP_bench_d_01" parent="NavigationRegion3D/brick_house" instance=ExtResource("pr_bench_d")]
+transform = Transform3D(-6.18898e-07, 0, 1.000001, 0, 1, 0, -1.000001, 0, -6.18898e-07, -0.32388, 0.11346, 1.05019)
+
+[node name="PROP_pot_plant_01" parent="NavigationRegion3D/brick_house" instance=ExtResource("pr_pot_plant")]
+transform = Transform3D(-0.3173047, 0, -0.9483242, 0, 1, 0, 0.9483242, 0, -0.3173047, -0.45484, 0.12, 0.45249)
+
+[node name="PROP_pot_plant_02" parent="NavigationRegion3D/brick_house" instance=ExtResource("pr_pot_plant")]
+transform = Transform3D(-0.3173047, 0, -0.9483242, 0, 1, 0, 0.9483242, 0, -0.3173047, -1.85484, 0.12, 0.35249)
+
+[node name="PROP_boat_01" parent="NavigationRegion3D" instance=ExtResource("pr_boat")]
+transform = Transform3D(0.9063075, 0, -0.422619, 0, 1, 0, 0.422619, 0, 0.9063075, 20.73663, -0.3, 17.00699)
+
+[node name="PROP_table_01" parent="NavigationRegion3D/tavern" instance=ExtResource("pr_table")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.69989, 0.002, 6.04524)
+
+[node name="PROP_trough_01" parent="NavigationRegion3D/tavern" instance=ExtResource("pr_trough")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.59822, -0.00233, 6.67839)
+
+[node name="PROP_cellar_hatch_01" parent="NavigationRegion3D/tavern" instance=ExtResource("pr_cellar_hatch")]
+transform = Transform3D(-6.18898e-07, 0, -1.000001, 0, 1, 0, 1.000001, 0, -6.18898e-07, -6.04853, 0, -1.75478)
+
+[node name="PROP_hitch_rail_01" parent="NavigationRegion3D/tavern" instance=ExtResource("pr_hitch_rail")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.60018, 0, 5.94745)
+
+[node name="PROP_pot_flowers_01" parent="NavigationRegion3D/narrow_house" instance=ExtResource("pr_pot_flowers")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00373, 0, 2.866)
+
+[node name="PROP_market_stand_01" parent="NavigationRegion3D/general_store" instance=ExtResource("pr_market_stand")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85552, -0.03122, 4.52194)
+
+[node name="PROP_sack_a_01" parent="NavigationRegion3D/general_store" instance=ExtResource("pr_sack_a")]
+transform = Transform3D(0.9553366, 0, 0.2955199, 0, 1, 0, -0.2955199, 0, 0.9553366, -4.19902, 0.00905, 3.85907)
+
+[node name="PROP_sack_b_01" parent="NavigationRegion3D/general_store" instance=ExtResource("pr_sack_b")]
+transform = Transform3D(0.3623588, 0, 0.9320387, 0, 1, 0, -0.9320387, 0, 0.3623588, -4.15743, 0.03614, 4.41486)
+
+[node name="PROP_sack_c_01" parent="NavigationRegion3D/general_store" instance=ExtResource("pr_sack_c")]
+transform = Transform3D(-0.4161469, 0, 0.9092969, 0, 1, 0, -0.9092969, 0, -0.4161469, -3.65875, 0.0583, 4.72313)
+
+[node name="PROP_wheelbarrow_01" parent="NavigationRegion3D/moat_house" instance=ExtResource("pr_wheelbarrow")]
+transform = Transform3D(0.9393296, 0, 0.343016, 0, 1, 0, -0.343016, 0, 0.9393296, 3.67289, -0.0082, 3.64174)
+
+[node name="PROP_hay_pile_01" parent="NavigationRegion3D/moat_house" instance=ExtResource("pr_hay_pile")]
+transform = Transform3D(0.9553366, 0, 0.2955199, 0, 1, 0, -0.2955199, 0, 0.9553366, 4.0041, 0, -0.82966)
+
+[node name="PROP_hayfork_01" parent="NavigationRegion3D/moat_house" instance=ExtResource("pr_hayfork")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.99392, 0.02959, 1.90921)
+
+[node name="PROP_vegetable_garden_01" parent="NavigationRegion3D/moat_house" instance=ExtResource("pr_vegetable_garden")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.60432, -0.01519, 4.37612)
+
+[node name="PROP_chopping_block_01" parent="NavigationRegion3D/veld_home" instance=ExtResource("pr_chopping_block")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.25066, 0, 3.14034)
+
+[node name="PROP_peel_a_01" parent="NavigationRegion3D/bakery" instance=ExtResource("pr_peel_a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82917, -0.07817, 3.27636)
+
+[node name="PROP_peel_b_01" parent="NavigationRegion3D/bakery" instance=ExtResource("pr_peel_b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99805, -0.07878, 3.2594)
+
+[node name="PROP_peel_c_01" parent="NavigationRegion3D/bakery" instance=ExtResource("pr_peel_c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.17388, -0.08414, 3.23611)
+
+[node name="PROP_lantern_post_01" parent="NavigationRegion3D/moat_house" instance=ExtResource("pr_lantern_post")]
+transform = Transform3D(-6.18898e-07, 0, -1.000001, 0, 1, 0, 1.000001, 0, -6.18898e-07, 1.50235, -0.27964, 9.59983)
+
+[node name="PROP_cauldron_01" parent="NavigationRegion3D/wizard_tower" instance=ExtResource("pr_cauldron")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.60022, -0.09728, 4.19973)
+
+[node name="PROP_bucket_01" parent="NavigationRegion3D/narrow_house" instance=ExtResource("pr_bucket")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30267, 0, 2.94152)
+
+[node name="PROP_noticeboard_01" parent="NavigationRegion3D" instance=ExtResource("pr_noticeboard")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.49918, -0.08, -0.49953)
+
+[node name="PROP_signpost_01" parent="NavigationRegion3D/school" instance=ExtResource("pr_signpost")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.50861, -0.29368, 6.08158)
+
+[node name="Doors" type="Node" parent="." unique_id=890031256]
+
+[node name="Bakery_DoorFront" type="Node" parent="Doors" unique_id=1826122540 node_paths=PackedStringArray("Structure")]
+script = ExtResource("sd_door")
+Structure = NodePath("../../NavigationRegion3D/bakery")
+Doorway = "Bakery_DoorFront"
+
+[node name="Bakery_DoorRight" type="Node" parent="Doors" unique_id=675224145 node_paths=PackedStringArray("Structure")]
+script = ExtResource("sd_door")
+Structure = NodePath("../../NavigationRegion3D/bakery")
+Doorway = "Bakery_DoorRight"
+
+[node name="BrickHouse_Door" type="Node" parent="Doors" unique_id=1049609982 node_paths=PackedStringArray("Structure")]
+script = ExtResource("sd_door")
+Structure = NodePath("../../NavigationRegion3D/brick_house")
+Doorway = "BrickHouse_Door"
+
+[node name="GeneralStore_Door" type="Node" parent="Doors" unique_id=314289044 node_paths=PackedStringArray("Structure")]
+script = ExtResource("sd_door")
+Structure = NodePath("../../NavigationRegion3D/general_store")
+Doorway = "GeneralStore_Door"
+
+[node name="GeneralStore_BackDoor" type="Node" parent="Doors" unique_id=1604859986 node_paths=PackedStringArray("Structure")]
+script = ExtResource("sd_door")
+Structure = NodePath("../../NavigationRegion3D/general_store")
+Doorway = "GeneralStore_BackDoor"
+
+[node name="MabelHome_Door" type="Node" parent="Doors" unique_id=1074408781 node_paths=PackedStringArray("Structure")]
+script = ExtResource("sd_door")
+Structure = NodePath("../../NavigationRegion3D/mabel_home")
+Doorway = "MabelHome_Door"
+
+[node name="MoatHouse_Door" type="Node" parent="Doors" unique_id=468527553 node_paths=PackedStringArray("Structure")]
+script = ExtResource("sd_door")
+Structure = NodePath("../../NavigationRegion3D/moat_house")
+Doorway = "MoatHouse_Door"
+
+[node name="NarrowHouse_Door" type="Node" parent="Doors" unique_id=1008271557 node_paths=PackedStringArray("Structure")]
+script = ExtResource("sd_door")
+Structure = NodePath("../../NavigationRegion3D/narrow_house")
+Doorway = "NarrowHouse_Door"
+
+[node name="NarrowHouse_UpperDoor" type="Node" parent="Doors" unique_id=801854856 node_paths=PackedStringArray("Structure")]
+script = ExtResource("sd_door")
+Structure = NodePath("../../NavigationRegion3D/narrow_house")
+Doorway = "NarrowHouse_UpperDoor"
+
+[node name="School_Door" type="Node" parent="Doors" unique_id=1325421162 node_paths=PackedStringArray("Structure")]
+script = ExtResource("sd_door")
+Structure = NodePath("../../NavigationRegion3D/school")
+Doorway = "School_Door"
+
+[node name="Tavern_FrontDoor" type="Node" parent="Doors" unique_id=959117403 node_paths=PackedStringArray("Structure")]
+script = ExtResource("sd_door")
+Structure = NodePath("../../NavigationRegion3D/tavern")
+Doorway = "Tavern_FrontDoor"
+
+[node name="Tavern_BackDoor" type="Node" parent="Doors" unique_id=1312292888 node_paths=PackedStringArray("Structure")]
+script = ExtResource("sd_door")
+Structure = NodePath("../../NavigationRegion3D/tavern")
+Doorway = "Tavern_BackDoor"
+
+[node name="VeldHome_Door" type="Node" parent="Doors" unique_id=720164554 node_paths=PackedStringArray("Structure")]
+script = ExtResource("sd_door")
+Structure = NodePath("../../NavigationRegion3D/veld_home")
+Doorway = "VeldHome_Door"
+
+[node name="VeldHome_BackDoor" type="Node" parent="Doors" unique_id=1292948066 node_paths=PackedStringArray("Structure")]
+script = ExtResource("sd_door")
+Structure = NodePath("../../NavigationRegion3D/veld_home")
+Doorway = "VeldHome_BackDoor"
+
+[node name="Windmill_Door" type="Node" parent="Doors" unique_id=1584010993 node_paths=PackedStringArray("Structure")]
+script = ExtResource("sd_door")
+Structure = NodePath("../../NavigationRegion3D/windmill")
+Doorway = "Windmill_Door"
+
+[node name="WizardTower_Door" type="Node" parent="Doors" unique_id=1285728772 node_paths=PackedStringArray("Structure")]
+script = ExtResource("sd_door")
+Structure = NodePath("../../NavigationRegion3D/wizard_tower")
+Doorway = "WizardTower_Door"
 
 [editable path="NavigationRegion3D/beaverford_village"]
 [editable path="NavigationRegion3D/wizard_tower"]

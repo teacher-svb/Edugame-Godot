@@ -2,6 +2,7 @@
 
 [ext_resource type="ArrayMesh" path="res://assets/3D/village/interiors/school_interior/meshes/school_flame_jet.res" id="1_arund"]
 [ext_resource type="Script" path="res://scripts/Game/Systems/Platforming/ChallengeHazard.cs" id="2_3nary"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/fx/fire_medium_local.tscn" id="3_firemed"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jrf6q"]
 size = Vector3(1.8, 1, 0.3)
@@ -13,7 +14,7 @@ size = Vector3(1.8, 1, 0.3)
 size = Vector3(1.8, 1, 0.3)
 
 [sub_resource type="Animation" id="Animation_wtdl7"]
-length = 3.6
+length = 4.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -22,10 +23,10 @@ tracks/0/path = NodePath("Row0/Flame:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.3, 0.38, 1.12, 1.25, 3.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1.7, 1.78, 2, 2.08, 2.82, 2.95, 4.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(1, 0.02, 1), Vector3(0.6, 0.18, 0.6), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1, 0.02, 1), Vector3(1, 0.02, 1)]
+"values": [Vector3(1, 0.02, 1), Vector3(1, 0.02, 1), Vector3(0.6, 0.18, 0.6), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1, 0.02, 1), Vector3(1, 0.02, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -34,7 +35,7 @@ tracks/1/path = NodePath("Row0/Hazard:Active")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.38, 1.15),
+"times": PackedFloat32Array(0, 2.08, 2.85),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -46,10 +47,10 @@ tracks/2/path = NodePath("Row1/Flame:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.2, 1.28, 1.5, 1.58, 2.32, 2.45, 3.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.08, 0.3, 0.38, 1.12, 1.25, 4.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(1, 0.02, 1), Vector3(1, 0.02, 1), Vector3(0.6, 0.18, 0.6), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1, 0.02, 1), Vector3(1, 0.02, 1)]
+"values": [Vector3(1, 0.02, 1), Vector3(0.6, 0.18, 0.6), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1, 0.02, 1), Vector3(1, 0.02, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -58,7 +59,7 @@ tracks/3/path = NodePath("Row1/Hazard:Active")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 1.58, 2.35),
+"times": PackedFloat32Array(0, 0.38, 1.15),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -70,7 +71,7 @@ tracks/4/path = NodePath("Row2/Flame:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 2.4, 2.48, 2.7, 2.78, 3.52, 3.6, 3.65),
+"times": PackedFloat32Array(0, 1.7, 1.78, 2, 2.08, 2.82, 2.95, 4.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(1, 0.02, 1), Vector3(1, 0.02, 1), Vector3(0.6, 0.18, 0.6), Vector3(0.6, 0.18, 0.6), Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1, 0.02, 1), Vector3(1, 0.02, 1)]
@@ -82,10 +83,46 @@ tracks/5/path = NodePath("Row2/Hazard:Active")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 2.78, 3.55),
+"times": PackedFloat32Array(0, 2.08, 2.85),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Row0/Fire:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.7, 1.78, 2, 2.08, 2.82, 2.95, 4.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(0.01, 0.01, 0.01), Vector3(0.35, 0.35, 0.35), Vector3(0.35, 0.35, 0.35), Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(0.01, 0.01, 0.01), Vector3(0.01, 0.01, 0.01)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Row1/Fire:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.3, 0.38, 1.12, 1.25, 4.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(0.35, 0.35, 0.35), Vector3(0.35, 0.35, 0.35), Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(0.01, 0.01, 0.01), Vector3(0.01, 0.01, 0.01)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Row2/Fire:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1.7, 1.78, 2, 2.08, 2.82, 2.95, 4.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(0.01, 0.01, 0.01), Vector3(0.35, 0.35, 0.35), Vector3(0.35, 0.35, 0.35), Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(0.01, 0.01, 0.01), Vector3(0.01, 0.01, 0.01)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s68u7"]
@@ -111,6 +148,17 @@ Active = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_jrf6q")
 
+[node name="Fire" type="Node3D" parent="Row0"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+
+[node name="FireA" parent="Row0/Fire" instance=ExtResource("3_firemed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42, 0, 0)
+
+[node name="FireB" parent="Row0/Fire" instance=ExtResource("3_firemed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42, 0, 0)
+speed_scale = 1.2
+preprocess = 3.5
+
 [node name="Row1" type="Node3D" parent="." unique_id=476110798]
 
 [node name="Flame" type="MeshInstance3D" parent="Row1" unique_id=1063839116]
@@ -125,6 +173,19 @@ Active = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Row1/Hazard" unique_id=1257666887]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_grqvh")
+
+[node name="Fire" type="Node3D" parent="Row1"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+
+[node name="FireA" parent="Row1/Fire" instance=ExtResource("3_firemed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42, 0, 0)
+speed_scale = 1.38
+preprocess = 1.2
+
+[node name="FireB" parent="Row1/Fire" instance=ExtResource("3_firemed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42, 0, 0)
+speed_scale = 1.24
+preprocess = 4.7
 
 [node name="Row2" type="Node3D" parent="." unique_id=824987120]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
@@ -141,6 +202,19 @@ Active = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Row2/Hazard" unique_id=2138689014]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_uti26")
+
+[node name="Fire" type="Node3D" parent="Row2"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+
+[node name="FireA" parent="Row2/Fire" instance=ExtResource("3_firemed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42, 0, 0)
+speed_scale = 1.27
+preprocess = 2.4
+
+[node name="FireB" parent="Row2/Fire" instance=ExtResource("3_firemed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42, 0, 0)
+speed_scale = 1.42
+preprocess = 5.9
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1827949735]
 callback_mode_process = 0

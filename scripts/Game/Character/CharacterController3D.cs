@@ -119,6 +119,57 @@ namespace TnT.EduGame.Characters
             _worldDir = Vector3.Zero;
         }
 
+        // a paused tree (message, menu, challenge) stops this node in its last movement state, while VisualRoot (its
+        // AnimationTree) has process mode Always: a character that was running kept its run animation in place. On
+        // the floor it goes to idle; after the pause the next physics frame emits its real state again
+        public override void _Notification(int what)
+        {
+            if (what == NotificationPaused && _character != null && _character.IsOnFloor() && _currentState != "idle")
+            {
+                _currentState = "idle";
+                EmitSignal(SignalName.MovementStateChanged, _currentState);
+            }
+        }
+
+        /// <summary>
+        /// Turns <see cref="VisualRoot"/> to face <paramref name="worldPosition"/> (horizontally) over
+        /// <paramref name="duration"/> seconds, also while the tree is paused (e.g. a character turning to the player
+        /// when it starts to speak). Walking turns it again toward the walk direction.
+        /// </summary>
+        public void FaceTowards(Vector3 worldPosition, float duration = 0.25f)
+        {
+            if (VisualRoot == null || !VisualRoot.IsInsideTree())
+                return;
+            var direction = worldPosition - VisualRoot.GlobalPosition;
+            direction.Y = 0;
+            if (direction.LengthSquared() < 0.0001f)
+                return;
+            var target = FacingQuaternion(direction.Normalized());
+            _faceTween?.Kill();
+            if (duration <= 0)
+            {
+                VisualRoot.Quaternion = target;
+                return;
+            }
+            VisualRoot.Quaternion = VisualRoot.Quaternion.Normalized();   // the tween slerps: needs a unit start
+            _faceTween = VisualRoot.CreateTween();
+            _faceTween.SetPauseMode(Tween.TweenPauseMode.Process);
+            _faceTween.TweenProperty(VisualRoot, "quaternion", target, duration)
+                .SetTrans(Tween.TransitionType.Sine)
+                .SetEase(Tween.EaseType.Out);
+        }
+
+        Tween _faceTween;
+
+        // world-space facing direction → VisualRoot's quaternion, relative to its parent
+        Quaternion FacingQuaternion(Vector3 direction)
+        {
+            var target = new Quaternion(Basis.LookingAt(-direction, Vector3.Up));
+            if (VisualRoot.GetParentOrNull<Node3D>() is Node3D parent)
+                target = (parent.GlobalBasis.GetRotationQuaternion().Inverse() * target).Normalized();
+            return target;
+        }
+
         private void OrientToDirection(Vector3 direction, double delta)
         {
             if (VisualRoot == null) return;
@@ -126,9 +177,13 @@ namespace TnT.EduGame.Characters
             // (finding 4.8: the Earth wizard's Mage2 at 0.525 grew to full size once he walked)
             // direction is world space, the quaternion is relative to VisualRoot's parent: turn the world facing
             // into the parent's space, so a character whose body is rotated in the level faces the right way
-            var target = new Quaternion(Basis.LookingAt(-direction, Vector3.Up));
-            if (VisualRoot.GetParentOrNull<Node3D>() is Node3D parent)
-                target = (parent.GlobalBasis.GetRotationQuaternion().Inverse() * target).Normalized();
+            var target = FacingQuaternion(direction);
+            // walking takes over from a FaceTowards turn
+            if (_faceTween != null && _faceTween.IsValid())
+            {
+                _faceTween.Kill();
+                _faceTween = null;
+            }
             float weight = Mathf.Min(_rotationSpeed * (float)delta, 1f);
             VisualRoot.Quaternion = VisualRoot.Quaternion.Normalized().Slerp(target, weight);
         }

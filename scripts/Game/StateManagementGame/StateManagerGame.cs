@@ -94,6 +94,9 @@ namespace TnT.EduGame.GameStates
                 Push(state);
         }
 
+        /// <summary>Whether <paramref name="state"/> is the top of the stack now (active or about to be).</summary>
+        public bool IsTop(BaseState state) => state != null && Top == state;
+
         /// <summary>Pushes a state that is not one of the registered game states (e.g. the dev menu).</summary>
         public void PushOverlay(BaseState state) => PushState(state);
 

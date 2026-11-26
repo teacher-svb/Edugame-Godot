@@ -35,9 +35,13 @@ namespace TnT.EduGame.GameStates
             public bool Retrieving;
             public Action OnNext;
             public Action OnClose;
+            public BaseState State;
         }
 
         Session _session;
+        // the previous box closed straight into this one: it was left showing (and the tree paused), Open swaps the
+        // text as a next within one box does
+        bool _keptVisible;
 
         /// <summary>True while a message box is pushed or showing: new messages go into it with <see cref="Enqueue"/>.</summary>
         public bool IsOpen => _session != null;
@@ -49,7 +53,7 @@ namespace TnT.EduGame.GameStates
             session.OnClose = () => ClearMessages(session);
             _session = session;
             Add(session, options);
-            return new BaseState(new()
+            return session.State = new BaseState(new()
             {
                 OnEnter = () => Open(session),
                 OnResume = () => Resume(session),
@@ -70,7 +74,7 @@ namespace TnT.EduGame.GameStates
         static void Add(Session session, MessageOptions options)
         {
             // no character: a text-only box (no closeup, no name)
-            MessageController.Instance.AddMessage(options.text, options.character?.CharacterScenePath, options.character?.CharacterName);
+            MessageController.Instance.AddMessage(options.text, options.character);
             if (options.onDismissed != null)
                 session.Dismissed.Add(options.onDismissed);
         }
@@ -127,6 +131,13 @@ namespace TnT.EduGame.GameStates
         {
             var tree = ManagerUI.Instance.GetTree();
             tree.Paused = true;
+            if (_keptVisible)
+            {
+                _keptVisible = false;
+                await MessageController.Instance.Hide(.1f);
+                if (!GodotObject.IsInstanceValid(MessageController.Instance) || session.AllRead)
+                    return;
+            }
             await MessageController.Instance.Show();
             // only once the box is shown: a Next during the scale-in started a Hide that killed the scale-in tween
             // (UITweens now resumes such an awaiter anyway)
@@ -154,15 +165,27 @@ namespace TnT.EduGame.GameStates
             MessageController.Instance.CloseBtnPushed -= session.OnClose;
             session.Options.next.Disable();
             session.Options.close.Disable();
-            await MessageController.Instance.Hide();
-            ManagerUI.Instance.GetTree().Paused = false;
             if (_session == session)
                 _session = null;
             // after the state is popped (AbstractStateStack removes a state before awaiting its ExitState), so a
             // message pushed by a callback (e.g. the next objective's start) opens a new box, and the ones after it
-            // join that box
+            // join that box. Before the box hides: when that new box is next, the box stays up and swaps its text
+            // (bug-quest-message-gap: it used to scale out and in again, with a frame of unpaused play between)
             foreach (var dismissed in session.Dismissed)
                 dismissed();
+            // continuations a callback posted (a quest reaction going on after its MessageStep) run this frame
+            var tree = ManagerUI.Instance.GetTree();
+            await ToSignal(tree, SceneTree.SignalName.ProcessFrame);
+            if (!GodotObject.IsInstanceValid(MessageController.Instance) || !GodotObject.IsInstanceValid(this))
+                return;
+            if (_session != null && _session != session && StateManagerGame.Instance.IsTop(_session.State))
+            {
+                _keptVisible = true;
+                return;
+            }
+            _keptVisible = false;
+            await MessageController.Instance.Hide();
+            tree.Paused = false;
         }
     }
 }

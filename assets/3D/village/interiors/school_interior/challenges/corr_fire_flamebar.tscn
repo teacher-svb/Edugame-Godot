@@ -1,7 +1,8 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://sf5srugrcenv"]
 
 [ext_resource type="ArrayMesh" path="res://assets/3D/village/interiors/school_interior/meshes/school_flame_bar.res" id="1_v1mbc"]
-[ext_resource type="Script" path="res://scripts/Game/Systems/Platforming/ChallengeHazard.cs" id="2_h1ota"]
+[ext_resource type="Script" uid="uid://bhnaktwpidetc" path="res://scripts/Game/Systems/Platforming/ChallengeHazard.cs" id="2_h1ota"]
+[ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/challenges/fx/fire_small_local.tscn" id="3_firesmall"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ggu1y"]
 size = Vector3(1.05, 0.22, 0.2)
@@ -41,6 +42,19 @@ script = ExtResource("2_h1ota")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot/Hazard" unique_id=164017444]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.675, 0.19, 0)
 shape = SubResource("BoxShape3D_ggu1y")
+
+[node name="Fire0" parent="Pivot" unique_id=1249767540 instance=ExtResource("3_firesmall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36, 0.12, 0)
+
+[node name="Fire1" parent="Pivot" unique_id=1630640708 instance=ExtResource("3_firesmall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.675, 0.12, 0)
+preprocess = 2.3
+speed_scale = 1.18
+
+[node name="Fire2" parent="Pivot" unique_id=755501225 instance=ExtResource("3_firesmall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99, 0.12, 0)
+preprocess = 4.6
+speed_scale = 1.42
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1316738978]
 callback_mode_process = 0

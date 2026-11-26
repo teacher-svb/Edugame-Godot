@@ -22,7 +22,6 @@
 [ext_resource type="Texture2D" uid="uid://c72t1e36d3fgo" path="res://project/images/drawbridge-diagram.png" id="20_gom7j"]
 [ext_resource type="Script" uid="uid://sup7lp6karaf" path="res://scripts/Game/Systems/Challenges/MathChallenge.cs" id="20_kjadr"]
 [ext_resource type="Script" uid="uid://bduu2nqauu8sw" path="res://scripts/Game/Systems/Challenges/Visualizations/ImageVisualization.cs" id="21_bqjii"]
-[ext_resource type="PackedScene" uid="uid://cyuqaejlyounm" path="res://assets/3D/village/props/prop_cellar_hatch.glb" id="39_kjadr"]
 [ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="cd_mabel"]
 [ext_resource type="Environment" uid="uid://detuifcyaequt" path="res://GameData/environments/beaverford_morning.tres" id="env_morning"]
 [ext_resource type="Script" uid="uid://bbbrd61e4khhl" path="res://scripts/Game/Systems/Levels/LevelExit.cs" id="lv_exit"]
@@ -568,10 +567,6 @@ _resumeAfterLoad = true
 eventChannel = ExtResource("15_jttql")
 metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 
-[node name="IdleStep" type="Node" parent="Quests/I_2-the Ambition/Cornelis/obj3-init-Dismiss" unique_id=926490946 node_paths=PackedStringArray("_character")]
-script = ExtResource("qs_idle")
-_character = NodePath("../../../../../Cornelis")
-
 [node name="Hendrik" type="Node" parent="Quests/I_2-the Ambition" unique_id=853748344]
 script = ExtResource("13_bqjii")
 _quest = ExtResource("qs_quest_hendrik")
@@ -607,10 +602,6 @@ _state = 1
 _resumeAfterLoad = true
 eventChannel = ExtResource("15_jttql")
 metadata/_custom_type_script = "uid://dd1g4qvshevqa"
-
-[node name="IdleStep" type="Node" parent="Quests/I_2-the Ambition/Hendrik/obj3-init-Dismiss" unique_id=774582017 node_paths=PackedStringArray("_character")]
-script = ExtResource("qs_idle")
-_character = NodePath("../../../../../Hendrik")
 
 [node name="Liesbeth" type="Node" parent="Quests/I_2-the Ambition" unique_id=1543397962]
 script = ExtResource("13_bqjii")
@@ -648,10 +639,6 @@ _resumeAfterLoad = true
 eventChannel = ExtResource("15_jttql")
 metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 
-[node name="IdleStep" type="Node" parent="Quests/I_2-the Ambition/Liesbeth/obj3-init-Dismiss" unique_id=138945425 node_paths=PackedStringArray("_character")]
-script = ExtResource("qs_idle")
-_character = NodePath("../../../../../Liesbeth")
-
 [node name="MsBram" type="Node" parent="Quests/I_2-the Ambition" unique_id=1824263733]
 script = ExtResource("13_bqjii")
 _quest = ExtResource("qs_quest_msbram")
@@ -688,10 +675,6 @@ _resumeAfterLoad = true
 eventChannel = ExtResource("15_jttql")
 metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 
-[node name="IdleStep" type="Node" parent="Quests/I_2-the Ambition/MsBram/obj3-init-Dismiss" unique_id=294349187 node_paths=PackedStringArray("_character")]
-script = ExtResource("qs_idle")
-_character = NodePath("../../../../../MsBram")
-
 [node name="others-completed-EnableBell" type="Node" parent="Quests/I_2-the Ambition/MsBram" unique_id=1337059925]
 script = ExtResource("qs_quests_completed")
 _quests = Array[ExtResource("qs_quest_script")]([ExtResource("14_dlsi4"), ExtResource("qs_quest_liesbeth"), ExtResource("qs_quest_hendrik")])
@@ -710,6 +693,21 @@ _character = ExtResource("cd_mabel")
 [node name="OpenSchoolExit" type="Node" parent="Quests/I_2-completed-OpenSchool" unique_id=1730215096 node_paths=PackedStringArray("Target")]
 script = ExtResource("qs_call")
 Target = NodePath("../../../Exits/ExitToSchool")
+_method = "Open"
+
+[node name="OpenSchoolDoor" type="Node" parent="Quests/I_2-completed-OpenSchool" node_paths=PackedStringArray("Target")]
+script = ExtResource("qs_call")
+Target = NodePath("../../../Beaverford/Doors/WizardTower_Door")
+_method = "Open"
+
+[node name="I_1-completed-OpenHomeDoor" type="Node" parent="Quests"]
+script = ExtResource("qs_quests_completed")
+_quests = Array[ExtResource("qs_quest_script")]([ExtResource("qs_quest_i1")])
+eventChannel = ExtResource("15_jttql")
+
+[node name="OpenHomeDoor" type="Node" parent="Quests/I_1-completed-OpenHomeDoor" node_paths=PackedStringArray("Target")]
+script = ExtResource("qs_call")
+Target = NodePath("../../../Beaverford/Doors/MabelHome_Door")
 _method = "Open"
 
 [node name="CornelisDrawbridgeArea" type="Area3D" parent="." unique_id=475543381]
@@ -798,9 +796,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0.4, 42)
 [node name="SceneMusic" type="Node" parent="." unique_id=1730452011]
 script = ExtResource("music_scene")
 Track = ExtResource("music_track")
-
-[node name="prop_cellar_hatch2" parent="." unique_id=2085503273 instance=ExtResource("39_kjadr")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -46, 0.5, 4.2)
 
 [node name="Spawns" type="Node3D" parent="." unique_id=424840938]
 

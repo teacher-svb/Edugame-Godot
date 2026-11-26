@@ -57,6 +57,7 @@ namespace TnT.EduGame
         {
             Bind<Door, DoorSaveData>(GameData.doorData, root);
             Bind<Doors.CodeDoor, DoorSaveData>(GameData.doorData, root);
+            Bind<Doors.StructureDoor, DoorSaveData>(GameData.doorData, root);
             Bind<MathChallengeTrigger, ChallengeSaveData>(GameData.challengeData, root);
             Bind<Item, WorldItemSaveData>(GameData.worldItemData, root);   // a picked-up item removes itself
         }
