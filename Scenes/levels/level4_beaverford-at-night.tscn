@@ -4,6 +4,23 @@
 [ext_resource type="Shader" uid="uid://b2x22th280fpm" path="res://scripts/Trail/trail_draw.gdshader" id="2_0etoc"]
 [ext_resource type="Script" uid="uid://6214kgglowmy" path="res://scripts/Trail/GPUTrail3D.cs" id="3_eeffx"]
 [ext_resource type="PackedScene" uid="uid://c7sx881ac5y6g" path="res://Scenes/levels/beaverford.tscn" id="4_tbltw"]
+[ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="5_player"]
+[ext_resource type="Script" uid="uid://b6r73solgkl3m" path="res://scripts/Game/Systems/Audio/SceneMusic.cs" id="6_music"]
+[ext_resource type="Resource" path="res://GameData/music/route7-ramble-110.tres" id="7_track"]
+[ext_resource type="Script" uid="uid://dub3134yuqw1k" path="res://scripts/Game/Systems/Levels/SpawnPoint.cs" id="8_spawn"]
+[ext_resource type="Script" uid="uid://cq81buxdcg86j" path="res://scripts/Game/Systems/Levels/AnimatedProp.cs" id="9_prop"]
+[ext_resource type="Script" uid="uid://bbbrd61e4khhl" path="res://scripts/Game/Systems/Levels/LevelExit.cs" id="10_exit"]
+[ext_resource type="Script" uid="uid://bksw1ls1mwcv0" path="res://scripts/Game/Systems/QuestSystem/QuestNode.cs" id="11_questnode"]
+[ext_resource type="Resource" path="res://GameData/quests/III.1-TheHiddenWorkshop.tres" id="12_iii1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_exitHome"]
+size = Vector3(1.2, 2, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_arrival"]
+size = Vector3(8, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_well"]
+size = Vector3(4, 2, 4)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nkays"]
 sky_top_color = Color(0.03612628, 0.053521246, 0.07621951, 1)
@@ -247,3 +264,70 @@ libraries/ = SubResource("AnimationLibrary_wg0sy")
 autoplay = &"RESET"
 
 [node name="Beaverford" parent="." unique_id=1715006005 instance=ExtResource("4_tbltw")]
+
+[node name="Drawbridge" type="Node" parent="." unique_id=1715006101 node_paths=PackedStringArray("Player")]
+script = ExtResource("9_prop")
+Player = NodePath("../Beaverford/NavigationRegion3D/drawbridge/AnimationPlayer")
+StartAnimation = &"Drawbridge_Lower"
+
+[node name="DrawbridgeNavLink" type="NavigationLink3D" parent="." unique_id=1715006102]
+start_position = Vector3(27, 0, 10.2)
+end_position = Vector3(27, 0, 23.6)
+
+[node name="Player" parent="." unique_id=1715006103 instance=ExtResource("5_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0.4, 42)
+
+[node name="SceneMusic" type="Node" parent="." unique_id=1715006104]
+script = ExtResource("6_music")
+Track = ExtResource("7_track")
+
+[node name="Markers" type="Node3D" parent="." unique_id=1715006105]
+
+[node name="OldWell" type="Marker3D" parent="Markers" unique_id=1715006106]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.1, 6)
+
+[node name="Quests" type="Node" parent="." unique_id=1715006107]
+
+[node name="III_1-The Hidden Workshop" type="Node" parent="Quests" unique_id=1715006108]
+script = ExtResource("11_questnode")
+_quest = ExtResource("12_iii1")
+
+[node name="III1_ArrivalArea" type="Area3D" parent="." unique_id=1715006109]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 1, 37)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="III1_ArrivalArea" unique_id=1715006110]
+shape = SubResource("BoxShape3D_arrival")
+
+[node name="III1_WellArea" type="Area3D" parent="." unique_id=1715006111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 6)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="III1_WellArea" unique_id=1715006112]
+shape = SubResource("BoxShape3D_well")
+
+[node name="Spawns" type="Node3D" parent="." unique_id=1715006113]
+
+[node name="from_home" type="Marker3D" parent="Spawns" unique_id=1715006114]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0.4, 42)
+script = ExtResource("8_spawn")
+Default = true
+
+[node name="Exits" type="Node3D" parent="." unique_id=1715006115]
+
+[node name="ExitToHome" type="Area3D" parent="Exits" unique_id=1715006116]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 1, 40.75)
+collision_mask = 3
+monitoring = false
+script = ExtResource("10_exit")
+TargetScene = "uid://lsbk05nndu58"
+_targetSpawnPath = "Spawns/front_door"
+Enabled = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Exits/ExitToHome" unique_id=1715006117]
+shape = SubResource("BoxShape3D_exitHome")
+
+[connection signal="body_entered" from="III1_ArrivalArea" to="Quests/III_1-The Hidden Workshop" method="_OnPlayerStartObjective" binds= ["89d29cd1-445c-47db-805b-363473c45201"]]
+[connection signal="body_entered" from="III1_WellArea" to="Quests/III_1-The Hidden Workshop" method="_OnPlayerCompleteObjective" binds= ["89d29cd1-445c-47db-805b-363473c45201"]]

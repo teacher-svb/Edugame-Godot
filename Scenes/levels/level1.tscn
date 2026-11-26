@@ -49,6 +49,7 @@
 [ext_resource type="Script" uid="uid://v6ge3lx8r4vx" path="res://scripts/Game/Systems/QuestSystem/Steps/IdleStep.cs" id="qs_idle"]
 [ext_resource type="Script" uid="uid://ch4x6amfugyhw" path="res://scripts/Game/Systems/QuestSystem/Steps/PatrolStep.cs" id="qs_patrol"]
 [ext_resource type="Script" uid="uid://bon4b1kkdldu8" path="res://scripts/Game/Systems/QuestSystem/Steps/PopStateStep.cs" id="qs_pop"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/Steps/FreeNodeStep.cs" id="qs_free"]
 [ext_resource type="Script" uid="uid://bksw1ls1mwcv0" path="res://scripts/Game/Systems/QuestSystem/QuestNode.cs" id="qs_questnode"]
 [ext_resource type="Resource" uid="uid://bcgox3enbg4ph" path="res://GameData/quests/I.1-MorningInBeaverford.tres" id="qs_quest_i1"]
 [ext_resource type="Script" uid="uid://cnq1ox81dkvb3" path="res://scripts/Game/Systems/QuestSystem/Steps/ActCardStep.cs" id="q_actcard"]
@@ -508,6 +509,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1, 0.20000002, -46.425)
 shape = SubResource("BoxShape3D_exit")
 debug_color = Color(0.6, 0.4, 0.1, 1)
 
+[node name="transporter_livingroom_act3" type="Area3D" parent="transporters" unique_id=1733560501]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0.4, 42)
+collision_mask = 3
+monitoring = false
+script = ExtResource("lv_exit")
+TargetScene = "uid://cr3nwuawx7hye"
+_targetSpawnPath = "Spawns/from_home"
+Enabled = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="transporters/transporter_livingroom_act3" unique_id=1733560502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1, 0.20000002, -46.425)
+shape = SubResource("BoxShape3D_exit")
+debug_color = Color(0.2, 0.2, 0.6, 1)
+
 [node name="Quests" type="Node" parent="." unique_id=371530256]
 
 [node name="LookingForAvocado" type="Node" parent="Quests" unique_id=819544074]
@@ -612,6 +627,19 @@ eventChannel = ExtResource("28_kdqke")
 script = ExtResource("qs_pop")
 _character = NodePath("../../../../../Player")
 
+[node name="obj5-completed-AvocadoGone" type="Node" parent="Quests/LookingForAvocado/Reactions" unique_id=810609501]
+script = ExtResource("26_0tae3")
+_checkObjectiveId = true
+_objectiveId = "67bc9a4e-a340-4225-a816-1a8b2b1b8925"
+_checkState = true
+_state = 2
+_catchUpAfterLoad = true
+eventChannel = ExtResource("28_kdqke")
+
+[node name="FreeNodeStep" type="Node" parent="Quests/LookingForAvocado/Reactions/obj5-completed-AvocadoGone" unique_id=810609502 node_paths=PackedStringArray("_node")]
+script = ExtResource("qs_free")
+_node = NodePath("../../../../../avocado")
+
 [node name="I_4-The Heavy Heart" type="Node" parent="Quests" unique_id=1733540409]
 script = ExtResource("qs_questnode")
 _quest = ExtResource("q_i4")
@@ -673,6 +701,11 @@ eventChannel = ExtResource("28_kdqke")
 script = ExtResource("q_actcard")
 _title = "Einde van Akte II"
 _subtitle = "Toveren zonder toverstaf"
+
+[node name="OpenActIIITown" type="Node" parent="Quests/II5-completed-EndOfActII" unique_id=1733560503 node_paths=PackedStringArray("Target")]
+script = ExtResource("q_call")
+Target = NodePath("../../../transporters/transporter_livingroom_act3")
+_method = "Open"
 
 [node name="Autosave" type="Node" parent="Quests/II5-completed-EndOfActII" unique_id=938363920]
 script = ExtResource("q_save")

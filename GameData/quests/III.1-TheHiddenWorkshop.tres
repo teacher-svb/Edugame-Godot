@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Quest" format=3]
+
+[ext_resource type="Script" uid="uid://bkc5aqh43okjh" path="res://scripts/Game/Systems/QuestSystem/QuestObjective.cs" id="1_obj"]
+[ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="2_mabel"]
+[ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="3_quest"]
+
+[sub_resource type="Resource" id="Resource_obj1"]
+script = ExtResource("1_obj")
+_startText = "...tien, elf, twaalf. Middernacht. Het hele dorp slaapt. Nu naar de oude put op het plein, zoals de brief zei."
+_completeText = "Daar is de put. Ergens op de rand moet het teken van een tandwiel zitten."
+_characterData = ExtResource("2_mabel")
+_objectiveId = "89d29cd1-445c-47db-805b-363473c45201"
+metadata/_custom_type_script = "uid://bkc5aqh43okjh"
+
+[resource]
+script = ExtResource("3_quest")
+_id = "89d29cd1-445c-47db-805b-363473c45200"
+_name = "The Hidden Workshop"
+_objectives = Array[ExtResource("1_obj")]([SubResource("Resource_obj1")])
+metadata/_custom_type_script = "uid://k32terbd7gqc"

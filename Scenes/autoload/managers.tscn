@@ -36,6 +36,7 @@
 [ext_resource type="Resource" path="res://GameData/quests/II.3-TheBusyWeek-MsBram.tres" id="24_ii3m"]
 [ext_resource type="Resource" path="res://GameData/quests/II.4-TheExposure.tres" id="25_ii4"]
 [ext_resource type="Resource" path="res://GameData/quests/II.5-TheMysteriousLetter.tres" id="26_ii5"]
+[ext_resource type="Resource" path="res://GameData/quests/III.1-TheHiddenWorkshop.tres" id="27_iii1"]
 [ext_resource type="Script" path="res://scripts/Game/Dev/DevShortcuts.cs" id="dev_shortcuts"]
 [ext_resource type="Script" path="res://scripts/Game/Dev/DevCheckpoint.cs" id="dev_cp"]
 [ext_resource type="Resource" path="res://GameData/dev/00_i3-fire.tres" id="dev_cp0"]
@@ -44,6 +45,7 @@
 [ext_resource type="Resource" path="res://GameData/dev/03_ii3.tres" id="dev_cp3"]
 [ext_resource type="Resource" path="res://GameData/dev/04_ii4.tres" id="dev_cp4"]
 [ext_resource type="Resource" path="res://GameData/dev/05_ii5.tres" id="dev_cp5"]
+[ext_resource type="Resource" path="res://GameData/dev/06_act3-start.tres" id="dev_cp6"]
 [ext_resource type="Script" uid="uid://bf6jiou3no26s" path="res://scripts/Game/UI/MVC_Challenges/Controller/ChallengeController.cs" id="23_aum7h"]
 [ext_resource type="Script" uid="uid://dlqolcp4oddju" path="res://scripts/Game/UI/MVC_Challenges/View/ChallengeView.cs" id="24_qelhd"]
 [ext_resource type="PackedScene" uid="uid://dx5c0meqksg8l" path="res://Scenes/UI/ChallengeUI.tscn" id="25_d2cak"]
@@ -219,13 +221,13 @@ script = ExtResource("3_4v8vv")
 
 [node name="QuestManager" type="Node" parent="." unique_id=600992704]
 script = ExtResource("4_347u6")
-_quests = Array[ExtResource("11_aum7h")]([ExtResource("6_pnf1h"), ExtResource("17_56cnb"), ExtResource("17_hendrik"), ExtResource("17_liesbeth"), ExtResource("17_msbram"), ExtResource("18_i3fire"), ExtResource("18_i3water"), ExtResource("18_i3earth"), ExtResource("19_i4"), ExtResource("20_ii1"), ExtResource("21_ii2"), ExtResource("22_ii3l"), ExtResource("23_ii3h"), ExtResource("24_ii3m"), ExtResource("25_ii4"), ExtResource("26_ii5")])
+_quests = Array[ExtResource("11_aum7h")]([ExtResource("6_pnf1h"), ExtResource("17_56cnb"), ExtResource("17_hendrik"), ExtResource("17_liesbeth"), ExtResource("17_msbram"), ExtResource("18_i3fire"), ExtResource("18_i3water"), ExtResource("18_i3earth"), ExtResource("19_i4"), ExtResource("20_ii1"), ExtResource("21_ii2"), ExtResource("22_ii3l"), ExtResource("23_ii3h"), ExtResource("24_ii3m"), ExtResource("25_ii4"), ExtResource("26_ii5"), ExtResource("27_iii1")])
 eventChannel = ExtResource("13_pnf1h")
 
 
 [node name="DevShortcuts" type="Node" parent="."]
 script = ExtResource("dev_shortcuts")
-Checkpoints = Array[ExtResource("dev_cp")]([ExtResource("dev_cp0"), ExtResource("dev_cp1"), ExtResource("dev_cp2"), ExtResource("dev_cp3"), ExtResource("dev_cp4"), ExtResource("dev_cp5")])
+Checkpoints = Array[ExtResource("dev_cp")]([ExtResource("dev_cp0"), ExtResource("dev_cp1"), ExtResource("dev_cp2"), ExtResource("dev_cp3"), ExtResource("dev_cp4"), ExtResource("dev_cp5"), ExtResource("dev_cp6")])
 
 [node name="UIManager" type="Node" parent="." unique_id=1207108139]
 script = ExtResource("4_c37v5")
