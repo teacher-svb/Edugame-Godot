@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://ri147ckev4hj" path="res://assets/3D/characters/Mini Characters 1/Models/GLB format/avocado.glb" id="1_avo"]
+[ext_resource type="Animation" path="res://assets/3D/playground/characters/avocado_seesaw_enter.res" id="2_enter"]
+[ext_resource type="Animation" path="res://assets/3D/playground/characters/avocado_seesaw_loop.res" id="3_loop"]
+[ext_resource type="Animation" path="res://assets/3D/playground/characters/avocado_seesaw_exit.res" id="4_exit"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_seesaw"]
+_data = {
+&"avocado_seesaw_enter": ExtResource("2_enter"),
+&"avocado_seesaw_exit": ExtResource("4_exit"),
+&"avocado_seesaw_loop": ExtResource("3_loop")
+}
+
+[node name="AvocadoSeated" type="Node3D"]
+
+[node name="avocado" parent="." instance=ExtResource("1_avo")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="SeatedPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../avocado")
+libraries/ = SubResource("AnimationLibrary_seesaw")

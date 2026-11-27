@@ -22,6 +22,8 @@ namespace TnT.EduGame.Playground
         [Export] public float PumpSpeed { get; set; } = 0.8f;
         /// <summary>Damping per second; the swing loses about half its height in 1.4 / Damping seconds.</summary>
         [Export] public float Damping { get; set; } = 0.15f;
+        /// <summary>Damping while braked (<see cref="Brake"/>: someone caught the seat to get on).</summary>
+        [Export] public float BrakeDamping { get; set; } = 3f;
 
         const float Gravity = 9.8f;
         const float RestSpeed = 0.02f;   // rad/s: below this (near the bottom) it stops
@@ -64,6 +66,7 @@ namespace TnT.EduGame.Playground
         /// </summary>
         public bool Pump()
         {
+            _braking = false;
             int direction = AngularVelocity > RestSpeed ? 1 : AngularVelocity < -RestSpeed ? -1 : 1;
             if (direction == _lastPumpDirection)
                 return false;
@@ -79,8 +82,15 @@ namespace TnT.EduGame.Playground
         }
 
         /// <summary>Stops the swing hanging straight down (no swing back).</summary>
+        /// <summary>Slows the swing down quickly (<see cref="BrakeDamping"/>) until it hangs still or is pumped: the
+        /// player catching a still-moving seat to get on.</summary>
+        public void Brake() => _braking = true;
+
+        bool _braking;
+
         public void Stop()
         {
+            _braking = false;
             Angle = 0;
             AngularVelocity = 0;
             _lastPumpDirection = 0;
@@ -97,7 +107,7 @@ namespace TnT.EduGame.Playground
             float dt = (float)delta / steps;
             for (int i = 0; i < steps; i++)
             {
-                AngularVelocity += (-Gravity / _length * Mathf.Sin(Angle) - Damping * AngularVelocity) * dt;
+                AngularVelocity += (-Gravity / _length * Mathf.Sin(Angle) - (_braking ? Mathf.Max(Damping, BrakeDamping) : Damping) * AngularVelocity) * dt;
                 Angle += AngularVelocity * dt;
             }
             if (Mathf.Abs(AngularVelocity) < RestSpeed && Mathf.Abs(Angle) < 0.002f)

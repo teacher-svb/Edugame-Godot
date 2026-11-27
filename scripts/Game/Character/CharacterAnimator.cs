@@ -60,6 +60,26 @@ namespace TnT.EduGame.Characters
             OnMovementStateChanged(_movementState);
         }
 
+        /// <summary>
+        /// Plays the landing ("land" with the squash) after a scripted flight that the controller didn't see (its
+        /// movement was off), then goes back to the character's movement state once the clip has played, unless
+        /// something else took over meanwhile (a walk, a hold): the controller emits nothing new for a character that
+        /// stood still before and after, so without this the last frame of "land" stayed.
+        /// </summary>
+        public void PlayLanding()
+        {
+            if (_held != null || _stateMachine == null)
+                return;
+            _stateMachine.Travel("land");
+            DoSquash();
+            float length = AnimationLength("land");
+            GetTree().CreateTimer(length > 0 ? length : 0.3f, processAlways: false).Timeout += () =>
+            {
+                if (IsInstanceValid(this) && _held == null && _stateMachine.GetCurrentNode() == "land")
+                    OnMovementStateChanged(_movementState);
+            };
+        }
+
         /// <summary>Whether the AnimationTree's state machine has <paramref name="state"/>.</summary>
         public bool HasState(string state) =>
             _stateMachine != null && AnimationTree.TreeRoot is AnimationNodeStateMachine machine && machine.HasNode(state);

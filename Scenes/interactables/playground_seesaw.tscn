@@ -1,0 +1,53 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://bqvtnhlqjbwn2" path="res://assets/3D/playground/playground_seesaw.glb" id="1_seesaw"]
+[ext_resource type="Script" uid="uid://dg5vuusj1ccfx" path="res://scripts/Game/Systems/Playground/PlaythingSeat.cs" id="2_seat"]
+[ext_resource type="Script" uid="uid://bs38wksyxjgmg" path="res://scripts/Game/Systems/Playground/SeesawBeam.cs" id="3_beam"]
+[ext_resource type="Script" uid="uid://cqcq4fb7jfbvw" path="res://scripts/Game/Systems/Playground/AvocadoSpot.cs" id="4_avo"]
+[ext_resource type="Resource" uid="uid://dsctdv3pdwt0h" path="res://GameData/Items/item_test.tres" id="5_item"]
+[ext_resource type="PackedScene" path="res://Scenes/interactables/avocado_seated.tscn" id="6_model"]
+[ext_resource type="Resource" uid="uid://b4o8xetb12dcq" path="res://GameData/characterData/Character_mabel_CharacterData.tres" id="7_mabel"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_end"]
+height = 2.0
+radius = 0.9
+
+[node name="PlaygroundSeesaw" type="Node3D"]
+
+[node name="playground_seesaw" parent="." instance=ExtResource("1_seesaw")]
+
+[node name="SeatPlayer" type="Area3D" parent="." node_paths=PackedStringArray("Enter", "Seat", "Beam", "Partner")]
+collision_layer = 0
+collision_mask = 3
+monitorable = false
+script = ExtResource("2_seat")
+Enter = NodePath("../playground_seesaw/playground_seesaw/ENTER_seesaw_player")
+Seat = NodePath("../playground_seesaw/playground_seesaw/pg_seesaw_beam/SEAT_seesaw_player")
+GetOffPromptOffset = Vector3(-0.6, 0.25, 0)
+Beam = NodePath("../Beam")
+Partner = NodePath("../AvocadoEnd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SeatPlayer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 1, 0.3)
+shape = SubResource("CylinderShape3D_end")
+
+[node name="AvocadoEnd" type="Area3D" parent="." node_paths=PackedStringArray("Enter", "Seat", "PlayerSeat", "Beam")]
+collision_layer = 0
+collision_mask = 3
+monitorable = false
+script = ExtResource("4_avo")
+Enter = NodePath("../playground_seesaw/playground_seesaw/ENTER_seesaw_avocado")
+Seat = NodePath("../playground_seesaw/playground_seesaw/pg_seesaw_beam/SEAT_seesaw_avocado")
+PlayerSeat = NodePath("../SeatPlayer")
+Beam = NodePath("../Beam")
+AvocadoItem = ExtResource("5_item")
+AvocadoScene = ExtResource("6_model")
+Speaker = ExtResource("7_mabel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AvocadoEnd"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 1, 0.3)
+shape = SubResource("CylinderShape3D_end")
+
+[node name="Beam" type="Node" parent="." node_paths=PackedStringArray("Beam")]
+script = ExtResource("3_beam")
+Beam = NodePath("../playground_seesaw/playground_seesaw/pg_seesaw_beam")

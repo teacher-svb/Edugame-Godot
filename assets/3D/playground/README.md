@@ -34,3 +34,6 @@ Sequences: swing `swing_a_start` → `swing_a` → `swing_a_stop` (same for b); 
 
 ## Check (2026-11-26)
 Godot 4.7.2 headless, scratch project: import with no errors or warnings; each file has its clips, one `StaticBody3D`, and its `SEAT_` / `ENTER_` markers.
+
+## Avocado seesaw clips (2026-11-27)
+`characters/avocado_seesaw.glb`: the Avocado seesaw clips from the playground pass (the last export, `blend/playground/versions/glb_character_clips/avocado_seesaw.glb`, made against the current seesaw GLB): `avocado_seesaw_enter` (1.0 s, hops from in front of and below the seat onto it), `avocado_seesaw_loop` (2.4 s, one bounce cycle, frame 0 = rest; Godot names it `avocado_seesaw`), `avocado_seesaw_exit` (0.87 s). Avocado mesh without material (use the game's `avocado.glb` + these clips: tracks `Armature/Skeleton3D:*`), model at scale 1.5 directly under `SEAT_seesaw_avocado`, unturned (the clips are made for the raw model, which faces its own −X).

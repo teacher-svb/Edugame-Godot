@@ -433,6 +433,7 @@ size = Vector3(3.6, 2, 1.2)
 
 [node name="Node3D" type="Node3D" unique_id=1964158039]
 script = ExtResource("1_74s4i")
+InteriorDarkness = 1.0
 CutOffHeight = 0.0
 CutOffFront = 0.0
 ExcludeLayers = 2

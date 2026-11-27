@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://ik61onk8hqfy"]
+
+[ext_resource type="PackedScene" uid="uid://3qdneerntcdg" path="res://assets/3D/playground/playground_merry_go_round.glb" id="1_mgr"]
+[ext_resource type="Script" uid="uid://dg5vuusj1ccfx" path="res://scripts/Game/Systems/Playground/PlaythingSeat.cs" id="2_seat"]
+[ext_resource type="Script" uid="uid://d2gomoxhmm8f0" path="res://scripts/Game/Systems/Playground/SpinningDisc.cs" id="3_disc"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mgr"]
+radius = 1.6
+
+[node name="PlaygroundMerryGoRound" type="Node3D" unique_id=973983657]
+
+[node name="playground_merry_go_round" parent="." unique_id=1719260212 instance=ExtResource("1_mgr")]
+
+[node name="GRAB_mgr" type="Marker3D" parent="playground_merry_go_round/playground_merry_go_round/pg_mgr_disc"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0.23, 0.22, -0.45)
+
+[node name="Seat" type="Area3D" parent="." unique_id=1914928261 node_paths=PackedStringArray("Enter", "Seat", "Disc")]
+collision_layer = 0
+collision_mask = 3
+monitorable = false
+script = ExtResource("2_seat")
+Enter = NodePath("../playground_merry_go_round/playground_merry_go_round/ENTER_mgr")
+Seat = NodePath("../playground_merry_go_round/playground_merry_go_round/pg_mgr_disc/GRAB_mgr")
+SitOffset = Vector3(0, 0, 0)
+PromptHeight = 1.4
+GetOffPromptOffset = Vector3(0, 0.25, -0.6)
+JumpOffBoost = Vector2(1.6, 1.4)
+Disc = NodePath("../Disc")
+SeatSymmetry = 4
+SettleState = "grab_onto"
+SettleSeconds = 0.25
+GetUpState = ""
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Seat" unique_id=275388559]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_mgr")
+
+[node name="Disc" type="Node" parent="." unique_id=1311676293 node_paths=PackedStringArray("Disc")]
+script = ExtResource("3_disc")
+Disc = NodePath("../playground_merry_go_round/playground_merry_go_round/pg_mgr_disc")
+
+[editable path="playground_merry_go_round"]

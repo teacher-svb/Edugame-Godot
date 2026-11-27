@@ -12,7 +12,8 @@ namespace TnT.EduGame.Playground
     /// A seat on a plaything (a swing seat, a seesaw end) the player gets on with the interact key.
     /// With a <see cref="Swing"/>: while seated, the jump key pumps the swing (a second key label shows it), and E
     /// while the swing is high enough waits for the next forward swing and jumps off forward, landing on the ground in
-    /// front; low, E gets off as without a swing. While the player is
+    /// front; low, E gets off as without a swing. With a <see cref="Disc"/> (merry-go-round): the jump key pushes the
+    /// disc round, and E jumps off outward when it turns fast enough, else steps off outward. While the player is
     /// in this area, a key label ("E", <c>quest_prompt.tscn</c>) floats above <see cref="Seat"/>; E starts the sequence:
     /// the player walks to <see cref="Enter"/> (its navigation agent, then straight to the spot), turns to face the way
     /// <see cref="Enter"/>'s +Z points (away from the seat), jumps backwards onto the seat and sits down. E again: stands
@@ -57,16 +58,38 @@ namespace TnT.EduGame.Playground
         [Export] public float JumpOffAngle { get; set; } = 15f;
         /// <summary>Added to the seat's speed when jumping off: up, and forward along <see cref="Enter"/>'s +Z (m/s).</summary>
         [Export] public Vector2 JumpOffBoost { get; set; } = new(0.5f, 1.2f);
+        /// <summary>The disc this seat turns with (merry-go-round); empty: none. The jump key pushes it; getting off
+        /// goes outward, away from its centre.</summary>
+        [Export] public SpinningDisc Disc { get; set; }
+        /// <summary>With a <see cref="Disc"/>: at this rider speed (m/s) or more E jumps off, below it the rider steps off.</summary>
+        [Export] public float MinJumpOffSpeed { get; set; } = 0.6f;
+        /// <summary>With a <see cref="Disc"/>: stepping off lands this far from its centre (m).</summary>
+        [Export] public float StepOffRadius { get; set; } = 1.15f;
+        /// <summary>The seesaw beam this seat rocks with; empty: none. The jump key bounces it (one bounce per press,
+        /// from rest); E while it bounces gets off once it is back at rest.</summary>
+        [Export] public SeesawBeam Beam { get; set; }
+        /// <summary>Optional <see cref="IPlaythingPartner"/> (the seesaw's <see cref="AvocadoSpot"/>): the player only
+        /// gets on while it <see cref="IPlaythingPartner.IsReady"/> (else it explains why), and it is told when the
+        /// player got off.</summary>
+        [Export] public Node Partner { get; set; }
+        IPlaythingPartner PartnerOrNull => Partner as IPlaythingPartner;
+        /// <summary>The plaything looks the same after a 1/N turn (a merry-go-round with 4 bars: 4): getting on, the
+        /// player takes the copy of <see cref="Seat"/> turned by k/N about its parent's Y axis that is nearest to
+        /// <see cref="Enter"/>, so the disc may have stopped at any angle. 1: always <see cref="Seat"/> as placed.</summary>
+        [Export(PropertyHint.Range, "1,12")] public int SeatSymmetry { get; set; } = 1;
+        /// <summary>Animation state after landing on the seat ("sit_down", which goes on to "sit"; "grab_onto" standing).</summary>
+        [Export] public string SettleState { get; set; } = "sit_down";
+        /// <summary>Seconds in <see cref="SettleState"/> before the player is seated (and E works); negative: its clip's length.</summary>
+        [Export] public float SettleSeconds { get; set; } = -1f;
+        /// <summary>Animation state played before stepping off ("stand_up"); empty: step off at once.</summary>
+        [Export] public string GetUpState { get; set; } = "stand_up";
 
-        enum Phase { Free, Walking, Approaching, Turning, Jumping, SittingDown, Seated, StandingUp, SteppingOff, Flying }
+        enum Phase { Free, Approaching, Catching, Jumping, SittingDown, Seated, StandingUp, SteppingOff, Flying }
 
         // the seat the player is on or getting on (one at a time)
         static PlaythingSeat _inUse;
 
-        const float NearEnough = 0.06f;      // m from Enter: stop walking, place the body exactly
-        const float WalkTimeout = 12f;       // s on the navigation path before going straight
-        const float ApproachTimeout = 3f;    // s going straight before placing the body anyway
-        const float TurnSeconds = 0.3f;
+        const float CatchAngle = 2f;          // degrees: a braked swing this low is stopped and the player hops on
 
         InputAction InteractAction => StateManagerGame.Instance?.PickupItemAction;
         InputAction PumpAction => StateManagerGame.Instance?.JumpPlayerAction;
@@ -87,16 +110,22 @@ namespace TnT.EduGame.Playground
         bool _jumpOffQueued;
         Vector3 _flyVelocity;
 
+        Transform3D _seatBase;   // Seat's local transform as placed, for SeatSymmetry
+
         Character3D _body;
         CharacterController3D _cc;
         CharacterStateManager _states;
         CharacterAnimator _animator;
         NavigationAgent3D _agent;
+        PlayerApproach _approach;
+        bool _getOffQueued;   // a seesaw: E while bouncing gets off once the player's end is down again
 
         public override void _Ready()
         {
             if (Enter == null || Seat == null)
                 GD.PrintErr($"PlaythingSeat '{Name}': Enter or Seat not set.");
+            else
+                _seatBase = Seat.Transform;
 
             if (Prompt == null && GD.Load<PackedScene>(DefaultPromptScene) is PackedScene scene)
             {
@@ -110,7 +139,7 @@ namespace TnT.EduGame.Playground
                 if (label != null && InteractionFocus.KeyLabel(InteractAction) is string key)
                     label.Text = key;
                 // the pump key, under the E while seated on a swing
-                if (Swing != null && label != null)
+                if ((Swing != null || Disc != null || Beam != null) && label != null)
                 {
                     _pumpLabel = (Label3D)label.Duplicate();
                     _pumpLabel.Text = InteractionFocus.KeyLabel(PumpAction) ?? "Space";
@@ -140,28 +169,46 @@ namespace TnT.EduGame.Playground
             if (InteractionFocus.TryUse(this, InteractAction))
                 Interact();
             // read in _Process: Triggered is true for one frame, which a physics frame can miss or see twice
-            if (_phase == Phase.Seated && !_jumpOffQueued && Swing != null && PumpAction?.Triggered == true)
-                Swing.Pump();
+            if (_phase == Phase.Seated && !_jumpOffQueued && PumpAction?.Triggered == true)
+            {
+                if (Swing != null)
+                    Swing.Pump();
+                else if (Disc != null)
+                    Disc.Push();
+                else
+                    Beam?.Push();
+            }
         }
 
         Vector3 IInteractable.InteractPosition =>
             _phase == Phase.Seated && IsInstanceValid(_body) ? _body.GlobalPosition : Enter?.GlobalPosition ?? GlobalPosition;
 
         bool IInteractable.CanInteract => _playerInRange && Enter != null && Seat != null
-            && (_phase == Phase.Free ? _inUse == null : _phase == Phase.Seated);
+            && (_phase == Phase.Free ? _inUse == null && PartnerOrNull?.IsBusy != true : _phase == Phase.Seated);
 
         /// <summary>Whether the player sits on this seat now.</summary>
         public bool IsSeated => _phase == Phase.Seated;
+        /// <summary>Whether the player is getting on, on or getting off this seat.</summary>
+        public bool IsBusy => _phase != Phase.Free;
 
         /// <summary>Gets on (free) or off (seated), as if the player pressed the interact key.</summary>
         public void Interact()
         {
-            if (_phase == Phase.Free && _inUse == null)
-                Begin();
-            else if (_phase == Phase.Seated && !_jumpOffQueued)
+            if (_phase == Phase.Free && _inUse == null && PartnerOrNull?.IsBusy != true)
+            {
+                if (PartnerOrNull is IPlaythingPartner partner && !partner.IsReady)
+                    partner.ExplainNotReady();
+                else
+                    Begin();
+            }
+            else if (_phase == Phase.Seated && Beam != null && !Beam.AtRest)
+                _getOffQueued = true;
+            else if (_phase == Phase.Seated && !_jumpOffQueued && !_getOffQueued)
             {
                 if (Swing != null && Mathf.RadToDeg(Swing.Amplitude) >= MinJumpOffAngle)
                     _jumpOffQueued = true;   // leaves on the next forward swing (_PhysicsProcess)
+                else if (Disc != null && Disc.SpeedAt(Seat.GlobalPosition) >= MinJumpOffSpeed)
+                    StartJumpOff();
                 else
                     StartStandingUp();
             }
@@ -183,16 +230,13 @@ namespace TnT.EduGame.Playground
             _inUse = this;
             _holdDone = false;
             _jumpOffQueued = false;
+            _getOffQueued = false;
             _model = _cc.VisualRoot;
+            Swing?.Brake();   // a still-swinging seat is caught first; the hop waits until it hangs nearly still
             HoldPlayer();
-            _timer = 0;
-            if (_agent != null)
-            {
-                _agent.TargetPosition = Enter.GlobalPosition;
-                _phase = Phase.Walking;
-            }
-            else
-                _phase = Phase.Approaching;
+            _approach = new PlayerApproach(_body, _cc, _agent);
+            _approach.Start(Enter.GlobalPosition, Enter.GlobalBasis.Z);
+            Switch(Phase.Approaching);
         }
 
         async void HoldPlayer()
@@ -231,38 +275,28 @@ namespace TnT.EduGame.Playground
 
             switch (_phase)
             {
-                case Phase.Walking:
-                    var next = _agent.GetNextPathPosition();
-                    if (Flat(Enter.GlobalPosition - _body.GlobalPosition).Length() < 1f || _agent.IsNavigationFinished() || _timer > WalkTimeout)
-                        Switch(Phase.Approaching);
-                    else
-                        _cc.MoveInWorld(next - _body.GlobalPosition);
-                    break;
-
                 case Phase.Approaching:
-                    var toEnter = Flat(Enter.GlobalPosition - _body.GlobalPosition);
-                    if (toEnter.Length() < NearEnough || _timer > ApproachTimeout)
-                    {
-                        _body.GlobalPosition = new Vector3(Enter.GlobalPosition.X, _body.GlobalPosition.Y, Enter.GlobalPosition.Z);
-                        _cc.FaceTowards(Enter.GlobalPosition + Flat(Enter.GlobalBasis.Z), TurnSeconds);
-                        Switch(Phase.Turning);
-                    }
-                    else
-                        _cc.MoveInWorld(toEnter);
+                    if (_approach.Step(delta))
+                        Switch(Phase.Catching);
                     break;
 
-                case Phase.Turning:
-                    if (_timer >= TurnSeconds)
+                case Phase.Catching:   // a swing caught on the way: wait until it hangs nearly still
+                    if (Swing == null || Mathf.RadToDeg(Swing.Amplitude) <= CatchAngle)
                         StartJump();
                     break;
 
                 case Phase.SittingDown:
-                    if (_timer >= _animator.AnimationLength("sit_down"))
+                    if (_timer >= (SettleSeconds >= 0 ? SettleSeconds : _animator.AnimationLength(SettleState)))
                         Switch(Phase.Seated);
                     break;
 
                 case Phase.Seated:
-                    if (_jumpOffQueued && Swing != null)
+                    if (_getOffQueued && (Beam == null || Beam.AtRest))
+                    {
+                        _getOffQueued = false;
+                        StartStandingUp();
+                    }
+                    else if (_jumpOffQueued && Swing != null)
                     {
                         float release = Mathf.Min(Mathf.DegToRad(JumpOffAngle), Swing.Amplitude * 0.6f);
                         if (Swing.AngularVelocity > 0 && Swing.Angle >= release)
@@ -279,33 +313,58 @@ namespace TnT.EduGame.Playground
                     if (_flyVelocity.Y < 0 && p.Y <= ground)
                     {
                         _body.GlobalPosition = new Vector3(p.X, ground, p.Z);
-                        Finish();
-                        _animator.OnMovementStateChanged("land");   // the squash and the land clip, as after a jump
+                        Finish(gotOff: true);
+                        _animator.PlayLanding();   // the squash and the land clip, then back to idle
                     }
                     else
                         _body.GlobalPosition = p;
                     break;
 
                 case Phase.StandingUp:
-                    if (_timer >= _animator.AnimationLength("stand_up"))
+                    if (_timer >= _animator.AnimationLength(GetUpState))
                         StartSteppingOff();
                     break;
             }
         }
 
+        // the turned copy of the seat (SeatSymmetry) nearest to Enter; the marker is moved there, under its parent
+        void PickNearestSeat()
+        {
+            if (SeatSymmetry <= 1 || Seat == null)
+                return;
+            Transform3D best = _seatBase;
+            float bestDistance = float.MaxValue;
+            for (int k = 0; k < SeatSymmetry; k++)
+            {
+                var turned = new Transform3D(new Basis(Vector3.Up, Mathf.Tau * k / SeatSymmetry), Vector3.Zero) * _seatBase;
+                Seat.Transform = turned;
+                float d = Seat.GlobalPosition.DistanceSquaredTo(Enter.GlobalPosition);
+                if (d < bestDistance)
+                {
+                    bestDistance = d;
+                    best = turned;
+                }
+            }
+            Seat.Transform = best;
+        }
+
         void StartJump()
         {
+            PickNearestSeat();
+            Swing?.Stop();
             Switch(Phase.Jumping);
             _cc.MovementEnabled = false;
             _animator.Hold("jump");
             var from = _body.GlobalPosition;
+            // turn in the air to the way the player faces on the seat (a swing: the same way already)
+            _cc.FaceTowards(_body.GlobalPosition + Flat(Seat.GlobalBasis.Z), JumpSeconds);
             Arc(from, () => Seat.GlobalTransform * SitOffset, JumpSeconds, JumpHeight, t =>
             {
                 if (t >= 0.5f)
                     _animator.Hold("fall");
             }, () =>
             {
-                _animator.Hold("sit_down");
+                _animator.Hold(SettleState);
                 AttachModel();
                 Switch(Phase.SittingDown);
             });
@@ -339,33 +398,60 @@ namespace TnT.EduGame.Playground
             if (!IsInstanceValid(_model))
                 return;
             var at = _model.GlobalPosition;
+            var facing = Flat(_model.GlobalBasis.Z);   // the heading on the seat (a disc has turned the rider)
             _model.Transform = _modelRest;
             if (IsInstanceValid(_body))
                 _body.GlobalPosition = at;
+            if (IsInstanceValid(_cc) && facing.LengthSquared() > 0.0001f)
+                _cc.FaceTowards(_model.GlobalPosition + facing, 0f);   // upright, with that heading
         }
 
         void StartJumpOff()
         {
             _jumpOffQueued = false;
-            var forward = Flat(Enter.GlobalBasis.Z).Normalized();
-            _flyVelocity = _seatVelocity + forward * JumpOffBoost.X + Vector3.Up * JumpOffBoost.Y;
+            _flyVelocity = _seatVelocity + OffDirection() * JumpOffBoost.X + Vector3.Up * JumpOffBoost.Y;
             DetachModel();
             _animator.Hold("jump");
             Switch(Phase.Flying);
         }
 
+        // a swing: forward (Enter's +Z); a disc: away from its centre, from where the rider is now
+        Vector3 OffDirection()
+        {
+            if (Disc?.Disc != null)
+            {
+                var from = _modelAttached && IsInstanceValid(_model) ? _model.GlobalPosition : _body.GlobalPosition;
+                var away = Flat(from - Disc.Disc.GlobalPosition);
+                if (away.LengthSquared() > 0.0001f)
+                    return away.Normalized();
+            }
+            return Flat(Enter.GlobalBasis.Z).Normalized();
+        }
+
         void StartStandingUp()
         {
-            _animator.Hold("stand_up");
+            if (string.IsNullOrEmpty(GetUpState))
+            {
+                StartSteppingOff();
+                return;
+            }
+            _animator.Hold(GetUpState);
             Switch(Phase.StandingUp);
         }
 
         void StartSteppingOff()
         {
+            // a disc: out to the ground beside where the rider is now (the disc may have turned them anywhere)
+            var target = Enter.GlobalPosition;
+            if (Disc?.Disc != null)
+            {
+                var c = Disc.Disc.GlobalPosition;
+                target = new Vector3(c.X, Enter.GlobalPosition.Y, c.Z) + OffDirection() * StepOffRadius;
+            }
             DetachModel();
             Switch(Phase.SteppingOff);
             _animator.Hold("idle");
-            Arc(_body.GlobalPosition, () => Enter.GlobalPosition, 0.3f, 0.1f, null, Finish);
+            Arc(_body.GlobalPosition, () => target, Disc != null ? 0.4f : 0.3f, Disc != null ? 0.2f : 0.1f, null, () => Finish(gotOff: true));
         }
 
         // moves the body from `from` to `to()` (re-read every frame: the seat may move) on an arc `height` high
@@ -392,7 +478,8 @@ namespace TnT.EduGame.Playground
             Finish();
         }
 
-        void Finish()
+        // gotOff: the player got off normally (stepped or jumped off), so the partner is told; not when put back
+        void Finish(bool gotOff = false)
         {
             DetachModel();
             _jumpOffQueued = false;
@@ -406,6 +493,9 @@ namespace TnT.EduGame.Playground
             if (_inUse == this)
                 _inUse = null;
             _phase = Phase.Free;
+            _getOffQueued = false;
+            if (gotOff)
+                PartnerOrNull?.PlayerGotOff();
         }
 
         void Switch(Phase phase)
@@ -428,7 +518,7 @@ namespace TnT.EduGame.Playground
                 : aboveSeat;
             if (_pumpLabel != null)
             {
-                _pumpLabel.Visible = _phase == Phase.Seated && !_jumpOffQueued;
+                _pumpLabel.Visible = _phase == Phase.Seated && !_jumpOffQueued && !_getOffQueued;
                 if (_pumpLabel.Visible)
                     _pumpLabel.GlobalPosition = aboveSeat;
             }
