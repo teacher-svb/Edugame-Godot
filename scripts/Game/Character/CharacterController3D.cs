@@ -21,11 +21,6 @@ namespace TnT.EduGame.Characters
 
 
         /// <summary>
-        /// Raycast used to detect occlusion between the camera and the character.
-        /// </summary>
-        [Export] public RayCast3D OcclusionRaycast { get; private set; }
-
-        /// <summary>
         /// The camera that follows or is attached to this character.
         /// </summary>
         [Export] public Camera3D Camera { get; private set; }
@@ -58,7 +53,28 @@ namespace TnT.EduGame.Characters
         public override void _Ready()
         {
             _character = this.FindAncestorOfType<Character3D>();
-            OcclusionRaycast?.AddException(_character);
+        }
+
+        /// <summary>
+        /// False: the body isn't moved at all (no gravity, input, walk or push) and no movement state is emitted, for a
+        /// scripted sequence that places the body itself (sitting on a plaything). Turning it off drops the velocity
+        /// and this frame's queued input; true again: physics as usual, from where the body was put.
+        /// </summary>
+        public bool MovementEnabled
+        {
+            get => IsPhysicsProcessing();
+            set
+            {
+                if (!value && _character != null)
+                {
+                    _character.Velocity = Vector3.Zero;
+                    _jumpBufferLeft = 0;
+                    inputDir = Vector2.Zero;
+                    _worldDir = Vector3.Zero;
+                    _push = Vector3.Zero;
+                }
+                SetPhysicsProcess(value);
+            }
         }
 
         /// <summary>

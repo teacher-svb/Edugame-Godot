@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://d4bts806m6wx0"]
+
+[ext_resource type="PackedScene" uid="uid://c3gunusgw3skx" path="res://assets/3D/playground/playground_swing.glb" id="1_swing"]
+[ext_resource type="Script" uid="uid://dg5vuusj1ccfx" path="res://scripts/Game/Systems/Playground/PlaythingSeat.cs" id="2_seat"]
+[ext_resource type="Script" uid="uid://doxfpbbevyex" path="res://scripts/Game/Systems/Playground/SwingPendulum.cs" id="3_swing"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_seat"]
+radius = 0.9
+
+[node name="PlaygroundSwing" type="Node3D" unique_id=124700187]
+
+[node name="playground_swing" parent="." unique_id=1835938932 instance=ExtResource("1_swing")]
+
+[node name="SeatA" type="Area3D" parent="." unique_id=669880897 node_paths=PackedStringArray("Enter", "Seat", "Swing")]
+collision_layer = 0
+collision_mask = 3
+monitorable = false
+script = ExtResource("2_seat")
+Enter = NodePath("../playground_swing/playground_swing/ENTER_swing_a")
+Seat = NodePath("../playground_swing/playground_swing/pg_swing_seat_a/SEAT_swing_a")
+Swing = NodePath("../SwingA")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SeatA" unique_id=1137414847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.62, 1, 0.45)
+shape = SubResource("CylinderShape3D_seat")
+
+[node name="SeatB" type="Area3D" parent="." unique_id=1827181767 node_paths=PackedStringArray("Enter", "Seat", "Swing")]
+collision_layer = 0
+collision_mask = 3
+monitorable = false
+script = ExtResource("2_seat")
+Enter = NodePath("../playground_swing/playground_swing/ENTER_swing_b")
+Seat = NodePath("../playground_swing/playground_swing/pg_swing_seat_b/SEAT_swing_b")
+Swing = NodePath("../SwingB")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SeatB" unique_id=849314801]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.62, 1, 0.45)
+shape = SubResource("CylinderShape3D_seat")
+
+[node name="SwingA" type="Node" parent="." unique_id=1625194749 node_paths=PackedStringArray("Pivot", "Seat")]
+script = ExtResource("3_swing")
+Pivot = NodePath("../playground_swing/playground_swing/pg_swing_seat_a")
+Seat = NodePath("../playground_swing/playground_swing/pg_swing_seat_a/SEAT_swing_a")
+MaxAngle = 45.846
+
+[node name="SwingB" type="Node" parent="." unique_id=790851942 node_paths=PackedStringArray("Pivot", "Seat")]
+script = ExtResource("3_swing")
+Pivot = NodePath("../playground_swing/playground_swing/pg_swing_seat_b")
+Seat = NodePath("../playground_swing/playground_swing/pg_swing_seat_b/SEAT_swing_b")

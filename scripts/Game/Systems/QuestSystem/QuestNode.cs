@@ -51,6 +51,15 @@ namespace TnT.EduGame.QuestSystem
 				QuestManager.Instance.FailObjective(_quest.Id, objectiveId);
 		}
 
+		/// <summary>The live objective (the quest as <see cref="QuestManager"/> holds it), or null.</summary>
+		public QuestObjective FindObjective(string objectiveId)
+		{
+			if (_quest == null || QuestManager.Instance == null)
+				return null;
+			var quest = QuestManager.Instance.Quests.FirstOrDefault(q => q.Id == _quest.Id) ?? _quest;
+			return quest.Objectives.FirstOrDefault(o => o.ObjectiveId == objectiveId);
+		}
+
 		void _OnPlayerStartObjective(Node body, string objectiveId)
 		{
 			if (Player.IsPlayer(body))

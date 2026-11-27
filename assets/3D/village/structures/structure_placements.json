@@ -1,6 +1,6 @@
 {
  "coordinate_system": "Godot: X = map x - 50, Y = height, Z = map z - 50 (same as the exported level); rotation is a quaternion [x, y, z, w]",
- "count": 14,
+ "count": 15,
  "placements": [
   {
    "marker": "STRUCT_well",
@@ -270,13 +270,13 @@
    "animations": []
   },
   {
-   "marker": "STRUCT_wizard_tower",
-   "structure": "WizardTower",
-   "structure_file": "wizard_tower.glb",
+   "marker": "STRUCT_stream_bridge",
+   "structure": "StreamBridge",
+   "structure_file": "stream_bridge.glb",
    "position": [
-    -26.028,
-    1.2,
-    -31.817
+    -10.0,
+    0.12,
+    -22.0
    ],
    "rotation_quaternion_xyzw": [
     0.0,
@@ -289,18 +289,38 @@
     1.0,
     1.0
    ],
-   "animations": [
-    "WizardTower_Turn"
-   ]
+   "animations": []
   },
   {
-   "marker": "STRUCT_stream_bridge",
-   "structure": "StreamBridge",
-   "structure_file": "stream_bridge.glb",
+   "marker": "STRUCT_forest_gate",
+   "structure": "ForestGate",
+   "structure_file": "forest_gate.glb",
+   "position": [
+    -41.5,
+    -0.08,
+    -33.5
+   ],
+   "rotation_quaternion_xyzw": [
+    0.0,
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "animations": []
+  },
+  {
+   "marker": "STRUCT_forest_signpost",
+   "structure": "ForestSignpost",
+   "structure_file": "forest_signpost.glb",
    "position": [
     -10.0,
-    0.12,
-    -22.0
+    0.00639,
+    -29.3
    ],
    "rotation_quaternion_xyzw": [
     0.0,

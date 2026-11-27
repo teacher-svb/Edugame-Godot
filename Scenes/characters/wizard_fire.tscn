@@ -38,19 +38,15 @@ albedo_texture = ExtResource("4_wce8a")
 _characterData = ExtResource("2_wce8a")
 PersistentId = "firewizard"
 
-[node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
-VisualRoot = NodePath("../../VisualRoot/Mage")
-
-[node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
-root_node = NodePath("../../VisualRoot/Mage")
+[node name="AnimationTree" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
+root_node = NodePath("../../Mage")
 advance_expression_base_node = NodePath("")
-anim_player = NodePath("../../VisualRoot/AnimationPlayer")
 
 [node name="CollisionShape3D" parent="." index="3" unique_id=293151575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5249999, 0)
 shape = SubResource("CapsuleShape3D_lli5a")
 
-[node name="Mage" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="1" unique_id=1895689160 instance=ExtResource("3_revn8")]
+[node name="Mage" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="2" unique_id=1895689160 instance=ExtResource("3_revn8")]
 transform = Transform3D(0.525, 0, 0, 0, 0.525, 0, 0, 0, 0.525, 0, 0, 0)
 
 [node name="Skeleton3D" parent="VisualRoot/Mage/Rig_Medium" parent_id_path=PackedInt32Array(1895689160, 2021025981) index="0" unique_id=1757248692]
@@ -138,7 +134,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_bimfr")
 layers = 524289
 surface_material_override/0 = SubResource("StandardMaterial3D_3opmh")
 
-[node name="AnimationPlayer" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="2" unique_id=933369381]
-root_node = NodePath("../Mage")
+[node name="AnimationPlayer" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="2" unique_id=933369381]
+root_node = NodePath("../../Mage")
 
 [editable path="VisualRoot/Mage"]

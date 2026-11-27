@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://selmqjc4dpgf"]
 
 [ext_resource type="Script" uid="uid://coeco3nsaywj6" path="res://scripts/Lib/OcclusionFader/OcclusionFader.cs" id="1_74s4i"]
-[ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://scripts/Lib/OcclusionFader/occlusionFader.gdshader" id="2_tpwq7"]
 [ext_resource type="Shader" uid="uid://bkktv7833qkb0" path="res://scripts/Trail/trail_process.gdshader" id="3_gom7j"]
 [ext_resource type="Shader" uid="uid://b2x22th280fpm" path="res://scripts/Trail/trail_draw.gdshader" id="4_wwkp4"]
 [ext_resource type="Script" uid="uid://6214kgglowmy" path="res://scripts/Trail/GPUTrail3D.cs" id="5_bqjii"]
@@ -40,6 +39,7 @@
 [ext_resource type="Resource" uid="uid://b4r7x8oy4xdtc" path="res://GameData/quests/I.2-theAmbition-Liesbeth.tres" id="qs_quest_liesbeth"]
 [ext_resource type="Resource" uid="uid://bx6bq5o64me5r" path="res://GameData/quests/I.2-theAmbition-MsBram.tres" id="qs_quest_msbram"]
 [ext_resource type="Script" uid="uid://k32terbd7gqc" path="res://scripts/Game/Systems/QuestSystem/Quest.cs" id="qs_quest_script"]
+[ext_resource type="Script" uid="uid://b0xyc5por6g80" path="res://scripts/Game/Systems/QuestSystem/QuestStarter.cs" id="qs_starter"]
 [ext_resource type="Texture2D" uid="uid://kg55grkl3acm" path="res://project/images/schoolbell.png" id="qs_tex_bell"]
 [ext_resource type="Texture2D" uid="uid://bwbnh2ruyuhhd" path="res://project/images/mill-diagram.png" id="qs_tex_mill"]
 [ext_resource type="Texture2D" uid="uid://cva3nbii7dftk" path="res://project/images/scales-diagram.png" id="qs_tex_scales"]
@@ -413,26 +413,14 @@ metadata/_custom_type_script = "uid://sup7lp6karaf"
 [sub_resource type="BoxShape3D" id="BoxShape3D_kjadr"]
 size = Vector3(2.4, 1, 2.7412963)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_t3qpp"]
-size = Vector3(1.2714355, 1, 1.4)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_kd8u4"]
 size = Vector3(2.5681982, 1.4074707, 1.9961815)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ne1q5"]
-size = Vector3(0.5019531, 1.4165039, 0.6586914)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v572t"]
 size = Vector3(6, 2, 6)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gnjj1"]
-size = Vector3(0.670166, 2, 0.5877075)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_uw05l"]
 size = Vector3(6, 2, 6)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_c6cs2"]
-size = Vector3(0.7693176, 1.3491211, 0.6875)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_village_edge"]
 size = Vector3(1, 2, 1)
@@ -440,13 +428,14 @@ size = Vector3(1, 2, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_exitHome"]
 size = Vector3(1.2, 2, 0.9)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_exitSchool"]
-size = Vector3(1.4, 2, 1.2)
+[sub_resource type="BoxShape3D" id="BoxShape3D_exitForest"]
+size = Vector3(3.6, 2, 1.2)
 
 [node name="Node3D" type="Node3D" unique_id=1964158039]
 script = ExtResource("1_74s4i")
-OcclusionShader = ExtResource("2_tpwq7")
-MaxRadius = 1.0
+CutOffHeight = 0.0
+CutOffFront = 0.0
+ExcludeLayers = 2
 
 [node name="Environment" type="Node3D" parent="." unique_id=1321630098]
 
@@ -508,7 +497,7 @@ autoplay = &"RESET"
 [node name="Beaverford" parent="." unique_id=1966969946 instance=ExtResource("6_dlsi4")]
 
 [node name="Player" parent="." unique_id=926984674 instance=ExtResource("7_b0oxq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -36)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.39999998, 5)
 
 [node name="Hendrik" parent="." unique_id=497783338 instance=ExtResource("8_c8hg8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.234116, 1.578182, 44.51187)
@@ -533,6 +522,15 @@ _quest = ExtResource("qs_quest_i1")
 [node name="Cornelis" type="Node" parent="Quests/I_2-the Ambition" unique_id=1884105571]
 script = ExtResource("13_bqjii")
 _quest = ExtResource("14_dlsi4")
+
+[node name="obj1-init-Greet" type="Node" parent="Quests/I_2-the Ambition/Cornelis" unique_id=1408105979]
+script = ExtResource("13_ymh3g")
+_checkObjectiveId = true
+_objectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa01"
+_checkState = true
+_state = 1
+_resumeAfterLoad = true
+eventChannel = ExtResource("15_jttql")
 
 [node name="MathChallengeTrigger" type="Node" parent="Quests/I_2-the Ambition/Cornelis" unique_id=813255150]
 script = ExtResource("16_wirkn")
@@ -571,6 +569,15 @@ metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 script = ExtResource("13_bqjii")
 _quest = ExtResource("qs_quest_hendrik")
 
+[node name="obj1-init-Greet" type="Node" parent="Quests/I_2-the Ambition/Hendrik" unique_id=158721575]
+script = ExtResource("13_ymh3g")
+_checkObjectiveId = true
+_objectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee01"
+_checkState = true
+_state = 1
+_resumeAfterLoad = true
+eventChannel = ExtResource("15_jttql")
+
 [node name="MathChallengeTrigger" type="Node" parent="Quests/I_2-the Ambition/Hendrik" unique_id=1346264907]
 script = ExtResource("16_wirkn")
 _challenge = SubResource("Resource_hendrik_challenge")
@@ -607,6 +614,15 @@ metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 script = ExtResource("13_bqjii")
 _quest = ExtResource("qs_quest_liesbeth")
 
+[node name="obj1-init-Greet" type="Node" parent="Quests/I_2-the Ambition/Liesbeth" unique_id=984935639]
+script = ExtResource("13_ymh3g")
+_checkObjectiveId = true
+_objectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd01"
+_checkState = true
+_state = 1
+_resumeAfterLoad = true
+eventChannel = ExtResource("15_jttql")
+
 [node name="MathChallengeTrigger" type="Node" parent="Quests/I_2-the Ambition/Liesbeth" unique_id=956914814]
 script = ExtResource("16_wirkn")
 _challenge = SubResource("Resource_liesbeth_challenge")
@@ -642,6 +658,15 @@ metadata/_custom_type_script = "uid://dd1g4qvshevqa"
 [node name="MsBram" type="Node" parent="Quests/I_2-the Ambition" unique_id=1824263733]
 script = ExtResource("13_bqjii")
 _quest = ExtResource("qs_quest_msbram")
+
+[node name="obj1-init-Greet" type="Node" parent="Quests/I_2-the Ambition/MsBram" unique_id=250298306]
+script = ExtResource("13_ymh3g")
+_checkObjectiveId = true
+_objectiveId = "3a861b47-c25e-4265-8205-81e4394e3901"
+_checkState = true
+_state = 1
+_resumeAfterLoad = true
+eventChannel = ExtResource("15_jttql")
 
 [node name="MathChallengeTrigger" type="Node" parent="Quests/I_2-the Ambition/MsBram" unique_id=1451274578]
 script = ExtResource("16_wirkn")
@@ -690,89 +715,67 @@ script = ExtResource("qs_message")
 _text = "Niemand laat me helpen met een beetje rekenwerk... Dan word ik gewoon een échte tovenaar. Op naar de Tovenaarsschool!"
 _character = ExtResource("cd_mabel")
 
-[node name="OpenSchoolExit" type="Node" parent="Quests/I_2-completed-OpenSchool" unique_id=1730215096 node_paths=PackedStringArray("Target")]
+[node name="OpenForestExit" type="Node" parent="Quests/I_2-completed-OpenSchool" unique_id=1730215096 node_paths=PackedStringArray("Target")]
 script = ExtResource("qs_call")
-Target = NodePath("../../../Exits/ExitToSchool")
+Target = NodePath("../../../Exits/ExitToForest")
 _method = "Open"
 
-[node name="OpenSchoolDoor" type="Node" parent="Quests/I_2-completed-OpenSchool" node_paths=PackedStringArray("Target")]
-script = ExtResource("qs_call")
-Target = NodePath("../../../Beaverford/Doors/WizardTower_Door")
-_method = "Open"
-
-[node name="I_1-completed-OpenHomeDoor" type="Node" parent="Quests"]
+[node name="I_1-completed-OpenHomeDoor" type="Node" parent="Quests" unique_id=751571229]
 script = ExtResource("qs_quests_completed")
 _quests = Array[ExtResource("qs_quest_script")]([ExtResource("qs_quest_i1")])
 eventChannel = ExtResource("15_jttql")
 
-[node name="OpenHomeDoor" type="Node" parent="Quests/I_1-completed-OpenHomeDoor" node_paths=PackedStringArray("Target")]
+[node name="OpenHomeDoor" type="Node" parent="Quests/I_1-completed-OpenHomeDoor" unique_id=339707527 node_paths=PackedStringArray("Target")]
 script = ExtResource("qs_call")
 Target = NodePath("../../../Beaverford/Doors/MabelHome_Door")
 _method = "Open"
 
-[node name="CornelisDrawbridgeArea" type="Area3D" parent="." unique_id=475543381]
+[node name="CornelisDrawbridgeArea" type="Area3D" parent="." unique_id=475543381 node_paths=PackedStringArray("QuestNode", "Giver")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.325844, 0, 20.187727)
 collision_mask = 3
+script = ExtResource("qs_starter")
+QuestNode = NodePath("../Quests/I_2-the Ambition/Cornelis")
+ObjectiveId = "65dd09e4-9554-43bd-9595-e67fc459aa01"
+Giver = NodePath("../Cornelis")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CornelisDrawbridgeArea" unique_id=1605957359]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6121042, 0.22172356)
 shape = SubResource("BoxShape3D_kjadr")
 
-[node name="CornelisDrawbridgeCloseArea" type="Area3D" parent="." unique_id=1958182607]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.642159, 9.536743e-07, 19.391285)
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CornelisDrawbridgeCloseArea" unique_id=1394947006]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5005131, 0, 0.20000076)
-shape = SubResource("BoxShape3D_t3qpp")
-
-[node name="HendrikMillArea" type="Area3D" parent="." unique_id=1470465706]
+[node name="HendrikMillArea" type="Area3D" parent="." unique_id=1470465706 node_paths=PackedStringArray("QuestNode", "Giver")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.03404, 1.5179372, 45.172806)
 collision_mask = 3
+script = ExtResource("qs_starter")
+QuestNode = NodePath("../Quests/I_2-the Ambition/Hendrik")
+ObjectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee01"
+Giver = NodePath("../Hendrik")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HendrikMillArea" unique_id=1481059729]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43288422, 0.29626465, 0.24312592)
 shape = SubResource("BoxShape3D_kd8u4")
 
-[node name="HendrikMillCloseArea" type="Area3D" parent="." unique_id=600818871]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.19019, 1.7251449, 44.877617)
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HendrikMillCloseArea" unique_id=1134775141]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12207031, 0.29174805, 0.30200195)
-shape = SubResource("BoxShape3D_ne1q5")
-
-[node name="LiesbethScalesArea" type="Area3D" parent="." unique_id=215740431]
+[node name="LiesbethScalesArea" type="Area3D" parent="." unique_id=215740431 node_paths=PackedStringArray("QuestNode", "Giver")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.98235, -1.9073486e-06, 20.426228)
 collision_mask = 3
+script = ExtResource("qs_starter")
+QuestNode = NodePath("../Quests/I_2-the Ambition/Liesbeth")
+ObjectiveId = "3cd9cc64-f69b-4d80-beb6-1290468dfd01"
+Giver = NodePath("../Liesbeth")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LiesbethScalesArea" unique_id=1563036971]
 shape = SubResource("BoxShape3D_v572t")
 
-[node name="LiesbethScalesCloseArea" type="Area3D" parent="." unique_id=1441486578]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.98235, -1.9073486e-06, 20.426228)
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LiesbethScalesCloseArea" unique_id=1359724527]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.044555664, 0, 0.36642456)
-shape = SubResource("BoxShape3D_gnjj1")
-
-[node name="MsBramBellArea" type="Area3D" parent="." unique_id=334275673]
+[node name="MsBramBellArea" type="Area3D" parent="." unique_id=334275673 node_paths=PackedStringArray("QuestNode", "Giver")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2056062, 0.34179962, -27.294489)
 collision_mask = 3
 monitoring = false
+script = ExtResource("qs_starter")
+QuestNode = NodePath("../Quests/I_2-the Ambition/MsBram")
+ObjectiveId = "3a861b47-c25e-4265-8205-81e4394e3901"
+Giver = NodePath("../MsBram")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MsBramBellArea" unique_id=761672957]
 shape = SubResource("BoxShape3D_uw05l")
-
-[node name="MsBramBellCloseArea" type="Area3D" parent="." unique_id=1716861232]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.390248, 0.34179962, -27.367657)
-collision_mask = 3
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MsBramBellCloseArea" unique_id=1921053802]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.47773743, 0.32543945, 0.65625)
-shape = SubResource("BoxShape3D_c6cs2")
 
 [node name="LeaveHomeArea" type="Area3D" parent="." unique_id=590053377]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 10)
@@ -816,37 +819,32 @@ _targetSpawnPath = "Spawns/front_door"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exits/ExitToHome" unique_id=739008005]
 shape = SubResource("BoxShape3D_exitHome")
 
-[node name="ExitToSchool" type="Area3D" parent="Exits" unique_id=1650819639]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 2, -29.3)
+[node name="ExitToForest" type="Area3D" parent="Exits" unique_id=1650819639]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.5, 1.4, -49.3)
 collision_mask = 3
 monitoring = false
 script = ExtResource("lv_exit")
-TargetScene = "uid://ce7tg67jxe5p5"
+TargetScene = "uid://dl6j3p5xq67or"
 Enabled = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Exits/ExitToSchool" unique_id=532960655]
-shape = SubResource("BoxShape3D_exitSchool")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Exits/ExitToForest" unique_id=532960655]
+shape = SubResource("BoxShape3D_exitForest")
 
+[connection signal="ReactionEnd" from="Quests/I_2-the Ambition/Cornelis/obj1-init-Greet" to="Quests/I_2-the Ambition/Cornelis" method="CompleteObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa01"]]
 [connection signal="ChallengeCompleted" from="Quests/I_2-the Ambition/Cornelis/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis" method="CompleteObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa02"]]
 [connection signal="ChallengeFailed" from="Quests/I_2-the Ambition/Cornelis/MathChallengeTrigger" to="Quests/I_2-the Ambition/Cornelis" method="FailObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa02"]]
 [connection signal="ReactionEnd" from="Quests/I_2-the Ambition/Cornelis/obj3-init-Dismiss" to="Quests/I_2-the Ambition/Cornelis" method="CompleteObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa03"]]
+[connection signal="ReactionEnd" from="Quests/I_2-the Ambition/Hendrik/obj1-init-Greet" to="Quests/I_2-the Ambition/Hendrik" method="CompleteObjective" binds= ["d31f51c6-cbd8-4285-800f-0bd317caee01"]]
 [connection signal="ChallengeCompleted" from="Quests/I_2-the Ambition/Hendrik/MathChallengeTrigger" to="Quests/I_2-the Ambition/Hendrik" method="CompleteObjective" binds= ["d31f51c6-cbd8-4285-800f-0bd317caee02"]]
 [connection signal="ChallengeFailed" from="Quests/I_2-the Ambition/Hendrik/MathChallengeTrigger" to="Quests/I_2-the Ambition/Hendrik" method="FailObjective" binds= ["d31f51c6-cbd8-4285-800f-0bd317caee02"]]
 [connection signal="ReactionEnd" from="Quests/I_2-the Ambition/Hendrik/obj3-init-Dismiss" to="Quests/I_2-the Ambition/Hendrik" method="CompleteObjective" binds= ["d31f51c6-cbd8-4285-800f-0bd317caee03"]]
+[connection signal="ReactionEnd" from="Quests/I_2-the Ambition/Liesbeth/obj1-init-Greet" to="Quests/I_2-the Ambition/Liesbeth" method="CompleteObjective" binds= ["3cd9cc64-f69b-4d80-beb6-1290468dfd01"]]
 [connection signal="ChallengeCompleted" from="Quests/I_2-the Ambition/Liesbeth/MathChallengeTrigger" to="Quests/I_2-the Ambition/Liesbeth" method="CompleteObjective" binds= ["3cd9cc64-f69b-4d80-beb6-1290468dfd02"]]
 [connection signal="ChallengeFailed" from="Quests/I_2-the Ambition/Liesbeth/MathChallengeTrigger" to="Quests/I_2-the Ambition/Liesbeth" method="FailObjective" binds= ["3cd9cc64-f69b-4d80-beb6-1290468dfd02"]]
 [connection signal="ReactionEnd" from="Quests/I_2-the Ambition/Liesbeth/obj3-init-Dismiss" to="Quests/I_2-the Ambition/Liesbeth" method="CompleteObjective" binds= ["3cd9cc64-f69b-4d80-beb6-1290468dfd03"]]
+[connection signal="ReactionEnd" from="Quests/I_2-the Ambition/MsBram/obj1-init-Greet" to="Quests/I_2-the Ambition/MsBram" method="CompleteObjective" binds= ["3a861b47-c25e-4265-8205-81e4394e3901"]]
 [connection signal="ChallengeCompleted" from="Quests/I_2-the Ambition/MsBram/MathChallengeTrigger" to="Quests/I_2-the Ambition/MsBram" method="CompleteObjective" binds= ["3a861b47-c25e-4265-8205-81e4394e3902"]]
 [connection signal="ChallengeFailed" from="Quests/I_2-the Ambition/MsBram/MathChallengeTrigger" to="Quests/I_2-the Ambition/MsBram" method="FailObjective" binds= ["3a861b47-c25e-4265-8205-81e4394e3902"]]
 [connection signal="ReactionEnd" from="Quests/I_2-the Ambition/MsBram/obj3-init-Dismiss" to="Quests/I_2-the Ambition/MsBram" method="CompleteObjective" binds= ["3a861b47-c25e-4265-8205-81e4394e3903"]]
 [connection signal="ReactionEnd" from="Quests/I_2-the Ambition/MsBram/others-completed-EnableBell" to="MsBramBellArea" method="set_deferred" binds= ["monitoring", true]]
-[connection signal="ReactionEnd" from="Quests/I_2-the Ambition/MsBram/others-completed-EnableBell" to="MsBramBellCloseArea" method="set_deferred" binds= ["monitoring", true]]
-[connection signal="body_entered" from="CornelisDrawbridgeArea" to="Quests/I_2-the Ambition/Cornelis" method="_OnPlayerStartObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa01"]]
-[connection signal="body_entered" from="CornelisDrawbridgeCloseArea" to="Quests/I_2-the Ambition/Cornelis" method="_OnPlayerCompleteObjective" binds= ["65dd09e4-9554-43bd-9595-e67fc459aa01"]]
-[connection signal="body_entered" from="HendrikMillArea" to="Quests/I_2-the Ambition/Hendrik" method="_OnPlayerStartObjective" binds= ["d31f51c6-cbd8-4285-800f-0bd317caee01"]]
-[connection signal="body_entered" from="HendrikMillCloseArea" to="Quests/I_2-the Ambition/Hendrik" method="_OnPlayerCompleteObjective" binds= ["d31f51c6-cbd8-4285-800f-0bd317caee01"]]
-[connection signal="body_entered" from="LiesbethScalesArea" to="Quests/I_2-the Ambition/Liesbeth" method="_OnPlayerStartObjective" binds= ["3cd9cc64-f69b-4d80-beb6-1290468dfd01"]]
-[connection signal="body_entered" from="LiesbethScalesCloseArea" to="Quests/I_2-the Ambition/Liesbeth" method="_OnPlayerCompleteObjective" binds= ["3cd9cc64-f69b-4d80-beb6-1290468dfd01"]]
-[connection signal="body_entered" from="MsBramBellArea" to="Quests/I_2-the Ambition/MsBram" method="_OnPlayerStartObjective" binds= ["3a861b47-c25e-4265-8205-81e4394e3901"]]
-[connection signal="body_entered" from="MsBramBellCloseArea" to="Quests/I_2-the Ambition/MsBram" method="_OnPlayerCompleteObjective" binds= ["3a861b47-c25e-4265-8205-81e4394e3901"]]
 [connection signal="body_entered" from="LeaveHomeArea" to="Quests/I_1-Morning in Beaverford" method="_OnPlayerCompleteObjective" binds= ["67bc9a4e-a340-4225-a816-1a8b2b1b8926"]]

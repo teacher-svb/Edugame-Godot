@@ -17,18 +17,15 @@ albedo_texture = ExtResource("3_7p3bs")
 _characterData = ExtResource("2_fyvvx")
 PersistentId = "waterwizard"
 
-[node name="CharacterAnimator" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="0" unique_id=1328867310 node_paths=PackedStringArray("VisualRoot")]
-VisualRoot = NodePath("../../VisualRoot/Mage3")
-
-[node name="AnimationTree" parent="Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
-root_node = NodePath("../../VisualRoot/Mage3")
+[node name="AnimationTree" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
+root_node = NodePath("../../Mage3")
 
 [node name="CollisionShape3D" parent="." index="3" unique_id=293151575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5249999, 0)
 shape = SubResource("CapsuleShape3D_lli5a")
 
-[node name="AnimationPlayer" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="1" unique_id=933369381]
-root_node = NodePath("../Mage3")
+[node name="AnimationPlayer" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="2" unique_id=933369381]
+root_node = NodePath("../../Mage3")
 
 [node name="Mage3" parent="VisualRoot" parent_id_path=PackedInt32Array(1420670141) index="2" unique_id=225768544 instance=ExtResource("2_lli5a")]
 transform = Transform3D(0.525, 0, 0, 0, 0.525, 0, 0, 0, 0.525, 0.0071179, 0, 0)

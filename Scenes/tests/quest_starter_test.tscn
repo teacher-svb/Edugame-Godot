@@ -1,0 +1,56 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/characters/Player_3D.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://Scenes/characters/hendrik.tscn" id="2_hendrik"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/QuestNode.cs" id="3_questnode"]
+[ext_resource type="Resource" path="res://GameData/quests/I.2-theAmbition-Hendrik.tres" id="4_quest"]
+[ext_resource type="Script" path="res://scripts/Game/Systems/QuestSystem/QuestStarter.cs" id="5_starter"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_start"]
+size = Vector3(6, 2, 6)
+
+[node name="QuestStarterTest" type="Node3D"]
+
+[node name="Light" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8660254, -0.38302222, 0.32139382, 0, 0.64278764, 0.76604444, -0.5, -0.66341394, 0.5566704, 0, 10, 0)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="Mesh" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_floor")
+
+[node name="Hendrik" parent="." instance=ExtResource("2_hendrik")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+
+[node name="Quests" type="Node" parent="."]
+
+[node name="Hendrik" type="Node" parent="Quests"]
+script = ExtResource("3_questnode")
+_quest = ExtResource("4_quest")
+
+[node name="HendrikStartArea" type="Area3D" parent="." node_paths=PackedStringArray("QuestNode", "Giver")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("5_starter")
+QuestNode = NodePath("../Quests/Hendrik")
+ObjectiveId = "d31f51c6-cbd8-4285-800f-0bd317caee01"
+Giver = NodePath("../Hendrik")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HendrikStartArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_start")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 3)

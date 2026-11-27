@@ -1,6 +1,6 @@
 {
  "coordinate_system": "Godot: X = map x - 50, Y = height, Z = map z - 50 (same as the exported level); rotation is a quaternion [x, y, z, w]",
- "count": 43,
+ "count": 42,
  "placements": [
   {
    "marker": "PROP_barrel_a_01",
@@ -1613,48 +1613,6 @@
      -0.707107,
      0.0,
      0.707107
-    ],
-    "scale": [
-     1.0,
-     1.0,
-     1.0
-    ]
-   }
-  },
-  {
-   "marker": "PROP_cauldron_01",
-   "prop_type": "prop_cauldron",
-   "prop_file": "prop_cauldron.glb",
-   "instance": "wizard_cauldron",
-   "position": [
-    -29.62822,
-    1.20172,
-    -27.61727
-   ],
-   "rotation_quaternion_xyzw": [
-    -0.0,
-    0.0,
-    0.0,
-    1.0
-   ],
-   "scale": [
-    1.0,
-    1.0,
-    1.0
-   ],
-   "structure": "STRUCT_wizard_tower",
-   "structure_file": "wizard_tower.glb",
-   "relative_to_structure": {
-    "position": [
-     -3.60022,
-     0.00172,
-     4.19973
-    ],
-    "rotation_quaternion_xyzw": [
-     -0.0,
-     0.0,
-     0.0,
-     1.0
     ],
     "scale": [
      1.0,

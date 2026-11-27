@@ -131,6 +131,14 @@ occlusion_voffset={
 "type": "float",
 "value": 1.0
 }
+occlusion_cutoff_height={
+"type": "float",
+"value": 0.1
+}
+occlusion_cutoff_front={
+"type": "float",
+"value": 0.2
+}
 wind_intensity={
 "type": "float",
 "value": 0.1

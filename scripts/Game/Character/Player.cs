@@ -23,7 +23,6 @@ namespace TnT.EduGame.Characters
 		CharacterController3D Controller => _cc ??= this.FindAncestorOfType<Character3D>().FindAnyObjectByType<CharacterController3D>(includeSelf: true);
 		Node3D IOcclusionTarget.OcclusionBody => this.FindAncestorOfType<Character3D>();
 		Camera3D IOcclusionTarget.OcclusionCamera => Controller.Camera;
-		RayCast3D IOcclusionTarget.OcclusionRaycast => Controller.OcclusionRaycast;
 
 		/// <summary>
 		/// Whether <paramref name="body"/> (e.g. what entered an area) is the player: it or a node below it is a

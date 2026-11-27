@@ -14,10 +14,3 @@ fov = 12.84131
 size = 0.1
 near = 0.25
 far = 15.0
-
-[node name="RayCast3D" type="RayCast3D" parent="." unique_id=185355257]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5801216, -0.033002913)
-target_position = Vector3(0, 5.112, 5.952)
-hit_from_inside = true
-debug_shape_custom_color = Color(1, 0, 1, 1)
-debug_shape_thickness = 5

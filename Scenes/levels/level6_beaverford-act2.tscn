@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dhsjpdmhgiba4"]
 
 [ext_resource type="Script" uid="uid://coeco3nsaywj6" path="res://scripts/Lib/OcclusionFader/OcclusionFader.cs" id="1_occl"]
-[ext_resource type="Shader" uid="uid://bwf6lsmxguiy6" path="res://scripts/Lib/OcclusionFader/occlusionFader.gdshader" id="2_occl"]
 [ext_resource type="PackedScene" uid="uid://c7sx881ac5y6g" path="res://Scenes/levels/beaverford.tscn" id="3_town"]
 [ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="4_player"]
 [ext_resource type="PackedScene" uid="uid://by56kgwnxfbe5" path="res://Scenes/characters/hendrik.tscn" id="5_hendrik"]
@@ -51,6 +50,7 @@
 [ext_resource type="Resource" path="res://GameData/readables/II.4-public_notice.tres" id="55_notice"]
 [ext_resource type="PackedScene" path="res://Scenes/interactables/readable.tscn" id="56_readable"]
 [ext_resource type="PackedScene" path="res://assets/3D/village/interiors/school_interior/goal/spark_test_platform.tscn" id="57_spark"]
+[ext_resource type="Script" uid="uid://b0xyc5por6g80" path="res://scripts/Game/Systems/QuestSystem/QuestStarter.cs" id="qs_starter"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_exitHome"]
 size = Vector3(1.2, 2, 0.9)
@@ -118,9 +118,6 @@ HintText = "Tel eerst de brug en de voorraad op. Trek daarna af wat er al in de 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bakery"]
 size = Vector3(6, 2, 6)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_scales"]
-size = Vector3(2.5, 2, 2.5)
-
 [sub_resource type="Resource" id="Resource_ii3l_a"]
 script = ExtResource("29_param")
 Name = "a"
@@ -171,9 +168,6 @@ HintText = "Reken eerst uit hoeveel meel alle broden samen nodig hebben. Trek da
 [sub_resource type="BoxShape3D" id="BoxShape3D_mill"]
 size = Vector3(6, 4, 6)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_millstone"]
-size = Vector3(2.5, 3, 2.5)
-
 [sub_resource type="Resource" id="Resource_ii3h_a"]
 script = ExtResource("29_param")
 Name = "a"
@@ -215,16 +209,12 @@ HintText = "Vermenigvuldigen gaat voor optellen en aftrekken. Reken dus eerst de
 [sub_resource type="BoxShape3D" id="BoxShape3D_school"]
 size = Vector3(6, 4, 6)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_bell"]
-size = Vector3(2.5, 3, 2.5)
-
 [sub_resource type="BoxMesh" id="BoxMesh_noticepaper"]
 size = Vector3(0.45, 0.6, 0.01)
 
 [node name="BeaverfordActII" type="Node3D"]
 script = ExtResource("1_occl")
-OcclusionShader = ExtResource("2_occl")
-MaxRadius = 1.0
+MaxRadius = 2.0
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -441,6 +431,15 @@ eventChannel = ExtResource("34_channel")
 script = ExtResource("20_questnode")
 _quest = ExtResource("44_ii3l")
 
+[node name="obj1-init-Greet" type="Node" parent="Quests/II_3-The Busy Week-Liesbeth"]
+script = ExtResource("21_listener")
+_checkObjectiveId = true
+_objectiveId = "13a54ec8-e70e-42c3-b25b-6a35c8d9a901"
+_checkState = true
+_state = 1
+_resumeAfterLoad = true
+eventChannel = ExtResource("34_channel")
+
 [node name="MathChallengeTrigger" type="Node" parent="Quests/II_3-The Busy Week-Liesbeth"]
 script = ExtResource("27_trigger")
 _challenge = SubResource("Resource_ii3l_challenge")
@@ -480,6 +479,15 @@ eventChannel = ExtResource("34_channel")
 script = ExtResource("20_questnode")
 _quest = ExtResource("47_ii3h")
 
+[node name="obj1-init-Greet" type="Node" parent="Quests/II_3-The Busy Week-Hendrik"]
+script = ExtResource("21_listener")
+_checkObjectiveId = true
+_objectiveId = "bda3574b-3ad5-4852-82a9-86818f51d501"
+_checkState = true
+_state = 1
+_resumeAfterLoad = true
+eventChannel = ExtResource("34_channel")
+
 [node name="MathChallengeTrigger" type="Node" parent="Quests/II_3-The Busy Week-Hendrik"]
 script = ExtResource("27_trigger")
 _challenge = SubResource("Resource_ii3h_challenge")
@@ -518,6 +526,15 @@ eventChannel = ExtResource("34_channel")
 [node name="II_3-The Busy Week-MsBram" type="Node" parent="Quests"]
 script = ExtResource("20_questnode")
 _quest = ExtResource("49_ii3m")
+
+[node name="obj1-init-Greet" type="Node" parent="Quests/II_3-The Busy Week-MsBram"]
+script = ExtResource("21_listener")
+_checkObjectiveId = true
+_objectiveId = "5db5ba3b-7f5e-4770-85b6-3070aff45901"
+_checkState = true
+_state = 1
+_resumeAfterLoad = true
+eventChannel = ExtResource("34_channel")
 
 [node name="MathChallengeTrigger" type="Node" parent="Quests/II_3-The Busy Week-MsBram"]
 script = ExtResource("27_trigger")
@@ -712,71 +729,67 @@ collision_mask = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CornelisBankArea"]
 shape = SubResource("BoxShape3D_bank")
 
-[node name="RumorSquareArea" type="Area3D" parent="."]
+[node name="RumorSquareArea" type="Area3D" node_paths=PackedStringArray("QuestNode", "Giver") parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 2)
 collision_layer = 0
 collision_mask = 3
 monitoring = false
+script = ExtResource("qs_starter")
+QuestNode = NodePath("../Quests/II_2-The Rumor Mill")
+ObjectiveId = "fff66ceb-01f6-41ab-8d61-552129f73b01"
+Giver = NodePath("../Villagers/Cornelis")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RumorSquareArea"]
 shape = SubResource("BoxShape3D_square")
 
-[node name="LiesbethBakeryArea" type="Area3D" parent="."]
+[node name="LiesbethBakeryArea" type="Area3D" node_paths=PackedStringArray("QuestNode", "Giver") parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.98, 1, 20.43)
 collision_layer = 0
 collision_mask = 3
 monitoring = false
+script = ExtResource("qs_starter")
+QuestNode = NodePath("../Quests/II_3-The Busy Week-Liesbeth")
+ObjectiveId = "13a54ec8-e70e-42c3-b25b-6a35c8d9a901"
+Giver = NodePath("../Villagers/Liesbeth")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LiesbethBakeryArea"]
 shape = SubResource("BoxShape3D_bakery")
 
-[node name="LiesbethScalesArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.84, 1, 20.05)
-collision_layer = 0
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LiesbethScalesArea"]
-shape = SubResource("BoxShape3D_scales")
-
-[node name="HendrikMillArea" type="Area3D" parent="."]
+[node name="HendrikMillArea" type="Area3D" node_paths=PackedStringArray("QuestNode", "Giver") parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.23, 1.6, 45)
 collision_layer = 0
 collision_mask = 3
 monitoring = false
+script = ExtResource("qs_starter")
+QuestNode = NodePath("../Quests/II_3-The Busy Week-Hendrik")
+ObjectiveId = "bda3574b-3ad5-4852-82a9-86818f51d501"
+Giver = NodePath("../Villagers/Hendrik")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HendrikMillArea"]
 shape = SubResource("BoxShape3D_mill")
 
-[node name="HendrikMillstoneArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.23, 1.6, 44.51)
-collision_layer = 0
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HendrikMillstoneArea"]
-shape = SubResource("BoxShape3D_millstone")
-
-[node name="MsBramSchoolArea" type="Area3D" parent="."]
+[node name="MsBramSchoolArea" type="Area3D" node_paths=PackedStringArray("QuestNode", "Giver") parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.94, 0.7, -26.5)
 collision_layer = 0
 collision_mask = 3
 monitoring = false
+script = ExtResource("qs_starter")
+QuestNode = NodePath("../Quests/II_3-The Busy Week-MsBram")
+ObjectiveId = "5db5ba3b-7f5e-4770-85b6-3070aff45901"
+Giver = NodePath("../Villagers/MsBram")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MsBramSchoolArea"]
 shape = SubResource("BoxShape3D_school")
 
-[node name="MsBramBellArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.94, 0.7, -28.21)
-collision_layer = 0
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MsBramBellArea"]
-shape = SubResource("BoxShape3D_bell")
-
-[node name="ExposureSquareArea" type="Area3D" parent="."]
+[node name="ExposureSquareArea" type="Area3D" node_paths=PackedStringArray("QuestNode", "Giver") parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 2)
 collision_layer = 0
 collision_mask = 3
 monitoring = false
+script = ExtResource("qs_starter")
+QuestNode = NodePath("../Quests/II_4-The Exposure")
+ObjectiveId = "fb25da60-3efc-422e-8eba-bddc9ddea401"
+Giver = NodePath("../Villagers/TravelingWizard")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExposureSquareArea"]
 shape = SubResource("BoxShape3D_square")
@@ -843,31 +856,25 @@ shape = SubResource("BoxShape3D_exitHome")
 [connection signal="body_entered" from="CornelisShoutArea" to="Quests/II_1-The Desperate Help" method="_OnPlayerStartObjective" binds= ["daaeb60f-a9fb-4892-9e1a-d7390bcd1c01"]]
 [connection signal="body_entered" from="CornelisBankArea" to="Quests/II_1-The Desperate Help" method="_OnPlayerCompleteObjective" binds= ["daaeb60f-a9fb-4892-9e1a-d7390bcd1c01"]]
 [connection signal="ReactionEnd" from="Quests/II1-completed-ArmSquare" to="RumorSquareArea" method="set_deferred" binds= ["monitoring", true]]
-[connection signal="body_entered" from="RumorSquareArea" to="Quests/II_2-The Rumor Mill" method="_OnPlayerStartObjective" binds= ["fff66ceb-01f6-41ab-8d61-552129f73b01"]]
 [connection signal="ReactionEnd" from="Quests/II_2-The Rumor Mill/obj1-init-Reactions" to="Quests/II_2-The Rumor Mill" method="CompleteObjective" binds= ["fff66ceb-01f6-41ab-8d61-552129f73b01"]]
 [connection signal="ReactionEnd" from="Quests/II_2-The Rumor Mill/obj2-init-Requests" to="Quests/II_2-The Rumor Mill" method="CompleteObjective" binds= ["fff66ceb-01f6-41ab-8d61-552129f73b02"]]
 [connection signal="ReactionEnd" from="Quests/II2-completed-ArmBakery" to="LiesbethBakeryArea" method="set_deferred" binds= ["monitoring", true]]
-[connection signal="body_entered" from="LiesbethBakeryArea" to="Quests/II_3-The Busy Week-Liesbeth" method="_OnPlayerStartObjective" binds= ["13a54ec8-e70e-42c3-b25b-6a35c8d9a901"]]
-[connection signal="body_entered" from="LiesbethScalesArea" to="Quests/II_3-The Busy Week-Liesbeth" method="_OnPlayerCompleteObjective" binds= ["13a54ec8-e70e-42c3-b25b-6a35c8d9a901"]]
 [connection signal="ChallengeCompleted" from="Quests/II_3-The Busy Week-Liesbeth/MathChallengeTrigger" to="Quests/II_3-The Busy Week-Liesbeth" method="CompleteObjective" binds= ["13a54ec8-e70e-42c3-b25b-6a35c8d9a902"]]
 [connection signal="ChallengeFailed" from="Quests/II_3-The Busy Week-Liesbeth/MathChallengeTrigger" to="Quests/II_3-The Busy Week-Liesbeth" method="FailObjective" binds= ["13a54ec8-e70e-42c3-b25b-6a35c8d9a902"]]
 [connection signal="ReactionEnd" from="Quests/II_3-The Busy Week-Liesbeth/obj3-init-ScalesFixed" to="Quests/II_3-The Busy Week-Liesbeth" method="CompleteObjective" binds= ["13a54ec8-e70e-42c3-b25b-6a35c8d9a903"]]
 [connection signal="ReactionEnd" from="Quests/II2-completed-ArmMill" to="HendrikMillArea" method="set_deferred" binds= ["monitoring", true]]
-[connection signal="body_entered" from="HendrikMillArea" to="Quests/II_3-The Busy Week-Hendrik" method="_OnPlayerStartObjective" binds= ["bda3574b-3ad5-4852-82a9-86818f51d501"]]
-[connection signal="body_entered" from="HendrikMillstoneArea" to="Quests/II_3-The Busy Week-Hendrik" method="_OnPlayerCompleteObjective" binds= ["bda3574b-3ad5-4852-82a9-86818f51d501"]]
 [connection signal="ChallengeCompleted" from="Quests/II_3-The Busy Week-Hendrik/MathChallengeTrigger" to="Quests/II_3-The Busy Week-Hendrik" method="CompleteObjective" binds= ["bda3574b-3ad5-4852-82a9-86818f51d502"]]
 [connection signal="ChallengeFailed" from="Quests/II_3-The Busy Week-Hendrik/MathChallengeTrigger" to="Quests/II_3-The Busy Week-Hendrik" method="FailObjective" binds= ["bda3574b-3ad5-4852-82a9-86818f51d502"]]
 [connection signal="ReactionEnd" from="Quests/II_3-The Busy Week-Hendrik/obj3-init-MillFixed" to="Quests/II_3-The Busy Week-Hendrik" method="CompleteObjective" binds= ["bda3574b-3ad5-4852-82a9-86818f51d503"]]
 [connection signal="ReactionEnd" from="Quests/II2-completed-ArmSchool" to="MsBramSchoolArea" method="set_deferred" binds= ["monitoring", true]]
-[connection signal="body_entered" from="MsBramSchoolArea" to="Quests/II_3-The Busy Week-MsBram" method="_OnPlayerStartObjective" binds= ["5db5ba3b-7f5e-4770-85b6-3070aff45901"]]
-[connection signal="body_entered" from="MsBramBellArea" to="Quests/II_3-The Busy Week-MsBram" method="_OnPlayerCompleteObjective" binds= ["5db5ba3b-7f5e-4770-85b6-3070aff45901"]]
 [connection signal="ChallengeCompleted" from="Quests/II_3-The Busy Week-MsBram/MathChallengeTrigger" to="Quests/II_3-The Busy Week-MsBram" method="CompleteObjective" binds= ["5db5ba3b-7f5e-4770-85b6-3070aff45902"]]
 [connection signal="ChallengeFailed" from="Quests/II_3-The Busy Week-MsBram/MathChallengeTrigger" to="Quests/II_3-The Busy Week-MsBram" method="FailObjective" binds= ["5db5ba3b-7f5e-4770-85b6-3070aff45902"]]
 [connection signal="ReactionEnd" from="Quests/II_3-The Busy Week-MsBram/obj3-init-BellFixed" to="Quests/II_3-The Busy Week-MsBram" method="CompleteObjective" binds= ["5db5ba3b-7f5e-4770-85b6-3070aff45903"]]
 [connection signal="ReactionEnd" from="Quests/II3-completed-ArmExposure" to="ExposureSquareArea" method="set_deferred" binds= ["monitoring", true]]
-[connection signal="body_entered" from="ExposureSquareArea" to="Quests/II_4-The Exposure" method="_OnPlayerStartObjective" binds= ["fb25da60-3efc-422e-8eba-bddc9ddea401"]]
 [connection signal="ReactionEnd" from="Quests/II_4-The Exposure/obj1-init-Challenge" to="Quests/II_4-The Exposure" method="CompleteObjective" binds= ["fb25da60-3efc-422e-8eba-bddc9ddea401"]]
 [connection signal="Tested" from="SparkTestPlatform" to="Quests/II_4-The Exposure" method="CompleteObjective" binds= ["fb25da60-3efc-422e-8eba-bddc9ddea402"]]
 [connection signal="ReactionEnd" from="Quests/II_4-The Exposure/obj3-init-Verdict" to="Quests/II_4-The Exposure" method="CompleteObjective" binds= ["fb25da60-3efc-422e-8eba-bddc9ddea403"]]
 [connection signal="Read" from="Noticeboard/Notice" to="Quests/II_4-The Exposure" method="CompleteObjective" binds= ["fb25da60-3efc-422e-8eba-bddc9ddea404"]]
-
+[connection signal="ReactionEnd" from="Quests/II_3-The Busy Week-Liesbeth/obj1-init-Greet" to="Quests/II_3-The Busy Week-Liesbeth" method="CompleteObjective" binds= ["13a54ec8-e70e-42c3-b25b-6a35c8d9a901"]]
+[connection signal="ReactionEnd" from="Quests/II_3-The Busy Week-Hendrik/obj1-init-Greet" to="Quests/II_3-The Busy Week-Hendrik" method="CompleteObjective" binds= ["bda3574b-3ad5-4852-82a9-86818f51d501"]]
+[connection signal="ReactionEnd" from="Quests/II_3-The Busy Week-MsBram/obj1-init-Greet" to="Quests/II_3-The Busy Week-MsBram" method="CompleteObjective" binds= ["5db5ba3b-7f5e-4770-85b6-3070aff45901"]]

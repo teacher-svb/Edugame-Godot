@@ -75,9 +75,9 @@ shape = SubResource("CapsuleShape3D_rqd8d")
 transform = Transform3D(1, 0, 0, 0, 0.9961948, 0.0871557, 0, -0.0871557, 0.9961948, -0.0203368, 0.3874999, 0.5205989)
 
 [node name="AnimationTree" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="1" unique_id=58694043]
-root_node = NodePath("../../VisualRoot/avocado2")
+root_node = NodePath("../../avocado2")
 tree_root = SubResource("AnimationNodeStateMachine_sl66g")
-anim_player = NodePath("../../VisualRoot/avocado2/AnimationPlayer")
+anim_player = NodePath("../../avocado2/AnimationPlayer")
 
 [node name="AnimationPlayer" parent="VisualRoot/Animation" parent_id_path=PackedInt32Array(2085856052) index="2" unique_id=933369381]
 root_node = NodePath("")

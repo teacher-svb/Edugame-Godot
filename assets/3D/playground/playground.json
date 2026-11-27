@@ -1,0 +1,229 @@
+{
+ "units": "metres; Godot +Y up; each piece has its origin at the bottom centre; front faces Godot +Z",
+ "fps": 30,
+ "material": "one palette texture textures/T_PlaygroundColorMap.png (nearest filter, no mipmaps), no vertex colours",
+ "sync": {
+  "swing": "swing_<a|b>_start -> swing_<a|b>_loop -> swing_<a|b>_stop (seat a or b)",
+  "merry_go_round": "mgr_spin_loop; set AnimationPlayer speed_scale to spin up / slow down",
+  "seesaw": "seesaw_loop; frame 0 = rest = player end (-X) down"
+ },
+ "pieces": [
+  {
+   "file": "playground_swing.glb",
+   "clips": {
+    "swing_a_loop": {
+     "frames": 78,
+     "seconds": 2.6,
+     "loop": true
+    },
+    "swing_a_start": {
+     "frames": 156,
+     "seconds": 5.2,
+     "loop": false
+    },
+    "swing_a_stop": {
+     "frames": 156,
+     "seconds": 5.2,
+     "loop": false
+    },
+    "swing_b_loop": {
+     "frames": 78,
+     "seconds": 2.6,
+     "loop": true
+    },
+    "swing_b_start": {
+     "frames": 156,
+     "seconds": 5.2,
+     "loop": false
+    },
+    "swing_b_stop": {
+     "frames": 156,
+     "seconds": 5.2,
+     "loop": false
+    }
+   },
+   "markers": [
+    {
+     "name": "ENTER_swing_a",
+     "parent": "playground_swing",
+     "godot_position": [
+      -0.62,
+      0.0,
+      0.42
+     ],
+     "godot_rig_forward": [
+      0.0,
+      0.0,
+      1.0
+     ]
+    },
+    {
+     "name": "ENTER_swing_b",
+     "parent": "playground_swing",
+     "godot_position": [
+      0.62,
+      0.0,
+      0.42
+     ],
+     "godot_rig_forward": [
+      0.0,
+      0.0,
+      1.0
+     ]
+    },
+    {
+     "name": "SEAT_swing_a",
+     "parent": "pg_swing_seat_a",
+     "godot_position": [
+      -0.62,
+      0.3,
+      -0.0
+     ],
+     "godot_rig_forward": [
+      0.0,
+      0.0,
+      1.0
+     ]
+    },
+    {
+     "name": "SEAT_swing_b",
+     "parent": "pg_swing_seat_b",
+     "godot_position": [
+      0.62,
+      0.3,
+      -0.0
+     ],
+     "godot_rig_forward": [
+      0.0,
+      0.0,
+      1.0
+     ]
+    }
+   ],
+   "colliders": [
+    "pg_swing_frame-colonly"
+   ],
+   "tris": 1660,
+   "kb": 137.2
+  },
+  {
+   "file": "playground_merry_go_round.glb",
+   "clips": {
+    "mgr_spin_loop": {
+     "frames": 120,
+     "seconds": 4.0,
+     "loop": true
+    }
+   },
+   "markers": [
+    {
+     "name": "ENTER_mgr",
+     "parent": "playground_merry_go_round",
+     "godot_position": [
+      0.792,
+      0.0,
+      -0.792
+     ],
+     "godot_rig_forward": [
+      -0.707,
+      0.0,
+      0.707
+     ]
+    },
+    {
+     "name": "SEAT_mgr",
+     "parent": "pg_mgr_disc",
+     "godot_position": [
+      0.3677,
+      0.22,
+      -0.3677
+     ],
+     "godot_rig_forward": [
+      -0.707,
+      0.0,
+      0.707
+     ]
+    }
+   ],
+   "colliders": [
+    "pg_mgr_base-colonly"
+   ],
+   "tris": 1044,
+   "kb": 73.8
+  },
+  {
+   "file": "playground_seesaw.glb",
+   "clips": {
+    "seesaw_loop": {
+     "frames": 72,
+     "seconds": 2.4,
+     "loop": true
+    }
+   },
+   "markers": [
+    {
+     "name": "ENTER_seesaw_avocado",
+     "parent": "playground_seesaw",
+     "godot_position": [
+      1.1,
+      0.0,
+      0.36
+     ],
+     "godot_rig_forward": [
+      0.0,
+      0.0,
+      1.0
+     ]
+    },
+    {
+     "name": "ENTER_seesaw_player",
+     "parent": "playground_seesaw",
+     "godot_position": [
+      -1.1,
+      0.0,
+      0.42
+     ],
+     "godot_rig_forward": [
+      1.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "name": "SEAT_seesaw_avocado",
+     "parent": "pg_seesaw_beam",
+     "godot_position": [
+      1.063,
+      0.5928,
+      -0.0
+     ],
+     "godot_rig_forward": [
+      0.0,
+      0.0,
+      1.0
+     ]
+    },
+    {
+     "name": "SEAT_seesaw_player",
+     "parent": "pg_seesaw_beam",
+     "godot_position": [
+      -1.0929,
+      0.1542,
+      -0.0
+     ],
+     "godot_rig_forward": [
+      0.98,
+      0.199,
+      0.0
+     ]
+    }
+   ],
+   "colliders": [
+    "pg_seesaw_base-colonly"
+   ],
+   "tris": 444,
+   "kb": 36.0
+  }
+ ],
+ "markers_note": "SEAT_*: where a character sits (moves with the seat / disc / beam); ENTER_*: where it stands to get on and off"
+}

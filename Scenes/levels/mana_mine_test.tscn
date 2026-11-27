@@ -4,7 +4,10 @@
 [ext_resource type="Resource" uid="uid://c7fbsi3vt6k3a" path="res://GameData/wfc/mana_mine_corridors.tres" id="2_corr"]
 [ext_resource type="Resource" uid="uid://cjjpoma5vfji6" path="res://GameData/wfc/mana_mine_rooms.tres" id="3_rooms"]
 [ext_resource type="Script" uid="uid://cgraummx7cyo2" path="res://addons/godoodungeon/Resources/DungeonSettings.cs" id="4_settings"]
+[ext_resource type="Script" uid="uid://cpnq5njr2adxx" path="res://addons/godoodungeon/Resources/DungeonCorridor.cs" id="5_3k7j8"]
 [ext_resource type="PackedScene" uid="uid://crkyo8y8iqgx1" path="res://Scenes/characters/Player_3D.tscn" id="5_player"]
+[ext_resource type="Script" uid="uid://1ixkt6cweadw" path="res://addons/godoodungeon/Resources/DungeonRoom.cs" id="6_66pco"]
+[ext_resource type="Script" uid="uid://b27dpvrinn6ki" path="res://addons/godoodungeon/Resources/DungeonGraph.cs" id="7_xsslh"]
 
 [sub_resource type="Environment" id="Environment_mine"]
 background_mode = 1
@@ -17,10 +20,10 @@ glow_enabled = true
 glow_intensity = 0.9
 glow_bloom = 0.15
 
-[sub_resource type="Resource" id="Resource_mine_dungeon"]
+[sub_resource type="Resource" id="Resource_8jxb8"]
 script = ExtResource("4_settings")
 RandomiseSeed = true
-Seed = 1
+Seed = 3774170532
 RoomTileSet = ExtResource("3_rooms")
 CorridorTileSet = ExtResource("2_corr")
 Door = 12
@@ -31,24 +34,79 @@ MaxRoomSize = Vector2i(6, 6)
 MaxDoorsPerRoom = 3
 metadata/_custom_type_script = "uid://cgraummx7cyo2"
 
-[node name="ManaMineTest" type="Node3D"]
+[sub_resource type="Resource" id="Resource_x4bt6"]
+script = ExtResource("5_3k7j8")
+RoomB = 2
+DoorA = Vector3i(4, 0, 6)
+DoorB = Vector3i(8, 0, 7)
+IsTreeEdge = true
+Cells = Array[Vector3i]([Vector3i(5, 0, 6), Vector3i(6, 0, 6), Vector3i(6, 0, 7), Vector3i(7, 0, 7)])
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[sub_resource type="Resource" id="Resource_e7mfh"]
+script = ExtResource("5_3k7j8")
+Index = 1
+RoomA = 1
+RoomB = 2
+DoorA = Vector3i(14, 0, 8)
+DoorB = Vector3i(10, 0, 7)
+IsTreeEdge = true
+Cells = Array[Vector3i]([Vector3i(13, 0, 8), Vector3i(12, 0, 8), Vector3i(12, 0, 7), Vector3i(11, 0, 7)])
+
+[sub_resource type="Resource" id="Resource_b8dfm"]
+script = ExtResource("6_66pco")
+Position = Vector3i(1, 0, 4)
+Size = Vector3i(4, 1, 4)
+DoorCells = Array[Vector3i]([Vector3i(4, 0, 6)])
+DoorDirections = Array[Vector3i]([Vector3i(1, 0, 0)])
+Corridors = PackedInt32Array(0)
+
+[sub_resource type="Resource" id="Resource_cworr"]
+script = ExtResource("6_66pco")
+Index = 1
+Position = Vector3i(14, 0, 5)
+Size = Vector3i(3, 1, 5)
+DoorCells = Array[Vector3i]([Vector3i(14, 0, 8)])
+DoorDirections = Array[Vector3i]([Vector3i(-1, 0, 0)])
+Corridors = PackedInt32Array(1)
+
+[sub_resource type="Resource" id="Resource_uovaa"]
+script = ExtResource("6_66pco")
+Index = 2
+Position = Vector3i(8, 0, 6)
+Size = Vector3i(3, 1, 5)
+DoorCells = Array[Vector3i]([Vector3i(8, 0, 7), Vector3i(10, 0, 7)])
+DoorDirections = Array[Vector3i]([Vector3i(-1, 0, 0), Vector3i(1, 0, 0)])
+Corridors = PackedInt32Array(0, 1)
+
+[sub_resource type="Resource" id="Resource_oyne4"]
+script = ExtResource("7_xsslh")
+Size = Vector2i(20, 16)
+Rooms = Array[ExtResource("6_66pco")]([SubResource("Resource_b8dfm"), SubResource("Resource_cworr"), SubResource("Resource_uovaa")])
+Corridors = Array[ExtResource("5_3k7j8")]([SubResource("Resource_x4bt6"), SubResource("Resource_e7mfh")])
+
+[node name="ManaMineTest" type="Node3D" unique_id=646090456]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2033062026]
 environment = SubResource("Environment_mine")
 
-[node name="Lamp" type="DirectionalLight3D" parent="."]
+[node name="Lamp" type="DirectionalLight3D" parent="." unique_id=1641639108]
 transform = Transform3D(0.8660254, -0.35355338, 0.35355338, 0, 0.70710677, 0.70710677, -0.5, -0.6123724, 0.6123724, 0, 10, 0)
 light_color = Color(0.75, 0.85, 1, 1)
 light_energy = 0.6
 shadow_enabled = true
 directional_shadow_max_distance = 60.0
 
-[node name="Mine" type="GridMap" parent="."]
+[node name="Mine" type="GridMap" parent="." unique_id=2103053669]
 mesh_library = ExtResource("1_lib")
 cell_size = Vector3(4, 1, 4)
 cell_center_y = false
-metadata/godoodads_dungeon_settings = SubResource("Resource_mine_dungeon")
+data = {
+"cells": PackedInt32Array(0, 0, 20, 1, 0, 20, 2, 0, 20, 3, 0, 20, 4, 0, 20, 5, 0, 20, 6, 0, 20, 7, 0, 20, 8, 0, 20, 9, 0, 20, 10, 0, 22, 11, 0, 20, 12, 0, 20, 13, 0, 20, 14, 0, 20, 15, 0, 20, 16, 0, 20, 17, 0, 20, 18, 0, 20, 19, 0, 20, 0, 1, 20, 1, 1, 22, 2, 1, 20, 3, 1, 20, 4, 1, 22, 5, 1, 20, 6, 1, 22, 7, 1, 20, 8, 1, 20, 9, 1, 20, 10, 1, 20, 11, 1, 20, 12, 1, 20, 13, 1, 20, 14, 1, 20, 15, 1, 21, 16, 1, 20, 17, 1, 20, 18, 1, 21, 19, 1, 20, 0, 2, 20, 1, 2, 20, 2, 2, 20, 3, 2, 20, 4, 2, 20, 5, 2, 20, 6, 2, 20, 7, 2, 20, 8, 2, 20, 9, 2, 21, 10, 2, 20, 11, 2, 20, 12, 2, 20, 13, 2, 20, 14, 2, 20, 15, 2, 20, 16, 2, 20, 17, 2, 20, 18, 2, 20, 19, 2, 20, 0, 3, 20, 1, 3, 20, 2, 3, 21, 3, 3, 20, 4, 3, 20, 5, 3, 20, 6, 3, 20, 7, 3, 20, 8, 3, 20, 9, 3, 20, 10, 3, 20, 11, 3, 20, 12, 3, 21, 13, 3, 20, 14, 3, 20, 15, 3, 20, 16, 3, 20, 17, 3, 20, 18, 3, 20, 19, 3, 20, 0, 4, 20, 1, 4, 11, 2, 4, 10, 3, 4, 10, 4, 4, 1441803, 5, 4, 20, 6, 4, 20, 7, 4, 20, 8, 4, 21, 9, 4, 20, 10, 4, 22, 11, 4, 20, 12, 4, 21, 13, 4, 20, 14, 4, 21, 15, 4, 20, 16, 4, 20, 17, 4, 20, 18, 4, 20, 19, 4, 20, 0, 5, 20, 1, 5, 1048584, 2, 5, 7, 3, 5, 0, 4, 5, 1441800, 5, 5, 20, 6, 5, 20, 7, 5, 20, 8, 5, 20, 9, 5, 20, 10, 5, 20, 11, 5, 21, 12, 5, 21, 13, 5, 22, 14, 5, 11, 15, 5, 9, 16, 5, 1441803, 17, 5, 20, 18, 5, 20, 19, 5, 20, 0, 6, 20, 1, 6, 1048585, 2, 6, 1, 3, 6, 5, 4, 6, 1441804, 5, 6, 1048590, 6, 6, 655377, 7, 6, 20, 8, 6, 11, 9, 6, 9, 10, 6, 1441803, 11, 6, 20, 12, 6, 20, 13, 6, 20, 14, 6, 1048584, 15, 6, 4, 16, 6, 1441801, 17, 6, 20, 18, 6, 21, 19, 6, 20, 0, 7, 20, 1, 7, 1048587, 2, 7, 655370, 3, 7, 655369, 4, 7, 655371, 5, 7, 21, 6, 7, 17, 7, 7, 1048592, 8, 7, 1048588, 9, 7, 4, 10, 7, 1441804, 11, 7, 1048591, 12, 7, 655377, 13, 7, 22, 14, 7, 1048585, 15, 7, 1, 16, 7, 1441801, 17, 7, 20, 18, 7, 20, 19, 7, 20, 0, 8, 20, 1, 8, 20, 2, 8, 20, 3, 8, 20, 4, 8, 20, 5, 8, 20, 6, 8, 20, 7, 8, 20, 8, 8, 1048584, 9, 8, 0, 10, 8, 1441801, 11, 8, 20, 12, 8, 17, 13, 8, 1048589, 14, 8, 1048588, 15, 8, 3, 16, 8, 1441800, 17, 8, 20, 18, 8, 20, 19, 8, 20, 0, 9, 21, 1, 9, 20, 2, 9, 20, 3, 9, 20, 4, 9, 20, 5, 9, 20, 6, 9, 20, 7, 9, 20, 8, 9, 1048584, 9, 9, 4, 10, 9, 1441801, 11, 9, 20, 12, 9, 22, 13, 9, 20, 14, 9, 1048587, 15, 9, 655368, 16, 9, 655371, 17, 9, 20, 18, 9, 20, 19, 9, 20, 0, 10, 20, 1, 10, 22, 2, 10, 20, 3, 10, 21, 4, 10, 20, 5, 10, 20, 6, 10, 20, 7, 10, 20, 8, 10, 1048587, 9, 10, 655369, 10, 10, 655371, 11, 10, 20, 12, 10, 20, 13, 10, 20, 14, 10, 20, 15, 10, 20, 16, 10, 20, 17, 10, 20, 18, 10, 20, 19, 10, 20, 0, 11, 20, 1, 11, 20, 2, 11, 20, 3, 11, 21, 4, 11, 21, 5, 11, 20, 6, 11, 20, 7, 11, 21, 8, 11, 20, 9, 11, 20, 10, 11, 20, 11, 11, 20, 12, 11, 22, 13, 11, 20, 14, 11, 20, 15, 11, 20, 16, 11, 21, 17, 11, 20, 18, 11, 20, 19, 11, 20, 0, 12, 21, 1, 12, 22, 2, 12, 20, 3, 12, 20, 4, 12, 20, 5, 12, 20, 6, 12, 20, 7, 12, 20, 8, 12, 21, 9, 12, 20, 10, 12, 20, 11, 12, 20, 12, 12, 20, 13, 12, 21, 14, 12, 21, 15, 12, 20, 16, 12, 20, 17, 12, 20, 18, 12, 20, 19, 12, 22, 0, 13, 20, 1, 13, 20, 2, 13, 20, 3, 13, 20, 4, 13, 20, 5, 13, 21, 6, 13, 20, 7, 13, 21, 8, 13, 21, 9, 13, 20, 10, 13, 20, 11, 13, 20, 12, 13, 20, 13, 13, 20, 14, 13, 22, 15, 13, 20, 16, 13, 20, 17, 13, 20, 18, 13, 20, 19, 13, 20, 0, 14, 20, 1, 14, 20, 2, 14, 20, 3, 14, 20, 4, 14, 20, 5, 14, 20, 6, 14, 20, 7, 14, 21, 8, 14, 20, 9, 14, 20, 10, 14, 22, 11, 14, 20, 12, 14, 20, 13, 14, 20, 14, 14, 20, 15, 14, 20, 16, 14, 21, 17, 14, 20, 18, 14, 20, 19, 14, 21, 0, 15, 20, 1, 15, 20, 2, 15, 20, 3, 15, 20, 4, 15, 20, 5, 15, 21, 6, 15, 20, 7, 15, 20, 8, 15, 20, 9, 15, 22, 10, 15, 20, 11, 15, 20, 12, 15, 20, 13, 15, 20, 14, 15, 20, 15, 15, 20, 16, 15, 20, 17, 15, 20, 18, 15, 20, 19, 15, 20)
+}
+metadata/godoodads_dungeon_settings = SubResource("Resource_8jxb8")
+metadata/godoodads_dungeon_generated = PackedByteArray("Ae2T/W6FIAzFf171CqJX3IDn2fs/1eJdsyjxoyYz2R/2xEgP9LQU+CoACh6UVNQ8aTBYWhwdPS8GPCMffN7ruPtyzT247bb/b4USDyVKJSolaiWeSjRKGCWsEq0STolOiV6JlxKDEgFUX1KuC9nadCI+bozDibjwxzFRscYBrXxuIz5lftzRM0Aj794c1BZF2wF2JX8QvgBqoANewDir3a7EGaCSuZDV62SvVsZR9LzoV/IfhE+zGuzJczLSByv+CPSiX670Jyr0qplemu3JbPQv7Wi7nb4Hxd2KB7Wng/3Fg7cVFXnDRq5cYytuL/Zo/9rce2eb82dqucKm/AvzS+49njg/vaLJ88K1bQvev2eE+5VIPzM5NwXNuYV3vX0D")
+metadata/godoodads_dungeon_graph = SubResource("Resource_oyne4")
 
-[node name="Player" parent="." instance=ExtResource("5_player")]
+[node name="Player" parent="." unique_id=1078989548 instance=ExtResource("5_player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.1, 32)
 PersistentId = "Player"

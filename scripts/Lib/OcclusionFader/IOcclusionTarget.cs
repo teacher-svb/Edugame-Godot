@@ -11,8 +11,6 @@ namespace TnT.Systems.OcclusionFade
 	{
 		Node3D OcclusionBody { get; }
 		Camera3D OcclusionCamera { get; }
-		/// <summary>Cast from the body; the fader points it at the camera each frame.</summary>
-		RayCast3D OcclusionRaycast { get; }
 	}
 
 	/// <summary>Meshes in the subtree of a node implementing this are never faded (e.g. characters).</summary>

@@ -156,6 +156,32 @@ namespace TnT.EduGame.Characters.States
             return ended.Task;
         }
 
+        /// <summary>
+        /// Holds the character for a scripted sequence that moves it itself (getting on a plaything): counts as
+        /// autonomous behaviour, so the player's move input and timed idles are ignored, until
+        /// <paramref name="done"/> returns true. Like a patrol it is replaced by a new patrol, follow or hold. The task
+        /// completes when it leaves the stack: true when <paramref name="done"/> ended it, false when it was stopped
+        /// first (replaced, popped, unwound), so the sequence can put the character back.
+        /// </summary>
+        public Task<bool> Hold(Func<bool> done)
+        {
+            var ended = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            bool finished = false;
+            BaseState holdState = null;
+            holdState = new BaseState(new()
+            {
+                ExitOnNextUpdate = () => finished = done(),
+                OnExit = () =>
+                {
+                    AutonomousEnded(holdState);
+                    ended.TrySetResult(finished);
+                    return Task.CompletedTask;
+                },
+            });
+            StartAutonomous(holdState, "hold");
+            return ended.Task;
+        }
+
         // replaces the running patrol / follow: its exit is requested first, so it exits (and puts its settings back)
         // before the new one is entered
         void StartAutonomous(BaseState state, string what)
